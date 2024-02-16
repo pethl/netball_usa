@@ -1,0 +1,10 @@
+<% content_for(:page_title, "Educators: Edit")%>
+
+<%= render "form", educator: @educator %>
+
+<br>
+
+<div>
+  <%= link_to "Show this educator", @educator, class: block_link_class %> |
+  <%= link_to "Back to Educators List", educators_path, class: block_link_class %>
+</div>

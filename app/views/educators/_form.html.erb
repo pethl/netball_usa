@@ -1,0 +1,89 @@
+<div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+
+
+<%= form_with(model: educator) do |form| %>
+  <% if educator.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(educator.errors.count, "error") %> prohibited this educator from being saved:</h2>
+
+      <ul>
+        <% educator.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-6">
+    <%= form.label :first_name, class: label_class  %>
+     <div class="mt-1">
+    <%= form.text_field :first_name, class: input_class %>
+   </div>
+  </div>
+
+ <div class="mb-6">
+    <%= form.label :last_name, class: label_class %>
+    <div class="mt-1">
+    <%= form.text_field :last_name, class: input_class %>
+  </div>
+ </div>
+
+
+ <div class="mb-6">
+    <%= form.label :email, class: label_class  %>
+    <div class="mt-1">
+    <%= form.text_field :email, class: input_class %>
+   </div>
+  </div>
+
+   <div class="mb-6">
+    <%= form.label :phone, class: label_class  %>
+    <div class="mt-1">
+    <%= form.text_field :phone, class: input_class %>
+   </div>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :school_name, class: label_class  %>
+    <div class="mt-1">
+    <%= form.text_field :school_name, class: input_class %>
+   </div>
+  </div>
+
+   <div class="mb-6">
+    <%= form.label :city, class: label_class  %>
+    <div class="mt-1">
+    <%= form.text_field :city, class: input_class %>
+   </div>
+  </div>
+  
+ <div class="mb-6">
+    <%= form.label :state, class: label_class  %>
+    <div class="mt-1">
+    <%= form.select :state, options_for_select(us_states),{}, class: input_class %>
+   </div>
+  </div>
+
+ <div class="mb-6">
+    <%= form.label :educator_notes, style: "display: block", class: label_class  %>
+    <div class="mt-1">
+    <%= form.text_area :educator_notes, class: input_class %>
+   </div>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :mgmt_notes, style: "display: block", class: label_class  %>
+    <div class="mt-1">
+    <%= form.text_area :mgmt_notes, class: input_class %>
+   </div>
+  </div>
+
+
+  <div>
+    <%= form.submit "Save Record", class: form_button_class %>
+  </div>
+<% end %>
+
+  </div>
+    </div>
