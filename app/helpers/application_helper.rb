@@ -4,19 +4,23 @@ module ApplicationHelper
    end
 
    def input_class
-     "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+     "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-sky-800 focus:outline-none focus:ring-sky-800 sm:text-sm"
    end
 
    def form_button_class
-     "flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+     "flex w-full justify-center rounded-md border border-transparent bg-indigo-800 py-2 px-4 text-sm font-medium text-black shadow-sm hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-sky-800 focus:ring-offset-2"
+   end
+   
+   def table_header_class
+     "font-bold p-2 border-b text-left bg-sky-800 text-white"
    end
    
    def block_link_class
-     "block text-md font-medium text-cyan-800 italic"
+     "block text-md font-medium text-sky-800 italic"
    end
    
    def link_class
-     "text-md font-medium text-cyan-800 italic"
+     "text-md font-medium text-sky-800 italic"
    end
    
    def us_states
@@ -74,5 +78,44 @@ module ApplicationHelper
          ['Wisconsin', 'WI'],
          ['Wyoming', 'WY']
        ]
+   end
+   
+   def sponsor_category
+       [
+         ["--"],
+         ["Women's Products"],
+         ['Oz companies'],
+         ['UK companies'],
+         ['NZ companies'],
+         ['Sth Africa companies'],
+         ['Caribbean companies'],
+         ['Pacific Islander companies']
+       ]       
+   end
+   
+   def sponsor_industry
+     [
+       ['--'],['Beverage'], ['Food'], ['Retail - Clothing'], ['Retail - Care Products'], ['Entertainment'], ['Financial Services'], ['Media'], ['Software'], ['Sports'], ['Telecommunications'], ['Tourism'], ['Transport'], ['Trade & Investment']
+     ]
+   end
+   
+   def sponsor_status
+       [
+         ['Not Allocated'],
+         ['Not Started'],
+         ['In Progress'],
+         ['Completed'],
+       ]       
+   end
+   
+   def sponsor_opportunity_area
+       [
+         ["--"],
+         ['Corporate'],
+         ['BAI'],
+         ['U.S. Open'],
+         ['NNL'],
+         ['Member']
+       ]       
    end
 end

@@ -13,10 +13,8 @@
   <body class="h-full">
     <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div class="sm:mx-auto sm:w-full sm:max-w-md">
+      <%= image_tag 'Netball-America-Logo-Transparent-Background.png', :class => "mx-auto h-13 w-auto" %>
       
-      <img class="mx-auto h-12 w-auto" src="/images/Netball-America-Logo-Transparent-Background.png" alt="Netball America">
-     
-        <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Netball America">
         <%= yield(:auth_header) if content_for?(:auth_header) %>
       </div>
 

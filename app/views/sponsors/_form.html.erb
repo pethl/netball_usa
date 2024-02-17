@@ -1,0 +1,109 @@
+<div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+
+
+<%= form_with(model: sponsor) do |form| %>
+  <% if sponsor.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(sponsor.errors.count, "error") %> prohibited this sponsor from being saved:</h2>
+
+      <ul>
+        <% sponsor.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <div class="mb-6">
+    <%= form.label :category, class: label_class%>
+     <div class="mt-1">
+     <%= form.select :category, options_for_select(sponsor_category),{}, class: input_class %>
+  </div> </div>
+
+   <div class="mb-6">
+    <%= form.label :industry, class: label_class %>
+     <div class="mt-1">
+    <%= form.select :industry, options_for_select(sponsor_industry),{}, class: input_class %>  
+   </div> </div>
+
+   <div class="mb-6">
+    <%= form.label :company_name, class: label_class%>
+     <div class="mt-1">
+    <%= form.text_field :company_name, class: input_class  %>
+   </div> </div>
+
+   <div class="mb-6">
+    <%= form.label :allocated_to, class: label_class%>
+     <div class="mt-1">
+    <%=  %><br><br>
+   </div> </div>
+
+
+   <div class="mb-6">
+    <%= form.label :status, class: label_class%>
+     <div class="mt-1">
+    <%= form.select :status, options_for_select(sponsor_status),{}, class: input_class %>
+   </div> </div>
+
+   <div class="mb-6">
+    <%= form.label :about, class: label_class%>
+     <div class="mt-1">
+    <%= form.text_area :about, class: input_class  %>
+   </div> </div>
+
+   <div class="mb-6">
+    <%= form.label :location, class: label_class%>
+     <div class="mt-1">
+    <%= form.text_field :location, class: input_class  %>
+   </div> </div>
+
+   <div class="mb-6">
+    <%= form.label :website, class: label_class%>
+     <div class="mt-1">
+    <%= form.text_field :website, class: input_class  %>
+   </div> </div>
+
+   <div class="mb-6">
+    <%= form.label :key_contacts, class: label_class%>
+     <div class="mt-1">
+    <%= form.text_area :key_contacts, class: input_class  %>
+   </div> </div>
+
+   <div class="mb-6">
+    <%= form.label :phone_numbers_emails, class: label_class%>
+     <div class="mt-1">
+    <%= form.text_field :phone_numbers_emails, class: input_class  %>
+   </div> </div>
+
+   <div class="mb-6">
+    <%= form.label :opportunity_area, class: label_class%>
+     <div class="mt-1">
+    <%= form.select :opportunity_area, options_for_select(sponsor_opportunity_area),{}, class: input_class %>
+   </div> </div>
+
+   <div class="mb-6">
+    <%= form.label :pitch, class: label_class%>
+     <div class="mt-1">
+    <%= form.text_field :pitch, class: input_class  %>
+   </div> </div>
+
+   <div class="mb-6">
+    <%= form.label :follow_up_actions, class: label_class%>
+     <div class="mt-1">
+    <%= form.text_area :follow_up_actions, class: input_class  %>
+   </div> </div>
+
+   <div class="mb-6">
+    <%= form.label :notes, class: label_class%>
+     <div class="mt-1">
+    <%= form.text_area :notes, class: input_class  %>
+   </div> </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+</div>
+  </div>

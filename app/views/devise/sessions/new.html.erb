@@ -3,7 +3,7 @@
   <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
     <p class="mt-2 text-center text-sm text-gray-600">
       Or
-      <%= link_to "create your account", new_registration_path(resource_name), class: "font-medium text-indigo-600 hover:text-indigo-500" %>
+      <%= link_to "create your account", new_registration_path(resource_name), class: "font-medium text-sky-800 hover:text-sky-700" %>
     </p>
   <% end %>
 <% end %>
@@ -26,16 +26,16 @@
   <div class="flex items-center justify-between mb-6">
     <% if devise_mapping.rememberable? %>
       <div class="flex items-center">
-        <%= f.check_box :remember_me, class: "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" %>
+        <%= f.check_box :remember_me, class: "h-4 w-4 rounded border-gray-300 text-sky-800 focus:ring-sky-800" %>
         <%= f.label :remember_me, class: "ml-2 block text-sm text-gray-900" %>
       </div>
     <% end %>
       </div>
 
-    <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+    <% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
       <div class="text-sm ">
-        <%= link_to "Forgot your password?", new_password_path(resource_name), class: "font-medium text-indigo-600 hover:text-indigo-500" %>
-      <br> <br>
+        <%= link_to "Forgot your password?", new_password_path(resource_name), class: "font-medium text-sky-800 hover:text-sky-800" %>
+     
       </div>
     <% end %>
   
@@ -43,6 +43,10 @@
   <div>
     <%= f.submit "Log in", class: form_button_class %>
   </div>
+<% end %>
+
+<% if controller_name != 'sessions' %>
+  <%= link_to "Log in", new_session_path(resource_name) %><br />
 <% end %>
 
 <%#= render "devise/shared/links" %>

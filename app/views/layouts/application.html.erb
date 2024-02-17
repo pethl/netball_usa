@@ -68,7 +68,12 @@
                   <!-- Active: "bg-gray-100", Not Active: "" -->
                   <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
                   <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+                  <%= button_to(
+                          "Sign Out",
+                          destroy_user_session_path,
+                          method: :delete,
+                         ) %>
+                  <a href="/destroy_user_session/" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
                 </div>
               </div>
             </div>
@@ -101,8 +106,7 @@
           <a href="/grants/" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Grants</a>
           <a href="/equipments/" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Equipment</a>
           <a href="/users/" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Users</a>
-        
-        </div>
+          </div>
         <div class="border-t border-gray-700 pb-3 pt-4">
           <div class="flex items-center px-5">
             <div class="flex-shrink-0">
@@ -149,6 +153,8 @@
     </main>
   </div>
   
-   
+  <!-- Debugging for dev only
+     ================================================== -->	
+  <%= debug(params) if Rails.env.development? %>
   </body>
 </html>

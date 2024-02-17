@@ -1,0 +1,60 @@
+<% content_for(:page_title, "Sponsor Targets")%>
+
+<div class="mt-8 sm:mx-auto sm:w-full max-w-screen-xl">
+  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+
+
+<div id="sponsors">
+ 
+<table class="table-auto border border-slate-400 text-sm">
+  <thead>
+    <tr>
+      <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">Category</th>
+      <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">Industry</th>
+      <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">Company Name</th>   
+      <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">Allocated To</th>    
+      <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">Status</th>    
+      <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">About</th>    
+      <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">Location</th>    
+      <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">Website</th>    
+      <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">Key Contacts</th>    
+      <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">Phone/Email</th>    
+      <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">Opportunity Area</th>    
+      <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">Pitch</th>    
+      <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">Follow Up Actions</th>   
+      <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">Notes</th>     
+    </tr>
+  </thead>
+  
+  <tbody>
+  <% @sponsors.each do |sponsor| %>
+     <tr class="odd:bg-gray-100">
+     <td class="p-2 border-b text-left"><%= sponsor.category %></td>
+     <td class="p-2 border-b text-left"><%= sponsor.industry %></td>
+     <td class="p-2 border-b text-left"><%= link_to sponsor.company_name, sponsor_path(sponsor), class: link_class %></td>
+     <td class="p-2 border-b text-left"><%=  %></td>
+     <td class="p-2 border-b text-left"><%= sponsor.status %></td>
+     <td class="p-2 border-b text-left"><%= sponsor.about %></td>
+     <td class="p-2 border-b text-left"><%= sponsor.location %></td>
+     <td class="p-2 border-b text-left"><%= sponsor.website %></td>
+     <td class="p-2 border-b text-left"><%= sponsor.key_contacts %></td>
+     <td class="p-2 border-b text-left"><%= sponsor.phone_numbers_emails %></td>
+     <td class="p-2 border-b text-left"><%= sponsor.opportunity_area %></td>
+     <td class="p-2 border-b text-left"><%= sponsor.pitch %></td>
+     <td class="p-2 border-b text-left"><%= sponsor.follow_up_actions %></td>
+     <td class="p-2 border-b text-left"><%= sponsor.notes %></td>
+     
+        </tr>
+  <% end %>
+ </tbody>
+</table>
+</div>
+
+<br><br>
+ <div class="mt-1">
+<%= link_to "Add New Sponsor", new_sponsor_path, class: block_link_class %>
+</div>
+    </div></div>
+    </div>
+    </div>
+
