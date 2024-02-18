@@ -8,7 +8,7 @@ module ApplicationHelper
    end
 
    def form_button_class
-     "flex w-full justify-center rounded-md border border-transparent bg-indigo-800 py-2 px-4 text-sm font-medium text-black shadow-sm hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-sky-800 focus:ring-offset-2"
+     "flex w-full justify-center rounded-md border border-transparent bg-indigo-800 py-2 px-4 text-sm font-medium text-black shadow-sm hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-800 focus:ring-offset-2"
    end
    
    def table_header_class
@@ -21,6 +21,10 @@ module ApplicationHelper
    
    def link_class
      "text-md font-medium text-sky-800 italic"
+   end
+   
+   def list_class
+     "block px-4 py-2 text-sm text-gray-700"
    end
    
    def us_states

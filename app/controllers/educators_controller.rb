@@ -13,10 +13,12 @@ class EducatorsController < ApplicationController
   # GET /educators/new
   def new
     @educator = Educator.new
+    @users = User.all
   end
 
   # GET /educators/1/edit
   def edit
+     @users = User.all
   end
 
   # POST /educators
@@ -53,6 +55,6 @@ class EducatorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def educator_params
-      params.require(:educator).permit(:first_name, :last_name, :email, :phone, :school_name, :city, :state, :educator_notes, :mgmt_notes)
+      params.require(:educator).permit(:first_name, :last_name, :email, :phone, :school_name, :city, :state, :educator_notes, :mgmt_notes, :user_id)
     end
 end

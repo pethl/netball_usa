@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+	.h_scrolling_list_table {
+	    @apply w-full p-2 m-1;
+	}
+}

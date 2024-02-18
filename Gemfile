@@ -28,7 +28,7 @@ gem "stimulus-rails"
 gem "cssbundling-rails"
 
 #devise
-gem "devise"
+gem "devise", github: 'heartcombo/devise', branch: 'main' 
 gem "letter_opener_web"
 
 # Use Redis adapter to run Action Cable in production

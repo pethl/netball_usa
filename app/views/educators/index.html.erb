@@ -12,6 +12,7 @@
       <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">School/District</th>
       <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">City</th>
       <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white" >State</th>
+      <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white" >Allocated_to</th>
     </tr>
   </thead>
   
@@ -22,6 +23,7 @@
       <td class="p-2 border-b text-left"><%= educator.school_name %></td>
       <td class="p-2 border-b text-left"><%= educator.city %></td>
       <td class="p-2 border-b text-left"><%= educator.state %></td>
+      <td class="p-2 border-b text-left"><%= educator.user.full_name unless (educator.user_id.to_s.empty?)  %></td>
     </tr>
     <% end %>
     </tbody>

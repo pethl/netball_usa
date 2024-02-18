@@ -40,6 +40,13 @@
   </p>
 
   <p>
+    <strong>Allocated To:</strong>
+    <%= educator.user.full_name unless (educator.user_id.to_s.empty?) %>
+    
+  </p>
+
+
+  <p>
     <strong>Mgmt notes:</strong>
     <%= educator.mgmt_notes %>
   </p>

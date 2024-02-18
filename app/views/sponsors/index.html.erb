@@ -3,10 +3,10 @@
 <div class="mt-8 sm:mx-auto sm:w-full max-w-screen-xl">
   <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
 
-
 <div id="sponsors">
  
-<table class="table-auto border border-slate-400 text-sm">
+<div class="overflow-x-auto">
+<table class="border border-slate-400 text-sm h_scrolling_list_table">
   <thead>
     <tr>
       <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">Category</th>
@@ -28,11 +28,11 @@
   
   <tbody>
   <% @sponsors.each do |sponsor| %>
-     <tr class="odd:bg-gray-100">
+     <tr class="odd:bg-gray-200">
      <td class="p-2 border-b text-left"><%= sponsor.category %></td>
      <td class="p-2 border-b text-left"><%= sponsor.industry %></td>
      <td class="p-2 border-b text-left"><%= link_to sponsor.company_name, sponsor_path(sponsor), class: link_class %></td>
-     <td class="p-2 border-b text-left"><%=  %></td>
+     <td class="p-2 border-b text-left"><%= sponsor.user.full_name unless (sponsor.user_id.to_s.empty?) %></td>
      <td class="p-2 border-b text-left"><%= sponsor.status %></td>
      <td class="p-2 border-b text-left"><%= sponsor.about %></td>
      <td class="p-2 border-b text-left"><%= sponsor.location %></td>
@@ -48,6 +48,8 @@
   <% end %>
  </tbody>
 </table>
+</div>
+</div>
 </div>
 
 <br><br>
