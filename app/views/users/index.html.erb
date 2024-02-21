@@ -1,6 +1,6 @@
 <% content_for(:page_title, "System Users")%>
 
-<div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+<div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 text-sm">
  
 
 <div id="users">
@@ -8,11 +8,12 @@
 <table class="table-auto border border-slate-400 ...">
   <thead>
     <tr>
-      <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">First Name</th>
-      <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">Last Name</th>
-      <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">Email</th>    
-      <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">Account Created</th>    
-       <th class="font-bold p-2 border-b text-left bg-indigo-700 text-white">Last Sign In</th>    
+      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">First Name</th>
+      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">Last Name</th>
+      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">Email</th>    
+      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">Account Created</th>    
+      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">Last Sign In</th> 
+      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white" >Is_admin?</th>   
     </tr>
   </thead>
   
@@ -24,6 +25,8 @@
       <td class="p-2 border-b text-left"><%= user.email %></td>
        <td class="p-2 border-b text-left"><%= user.created_at.to_formatted_s(:default) %></td>
        <td class="p-2 border-b text-left"><%= user.last_sign_in_at.to_formatted_s(:default) unless (user.last_sign_in_at.to_s.empty?)%></td>
+       <td class="p-2 border-b text-left"><%= user.admin %></td>
+      
         </tr>
   <% end %>
  </tbody>

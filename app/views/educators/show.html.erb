@@ -2,8 +2,11 @@
 
 <%= render @educator %>
 
+
+<% if user_signed_in? %>
 <div>
   <%= link_to "Edit this educator", edit_educator_path(@educator), class: block_link_class %>
   <%= link_to "Back to educators", educators_path, class: block_link_class %>
   <%= button_to "Destroy this educator record", @educator, method: :delete, class: block_link_class %>
 </div>
+<% end %>

@@ -2,13 +2,13 @@
   <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
 
 
-<%= form_with(model: educator) do |form| %>
-  <% if educator.errors.any? %>
+<%= form_with(model: netball_educator) do |form| %>
+  <% if netball_educator.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(educator.errors.count, "error") %> prohibited this educator from being saved:</h2>
+      <h2><%= pluralize(netball_educator.errors.count, "error") %> prohibited this netball_educator from being saved:</h2>
 
       <ul>
-        <% educator.errors.each do |error| %>
+        <% netball_educator.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -61,12 +61,12 @@
  <div class="mb-6">
     <%= form.label :state, class: label_class  %>
     <div class="mt-1">
-    <%= form.select :state, options_for_select(us_states, :selected => educator.state),{}, class: input_class %>
+    <%= form.select :state, options_for_select(us_states, :selected => netball_educator.state),{}, class: input_class %>
    </div>
   </div>
 
  <div class="mb-6">
-    <%= form.label :educator_notes, style: "display: block", class: label_class  %>
+    <%= form.label :netball_educator_notes, style: "display: block", class: label_class  %>
     <div class="mt-1">
     <%= form.text_area :educator_notes, class: input_class %>
    </div>

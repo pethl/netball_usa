@@ -1,7 +1,6 @@
 <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
   <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
 
-
 <%= form_with(model: educator) do |form| %>
   <% if educator.errors.any? %>
     <div style="color: red">
@@ -61,7 +60,7 @@
  <div class="mb-6">
     <%= form.label :state, class: label_class  %>
     <div class="mt-1">
-    <%= form.select :state, options_for_select(us_states, :selected => educator.state),{}, class: input_class %>
+    <%= form.select :state, options_for_select(us_states),{}, class: input_class %>
    </div>
   </div>
 
@@ -72,21 +71,7 @@
    </div>
   </div>
 
-<% unless current_user.nil? %>
-  <div class="mb-6">
-   <%= form.label :allocated_to, class: label_class%>
-    <div class="mt-1">
-    <%= form.collection_select(:user_id, @users, :id, :full_name,{:prompt=>true}, {:class=>'input-class'}) %>
- </div> </div>
- <% end %>
-
-  <div class="mb-6">
-    <%= form.label :mgmt_notes, style: "display: block", class: label_class  %>
-    <div class="mt-1">
-    <%= form.text_area :mgmt_notes, class: input_class %>
-   </div>
-  </div>
-
+  
 
   <div>
     <%= form.submit "Save Record", class: form_button_class %>

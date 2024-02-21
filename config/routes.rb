@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :netball_educators
   resources :sponsors
   resources :educators
   devise_for :users
@@ -7,7 +8,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "pages#home"
   
-  get "pages/rolodex"
+  get "pages/educator_sign_up"
   match '/users',   to: 'users#index',   via: 'get'
  
 

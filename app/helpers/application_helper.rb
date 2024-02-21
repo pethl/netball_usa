@@ -4,31 +4,32 @@ module ApplicationHelper
    end
 
    def input_class
-     "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-sky-800 focus:outline-none focus:ring-sky-800 sm:text-sm"
+     "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
    end
 
    def form_button_class
-     "flex w-full justify-center rounded-md border border-transparent bg-indigo-800 py-2 px-4 text-sm font-medium text-black shadow-sm hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-800 focus:ring-offset-2"
+     "flex w-full justify-center rounded-md border border-transparent bg-blue-900 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2"
    end
    
    def table_header_class
-     "font-bold p-2 border-b text-left bg-sky-800 text-white"
+     "font-bold p-2 border-b text-left bg-blue-900 text-white"
    end
    
    def block_link_class
-     "block text-md font-medium text-sky-800 italic"
+     "block text-md font-medium text-blue-900 italic"
    end
    
    def link_class
-     "text-md font-medium text-sky-800 italic"
+     "text-md font-medium text-blue-900 italic"
    end
    
-   def list_class
+   def list_class_other
      "block px-4 py-2 text-sm text-gray-700"
    end
    
    def us_states
        [
+         ["--"],
          ['Alabama', 'AL'],
          ['Alaska', 'AK'],
          ['Arizona', 'AZ'],

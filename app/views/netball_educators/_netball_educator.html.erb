@@ -1,62 +1,62 @@
-<div id="<%= dom_id educator %>">
+<div id="<%= dom_id netball_educator %>">
 
 <% unless user_signed_in? %>
   
   <h2>Thank you for sharing your contact details, we will be in touch!<br><br><i>Netball America<br><br></i></h2>
   <% end %>
-
-
+  
+  
   <p>
     <strong>First name:</strong>
-    <%= educator.first_name %>
+    <%= netball_educator.first_name %>
   </p>
 
   <p>
     <strong>Last name:</strong>
-    <%= educator.last_name %>
+    <%= netball_educator.last_name %>
   </p>
 
   <p>
     <strong>Email:</strong>
-    <%= educator.email %>
+    <%= netball_educator.email %>
   </p>
 
   <p>
     <strong>Phone:</strong>
-    <%= educator.phone %>
+    <%= netball_educator.phone %>
   </p>
 
   <p>
     <strong>School name:</strong>
-    <%= educator.school_name %>
+    <%= netball_educator.school_name %>
   </p>
 
   <p>
     <strong>City:</strong>
-    <%= educator.city %>
+    <%= netball_educator.city %>
   </p>
 
   <p>
     <strong>State:</strong>
-    <%= educator.state %>
+    <%= netball_educator.state %>
   </p>
 
   <p>
     <strong>Educator notes:</strong>
-    <%= educator.educator_notes %>
+    <%= netball_educator.educator_notes %>
   </p>
 
 <% if user_signed_in? %>
   <p>
     <strong>Allocated To:</strong>
-    <%= educator.user.full_name unless (educator.user_id.to_s.empty?) %>
-  </p>
-
-  <p>
-    <strong>Mgmt notes:</strong>
-    <%= educator.mgmt_notes %>
+    <%= netball_educator.user.full_name unless (netball_educator.user_id.to_s.empty?) %>
   </p>
   
-<% end %>  
+  <p>
+    <strong>Mgmt notes:</strong>
+    <%= netball_educator.mgmt_notes %>
+  </p>
+  
+  <% end %>  
 
 </div>

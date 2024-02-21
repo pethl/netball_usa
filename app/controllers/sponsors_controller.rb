@@ -5,7 +5,12 @@ class SponsorsController < ApplicationController
 
   # GET /sponsors
   def index
-    @sponsors = Sponsor.all
+   
+    if is_admin? 
+       @sponsors = Sponsor.all
+    else
+        @sponsors = Sponsor.where(user_id: current_user.id)
+      end
   end
 
   # GET /sponsors/1

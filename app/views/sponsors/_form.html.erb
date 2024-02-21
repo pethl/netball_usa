@@ -18,13 +18,13 @@
  <div class="mb-6">
     <%= form.label :category, class: label_class%>
      <div class="mt-1">
-     <%= form.select :category, options_for_select(sponsor_category),{}, class: input_class %>
+     <%= form.select :category, options_for_select(sponsor_category, :selected => sponsor.category),{}, class: input_class %>
   </div> </div>
 
    <div class="mb-6">
     <%= form.label :industry, class: label_class %>
      <div class="mt-1">
-    <%= form.select :industry, options_for_select(sponsor_industry),{}, class: input_class %>  
+    <%= form.select :industry, options_for_select(sponsor_industry, :selected => sponsor.industry),{}, class: input_class %>  
    </div> </div>
 
    <div class="mb-6">
@@ -42,7 +42,7 @@
    <div class="mb-6">
     <%= form.label :status, class: label_class%>
      <div class="mt-1">
-    <%= form.select :status, options_for_select(sponsor_status),{}, class: input_class %>
+    <%= form.select :status, options_for_select(sponsor_status, :selected => sponsor.status),{}, class: input_class %>
    </div> </div>
 
    <div class="mb-6">
@@ -78,7 +78,7 @@
    <div class="mb-6">
     <%= form.label :opportunity_area, class: label_class%>
      <div class="mt-1">
-    <%= form.select :opportunity_area, options_for_select(sponsor_opportunity_area),{}, class: input_class %>
+    <%= form.select :opportunity_area, options_for_select(sponsor_opportunity_area, :selected => sponsor.opportunity_area),{}, class: input_class %>
    </div> </div>
 
    <div class="mb-6">
@@ -99,9 +99,9 @@
     <%= form.text_area :notes, class: input_class  %>
    </div> </div>
 
-  <div>
-    <%= form.submit %>
-  </div>
+   <div>
+     <%= form.submit "Save Record", class: form_button_class %>
+   </div>
 <% end %>
 
 </div>

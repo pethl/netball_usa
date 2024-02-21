@@ -1,5 +1,4 @@
-class Educator < ApplicationRecord
-  
+class NetballEducator < ApplicationRecord
   belongs_to :user, optional: true
  
   
@@ -16,4 +15,5 @@ class Educator < ApplicationRecord
                       format:     { with: VALID_EMAIL_REGEX },
                       uniqueness: { case_sensitive: false }
  
+  
 end

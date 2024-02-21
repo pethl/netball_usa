@@ -1,12 +1,110 @@
 <% content_for(:page_title, "Sponsor Targets")%>
 
-<%= render @sponsor %>
+<div class="h-screen">
+   <div class="grid grid-cols-3 grid-flow-row auto-rows-max md:grid-cols-4 gap-2 md:gap-4 h-screen">
+   
+      <div class="bg-sky-100 col-span-2">
+      <div>
+          <table>
+           <tr>
+            <td colspan="2"> <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+            Company Name</label></td></tr>
+           <tr>
+            <td colspan="2"> 
+             <div class=" px-3">
+              <input class="w-full text-sm bg-white text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="<%= @sponsor.company_name %>">
+             </div></td></tr>
+          <tr>
+            <td width="50%"><label class="uppercase text-gray-700 text-xs font-bold mb-2">Category</label></td>
+            <td width="50%"> <label class="uppercase text-gray-700 text-xs font-bold mb-2">Industry</label></td>
+          </tr>
+          <tr>
+            <td width="50%">
+             <div class=" px-3"><input class="bg-white text-sm text-black border border-gray-200 rounded py-3 mb-6 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="<%= @sponsor.category %>">
+             </div></td>
+            <td width="50%">
+             <div class=" px-3"><input class="bg-white text-sm text-black border border-gray-200 rounded py-3 px-2 mb-6 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="<%= @sponsor.industry %>">
+            </div></td>
+          </tr>
+          <tr>
+           <td colspan="2"> <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+           About</label></td></tr>
+          <tr>
+           <td colspan="2"> 
+              <div class=" px-3">
+          <textarea id="message" rows="2" class="block p-2.5 w-full text-sm text-black bg-white rounded-lg border border-gray-200 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="<%= @sponsor.about %>"></textarea>
+            </div></td></tr>
+          </table>
+          <label class="pt-4 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Opportunity Area</label>
+          <div class=" px-3">
+           <input class="bg-white text-black border border-gray-200 rounded py-3 mb-6 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="<%= @sponsor.opportunity_area %>">
+          </div>
+        </div>
+      <div>
+   </div>
+  </div>
+      
+      <div class="bg-red-100 col-span-1">
+     
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Status</label>
+         <div class=" px-3">
+          <input class="bg-white text-sm text-black border border-gray-200 rounded py-3 mb-6 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="<%= @sponsor.status %>">
+                  </div>
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Allocated_to</label>
+         <div class=" px-3">
+          <input class="bg-white text-sm text-black border border-gray-200 rounded py-3 mb-6 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="<%= @sponsor.user.full_name unless @sponsor.user.full_name.to_s.empty? %>">
+                  </div>
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Last Updated</label>
+         <div class=" px-3">
+          <input class="bg-white text-sm text-black border border-gray-200 rounded py-3 mb-6 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="<%= @sponsor.updated_at.to_formatted_s(:default) %>">
+                  </div>
+       
+      </div>
+      
+      
+     <div class="bg-sky-100 col-span-1">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Website</label>
+      <div class=" px-3">
+       <input class="bg-white text-sm text-black border border-gray-200 rounded py-3 mb-6 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="<%= @sponsor.website %>">
+               </div>
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Contacts</label>
+      <div class=" px-3">
+       <textarea id="message" rows="3" class="block p-2.5 w-full text-sm text-black bg-white rounded-lg border border-gray-200 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="<%= @sponsor.key_contacts %>"></textarea>
+    </div>
+    <label class="pt-4 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Phone / Emails</label>
+    <div class=" px-3">
+     <textarea id="message" rows="3" class="block p-2.5 w-full text-sm text-black bg-white rounded-lg border border-gray-200 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="<%= @sponsor.phone_numbers_emails %>"></textarea>
+  </div>
+      </div>
+      
+      
+      
+     <div class="bg-sky-100 col-span-1">
+       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Pitch</label>
+       <div class=" px-3">
+        <textarea id="message" rows="3" class="block p-2.5 w-full text-sm text-black bg-white rounded-lg border border-gray-200 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="<%= @sponsor.pitch %>"></textarea>
+       </div>
+      </div>
+      <div class="bg-sky-100 col-span-1">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Follow Up Actions</label>
+        <div class=" px-3">
+         <textarea id="message" rows="3" class="block p-2.5 w-full text-sm text-black bg-white rounded-lg border border-gray-200 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="<%= @sponsor.follow_up_actions %>"></textarea>
+        </div>
+       </div>
+       <div class="bg-sky-100 col-span-2">
+         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Notes</label>
+         <div class=" px-3 pb-4">
+          <textarea id="message" rows="3" class="block p-2.5 w-full text-sm text-black bg-white rounded-lg border border-gray-200 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="<%= @sponsor.notes %>"></textarea>
+         </div>
+        </div>
+     
+</form>
 
 
-<br><br>
 <div>
-  <%= link_to "Edit this sponsor", edit_sponsor_path(@sponsor) %> |
-  <%= link_to "Back to sponsors", sponsors_path %>
+  <%= link_to "Edit this sponsor", edit_sponsor_path(@sponsor), class: link_class %> |
+  <%= link_to "Back to sponsors", sponsors_path, class: link_class %>
 
   <%= button_to "Destroy this sponsor", @sponsor, method: :delete %>
 </div>
+
