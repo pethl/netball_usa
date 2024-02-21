@@ -1,62 +1,64 @@
 <div id="<%= dom_id netball_educator %>">
 
 <% unless user_signed_in? %>
-  
-  <h2>Thank you for sharing your contact details, we will be in touch!<br><br><i>Netball America<br><br></i></h2>
+  <h2>Thank you for sharing your contact details, we will be in touch!<br><br></h2>
   <% end %>
+
+  <a href="#" class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+ <form class="max-w-sm mx-auto">
+  <div class="mt-1">
+   <p class="block text-sm font-medium text-gray-700">First name:</p>
+     </div>
+   <input type="text" id="first_name" aria-label="first_name" class="bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm p-2.5 cursor-not-allowed" value=<%= netball_educator.last_name %> >
+   <div class="mt-1">
+   <p class="text-sm font-medium text-gray-700">Last name:</p>
+     </div>
+   <input type="text" id="last_name" aria-label="last_name" class="bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm p-2.5 cursor-not-allowed" value=<%= netball_educator.first_name %> >
+   <div class="mt-1">
+   <p class="block text-sm font-medium text-gray-700">Email:</p>
+  </div>
+   <input type="text" id="email" aria-label="email" class="bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm p-2.5 cursor-not-allowed" value=<%= netball_educator.email %> >
+   <div class="mt-1">
+   <p class="text-sm font-medium text-gray-700">Phone:</p>
+  </div>
+   <input type="text" id="phone" aria-label="phone" class="bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm p-2.5 cursor-not-allowed" value=<%= netball_educator.phone %> >
+   <div class="mt-1">
+   <p class="block text-sm font-medium text-gray-700">School name:</p>
+  </div>
+   <input type="text" id="school_name" aria-label="school_name" class="bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm p-2.5 cursor-not-allowed" value=<%= netball_educator.school_name %> >
+   <div class="mt-1">
+   <p class="text-sm font-medium text-gray-700">City:</p>
+  </div>
+   <input type="text" id="city" aria-label="city" class="bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm p-2.5 cursor-not-allowed" value=<%= netball_educator.city %> >
+   <div class="mt-1">
+    <p class="text-sm font-medium text-gray-700">State:</p>
+  </div>
+   <input type="text" id="city" aria-label="city" class="bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm p-2.5 cursor-not-allowed" value=<%= netball_educator.state %> >
+   <div class="mt-1">
+   <p class="text-sm font-medium text-gray-700">More info:</p>
+  </div>
+   <input type="text" id="educator_notes" aria-label="educator_notes" class="bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm p-2.5 cursor-not-allowed" value=<%= netball_educator.educator_notes %> >
+   <div class="mt-1">
+   <p class="text-sm font-medium text-gray-700">Feedback:</p>
+  </div>
+   <input type="text" id="feedback" aria-label="feedback" class="bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm p-2.5 cursor-not-allowed" value=<%= netball_educator.feedback %> >
   
-  
-  <p>
-    <strong>First name:</strong>
-    <%= netball_educator.first_name %>
-  </p>
-
-  <p>
-    <strong>Last name:</strong>
-    <%= netball_educator.last_name %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= netball_educator.email %>
-  </p>
-
-  <p>
-    <strong>Phone:</strong>
-    <%= netball_educator.phone %>
-  </p>
-
-  <p>
-    <strong>School name:</strong>
-    <%= netball_educator.school_name %>
-  </p>
-
-  <p>
-    <strong>City:</strong>
-    <%= netball_educator.city %>
-  </p>
-
-  <p>
-    <strong>State:</strong>
-    <%= netball_educator.state %>
-  </p>
-
-  <p>
-    <strong>Educator notes:</strong>
-    <%= netball_educator.educator_notes %>
-  </p>
+  </form> 
 
 <% if user_signed_in? %>
-  <p>
-    <strong>Allocated To:</strong>
-    <%= netball_educator.user.full_name unless (netball_educator.user_id.to_s.empty?) %>
-  </p>
   
-  <p>
-    <strong>Mgmt notes:</strong>
-    <%= netball_educator.mgmt_notes %>
-  </p>
+  <div class="mt-1">
+  <p class="text-sm font-medium text-gray-700">Allocated To:</p>
+ </div>
+  <input type="text" id="allocated" aria-label="allocated" class="bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm p-2.5 cursor-not-allowed" value=<%= netball_educator.user.full_name unless (netball_educator.user_id.to_s.empty?) %> >
+ 
+  <div class="mt-1">
+  <p class="text-sm font-medium text-gray-700">Mgmt Notes:</p>
+ </div>
+  <input type="text" id="mgmt_notes" aria-label="mgmt_notes" class="bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm p-2.5 cursor-not-allowed" value=<%= netball_educator.mgmt_notes %> >
+ 
   
   <% end %>  
+</a>
 
-</div>

@@ -66,11 +66,18 @@
   </div>
 
  <div class="mb-6">
-    <%= form.label :netball_educator_notes, style: "display: block", class: label_class  %>
+    <%= form.label :netball_educator_notes, 'Notes', style: "display: block", class: label_class  %>
     <div class="mt-1">
     <%= form.text_area :educator_notes, class: input_class %>
    </div>
   </div>
+  
+  <div class="mb-6">
+     <%= form.label :feedback, style: "display: block", class: label_class  %>
+     <div class="mt-1">
+     <%= form.text_area :feedback, class: input_class %>
+    </div>
+   </div>
 
 <% unless current_user.nil? %>
   <div class="mb-6">
@@ -78,7 +85,7 @@
     <div class="mt-1">
     <%= form.collection_select(:user_id, @users, :id, :full_name,{:prompt=>true}, {:class=>'input-class'}) %>
  </div> </div>
- <% end %>
+
 
   <div class="mb-6">
     <%= form.label :mgmt_notes, style: "display: block", class: label_class  %>
@@ -86,6 +93,7 @@
     <%= form.text_area :mgmt_notes, class: input_class %>
    </div>
   </div>
+   <% end %>
 
 
   <div>

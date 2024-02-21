@@ -4,7 +4,11 @@ class NetballEducatorsController < ApplicationController
 
   # GET /netball_educators
   def index
-    @netball_educators = NetballEducator.all
+    if is_admin? 
+       @netball_educators = NetballEducator.all
+    else
+        @netball_educators = NetballEducator.where(user_id: current_user.id)
+      end
   end
 
   # GET /netball_educators/1
@@ -27,7 +31,7 @@ class NetballEducatorsController < ApplicationController
     @netball_educator = NetballEducator.new(netball_educator_params)
 
     if @netball_educator.save
-      redirect_to @netball_educator, notice: "Netball educator was successfully created."
+      redirect_to @netball_educator, notice: "Record saved successfully."
     else
       render :new, status: :unprocessable_entity
     end
@@ -36,7 +40,7 @@ class NetballEducatorsController < ApplicationController
   # PATCH/PUT /netball_educators/1
   def update
     if @netball_educator.update(netball_educator_params)
-      redirect_to @netball_educator, notice: "Netball educator was successfully updated.", status: :see_other
+      redirect_to @netball_educator, notice: "Record was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -45,7 +49,7 @@ class NetballEducatorsController < ApplicationController
   # DELETE /netball_educators/1
   def destroy
     @netball_educator.destroy
-    redirect_to netball_educators_url, notice: "Netball educator was successfully destroyed.", status: :see_other
+    redirect_to netball_educators_url, notice: "Record was successfully destroyed.", status: :see_other
   end
 
   private
@@ -56,6 +60,6 @@ class NetballEducatorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def netball_educator_params
-      params.require(:netball_educator).permit(:first_name, :last_name, :user_id, :email, :phone, :school_name, :city, :state, :educator_notes, :mgmt_notes)
+      params.require(:netball_educator).permit(:feedback, :first_name, :last_name, :user_id, :email, :phone, :school_name, :city, :state, :educator_notes, :mgmt_notes)
     end
 end

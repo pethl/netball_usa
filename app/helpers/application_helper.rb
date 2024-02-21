@@ -11,6 +11,15 @@ module ApplicationHelper
      "flex w-full justify-center rounded-md border border-transparent bg-blue-900 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2"
    end
    
+   def ex_input_class
+     "block w-full appearance-none rounded-md border border-gray-300 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
+   end
+
+   def ex_label_class
+      "block text-sm font-medium text-gray-700"
+    end
+  
+   
    def table_header_class
      "font-bold p-2 border-b text-left bg-blue-900 text-white"
    end

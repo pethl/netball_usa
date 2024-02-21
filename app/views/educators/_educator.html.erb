@@ -1,14 +1,17 @@
 <div id="<%= dom_id educator %>">
 
 <% unless user_signed_in? %>
-  
-  <h2>Thank you for sharing your contact details, we will be in touch!<br><br><i>Netball America<br><br></i></h2>
+   <br>
+    <p class="text-xl text-blue-900">Educators Sign Up Form</p><br>
+   
+    <h2>Thank you for sharing your contact details, we will be in touch!<br><br></h2>
   <% end %>
 
 
   <p>
     <strong>First name:</strong>
     <%= educator.first_name %>
+  
   </p>
 
   <p>
