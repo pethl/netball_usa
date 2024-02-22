@@ -12,11 +12,11 @@ module ApplicationHelper
    end
    
    def ex_input_class
-     "block w-full appearance-none rounded-md border border-gray-300 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
+     "block w-full appearance-none rounded-md border border-gray-300 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm invalid:border-red-500"
    end
 
    def ex_label_class
-      "block text-sm font-medium text-gray-700"
+      "block text-sm font-medium text-gray-700 invalid:border-red-500"
     end
   
    
@@ -38,7 +38,7 @@ module ApplicationHelper
    
    def us_states
        [
-         ["--"],
+         [""],
          ['Alabama', 'AL'],
          ['Alaska', 'AK'],
          ['Arizona', 'AZ'],

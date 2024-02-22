@@ -8,7 +8,9 @@
 <table class="table-auto border border-slate-400 text-sm">
   <thead>
     <tr>
+    <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">Date Created</th>
       <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">Name</th>
+      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">Contact</th>
       <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">School/District</th>
       <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">City</th>
       <th class="font-bold p-2 border-b text-left bg-blue-900 text-white" >State</th>
@@ -22,7 +24,10 @@
   <tbody>
    <% @netball_educators.each do |educator| %>
      <tr class="odd:bg-gray-100">
-      <td class="p-2 border-b text-left"><%= link_to educator.last_name, edit_netball_educator_path(educator), class: link_class %>, <%= educator.first_name %></td>
+     <td class="p-2 border-b text-left"><%= educator.created_at.to_formatted_s(:month_and_year) unless (educator.created_at.to_s.empty?) %></td>
+    
+      <td class="p-2 border-b text-left text-blue-900 text-base"><%= educator.last_name  %>, <%= educator.first_name %></td>
+      <td class="p-2 border-b text-left"><%= educator.formatted_phone %><br><%= educator.email %></td>
       <td class="p-2 border-b text-left"><%= educator.school_name %></td>
       <td class="p-2 border-b text-left"><%= educator.city %></td>
       <td class="p-2 border-b text-left"><%= educator.state %></td>

@@ -30,6 +30,7 @@ gem "cssbundling-rails"
 #devise
 gem "devise", github: 'heartcombo/devise', branch: 'main' 
 gem "letter_opener_web"
+gem "phonelib"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

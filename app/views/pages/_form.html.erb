@@ -1,7 +1,7 @@
 <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-  <div class="bg-blue-400 py-8 px-4 shadow sm:rounded-lg sm:px-10">
+  <div class="bg-blue-400 py-2 px-2 shadow sm:rounded-lg sm:px-6">
   
-  <p class="text-xl text-blue-900">Educators Sign Up Form</p><br>
+  <p class="text-xl text-blue-900">Teacher's Information Form</p><br>
 
 <%= form_with(model: educator) do |form| %>
   <% if educator.errors.any? %>
@@ -15,75 +15,80 @@
       </ul>
     </div>
   <% end %>
+  
+  <p class="text-xs">Complete the form below with your contact details and we will reach out to you with follow up information. <p>
+  </p><br>
 
+ 
   <div class="mb-6">
-    <%= form.label :first_name, class: ex_label_class  %>
+    <%= form.label :first_name, autofocus: true, autocomplete: "name", class: "required block text-sm font-medium text-gray-700 invalid:border-red-500 required"%>
      <div class="mt-1">
-    <%= form.text_field :first_name, class: ex_input_class %>
+    <%= form.text_field :first_name, class: input_class %>
    </div>
   </div>
 
  <div class="mb-6">
-    <%= form.label :last_name, class: ex_label_class %>
+    <%= form.label :last_name, autofocus: true, autocomplete: "name", class: label_class %>
     <div class="mt-1">
-    <%= form.text_field :last_name, class: ex_input_class %>
+    <%= form.text_field :last_name, class: input_class %>
   </div>
  </div>
 
  <div class="mb-6">
-    <%= form.label :email, class: ex_label_class  %>
+    <%= form.label :email, autofocus: true, autocomplete: "email", class: label_class  %>
     <div class="mt-1">
-    <%= form.text_field :email, class: ex_input_class %>
+    <%= form.text_field :email, class: input_class, autocomplete: "email" %>
    </div>
   </div>
 
    <div class="mb-6">
-    <%= form.label :phone, class: ex_label_class  %>
+    <%= form.label :phone, autofocus: true, autocomplete: "phone", class: label_class  %>
     <div class="mt-1">
-    <%= form.text_field :phone, class: ex_input_class %>
+    <%= form.text_field :phone, class: input_class %>
    </div>
   </div>
 
   <div class="mb-6">
-    <%= form.label :school_name, class: ex_label_class  %>
+    <%= form.label :school_name, class: label_class  %>
     <div class="mt-1">
-    <%= form.text_field :school_name, class: ex_input_class %>
+    <%= form.text_field :school_name, class: input_class %>
    </div>
   </div>
 
    <div class="mb-6">
-    <%= form.label :city, class: ex_label_class  %>
+    <%= form.label :city, class: label_class  %>
     <div class="mt-1">
-    <%= form.text_field :city, class: ex_input_class %>
+    <%= form.text_field :city, class: input_class %>
    </div>
   </div>
   
  <div class="mb-6">
-    <%= form.label :state, class: ex_label_class  %>
+    <%= form.label :state, class: label_class  %>
     <div class="mt-1">
-    <%= form.select :state, options_for_select(us_states),{}, class: ex_input_class %>
+    <%= form.select :state, options_for_select(us_states),{}, class: input_class %>
    </div>
   </div>
 
  <div class="mb-6">
-    <%= form.label :educator_notes, 'What would you like more information on?', style: "display: block", class: ex_label_class  %>
+    <%= form.label :educator_notes, 'What would you like more information on?', style: "display: block", class: label_class  %>
     <div class="mt-1">
-    <%= form.text_area :educator_notes, class: ex_input_class %>
+    <%= form.text_area :educator_notes, class: input_class %>
    </div>
   </div>
   
   <div class="mb-6">
-     <%= form.label :feedback, 'Feedback or Comments on your session', style: "display: block", class: ex_label_class  %>
+     <%= form.label :feedback, 'Feedback or Comments on your session', style: "display: block", class: label_class  %>
      <div class="mt-1">
-     <%= form.text_area :feedback, class: ex_input_class %>
+     <%= form.text_area :feedback, class: input_class %>
     </div>
    </div>
   
 
   <div>
-    <%= form.submit "Save Record", class: form_button_class %>
+    <%= form.submit "Submit", class: form_button_class %>
   </div>
 <% end %>
+
 
   </div>
     </div>
