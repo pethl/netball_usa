@@ -16,68 +16,74 @@
   <% end %>
 
   <div class="mb-6">
-    <%= form.label :first_name, class: label_class  %>
+    <%= form.label :first_name, "First Name*", autofocus: true, autocomplete: "name", class: "required block text-sm font-medium text-gray-700 invalid:border-red-500 required"%>
      <div class="mt-1">
     <%= form.text_field :first_name, class: input_class %>
    </div>
   </div>
 
  <div class="mb-6">
-    <%= form.label :last_name, class: label_class %>
+    <%= form.label :last_name, "Last Name*", autofocus: true, autocomplete: "name", class: label_class %>
     <div class="mt-1">
     <%= form.text_field :last_name, class: input_class %>
   </div>
  </div>
 
-
  <div class="mb-6">
-    <%= form.label :email, class: label_class  %>
+    <%= form.label :email, "Email*", autofocus: true, autocomplete: "email", class: label_class  %>
     <div class="mt-1">
-    <%= form.text_field :email, class: input_class %>
+    <%= form.text_field :email, class: input_class, autocomplete: "email" %>
    </div>
   </div>
 
    <div class="mb-6">
-    <%= form.label :phone, class: label_class  %>
+    <%= form.label :phone, "Phone (please include country code)", autofocus: true, autocomplete: "phone", class: label_class  %>
     <div class="mt-1">
     <%= form.text_field :phone, class: input_class %>
    </div>
   </div>
 
   <div class="mb-6">
-    <%= form.label :school_name, class: label_class  %>
+    <%= form.label :school_name, "School Name*", class: label_class  %>
     <div class="mt-1">
     <%= form.text_field :school_name, class: input_class %>
    </div>
   </div>
 
    <div class="mb-6">
-    <%= form.label :city, class: label_class  %>
+    <%= form.label :city, "City*", class: label_class  %>
     <div class="mt-1">
     <%= form.text_field :city, class: input_class %>
    </div>
   </div>
   
  <div class="mb-6">
-    <%= form.label :state, class: label_class  %>
+    <%= form.label :state, "State*", class: label_class  %>
     <div class="mt-1">
-    <%= form.select :state, options_for_select(us_states, :selected => netball_educator.state),{}, class: input_class %>
+    <%= form.select :state, options_for_select(us_states),{}, class: input_class %>
    </div>
   </div>
 
  <div class="mb-6">
-    <%= form.label :netball_educator_notes, 'Notes', style: "display: block", class: label_class  %>
+    <%= form.label :educator_notes, 'What would you like more information on?', style: "display: block", class: label_class  %>
     <div class="mt-1">
     <%= form.text_area :educator_notes, class: input_class %>
    </div>
   </div>
   
   <div class="mb-6">
-     <%= form.label :feedback, style: "display: block", class: label_class  %>
+     <%= form.label :feedback, 'Quote/Feedback on your session', style: "display: block", class: label_class  %>
      <div class="mt-1">
      <%= form.text_area :feedback, class: input_class %>
     </div>
    </div>
+   
+   <div class="mb-6">
+      <%= form.label :authorize, 'Do you authorize us to use feedback on social media?', style: "display: block", class: label_class  %>
+      <div class="mt-1">
+      <%= form.check_box :authorize, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+     </div>
+    </div>
 
 <% unless current_user.nil? %>
   <div class="mb-6">
