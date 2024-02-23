@@ -55,14 +55,5 @@ module NetballUsa
          Devise::Mailer.layout "mailer"
        end
 
-     ActionMailer::Base.smtp_settings = {
-      address: ENV['MAILGUN_SMTP_SERVER'],
-      port: ['MAILGUN_SMTP_PORT'],
-      domain: ['MAILGUN_DOMAIN'],
-      user_name: ['MAILGUN_SMTP_LOGIN'],
-      password: ['MAILGUN_SMTP_PASSWORD'],
-      authentication: :plain,
-      enable_starttls_auto: true 
-}
 end
   end
