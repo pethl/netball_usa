@@ -22,6 +22,7 @@ module NetballUsa
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+    config.autoload_paths += %W(#{config.root}/lib)
     
 
     # Configuration for the application, engines, and railties goes here.
@@ -54,16 +55,14 @@ module NetballUsa
          Devise::Mailer.layout "mailer"
        end
 
-  
-
-ActionMailer::Base.smtp_settings = {
-  address: ENV['MAILGUN_SMTP_SERVER'],
-  port: ['MAILGUN_SMTP_PORT'],
-  domain: ['MAILGUN_DOMAIN'],
-  user_name: ['MAILGUN_SMTP_LOGIN'],
-  password: ['MAILGUN_SMTP_PASSWORD'],
-  authentication: :plain,
-  enable_starttls_auto: true 
+     ActionMailer::Base.smtp_settings = {
+      address: ENV['MAILGUN_SMTP_SERVER'],
+      port: ['MAILGUN_SMTP_PORT'],
+      domain: ['MAILGUN_DOMAIN'],
+      user_name: ['MAILGUN_SMTP_LOGIN'],
+      password: ['MAILGUN_SMTP_PASSWORD'],
+      authentication: :plain,
+      enable_starttls_auto: true 
 }
 end
   end
