@@ -3,7 +3,7 @@ class NetballEducator < ApplicationRecord
  
   
   before_save { email.downcase! }
- # before_save :normalize_phone
+ before_save :normalize_phone
   
   validates :first_name, presence: true, length: { maximum: 30 }
   validates :last_name, presence: true, length: { maximum: 40 }

@@ -29,6 +29,7 @@ gem "cssbundling-rails"
 
 #devise
 gem "devise", github: 'heartcombo/devise', branch: 'main' 
+  gem "phonelib"
 
 
 # Use Redis adapter to run Action Cable in production
@@ -62,7 +63,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
   gem "letter_opener_web"
-  gem "phonelib"
+
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
