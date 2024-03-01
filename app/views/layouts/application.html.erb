@@ -5,56 +5,45 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-  
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-   
+  <script src="https://kit.fontawesome.com/d868e3ba9e.js" crossorigin="anonymous"></script>
   </head>
 
   <body class="h-full">
    <% if user_signed_in? %> 
-    
-    <header class="bg-gray-800 sm:flex sm:justify-between">
-     <div class="flex items-end justify-between px-1 py-3">
-       <div>
-           <%= image_tag 'Netball_America_Logo.png', :class => "mx-10 h-14 w-auto" %>
+     
+    <header class="bg-gray-800">
+      <div class="flex items-end justify-between px-1 py-3">
+           <div>
+              <%= image_tag 'Netball_America_Logo.png', :class => "mx-10 h-14 w-auto" %>
+           </div>
+         
+           <div>
+           </div>
+         
+          <div class="pr-8 px-3 py-2 items-end justify-baseline">
+            <%= link_to edit_user_registration_path do %>
+              <i class="fa-solid fa-user text-white"></i>
+            <% end %>
+            <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
+              <i class="fa-solid fa-arrow-right-from-bracket text-white"></i>
+            <% end %>
+            </div>
+            
         </div>
-        <div>
-        <div class="hidden md:block">
-          <div class="sm:hidden ml-10 flex items-baseline space-x-4">
-            <a href="/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Dashboard</a>
-            <a href="/netball_educators/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Educators</a>
-            <a href="/sponsors" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Sponsors</a>
-            <a href="/grants/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Grants</a>
-            <a href="/equipments/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Equipment</a>
-            <% if is_admin? %>  
-               <a href="/users/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Users</a>
-               <% end %>
-          </div>
         </div>
+          <div class="mx-10 sm:max-w-xl md:max-w-md items-end md:place-content-center justify-between px-1 py-2 text-xs ">
+          <a href="/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Dashboard</a>
+          <a href="/netball_educators/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Educators</a>
+          <a href="/sponsors" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Sponsors</a>
+          <a href="/grants/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Grants</a>
+          <a href="/equipments/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Equipment</a>
+          <% if is_admin? %>  
+             <a href="/users/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Users</a>
+             <% end %>
           </div>
-         <div>
-         <div class="flex px-2 pt-2 pb-4">
-          <img class="h-6 w-6 rounded-full"  <%= image_tag 'user.png', :class => "mx-auto h-2 w-auto" %> 
-           <ul class="list-image-none list-inside block px-5 text-xs text-gray-300">
-              <li class=" rounded hover:bg-gray-600"> <%= link_to 'Edit profile', edit_user_registration_path %></li>
-              <li class=" rounded hover:bg-gray-600"> <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete } %></li>
-            </ul>
-          </div>
-       </div>
-    </div>
-     <div class="md:hidden sm:block sm:flex items-end justify-between px-2 py-3 text-xs pl-6">
-       <a href="/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Dashboard</a>
-       <a href="/netball_educators/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Educators</a>
-       <a href="/sponsors" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Sponsors</a>
-       <a href="/grants/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Grants</a>
-       <a href="/equipments/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Equipment</a>
-       <% if is_admin? %>  
-          <a href="/users/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Users</a>
-          <% end %>
-     </div>
-     </div>
-     </header>
+        </header>
     
     <% else %>
      <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -82,7 +71,7 @@
       </div>
     </main>
    
-  </div>
+   </div>
    </div>
   </div>
 
