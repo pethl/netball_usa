@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   
   helper_method :is_admin?
+  
+  def default_url_options
+     {:locale => I18n.locale}
+   end
 
 
     def is_admin?

@@ -9,6 +9,7 @@
 <% end %>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name),data: {turbo: false}) do |f| %>
+  <br>
   <div class="mb-6">
     <%= f.label :email, class: label_class %>
     <div class="mt-1">
