@@ -14,35 +14,36 @@
    <% if user_signed_in? %> 
      
     <header class="bg-gray-800">
-      <div class="flex items-end justify-between px-1 py-3">
-           <div>
-              <%= image_tag 'Netball_America_Logo.png', :class => "mx-10 h-14 w-auto" %>
+      <div class="flex items-end justify-between mx-8 my-8 p-4">
+           <div title="Netball America Home Page">
+              
+              <%= link_to image_tag("Netball_America_Logo.png", :class=>"mx-2 h-14 w-auto"), root_path %>
            </div>
          
-           <div>
+           <div class="mx-10 sm:max-w-xl md:max-w-md items-end md:place-content-center justify-between px-1 py-2 text-xs ">
+           <a href="/netball_educators/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Educators</a>
+           <a href="/sponsors" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Sponsors</a>
+           <a href="/grants/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Grants</a>
+           <% if is_admin? %>  
+              <a href="/users/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Users</a>
+              <% end %>
            </div>
-         
-          <div class="pr-8 px-3 py-2 items-end justify-baseline">
+           
+        <div class="flex items-end justify-baseline">
+          <div class="p-2 " title="Edit User">
             <%= link_to edit_user_registration_path do %>
               <i class="fa-solid fa-user text-white"></i>
             <% end %>
+              </div>
+             <div class="p-2 " title="Logout">
             <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
               <i class="fa-solid fa-arrow-right-from-bracket text-white"></i>
             <% end %>
             </div>
-            
+           </div>   
         </div>
         </div>
-          <div class="mx-10 sm:max-w-xl md:max-w-md items-end md:place-content-center justify-between px-1 py-2 text-xs ">
-          <a href="/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Dashboard</a>
-          <a href="/netball_educators/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Educators</a>
-          <a href="/sponsors" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Sponsors</a>
-          <a href="/grants/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Grants</a>
-          <a href="/equipments/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Equipment</a>
-          <% if is_admin? %>  
-             <a href="/users/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-medium">Users</a>
-             <% end %>
-          </div>
+         
         </header>
     
     <% else %>
@@ -55,7 +56,6 @@
     <header class="bg-white shadow">
       <div class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
         <h1 class="text-2xl font-bold tracking-tight text-gray-900">
-       
         <%= yield(:page_title)%></h1>
       </div>
     </header>
