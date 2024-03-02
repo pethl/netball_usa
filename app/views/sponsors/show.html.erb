@@ -1,16 +1,17 @@
 <% content_for(:page_title, "Sponsor Targets")%>
 
-  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md md:max-w-lg">
   <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
 
    <br>
  
 <%= render @sponsor %>
 
+</div>
+</div>
+
+
 <br>
-
-
-
 <div>
   <%= link_to "Edit this sponsor", edit_sponsor_path(@sponsor), class: link_class %> |
   <%= link_to "Back to sponsors", sponsors_path, class: link_class %>

@@ -2,6 +2,11 @@
 
 <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 text-sm">
  
+   <div class="m-2">
+    <%= link_to "Add New Sponsor", new_sponsor_path, class: block_link_class %>
+    <br>
+   </div>
+
 <div id="sponsors">
  
 <div class="overflow-x-auto">
@@ -30,7 +35,7 @@
   
   <tbody>
   <% @sponsors.each do |sponsor| %>
-     <tr class="odd:bg-gray-200">
+     <tr class="">
      <td class="p-2 border-b text-left"><%= sponsor.category %></td>
      <td class="p-2 border-b text-left"><%= sponsor.industry %></td>
      <td class="p-2 border-b text-left"><%= link_to sponsor.company_name, sponsor_path(sponsor), class: link_class %></td>
@@ -38,7 +43,7 @@
      <td class="p-2 border-b text-left"><%= sponsor.status %></td>
      <td class="p-2 border-b text-left"><%= sponsor.about %></td>
      <td class="p-2 border-b text-left"><%= sponsor.location %></td>
-     <td class="p-2 border-b text-left"><%= sponsor.website %></td>
+     <td class="p-2 border-b text-left truncate"><%= sponsor.website %></td>
      <td class="p-2 border-b text-left"><%= sponsor.key_contacts %></td>
      <td class="p-2 border-b text-left"><%= sponsor.phone_numbers_emails %></td>
      <td class="p-2 border-b text-left"><%= sponsor.opportunity_area %></td>
@@ -57,8 +62,5 @@
 </div>
 </div>
 
-<br><br>
- <div class="mt-1">
-<%= link_to "Add New Sponsor", new_sponsor_path, class: block_link_class %>
-</div>
+ 
    

@@ -32,6 +32,9 @@ class NetballEducator < ApplicationRecord
       formatted
     end
  
+    def full_name
+      "#{self.first_name} #{self.last_name}"
+    end
  
   private
  

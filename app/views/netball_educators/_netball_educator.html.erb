@@ -5,7 +5,7 @@
   <% end %>
   </div>
 
-  <a href="#" class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+  <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
           First Name:
@@ -63,7 +63,7 @@
           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
               State:
           </p>
-          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+          <p class="text-sm font-medium text-gray-900 dark:text-white">
           <%= netball_educator.state %> 
           </p>
            </div>
@@ -72,7 +72,7 @@
            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                More Information:
            </p>
-           <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+           <p class="text-sm font-medium text-gray-900 dark:text-white">
            <%= netball_educator.educator_notes %> 
            </p>
             </div>
@@ -82,7 +82,7 @@
             <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                 Feedback:
             </p>
-            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+            <p class="text-sm font-medium text-gray-900 dark:text-white">
             <%= netball_educator.feedback %> 
             </p>
              </div>
@@ -90,27 +90,35 @@
        
              <div class="mt-2">
              <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                 Do you authorize us to use feedback on social media?:
+                 Authorize use of feedback on social media?:
              </p>
              <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
              
-             <%= netball_educator.authorize? ? 'yes' : 'no' %>
+             <%= netball_educator.authorize? ? 'Yes' : 'No' %>
              </p>
               </div>
  
   
 <% if user_signed_in? %>
   
-  <div class="mt-1">
-  <p class="text-sm font-medium text-gray-700">Allocated To:</p>
- </div>
-  <input type="text" id="allocated" aria-label="allocated" class="bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm p-2.5 cursor-not-allowed" value=<%= netball_educator.user.full_name unless (netball_educator.user_id.to_s.empty?) %> >
- 
-  <div class="mt-1">
-  <p class="text-sm font-medium text-gray-700">Mgmt Notes:</p>
- </div>
-  <input type="text" id="mgmt_notes" aria-label="mgmt_notes" class="bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm p-2.5 cursor-not-allowed" value=<%= netball_educator.mgmt_notes %> >
- 
+        <div class="mt-2">
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            Allocated To:
+        </p>
+        <p class="text-sm font-medium text-gray-900 dark:text-white">
+       <%= netball_educator.user.full_name unless (netball_educator.user_id.to_s.empty?) %>
+        </p>
+         </div>
+  
+         <div class="mt-2">
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+              Mgmt Notes:
+          </p>
+          <p class="text-sm font-medium text-gray-900 dark:text-white">
+          <%= netball_educator.mgmt_notes %> 
+          </p>
+           </div>
+    
   <% end %>  
-</a>
+</div>
 

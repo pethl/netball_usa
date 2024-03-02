@@ -1,7 +1,6 @@
-<div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+<div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md max-w-md">
   <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-   <div class="grid gap-6 mb-6 md:grid-cols-2">
-
+  
 
 <%= form_with(model: sponsor) do |form| %>
   <% if sponsor.errors.any? %>
@@ -88,7 +87,7 @@
    <div class="mb-6">
     <%= form.label :pitch, class: label_class%>
      <div class="mt-1">
-    <%= form.text_field :pitch, class: input_class  %>
+    <%= form.text_area :pitch, class: input_class  %>
    </div> </div>
 
    <div class="mb-6">

@@ -3,6 +3,12 @@
 <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
  
 
+ <div class="mt-1">
+<%= link_to "Add New Educator", new_netball_educator_path, class: block_link_class %>
+<br>
+</div>
+ 
+
 <div id="educators">
 <div class="overflow-x-auto"> 
 <table class="table-auto border border-slate-400 text-sm h_scrolling_list_table">
@@ -14,7 +20,7 @@
       <th class="p-2 border-b text-left bg-blue-900 text-white">School/District</th>
       <th class="p-2 border-b text-left bg-blue-900 text-white">City</th>
       <th class="p-2 border-b text-left bg-blue-900 text-white" >State</th>
-      <th class="p-2 border-b text-left bg-blue-900 text-white" >Allocated_to</th>
+      <th class="p-2 border-b text-left bg-blue-900 text-white" >Allocated To</th>
       <th class="p-2 border-b text-left bg-blue-900 text-white" >Show Details</th>
       <th class="p-2 border-b text-left bg-blue-900 text-white" >Edit</th>
     </tr>
@@ -24,7 +30,7 @@
    <% @netball_educators.each do |educator| %>
      <tr class="odd:bg-gray-100">
       <td class="p-2 border-b text-left"><%= educator.created_at.to_formatted_s(:month_and_year) unless (educator.created_at.to_s.empty?) %></td>
-      <td class="p-2 border-b text-left text-blue-900 text-base"><%= educator.last_name  %>, <%= educator.first_name %></td>
+      <td class="p-2 border-b text-left text-blue-900 text-base"><%= link_to educator.full_name, netball_educator_path(educator), class: link_class %></td>
       <td class="p-2 border-b text-left"><%= educator.formatted_phone %><br><%= educator.email %></td>
       <td class="p-2 border-b text-left"><%= educator.school_name %></td>
       <td class="p-2 border-b text-left"><%= educator.city %></td>
@@ -40,8 +46,4 @@
     </div>
   </div>
     
-    <br><br>
-     <div class="mt-1">
-    <%= link_to "Add New Educator", new_netball_educator_path, class: block_link_class %>
-    </div>
-  
+   
