@@ -60,8 +60,8 @@
  <div class="mb-6">
     <%= form.label :state, "State*", class: label_class  %>
     <div class="mt-1">
-    <%= form.select :state, options_for_select(us_states),{}, class: input_class %>
-   </div>
+     <%= form.select :state, options_for_select(us_states, :selected => netball_educator.state),{}, class: input_class %>
+    </div>
   </div>
 
  <div class="mb-6">
@@ -87,9 +87,10 @@
 
 <% unless current_user.nil? %>
   <div class="mb-6">
-   <%= form.label :allocated_to, class: label_class%>
+   <%= form.label :user_id, 'Allocated To', class: label_class%>
     <div class="mt-1">
-    <%= form.collection_select(:user_id, @users, :id, :full_name,{:prompt=>true}, {:class=>'input-class'}) %>
+    <%= form.collection_select(:user_id, User.all, :id, :full_name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
+   }) %>
  </div> </div>
 
 
@@ -99,7 +100,7 @@
     <%= form.text_area :mgmt_notes, class: input_class %>
    </div>
   </div>
-   <% end %>
+<% end %>
 
 
   <div>

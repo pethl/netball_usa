@@ -1,5 +1,6 @@
 <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
   <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+   <div class="grid gap-6 mb-6 md:grid-cols-2">
 
 
 <%= form_with(model: sponsor) do |form| %>
@@ -14,6 +15,21 @@
       </ul>
     </div>
   <% end %>
+
+  <div class="mb-6">
+   <%= form.label :status, class: label_class%>
+    <div class="mt-1">
+   <%= form.select :status, options_for_select(sponsor_status, :selected => sponsor.status),{}, class: input_class %>
+  </div> </div>
+
+  <div class="mb-6">
+   <%= form.label :allocated_to, class: label_class%>
+    <div class="mt-1">
+    <%= form.collection_select(:user_id, @users, :id, :full_name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
+  }) %>
+ </div> </div>
+
+ <div class="border-b-4 border-indigo-500"></div><br>
 
  <div class="mb-6">
     <%= form.label :category, class: label_class%>
@@ -31,18 +47,6 @@
     <%= form.label :company_name, class: label_class%>
      <div class="mt-1">
     <%= form.text_field :company_name, class: input_class  %>
-   </div> </div>
-
-   <div class="mb-6">
-    <%= form.label :allocated_to, class: label_class%>
-     <div class="mt-1">
-     <%= form.collection_select(:user_id, @users, :id, :full_name,{:prompt=>true}, {:class=>'input-class'}) %>
-  </div> </div>
-
-   <div class="mb-6">
-    <%= form.label :status, class: label_class%>
-     <div class="mt-1">
-    <%= form.select :status, options_for_select(sponsor_status, :selected => sponsor.status),{}, class: input_class %>
    </div> </div>
 
    <div class="mb-6">
@@ -106,3 +110,4 @@
 
 </div>
   </div>
+   </div>

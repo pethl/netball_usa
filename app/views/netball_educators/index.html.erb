@@ -1,6 +1,6 @@
 <% content_for(:page_title, "Educators")%>
 
-<div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 text-sm">
+<div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
  
 
 <div id="educators">
@@ -8,24 +8,22 @@
 <table class="table-auto border border-slate-400 text-sm h_scrolling_list_table">
   <thead>
     <tr>
-    <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">Date Created</th>
-      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">Name</th>
-      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">Contact</th>
-      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">School/District</th>
-      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">City</th>
-      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white" >State</th>
-      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white" >Allocated_to</th>
-      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white" >Show Details</th>
-      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white" >Edit</th>
-      
+      <th class="p-2 border-b text-left bg-blue-900 text-white">Date Created</th>
+      <th class="p-2 border-b text-left bg-blue-900 text-white">Name</th>
+      <th class="p-2 border-b text-left bg-blue-900 text-white">Contact</th>
+      <th class="p-2 border-b text-left bg-blue-900 text-white">School/District</th>
+      <th class="p-2 border-b text-left bg-blue-900 text-white">City</th>
+      <th class="p-2 border-b text-left bg-blue-900 text-white" >State</th>
+      <th class="p-2 border-b text-left bg-blue-900 text-white" >Allocated_to</th>
+      <th class="p-2 border-b text-left bg-blue-900 text-white" >Show Details</th>
+      <th class="p-2 border-b text-left bg-blue-900 text-white" >Edit</th>
     </tr>
   </thead>
   
   <tbody>
    <% @netball_educators.each do |educator| %>
      <tr class="odd:bg-gray-100">
-     <td class="p-2 border-b text-left"><%= educator.created_at.to_formatted_s(:month_and_year) unless (educator.created_at.to_s.empty?) %></td>
-    
+      <td class="p-2 border-b text-left"><%= educator.created_at.to_formatted_s(:month_and_year) unless (educator.created_at.to_s.empty?) %></td>
       <td class="p-2 border-b text-left text-blue-900 text-base"><%= educator.last_name  %>, <%= educator.first_name %></td>
       <td class="p-2 border-b text-left"><%= educator.formatted_phone %><br><%= educator.email %></td>
       <td class="p-2 border-b text-left"><%= educator.school_name %></td>
@@ -36,8 +34,8 @@
       <td class="p-2 border-b text-left"><%= link_to "Edit", edit_netball_educator_path(educator), class: link_class %></td>
      </tr>
     <% end %>
-    </tbody>
-    </table>
+  </tbody>
+  </table>
     
     </div>
   </div>
