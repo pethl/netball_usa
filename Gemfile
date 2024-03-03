@@ -27,6 +27,9 @@ gem "stimulus-rails"
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem "cssbundling-rails"
 
+# sendgrid email
+gem 'sendgrid-ruby'
+
 #devise
 gem "devise", github: 'heartcombo/devise', branch: 'main' 
   gem "phonelib"
