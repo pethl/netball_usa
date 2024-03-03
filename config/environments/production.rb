@@ -70,11 +70,11 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'https://netball-america-923def44b63e.herokuapp.com' }
 
   config.action_mailer.smtp_settings = {
+    :port => ENV.fetch('SMTP_PORT'),
+    :address => 'smtp.sendgrid.net',
     :user_name => ENV.fetch('SMTP_LOGIN'),
     :password => ENV.fetch('SMTP_PASSWORD'),
-    :address => 'smtp.sendgrid.net',
     :domain => ENV.fetch('SMTP_DOMAIN'),
-    :port => ENV.fetch('SMTP_PORT'),
     :authentication => :plain,
     :enable_starttls_auto => true
   }
