@@ -28,7 +28,7 @@ gem "stimulus-rails"
 gem "cssbundling-rails"
 
 # sendgrid email
-gem 'sendgrid-ruby'
+#gem 'sendgrid-ruby'
 
 #devise
 gem "devise", github: 'heartcombo/devise', branch: 'main' 
