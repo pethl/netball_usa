@@ -26,7 +26,7 @@ class NetballEducatorsController < ApplicationController
   end
 
   def index_user
-    @users =User.all
+   
     if is_admin? 
        @netball_educators = NetballEducator.all
        @netball_educators = @netball_educators.order(user_id: :asc)
