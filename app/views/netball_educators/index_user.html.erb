@@ -3,24 +3,27 @@
 <div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
  
 
-
 <div class="">
    <ul class="flex flex-wrap text-sm font-medium text-left text-gray-500">
       <li class="me-2">
-            <a href="/netball_educators/" class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active" aria-current="page">By Created Date</a>
+            <a href="/netball_educators/" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Created Date</a>
         </li>
         <li class="me-2">
             <a href="/netball_educators/index_state" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By State</a>
         </li>
-         <li class="me-2">
-            <a href="/netball_educators/index_user" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By User</a>
+        <li class="me-2">
+            <a href="/netball_educators/index_user" class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active " aria-current="page">By Allocation</a>
         </li>
       </ul>
 </div>
 
-<br><br>
+<br>
 
-
+<% @netball_educators_by_user.each do |user, educators| %>
+<div class="text-xl">
+    <%= User.find(user).first_name unless user.nil? %>  <%= User.find(user).last_name unless user.nil? %>
+    <% if user.nil? %> Not Allocated <% end %>
+</div>
 
 <div id="educators">
 <div class="relative overflow-x-auto">
@@ -57,7 +60,7 @@
             </tr>
         </thead>
         <tbody>
-        <% @netball_educators.each do |educator| %>
+        <% educators.each do |educator| %>
             <tr class="bg-white border-b hover:bg-gray-100">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
                     <%= educator.created_at.to_formatted_s(:usa) unless (educator.created_at.to_s.empty?) %>
@@ -98,7 +101,11 @@
             </tr>
             <% end %>
         </tbody>
+
+
     </table>
+<br><br>
+    <% end %>
 </div>
  </div>
 </div>

@@ -10,6 +10,10 @@ module ApplicationHelper
    def form_button_class
      "flex w-full justify-center rounded-md border border-transparent bg-blue-900 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2"
    end
+
+   def small_button_class
+    "justify-center rounded-md border border-transparent bg-blue-900 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2"
+  end
    
    def ex_input_class
      "block w-full appearance-none rounded-md border border-gray-300 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm invalid:border-red-500"
@@ -140,4 +144,15 @@ module ApplicationHelper
          ['Member']
        ]       
    end
+
+   def educator_level
+    [
+      ["--"],
+      ['Elementary'],
+      ['Middle'],
+      ['High'],
+      ['University'],
+      ['School/District Lead']
+    ]       
+end
 end

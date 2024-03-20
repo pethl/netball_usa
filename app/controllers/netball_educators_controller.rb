@@ -6,8 +6,34 @@ class NetballEducatorsController < ApplicationController
   def index
     if is_admin? 
        @netball_educators = NetballEducator.all
+       @netball_educators = @netball_educators.order(created_at: :desc)
     else
         @netball_educators = NetballEducator.where(user_id: current_user.id)
+        @netball_educators = @netball_educators.order(created_at: :desc)
+      end
+  end
+
+  # GET /netball_educators
+  def index_state
+    if is_admin? 
+       @netball_educators = NetballEducator.all
+       @netball_educators = @netball_educators.order(state: :asc)
+       @netball_educators_by_state = @netball_educators.group_by { |t| t.state }
+    else
+        @netball_educators = NetballEducator.where(user_id: current_user.id)
+        @netball_educators = @netball_educators.order(state: :asc)
+      end
+  end
+
+  def index_user
+    @users =User.all
+    if is_admin? 
+       @netball_educators = NetballEducator.all
+       @netball_educators = @netball_educators.order(user_id: :asc)
+       @netball_educators_by_user = @netball_educators.group_by { |t| t.user_id }
+    else
+        @netball_educators = NetballEducator.where(user_id: current_user.id)
+        @netball_educators = @netball_educators.order(state: :asc)
       end
   end
 
@@ -60,6 +86,6 @@ class NetballEducatorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def netball_educator_params
-      params.require(:netball_educator).permit(:feedback, :first_name, :last_name, :authorize, :user_id, :email, :phone, :school_name, :city, :state, :educator_notes, :mgmt_notes)
+      params.require(:netball_educator).permit(:feedback, :first_name, :last_name, :level, :website, :authorize, :user_id, :email, :phone, :school_name, :city, :state, :educator_notes, :mgmt_notes)
     end
 end

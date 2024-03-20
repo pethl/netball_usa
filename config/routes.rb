@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'netball_educators/index_state' => 'netball_educators#index_state', :as => :index_state
+  get 'netball_educators/index_user' => 'netball_educators#index_user', :as => :index_user
+
   resources :netball_educators
   resources :sponsors
   resources :educators
@@ -11,5 +14,6 @@ Rails.application.routes.draw do
   get "pages/educator_sign_up"
   match '/users',   to: 'users#index',   via: 'get'
  
-
+  
+  
 end

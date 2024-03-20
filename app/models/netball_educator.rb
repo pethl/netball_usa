@@ -11,6 +11,7 @@ class NetballEducator < ApplicationRecord
   validates :school_name, presence: true, length: { maximum: 40 }
   validates :city, presence: true, length: { maximum: 30 }
   validates :state, presence: true, length: { maximum: 30 }
+  validates :level, presence: true
                      
     
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

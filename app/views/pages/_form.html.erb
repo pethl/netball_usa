@@ -42,7 +42,7 @@
   </div>
 
    <div class="mb-6">
-    <%= form.label :phone, "Phone (please include country code)", autofocus: true, autocomplete: "phone", class: label_class  %>
+    <%= form.label :phone, "Phone (include area code)", autofocus: true, autocomplete: "phone", class: label_class  %>
     <div class="mt-1">
     <%= form.text_field :phone, class: input_class %>
    </div>
@@ -52,6 +52,13 @@
     <%= form.label :school_name, "School Name*", class: label_class  %>
     <div class="mt-1">
     <%= form.text_field :school_name, class: input_class %>
+   </div>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :website, "Shool Website", class: label_class  %>
+    <div class="mt-1">
+    <%= form.text_field :website, class: input_class %>
    </div>
   </div>
 
@@ -66,6 +73,13 @@
     <%= form.label :state, "State*", class: label_class  %>
     <div class="mt-1">
     <%= form.select :state, options_for_select(us_states),{}, class: input_class %>
+   </div>
+  </div>
+
+   <div class="mb-6">
+    <%= form.label :level, "Role/Level*", class: label_class  %>
+    <div class="mt-1">
+    <%= form.select :level, options_for_select(educator_level),{}, class: input_class %>
    </div>
   </div>
 
