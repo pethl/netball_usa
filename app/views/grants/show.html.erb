@@ -1,0 +1,28 @@
+
+<% content_for(:page_title, "Grant")%>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md md:max-w-lg">
+  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+
+   <br>
+ 
+<%= render @grant %>
+
+</div>
+</div>
+
+<br>
+
+<div>
+  <%= link_to "Edit this grant", edit_grant_path(@grant), class: block_link_class %>
+  <%= link_to "Back to grants", grants_path, class: block_link_class %>
+
+  <%= button_to "Destroy this grant", @grant, method: :delete %>
+</div>
+
+
+
+
+
+
+

@@ -1,0 +1,10 @@
+<% content_for(:page_title, "Reference: Edit")%>
+
+<%= render "form", sponsor: @reference %>
+
+<br>
+
+<div>
+  <%= link_to "Show this reference", @reference %> |
+  <%= link_to "Back to references", references_path %>
+</div>

@@ -1,0 +1,112 @@
+<div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md max-w-md">
+  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+
+<%= form_with(model: grant) do |form| %>
+  <% if grant.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(grant.errors.count, "error") %> prohibited this grant from being saved:</h2>
+
+      <ul>
+        <% grant.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-6">
+   <%= form.label :name, class: label_class%>
+    <div class="mt-1">
+   <%= form.text_field :name, class: input_class  %>
+  </div> </div>
+
+  <div class="mb-6">
+     <%= form.label :apply, style: "display: block", class: label_class  %>
+     <div class="mt-1">
+     <%= form.check_box :apply, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+    </div>
+   </div>
+
+   <div class="mb-6">
+    <%= form.label :amount, class: label_class%>
+     <div class="mt-1">
+    <%= form.number_field :amount, class: input_class  %>
+   </div> </div>
+
+   <div class="mb-6">
+    <%= form.label :location, class: label_class%>
+     <div class="mt-1">
+    <%= form.text_field :location, class: input_class  %>
+   </div> </div>
+
+   <div class="mb-6">
+    <%= form.label :due_date, class: label_class%>
+     <div class="mt-1">
+    <%= form.date_field :due_date, class: input_class  %>
+   </div> </div>
+
+   <div class="mb-6">
+      <%= form.label :purpose, style: "display: block", class: label_class  %>
+      <div class="mt-1">
+      <%= form.text_area :purpose, class: input_class %>
+     </div>
+    </div>
+
+    <div class="mb-6">
+     <%= form.label :grant_link, class: label_class%>
+      <div class="mt-1">
+     <%= form.text_field :name, class: input_class  %>
+    </div> </div>
+ 
+
+  <div class="mb-6">
+     <%= form.label :notes, style: "display: block", class: label_class  %>
+     <div class="mt-1">
+     <%= form.text_area :notes, class: input_class %>
+    </div>
+   </div>
+
+   <div class="mb-6">
+     <%= form.label :status, class: label_class  %>
+     <div class="mt-1">
+      <%= form.select :status, options_for_select(grant_status, :selected => grant.status),{}, class: input_class %>
+     </div>
+   </div>
+   
+   <% unless current_user.nil? %>
+     <div class="mb-6">
+      <%= form.label :user_id, 'Allocated To', class: label_class%>
+       <div class="mt-1">
+       <%= form.collection_select(:user_id, User.all, :id, :full_name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
+      }) %>
+    </div> </div>
+    <% end %>
+
+   <div class="mb-6">
+    <%= form.label :date_submitted, class: label_class%>
+     <div class="mt-1">
+    <%= form.date_field :date_submitted, class: input_class  %>
+   </div> </div>
+     
+   <div class="mb-6">
+    <%= form.label :program, class: label_class%>
+     <div class="mt-1">
+    <%= form.text_field :program, class: input_class  %>
+   </div> </div>
+
+   <div class="mb-6">
+    <%= form.label :application_link, class: label_class%>
+     <div class="mt-1">
+    <%= form.text_field :application_link, class: input_class  %>
+   </div> </div>
+   
+   <div class="mb-6">
+    <%= form.label :login, class: label_class%>
+     <div class="mt-1">
+    <%= form.text_field :login, class: input_class  %>
+   </div> </div>
+
+   <div>
+     <%= form.submit "Submit", class: form_button_class %>
+   </div>
+ <% end %>

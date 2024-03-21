@@ -1,0 +1,9 @@
+<% content_for(:page_title, "Reference: Add new record")%>
+
+<%= render "form", reference: @reference %>
+
+<br>
+
+<div>
+  <%= link_to "Back to references", references_path, class: link_class %>
+</div>

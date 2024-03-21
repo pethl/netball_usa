@@ -1,11 +1,7 @@
 <% content_for(:auth_header) do %>
   <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign in</h2>
   <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-    <p class="mt-2 text-center text-sm text-gray-600">
-      Or
-      <%= link_to "create your account", new_registration_path(resource_name), class: "font-medium text-sky-800 hover:text-sky-700" %>
-    </p>
-  <% end %>
+    <% end %>
 <% end %>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name),data: {turbo: false}) do |f| %>

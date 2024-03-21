@@ -1,0 +1,102 @@
+<% content_for(:page_title, "Grants")%>
+
+<div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
+
+<div id="grants">
+<div class="relative overflow-x-auto">
+    <table class="table-fixed w-full text-left rtl:text-right">
+        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+             <tr>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Grant Name
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Apply?
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Amount
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Location
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Due Date
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Purpose
+                </th>
+                <th scope="col" class="px-6 py-3 w-40">
+                    Grant Link
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                   Notes
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 truncate">
+                    Status
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 truncate">
+                    Date Submitted
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @grants.each do |grant| %>
+            <tr class="bg-white border-b hover:bg-gray-100">
+               
+                <td class="px-6 py-4">
+                   <%= link_to grant.name, edit_grant_path(grant), class: link_class %>
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= grant.apply? ? 'Yes' : 'No'  %>
+                   
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= number_to_currency(grant.amount, precision: 0) %>
+                </td>
+                
+                <td class="px-6 py-4">
+                  <%= grant.location%><br>
+                  
+                </td>
+                <td class="px-6 py-4">
+                   <%= grant.due_date.to_formatted_s(:usa) unless (grant.created_at.to_s.empty?) %>
+                </td>
+                
+                 <td class="px-6 py-4">
+                    <%= grant.purpose %>
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= (link_to grant.grant_link, grant.grant_link, target: '_blank', class: link_class) unless (grant.grant_link.to_s.empty?)%>
+                 
+                </td>
+                
+                <td class="px-6 py-4 truncate">
+                   <%= grant.notes %>
+                </td>
+
+                 <td class="px-6 py-4">
+                 <%= grant.status %>
+                </td>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                    <%= grant.date_submitted.to_formatted_s(:usa) unless (grant.date_submitted.to_s.empty?) %>
+                </th>
+                
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+ </div>
+</div>
+</div>
+<br>
+
+<div class="mt-1">
+<%= link_to "Add New Grant", new_grant_path, class: small_button_class %>
+<br>
+</div>
+
+

@@ -48,6 +48,18 @@ module ApplicationHelper
      "block px-4 py-2 text-sm text-gray-700"
    end
    
+   
+   def reference_group
+     [
+       ['sponsor_category'],
+       ['sponsor_industry'],
+       ['sponsor_status'],
+       ['sponsor_opportunity_area'],
+       ['educator_level'],
+       ['grant_status']
+     ]
+     
+   end
    def us_states
        [
          [""],
@@ -107,52 +119,32 @@ module ApplicationHelper
    end
    
    def sponsor_category
-       [
-         ["--"],
-         ["Women's Products"],
-         ['Oz companies'],
-         ['UK companies'],
-         ['NZ companies'],
-         ['Sth Africa companies'],
-         ['Caribbean companies'],
-         ['Pacific Islander companies']
-       ]       
+     sponsor_category = Reference.where(active: "TRUE", group: 'sponsor_category')
+     sponsor_category = sponsor_category.pluck(:value)  
    end
    
    def sponsor_industry
-     [
-       ['--'],['Beverage'], ['Food'], ['Retail - Clothing'], ['Retail - Care Products'], ['Entertainment'], ['Financial Services'], ['Media'], ['Software'], ['Sports'], ['Telecommunications'], ['Tourism'], ['Transport'], ['Trade & Investment']
-     ]
+     sponsor_industry = Reference.where(active: "TRUE", group: 'sponsor_industry')
+     sponsor_industry = sponsor_industry.pluck(:value)  
    end
    
    def sponsor_status
-       [
-         ['Not Allocated'],
-         ['Not Started'],
-         ['In Progress'],
-         ['Completed'],
-       ]       
+     sponsor_status = Reference.where(active: "TRUE", group: 'sponsor_status')
+     sponsor_status = sponsor_status.pluck(:value)  
    end
    
    def sponsor_opportunity_area
-       [
-         ["--"],
-         ['Corporate'],
-         ['BAI'],
-         ['U.S. Open'],
-         ['NNL'],
-         ['Member']
-       ]       
+     sponsor_opportunity_area = Reference.where(active: "TRUE", group: 'sponsor_opportunity_area')
+     sponsor_opportunity_area = sponsor_opportunity_area.pluck(:value)       
    end
 
    def educator_level
-    [
-      ["--"],
-      ['Elementary'],
-      ['Middle'],
-      ['High'],
-      ['University'],
-      ['School/District Lead']
-    ]       
-end
+     educator_level = Reference.where(active: "TRUE", group: 'educator_level')
+     educator_level = educator_level.pluck(:value)       
+   end
+
+    def grant_status
+      grant_status = Reference.where(active: "TRUE", group: 'grant_status')
+      grant_status = grant_status.pluck(:value)       
+    end
 end

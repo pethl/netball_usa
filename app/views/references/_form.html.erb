@@ -1,0 +1,55 @@
+<div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md max-w-md">
+  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+
+<%= form_with(model: reference) do |form| %>
+  <% if reference.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(reference.errors.count, "error") %> prohibited this reference from being saved:</h2>
+
+      <ul>
+        <% reference.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-6">
+   <%= form.label :group, "Group*", class: label_class%>
+    <div class="mt-1">
+   <%= form.select :group, options_for_select(reference_group, :selected => reference.group),{}, class: input_class %>
+  </div> </div>
+  
+  <div class="mb-6">
+   <%= form.label :value, "Value*", class: label_class%>
+    <div class="mt-1">
+   <%= form.text_field :value, class: input_class  %>
+  </div> </div>
+  
+  <div class="mb-6">
+   <%= form.label :key, "Key (if required)", class: label_class%>
+    <div class="mt-1">
+   <%= form.text_field :key, class: input_class  %>
+  </div> </div>
+
+  <div class="mb-6">
+   <%= form.label :desc, "Description", class: label_class%>
+    <div class="mt-1">
+   <%= form.text_field :desc, class: input_class  %>
+  </div> </div>
+ 
+
+  <div class="mb-6">
+     <%= form.label :active, "Active?", style: "display: block", class: label_class  %>
+     <div class="mt-1">
+     <%= form.check_box :active, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+    </div>
+   </div>
+ 
+
+  <div>
+    <%= form.submit "Save Record", class: form_button_class %>
+  </div>
+<% end %>
+
+

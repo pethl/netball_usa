@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_19_202520) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_20_175640) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -25,6 +25,25 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_19_202520) do
     t.string "state"
     t.text "educator_notes"
     t.text "mgmt_notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+  end
+
+  create_table "grants", force: :cascade do |t|
+    t.string "name"
+    t.boolean "apply"
+    t.integer "amount"
+    t.string "location"
+    t.datetime "due_date"
+    t.text "purpose"
+    t.string "grant_link"
+    t.text "notes"
+    t.string "status"
+    t.datetime "date_submitted"
+    t.string "program"
+    t.string "application_link"
+    t.string "login"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
@@ -47,6 +66,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_19_202520) do
     t.boolean "authorize"
     t.string "level"
     t.string "website"
+  end
+
+  create_table "references", force: :cascade do |t|
+    t.string "group"
+    t.string "value"
+    t.string "key"
+    t.string "desc"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "active"
   end
 
   create_table "sponsors", force: :cascade do |t|
