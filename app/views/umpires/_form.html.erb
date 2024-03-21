@@ -1,0 +1,131 @@
+<div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md max-w-md">
+  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+
+
+<%= form_with(model: umpire) do |form| %>
+  <% if umpire.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(umpire.errors.count, "error") %> prohibited this umpire from being saved:</h2>
+
+      <ul>
+        <% umpire.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-6">
+    <%= form.label :role, class: label_class  %>
+    <div class="mt-1">
+     <%= form.select :role, options_for_select(people_role, :selected => umpire.role),{}, class: input_class %>
+    </div>
+  </div>
+  
+  <div class="mb-6">
+    <%= form.label :region, class: label_class  %>
+    <div class="mt-1">
+     <%= form.select :region, options_for_select(people_region, :selected => umpire.region),{}, class: input_class %>
+    </div>
+  </div>
+  
+  <div class="mb-6">
+   <%= form.label :first_name, class: label_class%>
+    <div class="mt-1">
+   <%= form.text_field :first_name, class: input_class  %>
+  </div> </div>
+  
+  <div class="mb-6">
+   <%= form.label :last_name, class: label_class%>
+    <div class="mt-1">
+   <%= form.text_field :last_name, class: input_class  %>
+  </div> </div>
+  
+  <div class="mb-6">
+   <%= form.label :location, class: label_class%>
+    <div class="mt-1">
+   <%= form.text_field :location, class: input_class  %>
+  </div> </div>
+  
+  <div class="mb-6">
+    <%= form.label :level, class: label_class  %>
+    <div class="mt-1">
+     <%= form.select :level, options_for_select(people_level, :selected => umpire.level),{}, class: input_class %>
+    </div>
+  </div>
+
+  <div class="mb-6">
+   <%= form.label :email, class: label_class%>
+    <div class="mt-1">
+   <%= form.text_field :email, class: input_class  %>
+  </div> </div>
+ 
+  <div class="mb-6">
+   <%= form.label :phone, class: label_class%>
+    <div class="mt-1">
+   <%= form.text_field :phone, class: input_class  %>
+  </div> </div>
+
+  <div class="mb-6">
+   <%= form.label :address, class: label_class%>
+    <div class="mt-1">
+   <%= form.text_field :address, class: input_class  %>
+  </div> </div>
+
+  <div class="mb-6">
+   <%= form.label :associated, class: label_class%>
+    <div class="mt-1">
+   <%= form.text_field :associated, class: input_class  %>
+  </div> </div>
+ 
+  <div class="mb-6">
+    <%= form.label :gender, class: label_class  %>
+    <div class="mt-1">
+     <%= form.select :gender, options_for_select(gender, :selected => umpire.gender),{}, class: input_class %>
+    </div>
+  </div>
+  
+  <div class="mb-6">
+    <%= form.label :tshirt_size, class: label_class  %>
+    <div class="mt-1">
+     <%= form.select :tshirt_size, options_for_select(tshirt_size, :selected => umpire.tshirt_size),{}, class: input_class %>
+    </div>
+  </div>
+
+  <div class="mb-6">
+   <%= form.label :uniform_size, class: label_class%>
+    <div class="mt-1">
+   <%= form.text_field :uniform_size, class: input_class  %>
+  </div> </div>
+  
+  <div class="mb-6">
+     <%= form.label :headshot, style: "display: block", class: label_class  %>
+     <div class="mt-1">
+     <%= form.check_box :headshot, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+    </div>
+   </div>
+  
+   <div class="mb-6">
+    <%= form.label :headshot_file, class: label_class%>
+     <div class="mt-1">
+    <%= form.text_field :headshot_file, class: input_class  %>
+   </div> </div>
+   
+   <div class="mb-6">
+      <%= form.label :invite_back, style: "display: block", class: label_class  %>
+      <div class="mt-1">
+      <%= form.check_box :invite_back, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+     </div>
+    </div>
+  
+    <div class="mb-6">
+       <%= form.label :notes, style: "display: block", class: label_class  %>
+       <div class="mt-1">
+       <%= form.text_area :notes, class: input_class %>
+      </div>
+     </div>
+
+     <div>
+       <%= form.submit "Submit", class: form_button_class %>
+     </div>
+   <% end %>

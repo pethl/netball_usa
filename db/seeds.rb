@@ -9,6 +9,7 @@
 #NetballEducator.create(first_name: 'Jenna',last_name: 'Jones',email: 'jennajones88@gmail.com',phone: '1314555676',school_name: 'Hillview High School',city: 'Houston',state: 'TX', educator_notes: 'Callback for equipment', mgmt_notes: 'Spoke at meeting', );
 #NetballEducator.create(first_name: 'Katlin',last_name: 'Smith',email: 'katlin99@gmail.com',phone: '1314888876',school_name: 'Valleyview High School',city: 'Dallas',state: 'TX', educator_notes: 'Callback for equipment', mgmt_notes: 'Spoke at meeting', );
 #NetballEducator.create(first_name: 'Robin',last_name: 'Hall',email: 'robinhall@gmail.com',phone: '162345676',school_name: 'Jackson High School',city: 'Austin',state: 'TX', educator_notes: 'Callback for equipment', mgmt_notes: 'Spoke at session', );
+Reference.destroy_all
 Reference.create(group:	'sponsor_category',	value:	'--',	active:	'TRUE');
 Reference.create(group:	'sponsor_category',	value:	"Women's Products", active:	'TRUE');
 Reference.create(group:	'sponsor_category',	value:	'Oz companies', active:	'TRUE');
@@ -53,4 +54,21 @@ Reference.create(group:	'grant_status',	value:	'Completed', active:	'TRUE');
 Reference.create(group:	'grant_status',	value:	'Submitted', active:	'TRUE');
 Reference.create(group:	'grant_status',	value:	'Won', active:	'TRUE');
 Reference.create(group:	'grant_status',	value:	'Lost', active:	'TRUE');
+Reference.create(group:	'people_role',	value:	'Umpire', active:	'TRUE');
+Reference.create(group:	'people_role',	value:	'Scorer', active:	'TRUE');
+Reference.create(group:	'people_region',	value:	'US & Canada', active:	'TRUE');
+Reference.create(group:	'people_region',	value:	'International', active:	'TRUE');
+Reference.create(group:	'people_level',	value:	'Beginner', active:	'TRUE');
+Reference.create(group:	'people_level',	value:	'Intermediate', active:	'TRUE');
+Reference.create(group:	'people_level',	value:	'Advanced', active:	'TRUE');
+Reference.create(group:	'gender',	value:	'Female', active:	'TRUE');
+Reference.create(group:	'gender',	value:	'Male', active:	'TRUE');
+Reference.create(group:	'tshirt_size',	value:	'XS', active:	'TRUE');
+Reference.create(group:	'tshirt_size',	value:	'Small', active:	'TRUE');
+Reference.create(group:	'tshirt_size',	value:	'Medium', active:	'TRUE');
+Reference.create(group:	'tshirt_size',	value:	'Large', active:	'TRUE');
+Reference.create(group:	'tshirt_size',	value:	'XL', active:	'TRUE');
+Reference.create(group:	'tshirt_size',	value:	'XXL', active:	'TRUE');
+Reference.create(group:	'tshirt_size',	value:	'XXXL', active:	'TRUE');
+Reference.create(group:	'tshirt_size',	value:	'XXXXL', active:	'TRUE');
 

@@ -147,4 +147,29 @@ module ApplicationHelper
       grant_status = Reference.where(active: "TRUE", group: 'grant_status')
       grant_status = grant_status.pluck(:value)       
     end
+    
+    def people_role
+      people_role = Reference.where(active: "TRUE", group: 'people_role')
+      people_role = people_role.pluck(:value)       
+    end
+    
+    def people_region
+      people_region = Reference.where(active: "TRUE", group: 'people_region')
+      people_region = people_region.pluck(:value)       
+    end
+    
+    def people_level
+      people_level = Reference.where(active: "TRUE", group: 'people_level')
+      people_level = people_level.pluck(:value)       
+    end
+    
+    def gender
+      gender = Reference.where(active: "TRUE", group: 'gender')
+      gender = gender.pluck(:value)       
+    end
+    
+    def tshirt_size
+      tshirt_size = Reference.where(active: "TRUE", group: 'tshirt_size')
+      tshirt_size = tshirt_size.pluck(:value)       
+    end
 end

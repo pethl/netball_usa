@@ -1,0 +1,160 @@
+<div id="<%= dom_id umpire %>">
+
+<div class="max-w-sm">
+<div class="flex justify-between p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+   <div class="mt-2">
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Role:
+    </p>
+    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+    <%= umpire.role %> 
+    </p>
+     </div> 
+  
+   <div class="mt-2">
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Region
+    </p>
+    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+    <%= umpire.region %> 
+    </p>
+  </div> 
+   </div> 
+
+  <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+         Name:
+     </p>
+     <p class="text-xl font-medium text-gray-900 truncate dark:text-white">
+     <%= umpire.first_name %>  <%= umpire.last_name %> 
+     </p> 
+    
+       <div class="mt-2">
+      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+          Location
+      </p>
+      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <%= umpire.location %> 
+      </p>
+       </div>
+
+      <div class="mt-2">
+      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+          Level:
+      </p>
+      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <%= umpire.level %> :  <%= umpire.level_note %> 
+      </p>
+       </div>
+       
+       <div class="mt-2">
+       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+           Associated?:
+       </p>
+       <p class="text-sm font-medium text-gray-900 dark:text-white">
+       <%= umpire.associated %> 
+       </p>
+        </div>
+    </div>
+
+    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <div class="mt-2">
+      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+          Email:
+      </p>
+      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <%= umpire.email %> 
+      </p>
+     </div>
+
+     <div class="mt-2">
+     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+         Phone:
+     </p>
+     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+     <%= umpire.phone %> 
+     </p>
+      </div>
+      
+
+      <div class="mt-2 block">
+      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+          Address:
+      </p>
+      <p class="text-sm font-medium text-gray-900 dark:text-white">
+      <%= umpire.address %> 
+      </p>
+       </div>
+      
+     <div class="mt-2">
+     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+     Gender:
+     </p>
+     <p class="text-sm font-medium text-gray-900 dark:text-white">
+     <%= umpire.gender %> 
+     </p>
+      </div>
+     </div>
+  
+     <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+  
+      <div class="mt-2">
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            T-shirt size:
+        </p>
+        <p class="text-sm font-medium text-gray-900 dark:text-white">
+        <%= umpire.tshirt_size %> 
+        </p>
+        </div>
+   
+
+       <div class="mt-2">
+         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+             Uniform Size:
+         </p>
+         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+         <%= umpire.uniform_size %> 
+         </p>
+        </div>
+
+        <div class="mt-2">
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+              Headshot:
+          </p>
+          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+          <%= umpire.headshot? ? 'Yes' : 'No' %>
+          </p>
+        </div>
+
+        <div class="mt-2">
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+              Headshot file:
+          </p>
+          <p class="text-sm font-medium text-gray-900 dark:text-white">
+         <%= umpire.headshot_file %>
+          </p>
+         </div>
+        </div>
+
+    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+     <div class="mt-2">
+       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+           Invite Back?:
+       </p>
+       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+       <%= umpire.invite_back? ? 'Yes' : 'No' %>
+       </p>
+     </div>
+     
+     <div class="mt-2">
+       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+           Notes:
+       </p>
+       <p class="text-sm font-medium text-gray-900 dark:text-white">
+      <%= umpire.notes %>
+       </p>
+      </div>
+      </div>
+
+</div>

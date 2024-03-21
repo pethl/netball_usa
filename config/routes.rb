@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :umpires
   resources :references
   resources :grants
   get 'netball_educators/index_state' => 'netball_educators#index_state', :as => :index_state

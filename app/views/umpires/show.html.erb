@@ -1,0 +1,18 @@
+<% content_for(:page_title, "People")%>
+
+<div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md md:max-w-lg justify-center">
+  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+    <br>
+
+    <%= render @umpire %>
+  </div>
+</div>
+
+<br>
+
+<div>
+  <%= link_to "Edit this umpire", edit_umpire_path(@umpire), class: link_class %> |
+  <%= link_to "Back to umpires", umpires_path, class: link_class %>
+
+  <%= button_to "Delete this record", @umpire, method: :delete %>
+</div>
