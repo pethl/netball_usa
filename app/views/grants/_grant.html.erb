@@ -41,7 +41,7 @@
         Due Date:
     </p>
     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-    <%= grant.due_date %> 
+    <%= grant.due_date.to_formatted_s(:usa) unless (grant.due_date.to_s.empty?) %>  %> 
     </p>
      </div>
 
@@ -86,7 +86,7 @@
         Date Submitted:
      </p>
      <p class="text-sm font-medium text-gray-900 dark:text-white">
-     <%= grant.date_submitted %> 
+     <%= grant.date_submitted.to_formatted_s(:usa) unless (grant.date_submitted.to_s.empty?) %> 
      </p>
       </div>
       

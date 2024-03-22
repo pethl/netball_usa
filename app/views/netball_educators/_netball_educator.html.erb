@@ -121,21 +121,21 @@
 <% if user_signed_in? %>
   
         <div class="mt-2">
-        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-            Allocated To:
-        </p>
-        <p class="text-sm font-medium text-gray-900 dark:text-white">
-       <%= netball_educator.user.full_name unless (netball_educator.user_id.to_s.empty?) %>
-        </p>
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+              Allocated To:
+          </p>
+          <p class="text-sm font-medium text-gray-900 dark:text-white">
+           <%= netball_educator.user.full_name unless (netball_educator.user_id.to_s.empty?) %>
+          </p>
          </div>
   
          <div class="mt-2">
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-              Mgmt Notes:
-          </p>
-          <p class="text-sm font-medium text-gray-900 dark:text-white">
-          <%= netball_educator.mgmt_notes %> 
-          </p>
+            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                Mgmt Notes:
+            </p>
+            <p class="text-sm font-medium text-gray-900 dark:text-white">
+            <%= netball_educator.mgmt_notes %> 
+            </p>
            </div>
     
   <% end %>  

@@ -3,8 +3,16 @@ class UmpiresController < ApplicationController
 
   # GET /umpires
   def index
-    @umpires = Umpire.all
+    @umpires = Umpire.where(role: "Umpire", region: "US & Canada")
   end
+  
+  def index_int
+     @umpires = Umpire.where(role: "Umpire", region: "International")
+  end 
+  
+  def index_scorers
+     @umpires = Umpire.where(role: "Scorer")
+  end 
 
   # GET /umpires/1
   def show

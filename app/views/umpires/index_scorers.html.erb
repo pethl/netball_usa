@@ -6,13 +6,13 @@
 <div class="">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
-            <a href="/umpires/" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Umpires:<br>US & Canada</a>
+          <a href="/umpires/" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Umpires:<br>US & Canada</a>
         </li>
         <li class="me-2">
-            <a href="/umpires/index_int" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Umpires:<br>International</a>
+          <a href="/umpires/index_int/" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Umpires:<br>International</a>
         </li>
          <li class="me-2">
-            <a href="/umpires/index_scorers/" class="inline-block p-4 pb-8 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Scorers:</a>
+         <a href="/umpires/index_scorers" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Scorers:<br></a>
         </li>
       </ul>
 </div>
@@ -54,7 +54,7 @@
             </tr>
         </thead>
         <tbody>
-        <% if @umpires.count >0 %>
+         <% if @umpires.count >0 %>
          <% @umpires.each do |umpire| %>
             <tr class="bg-white border-b hover:bg-gray-100">
                
@@ -95,7 +95,9 @@
                 </td>
             </tr>
             <% end %>
-             <% end %>
+              <% else %>
+              No Records
+              <% end %>
         </tbody>
     </table>
 </div>
