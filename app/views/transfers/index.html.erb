@@ -1,0 +1,115 @@
+<% content_for(:page_title, "Airport Transfers")%>
+
+<div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
+ 
+
+<div class="">
+   <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
+      <li class="me-2">
+        <a href="/transfers" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Airport Transfer</a>
+      </li>
+        <li class="me-2">
+           <a href="/transfers" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Hotel & Flight</a>
+        </li>
+        
+      </ul>
+</div>
+
+<br><br>
+
+<div id="transfers">
+<div class="relative overflow-x-auto">
+    <table class="table-fixed w-full text-left rtl:text-right">
+        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+             <tr>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Name 
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Role
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Check In
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Check Out
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Room Type
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Room Share
+                </th>
+                <th scope="col" class="px-6 py-3 w-40">
+                    Arrival
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                   Departure
+                </th>
+                <th scope="col" class="px-6 py-3 w-60">
+                    No Pick Up Required
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 truncate">
+                    Notes
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+         <% if @transfers.count >0 %>
+         <% @transfers.each do |transfer| %>
+            <tr class="bg-white border-b hover:bg-gray-100">
+               
+                <td class="px-6 py-4">
+                   <%= link_to transfer.full_name, edit_transfer_path(transfer), class: link_class %>
+                   </td>
+               
+                <td class="px-6 py-4">
+                   <%= transfer.role %>
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= transfer.check_in.to_formatted_s(:usa) unless (transfer.check_in.to_s.empty?) %>
+                 </td>
+                
+                <td class="px-6 py-4">
+                <%= transfer.check_out.to_formatted_s(:usa) unless (transfer.check_out.to_s.empty?) %>
+              </td>
+                
+                 <td class="px-6 py-4">
+                    <%= transfer.room_type %>
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= transfer.share_volunteer %>
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= transfer.arrival_airline  %> <br>
+                    <%= transfer.arrival_flight  %> :  <%= transfer.arrival_time.to_formatted_s(:time_24) unless (transfer.arrival_time.to_s.empty?)  %>
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= transfer.departure_airline  %><br>
+                    <%= transfer.departure_flight  %> :  <%= transfer.departure_time.to_formatted_s(:time_24) unless (transfer.departure_time.to_s.empty?)  %>
+                </td>
+
+                 <td class="px-6 py-4">
+                  <p class="text-wrap truncate"> <%= transfer.notes %></p>
+                </td>
+             </tr>
+            <% end %>
+              <% else %>
+              No Records
+              <% end %>
+        </tbody>
+    </table>
+  </div>
+ </div>
+</div>
+
+<br>
+<div class="mt-1">
+  <%= link_to "Add New Record", new_transfer_path, class: small_button_class %>
+  <br>
+</div>
+

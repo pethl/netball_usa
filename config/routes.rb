@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :transfers
  
   get 'umpires/index_int' => 'umpires#index_int', :as => :index_int
   get 'umpires/index_scorers' => 'umpires#index_scorers', :as => :index_scorers

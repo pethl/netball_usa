@@ -172,4 +172,14 @@ module ApplicationHelper
       tshirt_size = Reference.where(active: "TRUE", group: 'tshirt_size')
       tshirt_size = tshirt_size.pluck(:value)       
     end
+    
+    def us_open_role
+      us_open_role = Reference.where(active: "TRUE", group: 'us_open_role')
+      us_open_role = us_open_role.pluck(:value)       
+    end
+    
+    def transfer_room_type
+      transfer_room_type = Reference.where(active: "TRUE", group: 'transfer_room_type')
+      transfer_room_type = transfer_room_type.pluck(:value)       
+    end
 end

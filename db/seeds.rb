@@ -71,4 +71,15 @@ Reference.create(group:	'tshirt_size',	value:	'XL', active:	'TRUE');
 Reference.create(group:	'tshirt_size',	value:	'XXL', active:	'TRUE');
 Reference.create(group:	'tshirt_size',	value:	'XXXL', active:	'TRUE');
 Reference.create(group:	'tshirt_size',	value:	'XXXXL', active:	'TRUE');
+Reference.create(group:	'us_open_role',	value:	'Please select ...', active:	'TRUE');
+Reference.create(group:	'us_open_role',	value:	'Assessor/Mentor', active:	'TRUE');
+Reference.create(group:	'us_open_role',	value:	'Int Umpire', active:	'TRUE');
+Reference.create(group:	'us_open_role',	value:	'US Umpire', active:	'TRUE');
+Reference.create(group:	'us_open_role',	value:	'Scorer', active:	'TRUE');
+Reference.create(group:	'us_open_role',	value:	'Operations', active:	'TRUE');
+Reference.create(group:	'us_open_role',	value:	'Media', active:	'TRUE');
+Reference.create(group:	'us_open_role',	value:	'NA President', active:	'TRUE');
+Reference.create(group:	'us_open_role',	value:	'Medic', active:	'TRUE');
+Reference.create(group:	'transfer_room_type',	value:	'King', active:	'TRUE');
+Reference.create(group:	'transfer_room_type',	value:	'Double Queen', active:	'TRUE');
 
