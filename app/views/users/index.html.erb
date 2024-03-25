@@ -5,21 +5,21 @@
 
 <div id="users">
  
-<table class="table-auto border border-slate-400 h_scrolling_list_table">
-  <thead>
-    <tr>
-      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">First Name</th>
-      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">Last Name</th>
-      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">Email</th>    
-      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">Account Created</th>    
-      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white">Last Sign In</th> 
-      <th class="font-bold p-2 border-b text-left bg-blue-900 text-white" >Is_admin?</th>   
-    </tr>
-  </thead>
+<table class="table-auto h_scrolling_list_table">
+  <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+      <tr>
+       <th scope="col" class="text-left p-3 w-52">First Name</th>
+       <th scope="col" class="text-left p-2 w-52">Last Name</th>
+       <th scope="col" class="text-left p-2 py-3 w-52">Email</th>
+       <th scope="col" class="text-left p-2 py-3 w-52">Account Created</th>
+       <th scope="col" class="text-left p-2 py-3 w-52">Last Sign In</th>
+       <th scope="col" class="text-left p-2 py-3 w-52">Is_admin?</th>
+      </tr>
+    </thead>
   
   <tbody>
   <% @users.each do |user| %>
-     <tr class="odd:bg-gray-100">
+     <tr class=" hover:bg-gray-100">
      <td class="p-2 border-b text-left"><%= user.first_name %></td>
       <td class="p-2 border-b text-left"><%= user.last_name %></td>
       <td class="p-2 border-b text-left"><%= user.email %></td>
