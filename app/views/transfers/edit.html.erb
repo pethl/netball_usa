@@ -1,10 +1,11 @@
-<h1>Editing transfer</h1>
+<% content_for(:page_title, "Airport Transfer: Edit")%>
+
 
 <%= render "form", transfer: @transfer %>
 
 <br>
 
 <div>
-  <%= link_to "Show this transfer", @transfer %> |
-  <%= link_to "Back to transfers", transfers_path %>
+  <%= link_to "Show this transfer", @transfer, class: link_class %> |
+  <%= link_to "Back to transfers", transfers_path, class: link_class %>
 </div>

@@ -1,4 +1,4 @@
-<div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md max-w-md">
+<div class=" sm:mx-auto sm:w-full sm:max-w-md max-w-md">
   <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
   
 
@@ -15,7 +15,9 @@
     </div>
   <% end %>
 
-  <div class="mb-6">
+  <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+ 
+   <div class="mb-6">
    <%= form.label :status, class: label_class%>
     <div class="mt-1">
    <%= form.select :status, options_for_select(sponsor_status, :selected => sponsor.status),{}, class: input_class %>
@@ -27,10 +29,10 @@
     <%= form.collection_select(:user_id, @users, :id, :full_name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
   }) %>
  </div> </div>
+ </div>
 
- <div class="border-b-4 border-blue-900"></div><br>
 
- <div class="mb-6">
+ <div class="mt-4 mb-6">
     <%= form.label :category, class: label_class%>
      <div class="mt-1">
      <%= form.select :category, options_for_select(sponsor_category, :selected => sponsor.category),{}, class: input_class %>
@@ -107,6 +109,6 @@
    </div>
 <% end %>
 
-</div>
-  </div>
-   </div>
+
+
+

@@ -50,15 +50,9 @@ module ApplicationHelper
    
    
    def reference_group
-     [
-       ['sponsor_category'],
-       ['sponsor_industry'],
-       ['sponsor_status'],
-       ['sponsor_opportunity_area'],
-       ['educator_level'],
-       ['grant_status']
-     ]
-     
+     reference_group = Reference.all
+     reference_group = reference_group.pluck(:group) 
+     reference_group = reference_group.uniq() 
    end
    def us_states
        [

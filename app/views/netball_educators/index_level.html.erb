@@ -1,4 +1,4 @@
-<% content_for(:page_title, "Educators - By User Allocation")%>
+<% content_for(:page_title, "Educators - By Level")%>
 
 <div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
  
@@ -12,20 +12,20 @@
             <a href="/netball_educators/index_state" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By State</a>
         </li>
         <li class="me-2">
-            <a href="/netball_educators/index_user" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active " aria-current="page">By Allocation</a>
+            <a href="/netball_educators/index_user" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Allocation</a>
         </li>
         <li class="me-2">
-           <a href="/netball_educators/index_level" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Level</a>
-       </li>
+          <a href="/netball_educators/index_level" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active " aria-current="page">By Level</a>
+         </li>
       </ul>
 </div>
 
 <br>
 
-<% @netball_educators_by_user.each do |user, educators| %>
+<% @netball_educators_by_level.each do |level, educators| %>
 <div class="text-xl">
-    <%= User.find(user).first_name unless user.nil? %>  <%= User.find(user).last_name unless user.nil? %>
-    <% if user.nil? %> Not Allocated <% end %>
+    <%= level %>
+    <% if level.nil? %> Level Unknown <% end %>
 </div>
 
 <div id="educators">

@@ -1,7 +1,6 @@
 <% content_for(:page_title, "System Users")%>
 
 <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 text-sm">
- 
 
 <div id="users">
  
@@ -23,11 +22,10 @@
      <td class="p-2 border-b text-left"><%= user.first_name %></td>
       <td class="p-2 border-b text-left"><%= user.last_name %></td>
       <td class="p-2 border-b text-left"><%= user.email %></td>
-       <td class="p-2 border-b text-left"><%= user.created_at.to_formatted_s(:default) %></td>
-       <td class="p-2 border-b text-left"><%= user.last_sign_in_at.to_formatted_s(:default) unless (user.last_sign_in_at.to_s.empty?)%></td>
-       <td class="p-2 border-b text-left"><%= user.admin %></td>
-      
-        </tr>
+      <td class="p-2 border-b text-left"><%= user.created_at.to_formatted_s(:usa) %></td>
+      <td class="p-2 border-b text-left"><%= user.last_sign_in_at.to_formatted_s(:usa_dt) unless (user.last_sign_in_at.to_s.empty?)%></td>
+      <td class="p-2 border-b text-left"><%= user.admin? ? 'Yes' : 'No'   %></td>
+   </tr>
   <% end %>
  </tbody>
 </table>

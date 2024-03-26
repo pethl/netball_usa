@@ -26,14 +26,27 @@ class NetballEducatorsController < ApplicationController
   end
 
   def index_user
-   
     if is_admin? 
        @netball_educators = NetballEducator.all
        @netball_educators = @netball_educators.order(user_id: :asc)
        @netball_educators_by_user = @netball_educators.group_by { |t| t.user_id }
     else
         @netball_educators = NetballEducator.where(user_id: current_user.id)
-        @netball_educators = @netball_educators.order(state: :asc)
+        @netball_educators = @netball_educators.order(user_id: :asc)
+         @netball_educators_by_user = @netball_educators.group_by { |t| t.user_id }
+      end
+  end
+  
+  def index_level
+   
+    if is_admin? 
+       @netball_educators = NetballEducator.all
+       @netball_educators = @netball_educators.order(level: :asc)
+       @netball_educators_by_level = @netball_educators.group_by { |t| t.level }
+    else
+        @netball_educators = NetballEducator.where(user_id: current_user.id)
+        @netball_educators = @netball_educators.order(level: :asc)
+        @netball_educators_by_level = @netball_educators.group_by { |t| t.level }
       end
   end
 
