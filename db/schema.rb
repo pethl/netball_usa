@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_24_122438) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_28_103845) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -28,6 +28,33 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_24_122438) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+  end
+
+  create_table "event_assignments", force: :cascade do |t|
+    t.bigint "umpire_id", null: false
+    t.bigint "event_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_assignments_on_event_id"
+    t.index ["umpire_id"], name: "index_event_assignments_on_umpire_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "event_type"
+    t.string "name"
+    t.datetime "date"
+    t.string "website"
+    t.text "key_contact"
+    t.string "city"
+    t.string "state"
+    t.string "location"
+    t.text "details"
+    t.string "booth"
+    t.text "cost_notes"
+    t.string "status"
+    t.string "outcome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "grants", force: :cascade do |t|
@@ -66,6 +93,29 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_24_122438) do
     t.boolean "authorize"
     t.string "level"
     t.string "website"
+  end
+
+  create_table "people", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "role"
+    t.string "region"
+    t.string "location"
+    t.string "email"
+    t.string "level"
+    t.string "phone"
+    t.string "address"
+    t.string "associated"
+    t.string "gender"
+    t.string "tshirt_size"
+    t.string "uniform_size"
+    t.boolean "headshot"
+    t.string "headshot_file"
+    t.boolean "invite_back"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "level_note"
   end
 
   create_table "references", force: :cascade do |t|
@@ -168,4 +218,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_24_122438) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "event_assignments", "events"
+  add_foreign_key "event_assignments", "umpires"
 end

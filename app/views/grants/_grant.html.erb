@@ -20,7 +20,7 @@
 
      <div class="mt-2">
      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-         Amount
+         Amount:
      </p>
      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
      <%= grant.amount %> 
@@ -41,7 +41,7 @@
         Due Date:
     </p>
     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-    <%= grant.due_date.to_formatted_s(:usa) unless (grant.due_date.to_s.empty?) %>  %> 
+    <%= grant.due_date.to_formatted_s(:usa) unless (grant.due_date.to_s.empty?) %> 
     </p>
      </div>
 

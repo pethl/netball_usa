@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
+  get 'people/index_int' => 'people#index_int', :as => :index_int
+  get 'people/index_scorers' => 'people#index_scorers', :as => :index_scorers
+ 
+  resources :people
+  resources :events
   resources :transfers
- 
-  get 'umpires/index_int' => 'umpires#index_int', :as => :index_int
-  get 'umpires/index_scorers' => 'umpires#index_scorers', :as => :index_scorers
- 
-  resources :umpires
   resources :references
   resources :grants
  

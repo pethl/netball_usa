@@ -1,4 +1,4 @@
-<div id="<%= dom_id umpire %>">
+<div id="<%= dom_id person %>">
 
 <div class="max-w-sm">
 <div class="flex justify-between p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -8,7 +8,7 @@
         Role:
     </p>
     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-    <%= umpire.role %> 
+    <%= person.role %> 
     </p>
      </div> 
   
@@ -17,7 +17,7 @@
         Region
     </p>
     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-    <%= umpire.region %> 
+    <%= person.region %> 
     </p>
   </div> 
    </div> 
@@ -27,7 +27,7 @@
          Name:
      </p>
      <p class="text-xl font-medium text-gray-900 truncate dark:text-white">
-     <%= umpire.first_name %>  <%= umpire.last_name %> 
+     <%= person.first_name %>  <%= person.last_name %> 
      </p> 
     
        <div class="mt-2">
@@ -35,7 +35,7 @@
           Location
       </p>
       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= umpire.location %> 
+      <%= person.location %> 
       </p>
        </div>
 
@@ -44,7 +44,7 @@
           Level:
       </p>
       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= umpire.level %> :  <%= umpire.level_note %> 
+      <%= person.level %> :  <%= person.level_note %> 
       </p>
        </div>
        
@@ -53,7 +53,7 @@
            Associated?:
        </p>
        <p class="text-sm font-medium text-gray-900 dark:text-white">
-       <%= umpire.associated %> 
+       <%= person.associated %> 
        </p>
         </div>
     </div>
@@ -64,7 +64,7 @@
           Email:
       </p>
       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= umpire.email %> 
+      <%= person.email %> 
       </p>
      </div>
 
@@ -73,7 +73,7 @@
          Phone:
      </p>
      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-     <%= umpire.phone %> 
+     <%= person.phone %> 
      </p>
       </div>
       
@@ -83,7 +83,7 @@
           Address:
       </p>
       <p class="text-sm font-medium text-gray-900 dark:text-white">
-      <%= umpire.address %> 
+      <%= person.address %> 
       </p>
        </div>
       
@@ -92,7 +92,7 @@
         Gender:
      </p>
      <p class="text-sm font-medium text-gray-900 dark:text-white">
-     <%= umpire.gender %> 
+     <%= person.gender %> 
      </p>
       </div>
      </div>
@@ -104,7 +104,7 @@
             T-shirt size:
         </p>
         <p class="text-sm font-medium text-gray-900 dark:text-white">
-        <%= umpire.tshirt_size %> 
+        <%= person.tshirt_size %> 
         </p>
         </div>
    
@@ -114,7 +114,7 @@
              Uniform Size:
          </p>
          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-         <%= umpire.uniform_size %> 
+         <%= person.uniform_size %> 
          </p>
         </div>
 
@@ -123,7 +123,7 @@
               Headshot:
           </p>
           <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-          <%= umpire.headshot? ? 'Yes' : 'No' %>
+          <%= person.headshot? ? 'Yes' : 'No' %>
           </p>
         </div>
 
@@ -132,7 +132,7 @@
               Headshot file:
           </p>
           <p class="text-sm font-medium text-gray-900 dark:text-white">
-         <%= umpire.headshot_file %>
+         <%= person.headshot_file %>
           </p>
          </div>
         </div>
@@ -143,7 +143,7 @@
            Invite Back?:
        </p>
        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-       <%= umpire.invite_back? ? 'Yes' : 'No' %>
+       <%= person.invite_back? ? 'Yes' : 'No' %>
        </p>
      </div>
      
@@ -152,7 +152,7 @@
            Notes:
        </p>
        <p class="text-sm font-medium text-gray-900 dark:text-white">
-      <%= umpire.notes %>
+      <%= person.notes %>
        </p>
       </div>
       </div>

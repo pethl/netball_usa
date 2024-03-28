@@ -1,24 +1,24 @@
-<% content_for(:page_title, "People - US & Canada Umpires")%>
+<% content_for(:page_title, "People - US & Canada persons")%>
 
 <div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
 
 <div class="">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
-            <a href="/umpires/" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Umpires:<br>US & Canada</a>
+            <a href="/people/" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Umpire:<br>US & Canada</a>
         </li>
         <li class="me-2">
-            <a href="/umpires/index_int" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Umpires:<br>International</a>
+            <a href="/people/index_int" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Umpire:<br>International</a>
         </li>
          <li class="me-2">
-            <a href="/umpires/index_scorers/" class="inline-block p-4 pb-8 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Scorers:</a>
+            <a href="/people/index_scorers/" class="inline-block p-4 pb-8 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Scorers:</a>
         </li>
       </ul>
 </div>
 
 <br>
 
-<div id="umpires">
+<div id="persons">
 <div class="relative overflow-x-auto">
     <table class="table-fixed w-full text-left rtl:text-right">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
@@ -53,44 +53,44 @@
             </tr>
         </thead>
         <tbody>
-        <% if @umpires.count >0 %>
-         <% @umpires.each do |umpire| %>
+        <% if @people.count >0 %>
+         <% @people.each do |person| %>
             <tr class="bg-white border-b hover:bg-gray-100">
                
                 <td class="px-6 py-4">
-                   <%= link_to umpire.full_name, edit_umpire_path(umpire), class: link_class %>
+                   <%= link_to person.full_name, edit_person_path(person), class: link_class %>
                 </td>
                
                 <td class="px-6 py-4">
-                   <%= umpire.location %>
+                   <%= person.location %>
                 </td>
                 
                 <td class="px-6 py-4">
-                  <%= umpire.level %><br>
+                  <%= person.level %><br>
                  </td>
                 
                 <td class="px-6 py-4">
-                   <%= umpire.email %>
+                   <%= person.email %>
                 </td>
                 
                  <td class="px-6 py-4">
-                    <%= umpire.phone %>
+                    <%= person.phone %>
                 </td>
                 
                 <td class="px-6 py-4">
-                   <%= umpire.address %>
+                   <%= person.address %>
                 </td>
                 
                 <td class="px-6 py-4">
-                   <%= umpire.associated  %>
+                   <%= person.associated  %>
                 </td>
                 
                 <td class="px-6 py-4">
-                   <%= umpire.gender  %>
+                   <%= person.gender  %>
                 </td>
 
                  <td class="px-6 py-4">
-                  <p class="text-wrap truncate"> <%= umpire.notes %></p>
+                  <p class="text-wrap truncate"> <%= person.notes %></p>
                 </td>
             </tr>
             <% end %>
@@ -104,11 +104,12 @@
 
 <br>
 <div class="mt-1">
-<%= link_to "Add New Person", new_umpire_path, class: small_button_class %>
+<%= link_to "Add New Person", new_person_path, class: small_button_class %>
 <br>
 </div>
 
 
     
    
+
 

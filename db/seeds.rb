@@ -82,4 +82,11 @@ Reference.create(group:	'us_open_role',	value:	'NA President', active:	'TRUE');
 Reference.create(group:	'us_open_role',	value:	'Medic', active:	'TRUE');
 Reference.create(group:	'transfer_room_type',	value:	'King', active:	'TRUE');
 Reference.create(group:	'transfer_room_type',	value:	'Double Queen', active:	'TRUE');
+Reference.create(group:	'event_type',	value:	'Booth', active:	'TRUE');
+Reference.create(group:	'event_type',	value:	'Virtual Workshop', active:	'TRUE');
+Reference.create(group:	'event_type',	value:	'In Person Workshop', active:	'TRUE');
+Reference.create(group:	'event_type',	value:	'PE Class', active:	'TRUE');
+Reference.create(group:	'event_status',	value:	'Plan', active:	'TRUE');
+Reference.create(group:	'event_status',	value:	'Prep', active:	'TRUE');
+Reference.create(group:	'event_status',	value:	'Complete', active:	'TRUE');
 

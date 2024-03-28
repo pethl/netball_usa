@@ -1,0 +1,123 @@
+<div id="<%= dom_id event %>">
+
+<div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+ 
+  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+     Type:
+  </p>
+  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+  <%= event.event_type %> 
+  </p>
+
+  <div class="mt-2">
+  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+      Name:
+  </p>
+  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+  <%= event.name %> 
+  </p> 
+  </div>
+
+  <div class="mt-2">
+  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+      Date:
+  </p>
+  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+  <%= event.date.to_formatted_s(:usa) unless (event.date.to_s.empty?) %> 
+  </p>
+   </div>
+  
+   <div class="mt-2">
+   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+       Status:
+   </p>
+   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+   <%= event.status %> 
+   </p> 
+   </div>
+  
+   <div class="mt-2">
+   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+       Website:
+   </p>
+   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+   <%= event.website %> 
+   </p> 
+   </div>
+   
+   <div class="mt-2">
+   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+       Key Contact:
+   </p>
+   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+   <%= event.key_contact %> 
+   </p> 
+   </div>
+
+   <div class="mt-2">
+   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+       City:
+   </p>
+   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+   <%= event.city %> 
+   </p> 
+   </div>
+ 
+
+   <div class="mt-2">
+   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+       State:
+   </p>
+   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+   <%= event.state %> 
+   </p> 
+   </div>
+  
+   <div class="mt-2">
+   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+       Location:
+   </p>
+   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+   <%= event.location %> 
+   </p> 
+   </div>
+  
+
+   <div class="mt-2">
+   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+       Details:
+   </p>
+   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+   <%= event.details %> 
+   </p> 
+   </div>
+
+   <div class="mt-2">
+   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+       Booth #:
+   </p>
+   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+   <%= event.booth %> 
+   </p> 
+   </div>
+
+   <div class="mt-2">
+   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+       Costs:
+   </p>
+   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+   <%= event.cost_notes %> 
+   </p> 
+   </div>
+   
+   <div class="mt-2">
+   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+       Outcome:
+   </p>
+   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+   <%= event.outcome %> 
+   </p> 
+   </div>
+
+

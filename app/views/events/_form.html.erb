@@ -1,0 +1,105 @@
+<div class=" sm:mx-auto sm:w-full sm:max-w-md max-w-md">
+  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+
+<%= form_with(model: event) do |form| %>
+  <% if event.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+        <% event.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-6">
+    <%= form.label :event_type, class: label_class  %>
+    <div class="mt-1">
+     <%= form.select :event_type, options_for_select(event_type, :selected => event.event_type),{}, class: input_class %>
+    </div>
+  </div>
+  
+  <div class="mb-6">
+   <%= form.label :name, class: label_class%>
+    <div class="mt-1">
+   <%= form.text_field :name, class: input_class  %>
+  </div> </div>
+
+  <div class="mb-6">
+   <%= form.label :date, class: label_class%>
+    <div class="mt-1">
+   <%= form.date_field :date, class: input_class  %>
+  </div> </div>
+    
+  <div class="mb-6">
+    <%= form.label :status, class: label_class  %>
+    <div class="mt-1">
+     <%= form.select :status, options_for_select(event_status, :selected => event.status),{}, class: input_class %>
+    </div>
+  </div>
+
+   <div class="mb-6">
+    <%= form.label :website, class: label_class%>
+     <div class="mt-1">
+    <%= form.text_field :website, class: input_class  %>
+   </div> </div>
+
+   <div class="mb-6">
+    <%= form.label :key_contact, class: label_class%>
+     <div class="mt-1">
+    <%= form.text_area :key_contact, class: input_class  %>
+   </div> </div>
+
+    <div class="mb-6">
+     <%= form.label :city, class: label_class%>
+      <div class="mt-1">
+     <%= form.text_field :city, class: input_class  %>
+    </div> </div>
+   
+    <div class="mb-6">
+      <%= form.label :state, class: label_class  %>
+      <div class="mt-1">
+       <%= form.select :state, options_for_select(us_states, :selected => event.state),{}, class: input_class %>
+      </div>
+    </div>
+  
+    <div class="mb-6">
+     <%= form.label :location, class: label_class%>
+      <div class="mt-1">
+     <%= form.text_field :location, class: input_class  %>
+    </div> </div>
+   
+  <div class="mb-6">
+     <%= form.label :details, style: "display: block", class: label_class  %>
+     <div class="mt-1">
+     <%= form.text_area :details, class: input_class %>
+    </div>
+   </div>
+   
+   <div class="mb-6">
+    <%= form.label :booth,"Booth #", class: label_class%>
+     <div class="mt-1">
+    <%= form.text_field :booth, class: input_class  %>
+   </div> </div>
+  
+   <div class="mb-6">
+      <%= form.label :cost_notes, "Costs", style: "display: block", class: label_class  %>
+      <div class="mt-1">
+      <%= form.text_area :cost_notes, class: input_class %>
+     </div>
+    </div>
+    
+    <div class="mb-6">
+       <%= form.label :outcome, style: "display: block", class: label_class  %>
+       <div class="mt-1">
+       <%= form.text_area :outcome, class: input_class %>
+      </div>
+     </div>
+  
+   <div>
+     <%= form.submit "Submit", class: form_button_class %>
+   </div>
+ <% end %>
+
