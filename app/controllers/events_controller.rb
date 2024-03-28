@@ -5,6 +5,11 @@ class EventsController < ApplicationController
   def index
     @events = Event.all
   end
+  
+  # GET /events
+  def calendar
+    @events = Event.all
+  end
 
   # GET /events/1
   def show
@@ -17,6 +22,8 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
+    @people = Person.all
+    @people = @people.order(last_name: :asc)
   end
 
   # POST /events
@@ -53,6 +60,6 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:event_type, :name, :date, :website, :key_contact, :city, :state, :location, :details, :booth, :cost_notes, :status, :outcome)
+      params.require(:event).permit(:event_type, :name, :date, :website, :key_contact, :city, :state, :location, :details, :booth, :cost_notes, :status, :outcome, person_ids: [])
     end
 end

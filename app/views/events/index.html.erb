@@ -23,6 +23,9 @@
                     City/State
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Personnel
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Booth
                 </th>
                
@@ -47,9 +50,15 @@
                     <%= event.city %>,   <%= event.state %>
                 </td>
                 <td class="px-6 py-4">
+                <% if event.people.any? %>
+                   <% event.people.each do |person| %>
+                     <%= person.full_name %> <br>
+                    <% end %>
+                <% end %>
+                </td>
+                <td class="px-6 py-4">
                    <%= event.booth %>
                 </td>
-               
             </tr>
             <% end %>
         </tbody>

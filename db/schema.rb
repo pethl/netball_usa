@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_28_103845) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_28_111125) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -37,6 +37,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_28_103845) do
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_event_assignments_on_event_id"
     t.index ["umpire_id"], name: "index_event_assignments_on_umpire_id"
+  end
+
+  create_table "event_participants", force: :cascade do |t|
+    t.bigint "person_id", null: false
+    t.bigint "event_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_participants_on_event_id"
+    t.index ["person_id"], name: "index_event_participants_on_person_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -220,4 +229,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_28_103845) do
 
   add_foreign_key "event_assignments", "events"
   add_foreign_key "event_assignments", "umpires"
+  add_foreign_key "event_participants", "events"
+  add_foreign_key "event_participants", "people"
 end

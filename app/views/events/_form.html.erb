@@ -97,6 +97,17 @@
        <%= form.text_area :outcome, class: input_class %>
       </div>
      </div>
+     
+     <div class="mb-6">
+     <p class: label_class  %>Personnel (check box to assign)</p>
+     <div class="mt-1">
+        <%= form.collection_check_boxes :person_ids, @people, :id, :full_name, not_checked: Person.all.map(&:id) do |b| %>
+        <span class="indent-3">
+          <%= b.check_box %>
+          <%= b.label %><br>
+        </span>
+      <% end %>
+     <div>
   
    <div>
      <%= form.submit "Submit", class: form_button_class %>

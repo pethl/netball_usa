@@ -1,4 +1,4 @@
-<% content_for(:page_title, "People - International persons")%>
+<% content_for(:page_title, "People - International Umpires")%>
 
 <div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
  
@@ -24,6 +24,9 @@
     <table class="table-fixed w-full text-left rtl:text-right">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
              <tr>
+               <th scope="col" class="px-6 py-3 w-52">
+          
+               </th>
                 <th scope="col" class="px-6 py-3 w-52">
                     Name 
                 </th>
@@ -57,7 +60,10 @@
          <% if @people.count >0 %>
          <% @people.each do |person| %>
             <tr class="bg-white border-b hover:bg-gray-100">
-               
+                <td class="px-6 py-4">
+                  <%= link_to image_tag("view.png", :class=>"mx-2 h-6 w-auto"), person  %>
+                  </td>
+             
                 <td class="px-6 py-4">
                    <%= link_to person.full_name, edit_person_path(person), class: link_class %>
                 </td>

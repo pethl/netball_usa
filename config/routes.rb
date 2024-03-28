@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'events/calendar' => 'events#calendar', :as => :calendar
+  
   get 'people/index_int' => 'people#index_int', :as => :index_int
   get 'people/index_scorers' => 'people#index_scorers', :as => :index_scorers
  

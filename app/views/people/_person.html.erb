@@ -3,7 +3,7 @@
 <div class="max-w-sm">
 <div class="flex justify-between p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
-   <div class="mt-2">
+   <div class="">
     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
         Role:
     </p>
@@ -12,7 +12,7 @@
     </p>
      </div> 
   
-   <div class="mt-2">
+   <div class="">
     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
         Region
     </p>
@@ -32,7 +32,7 @@
     
        <div class="mt-2">
       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          Location
+          Location:
       </p>
       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
       <%= person.location %> 
@@ -59,7 +59,7 @@
     </div>
 
     <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-    <div class="mt-2">
+    <div class="">
       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
           Email:
       </p>
@@ -99,7 +99,7 @@
   
      <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
   
-      <div class="mt-2">
+      <div class="">
         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
             T-shirt size:
         </p>
@@ -138,7 +138,7 @@
         </div>
 
     <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-     <div class="mt-2">
+     <div class="">
        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
            Invite Back?:
        </p>
@@ -156,5 +156,21 @@
        </p>
       </div>
       </div>
+      <br>
+      <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+       <div class="">
+       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+           Events:
+       </p>
+       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+        <% if person.events.any? %>
+         <% person.events.each do |event| %>
+           <%= event.date.to_formatted_s(:usa) unless ( event.date.to_s.empty?)  %> <%= event.name %><br>
+           <% end %>
+            <% end %>
+       </p>
+     </div>
+     
+ 
 
 </div>
