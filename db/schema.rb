@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_28_111125) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_28_194011) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "budgets", force: :cascade do |t|
+    t.decimal "flight", precision: 7, scale: 2
+    t.text "flight_notes"
+    t.decimal "hotel", precision: 7, scale: 2
+    t.text "hotel_notes"
+    t.decimal "transport", precision: 7, scale: 2
+    t.text "transport_notes"
+    t.decimal "shipping", precision: 7, scale: 2
+    t.text "shipping_notes"
+    t.decimal "booth", precision: 7, scale: 2
+    t.text "booth_notes"
+    t.decimal "carpet", precision: 7, scale: 2
+    t.text "carpet_notes"
+    t.decimal "banners", precision: 7, scale: 2
+    t.string "banner_notes"
+    t.decimal "giveaways", precision: 7, scale: 2
+    t.text "giveaway_notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "event_id"
+  end
 
   create_table "educators", force: :cascade do |t|
     t.string "first_name"

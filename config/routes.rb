@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :budgets
   get 'events/calendar' => 'events#calendar', :as => :calendar
   
   get 'people/index_int' => 'people#index_int', :as => :index_int

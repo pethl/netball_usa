@@ -1,0 +1,111 @@
+<div id="<%= dom_id budget %>">
+
+<div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+  <p class="text-base font-medium text-gray-900 truncate dark:text-white">
+  <%= budget.budget_event_name %> 
+  </p>
+
+  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+  <%= budget.budget_event_date %> 
+  </p> 
+  <br>
+  
+    <div class="flex w-full justify-between">
+      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+         Flights:
+      </p>
+      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <%= number_to_currency(budget.flight, precision: 2) %>
+      </p></div>
+     <div class="block w-full text-center text-xs text-grey-600">
+       <%= budget.flight_notes %>
+    </div>
+ 
+    <div class="flex w-full justify-between mt-4">
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+           Hotels:
+        </p>
+        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+        <%= number_to_currency(budget.hotel, precision: 2) %>
+        </p></div>
+       <div class="block w-full text-center text-xs text-grey-600">
+         <%= budget.hotel_notes %>
+      </div>
+  
+      <div class="flex w-full justify-between mt-4">
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+             Transport:
+          </p>
+          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+          <%= number_to_currency(budget.transport, precision: 2) %>
+          </p></div>
+         <div class="block w-full text-center text-xs text-grey-600">
+           <%= budget.transport_notes %>
+        </div>
+    
+      <div class="flex w-full justify-between mt-4">
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+             Shipping:
+          </p>
+          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+          <%= number_to_currency(budget.shipping, precision: 2) %>
+          </p></div>
+         <div class="block w-full text-center text-xs text-grey-600">
+           <%= budget.shipping_notes %>
+        </div>
+    
+          <div class="flex w-full justify-between mt-4">
+              <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                 Booth
+              </p>
+              <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+              <%= number_to_currency(budget.booth, precision: 2) %>
+              </p></div>
+             <div class="block w-full text-center text-xs text-grey-600">
+               <%= budget.booth_notes %>
+            </div>
+            
+          <div class="flex w-full justify-between mt-4">
+              <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                 Carpet:
+              </p>
+              <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+              <%= number_to_currency(budget.carpet, precision: 2) %>
+              </p></div>
+             <div class="block w-full text-center text-xs text-grey-600">
+               <%= budget.carpet_notes %>
+            </div>
+           
+          <div class="flex w-full justify-between mt-4">
+              <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                 Banners:
+              </p>
+              <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+              <%= number_to_currency(budget.banners, precision: 2) %>
+              </p></div>
+             <div class="block w-full text-center text-xs text-grey-600">
+               <%= budget.banner_notes %>
+            </div>
+      
+          <div class="flex w-full justify-between mt-4">
+            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+               Giveaways:
+            </p>
+            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+            <%= number_to_currency(budget.giveaways, precision: 2) %>
+            </p></div>
+           <div class="block mb-2 w-full border-y-2 border-gray-900 text-center text-xs text-grey-600">
+             <%= budget.giveaway_notes %>
+          </div>
+            
+            <div class="flex w-full justify-between mt-4">
+           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+              TOTAL
+           </p>
+           <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+           <%= number_to_currency(budget.budget_total, precision: 2) %>
+           </p></div>
+
+
+

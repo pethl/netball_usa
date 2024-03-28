@@ -1,0 +1,109 @@
+<% content_for(:page_title, "Budgets")%>
+
+<div class="bg-white py-4 px-2shadow sm:rounded-lg sm:px-10 text-sm">
+
+<div id="budgets">
+<div class="relative overflow-x-auto">
+    <table class="table-auto w-full text-left rtl:text-right">
+        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+             <tr>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Event Name
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Event Date
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Flight
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Hotel
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Transport
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Shipping
+                </th>
+                <th scope="col" class="px-6 py-3 w-40">
+                    Booth
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                   Carpet
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 truncate">
+                    Banners
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 truncate">
+                    Giveaways
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 truncate">
+                    Total
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        <% @budgets.each do |budget| %>
+            <tr class="bg-white border-b hover:bg-gray-100">
+               
+                <td class="px-6 py-4">
+                    <%= link_to budget.budget_event_name, edit_budget_path(budget), class: link_class  %>
+                   </td>
+                
+                <td class="px-6 py-4">
+                   <%= budget.budget_event_date %> <br> 
+                   
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= number_to_currency(budget.flight, precision: 2) %>
+                </td>
+                
+                <td class="px-6 py-4">
+                  <%= number_to_currency(budget.hotel, precision: 2) %>
+                  
+                </td>
+                <td class="px-6 py-4">
+                   <%= number_to_currency(budget.transport, precision: 2) %>
+                </td>
+                
+                 <td class="px-6 py-4">
+                    <%= number_to_currency(budget.shipping, precision: 2) %>
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= number_to_currency(budget.booth, precision: 2) %>   
+                </td>
+                
+                <td class="px-6 py-4 truncate">
+                   <%= number_to_currency(budget.carpet, precision: 2) %>
+                </td>
+
+                 <td class="px-6 py-4">
+                 <%= number_to_currency(budget.banners, precision: 2) %>
+                </td>
+                
+                <td class="px-6 py-4">
+                    <%= number_to_currency(budget.giveaways, precision: 2) %> 
+                </td>
+                
+                <td class="px-6 py-4 font-medium">
+                    <%= number_to_currency(budget.budget_total, precision: 2) %> 
+                </td>
+            <% end %>
+        </tbody>
+    </table>
+
+ </div>
+</div>
+</div>
+<br>
+
+<div class="mt-1">
+<%= link_to "Add New budget", new_budget_path, class: small_button_class %>
+<br>
+</div>
+
+
+
