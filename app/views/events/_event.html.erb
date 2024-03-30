@@ -132,6 +132,7 @@
    </p> 
    </div>
   
+   <% if is_admin? %>  
    <div class="mt-2">
    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
        Budget Total:
@@ -143,6 +144,7 @@
        <br> <%=  link_to "Edit budget details =>", edit_budget_path(event.budget), class: link_class unless event.budget.to_s.empty? %>
     </p> 
    </div>
+   <% end %>
   
 
 

@@ -2,6 +2,7 @@
 
 <div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
 
+<% if @grants.any? %>
 <div id="grants">
 <div class="relative overflow-x-auto">
     <table class="table-fixed w-full text-left rtl:text-right">
@@ -92,6 +93,10 @@
  </div>
 </div>
 </div>
+    <% else %>
+    <p class="px-6 py-4">
+    No records to view</p>
+    <% end %>
 <br>
 
 <div class="mt-1">

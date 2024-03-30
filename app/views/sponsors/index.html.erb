@@ -2,6 +2,8 @@
 
 <div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
  
+ 
+<% if @sponsors.any? %>
 <div id="sponsors">
 <div class="relative overflow-x-auto">
     <table class="w-full text-left rtl:text-right">
@@ -67,6 +69,10 @@
 </div>
  </div>
 </div>
+<% else %>
+<p class="px-6 py-4">
+No records to view</p>
+<% end %>
 <br>
 <div class="m-2">
     <%= link_to "Add New Sponsor", new_sponsor_path, class: small_button_class %>

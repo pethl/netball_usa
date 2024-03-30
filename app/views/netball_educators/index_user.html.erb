@@ -20,7 +20,7 @@
       </ul>
 </div>
 
-<br>
+<% if @netball_educators.any? %>
 
 <% @netball_educators_by_user.each do |user, educators| %>
 <div class="text-xl">
@@ -104,11 +104,14 @@
             </tr>
             <% end %>
         </tbody>
-
-
     </table>
 <br><br>
     <% end %>
+    <% else %>
+    <p class="px-6 py-4">
+    No records to view</p>
+    <% end %>
+    
 </div>
  </div>
 </div>

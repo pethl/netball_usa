@@ -110,6 +110,7 @@
      <div>
      <br>
      
+      <% if is_admin? %>  
      <div class="mb-6">
      <p class="block text-sm font-medium text-gray-700" %>Budget</p>
      <div class="mt-1">
@@ -120,6 +121,7 @@
          <br> <%=  link_to "Edit budget details =>", edit_budget_path(event.budget), class: link_class unless event.budget.to_s.empty? %>
       </p> 
      <div>
+      <% end %>  
      <br>
   
    <div>

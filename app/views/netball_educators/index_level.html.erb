@@ -20,7 +20,7 @@
       </ul>
 </div>
 
-<br>
+<% if @netball_educators.any? %>
 
 <% @netball_educators_by_level.each do |level, educators| %>
 <div class="text-xl">
@@ -80,7 +80,6 @@
                 <td class="px-6 py-4">
                   <%= educator.school_name %><br>
                   <%= (link_to educator.website, educator.website, target: '_blank', class: link_class) unless (educator.website.to_s.empty?)%>
-                  
                 </td>
                 <td class="px-6 py-4">
                    <%= educator.level %>
@@ -104,11 +103,13 @@
             </tr>
             <% end %>
         </tbody>
-
-
+         <% end %>
     </table>
 <br><br>
-    <% end %>
+<% else %>
+<p class="px-6 py-4">
+No records to view</p>
+<% end %>
 </div>
  </div>
 </div>

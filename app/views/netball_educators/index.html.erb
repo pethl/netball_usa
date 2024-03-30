@@ -2,8 +2,6 @@
 
 <div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
  
-
-
 <div class="">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
@@ -21,8 +19,8 @@
       </ul>
 </div>
 
-<br><br>
-
+<% if @netball_educators.any? %>
+  
 <div id="educators">
 <div class="relative overflow-x-auto">
     <table class="table-fixed w-full text-left rtl:text-right">
@@ -100,6 +98,11 @@
             <% end %>
         </tbody>
     </table>
+    <% else %>
+    <p class="px-6 py-4">
+    No records to view</p>
+    <% end %>
+    
 </div>
  </div>
 </div>

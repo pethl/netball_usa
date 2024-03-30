@@ -3,7 +3,12 @@ class GrantsController < ApplicationController
 
   # GET /grants
   def index
-    @grants = Grant.all
+   
+    if is_admin? 
+       @grants = Grant.all
+    else
+       @grants = Grant.where(user_id: current_user.id)
+    end
   end
 
   # GET /grants/1
