@@ -1,6 +1,7 @@
 class BudgetsController < ApplicationController
+  before_action :set_event_collections, only: %i[ new show edit update ]
   before_action :set_budget, only: %i[ show edit update destroy ]
-
+  
   # GET /budgets
   def index
     @budgets = Budget.all
@@ -13,13 +14,12 @@ class BudgetsController < ApplicationController
   # GET /budgets/new
   def new
     @budget = Budget.new
-    @events= Event.all
+   
   end
 
   # GET /budgets/1/edit
   def edit
-      @events= Event.all
-  end
+   end
 
   # POST /budgets
   def create
@@ -51,6 +51,11 @@ class BudgetsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_budget
       @budget = Budget.find(params[:id])
+    end
+    
+    # Get event list for drop down.
+    def set_event_collections
+      @events= Event.all
     end
 
     # Only allow a list of trusted parameters through.

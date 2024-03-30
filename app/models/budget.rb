@@ -1,6 +1,8 @@
 class Budget < ApplicationRecord
   has_one :event
   
+  validates :event_id, presence: true
+  
   def budget_total
     self.flight.to_f + self.hotel.to_f + self.transport.to_f + self.shipping.to_f + self.booth.to_f + self.carpet.to_f + self.banners.to_f + self.giveaways.to_f
   end

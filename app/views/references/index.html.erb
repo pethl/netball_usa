@@ -1,6 +1,15 @@
-<% content_for(:page_title, "References")%>
+<% content_for(:page_title, "Reference Data")%>
 
 <div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
+
+<p class="text-base text-left font-light">IMPORTANT: values cannot be deleted, they can be made Inactive. 
+<br>When adding a new value you must assign the correct group and mark as Active for it to show up in the system.
+</p>
+<br>
+<div class="mt-1">
+<%= link_to "Add New Reference", new_reference_path, class: small_button_class %>
+<br>
+</div>
 
   <% @references_by_group.each do |group, references| %>
   <div class="text-xl pt-10 pb-4">
@@ -61,10 +70,7 @@
   </div>
   <br>
 
-  <div class="mt-1">
-  <%= link_to "Add New Reference", new_reference_path, class: small_button_class %>
-  <br>
-  </div>
+ 
 
 
 

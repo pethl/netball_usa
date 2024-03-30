@@ -7,48 +7,75 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-  <script src="https://kit.fontawesome.com/d868e3ba9e.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.turbo.min.js"></script>
+    <script src="https://kit.fontawesome.com/d868e3ba9e.js" crossorigin="anonymous"></script>
   </head>
 
   <body class="h-full">
    <% if user_signed_in? %> 
+     <nav class="bg-white border-blue-200 dark:bg-gray-900">
+         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
+             <a href="https://flowbite.com" class="flex items-center space-x-3 rtl:space-x-reverse">
+                 <%= link_to image_tag("Netball_America_Logo.png", :class=>"mx-2 h-14 w-auto"), root_path %>
+               </a>
+            
+             <div class="flex items-center space-x-6 rtl:space-x-reverse">
+                 <div class="p-2 " title="Edit User">
+                   <%= link_to edit_user_registration_path do %>
+                     <i class="fa-solid fa-user text-blue-800"></i>
+                   <% end %>
+                 </div>
+                 <div class="p-2 " title="Logout">
+                   <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
+                     <i class="fa-solid fa-arrow-right-from-bracket text-blue-800"></i>
+                   <% end %>
+                 </div>
+             </div>
+         </div>
+     </nav>
+     <nav class="bg-gray-50 dark:bg-gray-700">
+         <div class="max-w-screen-xl px-4 py-3 mx-auto">
+             <div class="flex items-center">
+                 <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
+                     <li>
+                         <%= link_to root_path do %>
+                           <i class="fa-solid fa-house text-blue-800 dark:text-white hover:underline"></i>
+                         <% end %>
+                      </li>
+                     <li>
+                         <a href="/netball_educators/" class="text-blue-800 dark:text-white hover:underline">Educators</a>
+                     </li>
+                     <li>
+                         <a href="/sponsors" class="text-blue-800 dark:text-white hover:underline">Sponsors</a>
+                     </li>
+                     <li>
+                         <a href="/grants/" class="text-blue-800 dark:text-white hover:underline">Grants</a>
+                     </li>
+                     <li>
+                         <a href="/people" class="text-blue-800 dark:text-white hover:underline">People</a>
+                     </li>
+                     <li>
+                         <a href="/events/" class="text-blue-800 dark:text-white hover:underline">Events</a>
+                     </li>
+                     <li>
+                         <a href="/budgets" class="text-blue-800 dark:text-white hover:underline">Budgets</a>
+                     </li>
+                     <li>
+                         <a href="/transfers/" class="text-blue-800 dark:text-white hover:underline">US Open</a>
+                     </li>
+                        <% if is_admin? %>  
+                          <li>
+                              <a href="/references/" class="text-blue-800 dark:text-white hover:underline">Ref Data</a>
+                          </li>
+                          <li>
+                              <a href="/users" class="text-blue-800 dark:text-white hover:underline">Users</a>
+                          </li>
+                    <% end %>
+                 </ul>
+             </div>
+         </div>
+     </nav>
      
-    <header class="bg-gradient-to-r from-white to-blue-800 ">
-      <div class="flex items-end justify-between mx-8 my-1 pt-4 pb-2">
-           <div title="Netball America Home Page">
-              <%= link_to image_tag("Netball_America_Logo.png", :class=>"mx-2 h-14 w-auto"), root_path %>
-           </div>
-         
-           <div class="mx-10 sm:max-w-xl md:max-w-md items-end md:place-content-center justify-between px-1 py-2 text-xs text-thin">
-            <a href="/netball_educators/" class="text-gray-900 hover:bg-blue-400 hover:text-white rounded-md px-3 py-2 font-medium">Educators</a>
-            <a href="/sponsors" class="text-gray-900  hover:bg-blue-400 hover:text-white rounded-md px-3 py-2 font-medium">Sponsors</a>
-            <a href="/grants/" class="text-gray-900 hover:bg-blue-400 hover:text-white rounded-md px-3 py-2 font-medium">Grants</a>
-            <a href="/people/" class="text-gray-900 hover:bg-blue-400 hover:text-white rounded-md px-3 py-2 font-medium">People</a>
-            <a href="/events/" class="text-gray-900 hover:bg-blue-400 hover:text-white rounded-md px-3 py-2 font-medium">Events</a>
-            <a href="/budgets/" class="text-gray-900 hover:bg-blue-400 hover:text-white rounded-md px-3 py-2 font-medium">Budgets</a>
-            <a href="/transfers/" class="text-gray-900 hover:bg-blue-400 hover:text-white rounded-md px-3 py-2 font-medium">US Open</a>
-           
-             <% if is_admin? %>  
-                <a href="/users/" class="text-gray-900 hover:bg-blue-400 hover:text-white rounded-md px-3 py-2 font-medium">Users</a>
-                <a href="/references/" class="text-gray-900 hover:bg-blue-400 hover:text-white rounded-md px-3 py-2 font-medium">Ref Data</a>
-             <% end %>
-           </div>
-           
-          <div class="flex items-end justify-baseline">
-            <div class="p-2 " title="Edit User">
-              <%= link_to edit_user_registration_path do %>
-                <i class="fa-solid fa-user text-white"></i>
-              <% end %>
-            </div>
-            <div class="p-2 " title="Logout">
-              <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
-                <i class="fa-solid fa-arrow-right-from-bracket text-white"></i>
-              <% end %>
-            </div>
-          </div>   
-        </div>
-        </header>
-    
     <% else %>
      <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
@@ -58,7 +85,7 @@
     <% if content_for(:page_title)%>
       <header class="bg-white shadow">
         <div class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-          <h1 class="text-2xl font-thin font-bold border-2 border-white tracking-tight text-blue-900">
+          <h1 class="text-2xl font-light font-bold border-2 border-white tracking-tight text-blue-900">
           <%= yield(:page_title)%></h1>
         </div>
       </header>

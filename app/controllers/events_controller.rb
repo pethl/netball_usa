@@ -18,6 +18,8 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    @people = Person.all
+    @people = @people.order(last_name: :asc)
   end
 
   # GET /events/1/edit
