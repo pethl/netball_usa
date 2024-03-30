@@ -13,16 +13,20 @@
 
   <body class="h-full">
    <% if user_signed_in? %> 
-     <nav class="bg-white border-blue-200 dark:bg-gray-900">
-         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
+     <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+     
+         <div class=" flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
              <a href="https://flowbite.com" class="flex items-center space-x-3 rtl:space-x-reverse">
-                 <%= link_to image_tag("Netball_America_Logo.png", :class=>"mx-2 h-14 w-auto"), root_path %>
+                 <%= link_to image_tag("Netball_America_Logo.png", :class=>"mx-2 h-10 w-auto"), root_path %>
                </a>
             
              <div class="flex items-center space-x-6 rtl:space-x-reverse">
                  <div class="p-2 " title="Edit User">
                    <%= link_to edit_user_registration_path do %>
                      <i class="fa-solid fa-user text-blue-800"></i>
+                     <div class="text-xs text-center text-blue-800 ">
+                     Hi <%= current_user.first_name %>
+                     </div>
                    <% end %>
                  </div>
                  <div class="p-2 " title="Logout">
@@ -32,11 +36,11 @@
                  </div>
              </div>
          </div>
-     </nav>
+    
      <nav class="bg-gray-50 dark:bg-gray-700">
          <div class="max-w-screen-xl px-4 py-3 mx-auto">
              <div class="flex items-center">
-                 <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
+                 <ul class="flex flex-wrap font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
                      <li>
                          <%= link_to root_path do %>
                            <i class="fa-solid fa-house text-blue-800 dark:text-white hover:underline"></i>
@@ -76,25 +80,27 @@
              </div>
          </div>
      </nav>
+  
      
     <% else %>
      <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-      <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <div class="bg-white py-6 px-4 shadow sm:rounded-lg sm:px-10">
        <%= image_tag 'Netball_America_Logo.png', :class => "mx-auto h-13 w-auto" %>
     <% end %>
  
     <% if content_for(:page_title)%>
       <header class="bg-white shadow">
-        <div class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-          <h1 class="text-2xl font-light font-bold border-2 border-white tracking-tight text-blue-900">
+        <div class="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
+          <h1 class="text-xl font-light font-bold border-2 border-white tracking-tight text-blue-900">
           <%= yield(:page_title)%></h1>
         </div>
       </header>
     <% end %>
+   </nav>
    
     <main>
       <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-     
+      <br><br><br><br><br><br><br>
       <p class="notice"><%= notice %></p>
        <p class="alert"><%= alert %></p>
       <%= yield %>

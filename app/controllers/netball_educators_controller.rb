@@ -22,6 +22,7 @@ class NetballEducatorsController < ApplicationController
     else
         @netball_educators = NetballEducator.where(user_id: current_user.id)
         @netball_educators = @netball_educators.order(state: :asc)
+        @netball_educators_by_state = @netball_educators.group_by { |t| t.state }
       end
   end
 
@@ -38,7 +39,6 @@ class NetballEducatorsController < ApplicationController
   end
   
   def index_level
-   
     if is_admin? 
         @netball_educators = NetballEducator.all
         @netball_educators = @netball_educators.order(level: :asc)
