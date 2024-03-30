@@ -48,11 +48,11 @@
             <tr class="bg-white border-b hover:bg-gray-100">
                
                 <td class="px-6 py-4">
-                    <%= link_to budget.budget_event_name, edit_budget_path(budget), class: link_class  %>
+                    <%= (link_to budget.budget_event_name, edit_budget_path(budget), class: link_class) unless (budget.event_id.to_s.empty?) %>
                    </td>
                 
                 <td class="px-6 py-4">
-                   <%= budget.budget_event_date %> <br> 
+                   <%= budget.budget_event_date unless (budget.event_id.to_s.empty?) %> <br> 
                    
                 </td>
                 

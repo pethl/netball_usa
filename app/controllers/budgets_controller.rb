@@ -13,8 +13,9 @@ class BudgetsController < ApplicationController
 
   # GET /budgets/new
   def new
+    @events= Event.all
     @budget = Budget.new
-   
+    
   end
 
   # GET /budgets/1/edit
@@ -24,10 +25,12 @@ class BudgetsController < ApplicationController
   # POST /budgets
   def create
     @budget = Budget.new(budget_params)
+    @events= Event.all
 
     if @budget.save
       redirect_to @budget, notice: "Budget was successfully created."
     else
+      @events= Event.all
       render :new, status: :unprocessable_entity
     end
   end

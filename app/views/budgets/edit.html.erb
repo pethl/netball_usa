@@ -9,4 +9,8 @@
 <div>
   <%= link_to "Show this budget", @budget, class: link_class %> |
   <%= link_to "Back to budgets", budgets_path, class: link_class %>
+  <br>
+  <%= link_to "Show this event", @budget.event, class: link_class %> |
+  <%= link_to "Edit this event", edit_event_path(@budget.event), class: link_class %>
+  
 </div>

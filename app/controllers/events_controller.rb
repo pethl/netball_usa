@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :set_event_collections, only: %i[ new show edit update ]
   before_action :set_event, only: %i[ show edit update destroy ]
 
   # GET /events
@@ -35,6 +36,8 @@ class EventsController < ApplicationController
     if @event.save
       redirect_to @event, notice: "Event was successfully created."
     else
+      @people = Person.all
+      @people = @people.order(last_name: :asc)
       render :new, status: :unprocessable_entity
     end
   end
@@ -58,6 +61,12 @@ class EventsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find(params[:id])
+    end
+    
+    # Get event list for drop down.
+    def set_event_collections
+      @people= Person.all
+      @people = @people.order(last_name: :asc)
     end
 
     # Only allow a list of trusted parameters through.

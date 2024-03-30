@@ -13,8 +13,12 @@
 <br>
 
 <div>
-  <%= link_to "Edit this budget", edit_budget_path(@budget), class: block_link_class %>
-  <%= link_to "Back to budgets", budgets_path, class: block_link_class %>
+  <%= link_to "Edit this budget", edit_budget_path(@budget), class: link_class %> |
+  <%= link_to "Back to budgets", budgets_path, class: link_class %>
+  <br>
+  <%= link_to "Show this event", @budget.event, class: link_class %> |
+  <%= link_to "Edit this event", edit_event_path(@budget.event), class: link_class %>
+  <br> <br>
 
   <%= button_to "Delete this record",  @budget, method: :delete %>
 </div>

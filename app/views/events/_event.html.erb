@@ -85,19 +85,6 @@
    
    <div class="mt-2">
    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-       Personnel:
-   </p>
-   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-   <% if event.people.any? %>
-      <% event.people.each do |person| %>
-        <%= person.full_name %> <br>
-       <% end %>
-   <% end %>
-   </p> 
-   </div>
-  
-   <div class="mt-2">
-   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
        Details:
    </p>
    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
@@ -131,5 +118,31 @@
    <%= event.outcome %> 
    </p> 
    </div>
+   
+   <div class="mt-2">
+   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+       Personnel:
+   </p>
+   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+   <% if event.people.any? %>
+      <% event.people.each do |person| %>
+        <%= person.full_name %> <br>
+       <% end %>
+   <% end %>
+   </p> 
+   </div>
+  
+   <div class="mt-2">
+   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+       Budget Total:
+   </p>
+   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+
+        <%= number_to_currency(event.budget.budget_total, precision: 2) unless event.budget.to_s.empty? %> <br>
+            <%=  link_to "View budget details =>", event.budget, class: link_class unless event.budget.to_s.empty? %>
+       <br> <%=  link_to "Edit budget details =>", edit_budget_path(event.budget), class: link_class unless event.budget.to_s.empty? %>
+    </p> 
+   </div>
+  
 
 
