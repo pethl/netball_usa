@@ -14,5 +14,7 @@
   <%= link_to "Edit this transfer", edit_transfer_path(@transfer), class:link_class %> |
   <%= link_to "Back to transfers", transfers_path, class:link_class %>
 
+ <% if user_signed_in? %> 
   <%= button_to "Destroy this transfer", @transfer, method: :delete %>
+  <% end %>
 </div>

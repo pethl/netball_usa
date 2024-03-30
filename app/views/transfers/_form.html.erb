@@ -62,36 +62,34 @@
   <div class="mb-6">
    <%= form.label :share_volunteer, "Room Share - Volunteer Name / If applicable ", class: label_class%>
     <div class="mt-1">
-   <%= form.text_field :share_volunteer, class: input_class  %>
+   <%= form.text_field :share_volunteer, placeholder: "name of preferred room share volunteer", class: input_class  %>
   </div> </div>
   
   <div class="mb-6">
-     <%= form.label :no_pick_up, 'Airport Pickup Required?', style: "display: block", class: label_class  %>
+     <%= form.label :no_pick_up, 'Is Airport Pickup Required?', style: "display: block", class: label_class  %>
      <div class="mt-1">
      <%= form.check_box :no_pick_up, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
-     <span class="text-xs"><br>Only enter Arrival/Departure Flight details if you want airport pick-up.<span>
-    </div>
+     <span class="text-xs"><br>Tick Box for YES. Leave blank for NO.<span>
+     </div>
    </div>
   
-   <div class: "font-xl">
- 
-   </div>
-
+  
   <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <div class: "font-xl">
-    Arrival Details
-    </div>
-  
-      <div class="mb-6">
+      Arrival Details
+      <span class="text-xs tracking-tight"><br>NOTE: Only enter Arrival/Departure flight details if you want airport pick-up.<span>
+      </div>
+ 
+      <div class="mb-6 mt-2">
        <%= form.label :arrival_airline, "Airline", class: label_class%>
         <div class="mt-1">
-       <%= form.text_field :arrival_airline, class: input_class  %>
+       <%= form.text_field :arrival_airline, placeholder: "Airline Name", class: input_class  %>
       </div> </div>
 
       <div class="mb-6">
        <%= form.label :arrival_flight, "Flight Number", class: label_class%>
         <div class="mt-1">
-       <%= form.text_field :arrival_flight, class: input_class  %>
+       <%= form.text_field :arrival_flight, placeholder: "format XX1234", class: input_class  %>
       </div> </div>
    
       <div class="mb-6">
@@ -109,13 +107,13 @@
     <div class="mb-6">
      <%= form.label :departure_airline, "Airline", class: label_class%>
       <div class="mt-1">
-     <%= form.text_field :departure_airline, class: input_class  %>
+     <%= form.text_field :departure_airline, placeholder: "Airline Name", class: input_class  %>
     </div> </div>
 
     <div class="mb-6">
      <%= form.label :departure_flight, "Flight Number", class: label_class%>
       <div class="mt-1">
-     <%= form.text_field :departure_flight, class: input_class  %>
+     <%= form.text_field :departure_flight, placeholder: "format XX1234", class: input_class  %>
     </div> </div>
    
     <div class="mb-6">
@@ -129,7 +127,7 @@
    <div class="mb-6">
     <%= form.label :notes, class: label_class%>
      <div class="mt-1">
-    <%= form.text_area :notes, class: input_class  %>
+    <%= form.text_area :notes, placeholder: "please add any further notes you need to communicate re hotels or travel", class: input_class  %>
    </div> </div>
 
    <div>

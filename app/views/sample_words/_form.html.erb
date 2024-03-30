@@ -1,0 +1,42 @@
+<div class=" sm:mx-auto sm:w-full sm:max-w-md max-w-md">
+  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+  
+
+<%= form_with(model: sample_word) do |form| %>
+  <% if sample_word.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(sample_word.errors.count, "error") %> prohibited this sample_word from being saved:</h2>
+
+      <ul>
+        <% sample_word.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+ 
+  <div class="mb-6">
+   <%= form.label :category, class: label_class%>
+    <div class="mt-1">
+   <%= form.text_field :category, class: input_class  %>
+  </div> </div>
+  
+  <div class="mb-6">
+   <%= form.label :title, class: label_class%>
+    <div class="mt-1">
+   <%= form.text_field :title, class: input_class  %>
+  </div> </div>
+
+   <div class="mb-6">
+    <%= form.label :desc, class: label_class%>
+     <div class="mt-1">
+    <%= form.text_area :desc, class: input_class  %>
+   </div> </div>
+
+  
+   <div>
+     <%= form.submit "Save Record", class: form_button_class %>
+   </div>
+<% end %>

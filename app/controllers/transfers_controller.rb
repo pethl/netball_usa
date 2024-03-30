@@ -1,5 +1,6 @@
 class TransfersController < ApplicationController
   before_action :set_transfer, only: %i[ show edit update destroy ]
+  skip_before_action :authenticate_user!, only:[:show, :create, :edit, :update, :index]
 
   # GET /transfers
   def index

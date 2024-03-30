@@ -1,0 +1,20 @@
+<% content_for(:page_title, "Sample Words")%>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md md:max-w-lg">
+  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+
+   <br>
+   
+<%= render @sample_word %>
+
+</div>
+</div>
+
+
+<br>
+<div>
+<%= link_to "Edit this sample word", edit_sample_word_path(@sample_word), class: link_class  %> |
+<%= link_to "Back to sample words", sample_words_path, class: link_class  %>
+
+<%= button_to "Destroy this sample word", @sample_word, method: :delete %>
+ </div>

@@ -75,38 +75,63 @@
                           <li>
                               <a href="/users" class="text-blue-800 dark:text-white hover:underline">Users</a>
                           </li>
+                          <li>
+                              <a href="/sample_words" class="text-blue-800 dark:text-white hover:underline">Sample Wording</a>
+                          </li>
                     <% end %>
                  </ul>
              </div>
          </div>
      </nav>
+     
+     <% if content_for(:page_title)%>
+       <header class="bg-white shadow">
+         <div class="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
+           <h1 class="text-xl font-light font-bold border-2 border-white tracking-tight text-blue-900">
+           <%= yield(:page_title)%></h1>
+         </div>
+       </header>
+     <% end %>
+    </nav>
+   
+     <main>
+       <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+       <br><br><br><br><br><br><br>
+       <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+       <%= yield %>
+     
+       </div>
+     </main>
   
      
     <% else %>
      <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="bg-white py-6 px-4 shadow sm:rounded-lg sm:px-10">
        <%= image_tag 'Netball_America_Logo.png', :class => "mx-auto h-13 w-auto" %>
+       
+       <% if content_for(:page_title)%>
+         <header class="bg-white shadow">
+           <div class="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
+             <h1 class="text-xl font-light font-bold border-2 border-white tracking-tight text-blue-900">
+             <%= yield(:page_title)%></h1>
+           </div>
+         </header>
+       <% end %>
+      </nav>
+   
+       <main>
+         <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+     
+         <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+         <%= yield %>
+     
+         </div>
+       </main>
     <% end %>
  
-    <% if content_for(:page_title)%>
-      <header class="bg-white shadow">
-        <div class="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
-          <h1 class="text-xl font-light font-bold border-2 border-white tracking-tight text-blue-900">
-          <%= yield(:page_title)%></h1>
-        </div>
-      </header>
-    <% end %>
-   </nav>
    
-    <main>
-      <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-      <br><br><br><br><br><br><br>
-      <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
-      <%= yield %>
-     
-      </div>
-    </main>
    
    
    </div>

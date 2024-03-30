@@ -1,8 +1,8 @@
 <% content_for(:page_title, "US Open")%>
 
-<div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
+<div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-4 text-sm">
  
-
+ <% if user_signed_in? %> 
 <div class="">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
@@ -120,4 +120,32 @@
   <%= link_to "Add New Record", new_transfer_path, class: small_button_class %>
   <br>
 </div>
+
+<% else %>
+<div class="relative overflow-x-auto">
+    <table class="table-auto w-full text-left rtl:text-right">
+        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+             <tr>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Name 
+                </th>
+              </tr>
+              <tbody>
+              <% if @transfers.count >0 %>
+              <% @transfers.each do |transfer| %>
+                 <tr class="bg-white border-b hover:bg-gray-100">
+               
+                     <td class="px-6 py-4">
+                        <%= link_to transfer.full_name, edit_transfer_path(transfer), class: link_class %>
+                        </td>
+                        <% end %>
+                          <% else %>
+                          No Records
+                          <% end %>
+                    </tbody>
+                </table>
+              </div>
+             </div>
+            
+<% end %>
 
