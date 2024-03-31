@@ -13,8 +13,8 @@
 <br>
 
 <div>
-  <%= link_to "Edit this Event", edit_event_path(@event), class: block_link_class %>
-  <%= link_to "Back to Events", events_path, class: block_link_class %>
+  <%= link_to "Edit this Event", edit_event_path(@event), class: link_class %> |
+  <%= link_to "Back to Events", events_path, class: link_class %>
 
   <%= button_to "Delete this record",  @event, method: :delete %>
 </div>

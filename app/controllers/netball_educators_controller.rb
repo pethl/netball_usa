@@ -2,6 +2,24 @@ class NetballEducatorsController < ApplicationController
   before_action :set_netball_educator, only: %i[ show edit update destroy ]
    skip_before_action :authenticate_user!, only:[:show, :create]
 
+   def search
+     if params[:search].blank?
+      # redirect_to search_path and return
+       @netball_educators= Array.new
+       return 
+     else
+       @parameter = params[:search].downcase
+       @netball_educators = NetballEducator.all.where("lower(last_name) LIKE :search", search: "%#{@parameter}%")
+       if @netball_educators.count==0
+         @netball_educators = NetballEducator.all.where("lower(first_name) LIKE :search", search: "%#{@parameter}%")
+       end
+       if @netball_educators.count==0
+       @netball_educators=0
+       return
+      end
+     end
+   end
+  
   # GET /netball_educators
   def index
     if is_admin? 

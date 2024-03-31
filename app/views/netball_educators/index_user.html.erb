@@ -6,20 +6,23 @@
 <div class="">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
-            <a href="/netball_educators/" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Created Date</a>
+            <a href="/netball_educators/" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Created Date</a>
         </li>
         <li class="me-2">
-            <a href="/netball_educators/index_state" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By State</a>
+            <a href="/netball_educators/index_state" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By State</a>
         </li>
         <li class="me-2">
-            <a href="/netball_educators/index_user" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active " aria-current="page">By Allocation</a>
+            <a href="/netball_educators/index_user" class="inline-block p-2 text-blue-900 bg-gray-100 rounded-t-lg active " aria-current="page">By Allocation</a>
         </li>
         <li class="me-2">
-           <a href="/netball_educators/index_level" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Level</a>
+           <a href="/netball_educators/index_level" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Level</a>
        </li>
+       <li class="me-2">
+          <a href="/netball_educators/search" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Search</a>
+      </li>
       </ul>
 </div>
-
+<br>
 <% if @netball_educators.any? %>
 <br>
 <% @netball_educators_by_user.each do |user, educators| %>

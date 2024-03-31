@@ -1,0 +1,49 @@
+<div class=" sm:mx-auto sm:w-full sm:max-w-md max-w-md">
+  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+
+<%= form_with(model: equipment) do |form| %>
+  <% if equipment.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(equipment.errors.count, "error") %> prohibited this equipment from being saved:</h2>
+
+      <ul>
+        <% equipment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-6">
+   <%= form.label :sale_date,"Date of Sale", class: label_class%>
+    <div class="mt-1">
+   <%= form.date_field :sale_date, class: input_class  %>
+  </div> </div>
+
+  <div class="mb-6">
+   <%= form.label :items_purchased, class: label_class%>
+    <div class="mt-1">
+   <%= form.text_area :items_purchased, class: input_class  %>
+  </div> </div>
+  
+  <div class="mb-6">
+   <%= form.label :purchase_amount, class: label_class%>
+    <div class="mt-1">
+     <%= form.number_field :purchase_amount, step: 0.01, placeholder: "$ 0.00",  class: small_input_class %>
+     </div>
+   </div>
+   
+  <div class="mb-6">
+    <%= form.label :netball_educator_id, class: label_class  %>
+    <div class="mt-1">
+    <%= form.collection_select(:netball_educator_id, @netball_educators, :id, :reverse_name_school_state,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
+   }) %>
+ </div>
+  </div>
+  
+   <div>
+     <%= form.submit "Save Record", class: form_button_class %>
+   </div>
+ <% end %>
+
+

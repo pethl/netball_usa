@@ -36,6 +36,26 @@ class NetballEducator < ApplicationRecord
     def full_name
       "#{self.first_name} #{self.last_name}"
     end
+    
+    def reverse_name_school_state
+      "#{self.last_name}, #{self.first_name} : #{self.school_name}, #{self.state} "
+    end
+    
+    def reverse_name
+      "#{self.last_name}, #{self.first_name} "
+    end
+    
+    def full_name_school_state
+      "#{self.first_name} #{self.last_name} : #{self.school_name}, #{self.state}"
+    end
+    
+    def school_and_location
+      "#{self.school_name}, #{self.city}, #{self.state}"
+    end
+    
+    def contact_details
+      "#{self.email}, #{self.phone}"
+    end
  
   private
  

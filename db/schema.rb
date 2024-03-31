@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_30_155702) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_31_133126) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -50,6 +50,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_30_155702) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+  end
+
+  create_table "equipment", force: :cascade do |t|
+    t.text "items_purchased"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "person_id"
+    t.datetime "sale_date"
+    t.uuid "netball_educator_id"
+    t.decimal "purchase_amount"
   end
 
   create_table "event_assignments", force: :cascade do |t|
@@ -257,6 +267,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_30_155702) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "equipment", "netball_educators"
+  add_foreign_key "equipment", "people"
   add_foreign_key "event_assignments", "events"
   add_foreign_key "event_assignments", "umpires"
   add_foreign_key "event_participants", "events"

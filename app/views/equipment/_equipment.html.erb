@@ -1,0 +1,43 @@
+<div id="<%= dom_id equipment %>">
+
+<div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+   Date of Sale:
+  </p>
+  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+  <%=  equipment.sale_date.to_formatted_s(:usa) unless ( equipment.sale_date.to_s.empty?) %> 
+  </p>
+
+  <div class="mt-2">
+  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+      Items purchased:
+  </p>
+  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+  <%= equipment.items_purchased %> 
+  </p> 
+  </div>
+  
+  <div class="mt-2">
+  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+      Items Ammount
+  </p>
+  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+    <%= number_to_currency(equipment.purchase_amount, precision: 2) %>
+  </p> 
+  </div>
+  
+  <div class="mt-2">
+  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+      Sale To:
+  </p>
+  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+   <%= equipment.netball_educator.full_name %> <br>
+   <%= equipment.netball_educator.school_and_location %> <br>
+   <%= equipment.netball_educator.contact_details %>
+  </p> 
+  </div>
+
+ 
+
+</div>
