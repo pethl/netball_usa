@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :follow_ups
   resources :equipment
   resources :sample_words
   resources :budgets

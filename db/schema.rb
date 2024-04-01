@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_31_133126) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_01_124224) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -96,6 +96,19 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_133126) do
     t.string "outcome"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "follow_ups", force: :cascade do |t|
+    t.string "lead_type"
+    t.string "status"
+    t.text "action_items"
+    t.decimal "sale_amount", precision: 7, scale: 2
+    t.boolean "add_to_mailing_list"
+    t.integer "event_id"
+    t.string "netball_educator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "grants", force: :cascade do |t|

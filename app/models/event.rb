@@ -9,6 +9,13 @@ class Event < ApplicationRecord
   
     def budget
       Budget.where(event_id: self.id).first
-      
+    end
+    
+    def event_date_name
+     "#{self.event_date_formatted}, #{self.name} "
+    end
+    
+    def event_date_formatted
+      self.date.to_formatted_s(:usa) 
     end
 end

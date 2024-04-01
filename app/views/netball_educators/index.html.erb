@@ -53,6 +53,12 @@
                 <th scope="col" class="px-6 py-3 w-40">
                     State
                 </th>
+                <th scope="col" class="px-6 py-3 w-40 text-center">
+                    Equip. Sale?
+                </th>
+                <th scope="col" class="px-6 py-3 w-40 text-center">
+                    Follow Up?
+                </th>
                 <th scope="col" class="px-6 py-3 w-52">
                     Allocated To
                 </th>
@@ -94,6 +100,22 @@
                 
                 <td class="px-6 py-4">
                    <%= educator.state %>
+                </td>
+                
+                <td class="px-6 py-4 text-center">
+                <% if  educator.equipment.count == 1%>
+                   <%= link_to educator.equipment.count, equipment_path(educator.equipment.first.id), class: link_class %>
+                  <% else %>
+                    <%= educator.equipment.count %>
+               <% end %>
+                </td>
+                
+                <td class="px-6 py-4 text-center">
+                <% if  educator.follow_up.count == 1%>
+                   <%= link_to educator.follow_up.count, follow_up_path(educator.follow_up.first.id), class: link_class %>
+                  <% else %>
+                    <%= educator.follow_up.count %>
+               <% end %>
                 </td>
                 
                 <td class="px-6 py-4">

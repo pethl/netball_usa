@@ -1,9 +1,11 @@
 class NetballEducator < ApplicationRecord
   belongs_to :user, optional: true
+  has_many :equipment
+  has_many :follow_ups
  
   
   before_save { email.downcase! }
- before_save :normalize_phone
+  before_save :normalize_phone
   
   validates :first_name, presence: true, length: { maximum: 30 }
   validates :last_name, presence: true, length: { maximum: 40 }
@@ -19,6 +21,14 @@ class NetballEducator < ApplicationRecord
                       format:     { with: VALID_EMAIL_REGEX },
                       uniqueness: { case_sensitive: false }
  
+  def follow_up
+    FollowUp.where(netball_educator_id: self.id)
+  end
+  
+  def equipment
+    Equipment.where(netball_educator_id: self.id)
+  end
+  
   def formatted_phone
       parsed_phone = Phonelib.parse(phone)
       return phone if parsed_phone.invalid?

@@ -7,40 +7,32 @@
 
   <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          First Name:
-      </p>
-      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= netball_educator.first_name %> 
-      </p>
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            Name:
+        </p>
+        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+        <%= netball_educator.first_name %> <%= netball_educator.last_name %> 
+        </p>
+    
       
        <div class="mt-2">
-       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-           Last Name:
-       </p>
-       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-       <%= netball_educator.last_name %> 
-       </p>
-       </div>
-      
-       <div class="mt-2">
-       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-           Email:
-       </p>
-       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-       <%= netball_educator.email %> 
-       </p> 
-       </div>
-       
-       <div class="mt-2">
-       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-           Phone:
-       </p>
-       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-       <%= netball_educator.formatted_phone %> 
-       </p>
+         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+             Email:
+         </p>
+         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+         <%= netball_educator.email %> 
+         </p> 
         </div>
-       
+        
+      <div class="mt-2">
+         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+             Phone:
+         </p>
+         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+         <%= netball_educator.formatted_phone %> 
+         </p>
+      </div>      
+    
         <div class="mt-2">
         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
             School Name:
@@ -61,21 +53,12 @@
        
          <div class="mt-2">
          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-             City:
+             City, State:
          </p>
          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-         <%= netball_educator.city %> 
+         <%= netball_educator.city %>,   <%= netball_educator.state %> 
          </p>
           </div>
-       
-          <div class="mt-2">
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-              State:
-          </p>
-          <p class="text-sm font-medium text-gray-900 dark:text-white">
-          <%= netball_educator.state %> 
-          </p>
-           </div>
        
            <div class="mt-2">
           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -139,6 +122,21 @@
            </div>
            
            
+           <div class="mt-2">
+              <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                  Equipment Sales:
+              </p>
+              <p class="text-sm font-medium text-gray-900 dark:text-white">
+              <% if netball_educator.equipment.any? %>
+                <% netball_educator.equipment.each do |equipment| %>
+                  <ul>
+                  <li><%= equipment.sale_date.to_formatted_s(:usa) unless (equipment.sale_date.to_s.empty?) %>  <%= equipment.items_purchased %>   <%= number_to_currency(equipment.purchase_amount, precision: 2) %><br>
+                  </li></ul>
+                 <% end %>
+                <% end %>
+              </p>
+             </div>
+          
     
   <% end %>  
 </div>

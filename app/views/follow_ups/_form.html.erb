@@ -1,0 +1,76 @@
+<div class=" sm:mx-auto sm:w-full sm:max-w-md max-w-md">
+  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+
+<%= form_with(model: follow_up) do |form| %>
+  <% if follow_up.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(follow_up.errors.count, "error") %> prohibited this follow_up from being saved:</h2>
+
+      <ul>
+        <% follow_up.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-6">
+    <%= form.label :lead_type, class: label_class  %>
+    <div class="mt-1">
+     <%= form.select :lead_type, options_for_select(follow_up_lead_type, :selected => follow_up.lead_type),{}, class: input_class %>
+    </div>
+  </div>
+
+    <div class="mb-6">
+     <%= form.label :user_id, 'Allocated To', class: label_class%>
+      <div class="mt-1">
+      <%= form.collection_select(:user_id, User.all, :id, :full_name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
+     }) %>
+   </div> </div>
+
+  <div class="mb-6">
+    <%= form.label :status, class: label_class  %>
+    <div class="mt-1">
+     <%= form.select :status, options_for_select(follow_up_status, :selected => follow_up.status),{}, class: input_class %>
+    </div>
+  </div>
+
+   <div class="mb-6">
+    <%= form.label :action_items, class: label_class%>
+     <div class="mt-1">
+    <%= form.text_area :action_items, class: input_class  %>
+   </div> </div>
+
+   <div class="mb-6">
+    <%= form.label :event_id, 'Event', class: label_class%>
+     <div class="mt-1">
+     <%= form.collection_select(:event_id, @events, :id, :event_date_name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
+    }) %>
+  </div> </div>
+
+  <div class="mb-6">
+   <%= form.label :sale_amount, class: label_class%>
+    <div class="mt-1">
+     <%= form.number_field :sale_amount, step: 0.01, placeholder: "$ 0.00",  class: small_input_class %>
+     </div>
+   </div>
+
+   <div class="mb-6">
+     <%= form.label :netball_educator_id, class: label_class  %>
+     <div class="mt-1">
+     <%= form.collection_select(:netball_educator_id, @netball_educators, :id, :reverse_name_school_state,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
+    }) %>
+  </div>
+   </div>
+
+   <div class="mb-6">
+      <%= form.label :add_to_mailing_list, 'Add to mailing list?', style: "display: block", class: label_class  %>
+      <div class="mt-1">
+      <%= form.check_box :add_to_mailing_list, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+     </div>
+    </div>
+
+   <div>
+     <%= form.submit "Save Record", class: form_button_class %>
+   </div>
+ <% end %>

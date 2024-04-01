@@ -19,6 +19,9 @@ class EquipmentController < ApplicationController
 
   # GET /equipment/1/edit
   def edit
+    @netball_educators = NetballEducator.all
+    @netball_educators = @netball_educators.order(last_name: :asc)
+    
   end
 
   # POST /equipment

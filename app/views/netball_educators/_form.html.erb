@@ -114,6 +114,22 @@
         <%= form.text_area :mgmt_notes, class: input_class %>
        </div>
       </div>
+      
+      <div class="mb-6">
+        <%= form.label :equipment, style: "display: block", class: label_class  %>
+        <div class="mt-1">
+        <p class="text-sm font-medium text-gray-900 dark:text-white">
+        <% if netball_educator.equipment.any? %>
+          <% netball_educator.equipment.each do |equipment| %>
+            <ul>
+            <li><%= equipment.sale_date.to_formatted_s(:usa) unless (equipment.sale_date.to_s.empty?) %>  <%= equipment.items_purchased %>   <%= number_to_currency(equipment.purchase_amount, precision: 2) %><br>
+            </li></ul>
+           <% end %>
+          <% end %>
+        </p>
+        <%= link_to "Add New Equipment Sale", equipment_index_path, class: link_class %>
+       </div>
+      </div>
     <% end %>
 
 

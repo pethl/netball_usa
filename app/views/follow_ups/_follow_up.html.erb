@@ -1,0 +1,77 @@
+<div id="<%= dom_id follow_up %>">
+
+<div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+   Lead Type:
+  </p>
+  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+    <%= follow_up.lead_type %> 
+  </p>
+
+  <div class="mt-2">
+  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+      Allocated To:
+  </p>
+  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+  <%= follow_up.user.full_name %> 
+  </p> 
+  </div>
+  
+  <div class="mt-2">
+  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+      Status:
+  </p>
+  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+    <%= follow_up.status %> 
+   </p> 
+  </div>
+  
+  <div class="mt-2">
+  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+      Action Items:
+  </p>
+  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+    <%= follow_up.action_items %> 
+   </p> 
+  </div>
+  
+  <div class="mt-2">
+  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+     Event:
+  </p>
+  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+    <%= follow_up.event.event_date_name unless (follow_up.event_id.to_s.empty?) %> 
+   </p> 
+  </div>
+  
+  <div class="mt-2">
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Sale Amount:
+    </p>
+    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <%= number_to_currency(follow_up.sale_amount, precision: 2) %>
+    </p> 
+  </div>
+
+  <div class="mt-2">
+  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+     Educator:
+  </p>
+  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+   <%= follow_up.netball_educator.full_name unless (follow_up.netball_educator_id.to_s.empty?)%> <br>
+   <%= follow_up.netball_educator.school_and_location unless (follow_up.netball_educator_id.to_s.empty?) %> <br>
+   <%= follow_up.netball_educator.contact_details unless (follow_up.netball_educator_id.to_s.empty?)  %>
+  </p> 
+  </div>
+
+  <div class="mt-2">
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Add To Mailing List?:
+    </p>
+    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <%= follow_up.add_to_mailing_list? ? 'Yes' : 'No' %>
+    </p> 
+  </div>
+
+</div>

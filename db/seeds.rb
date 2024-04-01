@@ -91,4 +91,13 @@ Reference.create(group:	'event_type',	value:	'PE Class', active:	'TRUE');
 Reference.create(group:	'event_status',	value:	'Plan', active:	'TRUE');
 Reference.create(group:	'event_status',	value:	'Prep', active:	'TRUE');
 Reference.create(group:	'event_status',	value:	'Complete', active:	'TRUE');
+Reference.create(group:	'follow_up_lead_type',	value:	'--', active:	'TRUE');
+Reference.create(group:	'follow_up_lead_type',	value:	'Equipment', active:	'TRUE');
+Reference.create(group:	'follow_up_lead_type',	value:	'Workshop', active:	'TRUE');
+Reference.create(group:	'follow_up_lead_type',	value:	'Curriculum', active:	'TRUE');
+Reference.create(group:	'follow_up_lead_type',	value:	'All', active:	'TRUE');
+Reference.create(group:	'follow_up_status',	value:	'Not Allocated', active:	'TRUE');
+Reference.create(group:	'follow_up_status',	value:	'Not Started', active:	'TRUE');
+Reference.create(group:	'follow_up_status',	value:	'In Progress', active:	'TRUE');
+Reference.create(group:	'follow_up_status',	value:	'Complete', active:	'TRUE');
 

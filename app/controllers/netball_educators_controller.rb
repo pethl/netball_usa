@@ -75,7 +75,7 @@ class NetballEducatorsController < ApplicationController
   # GET /netball_educators/new
   def new
     @netball_educator = NetballEducator.new
-     @users = User.all
+    @users = User.all
   end
 
   # GET /netball_educators/1/edit

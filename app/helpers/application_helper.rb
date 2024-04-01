@@ -190,4 +190,14 @@ module ApplicationHelper
       event_status = Reference.where(active: "TRUE", group: 'event_status')
       event_status = event_status.pluck(:value)       
     end
+    
+    def follow_up_lead_type
+      follow_up_lead_type = Reference.where(active: "TRUE", group: 'follow_up_lead_type')
+      follow_up_lead_type = follow_up_lead_type.pluck(:value)       
+    end
+    
+    def follow_up_status
+      follow_up_status = Reference.where(active: "TRUE", group: 'follow_up_status')
+      follow_up_status = follow_up_status.pluck(:value)       
+    end
 end

@@ -1,0 +1,10 @@
+<% content_for(:page_title, "Follow Up: Edit")%>
+
+<%= render "form", follow_up: @follow_up %>
+
+<br>
+
+<div>
+  <%= link_to "Show this follow up", @follow_up, class: link_class %> |
+  <%= link_to "Back to follow ups", follow_ups_path, class: link_class %>
+</div>
