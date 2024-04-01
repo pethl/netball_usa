@@ -11,6 +11,15 @@ class Event < ApplicationRecord
       Budget.where(event_id: self.id).first
     end
     
+    def budget_count
+        a = Budget.where(event_id: self.id)
+        if a.empty?()
+          return 0
+        else
+          return a
+        end
+    end
+    
     def event_date_name
      "#{self.event_date_formatted}, #{self.name} "
     end

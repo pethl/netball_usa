@@ -52,6 +52,10 @@ module ApplicationHelper
      "block px-4 py-2 text-sm text-gray-700"
    end
    
+   def routing_link_class
+     "text-sm text-blue-900"
+   end
+   
    
    def reference_group
      reference_group = Reference.all

@@ -114,6 +114,10 @@
      <div class="mb-6">
      <p class="block text-sm font-medium text-gray-700" %>Budget</p>
      <div class="mt-1">
+     <% if event.budget_count==0 %>
+       <%= link_to "Add New budget >>", new_budget_path, class: routing_link_class %>
+       <br>
+       <% end %>
          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
           <%= number_to_currency(event.budget.budget_total, precision: 2) unless event.budget.to_s.empty? %> <br>
           <br>
