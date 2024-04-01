@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resources :sample_words
   resources :budgets
   get 'events/calendar' => 'events#calendar', :as => :calendar
-  
+
+  get 'people/index_trainers_and_ambassadors' => 'people#index_trainers_and_ambassadors', :as => :index_trainers_and_ambassadors
   get 'people/index_int' => 'people#index_int', :as => :index_int
   get 'people/index_scorers' => 'people#index_scorers', :as => :index_scorers
  

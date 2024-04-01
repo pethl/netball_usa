@@ -5,8 +5,8 @@
 <div class="">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
-            <a href="/people/" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Umpires:<br>US & Canada</a>
-        </li>
+          <a href="/people/" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Umpires:<br>US & Canada</a>
+          </li>
         <li class="me-2">
             <a href="/people/index_int" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Umpires:<br>International</a>
         </li>
@@ -14,7 +14,7 @@
             <a href="/people/index_scorers/" class="inline-block p-4 pb-8 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Scorers:</a>
         </li>
         <li class="me-2">
-           <a href="/people/index_trainers_and_ambassadors/" class="inline-block p-4 pb-8 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Trainers & <br>Ambassadors</a>
+          <a href="/people/index_trainers_and_ambassadors/" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Trainers & <br>Ambassadors</a>
        </li>
       </ul>
 </div>
@@ -23,39 +23,39 @@
 
 <div id="persons">
 <div class="relative overflow-x-auto">
-    <table class="table-fixed w-full text-left rtl:text-right">
+    <table class="table-auto w-full text-left rtl:text-right">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
              <tr>
                <th scope="col" class="px-6 py-3 w-52">
                    See Details
                </th>
-               
+               <th scope="col" class="px-6 py-3 w-52">
+                   Role 
+               </th>
                 <th scope="col" class="px-6 py-3 w-52">
                     Name 
                 </th>
                 <th scope="col" class="px-6 py-3 w-52">
                     Location
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
-                    Level
-                </th>
-                <th scope="col" class="px-6 py-3 w-52">
+                  <th scope="col" class="px-6 py-3 w-52">
                     Email
                 </th>
                 <th scope="col" class="px-6 py-3 w-52">
                     Phone
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
-                    Adress
-                </th>
+               
                 <th scope="col" class="px-6 py-3 w-40">
-                    Associated?
+                    In Person Trained?
                 </th>
                 <th scope="col" class="px-6 py-3 w-52">
-                   Gender
+                   Virtually Trained?
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                   Booth Trained?
                 </th>
                 <th scope="col" class="px-6 py-3 w-60 truncate">
-                    Notes
+                  Notes
                 </th>
             </tr>
         </thead>
@@ -65,7 +65,10 @@
             <tr class="bg-white border-b hover:bg-gray-100">
                 <td class="px-6 py-4">
                   <%= link_to image_tag("view.png", :class=>"mx-2 h-6 w-auto"), person  %>
-                 
+                  </td>
+                  
+                  <td class="px-6 py-4">
+                     <%= person.role %>
                   </td>
                   
                 <td class="px-6 py-4">
@@ -75,11 +78,7 @@
                 <td class="px-6 py-4">
                    <%= person.location %>
                 </td>
-                
-                <td class="px-6 py-4">
-                  <%= person.level %><br>
-                 </td>
-                
+             
                 <td class="px-6 py-4">
                    <%= person.email %>
                 </td>
@@ -88,16 +87,17 @@
                     <%= person.phone %>
                 </td>
                 
+              
                 <td class="px-6 py-4">
-                   <%= person.address %>
+                   <%= person.in_person_trained? ? 'Yes' : 'No'  %>
                 </td>
                 
                 <td class="px-6 py-4">
-                   <%= person.associated  %>
+                  <%= person.virtually_trained? ? 'Yes' : 'No'  %>
                 </td>
                 
                 <td class="px-6 py-4">
-                   <%= person.gender  %>
+                  <%= person.booth_trained? ? 'Yes' : 'No'  %>
                 </td>
 
                  <td class="px-6 py-4">

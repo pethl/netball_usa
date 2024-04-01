@@ -16,14 +16,14 @@
   <% end %>
 
   <div class="mb-6">
-    <%= form.label :role, class: label_class  %>
+    <%= form.label :role,"Role*", class: label_class  %>
     <div class="mt-1">
-     <%= form.select :role, options_for_select(people_role, :selected => person.role),{}, class: input_class %>
+     <%= form.select :role, options_for_select(people_role, :selected => person.role),{}, :required => true, class: input_class %>
     </div>
   </div>
   
   <div class="mb-6">
-    <%= form.label :region, class: label_class  %>
+    <%= form.label :region,"Region*", class: label_class  %>
     <div class="mt-1">
      <%= form.select :region, options_for_select(people_region, :selected => person.region),{}, class: input_class %>
     </div>
@@ -47,20 +47,23 @@
    <%= form.text_field :location, class: input_class  %>
   </div> </div>
   
+   <div class="p-2 border-double border-4 border-blue-900 rounded-md mt-2">
+   <div class="text-xs text-center text-gray-400 m-2">Umpires/Scorers Only</div>
   <div class="mb-6">
     <%= form.label :level, class: label_class  %>
     <div class="mt-1">
-     <%= form.select :level, options_for_select(people_level, :selected => person.level),{}, class: input_class %>
+     <%= form.select :level, options_for_select(people_level, :selected => person.level),{prompt: true}, class: input_class %>
     </div>
   </div>
   
-  <div class="mb-6">
+  <div class="mb-4">
    <%= form.label :level_note,"Level notes", class: label_class%>
     <div class="mt-1">
    <%= form.text_field :level_note, class: input_class  %>
   </div> </div>
+  </div>
 
-  <div class="mb-6">
+  <div class="mb-6 mt-4">
    <%= form.label :email, class: label_class%>
     <div class="mt-1">
    <%= form.text_field :email, class: input_class  %>
@@ -78,8 +81,27 @@
    <%= form.text_field :address, class: input_class  %>
   </div> </div>
 
-  <div class="mb-6">
-   <%= form.label :associated, class: label_class%>
+  <div class="p-2 border-double border-4 border-blue-900 rounded-md mt-2">
+    <div class="text-xs text-center text-gray-400 m-2">Trainers/Ambassadors Only</div>
+   
+    <div class="flex items-center mb-4">
+        <%= form.check_box :in_person_trained, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
+        <%= form.label :in_person_trained, "In Person Trained?",class: "ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"  %>
+    </div>
+    
+    <div class="flex items-center mb-4">
+        <%= form.check_box :virtually_trained, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
+        <%= form.label :virtually_trained, "Virtually Trained?",class: "ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"  %>
+    </div>
+
+    <div class="flex items-center mb-4">
+        <%= form.check_box :booth_trained, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
+        <%= form.label :booth_trained, "Booth Trained?",class: "ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"  %>
+    </div>
+  </div>
+ 
+  <div class="mb-6 mt-4">
+   <%= form.label :associated, "Associated or Independent?", class: label_class%>
     <div class="mt-1">
    <%= form.text_field :associated, class: input_class  %>
   </div> </div>
@@ -94,7 +116,7 @@
   <div class="mb-6">
     <%= form.label :tshirt_size, class: label_class  %>
     <div class="mt-1">
-     <%= form.select :tshirt_size, options_for_select(tshirt_size, :selected => person.tshirt_size),{}, class: input_class %>
+     <%= form.select :tshirt_size, options_for_select(tshirt_size, :selected => person.tshirt_size),{prompt: true}, class: input_class %>
     </div>
   </div>
 
@@ -130,7 +152,25 @@
        <%= form.text_area :notes, class: input_class %>
       </div>
      </div>
-
+     
+     <div class="mt-2">
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            Events:
+        </p>
+        <p class="text-sm font-medium text-gray-900 dark:text-white">
+        <% if person.events.any? %>
+          <% person.events.each do |event| %>
+          <ul class="list-disc ms-6">
+            <li class="text-sm"><%= event.date.to_formatted_s(:usa) unless (event.date.to_s.empty?) %> - <%= event.name %> <br>
+            </li>
+          </ul>
+           <% end %>
+          <% end %>
+        </p>
+       
+       <%= link_to "Assign to New Event? >>", events_path, class: "text-sm text-blue-900" %>
+       </div>
+       <br>
       <div>
        <%= form.submit "Save Record", class: form_button_class %>
      </div>

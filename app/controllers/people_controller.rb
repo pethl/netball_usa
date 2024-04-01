@@ -13,6 +13,10 @@ class PeopleController < ApplicationController
   def index_scorers
      @people = Person.where(role: "Scorer")
   end 
+  
+  def index_trainers_and_ambassadors
+     @people = Person.where(role: "Trainer").or(Person.where(role: "Ambassador"))
+   end
  
   # GET /people/1
   def show
@@ -61,6 +65,6 @@ class PeopleController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def person_params
-      params.require(:person).permit(:first_name, :last_name, :role, :region, :location, :email, :level, :level_note, :phone, :address, :associated, :gender, :tshirt_size, :uniform_size, :headshot, :headshot_file, :invite_back, :notes)
+      params.require(:person).permit(:first_name, :last_name, :role, :region, :location, :email, :level, :level_note, :phone, :address, :associated, :gender, :tshirt_size, :uniform_size, :headshot, :headshot_file, :invite_back, :notes, :in_person_trained, :virtually_trained, :booth_trained)
     end
 end

@@ -101,7 +101,7 @@
      <div class="mb-6">
      <p class="block text-sm font-medium text-gray-700" %>Personnel (check box to assign)</p>
      <div class="mt-1">
-        <%= form.collection_check_boxes :person_ids, @people, :id, :full_name, not_checked: Person.all.map(&:id) do |b| %>
+        <%= form.collection_check_boxes :person_ids, @people, :id, :role_full_name, not_checked: Person.all.map(&:id) do |b| %>
           <span class="indent-3">
             <%= b.check_box %>
             <%= b.label %><br>

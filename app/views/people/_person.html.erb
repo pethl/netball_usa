@@ -1,5 +1,7 @@
 <div id="<%= dom_id person %>">
 
+
+  <% if ["Scorer", "Umpire"].include? person.role %>
 <div class="max-w-sm">
 <div class="flex justify-between p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
@@ -171,6 +173,148 @@
        </p>
      </div>
      
- 
+   
+   
+   
+   
+   
+   
+   
+    <% else %>
+     <div class="max-w-sm">
+     <div class="flex justify-between p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
+        <div class="">
+           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+               Role:
+           </p>
+           <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+             <%= person.role %> 
+           </p>
+          </div> 
+  
+        <div class="">
+         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+             Region
+         </p>
+         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+         <%= person.region %> 
+         </p>
+       </div> 
+        </div> 
+
+       <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+              Name:
+          </p>
+          <p class="text-xl font-medium text-gray-900 truncate dark:text-white">
+          <%= person.first_name %>  <%= person.last_name %> 
+          </p> 
+    
+            <div class="mt-2">
+           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+               Location:
+           </p>
+           <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+           <%= person.location %> 
+           </p>
+            </div>
+         </div>
+
+         <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+         <div class="">
+           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+               Email:
+           </p>
+           <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+           <%= person.email %> 
+           </p>
+          </div>
+
+          <div class="mt-2">
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+              Phone:
+          </p>
+          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+          <%= person.phone %> 
+          </p>
+           </div>
+      
+
+           <div class="mt-2 block">
+           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+               Address:
+           </p>
+           <p class="text-sm font-medium text-gray-900 dark:text-white">
+           <%= person.address %> 
+           </p>
+            </div>
+      
+          <div class="mt-2">
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+             Gender:
+          </p>
+          <p class="text-sm font-medium text-gray-900 dark:text-white">
+          <%= person.gender %> 
+          </p>
+           </div>
+          </div>
+  
+          <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+  
+           <div class="">
+             <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                In Person Trained?:
+             </p>
+             <p class="text-sm font-medium text-gray-900 dark:text-white">
+             <%= person.in_person_trained?? 'Yes' : 'No' %> 
+             </p>
+             </div>
+   
+            <div class="mt-2">
+              <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                 Virtually Trained?:
+              </p>
+              <p class="text-sm font-medium text-gray-900 dark:text-white">
+              <%= person.virtually_trained?? 'Yes' : 'No' %> 
+              </p>
+            </div>
+
+            <div class="mt-2">
+              <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                 Booth Trained?:
+              </p>
+              <p class="text-sm font-medium text-gray-900 dark:text-white">
+              <%= person.booth_trained?? 'Yes' : 'No' %> 
+              </p>
+            </div>
+             </div>
+
+         <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+          
+          <div class="mt-2">
+            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                Notes:
+            </p>
+            <p class="text-sm font-medium text-gray-900 dark:text-white">
+           <%= person.notes %>
+            </p>
+           </div>
+           </div>
+           <br>
+           <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <div class="">
+            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                Events:
+            </p>
+            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+             <% if person.events.any? %>
+              <% person.events.each do |event| %>
+                <%= event.date.to_formatted_s(:usa) unless ( event.date.to_s.empty?)  %> <%= event.name %><br>
+                <% end %>
+                 <% end %>
+            </p>
+          </div>
+   <% end %>
+   
 </div>

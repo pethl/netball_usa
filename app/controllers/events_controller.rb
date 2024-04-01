@@ -26,7 +26,7 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     @people = Person.all
-    @people = @people.order(last_name: :asc)
+    @people = @people.order(role: :asc).order(last_name: :asc)
   end
 
   # POST /events

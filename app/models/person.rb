@@ -6,8 +6,12 @@ class Person < ApplicationRecord
   
   validates :role, presence: true
  
-
+  
   def full_name
     "#{self.first_name} #{self.last_name}"
+  end
+  
+  def role_full_name
+    "#{self.role} - #{self.last_name}, #{self.first_name}"
   end
 end
