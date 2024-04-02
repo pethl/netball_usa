@@ -167,7 +167,9 @@ module ApplicationHelper
     
     def gender
       gender = Reference.where(active: "TRUE", group: 'gender')
-      gender = gender.pluck(:value)       
+      gender = gender.order(value: :asc)    
+      gender = gender.pluck(:value) 
+        
     end
     
     def tshirt_size

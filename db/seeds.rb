@@ -65,6 +65,7 @@ Reference.create(group:	'people_level',	value:	'Intermediate', active:	'TRUE');
 Reference.create(group:	'people_level',	value:	'Advanced', active:	'TRUE');
 Reference.create(group:	'gender',	value:	'Female', active:	'TRUE');
 Reference.create(group:	'gender',	value:	'Male', active:	'TRUE');
+Reference.create(group:	'gender',	value:	'Other', active:	'TRUE');
 Reference.create(group:	'tshirt_size',	value:	'XS', active:	'TRUE');
 Reference.create(group:	'tshirt_size',	value:	'Small', active:	'TRUE');
 Reference.create(group:	'tshirt_size',	value:	'Medium', active:	'TRUE');
