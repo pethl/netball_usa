@@ -45,10 +45,10 @@
           
           <div class="bg-blue-800 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
             <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-            <i class="fa-solid fa-person text-blue-800 dark:text-white hover:underline"></i>
+            <i class="fa-solid fa-dollar-sign text-blue-800 dark:text-white hover:underline"></i>
           </div>
             <div class="text-right">
-              <p class="text-2xl"> <p><%= link_to Person.all.count, people_path %></p>
+              <p class="text-2xl"><%= link_to Person.all.count, people_path %></p>
              <p><%= link_to "People", people_path %></p>
             </div>
           </div>
@@ -66,23 +66,25 @@
           <% if is_admin? %>  
           <div class="bg-blue-800 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
             <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-            <i class="fa-solid fa-money-check-dollar text-blue-800 dark:text-white hover:underline"></i>
-          </div>
+              <i class="fa-solid fa-money-check-dollar text-blue-800 dark:text-white hover:underline"></i>
+            </div>
             <div class="text-right">
               <p class="text-2xl"><%= link_to Budget.all.count, budgets_path %></p>
              <p><%= link_to "Budgets", budgets_path %></p>
             </div>
           </div>
          
+          
           <div class="bg-blue-800 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
             <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-            <i class="fa-solid fa-users text-blue-800 dark:text-white hover:underline"></i>
-          </div>
+              <i class="fa-solid fa-money-check-dollar text-blue-800 dark:text-white hover:underline"></i>
+            </div>
             <div class="text-right">
-              <p class="text-2xl"> <p><%= link_to User.all.count, users_path %></p>
+              <p class="text-2xl"><%= link_to User.all.count, users_path %></p>
              <p><%= link_to "Users", users_path %></p>
             </div>
           </div>
+          
           <% end %>
         </div>
         <!-- ./Statistics Cards -->

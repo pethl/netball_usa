@@ -30,7 +30,7 @@
   <div class="mb-6">
    <%= form.label :role, class: label_class%>
     <div class="mt-1">
-   <%= form.select :role, options_for_select(us_open_role, :selected => transfer.role),{}, class: input_class %>
+   <%= form.select :role, options_for_select(us_open_role, :selected => transfer.role),{prompt: true}, class: input_class %>
   </div> </div>
   
   <div class="mb-6">
@@ -48,7 +48,7 @@
   <div class="mb-6">
    <%= form.label :room_type, class: label_class%>
     <div class="mt-1">
-   <%= form.select :room_type, options_for_select(transfer_room_type, :selected => transfer.room_type),{}, class: input_class %>
+   <%= form.select :room_type, options_for_select(transfer_room_type, :selected => transfer.room_type),{prompt: true}, class: input_class %>
   </div> </div>
 
  <% unless current_user.nil? %>

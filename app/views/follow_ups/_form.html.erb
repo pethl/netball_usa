@@ -17,7 +17,7 @@
   <div class="mb-6">
     <%= form.label :lead_type, class: label_class  %>
     <div class="mt-1">
-     <%= form.select :lead_type, options_for_select(follow_up_lead_type, :selected => follow_up.lead_type),{}, class: input_class %>
+     <%= form.select :lead_type, options_for_select(follow_up_lead_type, :selected => follow_up.lead_type),{prompt: true}, class: input_class %>
     </div>
   </div>
 

@@ -9,6 +9,7 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.turbo.min.js"></script>
     <script src="https://kit.fontawesome.com/d868e3ba9e.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
   </head>
 
   <body class="h-full">
@@ -17,7 +18,7 @@
      
          <div class=" flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
              <a href="https://flowbite.com" class="flex items-center space-x-3 rtl:space-x-reverse">
-                 <%= link_to image_tag("Netball_America_Logo.png", :class=>"mx-2 h-10 w-auto"), root_path %>
+                 <%= link_to image_tag("Netball_America_Logo.png", :class=>"mx-2 h-14 w-auto"), root_path %>
                </a>
             
              <div class="flex items-center space-x-6 rtl:space-x-reverse">
@@ -45,7 +46,7 @@
                          <%= link_to root_path do %>
                            <i class="fa-solid fa-house text-blue-800 dark:text-white hover:underline"></i>
                          <% end %>
-                      </li>
+                    </li>
                      <li>
                          <a href="/netball_educators/" class="text-blue-800 dark:text-white hover:underline">Educators</a>
                      </li>
@@ -71,6 +72,7 @@
                          <a href="/transfers/" class="text-blue-800 dark:text-white hover:underline">US Open</a>
                      </li>
                         <% if is_admin? %>  
+                         
                           <li>
                               <a href="/budgets" class="text-blue-800 dark:text-white hover:underline">Budgets</a>
                           </li>
