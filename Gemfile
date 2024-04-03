@@ -75,5 +75,5 @@ group :development do
   # gem "spring"
 end
 
-gem 'shrine', '~> 2.6', '>= 2.6.1'
+gem "shrine", "~> 3.0"
 

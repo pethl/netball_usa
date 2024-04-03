@@ -1,5 +1,6 @@
 class Person < ApplicationRecord
-  include ImageUploader::Attachment(:image) 
+include ImageUploader::Attachment(:image) 
+   
   has_many :event_participants, dependent: :destroy
   has_many :events, through: :event_participants
 

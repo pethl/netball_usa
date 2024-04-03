@@ -134,7 +134,9 @@
               Headshot file:
           </p>
           <p class="text-sm font-medium text-gray-900 dark:text-white">
-         <%= person.image_data %>
+          <% if person.image.present? %>
+        <%= image_tag person.image_url %>
+        <% end %>
           </p>
          </div>
         </div>
