@@ -86,17 +86,17 @@
    
     <div class="flex items-center mb-4">
         <%= form.check_box :in_person_trained, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
-        <%= form.label :in_person_trained, "In Person Trained?",class: "ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"  %>
+        <%= form.label :in_person_trained, "In Person Trained?",class: "ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"  %>
     </div>
     
     <div class="flex items-center mb-4">
         <%= form.check_box :virtually_trained, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
-        <%= form.label :virtually_trained, "Virtually Trained?",class: "ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"  %>
+        <%= form.label :virtually_trained, "Virtually Trained?",class: "ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"  %>
     </div>
 
     <div class="flex items-center mb-4">
         <%= form.check_box :booth_trained, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
-        <%= form.label :booth_trained, "Booth Trained?",class: "ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"  %>
+        <%= form.label :booth_trained, "Booth Trained?",class: "ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"  %>
     </div>
   </div>
  
@@ -114,45 +114,39 @@
   </div>
   
   <div class="mb-6">
-    <%= form.label :tshirt_size, class: label_class  %>
+    <%= form.label :tshirt_size, class: label_class %>
     <div class="mt-1">
      <%= form.select :tshirt_size, options_for_select(tshirt_size, :selected => person.tshirt_size),{prompt: true}, class: input_class %>
     </div>
   </div>
 
   <div class="mb-6">
-   <%= form.label :uniform_size, class: label_class%>
+   <%= form.label :uniform_size, class: label_class %>
     <div class="mt-1">
-   <%= form.text_field :uniform_size, class: input_class  %>
+   <%= form.text_field :uniform_size, class: input_class %>
   </div> </div>
   
-  <div class="mb-6">
-     <%= form.label :headshot, style: "display: block", class: label_class  %>
-     <div class="mt-1">
-     <%= form.check_box :headshot, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
-    </div>
+  <div class="flex items-center mb-4">
+      <%= form.check_box :headshot, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
+      <%= form.label :headshot, "Have Headshot?",class: "ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"  %>
+  </div>
+  
+  <%= form.hidden_field :image, value: form.object.cached_image_data, id: nil %>
+    <%= form.file_field :image %>
+
+  
+   <div class="flex items-center mb-4">
+       <%= form.check_box :invite_back, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
+       <%= form.label :invite_back, "Invite Back?",class: "ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"  %>
    </div>
   
-   <div class="mb-6">
-    <%= form.label :headshot_file, class: label_class%>
+  <div class="mb-6">
+     <%= form.label :notes, style: "display: block", class: label_class  %>
      <div class="mt-1">
-    <%= form.text_field :headshot_file, class: input_class  %>
-   </div> </div>
-   
-   <div class="mb-6">
-      <%= form.label :invite_back, style: "display: block", class: label_class  %>
-      <div class="mt-1">
-      <%= form.check_box :invite_back, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
-     </div>
+     <%= form.text_area :notes, class: input_class %>
     </div>
-  
-    <div class="mb-6">
-       <%= form.label :notes, style: "display: block", class: label_class  %>
-       <div class="mt-1">
-       <%= form.text_area :notes, class: input_class %>
-      </div>
-     </div>
-     
+   </div>
+   
      <div class="mt-2">
         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
             Events:
