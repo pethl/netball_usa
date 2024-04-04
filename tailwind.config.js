@@ -6,7 +6,7 @@ module.exports = {
     './app/helpers/**/*.rb',
     './app/assets/stylesheets/**/*.css',
     './app/javascript/**/*.js',
-	'./node_modules/flowbite/**/*.js'
+	'./node_modules/flowbite/**/*.js',	
     ], 
 
     safelist: [
@@ -33,7 +33,22 @@ module.exports = {
                 lime: colors.lime, 
                 rose: colors.rose, 
             }, 
-        }, 
+			screens: {
+		  	  	'sm': '640px',
+		        // => @media (min-width: 640px) { ... }
+
+		        'md': '768px',
+		        // => @media (min-width: 768px) { ... }
+
+		        'lg': '1024px',
+		        // => @media (min-width: 1024px) { ... }
+
+		        'xl': '1280px',
+		        // => @media (min-width: 1280px) { ... }
+			        'widescreen': { 'raw': '(min-aspect-ratio: 3/2)' },
+			        'tallscreen': { 'raw': '(min-aspect-ratio: 13/20)' },
+			      },
+			     }, 
     }, 
     plugins: [
       require('@tailwindcss/forms'),

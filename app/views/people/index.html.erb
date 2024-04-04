@@ -22,7 +22,7 @@
 
 <div id="persons">
 <div class="relative overflow-x-auto">
-    <table class="table-fixed w-full text-left rtl:text-right">
+    <table class="table-fixed w-full text-left rtl:text-right shadow-md">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
              <tr>
                <th scope="col" class="px-6 py-3 w-52">
@@ -38,15 +38,13 @@
                 <th scope="col" class="px-6 py-3 w-52">
                     Level
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
+                <th scope="col" colspan="2" class="px-6 py-3 w-52">
                     Email
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
-                    Phone
+                <th scope="col" class="px-6 py-3 w-52 text-center">
+                    Headshot?
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
-                    Adress
-                </th>
+               
                 <th scope="col" class="px-6 py-3 w-40">
                     Associated?
                 </th>
@@ -79,16 +77,13 @@
                   <%= person.level %><br>
                  </td>
                 
-                <td class="px-6 py-4">
-                   <%= person.email %>
+                <td colspan="2" class="px-6 py-4">
+                  <%= person.email %><br>
+                   <%= person.phone %>
                 </td>
                 
-                 <td class="px-6 py-4">
-                    <%= person.phone %>
-                </td>
-                
-                <td class="px-6 py-4">
-                   <%= person.address %>
+                <td class="px-6 py-4 text-center">
+                   <%= person.headshot? ? 'Yes' : 'No'  %>
                 </td>
                 
                 <td class="px-6 py-4">

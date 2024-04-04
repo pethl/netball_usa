@@ -4,18 +4,22 @@ class PeopleController < ApplicationController
   # GET /umpires
   def index
     @people = Person.where(role: "Umpire", region: "US & Canada")
+     @people =  @people.order(first_name: :asc)
   end
   
   def index_int
      @people = Person.where(role: "Umpire", region: "International")
+      @people =  @people.order(first_name: :asc)
   end 
   
   def index_scorers
      @people = Person.where(role: "Scorer")
+      @people =  @people.order(first_name: :asc)
   end 
   
   def index_trainers_and_ambassadors
      @people = Person.where(role: "Trainer").or(Person.where(role: "Ambassador"))
+      @people =  @people.order(first_name: :asc)
    end
  
   # GET /people/1
