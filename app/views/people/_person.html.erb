@@ -128,6 +128,16 @@
           <%= person.headshot? ? 'Yes' : 'No' %>
           </p>
         </div>
+        
+        <div class="mt-2">
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+              Headshot file path:
+          </p>
+          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+          <%= (link_to person.headshot_path, person.headshot_path, target: '_blank', class: link_class) unless (person.headshot_path.to_s.empty?)%>
+       
+          </p>
+        </div>
 
         <div class="mt-2">
           <p class="text-sm text-gray-500 truncate dark:text-gray-400">

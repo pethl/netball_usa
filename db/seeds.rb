@@ -10,7 +10,6 @@
 #NetballEducator.create(first_name: 'Katlin',last_name: 'Smith',email: 'katlin99@gmail.com',phone: '1314888876',school_name: 'Valleyview High School',city: 'Dallas',state: 'TX', educator_notes: 'Callback for equipment', mgmt_notes: 'Spoke at meeting', );
 #NetballEducator.create(first_name: 'Robin',last_name: 'Hall',email: 'robinhall@gmail.com',phone: '162345676',school_name: 'Jackson High School',city: 'Austin',state: 'TX', educator_notes: 'Callback for equipment', mgmt_notes: 'Spoke at session', );
 Reference.destroy_all
-Reference.create(group:	'sponsor_category',	value:	'--',	active:	'TRUE');
 Reference.create(group:	'sponsor_category',	value:	"Women's Products", active:	'TRUE');
 Reference.create(group:	'sponsor_category',	value:	'Oz companies', active:	'TRUE');
 Reference.create(group:	'sponsor_category',	value:	'UK companies', active:	'TRUE');
@@ -18,7 +17,6 @@ Reference.create(group:	'sponsor_category',	value:	'NZ companies', active:	'TRUE
 Reference.create(group:	'sponsor_category',	value:	'Sth Africa companies', active:	'TRUE');
 Reference.create(group:	'sponsor_category',	value:	'Caribbean companies', active:	'TRUE');
 Reference.create(group:	'sponsor_category',	value:	'Pacific Islander companies', active:	'TRUE');
-Reference.create(group:	'sponsor_industry',	value:	'--', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Beverage', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Food', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Retail - Clothing', active:	'TRUE');
@@ -36,13 +34,11 @@ Reference.create(group:	'sponsor_status',	value:	'Not Allocated', active:	'TRUE'
 Reference.create(group:	'sponsor_status',	value:	'Not Started', active:	'TRUE');
 Reference.create(group:	'sponsor_status',	value:	'In Progress', active:	'TRUE');
 Reference.create(group:	'sponsor_status',	value:	'Completed', active:	'TRUE');
-Reference.create(group:	'sponsor_opportunity_area',	value:	'--', active:	'TRUE');
 Reference.create(group:	'sponsor_opportunity_area',	value:	'Corporate', active:	'TRUE');
 Reference.create(group:	'sponsor_opportunity_area',	value:	'BAI', active:	'TRUE');
 Reference.create(group:	'sponsor_opportunity_area',	value:	'U.S. Open', active:	'TRUE');
 Reference.create(group:	'sponsor_opportunity_area',	value:	'NNL', active:	'TRUE');
 Reference.create(group:	'sponsor_opportunity_area',	value:	'Member', active:	'TRUE');
-Reference.create(group:	'educator_level',	value:	'--', active:	'TRUE');
 Reference.create(group:	'educator_level',	value:	'Elementary', active:	'TRUE');
 Reference.create(group:	'educator_level',	value:	'Middle', active:	'TRUE');
 Reference.create(group:	'educator_level',	value:	'High', active:	'TRUE');
@@ -84,7 +80,6 @@ Reference.create(group:	'us_open_role',	value:	'NA President', active:	'TRUE');
 Reference.create(group:	'us_open_role',	value:	'Medic', active:	'TRUE');
 Reference.create(group:	'transfer_room_type',	value:	'King', active:	'TRUE');
 Reference.create(group:	'transfer_room_type',	value:	'Double Queen', active:	'TRUE');
-Reference.create(group:	'event_type',	value:	'--', active:	'TRUE');
 Reference.create(group:	'event_type',	value:	'Booth', active:	'TRUE');
 Reference.create(group:	'event_type',	value:	'Virtual Workshop', active:	'TRUE');
 Reference.create(group:	'event_type',	value:	'In Person Workshop', active:	'TRUE');

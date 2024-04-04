@@ -48,7 +48,7 @@
         </p> 
          </div>
        
-       
+     <% unless current_user.nil? %>  
        <div class="mt-2">
        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
            Hotel Reservation #:
@@ -56,8 +56,8 @@
        <p class="text-sm font-medium text-gray-900 dark:text-white">
        <%= transfer.hotel_reservation %> 
        </p>
-       
     </div>
+    <% end %>
 
     <div class="mt-2">
       <p class="text-sm text-gray-500 truncate dark:text-gray-400">

@@ -17,7 +17,7 @@
   <div class="mb-6">
     <%= form.label :event_type, class: label_class  %>
     <div class="mt-1">
-     <%= form.select :event_type, options_for_select(event_type, :selected => event.event_type),{}, class: input_class %>
+     <%= form.select :event_type, options_for_select(event_type, :selected => event.event_type),{:prompt=>true}, class: input_class %>
     </div>
   </div>
   
@@ -43,7 +43,7 @@
    <div class="mb-6">
     <%= form.label :website, class: label_class%>
      <div class="mt-1">
-    <%= form.text_field :website, placeholder: "please use format http://wwww.xxx", class: input_class  %>
+    <%= form.text_field :website, placeholder: "Enter with prefix Http:// or https://", class: input_class  %>
    </div> </div>
 
    <div class="mb-6">

@@ -131,14 +131,24 @@
       <%= form.label :headshot, "Have Headshot?",class: "ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"  %>
   </div>
   
-  <div class="mb-4 mt-4">
-    <%= form.label :image, "Headshot file upload", class: label_class %>
-     <div class="mt-1">
-    <%= form.hidden_field :image, value: form.object.cached_image_data, id: nil %>
-    <%= form.file_field :image, class:"block w-full ml-8 mb-5 text-xs text-gray-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-30 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" %>
-  </div></div>
+  <div class="mb-6">
+   <%= form.label :headshot_path, class: label_class %>
+    <div class="mt-1">
+   <%= form.text_field :headshot_path, placeholder: "Enter link to OneDrive Headshots folder", class: input_class %>
+  </div> </div>
   
-   <div class="flex items-center mb-4">
+  <div class="p-2 border-double border-4 border-blue-900 rounded-md mt-2">
+  <div class="text-xs text-center text-gray-400 m-2">Not Currently Available</div>
+  
+    <div class="mb-4 mt-4">
+      <%= form.label :image, "Headshot file upload", class: label_class %>
+       <div class="mt-1">
+      <%= form.hidden_field :image, value: form.object.cached_image_data, id: nil %>
+      <%= form.file_field :image, class:"block w-full ml-8 mb-5 text-xs text-gray-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-30 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" %>
+    </div></div>
+  </div>
+  
+   <div class="flex items-center mb-4 mt-4">
        <%= form.check_box :invite_back, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
        <%= form.label :invite_back, "Invite Back?",class: "ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"  %>
    </div>

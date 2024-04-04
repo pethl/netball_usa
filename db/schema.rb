@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_03_120055) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_04_083820) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -203,6 +203,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_03_120055) do
     t.text "accept_notes"
     t.string "description"
     t.text "image_data"
+    t.string "headshot_path"
   end
 
   create_table "references", force: :cascade do |t|

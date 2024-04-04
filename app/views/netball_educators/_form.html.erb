@@ -74,7 +74,7 @@
       <div class="mb-6">
         <%= form.label :level, "Level*", class: label_class  %>
         <div class="mt-1">
-         <%= form.select :level, options_for_select(educator_level, :selected => netball_educator.level),{}, class: input_class %>
+         <%= form.select :level, options_for_select(educator_level, :selected => netball_educator.level),{:prompt=>true}, class: input_class %>
         </div>
       </div>
 

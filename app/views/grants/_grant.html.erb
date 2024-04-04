@@ -59,7 +59,7 @@
          Grant Link:
      </p>
      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-     <%= grant.grant_link %> 
+     <%= (link_to grant.grant_link, grant.grant_link, target: '_blank', class: link_class) unless (grant.grant_link.to_s.empty?)%>
      </p>
       </div>
  
