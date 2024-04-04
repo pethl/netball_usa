@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get 'people/index_trainers_and_ambassadors' => 'people#index_trainers_and_ambassadors', :as => :index_trainers_and_ambassadors
   get 'people/index_int' => 'people#index_int', :as => :index_int
   get 'people/index_scorers' => 'people#index_scorers', :as => :index_scorers
- 
+  get 'people/people_search' => 'people#people_search', :as => :people_search
+  
   resources :people
   resources :events
   resources :transfers

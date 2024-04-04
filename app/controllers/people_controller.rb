@@ -1,6 +1,28 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: %i[ show edit update destroy ]
 
+
+  def people_search
+    if params[:search].blank?
+     # redirect_to search_path and return
+      @people = Array.new
+      return 
+    else
+      @parameter = params[:search].downcase
+      @people_first = Person.all.where("lower(last_name) LIKE :search", search: "%#{@parameter}%")
+      @people_last= Person.all.where("lower(first_name) LIKE :search", search: "%#{@parameter}%")
+      @people= @people_first+@people_last
+      if @people.count==0
+       @people=0
+       return
+      elsif @people.count==1
+          @person = @people
+          redirect_to @person
+      end
+    end
+  end
+ 
+
   # GET /umpires
   def index
     @people = Person.where(role: "Umpire", region: "US & Canada")
@@ -21,6 +43,8 @@ class PeopleController < ApplicationController
      @people = Person.where(role: "Trainer").or(Person.where(role: "Ambassador"))
       @people =  @people.order(first_name: :asc)
    end
+   
+  
  
   # GET /people/1
   def show
