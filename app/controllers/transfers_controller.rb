@@ -7,6 +7,18 @@ class TransfersController < ApplicationController
     @transfers = Transfer.all
   end
 
+  def index_inbound_pickup
+    @no_transfers = Transfer.where(no_pick_up: true)
+    @transfers = Transfer.where(no_pick_up: false)
+    @transfers = @transfers.order(arrival_time: :asc).order(arrival_airline: :asc)
+    @transfers_by_grouping = @transfers.group_by { |t| t.pick_up_grouping }
+  end
+  
+  def index_outbound_pickup
+    @transfers = Transfer.all.order(departure_time: :asc).order(arrival_airline: :asc)
+    @transfers_by_grouping = @transfers.group_by { |t| t.departure_grouping }
+  end
+  
   # GET /transfers/1
   def show
   end
@@ -54,6 +66,6 @@ class TransfersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transfer_params
-      params.require(:transfer).permit(:first_name, :last_name, :role, :check_in, :check_out, :room_type, :hotel_reservation, :share_volunteer, :arrival_airline, :arrival_flight, :arrival_time, :departure_airline, :departure_flight, :departure_time, :no_pick_up, :notes)
+      params.require(:transfer).permit(:first_name, :last_name, :role, :check_in, :check_out, :room_type, :hotel_reservation, :share_volunteer, :arrival_airline, :arrival_flight, :arrival_time, :departure_airline, :departure_flight, :departure_time, :no_pick_up, :notes, :phone, :hotel_name, :pick_up_grouping, :pickup_type, :pickup_note, :departure_grouping, :departure_type, :departure_note)
     end
 end

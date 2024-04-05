@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_04_083820) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_05_113525) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -262,6 +262,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_04_083820) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "phone"
+    t.string "hotel_name"
+    t.integer "pick_up_grouping"
+    t.string "pickup_type"
+    t.string "pickup_note"
+    t.integer "departure_grouping"
+    t.string "departure_type"
+    t.string "departure_note"
   end
 
   create_table "umpires", force: :cascade do |t|

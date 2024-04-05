@@ -95,4 +95,19 @@ Reference.create(group:	'follow_up_status',	value:	'Not Allocated', active:	'TRU
 Reference.create(group:	'follow_up_status',	value:	'Not Started', active:	'TRUE');
 Reference.create(group:	'follow_up_status',	value:	'In Progress', active:	'TRUE');
 Reference.create(group:	'follow_up_status',	value:	'Complete', active:	'TRUE');
+Reference.create(group:	'transfer_pickup_type',	value:	'Pick-up by Chris', active:	'TRUE');
+Reference.create(group:	'transfer_pickup_type',	value:	'Rental Car', active:	'TRUE');
+Reference.create(group:	'transfer_pickup_type',	value:	'Media Rental Car', active:	'TRUE');
+Reference.create(group:	'transfer_pickup_type',	value:	'Taxi/Uber to Hotel', active:	'TRUE');
+Reference.create(group:	'transfer_pickup_type',	value:	'Pick-up by Steve', active:	'TRUE');
+Reference.create(group:	'transfer_pickup_type',	value:	'Pick-up by Chris', active:	'TRUE');
+Reference.create(group:	'transfer_departure_type',	value:	'In Rental Bus', active:	'TRUE');
+Reference.create(group:	'transfer_departure_type',	value:	'In Rental Van', active:	'TRUE');
+Reference.create(group:	'transfer_departure_type',	value:	'Taxi/Uber to Airport', active:	'TRUE');
+Reference.create(group:	'transfer_departure_type',	value:	'Share Taxi/Uber to Airport', active:	'TRUE');
+Reference.create(group:	'transfer_departure_type',	value:	'Drop off Rental Bus', active:	'TRUE');
+Reference.create(group:	'transfer_departure_type',	value:	'Drop off Rental Van', active:	'TRUE');
+Reference.create(group:	'us_open_hotel_name',	value:	'2023 - Marriott French Quarter', active:	'TRUE');
+Reference.create(group:	'us_open_hotel_name',	value:	'2023- Best Western', active:	'TRUE');
+
 

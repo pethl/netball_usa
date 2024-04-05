@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   resources :equipment
   resources :sample_words
   resources :budgets
+ 
+  get 'transfers/index_inbound_pickup' => 'transfers#index_inbound_pickup', :as => :index_inbound_pickup
+  get 'transfers/index_outbound_pickup' => 'transfers#index_outbound_pickup', :as => :index_outbound_pickup
+ 
   get 'events/calendar' => 'events#calendar', :as => :calendar
 
   get 'people/index_trainers_and_ambassadors' => 'people#index_trainers_and_ambassadors', :as => :index_trainers_and_ambassadors

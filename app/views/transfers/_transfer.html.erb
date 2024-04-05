@@ -76,6 +76,15 @@
        <%= transfer.no_pick_up? ? 'Yes' : 'No' %>
        </p>
      </div>
+     
+     <div class="mt-2">
+       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+           Phone (if requesting pick-up):
+       </p>
+       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+       <%= transfer.phone %>
+       </p>
+     </div>
 
      <div class="mt-4">
      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -107,8 +116,6 @@
        <p class="text-sm font-medium text-gray-900 dark:text-white">
       <%= transfer.notes %>
        </p>
-      </div>
-      </div>
 
 </div>
 </div>

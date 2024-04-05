@@ -16,7 +16,57 @@
     </div>
   <% end %>
   
-  <div class="mb-6">
+  <% unless current_user.nil? %>
+    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
+      <div class: "font-xl">
+        PICK UP DETAILS 
+        </div>
+ 
+        <div class="mb-6 mt-2">
+         <%= form.label :pick_up_grouping, "Grouping", class: label_class%>
+          <div class="mt-1">
+         <%= form.number_field :pick_up_grouping, placeholder: "#", class: input_class  %>
+        </div> </div>
+
+        <div class="mb-6">
+         <%= form.label :pickup_type, class: label_class%>
+          <div class="mt-1">
+          <%= form.select :pickup_type, options_for_select(transfer_pickup_type, :selected => transfer.pickup_type),{prompt: true}, class: input_class %>
+        </div> </div>
+   
+        <div class="mb-2">
+         <%= form.label :pickup_note, "Pick-up Notes", class: label_class%>
+          <div class="mt-1">
+         <%= form.text_area :pickup_note, class: input_class  %>
+        </div> </div>
+      </div>
+      
+      <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
+        <div class: "font-xl">
+          DEPARTURE DETAILS 
+          </div>
+ 
+          <div class="mb-6 mt-2">
+           <%= form.label :departure_grouping, "Grouping", class: label_class%>
+            <div class="mt-1">
+           <%= form.number_field :pickup_grouping, placeholder: "#", class: input_class  %>
+          </div> </div>
+
+          <div class="mb-6">
+           <%= form.label :departure_type, class: label_class%>
+            <div class="mt-1">
+            <%= form.select :departure_type, options_for_select(transfer_departure_type, :selected => transfer.pickup_type),{prompt: true}, class: input_class %>
+          </div> </div>
+   
+          <div class="mb-2">
+           <%= form.label :departure_note, "Departure Notes", class: label_class%>
+            <div class="mt-1">
+           <%= form.text_area :departure_note, class: input_class  %>
+          </div> </div>
+        </div>
+      <% end %>
+
+  <div class="mb-6 mt-4">
    <%= form.label :first_name, class: label_class%>
     <div class="mt-1">
    <%= form.text_field :first_name, class: input_class  %>
@@ -58,6 +108,12 @@
     <div class="mt-1">
    <%= form.text_field :hotel_reservation, class: input_class  %>
   </div> </div>
+  
+  <div class="mb-6">
+   <%= form.label :hotel_name, class: label_class%>
+    <div class="mt-1">
+   <%= form.select :hotel_name, options_for_select(us_open_hotel_name, :selected => transfer.hotel_name),{prompt: true}, class: input_class %>
+  </div> </div>
   <% end %>
   
   <div class="mb-6">
@@ -74,7 +130,11 @@
      Tick Box for YES. Leave blank for NO.
       </div>
   
-  
+    <div class="mb-6">
+     <%= form.label :phone, "Phone (Required if requesting pick up)", class: label_class%>
+      <div class="mt-1">
+     <%= form.text_field :phone, placeholder: "please include country code and area code", class: input_class  %>
+    </div> </div>
   
   <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
     <div class: "font-xl">

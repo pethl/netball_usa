@@ -9,16 +9,15 @@ class NetballEducatorsController < ApplicationController
        return 
      else
        @parameter = params[:search].downcase
-       @netball_educators = NetballEducator.all.where("lower(last_name) LIKE :search", search: "%#{@parameter}%")
-       if @netball_educators.count==0
-         @netball_educators = NetballEducator.all.where("lower(first_name) LIKE :search", search: "%#{@parameter}%")
-       end
+       @netball_educators_last = NetballEducator.all.where("lower(last_name) LIKE :search", search: "%#{@parameter}%")
+       @netball_educators_first = NetballEducator.all.where("lower(first_name) LIKE :search", search: "%#{@parameter}%")
+       @netball_educators = @netball_educators_last + @netball_educators_first 
+     end
        if @netball_educators.count==0
        @netball_educators=0
        return
       end
-     end
-   end
+    end
   
   # GET /netball_educators
   def index

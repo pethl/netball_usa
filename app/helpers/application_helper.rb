@@ -206,4 +206,19 @@ module ApplicationHelper
       follow_up_status = Reference.where(active: "TRUE", group: 'follow_up_status')
       follow_up_status = follow_up_status.pluck(:value)       
     end
+    
+    def transfer_pickup_type
+      transfer_pickup_type = Reference.where(active: "TRUE", group: 'transfer_pickup_type')
+      transfer_pickup_type = transfer_pickup_type.pluck(:value)       
+    end
+    
+    def transfer_departure_type
+      transfer_departure_type = Reference.where(active: "TRUE", group: 'transfer_departure_type')
+      transfer_departure_type = transfer_departure_type.pluck(:value)       
+    end
+    
+    def us_open_hotel_name
+      us_open_hotel_name = Reference.where(active: "TRUE", group: 'us_open_hotel_name')
+      us_open_hotel_name = us_open_hotel_name.pluck(:value)       
+    end
 end
