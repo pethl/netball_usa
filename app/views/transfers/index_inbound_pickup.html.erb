@@ -16,102 +16,115 @@
     </ul>
 </div>
 
-<% if @transfers.any? %>
-
- 
- <% @transfers_by_grouping.each do |group, transfers| %>
+ <% @transfers_by_arrival_date_only.each do |arrival_date_only, transfers| %>
    
-   <div class="text-xl text-blue-900 mt-8">
-   <% if group.nil? %> 
-       Ungrouped 
-     <% else %> 
-      Grouping <%= group %> -  <%= transfers.first.arrival_date_only %>
-     <% end %>
+   <div class="text-2xl text-blue-900 mt-8">
+       <%= transfers.first.arrival_time.strftime("%A") %>  <%= arrival_date_only %> 
   </div>
-  <div id="transfers">
-  <div class="relative overflow-x-auto">
-      <table class="table-auto w-full text-left rtl:text-right">
-          <thead class="bg-white border-b text-gray-300 font-light text-xs ">
-               <tr>
-                 <th scope="col" class="px-6 py-3 w-52">
-                     Grouping 
-                 </th>
-                  <th scope="col" class="px-6 py-3 w-52">
-                      Name 
-                  </th>
-                  <th scope="col" class="px-6 py-3 w-52">
-                      Phone
-                  </th>
-                  <th scope="col" class="px-6 py-3 w-52">
-                      Arrival Date/Time
-                  </th>
-                  <th scope="col" class="px-6 py-3 w-52">
-                      Flight #
-                  </th>
-                  <th scope="col" class="px-6 py-3 w-52">
-                      Airline
-                  </th>
-                  <th scope="col" class="px-6 py-3 w-52">
-                      Pick Up Type
-                  </th>
-                  <th scope="col" class="px-6 py-3 w-52">
-                      Hotel Name
-                  </th>
-                  <th scope="col" colspan="10" class="px-6 py-3 w-60">
-                      Notes
-                  </th>
-                </tr>
-           </thead>
-     
-   <% transfers.each do |transfer| %>
-     
-       <tbody>
-       <tr class="bg-white border-b hover:bg-gray-100">
-    
-           <td class="px-6 py-4">
-              <%= transfer.pick_up_grouping %>
-           </td>
-    
-           <td class="px-6 py-4">
-              <%= link_to transfer.full_name, edit_transfer_path(transfer), class: link_class %>
-              </td>
-    
-              <td class="px-6 py-4">
-                 <%= transfer.phone %>
-              </td>
-    
-             <td class="px-6 py-4">
-                <%= transfer.arrival_time.to_formatted_s(:usa_dt) unless (transfer.arrival_time.to_s.empty?)  %>
-                <br><%= transfer.arrival_time_only_12_hour unless (transfer.arrival_time.to_s.empty?)  %>
-             </td>
-     
-             <td class="px-6 py-4">
-                <%= transfer.arrival_flight %>
-              </td>
-     
-             <td class="px-6 py-4">
-               <%= transfer.arrival_airline %>
-             </td>
-     
-              <td class="px-6 py-4">
-                 <%= transfer.pickup_type %>
-             </td>
-     
-             <td class="px-6 py-4">
-                <%= transfer.hotel_name %>
-             </td>
-     
-             <td colspan="10" class="px-6 py-4">
-                <%= transfer.pickup_note  %>
-             </td>
-     
-           </tr>
-     </tbody>
-    </table>
-    <% end %>
-     <% end %>
-    
   
-  <% else %>
-  No Records
-<% end %>
+ 
+     
+   <% transfers_by_arrival_flight = transfers.group_by { |t| t.arrival_flight } %>   
+    
+     <% transfers_by_arrival_flight.each do |arrival_flight, transfers| %>
+      
+       <div class="text-xl text-gray-500 mt-8">
+        <%= arrival_flight %>   <%= transfers.first.arrival_time.to_formatted_s(:time_24) unless (transfers.first.arrival_time.to_s.empty?)  %>
+        </div>
+        <div id="transfers">
+        <div class="relative overflow-x-auto">
+            <table class="table-auto w-full text-left rtl:text-right">
+                <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+                     <tr>
+                       <th scope="col" class="px-6 py-3 w-52">
+                           Grouping 
+                       </th>
+                        <th scope="col" class="px-6 py-3 w-52">
+                            Name 
+                        </th>
+                        <th scope="col" class="px-6 py-3 w-52">
+                            Phone
+                        </th>
+                        <th scope="col" class="px-6 py-3 w-52">
+                            Arrival Date
+                        </th>
+                        <th scope="col" class="px-6 py-3 w-52">
+                            Arrival Time
+                        </th>
+                        <th scope="col" class="px-6 py-3 w-52">
+                            Flight #
+                        </th>
+                        <th scope="col" class="px-6 py-3 w-52">
+                            Airline
+                        </th>
+                        <th scope="col" class="px-6 py-3 w-52">
+                            Pick Up Type
+                        </th>
+                        <th scope="col" class="px-6 py-3 w-52">
+                            Hotel Name
+                        </th>
+                        <th scope="col" colspan="10" class="px-6 py-3 w-60">
+                            Notes
+                        </th>
+                      </tr>
+                 </thead>
+       
+        <% transfers.each do |transfer| %>
+         
+          <tbody>
+           <tr class="bg-white border-b hover:bg-gray-100">
+
+               <td class="px-6 py-4">
+                  <%= transfer.pick_up_grouping %>
+               </td>
+
+               <td class="px-6 py-4">
+                  <%= link_to transfer.full_name, edit_transfer_path(transfer), class: link_class %>
+                  </td>
+
+                  <td class="px-6 py-4">
+                     <%= transfer.phone %>
+                  </td>
+
+                 <td class="px-6 py-4">
+                    <%= transfer.arrival_time.to_formatted_s(:usa) unless (transfer.arrival_time.to_s.empty?)  %>
+                   </td>
+                 <td class="px-6 py-4">
+                   <%= transfer.arrival_time.to_formatted_s(:time_24) unless (transfer.arrival_time.to_s.empty?)  %><br>
+                   <%= transfer.arrival_time_only_12_hour unless (transfer.arrival_time.to_s.empty?)  %>
+                 </td>
+
+                 <td class="px-6 py-4">
+                    <%= transfer.arrival_flight %>
+                  </td>
+
+                 <td class="px-6 py-4">
+                   <%= transfer.arrival_airline %>
+                 </td>
+
+                  <td class="px-6 py-4">
+                     <%= transfer.pickup_type %>
+                 </td>
+
+                 <td class="px-6 py-4">
+                    <%= transfer.hotel_name %>
+                 </td>
+
+                 <td colspan="10" class="px-6 py-4">
+                    <%= transfer.pickup_note  %>
+                 </td>
+
+               </tr>
+                    
+            </tbody>
+         
+        <% end %>
+       </table>
+      <% end %>
+    
+  <% end %>
+   
+    
+
+
+

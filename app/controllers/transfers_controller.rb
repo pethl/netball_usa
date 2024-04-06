@@ -8,15 +8,16 @@ class TransfersController < ApplicationController
   end
 
   def index_inbound_pickup
-    @no_transfers = Transfer.where(no_pick_up: true)
-    @transfers = Transfer.where(no_pick_up: false)
+    @no_transfers = Transfer.where(no_pick_up: false)
+    @transfers = Transfer.where(no_pick_up: true). where("arrival_time IS NOT NULL")
+   
     @transfers = @transfers.order(arrival_time: :asc).order(arrival_airline: :asc)
-    @transfers_by_grouping = @transfers.group_by { |t| t.pick_up_grouping }
+    @transfers_by_arrival_date_only = @transfers.group_by { |t| t.arrival_date_only }
   end
   
   def index_outbound_pickup
     @transfers = Transfer.all.order(departure_time: :asc).order(arrival_airline: :asc)
-    @transfers_by_grouping = @transfers.group_by { |t| t.departure_grouping }
+    @transfers_by_departure_date_only = @transfers.group_by { |t| t.departure_date_only }
   end
   
   # GET /transfers/1
