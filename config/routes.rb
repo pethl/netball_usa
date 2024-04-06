@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :sample_words
   resources :budgets
  
+  get '/download_transfers_sheet_pdf' => "transfers#download_transfers_sheet_pdf" 
   get 'transfers/index_inbound_pickup' => 'transfers#index_inbound_pickup', :as => :index_inbound_pickup
   get 'transfers/index_outbound_pickup' => 'transfers#index_outbound_pickup', :as => :index_outbound_pickup
  

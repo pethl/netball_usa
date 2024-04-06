@@ -1,8 +1,9 @@
 <% content_for(:page_title, "US Open")%>
 
-<div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-4 text-sm">
+
  
  <% if user_signed_in? %> 
+   <div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-4 text-sm">
 <div class="">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
@@ -125,6 +126,12 @@
 </div>
 
 <% else %>
+
+<div class="text-sm text-blue-900">
+Please click on your name and enter details in the form provided.<br><br> Please remember to click SAVE RECORD when finished.<br><br>
+</div>
+
+<div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-4 text-sm">
 <div class="relative overflow-x-auto">
     <table class="table-auto w-full text-left rtl:text-right">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">

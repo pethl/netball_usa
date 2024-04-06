@@ -75,5 +75,10 @@ group :development do
   # gem "spring"
 end
 
+# file uploader
 gem "shrine", "~> 3.0"
+
+# PDF generator
+gem 'prawn', '~> 2.5'
+gem 'prawn-table', '~> 0.1.0'
 
