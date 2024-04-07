@@ -15,24 +15,24 @@
     </div>
   <% end %>
 
-  <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+  <div class="block max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
  
-  <div class="mb-6">
+  <div class="mb-4">
    <%= form.label :category, class: label_class%>
     <div class="mt-1">
    <%= form.text_field :category, class: input_class  %>
   </div> </div>
   
-  <div class="mb-6">
+  <div class="mb-4">
    <%= form.label :title, class: label_class%>
     <div class="mt-1">
    <%= form.text_field :title, class: input_class  %>
   </div> </div>
 
-   <div class="mb-6">
+   <div class="mb-4">
     <%= form.label :desc, class: label_class%>
      <div class="mt-1">
-    <%= form.text_area :desc, class: input_class  %>
+    <%= form.text_area :desc,  size: "20x18", class: input_class  %>
    </div> </div>
 
   

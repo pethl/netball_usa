@@ -64,6 +64,23 @@
            <%= form.text_area :departure_note, class: input_class  %>
           </div> </div>
         </div>
+        
+        <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
+          <div class: "font-xl">
+            HOTEL DETAILS 
+            </div>
+             <div class="mb-6 mt-2">
+              <%= form.label :hotel_reservation, "Hotel Reservation #", class: label_class%>
+               <div class="mt-1">
+              <%= form.text_area :hotel_reservation, class: input_class  %>
+             </div> </div>
+  
+             <div class="mb-6">
+              <%= form.label :hotel_name, class: label_class%>
+               <div class="mt-1">
+              <%= form.select :hotel_name, options_for_select(us_open_hotel_name, :selected => transfer.hotel_name),{prompt: true}, class: input_class %>
+             </div> </div>
+           </div>
       <% end %>
 
   <div class="mb-6 mt-4">
@@ -102,19 +119,6 @@
    <%= form.select :room_type, options_for_select(transfer_room_type, :selected => transfer.room_type),{prompt: true}, class: input_class %>
   </div> </div>
 
- <% unless current_user.nil? %>
-  <div class="mb-6">
-   <%= form.label :hotel_reservation, "Hotel Reservation #", class: label_class%>
-    <div class="mt-1">
-   <%= form.text_field :hotel_reservation, class: input_class  %>
-  </div> </div>
-  
-  <div class="mb-6">
-   <%= form.label :hotel_name, class: label_class%>
-    <div class="mt-1">
-   <%= form.select :hotel_name, options_for_select(us_open_hotel_name, :selected => transfer.hotel_name),{prompt: true}, class: input_class %>
-  </div> </div>
-  <% end %>
   
   <div class="mb-6">
    <%= form.label :share_volunteer, "Room Share - Volunteer Name / If applicable ", class: label_class%>

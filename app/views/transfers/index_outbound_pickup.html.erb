@@ -8,34 +8,32 @@
         <a href="/transfers" class="inline-block p-4 text-gray-500 rounded-t-lg active" aria-current="page">Hotel & Flight</a>
       </li>
       <li class="me-2">
-        <a href="/transfers/index_inbound_pickup/" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Arrivals Transfer</a>
+        <a href="/transfers/index_inbound_pickup/" class="inline-block p-4 ttext-gray-500  rounded-t-lg active" >Arrivals Transfer</a>
       </li>
       <li class="me-2">
-         <a href="/transfers/index_outbound_pickup/" class="inline-block p-4 text-gray-500 rounded-t-lg active" aria-current="page">Departures Transfers</a>
+         <a href="/transfers/index_outbound_pickup/" class="inline-block p-4 text-blue-900 bg-gray-100rounded-t-lg active" aria-current="page">Departures Transfers</a>
       </li>
       <li class="me-2">
          <div class="inline-block p-4 text-gray-500 rounded-t-lg active">
-           <%= link_to "Arrivals Transfer Sheet PDF", download_transfers_in_sheet_pdf_path(:value => Date.today.beginning_of_year, :format => 'pdf'), :style => "color:blue" %>
+           <%= link_to "Departures Transfer Sheet PDF", download_transfers_out_sheet_pdf_path(:value => Date.today.beginning_of_year, :format => 'pdf'), :style => "color:blue" %>
         <div>
         </li>
     </ul>
 </div>
 <br>
 
- <% @transfers_by_arrival_date_only.each do |arrival_date_only, transfers| %>
+ <% @transfers_by_departure_date_only.each do |departure_date_only, transfers| %>
    
    <div class="text-2xl text-center text-blue-900 mt-8">
-       <%= transfers.first.arrival_time.strftime("%A") %>  <%= arrival_date_only %> 
+       <%= transfers.first.departure_time.strftime("%A") unless (transfers.first.departure_time.to_s.empty?) %>  <%= departure_date_only %> 
   </div>
   
- 
-     
-   <% transfers_by_arrival_flight = transfers.group_by { |t| t.arrival_flight } %>   
+   <% transfers_by_departure_flight = transfers.group_by { |t| t.departure_flight } %>   
     
-     <% transfers_by_arrival_flight.each do |arrival_flight, transfers| %>
+     <% transfers_by_departure_flight.each do |departure_flight, transfers| %>
       
        <div class="text-xl text-gray-500 mt-8">
-        <%= arrival_flight %>   <%= transfers.first.arrival_time.to_formatted_s(:time_24) unless (transfers.first.arrival_time.to_s.empty?)  %>
+        <%= departure_flight %>   <%= transfers.first.departure_time.to_formatted_s(:time_24) unless (transfers.first.departure_time.to_s.empty?)  %>
         </div>
         <div id="transfers">
         <div class="relative overflow-x-auto">
@@ -52,10 +50,10 @@
                             Phone
                         </th>
                         <th scope="col" class="px-6 py-3 w-52">
-                            Arr. Date
+                            Dep. Date
                         </th>
                         <th scope="col" class="px-6 py-3 w-52">
-                            Arr. Time
+                            Dep. Time
                         </th>
                         <th scope="col" class="px-6 py-3 w-52">
                             Flight #
@@ -81,7 +79,7 @@
            <tr class="bg-white border-b hover:bg-gray-100">
 
                <td class="px-6 py-4">
-                  <%= transfer.pick_up_grouping %>
+                  <%= transfer.departure_grouping %>
                </td>
 
                <td class="px-6 py-4">
@@ -93,23 +91,23 @@
                   </td>
 
                  <td class="px-6 py-4">
-                    <%= transfer.arrival_time.to_formatted_s(:usa) unless (transfer.arrival_time.to_s.empty?)  %>
+                    <%= transfer.departure_time.to_formatted_s(:usa) unless (transfer.departure_time.to_s.empty?)  %>
                    </td>
                  <td class="px-6 py-4">
-                   <%= transfer.arrival_time.to_formatted_s(:time_24) unless (transfer.arrival_time.to_s.empty?)  %><br>
-                   <%= transfer.arrival_time_only_12_hour unless (transfer.arrival_time.to_s.empty?)  %>
+                   <%= transfer.departure_time.to_formatted_s(:time_24) unless (transfer.departure_time.to_s.empty?)  %><br>
+                   <%= transfer.departure_time_only_12_hour unless (transfer.departure_time.to_s.empty?)  %>
                  </td>
 
                  <td class="px-6 py-4">
-                    <%= transfer.arrival_flight %>
+                    <%= transfer.departure_flight %>
                   </td>
 
                  <td class="px-6 py-4">
-                   <%= transfer.arrival_airline %>
+                   <%= transfer.departure_airline %>
                  </td>
 
                   <td class="px-6 py-4">
-                     <%= transfer.pickup_type %>
+                     <%= transfer.departure_type %>
                  </td>
 
                  <td class="px-6 py-4">
@@ -117,11 +115,9 @@
                  </td>
 
                  <td colspan="10" class="px-6 py-4">
-                    <%= transfer.pickup_note  %>
+                    <%= transfer.departure_note  %>
                  </td>
-
                </tr>
-                    
             </tbody>
          
         <% end %>
