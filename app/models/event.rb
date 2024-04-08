@@ -27,4 +27,8 @@ class Event < ApplicationRecord
     def event_date_formatted
       self.date.to_formatted_s(:usa) 
     end
+    
+    def event_date_year
+      self.date.year
+    end
 end

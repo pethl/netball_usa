@@ -67,6 +67,17 @@ class NetballEducatorsController < ApplicationController
       end
   end
 
+  def pe_directors
+    if is_admin? 
+        @netball_educators = NetballEducator.where(level: "School/District Lead")
+        @netball_educators = @netball_educators.order(state: :asc)
+       
+    else
+        @netball_educators = NetballEducator.where(user_id: current_user.id).where(level: "School/District Lead")
+        @netball_educators = @netball_educators.order(state: :asc)
+      end
+  end
+
   # GET /netball_educators/1
   def show
   end

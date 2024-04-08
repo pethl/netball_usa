@@ -4,8 +4,14 @@
  
  
 <% if @events.any? %>
+    <% @events_by_year.each do |year, events| %>
+      
+      <div class="text-xl mt-6 text-blue-900">
+          <%= year %> 
+         </div>
+      
 <div id="events">
-<div class="relative overflow-x-auto">
+<div class="relative overflow-x-auto  mb-4">
     <table class="w-full text-left rtl:text-right">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
             <tr>
@@ -36,7 +42,7 @@
             </tr>
         </thead>
         <tbody>
-      <% @events.each do |event| %>
+      <% events.each do |event| %>
             <tr class="bg-white border-b hover:bg-gray-100">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
                     <%= event.event_type %>
@@ -70,6 +76,7 @@
             <% end %>
         </tbody>
     </table>
+      <% end %>
     </div>
  </div>
 </div>

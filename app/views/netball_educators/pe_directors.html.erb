@@ -1,42 +1,24 @@
-<% content_for(:page_title, "Educators")%>
+<% content_for(:page_title, "P.E. Directors")%>
 
 <div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
  
-<div class="">
-   <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
-      <li class="me-2">
-            <a href="/netball_educators/" class="inline-block p-2 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">By Created Date</a>
-        </li>
-        <li class="me-2">
-            <a href="/netball_educators/index_state" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By State</a>
-        </li>
-         <li class="me-2">
-            <a href="/netball_educators/index_user" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Allocation</a>
-        </li>
-        <li class="me-2">
-           <a href="/netball_educators/index_level" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Level</a>
-       </li>
-       <li class="me-2">
-          <a href="/netball_educators/search" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Search</a>
-      </li>
-      </ul>
-</div>
+
 <br>
 <% if @netball_educators.any? %>
   
 <div id="educators">
 <div class="relative overflow-x-auto">
-    <table class="table-fixed w-full text-left rtl:text-right">
+    <table class="table-auto w-full text-left rtl:text-right">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
              <tr>
                  <th scope="col" class="px-6 py-3 w-52">
                      See Details
                  </th>
                 <th scope="col" class="px-6 py-3 w-52">
-                    Date Created 
+                    Name
                 </th>
                 <th scope="col" class="px-6 py-3 w-52">
-                    Name
+                    State
                 </th>
                 <th scope="col" class="px-6 py-3 w-52">
                     Contact
@@ -45,13 +27,7 @@
                     School/District
                 </th>
                 <th scope="col" class="px-6 py-3 w-52">
-                    Level
-                </th>
-                <th scope="col" class="px-6 py-3 w-52">
                     City
-                </th>
-                <th scope="col" class="px-6 py-3 w-40">
-                    State
                 </th>
                 <th scope="col" class="px-6 py-3 w-40 text-center">
                     Equip. Sale?
@@ -73,12 +49,13 @@
                 <td class="px-6 py-4">
                   <%= link_to image_tag("view.png", :class=>"mx-2 h-6 w-auto"), educator  %>
                 </td>
-                <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
-                    <%= educator.created_at.to_formatted_s(:usa) unless (educator.created_at.to_s.empty?) %>
-                </th>
                 
                 <td class="px-6 py-4">
                    <%= link_to educator.full_name, edit_netball_educator_path(educator), class: link_class %>
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= educator.state %>
                 </td>
                 
                 <td class="px-6 py-4">
@@ -90,18 +67,13 @@
                   <%= (link_to educator.website, educator.website, target: '_blank', class: link_class) unless (educator.website.to_s.empty?)%>
                   
                 </td>
-                <td class="px-6 py-4">
-                   <%= educator.level %>
-                </td>
+               
                 
                  <td class="px-6 py-4">
                     <%= educator.city %>
                 </td>
                 
-                <td class="px-6 py-4">
-                   <%= educator.state %>
-                </td>
-                
+               
                 <td class="px-6 py-4 text-center">
                 <% if  educator.equipment.count == 1%>
                    <%= link_to educator.equipment.count, equipment_path(educator.equipment.first.id), class: link_class %>

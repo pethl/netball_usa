@@ -26,7 +26,7 @@
 <% if @netball_educators.any? %>
 <br>
 <% @netball_educators_by_user.each do |user, educators| %>
-<div class="text-xl">
+<div class="text-xl text-blue-900">
     Allocated to <%= User.find(user).first_name unless user.nil? %>  <%= User.find(user).last_name unless user.nil? %>
     <% if user.nil? %> Not Allocated <% end %>
 </div>

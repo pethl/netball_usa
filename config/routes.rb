@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :references
   resources :grants
  
+  get 'netball_educators/pe_directors' => 'netball_educators#pe_directors', :as => :pe_directors
   get 'netball_educators/search' => 'netball_educators#search', :as => :search
   get 'netball_educators/index_level' => 'netball_educators#index_level', :as => :index_level
   get 'netball_educators/index_state' => 'netball_educators#index_state', :as => :index_state

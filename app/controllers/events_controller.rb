@@ -5,6 +5,8 @@ class EventsController < ApplicationController
   # GET /events
   def index
     @events = Event.all
+    @events = @events.order(date: :asc)
+    @events_by_year = @events.group_by { |t| t.event_date_year }
   end
   
   # GET /events

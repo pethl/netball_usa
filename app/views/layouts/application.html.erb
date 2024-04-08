@@ -43,13 +43,16 @@
          </div>
     
        <nav class="bg-blue-900 text-white">
-         <div class="max-w-screen-xl px-4 py-3 mx-auto">
+         <div class="max-w-screen-xl px-2 py-2 mx-auto">
              <div class="md:flex sm:flex-col items-center">
                  <ul class="flex flex-wrap font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
                      <li title="Home">
                          <%= link_to root_path do %>
                            <i class="fa-solid fa-house text-white hover:underline"></i>
                          <% end %>
+                    </li>
+                    <li>
+                        <a href="/netball_educators/pe_directors" class="text-white hover:underline">PE Directors</a>
                     </li>
                      <li>
                          <a href="/netball_educators/" class="text-white hover:underline">Educators</a>
@@ -75,8 +78,14 @@
                      <li>
                          <a href="/transfers/" class="text-white hover:underline">US Open</a>
                      </li>
-                        <% if is_admin? %>  
-                         
+                     </ul>
+               </div>
+          </div>
+               <% if is_admin? %>  
+                <div class="max-w-screen-xl px-2 py-2 mx-auto">
+                  <div class="md:flex sm:flex-col items-center">
+                      <ul class="flex flex-wrap font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
+                 
                           <li>
                               <a href="/budgets" class="text-white hover:underline">Budgets</a>
                           </li>
@@ -89,10 +98,12 @@
                           <li>
                               <a href="/sample_words" class="text-white hover:underline">Sample Wording</a>
                           </li>
-                       <% end %>
-                    </ul>
-              </div>
-         </div>
+                      
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+          <% end %>
      </nav>
 
      
