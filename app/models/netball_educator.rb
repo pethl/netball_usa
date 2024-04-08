@@ -8,10 +8,10 @@ class NetballEducator < ApplicationRecord
   before_save :normalize_phone
   
   validates :first_name, presence: true, length: { maximum: 30 }
-  validates :last_name, presence: true, length: { maximum: 40 }
+  validates :last_name, presence: true, length: { maximum: 50 }
   validates :phone, phone: true, allow_blank: true
-  validates :school_name, presence: true, length: { maximum: 40 }
-  validates :city, presence: true, length: { maximum: 30 }
+  validates :school_name, presence: true, length: { maximum: 100 }
+  validates :city, presence: true, length: { maximum: 50 }
   validates :state, presence: true, length: { maximum: 30 }
   validates :level, presence: true
                      

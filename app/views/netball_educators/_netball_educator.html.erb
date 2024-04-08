@@ -79,7 +79,7 @@
            </p>
             </div>
             
-       
+            <% unless netball_educator.level=="School/District Lead" %>
             <div class="mt-2">
             <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                 Feedback:
@@ -99,6 +99,8 @@
              <%= netball_educator.authorize? ? 'Yes' : 'No' %>
              </p>
               </div>
+              
+              <% end %>
  
   
 <% if user_signed_in? %>
