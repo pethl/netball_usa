@@ -37,7 +37,7 @@
                     <%= link_to image_tag("view.png", :class=>"mx-2 h-6 w-auto"), equipment  %>
                 </th>
                 <td class="px-6 py-4">
-                    <%= equipment.sale_date.to_formatted_s(:usa) unless ( equipment.sale_date.to_s.empty?)  %>
+                    <%= (link_to equipment.sale_date.to_formatted_s(:usa), edit_equipment_path(equipment), class: link_class) unless ( equipment.sale_date.to_s.empty?)  %>
                 </td>
                 <td class="px-6 py-4">
                     <%= equipment.items_purchased %>

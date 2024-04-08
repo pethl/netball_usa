@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_05_113525) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_08_111515) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -124,6 +124,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_05_113525) do
     t.string "outcome"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "end_date"
   end
 
   create_table "follow_ups", force: :cascade do |t|

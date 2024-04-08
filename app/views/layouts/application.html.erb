@@ -23,17 +23,20 @@
               </a>
             
              <div class="flex items-center space-x-6 rtl:space-x-reverse">
-                 <div class="p-2 " title="Edit User">
+                 <div class="p-2 " title= "Edit User"<%= current_user.first_name %>>
                    <%= link_to edit_user_registration_path do %>
                      <i class="fa-solid fa-user text-blue-800"> </i>
-                     <div class="text-xs text-left text-blue-800 ">
-                      <%= current_user.first_name %>
-                     </div>
+                    
                    <% end %>
                  </div>
                  <div class="p-2 " title="Logout">
                    <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
                      <i class="fa-solid fa-arrow-right-from-bracket text-blue-800"></i>
+                   <% end %>
+                 </div>
+                 <div class="p-2 text-2xl" title="Info">
+                   <%= link_to asset_path("NA_System_User_Guide_V1_0.pdf", skip_pipeline: true) do %>
+                     <i class="fa-solid fa-circle-info text-blue-800"></i>
                    <% end %>
                  </div>
              </div>
@@ -43,7 +46,7 @@
          <div class="max-w-screen-xl px-4 py-3 mx-auto">
              <div class="md:flex sm:flex-col items-center">
                  <ul class="flex flex-wrap font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
-                     <li>
+                     <li title="Home">
                          <%= link_to root_path do %>
                            <i class="fa-solid fa-house text-white hover:underline"></i>
                          <% end %>

@@ -28,9 +28,15 @@
   </div> </div>
 
   <div class="mb-6">
-   <%= form.label :date, class: label_class%>
+   <%= form.label :date, "Start Date", class: label_class%>
     <div class="mt-1">
    <%= form.date_field :date, class: input_class  %>
+  </div> </div>
+  
+  <div class="mb-6">
+   <%= form.label :end_date, "End Date", class: label_class%>
+    <div class="mt-1">
+   <%= form.date_field :end_date, class: input_class  %>
   </div> </div>
     
   <div class="mb-6">

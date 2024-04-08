@@ -46,6 +46,7 @@
                 </td>
                 <td class="px-6 py-4">
                    <%= event.date.to_formatted_s(:usa) unless ( event.date.to_s.empty?) %>
+                   <% if !event.end_date.blank? %> - <%= event.end_date.to_formatted_s(:usa)  %><% end %>
                 </td>
                  <td class="px-6 py-4">
                     <%= event.status %>
