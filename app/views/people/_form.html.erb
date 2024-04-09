@@ -148,10 +148,11 @@
     </div></div>
   </div>
   
-   <div class="flex items-center mb-4 mt-4">
-       <%= form.check_box :invite_back, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
-       <%= form.label :invite_back, "Invite Back?",class: "ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"  %>
-   </div>
+  <div class="mb-6 mt-4">
+   <%= form.label :invite_back, class: label_class %>
+    <div class="mt-1">
+    <%= form.select :invite_back, options_for_select(people_invite_back, :selected => person.invite_back),{prompt: true}, class: input_class %>
+  </div> </div>
   
   <div class="mb-6">
      <%= form.label :notes, style: "display: block", class: label_class  %>

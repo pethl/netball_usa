@@ -21,13 +21,13 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
-    @people = Person.all
+    @people = Person.where(role: "Trainer").or(Person.where(role: "Ambassador"))
     @people = @people.order(last_name: :asc)
   end
 
   # GET /events/1/edit
   def edit
-    @people = Person.all
+    @people = Person.where(role: "Trainer").or(Person.where(role: "Ambassador"))
     @people = @people.order(role: :asc).order(last_name: :asc)
   end
 

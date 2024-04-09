@@ -1,4 +1,4 @@
-<% content_for(:page_title, "Person")%>
+<% content_for(:page_title, "Person ")%>
 
 <div class="sm:mx-auto sm:w-full sm:max-w-md md:max-w-lg justify-center">
   <div class="bg-white py-4 px-4 shadow sm:rounded-lg sm:px-10  ">
@@ -11,7 +11,8 @@
 
 <div>
   <%= link_to "Edit this person", edit_person_path(@person), class: link_class  %> |
-  <%= link_to "Back to people", people_path, class: link_class  %>
+  <%= link_to "Back to people", people_path, class: link_class  %> | 
+  <%= link_to "Add new people", new_person_path, class: link_class  %>
   <%= button_to "Delete this record", @person, method: :delete %>
 </div>
 </div>

@@ -58,7 +58,7 @@ module ApplicationHelper
    
    
    def reference_group
-     reference_group = Reference.all
+     reference_group = Reference.all.order(group: :asc)
      reference_group = reference_group.pluck(:group) 
      reference_group = reference_group.uniq() 
    end
@@ -220,5 +220,10 @@ module ApplicationHelper
     def us_open_hotel_name
       us_open_hotel_name = Reference.where(active: "TRUE", group: 'us_open_hotel_name')
       us_open_hotel_name = us_open_hotel_name.pluck(:value)       
+    end
+    
+    def people_invite_back
+      people_invite_back = Reference.where(active: "TRUE", group: 'people_invite_back')
+      people_invite_back = people_invite_back.pluck(:value)       
     end
 end
