@@ -5,13 +5,13 @@
   <div class="">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
-        <a href="/transfers" class="inline-block p-4 text-gray-500 rounded-t-lg active" aria-current="page">Hotel & Flight</a>
+        <a href="/transfers" class="inline-block p-4 text-gray-500 rounded-t-lg active" aria-current="page">Hotel<br>& Flight</a>
       </li>
       <li class="me-2">
-        <a href="/transfers/index_inbound_pickup/" class="inline-block p-4 ttext-gray-500  rounded-t-lg active" >Arrivals Transfer</a>
+        <a href="/transfers/index_inbound_pickup/" class="inline-block p-4 ttext-gray-500  rounded-t-lg active" >Arrivals<br>Transfer</a>
       </li>
       <li class="me-2">
-         <a href="/transfers/index_outbound_pickup/" class="inline-block p-4 text-blue-900 bg-gray-100rounded-t-lg active" aria-current="page">Departures Transfers</a>
+         <a href="/transfers/index_outbound_pickup/" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Departures<br>Transfers</a>
       </li>
       <li class="me-2">
          <div class="inline-block p-4 text-gray-500 rounded-t-lg active">
@@ -20,11 +20,10 @@
         </li>
     </ul>
 </div>
-<br>
 
  <% @transfers_by_departure_date_only.each do |departure_date_only, transfers| %>
    
-   <div class="text-2xl text-center text-blue-900 mt-8">
+   <div class="text-2xl text-center text-blue-900 mt-8 bg-gray-100">
        <%= transfers.first.departure_time.strftime("%A") unless (transfers.first.departure_time.to_s.empty?) %>  <%= departure_date_only %> 
   </div>
   

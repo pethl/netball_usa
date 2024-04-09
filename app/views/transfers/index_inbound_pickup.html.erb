@@ -5,13 +5,13 @@
   <div class="">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
-        <a href="/transfers" class="inline-block p-4 text-gray-500 rounded-t-lg active" aria-current="page">Hotel & Flight</a>
+        <a href="/transfers" class="inline-block p-4 text-gray-500 rounded-t-lg active" aria-current="page">Hotel<br>& Flight</a>
       </li>
       <li class="me-2">
-        <a href="/transfers/index_inbound_pickup/" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Arrivals Transfer</a>
+        <a href="/transfers/index_inbound_pickup/" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Arrivals<br>Transfer</a>
       </li>
       <li class="me-2">
-         <a href="/transfers/index_outbound_pickup/" class="inline-block p-4 text-gray-500 rounded-t-lg active" aria-current="page">Departures Transfers</a>
+         <a href="/transfers/index_outbound_pickup/" class="inline-block p-4 text-gray-500 rounded-t-lg active" aria-current="page">Departures<br>Transfers</a>
       </li>
       <li class="me-2">
          <div class="inline-block p-4 text-gray-500 rounded-t-lg active">
@@ -20,21 +20,18 @@
         </li>
     </ul>
 </div>
-<br>
 
  <% @transfers_by_arrival_date_only.each do |arrival_date_only, transfers| %>
    
-   <div class="text-2xl text-center text-blue-900 mt-8">
+   <div class="text-2xl text-center text-blue-900 mt-8 bg-gray-100">
        <%= transfers.first.arrival_time.strftime("%A") %>  <%= arrival_date_only %> 
   </div>
-  
  
      
    <% transfers_by_arrival_flight = transfers.group_by { |t| t.arrival_flight } %>   
-    
      <% transfers_by_arrival_flight.each do |arrival_flight, transfers| %>
       
-       <div class="text-xl text-gray-500 mt-8">
+       <div class="text-xl text-gray-500">
         <%= arrival_flight %>   <%= transfers.first.arrival_time.to_formatted_s(:time_24) unless (transfers.first.arrival_time.to_s.empty?)  %>
         </div>
         <div id="transfers">
@@ -125,6 +122,7 @@
             </tbody>
          
         <% end %>
+        <br>
        </table>
       <% end %>
     

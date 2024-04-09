@@ -1,24 +1,22 @@
 <% content_for(:page_title, "US Open")%>
 
-
- 
  <% if user_signed_in? %> 
    <div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-4 text-sm">
 <div class="">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
-        <a href="/transfers" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Hotel & Flight</a>
+        <a href="/transfers" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Hotel<br>& Flight</a>
       </li>
         <li class="me-2">
-           <a href="/transfers/index_inbound_pickup/" class="inline-block p-4 text-gray-600 rounded-t-lg active" aria-current="page">Arrivals Transfers</a>
+           <a href="/transfers/index_inbound_pickup/" class="inline-block p-4 text-gray-600 rounded-t-lg active" aria-current="page">Arrivals<br>Transfers</a>
         </li>
         <li class="me-2">
-           <a href="/transfers/index_outbound_pickup/" class="inline-block p-4 text-gray-600 rounded-t-lg active" aria-current="page">Departures Transfers</a>
+           <a href="/transfers/index_outbound_pickup/" class="inline-block p-4 text-gray-600 rounded-t-lg active" aria-current="page">Departures<br>Transfers</a>
         </li>
       </ul>
 </div>
 
-<br><br>
+<br>
 
 <div id="transfers">
 <div class="relative overflow-x-auto">
@@ -47,12 +45,12 @@
                     Pick Up Required
                 </th>
                 <th scope="col" colspan="2" class="px-6 py-3 w-40">
-                    Arrival
+                    Arrival  Details
                 </th>
                 <th scope="col" colspan="2" class="px-6 py-3 w-52">
                    Departure
                 </th>
-                <th scope="col" class="px-6 py-3 w-60 truncate">
+                <th scope="col" class="px-6 py-3 w-60 truncate text-left">
                     Notes
                 </th>
             </tr>
