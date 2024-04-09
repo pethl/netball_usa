@@ -40,13 +40,11 @@
                 <th scope="col" class="px-6 py-3 w-52">
                     Level
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
-                    Email
+                <th scope="col" colspan="2" class="px-6 py-3 w-52">
+                    Email & Phone
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
-                    Phone
-                </th>
-                <th scope="col" class="px-6 py-3 w-52">
+              
+                <th scope="col" class="px-6 py-3 w-52 text-center">
                     Adress
                 </th>
                 <th scope="col" class="px-6 py-3 w-40">
@@ -69,6 +67,19 @@
                   </td>
              
                 <td class="px-6 py-4">
+                <% if person.invite_back == "Yes" %>
+                 <i class="fa-solid fa-square text-green-500"></i>
+                  <% elsif person.invite_back == "" %>
+                 <i class="fa-regular fa-square text-gray-800"></i>
+                    <% elsif person.invite_back == "No" %>
+                     <i class="fa-solid fa-square text-red-600"></i>
+                      <% elsif person.invite_back == "Conditional" %>
+                       <i class="fa-solid fa-square text-yellow-300"></i>
+                        <% elsif person.invite_back.to_s.empty? %>
+                          <i class="fa-regular fa-square text-gray-800"></i>
+                          <% end %>
+                
+                
                    <%= link_to person.full_name, edit_person_path(person), class: link_class %>
                 </td>
                
@@ -80,15 +91,12 @@
                   <%= person.level %><br>
                  </td>
                 
-                <td class="px-6 py-4">
-                   <%= person.email %>
-                </td>
-                
-                 <td class="px-6 py-4">
+                <td colspan="2" class="px-6 py-4 truncate">
+                   <%= person.email %><br>
                     <%= person.phone %>
                 </td>
                 
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 text-center">
                    <%= person.address %>
                 </td>
                 
@@ -112,8 +120,13 @@
     </table>
 </div>
  </div>
+ <br>
+<div class="mt-1 ">
+Color coding is based on the 'Invite Back' Field.<br> 
+YES=<i class="fa-solid fa-square text-green-500"></i> : Conditional=<i class="fa-solid fa-square text-yellow-300"></i> : NO=<i class="fa-solid fa-square text-red-600"></i> : Unrated=<i class="fa-regular fa-square text-grey-800"></i>
 </div>
 
+</div>
 
 <br>
 <div class="mt-1">
