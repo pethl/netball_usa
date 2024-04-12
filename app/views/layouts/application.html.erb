@@ -43,7 +43,7 @@
          <% end %>
        </div>
        <div class="p-2 text-xl" title="Info">
-         <%= link_to asset_path("NA_System_User_Guide_V1_0.pdf", skip_pipeline: true) do %>
+         <%= link_to asset_path("NA_System_User_Guide_V1_1.pdf", skip_pipeline: true) do %>
            <i class="fa-solid fa-circle-info text-blue-800"></i>
          <% end %>
        </div>
@@ -86,21 +86,21 @@
            <a href="/transfers" class="hover:font-bold">US OPEN</a>
         </td>
       </tr>
-      
+    <% if is_admin? %>  
       <tr>
         <td>
-          <a href="/budgets" class="hover:font-bold">BUDGETS</a>
+          <a href="/budgets" class="text-blue-300 hover:font-bold">BUDGETS</a>
         </td>
         <td>
-          <a href="/references" class="hover:font-bold">REF DATA</a>
+          <a href="/references" class="text-blue-300 hover:font-bold">REF DATA</a>
         </td>
         <td>
-           <a href="/sample_words" class="hover:font-bold">WORDING</a>
+           <a href="/sample_words" class="text-blue-300 hover:font-bold">WORDING</a>
         </td>
       </tr>
       <tr>
         <td>
-          <a href="/users" class="hover:font-bold">USERS</a>
+          <a href="/users" class="text-blue-300 hover:font-bold">USERS</a>
         </td>
         <td>
           <a href="#" class="hover:font-bold"></a>
@@ -109,6 +109,7 @@
            <a href="#" class="hover:font-bold"></a>
         </td>
       </tr>
+      <% end %>
     </table>
          
      
@@ -192,21 +193,21 @@
                    <a href="/transfers/index_outbound_pickup" class="text-blue-800 hover:font-bold">- Departure Transfers</a>
                </li>
                <% if is_admin? %>  
-                    <li class="mt-2 ml-2 text-blue-800 font-semibold">
-                    ------- admin -------
+                    <li class="mt-2 text-gray-600 font-semibold">
+                    Admin Only
                     </li>
                      <li class="mt-2">
-                         <a href="/budgets" class="text-blue-800 hover:font-bold">Budgets</a>
+                         <a href="/budgets" class="text-gray-600 hover:font-bold">Budgets</a>
                      </li>
                      <li class="mt-2">
-                         <a href="/references/" class="text-blue-800 hover:font-bold">Ref Data</a>
+                         <a href="/references/" class="text-gray-600 hover:font-bold">Ref Data</a>
                      </li>
                      
                       <li class="mt-2">
-                         <a href="/sample_words" class="text-blue-800 hover:font-bold">Sample Wording</a>
+                         <a href="/sample_words" class="text-gray-600  hover:font-bold">Sample Wording</a>
                      </li>
                      <li class="mt-2">
-                        <a href="/users" class="text-blue-800 hover:font-bold">Users</a>
+                        <a href="/users" class="text-gray-600 hover:font-bold">Users</a>
                     </li>
               <% end %>
            </ul>
@@ -214,7 +215,7 @@
         <!--Sidebar nav end -->
         
         <!--Main Bucket  starts -->
-          <div class="flex w-4/5 ">
+          <div class="flex w-full ">
             <div class="flex flex-col w-full h-full">
              
              <!--Content title   starts -->
