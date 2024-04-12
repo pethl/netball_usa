@@ -15,118 +15,241 @@
 
   <body class="h-full">
    <% if user_signed_in? %> 
-    
-     <header class="border-blue-900 text-blue-900 bg-slate-50 sticky top-0 z-10">
-         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
-             <a href="https://netball-america.com" class="flex items-center space-x-3 rtl:space-x-reverse">
-                 <%= link_to image_tag("Netball_America_Logo.png", :class=>"mx-2 h-14 w-auto"), root_path %>
-              </a>
-            
-             <div class="flex items-center space-x-6 rtl:space-x-reverse">
-                 <div class="p-2 " title= "Edit User"<%= current_user.first_name %>>
-                   <%= link_to edit_user_registration_path do %>
-                     <i class="fa-solid fa-user text-blue-800"> </i>
-                    
-                   <% end %>
-                 </div>
-                 <div class="p-2 " title="Logout">
-                   <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
-                     <i class="fa-solid fa-arrow-right-from-bracket text-blue-800"></i>
-                   <% end %>
-                 </div>
-                 <div class="p-2 text-xl" title="Info">
-                   <%= link_to asset_path("NA_System_User_Guide_V1_0.pdf", skip_pipeline: true) do %>
-                     <i class="fa-solid fa-circle-info text-blue-800"></i>
-                   <% end %>
-                 </div>
-             </div>
-         </div>
-    
-       <nav class="bg-blue-900 text-white">
-         <div class="max-w-screen-xl px-2 py-2 mx-auto">
-             <div class="md:flex sm:flex-col items-center">
-                 <ul class="flex flex-wrap font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
-                     <li title="Home">
-                         <%= link_to root_path do %>
-                           <i class="fa-solid fa-house text-white hover:underline"></i>
-                         <% end %>
-                    </li>
-                    <li>
-                        <a href="/netball_educators/pe_directors" class="text-white hover:underline">PE Directors</a>
-                    </li>
-                     <li>
-                         <a href="/netball_educators/" class="text-white hover:underline">Educators</a>
-                     </li>
-                     <li>
-                         <a href="/follow_ups/" class="text-white hover:underline">Ed. Follow Ups</a>
-                     </li>
-                     <li>
-                         <a href="/sponsors" class="text-white hover:underline">Sponsors</a>
-                     </li>
-                     <li>
-                         <a href="/grants/" class="text-white hover:underline">Grants</a>
-                     </li>
-                     <li>
-                         <a href="/people" class="text-white hover:underline">People</a>
-                     </li>
-                     <li>
-                         <a href="/events/" class="text-white hover:underline">Events</a>
-                     </li>
-                     <li>
-                         <a href="/equipment" class="text-white hover:underline">Equipment</a>
-                     </li>
-                     <li>
-                         <a href="/transfers/" class="text-white hover:underline">US Open</a>
-                     </li>
-                     </ul>
-               </div>
-          </div>
-               <% if is_admin? %>  
-                <div class="max-w-screen-xl px-2 py-2 mx-auto">
-                  <div class="md:flex sm:flex-col items-center">
-                      <ul class="flex flex-wrap font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
-                 
-                          <li>
-                              <a href="/budgets" class="text-white hover:underline">Budgets</a>
-                          </li>
-                          <li>
-                              <a href="/references/" class="text-white hover:underline">Ref Data</a>
-                          </li>
-                          <li>
-                              <a href="/users" class="text-white hover:underline">Users</a>
-                          </li>
-                          <li>
-                              <a href="/sample_words" class="text-white hover:underline">Sample Wording</a>
-                          </li>
-                      
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-          <% end %>
-     </nav>
-
      
-     <% if content_for(:page_title)%>
-       <header class="bg-white shadow">
-         <div class="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
-           <h1 class="text-xl font-light text-center font-bold border-2 border-white tracking-tight text-blue-900">
-           <%= yield(:page_title)%></h1>
-         </div>
-       </header>
-     <% end %>
-    </nav>
-  </header>
-     <main>
-       <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-      
-       <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-       <%= yield %>
-     
-       </div>
-     </main>
+  <!-- Header bar sticky starts -->
+  <header class="border-blue-900 text-blue-900 bg-white sticky top-0 z-10 w-screen">
   
+   <div class="flex flex-row">
+      <div class="flex w-4/5 items-center place-items-start m-4">
+          <a href="https://netball-america.com" class="flex items-center space-x-3 rtl:space-x-reverse">
+              <%= link_to image_tag("Netball_America_Logo.png", :class=>"mx-2 h-12 w-auto"), root_path %>
+           </a>
+      </div>
+      <div class="flex w-1/5 items-center justify-between  m-4">
+      <div class="p-2 " title= "Home">
+           <%= link_to root_path do %>
+             <i class="fa-solid fa-house text-blue-800 hover:underline"></i>
+           <% end %>
+     </div>
+       <div class="p-2 " title= "Edit User">
+         <%= link_to edit_user_registration_path do %>
+           <i class="fa-solid fa-user text-blue-800"> </i>
+          
+         <% end %>
+       </div>
+       <div class="p-2 " title="Logout">
+         <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
+           <i class="fa-solid fa-arrow-right-from-bracket text-blue-800"></i>
+         <% end %>
+       </div>
+       <div class="p-2 text-xl" title="Info">
+         <%= link_to asset_path("NA_System_User_Guide_V1_0.pdf", skip_pipeline: true) do %>
+           <i class="fa-solid fa-circle-info text-blue-800"></i>
+         <% end %>
+       </div>
+      </div>
+   </div>
+  
+    <div class="md:hidden sm:w-full  sm:justify-items bg-blue-900 text-white border border-white">
+         
+    <table class="m-1 w-full text-center">
+      <tr>
+        <td>
+          <a href="/netball_educators/pe_directors" class="mt-8 hover:font-bold">PE DIRECTORS</a>
+        </td>
+        <td>
+          <a href="/netball_educators/" class="hover:font-bold">EDUCATORS</a>
+        </td>
+        <td>
+           <a href="/follow_ups/" class="hover:font-bold">ED. FOLLOW UPs</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/sponsors" class="hover:font-bold">SPONSORS</a>
+        </td>
+        <td>
+          <a href="/grants" class="hover:font-bold">GRANTS</a>
+        </td>
+        <td>
+           <a href="/events" class="hover:font-bold">EVENTS</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/equipment" class="hover:font-bold">EQUIPMENT</a>
+        </td>
+        <td>
+          <a href="/people" class="hover:font-bold">PEOPLE</a>
+        </td>
+        <td>
+           <a href="/transfers" class="hover:font-bold">US OPEN</a>
+        </td>
+      </tr>
+      
+      <tr>
+        <td>
+          <a href="/budgets" class="hover:font-bold">BUDGETS</a>
+        </td>
+        <td>
+          <a href="/references" class="hover:font-bold">REF DATA</a>
+        </td>
+        <td>
+           <a href="/sample_words" class="hover:font-bold">WORDING</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/users" class="hover:font-bold">USERS</a>
+        </td>
+        <td>
+          <a href="#" class="hover:font-bold"></a>
+        </td>
+        <td>
+           <a href="#" class="hover:font-bold"></a>
+        </td>
+      </tr>
+    </table>
+         
+     
+     </div>
+  </header>
+ 
+      
+    
+     <!-- Headerbar Sticky end -->
+     
+        <!--Sidebar nav starts -->
+        <div class="flex flex-row w-screen h-screen ">
+          <div class="hidden md:flex flex-col bg-white w-1/5 h-110 rounded">
+          
+          <div title=<%= current_user.full_name %> class="text-blue-900 text-lg ml-5 mt-4">
+          Contents
+             </div>
+          
+          <ul class="ml-6 text-xs xl:text-xs ">
+               <li class="mt-4">
+                   <a href="/netball_educators/pe_directors" class="mt-8 text-blue-800 hover:font-bold">PE DIRECTORS</a>
+               </li>
+               <li class="mt-2">
+                   <a href="/netball_educators/" class="text-blue-800 hover:font-bold">EDUCATORS</a>
+               </li>
+               <li class="mt-2 ml-2">
+                   <a href="/netball_educators/index_level/" class="text-blue-800 hover:font-bold">- By Level</a>
+               </li>
+                 <li class="mt-2 ml-2">
+                   <a href="/netball_educators/index_state" class="text-blue-800 hover:font-bold">- By State</a>
+               </li>
+               <li class="mt-2 ml-2">
+                   <a href="/netball_educators/index_user" class="text-blue-800 hover:font-bold">- By Allocation</a>
+               </li>
+               <li class="mt-2 ml-2">
+                   <a href="/netball_educators/search" class="text-blue-800 hover:font-bold">- Search</a>
+               </li>
+            <li class="mt-2">
+               <a href="/follow_ups/" class="text-blue-800 hover:font-bold">ED. FOLLOW UPs</a>
+           </li>
+            <li class="mt-2">
+               <a href="/sponsors" class="text-blue-800 hover:font-bold">SPONSORS</a>
+           </li>
+            <li class="mt-2">
+               <a href="/grants/" class="text-blue-800 hover:font-bold">GRANTS</a>
+           </li>
+            <li class="mt-2">
+               <a href="/people" class="mt-8 text-blue-800 hover:font-bold">NA PEOPLE</a>
+           </li>
+               <li class="mt-2 ml-2">
+                   <a href="/people/" class="text-blue-800 hover:font-bold">- US Umpires</a>
+               </li>
+                 <li class="mt-2 ml-2">
+                   <a href="/people/index_int" class="text-blue-800 hover:font-bold">- Int Umpires</a>
+               </li>
+               <li class="mt-2 ml-2">
+                   <a href="/people/index_scorers" class="text-blue-800 hover:font-bold">- Scorers</a>
+               </li>
+               <li class="mt-2 ml-2">
+                   <a href="/people/index_trainers_and_ambassadors" class="text-blue-800 hover:font-bold">- Trainers/Ambassadors</a>
+               </li>
+               <li class="mt-2 ml-2">
+                   <a href="/people/people_search" class="text-blue-800 hover:font-bold">- Search</a>
+               </li>
+                <li class="mt-2">
+                   <a href="/events/" class="text-blue-800 hover:font-bol">EVENTS</a>
+               </li>
+                <li class="mt-2">
+                   <a href="/equipment" class="text-blue-800 hover:font-bol">EQUIPMENT</a>
+               </li>
+                <li class="mt-2">
+                   <a href="/transfers/" class="text-blue-800 hover:font-bol">US OPEN</a>
+               </li>
+               <li class="mt-2 ml-2">
+                   <a href="/transfers/" class="text-blue-800 hover:font-bold">- Hotel & Flight</a>
+               </li>
+                 <li class="mt-2 ml-2">
+                   <a href="/transfers/index_inbound_pickup" class="text-blue-800 hover:font-bold">- Arrivals Transfers</a>
+               </li>
+               <li class="mt-2 ml-2">
+                   <a href="/transfers/index_outbound_pickup" class="text-blue-800 hover:font-bold">- Departure Transfers</a>
+               </li>
+               <% if is_admin? %>  
+                    <li class="mt-2 ml-2 text-blue-800 font-semibold">
+                    ------- admin -------
+                    </li>
+                     <li class="mt-2">
+                         <a href="/budgets" class="text-blue-800 hover:font-bold">Budgets</a>
+                     </li>
+                     <li class="mt-2">
+                         <a href="/references/" class="text-blue-800 hover:font-bold">Ref Data</a>
+                     </li>
+                     
+                      <li class="mt-2">
+                         <a href="/sample_words" class="text-blue-800 hover:font-bold">Sample Wording</a>
+                     </li>
+                     <li class="mt-2">
+                        <a href="/users" class="text-blue-800 hover:font-bold">Users</a>
+                    </li>
+              <% end %>
+           </ul>
+          </div>
+        <!--Sidebar nav end -->
+        
+        <!--Main Bucket  starts -->
+          <div class="flex w-4/5 ">
+            <div class="flex flex-col w-full h-full">
+             
+             <!--Content title   starts -->
+              <div class="flex bg-blue-900 sticky">
+              <% if content_for(:page_title)%>
+                <div class="">
+                  <div class="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
+                    <h1 class="text-md font-medium text-left font-bold tracking-tight text-white">
+                    <%= yield(:page_title)%></h1>
+                  </div>
+                </div>
+              <% end %>
+              </div>
+               <!--Content title end -->
+              
+               <!--Content Bucket  starts -->
+              <div class="flex bg-gray-100 w-full h-screen sticky">
+                <div class="m-4 w-full bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm overflow-x-auto ">
+                    <main>
+                      <p class="notice"><%= notice %></p>
+                      <p class="alert"><%= alert %></p>
+                       <%= yield %>
+                    </main>
+                  </div>
+                </div>
+               <!--Content bucket end -->  
+              
+              </div>
+            </div>
+            <!--Main bucket end -->
+         
+        </div>
+      </div>
+        <!--Main  end -->
+   
      
     <% else %>
      <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -141,25 +264,18 @@
            </div>
          </header>
        <% end %>
-      </nav>
+     
    
        <main>
          <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
      
-         <p class="notice"><%= notice %></p>
-          <p class="alert"><%= alert %></p>
-         <%= yield %>
+           <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p>
+           <%= yield %>
      
          </div>
        </main>
     <% end %>
- 
-   
-   
-   
-   </div>
-  </div>
 
   </body>
-
-</html>
+  </html>

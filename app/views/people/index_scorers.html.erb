@@ -1,8 +1,5 @@
 <% content_for(:page_title, "People - Scorers")%>
 
-<div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
- 
-
 <div class="">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
@@ -24,8 +21,8 @@
 </div>
 
 <div id="people">
-<div class="relative overflow-x-auto">
-    <table class="table-fixed w-full text-left rtl:text-right">
+<div class="w-full ">
+    <table class="table-auto w-screen text-left rtl:text-right overflow-x-scroll overscroll-contain">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
              <tr>
                  <th scope="col" class="px-6 py-3 w-52">
@@ -41,13 +38,7 @@
                     Level
                 </th>
                 <th scope="col" class="px-6 py-3 w-52">
-                    Email
-                </th>
-                <th scope="col" class="px-6 py-3 w-52">
-                    Phone
-                </th>
-                <th scope="col" class="px-6 py-3 w-52">
-                    Adress
+                    Email / Phone
                 </th>
                 <th scope="col" class="px-6 py-3 w-40">
                     Associated?
@@ -81,15 +72,8 @@
                  </td>
                 
                 <td class="px-6 py-4">
-                   <%= person.email %>
-                </td>
-                
-                 <td class="px-6 py-4">
+                   <%= person.email %><br>
                     <%= person.phone %>
-                </td>
-                
-                <td class="px-6 py-4">
-                   <%= person.address %>
                 </td>
                 
                 <td class="px-6 py-4">
@@ -112,12 +96,10 @@
     </table>
 </div>
  </div>
-</div>
-
 
 <br>
 <div class="mt-1">
-<%= link_to "Add New Person", new_person_path, class: small_button_class %>
+<%= link_to "Add New Person", new_person_path, class: form_button_class %>
 <br>
 </div>
 

@@ -1,7 +1,5 @@
 <% content_for(:page_title, "US Open")%>
 
-<div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-4 text-sm">
- 
   <div class="">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
@@ -78,8 +76,12 @@
            <tr class="bg-white border-b hover:bg-gray-100">
 
                <td class="px-6 py-4">
+               <% if transfer.departure_grouping? %>
                   <%= transfer.departure_grouping %>
-               </td>
+                  <% else %>
+                  <p class="text-gray-400">#</p>
+                <% end %>
+                </td>
 
                <td class="px-6 py-4">
                   <%= link_to transfer.full_name, edit_transfer_path(transfer), class: link_class %>

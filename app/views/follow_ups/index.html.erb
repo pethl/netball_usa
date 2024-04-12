@@ -1,93 +1,91 @@
 <% content_for(:page_title, "Educator Follow Up")%>
 
-<div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
+  <div class="font-xl border p-4 text-blue-900 m-4 font-semibold">
+    Please ensure educator details exist before creating follow_up record. Go to <span class="font-light border m-2 border-blue-900"> <%= link_to "Educator Search >>", search_path %></span>
+  </div>
  
-<div class="font-xl border p-4 text-blue-900 m-4 font-semibold">
-  Please ensure educator details exist before creating follow_up record. Go to <span class="font-light border m-2 border-blue-900"> <%= link_to "Educator Search >>", search_path %></span>
-</div>
- 
-<br>
-<% if @follow_ups.any? %>
-<div id="follow_up">
-<div class="relative overflow-x-auto">
-    <table class="w-full text-left rtl:text-right">
-        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                   View Details
-                </th>
-                <th scope="col" class="px-6 py-3">
-                   Type of Lead
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Allocated To
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Status
-                </th>
-                <th scope="col" class="px-6 py-3">
-                   Action Items
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Event
-                </th>
-                <th scope="col" class="px-6 py-3">
-                   Sale Amount
-                </th>
-                <th scope="col" colspan="2" class="px-6 py-3">
-                    Educator
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Add to mailing list?
-                </th>
-               </tr>
-        </thead>
-        <tbody>
-        <% @follow_ups.each do |follow_up| %>
-            <tr class="bg-white border-b hover:bg-gray-100">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
-                    <%= link_to image_tag("view.png", :class=>"mx-2 h-6 w-auto"), follow_up  %>
-                </th>
+  <br>
+  <% if @follow_ups.any? %>
+  <div id="follow_up">
+  <div class="relative overflow-auto">
+      <table class="w-full text-left rtl:text-right">
+          <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+              <tr>
+                  <th scope="col" class="px-6 py-3">
+                     View Details
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                     Type of Lead
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Allocated To
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Status
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                     Action Items
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Event
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                     Sale Amount
+                  </th>
+                  <th scope="col" colspan="2" class="px-6 py-3">
+                      Educator
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Add to mailing list?
+                  </th>
+                 </tr>
+          </thead>
+          <tbody>
+          <% @follow_ups.each do |follow_up| %>
+              <tr class="bg-white border-b hover:bg-gray-100">
+                  <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                      <%= link_to image_tag("view.png", :class=>"mx-2 h-6 w-auto"), follow_up  %>
+                  </th>
               
-                <td class="px-6 py-4">
-                    <%= link_to follow_up.lead_type, edit_follow_up_path(follow_up), class: link_class %>
-                </td>
-                <td class="px-6 py-4">
-                    <%= follow_up.user.full_name unless (follow_up.user_id.to_s.empty?) %>
-                </td>
-                <td class="px-6 py-4">
-                    <%= follow_up.status %>
-                </td>
-                <td class="px-6 py-4">
-                    <%= follow_up.action_items %>
-                </td>
-                <td class="px-6 py-4">
-                 <%= follow_up.event.event_date_name unless (follow_up.event_id.to_s.empty?) %> 
-                </td>
-                <td class="px-6 py-4">
-                   <%= number_to_currency(follow_up.sale_amount, precision: 2) %>
-                </td>
-                <td class="px-6 py-4">
-                   <%= follow_up.netball_educator.full_name unless (follow_up.netball_educator_id.to_s.empty?) %>
-                </td>
-                 <td class="px-6 py-4">
-                    <%= follow_up.netball_educator.school_and_location unless (follow_up.netball_educator_id.to_s.empty?)%>
-                </td>
-                <td class="px-6 py-4">
-                 <%= follow_up.add_to_mailing_list? ? 'Yes' : 'No' %>
-                </td>
-                </tr>
-            <% end %>
-        </tbody>
-    </table>
-</div>
- </div>
-</div>
-<% else %>
-<p class="px-6 py-4">
-No records to view</p>
-<% end %>
-<br>
+                  <td class="px-6 py-4">
+                      <%= link_to follow_up.lead_type, edit_follow_up_path(follow_up), class: link_class %>
+                  </td>
+                  <td class="px-6 py-4">
+                      <%= follow_up.user.full_name unless (follow_up.user_id.to_s.empty?) %>
+                  </td>
+                  <td class="px-6 py-4">
+                      <%= follow_up.status %>
+                  </td>
+                  <td class="px-6 py-4">
+                      <%= follow_up.action_items %>
+                  </td>
+                  <td class="px-6 py-4">
+                   <%= follow_up.event.event_date_name unless (follow_up.event_id.to_s.empty?) %> 
+                  </td>
+                  <td class="px-6 py-4">
+                     <%= number_to_currency(follow_up.sale_amount, precision: 2) %>
+                  </td>
+                  <td class="px-6 py-4">
+                     <%= follow_up.netball_educator.full_name unless (follow_up.netball_educator_id.to_s.empty?) %>
+                  </td>
+                   <td class="px-6 py-4">
+                      <%= follow_up.netball_educator.school_and_location unless (follow_up.netball_educator_id.to_s.empty?)%>
+                  </td>
+                  <td class="px-6 py-4">
+                   <%= follow_up.add_to_mailing_list? ? 'Yes' : 'No' %>
+                  </td>
+                  </tr>
+              <% end %>
+          </tbody>
+      </table>
+  </div>
 
-<%= link_to "Add New Follow-Up", new_follow_up_path, class: small_button_class %>
 
+  <% else %>
+    <p class="px-6 py-4">
+    No records to view</p>
+  <% end %>
+  <br>
+
+  <%= link_to "Add New Follow-Up", new_follow_up_path, class: form_button_class %>
+</div>

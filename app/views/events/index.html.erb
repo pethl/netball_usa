@@ -1,8 +1,5 @@
 <% content_for(:page_title, "Events")%>
 
-<div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
- 
- 
 <% if @events.any? %>
     <% @events_by_year.each do |year, events| %>
       
@@ -85,14 +82,13 @@
       <% end %>
     </div>
  </div>
-</div>
     <% else %>
         <p class="px-6 py-4">
         No records to view</p>
     <% end %>
 <br>
 <div class="m-2">
-    <%= link_to "Add New Event", new_event_path, class: small_button_class %>
+    <%= link_to "Add New Event", new_event_path, class: form_button_class %>
      <br>
    </div>
 

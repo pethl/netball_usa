@@ -1,13 +1,14 @@
 <% content_for(:page_title, "Budgets")%>
 
-<div class="bg-white py-4 px-2shadow sm:rounded-lg sm:px-10 text-sm">
-
 <div id="budgets">
 <div class="relative overflow-x-auto">
     <table class="table-auto w-full text-right rtl:text-right">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
              <tr>
-                <th scope="col" class="px-6 py-3 w-52">
+                 <th scope="col" class="px-6 py-3">
+                     Details
+                 </th>
+                <th colspan="2" scope="col" class="px-6 py-3 w-52 text-left">
                     Event Name
                 </th>
                 <th scope="col" class="px-6 py-3 w-52">
@@ -46,8 +47,12 @@
         <tbody>
         <% @budgets.each do |budget| %>
             <tr class="bg-white border-b hover:bg-gray-100">
-               
-                <td class="px-6 py-4">
+                
+                <td scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                    <%= link_to image_tag("view.png", :class=>"mx-2 h-6 w-auto"), budget %>
+                </td>
+                
+                <td colspan="2" class="px-6 py-4 text-left truncate">
                     <%= (link_to budget.budget_event_name, edit_budget_path(budget), class: link_class) unless (budget.event_id.to_s.empty?) %>
                    </td>
                 
@@ -97,11 +102,11 @@
 
  </div>
 </div>
-</div>
+
 <br>
 
 <div class="mt-1">
-<%= link_to "Add New Budget", new_budget_path, class: small_button_class %>
+<%= link_to "Add New Budget", new_budget_path, class: form_button_class %>
 <br>
 </div>
 

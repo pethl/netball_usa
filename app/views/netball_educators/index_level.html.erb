@@ -1,8 +1,5 @@
 <% content_for(:page_title, "Educators - By Level")%>
 
-<div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
- 
-
 <div class="">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
@@ -36,7 +33,7 @@
   
 
 <div id="educators">
-<div class="relative overflow-x-auto">
+<div class="relative overflow-auto">
     <table class="table-fixed w-full text-left rtl:text-right">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
             <tr>
@@ -126,8 +123,8 @@
 <br>
 
 <div class="mt-1">
-<%= link_to "Add New Educator", new_netball_educator_path, class: small_button_class %>
-<br>
+<%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
+<br><br>
 </div>
 
 

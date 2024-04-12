@@ -3,7 +3,7 @@ class ReferencesController < ApplicationController
 
   # GET /references
   def index
-    @references = Reference.all
+    @references = Reference.all.order(group: :asc)
     @references_by_group = @references.group_by { |t| t.group }
   end
 
@@ -18,6 +18,7 @@ class ReferencesController < ApplicationController
 
   # GET /references/1/edit
   def edit
+    @reference= set_reference
   end
 
   # POST /references

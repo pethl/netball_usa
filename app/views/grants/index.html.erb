@@ -1,7 +1,5 @@
 <% content_for(:page_title, "Grants")%>
 
-<div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
-
 <% if @grants.any? %>
 <div id="grants">
 <div class="relative overflow-x-auto">
@@ -92,7 +90,7 @@
 
  </div>
 </div>
-</div>
+
     <% else %>
     <p class="px-6 py-4">
     No records to view</p>
@@ -100,7 +98,7 @@
 <br>
 
 <div class="mt-1">
-<%= link_to "Add New Grant", new_grant_path, class: small_button_class %>
+<%= link_to "Add New Grant", new_grant_path, class: form_button_class %>
 <br>
 </div>
 

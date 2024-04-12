@@ -1,7 +1,5 @@
 <% content_for(:page_title, "Equipment Sales")%>
 
-<div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
- 
 <div class="font-xl border p-4 text-blue-900 m-4 font-semibold">
   Please ensure educator details exist before creating equipment sale record. Go to <span class="font-light border m-2 border-blue-900"> <%= link_to "Educator Search >>", search_path %></span>
 </div>
@@ -60,11 +58,10 @@
     </table>
 </div>
  </div>
-</div>
 <% else %>
 <p class="px-6 py-4">
 No records to view</p>
 <% end %>
 <br>
 
-<%= link_to "Add New Equipment", new_equipment_path, class: small_button_class %>
+<%= link_to "Add New Equipment", new_equipment_path, class: form_button_class %>

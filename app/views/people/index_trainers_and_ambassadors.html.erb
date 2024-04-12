@@ -1,7 +1,5 @@
 <% content_for(:page_title, "People - US & Canada Umpires")%>
 
-<div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
-
 <div class="">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
@@ -40,13 +38,9 @@
                     Location
                 </th>
                   <th scope="col" class="px-6 py-3 w-52">
-                    Email
+                    Email / Phone
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
-                    Phone
-                </th>
-               
-                <th scope="col" class="px-6 py-3 w-40">
+                 <th scope="col" class="px-6 py-3 w-40">
                     In Person Trained?
                 </th>
                 <th scope="col" class="px-6 py-3 w-52">
@@ -81,14 +75,10 @@
                 </td>
              
                 <td class="px-6 py-4">
-                   <%= person.email %>
-                </td>
-                
-                 <td class="px-6 py-4">
+                   <%= person.email %><br>
                     <%= person.phone %>
                 </td>
                 
-              
                 <td class="px-6 py-4">
                    <%= person.in_person_trained? ? 'Yes' : 'No'  %>
                 </td>
@@ -111,12 +101,11 @@
     </table>
 </div>
  </div>
-</div>
 
 
 <br>
 <div class="mt-1">
-<%= link_to "Add New Person", new_person_path, class: small_button_class %>
+<%= link_to "Add New Person", new_person_path, class: form_button_class %>
 <br>
 </div>
 

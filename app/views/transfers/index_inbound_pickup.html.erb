@@ -1,6 +1,4 @@
 <% content_for(:page_title, "US Open")%>
-
-<div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-4 text-sm">
  
   <div class="">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
@@ -78,7 +76,11 @@
            <tr class="bg-white border-b hover:bg-gray-100">
 
                <td class="px-6 py-4">
+               <% if transfer.pick_up_grouping? %>
                   <%= transfer.pick_up_grouping %>
+                  <% else %>
+                  <p class="text-gray-400">#</p>
+                <% end %>
                </td>
 
                <td class="px-6 py-4">

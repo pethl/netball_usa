@@ -1,38 +1,35 @@
 <% content_for(:page_title, "Educators - By User Allocation")%>
 
-<div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm">
- 
-
-<div class="">
-   <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
-      <li class="me-2">
-            <a href="/netball_educators/" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Created Date</a>
-        </li>
+  <div class="">
+     <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
         <li class="me-2">
-            <a href="/netball_educators/index_state" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By State</a>
+              <a href="/netball_educators/" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Created Date</a>
+          </li>
+          <li class="me-2">
+              <a href="/netball_educators/index_state" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By State</a>
+          </li>
+          <li class="me-2">
+              <a href="/netball_educators/index_user" class="inline-block p-2 text-blue-900 bg-gray-100 rounded-t-lg active " aria-current="page">By Allocation</a>
+          </li>
+          <li class="me-2">
+             <a href="/netball_educators/index_level" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Level</a>
+         </li>
+         <li class="me-2">
+            <a href="/netball_educators/search" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Search</a>
         </li>
-        <li class="me-2">
-            <a href="/netball_educators/index_user" class="inline-block p-2 text-blue-900 bg-gray-100 rounded-t-lg active " aria-current="page">By Allocation</a>
-        </li>
-        <li class="me-2">
-           <a href="/netball_educators/index_level" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Level</a>
-       </li>
-       <li class="me-2">
-          <a href="/netball_educators/search" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Search</a>
-      </li>
-      </ul>
-</div>
+        </ul>
+  </div>
 <br>
-<% if @netball_educators.any? %>
-<br>
-<% @netball_educators_by_user.each do |user, educators| %>
-<div class="text-xl text-blue-900">
-    Allocated to <%= User.find(user).first_name unless user.nil? %>  <%= User.find(user).last_name unless user.nil? %>
-    <% if user.nil? %> Not Allocated <% end %>
-</div>
+    <% if @netball_educators.any? %>
+    <br>
+    <% @netball_educators_by_user.each do |user, educators| %>
+    <div class="text-xl text-blue-900">
+        Allocated to <%= User.find(user).first_name unless user.nil? %>  <%= User.find(user).last_name unless user.nil? %>
+        <% if user.nil? %> Not Allocated <% end %>
+    </div>
 
 <div id="educators">
-<div class="relative overflow-x-auto">
+<div class="relative overflow-x-auto overflow-y-auto">
     <table class="table-fixed w-full text-left rtl:text-right">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
             <tr>
@@ -108,7 +105,7 @@
             <% end %>
         </tbody>
     </table>
-<br><br>
+<br>
     <% end %>
     <% else %>
     <p class="px-6 py-4">
@@ -117,11 +114,13 @@
     
 </div>
  </div>
-</div>
+
 <br>
 <div class="mt-1">
-<%= link_to "Add New Educator", new_netball_educator_path, class: small_button_class %>
-<br>
+<%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
+<br><br>
+</div>
+
 </div>
 
 

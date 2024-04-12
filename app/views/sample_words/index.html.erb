@@ -1,52 +1,59 @@
 <% content_for(:page_title, "Sample Words")%>
 
 <div id="sample_words">
+<br>
  
-    <% if @sample_words.any? %>
+<% if @sample_words.any? %>
+
     <div id="sample_words">
-    <div class="relative overflow-x-auto">
+   
+     <% @sample_words.each do |sample_word| %>  
         <table class="w-full text-left rtl:text-right">
-            <thead class="bg-white border-b text-gray-300 font-light text-xs ">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Category 
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Title
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Description/Content
-                    </th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-            <% @sample_words.each do |sample_word| %>
-                <tr class="bg-white border-b hover:bg-gray-100">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
-                        <%= link_to sample_word.category, edit_sample_word_path(sample_word), class: link_class %>
-                    </th>
-                    <td class="px-6 py-4">
-                        <%= sample_word.title %>
-                    </td>
-                    <td class="px-6 py-4">
-                        <%= sample_word.desc %>
-                    </td>
-                   
-                </tr>
-                <% end %>
+            <thead class="border-b text-gray-300 font-base text-sm ">
+              <tbody  class="border"> 
+              <tr>
+                <td scope="col" class="px-6 py-3">
+                    Category 
+                </td>
+                <td scope="col" class="px-6 py-3 text-blue-900">
+                    <%= link_to sample_word.category, edit_sample_word_path(sample_word), class: link_class %>
+                </td>
+            </tr>
+            <tr>
+                <td scope="col" class="px-6 py-3">
+                    Title 
+                </td>
+                <td scope="col" class="px-6 py-3 text-blue-900">
+                   <%= sample_word.title %>
+                </td>
+            </tr>
+            <tr>
+                <td scope="col" class="px-6 py-3">
+                    Description 
+                </td>
+                <td scope="col" class="px-6 py-3 text-blue-900">
+                    <%= sample_word.desc %>
+                </td>
+            </tr>  
             </tbody>
-        </table>
+            </table>
+            <br>
+         <% end %>
     </div>
      </div>
-    </div>
-    <% else %>
-    <p class="px-6 py-4">
-    No records to view</p>
-    <% end %>
-    <br>
+ 
+     <% else %>
+      <p class="px-6 py-4">
+        No records to view
+      </p>
+       <% end %>   
+  
+   
     <div class="m-2">
-        <%= link_to "Add New Sample Words", new_sample_word_path, class: small_button_class %>
+        <%= link_to "Add New Sample Words", new_sample_word_path, class: form_button_class %>
         <br>
-       </div>
+     </div>
+          
+</div>
+         
 
