@@ -10,4 +10,12 @@ class User < ApplicationRecord
     "#{self.first_name} #{self.last_name}"
   end
   
+  def active_for_authentication? 
+    super && approved?
+  end 
+  
+  def inactive_message 
+    approved? ? super : :not_approved
+  end
+  
 end
