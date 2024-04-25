@@ -1,0 +1,9 @@
+<% content_for(:page_title, "Region")%>
+
+<%= render @region %>
+<br>
+<div>
+  <%= link_to "Edit this region", edit_region_path(@region), class: link_class %> |
+  <%= link_to "Back to regions", regions_path, class: link_class %>
+
+</div>

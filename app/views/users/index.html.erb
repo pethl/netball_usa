@@ -40,7 +40,6 @@
        <th scope="col" class="text-left p-2 w-52">Last Name</th>
        <th scope="col" class="text-left p-2 py-3 w-52">Email</th>
        <th scope="col" class="text-left p-2 py-3 w-52">Account Created</th>
-       <th scope="col" class="text-left p-2 py-3 w-52">Last Sign In</th>
        <th scope="col" class="text-left p-2 py-3 w-52">Is_admin?</th>
        <th scope="col" class="text-left p-2 py-3 w-52">SYS:Row</th>
       </tr>
@@ -53,7 +52,6 @@
       <td class="p-2 border-b text-left"><%= user.last_name %></td>
       <td class="p-2 border-b text-left"><%= user.email %></td>
       <td class="p-2 border-b text-left"><%= user.created_at.to_formatted_s(:usa) %></td>
-      <td class="p-2 border-b text-left"><%= user.last_sign_in_at.to_formatted_s(:usa_dt) unless (user.last_sign_in_at.to_s.empty?)%></td>
       <td class="p-2 border-b text-left"><%= user.admin? ? 'Yes' : 'No'   %></td>
       <td class="p-2 border-b text-left"><%= user.id %></td>
     </tr>

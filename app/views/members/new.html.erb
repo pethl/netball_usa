@@ -1,0 +1,6 @@
+<main class="container">
+  <%= turbo_frame_tag @member do %>
+    <%= render "form",  team: @team, member: @member %>
+ <% end %>
+</main>
+

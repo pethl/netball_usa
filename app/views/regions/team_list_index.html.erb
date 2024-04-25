@@ -1,0 +1,35 @@
+<% content_for(:page_title, "Teams Year End Report")%>
+
+<main class="container m-6">
+
+
+  <%  @regions_by_region.each do |region, states| %>
+
+    <div class="text-xl text-blue-900 mt-8">
+      <th scope="row" colspan="9" class="px-6 py-4 font-medium text-blue-900 whitespace-nowrap dark:text-white">
+       <%= region %>
+      </th>
+     </div>
+    
+     <% states.each do |state| %>
+      <%= state.state %><br>
+    
+      <% @teams_by_state[state.state] %><br>
+      
+          
+          <%= Team.where(state: state.state).count %>
+    
+     
+
+ 
+   
+   <% end %>
+    
+   
+     
+<% end %>
+
+
+
+</main>
+

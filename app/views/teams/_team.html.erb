@@ -1,0 +1,35 @@
+<div id="<%= dom_id team %>">
+ 
+
+ <%= turbo_frame_tag team do %>
+ 
+  <div class="team">
+ 
+  <div class="flex w-2/3 justify-between items-center border border-blue-900 rounded m-4 ">
+    <div class="ml-4">
+     <span class="text-lg"> <%= link_to team.name, team_path(team),  data: { turbo_frame: "_top" }, class: link_class %></span>
+     <br>
+     <span class="text-blue-900"> Members #: </span><%= team.members.count %>
+     <br>
+     <span class="text-gray-600 text-sm"> Team administered by: </span><%= team.creator.full_name %>
+    </div>
+    
+    <div class="justify-between flex items-center m-4 w-32">
+    <% if team.members.count ==0 %>
+      <div>
+        <%= button_to "Delete",
+                  team_path(team),
+                  method: :delete,
+                  form: { data: { turbo_confirm: "Are you sure?" } },
+                  class: red_link_class %>
+      </div>
+      <% end %>
+      <div>
+        <%= link_to "Edit",
+                    edit_team_path(team),
+                    class: green_link_class %>
+      </div>
+    </div>
+    </div>
+  </div>
+  <% end %>

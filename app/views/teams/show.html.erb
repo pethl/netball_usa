@@ -1,0 +1,27 @@
+<% content_for(:page_title, "Team")%>
+
+<main class="container">
+
+<div class="header">
+  <div class="m-2">
+   <span class="text-lg"> <%= @team.name  %></span>
+   <br>
+   <span class="text-gray-600 text-sm"> Team administered by: </span><%= @team.creator.full_name %>
+  </div>
+  <hr>
+  <br>
+    <%= link_to "New member",
+                new_team_member_path(@team),
+                data: { turbo_frame: dom_id(Member.new) },
+                class: form_button_class %>
+                  <br> <br>  
+  </div>
+   
+  <%= turbo_frame_tag Member.new %>
+   <%= turbo_frame_tag "members" do %>
+    <%= render @members, team: @team %>
+  <% end %>
+  
+    <hr>
+    <%= link_to sanitize("&larr; Back to teams"), teams_path %>
+</main>

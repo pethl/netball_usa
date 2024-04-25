@@ -28,8 +28,8 @@
     <table class="table-fixed w-full text-left rtl:text-right">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
              <tr>
-                 <th scope="col" class="px-6 py-3 w-52">
-                     See Details
+                 <th scope="col" class="px-6 py-3 w-52 text-center">
+                      Details
                  </th>
                 <th scope="col" class="px-6 py-3 w-52">
                     Date Created 
@@ -69,9 +69,25 @@
         <tbody>
         <% @netball_educators.each do |educator| %>
             <tr class="bg-white border-b hover:bg-gray-100">
-                <td class="px-6 py-4">
-                  <%= link_to image_tag("view.png", :class=>"mx-2 h-6 w-auto"), educator  %>
+              
+                <td class="px-6 py-4 flex justify-evenly content-center">
+                  <%= link_to educator do %>
+                    <i data-tooltip-target="tooltip-view" class="fa-solid fa-eye text-blue-800"> </i>
+                  <% end %>
+                  <div id="tooltip-view" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-600 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                      View record
+                      <div class="tooltip-arrow" data-popper-arrow></div>
+                  </div>
+                  
+                  <%= link_to edit_netball_educator_path(educator) do %>
+                    <i data-tooltip-target="tooltip-edit" class="fa-regular fa-pen-to-square text-blue-800"> </i>
+                  <% end %>
+                  <div id="tooltip-edit" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                      Edit Record
+                      <div class="tooltip-arrow" data-popper-arrow></div>
+                  </div>
                 </td>
+                
                 <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
                     <%= educator.created_at.to_formatted_s(:usa) unless (educator.created_at.to_s.empty?) %>
                 </th>

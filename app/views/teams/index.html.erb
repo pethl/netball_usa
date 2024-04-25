@@ -1,0 +1,18 @@
+<% content_for(:page_title, "Teams")%>
+
+<main class="container m-6">
+  <div class="header">
+    <br>
+    <%= link_to "Add New team",
+                new_team_path,
+                class: form_button_class, data: { turbo_frame: dom_id(Team.new) } %>
+   </div>
+   <br>
+  
+   <%= turbo_frame_tag Team.new %>
+    
+   <%= turbo_frame_tag "teams" do %>
+    <%= render @teams %>
+   <% end %>
+</main>
+

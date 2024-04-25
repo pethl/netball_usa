@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_13_101946) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_19_132419) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -159,6 +159,25 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_13_101946) do
     t.integer "user_id"
   end
 
+  create_table "members", force: :cascade do |t|
+    t.bigint "team_id", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "email"
+    t.string "city"
+    t.string "state"
+    t.string "gender"
+    t.boolean "interested_in_coaching"
+    t.boolean "interested_in_umpiring"
+    t.boolean "interested_in_usa_team"
+    t.datetime "dob"
+    t.string "place_of_birth"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_members_on_team_id"
+  end
+
   create_table "netball_educators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -217,6 +236,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_13_101946) do
     t.boolean "active"
   end
 
+  create_table "regions", force: :cascade do |t|
+    t.string "state"
+    t.string "region"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sample_words", force: :cascade do |t|
     t.string "category"
     t.string "title"
@@ -242,6 +268,21 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_13_101946) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.string "state"
+    t.string "city"
+    t.string "website"
+    t.string "facebook"
+    t.string "twitter"
+    t.string "instagram"
+    t.string "other_sm"
+    t.index ["user_id"], name: "index_teams_on_user_id"
   end
 
   create_table "transfers", force: :cascade do |t|
@@ -333,4 +374,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_13_101946) do
   add_foreign_key "event_assignments", "umpires"
   add_foreign_key "event_participants", "events"
   add_foreign_key "event_participants", "people"
+  add_foreign_key "members", "teams"
+  add_foreign_key "teams", "users"
 end

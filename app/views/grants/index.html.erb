@@ -31,6 +31,9 @@
                    Notes
                 </th>
                 <th scope="col" class="px-6 py-3 w-60 truncate">
+                    Allocated To
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 truncate">
                     Status
                 </th>
                 <th scope="col" class="px-6 py-3 w-60 truncate">
@@ -76,9 +79,14 @@
                    <%= grant.notes %>
                 </td>
 
+                <td class="px-6 py-4">
+                <%= grant.user.full_name %>
+               </td>
+               
                  <td class="px-6 py-4">
                  <%= grant.status %>
                 </td>
+               
                 <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
                     <%= grant.date_submitted.to_formatted_s(:usa) unless (grant.date_submitted.to_s.empty?) %>
                 </th>

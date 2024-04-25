@@ -1,0 +1,36 @@
+<div class="sm:mx-auto sm:w-full sm:max-w-md max-w-md">
+  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+
+  
+<%= form_with(model: @region) do |form| %>
+  <% if @region.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@region.errors.count, "error") %> prohibited this region from being saved:</h2>
+
+      <ul>
+        <% @region.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-6">
+   <%= form.label :state, class: label_class%>
+    <div class="mt-1">
+      <%= form.text_field :state, class: input_class  %>
+  </div> </div>
+  
+  <div class="mb-6">
+   <%= form.label :region, class: label_class%>
+    <div class="mt-1">
+    <%= form.select :region, options_for_select(regions, :selected => @region.region),{}, class: input_class %>
+  </div> </div>
+  
+  <div>
+    <%= form.submit "Save Record", class: form_button_class %>
+  </div>
+<% end %>
+
+
+

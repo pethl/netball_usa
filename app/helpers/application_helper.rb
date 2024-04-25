@@ -7,6 +7,10 @@ module ApplicationHelper
      "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 hover:bg-gray-100 sm:text-sm"
    end
    
+   def required_input_class
+     "required:border-red-500 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 hover:bg-gray-100 sm:text-sm"
+   end
+   
    def small_input_class
      "block w-sm appearance-none text-right rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
    end
@@ -18,7 +22,11 @@ module ApplicationHelper
    def small_button_class
     "justify-center rounded-md border border-transparent bg-blue-900 py-2 px-4 text-sm font-light text-white shadow-sm hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2"
   end
-   
+  
+  def clear_button_class
+    "bg-transparent hover:bg-blue-300 text-blue-900 font-semibold hover:text-white py-2 px-4 border border-blue-900 hover:border-transparent rounded"
+  end
+  
    def ex_input_class
      "block w-full appearance-none rounded-md border border-gray-300 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm invalid:border-red-500"
    end
@@ -34,7 +42,6 @@ module ApplicationHelper
     def test_input
       "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
     end
-  
    
    def table_header_class
      "font-bold p-2 border-b text-left bg-blue-900 text-white"
@@ -46,6 +53,14 @@ module ApplicationHelper
    
    def link_class
      "text-md font-medium text-blue-900 italic"
+   end
+   
+   def red_link_class
+     "text-md font-medium text-red-500 italic"
+   end
+   
+   def green_link_class
+     "text-md font-medium text-green-600 italic"
    end
    
    def list_class_other
@@ -67,6 +82,7 @@ module ApplicationHelper
          [""],
          ['Alabama', 'AL'],
          ['Alaska', 'AK'],
+         ['American Samoa', 'AS'],
          ['Arizona', 'AZ'],
          ['Arkansas', 'AR'],
          ['California', 'CA'],
@@ -115,8 +131,21 @@ module ApplicationHelper
          ['Virginia', 'VA'],
          ['Washington', 'WA'],
          ['West Virginia', 'WV'],
-         ['Wisconsin', 'WI'],
-         ['Wyoming', 'WY']
+         ['Wisconsin','WI'],
+         ['Wyoming','WY'],
+         ['Alberta','AB'],
+         ['British Columbia',	'BC'],
+         ['Manitoba',	'MB'],
+         ['New Brunswick',	'NB'],
+         ['Newfoundland and Labrador',	'NL'],
+         ['Northwest Territories',	'NT'],
+         ['Nova Scotia',	'NS'],
+         ['Nunavut',	'NU'],
+         ['Ontario',	'ON'],
+         ['Prince Edward Island',	'PE'],
+         ['Quebec',	'QC'],
+         ['Saskatchewan',	'SK'],
+         ['Yukon',	'YT'],
        ]
    end
    
@@ -226,4 +255,27 @@ module ApplicationHelper
       people_invite_back = Reference.where(active: "TRUE", group: 'people_invite_back')
       people_invite_back = people_invite_back.pluck(:value)       
     end
+    
+    def regions
+      regions = Reference.where(active: "TRUE", group: 'regions')
+      regions = regions.pluck(:value)       
+    end
+    
+     def get_teams_per_state(state)
+     state = params[:state]
+     logger.info "#{state}"
+#       @list_of_states= Region.where(region: @region)
+#        @list_of_states= @list_of_states.pluck(:state)
+       @teams = Team.where(state: state.state)
+#      @teams_group_by_state = @teams.group_by { |t| t.state }
+     end
+     
+     def get_teams_per_region(region)
+      @region = params[:region]
+       logger.info "#{region}"
+       @list_of_states= Region.where(region: @region)
+       @list_of_states= @list_of_states.pluck(:state)
+       @teams = Team.where('state IN (?)', @list_of_states)
+       @teams_group_by_state = @teams.group_by { |t| t.state }
+     end
 end

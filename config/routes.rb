@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'regions/team_list_index' => 'regions#team_list_index', :as => :team_list_index
+  get 'teams/teams_list_index' => 'teams#teams_list_index', :as => :teams_list_index
+
+  resources :regions
+  resources :teams do
+    resources :members, except: [:index, :show]
+  end
   resources :follow_ups
   resources :equipment
   resources :sample_words

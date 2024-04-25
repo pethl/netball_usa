@@ -50,8 +50,5 @@
 <% end %>
 
 <br>
-<h3>Cancel my account</h3>
+  <%= link_to sanitize("&larr; Back "), :back %>
 
-<div> <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: form_button_class %></div>
-
-<%= link_to "Back", :back %>

@@ -1,0 +1,93 @@
+<%= form_for [team, member], html: { class: "form member" } do |form| %>
+
+  <% if member.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(member.errors.count, "error") %> prohibited this member from being saved:</h2>
+
+      <ul>
+        <% member.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="border border-blue-900 rounded ">
+  <div class="border border-white rounded m-2">
+      <div class="grid grid-cols-3 gap-4">
+        <div>
+          <%= form.label :first_name, "First Name*", class: label_class %>
+          <%= form.text_field :first_name, class: input_class  %>
+        </div>
+
+        <div>
+          <%= form.label :last_name, "Last Name*",  class: label_class %>
+          <%= form.text_field :last_name, class: input_class  %>
+        </div>
+
+        <div>
+          <%= form.label :email,  "Email*", class: label_class%>
+          <%= form.text_field :email, class: input_class  %>
+        </div>
+
+        <div>
+          <%= form.label :city, class: label_class %>
+          <%= form.text_field :city, class: input_class  %>
+        </div>
+
+        <div>
+          <%= form.label :state, class: label_class %>
+          <%= form.select :state, options_for_select(us_states, :selected => member.state),{}, class: input_class %>
+        </div>
+
+        <div>
+          <%= form.label :gender, class: label_class%>
+          <%= form.select :gender, options_for_select(gender, :selected => member.gender),{}, class: input_class %>
+       </div>
+
+        <div>
+          <%= form.label :dob, class: label_class %>
+          <%= form.datetime_field :dob, class: input_class  %>
+        </div>
+
+        <div>
+          <%= form.label :place_of_birth, class: label_class %>
+          <%= form.date_field :place_of_birth, class: input_class  %>
+        </div>
+        </div>
+  
+        <div class="grid grid-cols-3 gap-4">
+        <div class="mt-4">
+          <%= form.label :interested_in_coaching, class: label_class %>
+          <%= form.check_box :interested_in_coaching, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+        </div>
+
+        <div class="mt-4">
+          <%= form.label :interested_in_umpiring, class: label_class %>
+          <%= form.check_box :interested_in_umpiring, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+        </div>
+
+         <div class="mt-4">
+          <%= form.label :interested_in_usa_team, class: label_class%>
+          <%= form.check_box :interested_in_usa_team, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+        </div>
+
+        <div class="col-span-2">
+          <%= form.label :notes, class: label_class %>
+          <%= form.text_area :notes, class: input_class  %>
+        </div>
+          </div>
+
+       <div class="flex items-center">
+        <div>
+        <br>   <%= link_to "Cancel", team_path(team), class: clear_button_class %>
+        </div>
+
+        <div>
+           <br> <%= form.submit "Save Record", class: form_button_class %>
+         </div>
+      </div>
+    </div>
+  <% end %>
+   </div> 
+ </div>
