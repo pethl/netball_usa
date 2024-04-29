@@ -12,7 +12,7 @@
     </div>
   <% end %>
 
-  <div class="grid grid-cols-4 gap-4 w-full">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
      <div class="mb-4">
      <%= form.label :status, class: label_class%>
       <div class="mt-1">
@@ -35,8 +35,8 @@
    </div> </div>
       </div>
 
- <div class="grid grid-cols-4 gap-4">
-   <div class="mb-4 col-span-2">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
+   <div class="mb-4 md:col-span-2">
     <%= form.label :company_name, class: label_class%>
      <div class="mt-1">
     <%= form.text_field :company_name, class: form_input_class  %>
@@ -56,15 +56,15 @@
    </div>
   
   
-   <div class="grid grid-cols-4 gap-4">
-     <div class="mb-4 col-span-2">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
+      <div class="mb-4 md:col-span-2">
       <%= form.label :about, class: label_class%>
        <div class="mt-1">
         <%= form.text_field :about, class: form_input_class  %>
        </div>
     </div>
     
-    <div class="mb-4 col-span-2">
+     <div class="mb-4 md:col-span-2">
      <%= form.label :website, class: label_class%>
       <div class="mt-1">
        <%= form.text_field :website, placeholder: "Enter with prefix Http:// or https://", class: form_input_class  %>
@@ -73,8 +73,8 @@
   </div>
    
    
-  <div class="grid grid-cols-4 gap-4">
-   <div class="mb-4 col-span-2">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
+    <div class="mb-4 md:col-span-2">
     <%= form.label :location, class: label_class%>
      <div class="mt-1">
     <%= form.text_field :location, class: form_input_class  %>
@@ -111,15 +111,15 @@
    </div>
       </div>
   
-  <div class="grid grid-cols-4 gap-4">   
-    <div class="mb-4 col-span-2">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
+     <div class="mb-4 md:col-span-2">
       <%= form.label :pitch, class: label_class%>
        <div class="mt-1">
         <%= form.text_area :pitch, class: form_input_class  %>
      </div>
     </div>
 
-   <div class="mb-4 col-span-2">
+   <div class="mb-4 md:col-span-2">
     <%= form.label :follow_up_actions, class: label_class%>
      <div class="mt-1">
       <%= form.text_area :follow_up_actions, class: form_input_class  %>
@@ -127,8 +127,8 @@
     </div>
     </div>
 
-  <div class="grid grid-cols-4 gap-4">   
-   <div class="mb-4 col-span-3">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
+    <div class="mb-4 md:col-span-3">
     <%= form.label :notes, class: label_class%>
      <div class="mt-1">
       <%= form.text_area :notes, class: form_input_class  %>
