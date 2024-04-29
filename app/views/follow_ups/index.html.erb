@@ -42,7 +42,7 @@
           </thead>
           <tbody>
           <% @follow_ups.each do |follow_up| %>
-              <tr class="bg-white border-b hover:bg-gray-100">
+              <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
                   <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
                       <%= link_to image_tag("view.png", :class=>"mx-2 h-6 w-auto"), follow_up  %>
                   </th>

@@ -3,8 +3,8 @@ class RegionsController < ApplicationController
 
   # GET /regions
   def index
-    @regions = Region.all.order(region: :asc)
-    @regions_by_region = @regions.group_by { |t| t.region }
+     @regions = Region.all.order("region ASC, state ASC")
+     @regions_by_region = Region.all.group_by(&:region)
   end
   
   # GET /regions/1

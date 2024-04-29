@@ -7,6 +7,10 @@ module ApplicationHelper
      "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 hover:bg-gray-100 sm:text-sm"
    end
    
+   def form_input_class
+     "w-full appearance-none rounded-md border border-gray-300 p-4 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 hover:bg-gray-100 sm:text-sm"
+   end
+   
    def required_input_class
      "required:border-red-500 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 hover:bg-gray-100 sm:text-sm"
    end
@@ -71,82 +75,16 @@ module ApplicationHelper
      "text-sm text-blue-900"
    end
    
-   
    def reference_group
      reference_group = Reference.all.order(group: :asc)
      reference_group = reference_group.pluck(:group) 
      reference_group = reference_group.uniq() 
    end
+   
    def us_states
-       [
-         [""],
-         ['Alabama', 'AL'],
-         ['Alaska', 'AK'],
-         ['American Samoa', 'AS'],
-         ['Arizona', 'AZ'],
-         ['Arkansas', 'AR'],
-         ['California', 'CA'],
-         ['Colorado', 'CO'],
-         ['Connecticut', 'CT'],
-         ['Delaware', 'DE'],
-         ['District of Columbia', 'DC'],
-         ['Florida', 'FL'],
-         ['Georgia', 'GA'],
-         ['Hawaii', 'HI'],
-         ['Idaho', 'ID'],
-         ['Illinois', 'IL'],
-         ['Indiana', 'IN'],
-         ['Iowa', 'IA'],
-         ['Kansas', 'KS'],
-         ['Kentucky', 'KY'],
-         ['Louisiana', 'LA'],
-         ['Maine', 'ME'],
-         ['Maryland', 'MD'],
-         ['Massachusetts', 'MA'],
-         ['Michigan', 'MI'],
-         ['Minnesota', 'MN'],
-         ['Mississippi', 'MS'],
-         ['Missouri', 'MO'],
-         ['Montana', 'MT'],
-         ['Nebraska', 'NE'],
-         ['Nevada', 'NV'],
-         ['New Hampshire', 'NH'],
-         ['New Jersey', 'NJ'],
-         ['New Mexico', 'NM'],
-         ['New York', 'NY'],
-         ['North Carolina', 'NC'],
-         ['North Dakota', 'ND'],
-         ['Ohio', 'OH'],
-         ['Oklahoma', 'OK'],
-         ['Oregon', 'OR'],
-         ['Pennsylvania', 'PA'],
-         ['Puerto Rico', 'PR'],
-         ['Rhode Island', 'RI'],
-         ['South Carolina', 'SC'],
-         ['South Dakota', 'SD'],
-         ['Tennessee', 'TN'],
-         ['Texas', 'TX'],
-         ['Utah', 'UT'],
-         ['Vermont', 'VT'],
-         ['Virginia', 'VA'],
-         ['Washington', 'WA'],
-         ['West Virginia', 'WV'],
-         ['Wisconsin','WI'],
-         ['Wyoming','WY'],
-         ['Alberta','AB'],
-         ['British Columbia',	'BC'],
-         ['Manitoba',	'MB'],
-         ['New Brunswick',	'NB'],
-         ['Newfoundland and Labrador',	'NL'],
-         ['Northwest Territories',	'NT'],
-         ['Nova Scotia',	'NS'],
-         ['Nunavut',	'NU'],
-         ['Ontario',	'ON'],
-         ['Prince Edward Island',	'PE'],
-         ['Quebec',	'QC'],
-         ['Saskatchewan',	'SK'],
-         ['Yukon',	'YT'],
-       ]
+     column_names = ['value','key']
+     us_states = Reference.where(active: "TRUE", group: 'us_states')
+     us_states = us_states.pluck(column_names.join(',')) 
    end
    
    def sponsor_category

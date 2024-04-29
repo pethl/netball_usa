@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_19_132419) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_29_065416) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -252,7 +252,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_19_132419) do
   end
 
   create_table "sponsors", force: :cascade do |t|
-    t.string "category"
+    t.string "sponsor_category"
     t.string "industry"
     t.string "company_name"
     t.string "status"
@@ -268,6 +268,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_19_132419) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.string "city"
+    t.string "state"
   end
 
   create_table "teams", force: :cascade do |t|

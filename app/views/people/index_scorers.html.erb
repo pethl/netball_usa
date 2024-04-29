@@ -54,7 +54,7 @@
         <tbody>
          <% if @people.count >0 %>
          <% @people.each do |person| %>
-            <tr class="bg-white border-b hover:bg-gray-100">
+            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
                 <td class="px-6 py-4">
                   <%= link_to image_tag("view.png", :class=>"mx-2 h-6 w-auto"), person  %>
                  </td>

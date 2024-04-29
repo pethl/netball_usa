@@ -60,7 +60,7 @@
      <div class="mb-6">
         <%= form.label :state, "State*", class: label_class  %>
         <div class="mt-1">
-         <%= form.select :state, options_for_select(us_states, :selected => netball_educator.state),{}, class: input_class %>
+         <%= form.select :state, options_for_select(us_states, :selected => netball_educator.state),{:prompt=>true}, class: input_class %>
         </div>
       </div>
 

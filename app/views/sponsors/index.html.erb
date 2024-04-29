@@ -10,10 +10,19 @@
                     Company 
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Type
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Allocated To
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Status
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    City
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    State
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Location
@@ -30,19 +39,32 @@
                 <th scope="col" class="px-6 py-3">
                     Opportunity Area
                 </th>
+                <th scope="col" class="px-6 py-3">
+                    Notes
+                </th>
             </tr>
         </thead>
         <tbody>
         <% @sponsors.each do |sponsor| %>
-            <tr class="bg-white border-b hover:bg-gray-100">
+            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
-                    <%= link_to sponsor.company_name, edit_sponsor_path(sponsor), class: link_class %><br><%= sponsor.category %> / <%= sponsor.industry %>
+                    <%= link_to sponsor.company_name, edit_sponsor_path(sponsor), class: link_class %>
                 </th>
+                <td class="px-6 py-4">
+                  <%= sponsor.sponsor_category %>  <br>
+                   <%= sponsor.industry %>
+                </td>
                 <td class="px-6 py-4">
                     <%= sponsor.user.full_name unless (sponsor.user_id.to_s.empty?) %>
                 </td>
                 <td class="px-6 py-4">
                     <%= sponsor.status %>
+                </td>
+                <td class="px-6 py-4">
+                   <%= sponsor.city %>
+                </td>
+                <td class="px-6 py-4">
+                   <%= sponsor.state %>
                 </td>
                 <td class="px-6 py-4">
                    <%= sponsor.location %>
@@ -58,6 +80,9 @@
                 </td>
                 <td class="px-6 py-4">
                    <%= sponsor.opportunity_area %>
+                </td>
+                <td class="px-6 py-4">
+                   <%= sponsor.notes %>
                 </td>
             </tr>
             <% end %>

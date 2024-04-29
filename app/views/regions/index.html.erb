@@ -32,23 +32,20 @@
           <tbody>
         
           <% states.each do |state| %>
-              <tr class="bg-white border-b hover:bg-gray-100">
+              <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
                
                   <td class="px-6 py-4">
                      <%= link_to state.state, edit_region_path(state), class: link_class %>
+                     <% %>
                   </td>
-              
-                 
                 
               </tr>
               <% end %>
             
           </tbody>
-      
-      </table>
+          </table>
        <br>  <br>
     <% end %>
- 
    </div>
   </div>
 

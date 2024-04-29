@@ -64,7 +64,7 @@
         </thead>
         <tbody>
         <% educators.each do |educator| %>
-            <tr class="bg-white border-b hover:bg-gray-100">
+            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
                     <%= educator.created_at.to_formatted_s(:usa) unless (educator.created_at.to_s.empty?) %>
                 </th>

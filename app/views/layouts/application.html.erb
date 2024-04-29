@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="h-full bg-gray-100" lang="en">
+<html class="h-full bg-sky-50" lang="en">
  
   <head>
     <title>NetballUsa</title>
@@ -25,6 +25,7 @@
               <%= link_to image_tag("Netball_America_Logo.png", :class=>"mx-2 h-12 w-auto"), root_path %>
            </a>
       </div>
+     
       <div class="flex w-1/5 items-center justify-between  m-4">
       <div class="p-2 " title= "Home">
            <%= link_to root_path do %>
@@ -123,7 +124,7 @@
         <div class="flex flex-row w-screen ">
           <div class="hidden md:flex flex-col bg-sky-50 w-1/5 rounded">
           
-          <div title=<%= current_user.full_name %> class="text-blue-900 text-lg ml-5 mt-4">
+          <div title=<%= current_user.full_name %> class="text-blue-900 text-lg ml-5">
           Contents
              </div>
           
@@ -167,7 +168,7 @@
                <li class="mt-2 ml-2">
                    <a href="/people/index_scorers" class="text-blue-800 hover:font-bold">- Scorers</a>
                </li>
-               <li class="mt-2 ml-2">
+               <li class="mt-2 ml-2 mr-1 whitespace-nowrap">
                    <a href="/people/index_trainers_and_ambassadors" class="text-blue-800 hover:font-bold">- Trainers/Ambassadors</a>
                </li>
                <li class="mt-2 ml-2">
@@ -223,22 +224,21 @@
           <div class="flex w-full ">
             <div class="flex flex-col w-full h-full">
              
-             <!--Content title   starts -->
-              <div class="flex bg-blue-900 sticky">
-              <% if content_for(:page_title)%>
-                <div class="">
-                  <div class="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
-                    <h1 class="text-md font-medium text-left font-bold tracking-tight text-white">
-                    <%= yield(:page_title)%></h1>
-                  </div>
-                </div>
-              <% end %>
-              </div>
-               <!--Content title end -->
-              
                <!--Content Bucket  starts -->
-              <div class="flex bg-gray-100 w-full h-screen sticky">
-                <div class="m-4 w-full bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm overflow-x-auto ">
+              <div class="flex bg-blue-900 w-full h-screen rounded-lg ">
+              
+                <div class="m-2 w-full bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm overflow-x-auto">
+                  <div class="flex bg-blue-900 sticky rounded-lg">
+                  <% if content_for(:page_title)%>
+                    <div class="">
+                      <div class="mx-auto max-w-7xl px-4 py-2">
+                        <p class="text-md font-medium text-left font-bold tracking-tight text-white">
+                        <%= yield(:page_title)%></p>
+                      </div>
+                    </div>
+                  <% end %>
+                  </div>
+                  <br>
                     <main>
                       <p class="notice"><%= notice %></p>
                       <p class="alert"><%= alert %></p>
@@ -265,7 +265,7 @@
        <% if content_for(:page_title)%>
          <header class="bg-white shadow">
            <div class="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
-             <h1 class="text-xl font-light font-bold border-2 border-white tracking-tight text-blue-900">
+             <h1 class="text-xl font-bold border-2 border-white tracking-tight text-blue-900">
              <%= yield(:page_title)%></h1>
            </div>
          </header>
