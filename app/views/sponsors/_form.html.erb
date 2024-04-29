@@ -96,14 +96,14 @@
   </div>
  
 
-  <div class="grid grid-cols-4 gap-4">
-   <div class="mb-4 col-span-2">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
+   <div class="mb-4 md:col-span-2">
     <%= form.label :key_contacts, "Key Contact Names", class: label_class%>
      <div class="mt-1">
     <%= form.text_area :key_contacts, class: form_input_class  %>
    </div> </div>
 
-   <div class="mb-4 col-span-2">
+   <div class="mb-4 md:col-span-2">
     <%= form.label :phone_numbers_emails, "Key Contact Phone/email", class: label_class%>
      <div class="mt-1">
     <%= form.text_area :phone_numbers_emails, class: form_input_class  %>
