@@ -20,13 +20,13 @@
   <header class="border-blue-900 text-blue-900 bg-sky-50 sticky top-0 z-10 w-screen">
   
    <div class="flex flex-row">
-      <div class="flex w-4/5 items-center place-items-start m-4">
+      <div class="flex w-4/5 items-center place-items-start m-2">
           <a href="https://netball-america.com" class="flex items-center space-x-3 rtl:space-x-reverse">
               <%= link_to image_tag("Netball_America_Logo.png", :class=>"mx-2 h-12 w-auto"), root_path %>
            </a>
       </div>
      
-      <div class="flex w-1/5 items-center justify-between  m-4">
+     <div class="flex w-1/5 items-center justify-between m-4">
       <div class="p-2 " title= "Home">
            <%= link_to root_path do %>
              <i class="fa-solid fa-house text-blue-800 hover:underline"></i>
@@ -50,9 +50,10 @@
       </div>
    </div>
   
-    <div class="md:hidden sm:w-full  sm:justify-items bg-blue-900 text-white">
+    <div class="md:hidden sm:w-full sm:justify-items bg-blue-900 text-white">
          
     <table class="m-1 w-full text-center">
+    <br>
       <tr>
         <td>
           <a href="/netball_educators/pe_directors" class="mt-8 hover:font-bold">PE DIRECTORS</a>
@@ -111,21 +112,18 @@
       </tr>
       <% end %>
     </table>
-         
+    <br>
      
      </div>
   </header>
- 
-      
-    
-     <!-- Headerbar Sticky end -->
+<!-- Headerbar Sticky end -->
      
-        <!--Sidebar nav starts -->
-        <div class="flex flex-row w-screen ">
+  <!--Sidebar nav starts -->
+      <div class="flex flex-row w-screen">
           <div class="hidden md:flex flex-col bg-sky-50 w-1/5 rounded">
           
-          <div title=<%= current_user.full_name %> class="text-blue-900 text-lg ml-5">
-          Contents
+             <div title=<%= current_user.full_name %> class="text-blue-900 text-lg ml-5">
+                 Contents
              </div>
           
           <ul class="ml-6 text-xs xl:text-xs ">
@@ -147,18 +145,18 @@
                <li class="mt-2 ml-2">
                    <a href="/netball_educators/search" class="text-blue-800 hover:font-bold">- Search</a>
                </li>
-            <li class="mt-2">
-               <a href="/follow_ups/" class="text-blue-800 hover:font-bold">ED. FOLLOW UPs</a>
-           </li>
-            <li class="mt-2">
-               <a href="/sponsors" class="text-blue-800 hover:font-bold">SPONSORS</a>
-           </li>
-            <li class="mt-2">
-               <a href="/grants/" class="text-blue-800 hover:font-bold">GRANTS</a>
-           </li>
-            <li class="mt-2">
-               <a href="/people" class="mt-8 text-blue-800 hover:font-bold">NA PEOPLE</a>
-           </li>
+                <li class="mt-2">
+                   <a href="/follow_ups/" class="text-blue-800 hover:font-bold">ED. FOLLOW UPs</a>
+               </li>
+                <li class="mt-2">
+                   <a href="/sponsors" class="text-blue-800 hover:font-bold">SPONSORS</a>
+               </li>
+                <li class="mt-2">
+                   <a href="/grants/" class="text-blue-800 hover:font-bold">GRANTS</a>
+               </li>
+                <li class="mt-2">
+                   <a href="/people" class="mt-8 text-blue-800 hover:font-bold">NA PEOPLE</a>
+               </li>
                <li class="mt-2 ml-2">
                    <a href="/people/" class="text-blue-800 hover:font-bold">- US Umpires</a>
                </li>
@@ -193,41 +191,40 @@
                    <a href="/transfers/index_outbound_pickup" class="text-blue-800 hover:font-bold">- Departure Transfers</a>
                </li>
             <% if is_admin? %>  
-               <li class="mt-2">
-                   <a href="/teams/" class="text-blue-800 hover:font-bold">TEAMS</a>
-               </li>
-               <li class="mt-2 ml-2">
-                   <a href="/teams/teams_list_index" class="text-blue-800 hover:font-bold">- Teams Report</a>
-               </li>
+                   <li class="mt-2">
+                       <a href="/teams/" class="text-blue-800 hover:font-bold">TEAMS</a>
+                   </li>
+                   <li class="mt-2 ml-2">
+                       <a href="/teams/teams_list_index" class="text-blue-800 hover:font-bold">- Teams Report</a>
+                   </li>
                     <li class="mt-2 text-gray-600 font-semibold">
                     Admin Only
                     </li>
-                     <li class="mt-2">
-                         <a href="/budgets" class="text-gray-600 hover:font-bold">Budgets</a>
-                     </li>
-                     <li class="mt-2">
-                         <a href="/references/" class="text-gray-600 hover:font-bold">Ref Data</a>
-                     </li>
-                     
-                      <li class="mt-2">
-                         <a href="/sample_words" class="text-gray-600  hover:font-bold">Sample Wording</a>
-                     </li>
-                     <li class="mt-2">
-                        <a href="/users" class="text-gray-600 hover:font-bold">Users</a>
-                    </li>
+                   <li class="mt-2">
+                       <a href="/budgets" class="text-gray-600 hover:font-bold">Budgets</a>
+                   </li>
+                   <li class="mt-2">
+                       <a href="/references/" class="text-gray-600 hover:font-bold">Ref Data</a>
+                   </li>
+                   
+                    <li class="mt-2">
+                       <a href="/sample_words" class="text-gray-600  hover:font-bold">Sample Wording</a>
+                   </li>
+                   <li class="mt-2">
+                      <a href="/users" class="text-gray-600 hover:font-bold">Users</a>
+                  </li>
               <% end %>
            </ul>
           </div>
         <!--Sidebar nav end -->
         
         <!--Main Bucket  starts -->
-          <div class="flex w-full ">
-            <div class="flex flex-col w-full h-full">
+          <div class="flex w-4/5">
+            <div class="flex flex-col h-full">
              
                <!--Content Bucket  starts -->
-              <div class="flex bg-blue-900 w-full h-screen rounded-lg ">
               
-                <div class="m-2 w-full bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm overflow-x-auto">
+                <div class="m-2 bg-white py-4 px-2 shadow sm:rounded-lg sm:px-10 text-sm overflow-x-auto">
                   <div class="flex bg-blue-900 sticky rounded-lg">
                   <% if content_for(:page_title)%>
                     <div class="">
@@ -259,7 +256,7 @@
      
     <% else %>
      <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-      <div class="bg-white py-6 px-4 shadow sm:rounded-lg sm:px-10">
+      <div class="bg-white py-6 px-2 shadow rounded-lg sm:px-10 overflow-x-auto">
        <%= image_tag 'Netball_America_Logo.png', :class => "mx-auto h-13 w-auto" %>
        
        <% if content_for(:page_title)%>

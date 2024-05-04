@@ -9,17 +9,19 @@ class NetballEducator < ApplicationRecord
   
   validates :first_name, presence: true, length: { maximum: 30 }
   validates :last_name, presence: true, length: { maximum: 50 }
-  validates :phone, phone: true, allow_blank: true
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+validates :email, presence:   true,
+                    format:     { with: VALID_EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false }
+  
+#  validates :phone, phone: true, allow_blank: true
   validates :school_name, presence: true, length: { maximum: 100 }
   validates :city, presence: true, length: { maximum: 50 }
   validates :state, presence: true, length: { maximum: 30 }
   validates :level, presence: true
                      
     
-    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence:   true,
-                      format:     { with: VALID_EMAIL_REGEX },
-                      uniqueness: { case_sensitive: false }
+ 
  
   def follow_up
     FollowUp.where(netball_educator_id: self.id)

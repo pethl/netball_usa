@@ -1,7 +1,7 @@
 <div class=" sm:mx-auto sm:w-full sm:max-w-md">
   <div class="bg-white-400 py-2 px-2 shadow sm:rounded-lg sm:px-6">
   
-  <p class="text-xl text-blue-900">Teacher's Information Form</p><br>
+  <p class="text-xl text-blue-900">Educator's Request for<br> More Information</p><br>
 
 <%= form_with(model: educator) do |form| %>
   <% if educator.errors.any? %>
@@ -72,14 +72,14 @@
  <div class="mb-6">
     <%= form.label :state, "State*", class: label_class  %>
     <div class="mt-1">
-    <%= form.select :state, options_for_select(us_states),{}, class: input_class %>
+    <%= form.select :state, options_for_select(us_states),{:prompt=>true}, class: input_class %>
    </div>
   </div>
 
    <div class="mb-6">
     <%= form.label :level, "Role/Level*", class: label_class  %>
     <div class="mt-1">
-    <%= form.select :level, options_for_select(educator_level),{}, class: input_class %>
+    <%= form.select :level, options_for_select(educator_level),{:prompt=>true}, class: input_class %>
    </div>
   </div>
 

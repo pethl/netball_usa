@@ -23,7 +23,7 @@
   <div class="mb-4">
      <%= form.label :allocated_to, class: label_class%>
       <div class="mt-1">
-      <%= form.collection_select(:user_id, @users, :id, :full_name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
+      <%= form.collection_select(:user_id, @users, :id, :full_name,{:prompt=>true}, {:class=>"bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 hover:border-blue-900 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
     }) %>
    </div> 
    </div>
@@ -31,7 +31,7 @@
    <div class="mb-4">
     <%= form.label :opportunity_area, class: label_class%>
      <div class="mt-1">
-    <%= form.select :opportunity_area, options_for_select(sponsor_opportunity_area, :selected => sponsor.opportunity_area),{:prompt=>true}, class: input_class %>
+    <%= form.select :opportunity_area, options_for_select(sponsor_opportunity_area, :selected => sponsor.opportunity_area),{:prompt=>true}, class: form_input_class %>
    </div> </div>
       </div>
 

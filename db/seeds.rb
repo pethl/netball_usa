@@ -56,6 +56,7 @@ Reference.create(group:	'people_role',	value:	'Trainer', active:	'TRUE');
 Reference.create(group:	'people_role',	value:	'Ambassador', active:	'TRUE');
 Reference.create(group:	'people_region',	value:	'US & Canada', active:	'TRUE');
 Reference.create(group:	'people_region',	value:	'International', active:	'TRUE');
+Reference.create(group:	'people_level',	value:	'New', active:	'TRUE');
 Reference.create(group:	'people_level',	value:	'Beginner', active:	'TRUE');
 Reference.create(group:	'people_level',	value:	'Intermediate', active:	'TRUE');
 Reference.create(group:	'people_level',	value:	'Advanced', active:	'TRUE');
