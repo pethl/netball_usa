@@ -1,6 +1,6 @@
 class AdminMailer < ApplicationMailer
   class AdminMailer < Devise::Mailer
-    default from: 'lisa@redrink.co.uk'
+    default from: 'no-reply@netballamerica.com'
     layout 'mailer'
 
     def new_user_waiting_for_approval(email)
