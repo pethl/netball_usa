@@ -1,10 +1,10 @@
 <h2>Resend confirmation instructions</h2>
-
+<br>
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }, data: {turbo: "false"}) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email, class: label_class %><br />
+    <%= f.label :email, class: label_class %>
     <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: input_class %>
   </div>
 
@@ -12,5 +12,5 @@
     <%= f.submit "Resend confirmation instructions", class: form_button_class %>
   </div>
 <% end %>
-
+<br>
 <%= render "devise/shared/links" %>
