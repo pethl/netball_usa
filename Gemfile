@@ -83,3 +83,5 @@ gem 'prawn', '~> 2.5'
 gem 'prawn-table', '~> 0.1.0'
 gem 'thor', '~> 1.0.0'
 
+
+gem "cancancan", "~> 3.5"

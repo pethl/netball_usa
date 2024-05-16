@@ -1,11 +1,10 @@
 <div id="<%= dom_id team %>">
  
-
  <%= turbo_frame_tag team do %>
  
   <div class="team">
  
-  <div class="flex w-2/3 justify-between items-center border border-blue-900 rounded m-4 ">
+  <div class="flex justify-between items-center border border-blue-900 rounded m-4 ">
     <div class="ml-4">
      <span class="text-lg"> <%= link_to team.name, team_path(team),  data: { turbo_frame: "_top" }, class: link_class %></span>
      <br>
