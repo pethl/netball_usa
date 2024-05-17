@@ -61,6 +61,8 @@
            </div>
     </div>
   
+   
+     <% if current_user.role =="admin" || current_user.role =="office"%> 
     <div class="md:hidden sm:w-full sm:justify-items bg-blue-900 text-white">
          
       <table class="m-1 w-full text-center">
@@ -98,6 +100,17 @@
              <a href="/transfers" class="hover:font-bold">US OPEN</a>
           </td>
         </tr>
+        <tr>
+          <td>
+            <a href="/teams" class="hover:font-bold">MEMBERSHIP</a>
+          </td>
+          <td>
+             <a href="#" class="hover:font-bold"></a>
+          </td>
+          <td>
+              <a href="#" class="hover:font-bold"></a>
+          </td>
+        </tr>
       <% if is_admin? %>  
         <tr>
           <td>
@@ -125,6 +138,7 @@
       </table>
       <br>
      
+       <% end %>
      </div>
   </header>
 <!-- Headerbar Sticky end -->
