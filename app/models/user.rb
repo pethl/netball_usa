@@ -14,11 +14,18 @@ class User < ApplicationRecord
     inverse_of: :creator
   )
   
+  enum role: [:admin, :office, :teamlead]
+  after_initialize :set_default_role, :if => :new_record?
+  
+  def set_default_role
+    self.role || :teamlead
+  end
   
   def full_name
     "#{self.first_name} #{self.last_name}"
   end
   
+ 
 #  def active_for_authentication? 
 #    super && approved?
 #  end 

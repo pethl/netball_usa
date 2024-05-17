@@ -4,7 +4,7 @@ class TeamsController < ApplicationController
 
   # GET /teams
   def index
-     if is_admin? 
+     if current_user&.admin? || current_user&.office?
          @teams = Team.ordered
         else
       @teams = current_user.teams
@@ -16,9 +16,8 @@ class TeamsController < ApplicationController
       @teams = @teams.order(state: :asc)
       @teams_by_state = @teams.group_by { |t| t.state }
       @teams_by_state = @teams.group_by { |t| t.state }
-        @regions = Region.all.order(region: :asc)
-        @regions_by_region = @regions.group_by { |t| t.region }
-  
+      @regions = Region.all.order(region: :asc)
+      @regions_by_region = @regions.group_by { |t| t.region }
  end
   
   # GET /teams/1

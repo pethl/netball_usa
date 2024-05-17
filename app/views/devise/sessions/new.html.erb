@@ -5,7 +5,7 @@
 <% end %>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name),data: {turbo: false}) do |f| %>
-  <br>
+
   <div class="mb-6">
     <%= f.label :email, class: label_class %>
     <div class="mt-1">
@@ -20,20 +20,21 @@
     </div>
   </div>
 
-  <div class="flex items-center justify-between mb-6">
+  <div class="flex content-center justify-between mb-6">
     <% if devise_mapping.rememberable? %>
       <div class="flex items-center">
         <%= f.check_box :remember_me, class: "h-4 w-4 rounded border-gray-300 text-sky-800 focus:ring-sky-800" %>
         <%= f.label :remember_me, class: "ml-2 block text-sm text-gray-900" %>
       </div>
     <% end %>
-      </div>
+     
 
     <% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
       <div class="text-sm mb-4">
         <%= link_to "Forgot your password?", new_password_path(resource_name), class: "font-medium text-sky-800 hover:text-sky-800" %>
       </div>
     <% end %>
+     </div>
    
    
     <% if devise_mapping.confirmable? && controller_name != 'confirmations' %>

@@ -14,7 +14,6 @@
     </div>
     
     <div class="justify-between flex items-center m-4 w-32">
-    <% if team.members.count ==0 %>
       <div>
         <%= button_to "Delete",
                   team_path(team),
@@ -22,7 +21,6 @@
                   form: { data: { turbo_confirm: "Are you sure?" } },
                   class: red_link_class %>
       </div>
-      <% end %>
       <div>
         <%= link_to "Edit",
                     edit_team_path(team),
