@@ -134,16 +134,15 @@
      <div class="relative md:flex flex-row h-screen w-screen overflow-hidden">
       
     
-           <div class="hidden md:flex flex-col w-1/5 h-screen bg-blue-900 border-0 relative">
-          
-             <div title=<%= current_user.full_name %> class="text-gray-100 text-lg ml-5">
-                 Contents
-             </div>
-          
-             <ul class="ml-6 text-xs xl:text-xs ">
-               <% unless current_user.teamlead? %>
+       <div class="hidden md:flex flex-col w-1/5 h-screen bg-blue-900 border-0 relative">
+      
+         <ul class="ml-6 text-xs xl:text-xs ">
+           <% unless current_user.teamlead? %>
              
-               <li class="mt-4">
+             <div title=<%= current_user.full_name %> class="underline underline-offset-8 text-gray-100 text-sm tracking-tight ml-6">
+                 Hi <%= current_user.full_name %>
+             </div>
+               <li class="mt-2">
                    <a href="/netball_educators/pe_directors" class="mt-8 text-gray-100 hover:font-bold">PE DIRECTORS</a>
                </li>
                <li class="mt-2">
@@ -206,32 +205,43 @@
                <li class="mt-2 ml-2">
                    <a href="/transfers/index_outbound_pickup" class="text-gray-100 hover:font-bold">- Departure Transfers</a>
                </li>
-               <% end %>
-               
                <li class="mt-2">
-                   <a href="/teams/" class="text-gray-100 hover:font-bold">TEAMS</a>
+                   <a href="/teams/" class="text-gray-100 hover:font-bold">MEMBERSHIP</a>
                </li>
+               <% end %>
+                 <% if current_user.teamlead? %>
+                   <div title=<%= current_user.full_name %> class="italic underline underline-offset-8 text-gray-100 text-sm tracking-tight ">
+                       Hi <%= current_user.full_name %>
+                   </div>
+                   <li class="mt-2">
+                       <a href="/" class="text-gray-100 hover:font-bold">Home</a>
+                   </li>
+                   <li class="mt-2">
+                       <a href="/teams/" class="text-gray-100 hover:font-bold">My Team(s)</a>
+                   </li>
+                    <% end %>
               
             <% if is_admin? %>  
-                    <li class="mt-2 ml-2">
-                        <a href="/teams/teams_list_index" class="text-gray-100 hover:font-bold">- Teams Report</a>
-                    </li>
-                    <li class="mt-2 text-gray-300 font-semibold">
+                    <li class="mt-2 text-sky-300 font-semibold">
                     Admin Only
                     </li>
-                   <li class="mt-2">
-                       <a href="/budgets" class="text-gray-300 hover:font-bold">Budgets</a>
+                    <li class="mt-2 ml-2">
+                      <a href="/teams/teams_list_index" class="text-sky-300 hover:font-bold">Teams Report</a>
+                    </li>
+                   <li class="mt-2 ml-2">
+                       <a href="/budgets" class="text-sky-300 hover:font-bold">Budgets</a>
                    </li>
-                   <li class="mt-2">
-                       <a href="/references/" class="text-gray-300 hover:font-bold">Ref Data</a>
+                   <li class="mt-2 ml-2">
+                       <a href="/references/" class="text-sky-300 hover:font-bold">Ref Data</a>
                    </li>
                    
-                    <li class="mt-2">
-                       <a href="/sample_words" class="text-gray-300  hover:font-bold">Sample Wording</a>
+                    <li class="mt-2 ml-2">
+                       <a href="/sample_words" class="text-sky-300  hover:font-bold">Sample Wording</a>
                    </li>
-                   <li class="mt-2">
-                      <a href="/users" class="text-gray-300 hover:font-bold">Users</a>
+                   <li class="mt-2 ml-2">
+                      <a href="/users" class="text-sky-300 hoover:font-bold">Users</a><br>
                   </li>
+                   <br><br>
                <% end %>
            </ul>
            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -244,10 +254,8 @@
              
                <!--Content Bucket  starts -->
               
-                <div class="m-2 mr-2 bg-white py-2 px-2 text-sm">
+                <div class="m-2 mr-4 bg-white py-2 px-2 text-sm">
                  
-                
-                  <br>
                     <main>
                       <p class="notice"><%= notice %></p>
                       <p class="alert"><%= alert %></p>

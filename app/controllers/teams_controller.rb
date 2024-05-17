@@ -4,11 +4,23 @@ class TeamsController < ApplicationController
 
   # GET /teams
   def index
-     if current_user&.admin? || current_user&.office?
-         @teams = Team.ordered
-        else
-      @teams = current_user.teams
-    end
+      
+     if current_user.admin? 
+        # @teams = Team.ordered
+         @teams = Team.all
+         @teams = @teams.order(state: :asc)
+         @teams_by_state = @teams.group_by { |t| t.state }
+         @teams_by_state = @teams.group_by { |t| t.state }
+         @regions = Region.all.order(region: :asc)
+         @regions_by_region = @regions.group_by { |t| t.region }
+        
+        elsif current_user.role =="office"
+          @teams = Team.ordered
+          
+        else current_user.role =="teamlead"
+          @teams = current_user.teams
+          @team = current_user.teams.first
+       end
   end
   
   def teams_list_index

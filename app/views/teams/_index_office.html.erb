@@ -1,0 +1,68 @@
+<% content_for(:page_title, "Teams")%>
+
+<div class="mt-1">
+<br>
+  <%= link_to "Add New team", new_team_path, class: form_button_class %>
+  <br><br>
+</div>
+
+<% if @teams.any? %>
+<div id="teams">
+
+<div class="relative overflow-x-auto">
+    <table class="table-fixed w-full text-left rtl:text-right">
+        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+             <tr>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Team Name
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Location
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Website
+                </th>
+              
+                <th scope="col" class="px-6 py-3 w-52">
+                    Member Count
+                </th>
+               
+            </tr>
+        </thead>
+        <tbody>
+        <% @teams.each do |team| %>
+            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+               
+                <td class="px-6 py-4">
+                   <%= link_to team.name, team_path(team), class: link_class %>
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= team.city  %>,  <%= team.state  %>
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= team.website %>
+                </td>
+                
+                <td class="px-6 py-4">
+                  <%= team.members.count %>
+                </td>
+                
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+ </div>
+</div>
+
+    <% else %>
+    <p class="px-6 py-4">
+    No records to view</p>
+    <% end %>
+<br>
+
+
+
+

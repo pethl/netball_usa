@@ -1,11 +1,13 @@
 <% content_for(:page_title, "Team")%>
 
-<main class="container">
+<main class="container max-w-1/2">
 
 <div class="header">
   <div class="m-2">
-   <span class="text-lg"> <%= @team.name  %></span>
+   <span class="font-semibold"> <%= @team.name  %></span>
    <br>
+   <span class="font-light"> <%= @team.city  %>, <%= @team.state  %></span>
+   <br> <br>
    <span class="text-gray-600 text-sm"> Team administered by: </span><%= @team.creator.full_name %>
   </div>
   <hr>
@@ -22,6 +24,6 @@
     <%= render @members, team: @team %>
   <% end %>
   
-    <hr>
+    <hr><br>
     <%= link_to sanitize("&larr; Back to teams"), teams_path %>
 </main>

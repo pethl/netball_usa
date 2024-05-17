@@ -1,18 +1,13 @@
-<% content_for(:page_title, "Teams")%>
 
-<main class="container">
-  <div class="header m-2">
-  
-      <%= link_to "Add New team",
-                new_team_path,
-                class: form_button_class, data: { turbo_frame: dom_id(Team.new) } %>
-   </div>
-   <br>
-  
-   <%= turbo_frame_tag Team.new %>
+<% if current_user.role == "admin" %>
+  <%= render "index_admin" %>
+   
+   <% elsif current_user.role == "office" %>
+    <%= render "index_office" %>
+   
+   <% else %>
+      <%= render "index_teamlead" %>
     
-   <%= turbo_frame_tag "teams" do %>
-    <%= render @teams %>
-   <% end %>
-</main>
+<% end %>
+
 

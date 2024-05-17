@@ -152,6 +152,7 @@ Reference.create(group:	'us_states',	value:	'Montana', key:	'MT', active:	'TRUE'
 Reference.create(group:	'us_states',	value:	'Nebraska', key:	'NE', active:	'TRUE');
 Reference.create(group:	'us_states',	value:	'Nevada', key:	'NV', active:	'TRUE');
 Reference.create(group:	'us_states',	value:	'New Hampshire', key:	'NH', active:	'TRUE');
+Reference.create(group:	'us_states',	value:	'New Jersey', key:	'NJ', active:	'TRUE');
 Reference.create(group:	'us_states',	value:	'New Mexico', key:	'NM', active:	'TRUE');
 Reference.create(group:	'us_states',	value:	'New York', key:	'NY', active:	'TRUE');
 Reference.create(group:	'us_states',	value:	'North Carolina', key:	'NC', active:	'TRUE');

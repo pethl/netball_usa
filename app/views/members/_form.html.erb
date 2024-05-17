@@ -37,12 +37,12 @@
 
         <div>
           <%= form.label :state, class: label_class %>
-          <%= form.select :state, options_for_select(us_states, :selected => member.state),{}, class: input_class %>
+          <%= form.select :state, options_for_select(us_states, :selected => member.state),{:prompt=>true}, class: input_class %>
         </div>
 
         <div>
           <%= form.label :gender, class: label_class%>
-          <%= form.select :gender, options_for_select(gender, :selected => member.gender),{}, class: input_class %>
+          <%= form.select :gender, options_for_select(gender, :selected => member.gender),{:prompt=>true}, class: input_class %>
        </div>
 
         <div>

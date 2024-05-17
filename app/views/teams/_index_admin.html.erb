@@ -1,0 +1,68 @@
+<% content_for(:page_title, "All Teams Report")%>
+ 
+<main class="container m-6">
+
+    <div class="relative overflow-x-auto">
+         <table class="table-fixed w-full text-left rtl:text-right">
+             <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+                 <tr>
+                     <th scope="col" class="px-3 py-3 text-center">
+                         Club Name 
+                     </th>
+                     <th scope="col" class="px-3 py-3 text-right">
+                         City 
+                     </th>
+                     <th scope="col" class="px-3 py-3">
+                         State 
+                     </th>
+                     <th scope="col" class="px-3 py-3">
+                         Member Count
+                     </th>
+                
+                     <th scope="col" class="px-3 py-3">
+                         Admin
+                     </th>
+                  </tr>
+                 </thead>
+        
+      <%  @regions_by_region.each do |region, states| %>
+        <tbody>
+            <tr>
+              <th scope="row" colspan="5" class="text-2xl text-blue-900 mt-8 py-4 font-medium whitespace-nowrap dark:text-white">
+               <%= region %>
+              </th>
+            </tr>
+
+         <% @teams_by_state.each do |state, teams| %>
+           <% if Region.where(["region = ? and state = ?", region, state]).any? %>
+      
+                          <% teams.each do |team| %>
+                              <tr class="bg-white border-b hover:bg-gray-100">
+                             
+                                  <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                                      <%= link_to team.name, (team), class: link_class %>
+                                  </th>
+                                  <td class="px-6 py-4 text-right">
+                                      <%= team.city %>
+                                  </td>
+                                  <td scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                                      <%= team.state %></td>
+                                  <td class="px-6 py-4">
+                                      <%= team.members.count %>
+                                  </td>
+                             
+                                  <td class="px-6 py-4">
+                                      <%= team.creator.full_name %><br>
+                                       <%= team.creator.email %>
+                                  </td>
+                                  </tr>
+                       </tbody>
+                   <% end %>
+                     <% end %>
+                     <% end %>
+                      <% end %>
+            </table>
+        
+     </div>
+</main>
+
