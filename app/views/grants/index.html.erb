@@ -51,7 +51,6 @@
                 
                 <td class="px-6 py-4">
                    <%= grant.apply? ? 'Yes' : 'No'  %>
-                   
                 </td>
                 
                 <td class="px-6 py-4">
@@ -66,13 +65,12 @@
                    <%= grant.due_date.to_formatted_s(:usa_dt) unless (grant.created_at.to_s.empty?) %> - <%= grant.timezone %>
                 </td>
                 
-                 <td class="px-6 py-4">
+                 <td class="px-6 py-4 truncate">
                     <%= grant.purpose %>
                 </td>
                 
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 truncate">
                    <%= (link_to grant.grant_link, grant.grant_link, target: '_blank', class: link_class) unless (grant.grant_link.to_s.empty?)%>
-                 
                 </td>
                 
                 <td class="px-6 py-4 truncate">
