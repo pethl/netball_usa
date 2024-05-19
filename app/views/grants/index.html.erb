@@ -45,7 +45,7 @@
         <% @grants.each do |grant| %>
             <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
                
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 truncate">
                    <%= link_to grant.name, edit_grant_path(grant), class: link_class %>
                 </td>
                 
@@ -63,7 +63,7 @@
                   
                 </td>
                 <td class="px-6 py-4">
-                   <%= grant.due_date.to_formatted_s(:usa) unless (grant.created_at.to_s.empty?) %>
+                   <%= grant.due_date.to_formatted_s(:usa_dt) unless (grant.created_at.to_s.empty?) %> - <%= grant.timezone %>
                 </td>
                 
                  <td class="px-6 py-4">

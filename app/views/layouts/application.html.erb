@@ -29,28 +29,54 @@
       </div>
      
      <div class="flex w-1/5 items-center justify-between m-4">
-        <div class="p-2 " title= "Home">
-             <%= link_to root_path do %>
-               <i class="fa-solid fa-house text-blue-800 hover:underline"></i>
-             <% end %>
-        </div>
-         <div class="p-2 " title= "Edit User">
+        
+        <div class="p-2">
+         <%= link_to root_path do %>
+            <i data-tooltip-target="tooltip-home" class="fa-solid fa-house text-blue-800"> </i>
+          <% end %>
+          <div id="tooltip-home" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+              Home Page
+              <div class="tooltip-arrow" data-popper-arrow></div>
+          </div>
+          </div>
+        
+        
+         <div class="p-2">
            <%= link_to edit_user_registration_path do %>
-             <i class="fa-solid fa-user text-blue-800"> </i>
-             <% end %>
-         </div>
-         <div class="p-2 " title="Logout">
+             <i data-tooltip-target="tooltip-edit" class="fa-solid fa-user text-blue-800"> </i>
+           <% end %>
+           <div id="tooltip-edit" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+               Edit Profile
+               <div class="tooltip-arrow" data-popper-arrow></div>
+           </div>
+           </div>
+        
+         <div class="p-2">
            <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
-             <i class="fa-solid fa-arrow-right-from-bracket text-blue-800"></i>
+             <i data-tooltip-target="tooltip-logout" class="fa-solid fa-arrow-right-from-bracket text-blue-800"> </i>
            <% end %>
-         </div>
-         <div class="p-2 text-xl" title="Info">
-           <%= link_to asset_path("NA_System_User_Guide_V1_1.pdf", skip_pipeline: true) do %>
-             <i class="fa-solid fa-circle-info text-blue-800"></i>
-           <% end %>
-         </div>
+           <div id="tooltip-logout" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+               Logout
+               <div class="tooltip-arrow" data-popper-arrow></div>
+           </div>
+           </div>
+         
+           <% unless current_user.teamlead? %>
+           <div class="p-2 text-lg">
+             <%= link_to asset_path("NA_System_User_Guide_V1_1.pdf", skip_pipeline: true) do %>
+               <i data-tooltip-target="tooltip-help" class="fa-solid fa-circle-info text-blue-800"> </i>
+             <% end %>
+             <div id="tooltip-help" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+              Help
+                 <div class="tooltip-arrow" data-popper-arrow></div>
+             </div>
+             </div>
+          <% end %>
+     
       </div>
-      </div>      
+      </div>    
+      
+        
       <div class="container">
           <div class="block border-0 w-screen bg-blue-900 text-center text-white">
             <% if content_for(:page_title)%>
@@ -63,7 +89,7 @@
   
    
      <% if current_user.role =="admin" || current_user.role =="office"%> 
-    <div class="md:hidden sm:w-full sm:justify-items bg-blue-900 text-white">
+    <div class="md:hidden sm:w-fit sm:justify-items bg-blue-900 text-white">
          
       <table class="m-1 w-full text-center">
       <br>
@@ -227,10 +253,8 @@
                    <div title=<%= current_user.full_name %> class="italic underline underline-offset-8 text-gray-100 text-sm tracking-tight ">
                        Hi <%= current_user.full_name %>
                    </div>
-                   <li class="mt-2">
-                       <a href="/" class="text-gray-100 hover:font-bold">Home</a>
-                   </li>
-                   <li class="mt-2">
+                  
+                   <li class="mt-6">
                        <a href="/teams/" class="text-gray-100 hover:font-bold">My Team(s)</a>
                    </li>
                     <% end %>
@@ -271,9 +295,10 @@
                 <div class="m-2 mr-4 bg-white py-2 px-2 text-sm">
                  
                     <main>
+                    <div class="text-center">
                       <p class="notice"><%= notice %></p>
                       <p class="alert"><%= alert %></p>
-                     
+                   </div>  
                       <div class="overflow-x-auto">
                        <%= yield %>
                       </div>

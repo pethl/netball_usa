@@ -10,6 +10,7 @@
 #NetballEducator.create(first_name: 'Katlin',last_name: 'Smith',email: 'katlin99@gmail.com',phone: '1314888876',school_name: 'Valleyview High School',city: 'Dallas',state: 'TX', educator_notes: 'Callback for equipment', mgmt_notes: 'Spoke at meeting', );
 #NetballEducator.create(first_name: 'Robin',last_name: 'Hall',email: 'robinhall@gmail.com',phone: '162345676',school_name: 'Jackson High School',city: 'Austin',state: 'TX', educator_notes: 'Callback for equipment', mgmt_notes: 'Spoke at session', );
 Reference.destroy_all
+Reference.create(group:	'sponsor_category',	value:	"Fitness", active:	'TRUE');
 Reference.create(group:	'sponsor_category',	value:	"Women's Products", active:	'TRUE');
 Reference.create(group:	'sponsor_category',	value:	'Oz companies', active:	'TRUE');
 Reference.create(group:	'sponsor_category',	value:	'UK companies', active:	'TRUE');
@@ -18,12 +19,13 @@ Reference.create(group:	'sponsor_category',	value:	'Sth Africa companies', activ
 Reference.create(group:	'sponsor_category',	value:	'Caribbean companies', active:	'TRUE');
 Reference.create(group:	'sponsor_category',	value:	'Pacific Islander companies', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Beverage', active:	'TRUE');
-Reference.create(group:	'sponsor_industry',	value:	'Food', active:	'TRUE');
-Reference.create(group:	'sponsor_industry',	value:	'Retail - Clothing', active:	'TRUE');
-Reference.create(group:	'sponsor_industry',	value:	'Retail - Care Products', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Entertainment', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Financial Services', active:	'TRUE');
+Reference.create(group:	'sponsor_industry',	value:	'Food', active:	'TRUE');
+Reference.create(group:	'sponsor_industry',	value:	'Health and Wellness', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Media', active:	'TRUE');
+Reference.create(group:	'sponsor_industry',	value:	'Retail - Clothing', active:	'TRUE');
+Reference.create(group:	'sponsor_industry',	value:	'Retail - Care Products', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Software', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Sports', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Telecommunications', active:	'TRUE');
@@ -115,6 +117,14 @@ Reference.create(group:	'us_open_hotel_name',	value:	'2023- Best Western', activ
 Reference.create(group:	'people_invite_back',	value:	'Yes', active:	'TRUE');
 Reference.create(group:	'people_invite_back',	value:	'No', active:	'TRUE');
 Reference.create(group:	'people_invite_back',	value:	'Conditional', active:	'TRUE');
+Reference.create(group:	'timezones',	value:	'Eastern', active:	'TRUE');
+Reference.create(group:	'timezones',	value:	'Central', active:	'TRUE');
+Reference.create(group:	'timezones',	value:	'Mountain', active:	'TRUE');
+Reference.create(group:	'timezones',	value:	'Pacific', active:	'TRUE');
+Reference.create(group:	'timezones',	value:	'GMT', active:	'TRUE');
+Reference.create(group:	'timezones',	value:	'Australian Eastern', active:	'TRUE');
+Reference.create(group:	'timezones',	value:	'Australian Central', active:	'TRUE');
+Reference.create(group:	'timezones',	value:	'Australian Western', active:	'TRUE');
 Reference.create(group:	'regions',	value:	'North East', active:	'TRUE');
 Reference.create(group:	'regions',	value:	'South East', active:	'TRUE');
 Reference.create(group:	'regions',	value:	'South West', active:	'TRUE');

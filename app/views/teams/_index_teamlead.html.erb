@@ -1,116 +1,85 @@
  <% content_for(:page_title, "My Teams")%>
  
-<div class="text-gray-900 text-lg text-left font-semibold mb-4">
-Team Administrator Initial Actions List:
-</div> 
+<div class="container m-4 ml-4">
  
+  <div class="text-gray-700 text-lg font-semibold mb-6">
+  Team Administrator Actions List:
+  </div> 
  
-<div class="grid grid-cols-5 gap-2 align-top">
-
-  <div class="border border-gray-100 ml-6 text-gray-600 text-lg">
-   1. Create First Team
-  </div>
-
-  <% if current_user.teams.count==0 %>
+  <div class="flex flex-row">
+    <div>
+     <div class="flex flex-row gap-4">
+     <% if @teams.any? %>
+        <div class="flex-none h-8 w-8 border-2 text-center justify-middle pt-1 rounded-full border-green-500"><i class="fa-solid fa-1"></i></div>
+      <% else %>
+        <div class="flex-none h-8 w-8 border text-center justify-middle pt-1 rounded-full border-slate-400"><i class="fa-solid fa-1"></i></div>
+      <% end %>  
+       <div class="text-lg w-50">Create Your Team</div>
+    </div>
+    
+    <div class="flex flex-row gap-4">   
+    <% if @teams.first.members.any? %>
+       <div class="flex-none h-8 w-8 border-2 text-center justify-middle pt-1 rounded-full border-green-500"><i class="fa-solid fa-2"></i></div>
+     <% else %>
+       <div class="flex-none h-8 w-8 border text-center justify-middle pt-1 rounded-full border-slate-400"><i class="fa-solid fa-2"></i></div>
+     <% end %>  
+       <div class="text-lg w-50">Add Team Members</div>
+    </div>
+    
+    <div class="flex flex-row gap-4">   
+      <div class="flex-none h-8 w-8 border text-center justify-middle pt-1 rounded-full border-slate-400"><i class="fa-solid fa-3"></i></div>
+      <div class="text-lg w-50">Identify Key Roles</div>
+    </div>
+   <div class="flex flex-row gap-4">    
+   <p class="text-sm text-gray-500 mt-2">Mandatory fields are marked with a *, please provide as much information as you can,<br> it helps us understand and serve our membership group better.</p>
+   </div>
+   
+    </div>
+    <div class="pr-10 justify-self-end">b
+    </div>
+</div>
+  
+ 
+  
+      
+     
+    <br><hr><br>
     <div class="col-span-4 bg-white align-bottom text-left pt-2">
         <%= link_to "Add a Team", new_team_path, class: form_button_class %>
     </div>
     
-  <% elsif current_user.teams.count>0 %>
-    <div class="border border-gray-100 text-center align-middle">
-       <div><i class="text-2xl fa-solid fa-check text-center text-green-500"></i></div>
-     </div>
-    
-    <div class="col-span-2 bg-gray-100  align-middle text-left">
-      <div class=" ml-4">
-        <%= current_user.teams.first.name %>
-       </div>
-     </div>
-         
-    <div class="border border-white pt-1">
-     <%= link_to "Add Another Team", new_team_path, class: form_button_class %>
+  <br><hr>
+ 
+
+<% if @teams.any? %>
+  <div class="text-gray-700 text-lg text-left font-semibold mb-2 mt-4">
+   <% if @teams.count>1 %>
+     Your Teams
+    <% else %>  
+     Your Team
+   <% end %>  
+  </div>
+
+  <div class="grid grid-cols-3  gap-4 items-left m-4">
+   <% @teams.each do |team| %>
+ 
+    <div class="border border-grey-500 shadow-xl shadow-blue-900 hover:border-black rounded-lg">
+      <div class="m-4">
+          <span class="font-semibold"> <%= team.name  %></span>
+          <br>
+          <span class="font-light text-sm"> <%= team.city  %>, <%= @team.state  %><br></span>
+          <br>
+           <% team.members&.each do |member| %>
+               <span class="font-light text-blue-900 ml-4"> <%= member.full_name  %><br></span>
+              <% end %>  
+      </div>
+      <div class="col-span-4 bg-white m-4 pb-2 text-sm text-right">
+               <%= link_to "Add Team Members", team_path(team), class: form_button_class %>
+           </div>
     </div>
     <% end %>
-   
-    
-    <div class="border border-gray-100 ml-6 text-gray-600 text-lg">
-      2. Add Members
-    </div>
-
-    <% if current_user.teams.first.members.count==0 %>
-      <div class="col-span-4 bg-white align-bottom text-left pt-2">
-          <%= link_to "Add Team Members", team_path(@team), class: form_button_class %>
-      </div>
-    
-     <% elsif current_user.teams.first.members.count>0 %>
-      <div class="border border-gray-100 text-center align-middle">
-         <div><i class="text-2xl fa-solid fa-check text-center text-green-500"></i></div>
-       </div>
-    
-      <div class="col-span-2 bg-gray-100  align-middle text-left">
-        <div class=" ml-4">
-          <% current_user.teams.first.members.each do |member| %>
-            <%= member.full_name %>, 
-            <% end %>
-         </div>
-       </div>
-         
-      <div class="border border-white pt-1">
-       <%= link_to "Add More Members", team_path(@team), class: form_button_class %>
-      </div>
       <% end %>
-      
-      <div class="border border-gray-100 ml-6 text-gray-600 text-lg">
-        3. Identify Key Roles
-      </div>
-
-      <% if current_user.teams.first.members.count==0 %>
-        <div class="bg-white align-bottom text-left pt-2">
-            <%= link_to "Add Key Roles", team_path(@team), class: form_button_class %>
-        </div>
-        <div class="col-span-3 border border-gray-100">
-         <div class=" ml-4">
-        e.g. Team President, 
-        Head Coach, 
-        Head Umpire
-         </div>
-      </div>
-    
-       <% elsif current_user.teams.first.members.count>5 %>
-        <div class="border border-gray-100 text-center align-middle">
-           <div><i class="text-2xl fa-solid fa-check text-center text-green-500"></i></div>
-         </div>
-    
-        <div class="col-span-2 bg-gray-100  align-middle text-left ml-4">
-          <%= current_user.teams.first.name %>
-         </div>
-         
-        <div class="border border-white pt-1">
-         <%= link_to "Add Another Team", new_team_path, class: form_button_class %>
-        </div>
-        <% end %>
   
-</div>
-<br><br>
-<hr>
-<div class="text-gray-900 text-lg text-left font-semibold mb-4 mt-4">
-Your Teams
-</div>
-
-<div class="grid grid-cols-3  gap-4 items-left m-8">
-  <% @teams.each do |team| %>
- 
-    <div class="border border-grey-300 shadow-md hover:border-black">
-        <span class="font-semibold"> <%= team.name  %></span>
-        <br>
-        <span class="font-light text-sm"> <%= team.city  %>, <%= @team.state  %><br></span>
-        <br>
-         <% team.members&.each do |member| %>
-             <span class="font-light text-blue-900 ml-4"> <%= member.full_name  %><br></span>
-            <% end %>  
-    </div>
-  <% end %>
-  
-
-</div>
+ </div>
+ </div>
   <br><br> 

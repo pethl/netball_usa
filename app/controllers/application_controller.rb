@@ -3,6 +3,14 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   
   helper_method :is_admin?
+ 
+  def after_sign_in_path_for(resource)
+    if current_user.teamlead?
+        teams_path
+      else
+        '/'
+      end
+  end
   
   def default_url_options
      {:locale => I18n.locale}

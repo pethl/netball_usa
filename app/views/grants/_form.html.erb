@@ -40,8 +40,13 @@
    <div class="mb-6">
     <%= form.label :due_date, class: label_class%>
      <div class="mt-1">
-    <%= form.date_field :due_date, class: input_class  %>
+    <%= form.datetime_field :due_date, class: input_class  %>
    </div> </div>
+   <div class="mb-6">
+    <%= form.label :timezone, "Due Date Time Zone", class: label_class%>
+     <div class="mt-1">
+     <%= form.select :timezone, options_for_select(timezones, :selected => grant.timezone),{:prompt=>true}, class: input_class %>
+     </div> </div>
 
    <div class="mb-6">
       <%= form.label :purpose, style: "display: block", class: label_class  %>

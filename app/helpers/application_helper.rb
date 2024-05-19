@@ -199,6 +199,11 @@ module ApplicationHelper
       regions = regions.pluck(:value)       
     end
     
+    def timezones
+      timezones = Reference.where(active: "TRUE", group: 'timezones')
+      timezones = timezones.pluck(:value)       
+    end
+    
      def get_teams_per_state(state)
      state = params[:state]
      logger.info "#{state}"
