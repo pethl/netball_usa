@@ -33,7 +33,8 @@ class Ability
     
     can :update, Team, user: teamlead 
     can :manage, Team, user: office 
-    can :manage, Team, user: admin 
+    can :manage, Grant, user: office 
+    can :manage, all, user: admin 
  
     
   end

@@ -36,6 +36,13 @@
      <div class="mt-1">
     <%= form.text_field :location, class: input_class  %>
    </div> </div>
+   
+   <div class="mb-4 ">
+      <%= form.label :state, "State (if applicable)", class: label_class  %>
+      <div class="mt-1">
+       <%= form.select :state, options_for_select(us_states, :selected => grant.state),{:prompt=>true}, class: input_class %>
+      </div>
+    </div>
 
    <div class="mb-6">
     <%= form.label :due_date, class: label_class%>
@@ -61,14 +68,6 @@
      <%= form.text_field :grant_link, placeholder: "Enter with prefix Http:// or https://", class: input_class  %>
     </div> </div>
  
-
-  <div class="mb-6">
-     <%= form.label :notes, style: "display: block", class: label_class  %>
-     <div class="mt-1">
-     <%= form.text_area :notes, class: input_class %>
-    </div>
-   </div>
-
    <div class="mb-6">
      <%= form.label :status, class: label_class  %>
      <div class="mt-1">
@@ -78,14 +77,22 @@
    
    <% unless current_user.nil? %>
      <div class="mb-6">
-      <%= form.label :user_id, 'Allocated To', class: label_class%>
+      <%= form.label :user_id, 'Allocated to', class: label_class%>
        <div class="mt-1">
-       <%= form.collection_select(:user_id, User.all, :id, :full_name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
+       <%= form.collection_select(:user_id, User.all, :id, :full_name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 hover:bg-gray-100 sm:text-sm"
       }) %>
     </div> </div>
     <% end %>
+    
+    <div class="mb-6">
+     <%= form.label :action_by, class: label_class%>
+      <div class="mt-1">
+     <%= form.date_field :action_by, class: input_class  %>
+    </div> </div>
 
-   <div class="mb-6">
+
+    <% if is_admin? %> 
+      <div class="mb-6">
     <%= form.label :date_submitted, class: label_class%>
      <div class="mt-1">
     <%= form.date_field :date_submitted, class: input_class  %>
@@ -96,8 +103,7 @@
      <div class="mt-1">
     <%= form.text_field :program, class: input_class  %>
    </div> </div>
-
-    <% if is_admin? %>  
+ 
    <div class="mb-6">
     <%= form.label :application_link, class: label_class%>
      <div class="mt-1">
@@ -111,6 +117,13 @@
    </div> </div>
     <% end %>
 
+    <div class="mb-6">
+       <%= form.label :notes, style: "display: block", class: label_class  %>
+       <div class="mt-1">
+       <%= form.text_area :notes, class: input_class %>
+      </div>
+     </div>
+     
    <div>
      <%= form.submit "Save Record", class: form_button_class %>
    </div>

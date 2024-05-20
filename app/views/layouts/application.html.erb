@@ -79,12 +79,21 @@
         
       <div class="container">
           <div class="block border-0 w-screen bg-blue-900 text-center text-white">
-            <% if content_for(:page_title)%>
-                <p class="pb-2 pt-2 text-md font-2xl text-center font-bold tracking-tight text-white">
-                <%= yield(:page_title)%></p>
-              <% end %>
+           <div class="flex flex-row">
+              <div class="w-1/5 ">
+                <div class="pb-2 pt-2 text-md font-2xl text-white underline underline-offset-6 text-left justify-middle text-sm ml-4">
+                    Hi <%= current_user.full_name %>
+                </div>
+              </div>
+              <div class="w-4/5 ">
+                <% if content_for(:page_title)%>
+                    <p class="pb-2 pt-2 text-md font-2xl text-center font-semibold text-white">
+                    <%= yield(:page_title)%></p>
+                  <% end %>
+              </div>    
+            </div>
           </div>    
-           </div>
+        </div>
     </div>
   
    
@@ -179,9 +188,6 @@
          <ul class="ml-6 text-xs xl:text-xs ">
            <% unless current_user.teamlead? %>
              
-             <div title=<%= current_user.full_name %> class="underline underline-offset-8 text-gray-100 text-sm tracking-tight ml-6">
-                 Hi <%= current_user.full_name %>
-             </div>
                <li class="mt-2">
                    <a href="/netball_educators/pe_directors" class="mt-8 text-gray-100 hover:font-bold">PE DIRECTORS</a>
                </li>
@@ -250,10 +256,7 @@
                </li>
                <% end %>
                  <% if current_user.teamlead? %>
-                   <div title=<%= current_user.full_name %> class="italic underline underline-offset-8 text-gray-100 text-sm tracking-tight ">
-                       Hi <%= current_user.full_name %>
-                   </div>
-                  
+                 
                    <li class="mt-6">
                        <a href="/teams/" class="text-gray-100 hover:font-bold">My Team(s)</a>
                    </li>

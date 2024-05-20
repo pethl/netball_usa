@@ -1,57 +1,56 @@
 <div id="<%= dom_id grant %>">
 
-  <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+  <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
+      <p class="text-sm text-gray-500 truncate ">
           Grant Name:
       </p>
       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= grant.name %> 
+       <%= grant.name %> 
       </p>
       
      <div class="mt-2">
-     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-         Apply?:
-     </p>
-     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-     <%= grant.apply? ? 'Yes' : 'No' %>
-     </p>
+       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+           Apply?:
+       </p>
+       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+        <%= grant.apply? ? 'Yes' : 'No' %>
+       </p>
      </div>
 
      <div class="mt-2">
-     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-         Amount:
-     </p>
-     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-     <%= grant.amount %> 
-     </p> 
+       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+           Amount:
+       </p>
+       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+        $<%= grant.amount %> 
+       </p> 
      </div>
  
      <div class="mt-2">
-     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-         Location:
-     </p>
-     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-     <%= grant.location %> 
-     </p>
+       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+           Location:
+       </p>
+       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+        <%= grant.location %>  <%= grant.state %> 
+       </p>
       </div>
  
     <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Due Date:
-    </p>
-    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-    <%= grant.due_date.to_formatted_s(:usa) unless (grant.due_date.to_s.empty?) %> 
-    </p>
+      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+          Due DateTime:
+      </p>
+      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+       <%= grant.due_date.to_formatted_s(:usa_dt) unless (grant.due_date.to_s.empty?) %> <%= grant.timezone %> 
+      </p> 
      </div>
 
     <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Purpose:
-    </p>
-    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-    <%= grant.purpose %> 
-    </p>
+      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+          Purpose:
+      </p>
+      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+       <%= grant.purpose %> 
+      </p>
      </div>
  
      <div class="mt-2">
@@ -63,62 +62,81 @@
      </p>
       </div>
  
-      <div class="mt-2">
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          Notes:
-      </p>
-      <p class="text-sm font-medium text-gray-900 dark:text-white">
-      <%= grant.notes %> 
-      </p>
-       </div>
- 
-      <div class="mt-2">
+    <div class="mt-2">
       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
           Status:
       </p>
       <p class="text-sm font-medium text-gray-900 dark:text-white">
-      <%= grant.status %> 
+       <%= grant.status %> 
       </p>
-       </div>
+     </div>
+     
+     <div class="mt-2">
+       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+           Allocated to:
+       </p>
+       <p class="text-sm font-medium text-gray-900 dark:text-white">
+        <%= grant.user.full_name %>
+       </p>
+      </div>
+     
+      <div class="mt-2">
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            Action by:
+        </p>
+        <p class="text-sm font-medium text-gray-900 dark:text-white">
+       <%= grant.action_by.to_formatted_s(:usa) unless (grant.action_by.to_s.empty?) %>
+        </p>
+      </div>
+       
  
      <div class="mt-2">
-     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Date Submitted:
-     </p>
-     <p class="text-sm font-medium text-gray-900 dark:text-white">
-     <%= grant.date_submitted.to_formatted_s(:usa) unless (grant.date_submitted.to_s.empty?) %> 
-     </p>
+       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+          Date Submitted:
+       </p>
+       <p class="text-sm font-medium text-gray-900 dark:text-white">
+        <%= grant.date_submitted.to_formatted_s(:usa) unless (grant.date_submitted.to_s.empty?) %> 
+       </p>
       </div>
       
  
       <div class="mt-2">
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          Program
-      </p>
-      <p class="text-sm font-medium text-gray-900 dark:text-white">
-      <%= grant.program %> 
-      </p>
-       </div>
-       
- 
-       <div class="mt-2">
-       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-           Application Link:
-       </p>
-       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-       <%= grant.application_link %> 
-       </p>
-        </div>
-
-
-        <div class="mt-2">
         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-            Login Details:
+            Program
         </p>
         <p class="text-sm font-medium text-gray-900 dark:text-white">
-       <%= grant.login %>
+         <%= grant.program %> 
         </p>
+       </div>
+       
+    <% if is_admin? %>  
+       <div class="mt-2">
+         <p class="text-sm text-gray-500 dark:text-gray-400">
+             Application Link:
+         </p>
+         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+          <%= grant.application_link %> 
+         </p>
+        </div>
+
+        <div class="mt-2">
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+              Login Details:
+          </p>
+          <p class="text-sm font-medium text-gray-900 dark:text-white">
+           <%= grant.login %>
+          </p>
          </div>
+         <% end %>
+         
+         <div class="mt-2">
+           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+               Notes:
+           </p>
+           <p class="text-sm font-medium truncate text-gray-900 dark:text-white">
+            <%= grant.notes %> 
+           </p>
+        </div>
 
 </div>
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_19_125739) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_20_082349) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -158,6 +158,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_19_125739) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.string "timezone"
+    t.datetime "action_by"
+    t.string "state"
   end
 
   create_table "members", force: :cascade do |t|
