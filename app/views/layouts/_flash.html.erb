@@ -1,0 +1,11 @@
+#not currently using - using old notice and error in stead
+# to add put this code in application
+#<div class="flash">
+#   <%= render "layouts/flash" %>
+# </div>
+
+<% flash.each do |flash_type, message| %>
+  <div class="flash__message">
+    <%= message %>
+  </div>
+<% end %>

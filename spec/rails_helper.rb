@@ -35,7 +35,7 @@ RSpec.configure do |config|
   config.global_fixtures = :all
   
   config.include ActiveJob::TestHelper
-  config.include ActiveMailbox::TestHelper
+#  config.include ActiveMailbox::TestHelper   ***removed as causing rspec to fail
   
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false

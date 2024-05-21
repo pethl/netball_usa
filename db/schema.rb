@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_20_082349) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_20_104251) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -162,6 +162,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_20_082349) do
     t.string "state"
   end
 
+  create_table "member_key_roles", force: :cascade do |t|
+    t.bigint "team_id", null: false
+    t.bigint "member_id", null: false
+    t.string "key_role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_member_key_roles_on_member_id"
+    t.index ["team_id"], name: "index_member_key_roles_on_team_id"
+  end
+
   create_table "members", force: :cascade do |t|
     t.bigint "team_id", null: false
     t.string "first_name", null: false
@@ -178,6 +188,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_20_082349) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "age_status"
     t.index ["team_id"], name: "index_members_on_team_id"
   end
 
@@ -380,6 +391,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_20_082349) do
   add_foreign_key "event_assignments", "umpires"
   add_foreign_key "event_participants", "events"
   add_foreign_key "event_participants", "people"
+  add_foreign_key "member_key_roles", "members"
+  add_foreign_key "member_key_roles", "teams"
   add_foreign_key "members", "teams"
   add_foreign_key "teams", "users"
 end

@@ -1,18 +1,22 @@
 <div id="<%= dom_id member %>">
 
 <%= turbo_frame_tag member do %>
-<div class="flex w-2/3 justify-between items-center border border-blue-900 rounded m-4 ">
+<div class="flex justify-between items-center border border-gray-600 rounded m-2 ">
   <div class="ml-4">
-   <span class="text-base">  <%= member.full_name  %></span>
+   <span class="text-sm">  <%= member.full_name  %></span>
+  
   </div>
   
-  <div class="justify-between flex items-center m-2 w-32">
+  <div class="justify-between flex items-center m-2 w-28">
     <div>
-    <%= button_to "Delete",
-                  team_member_path(team, member),
-                  method: :delete,
-                  form: { data: { turbo_confirm: "Are you sure?" } },
-                  class: red_link_class %>
+    
+    <% if member.is_key_role == false %>
+      <%= button_to "Delete",
+                    team_member_path(team, member),
+                    method: :delete,
+                    form: { data: { turbo_confirm: "Are you sure?" } },
+                    class: red_link_class %>
+       <% end %>             
     </div>
     <div>
       <%= link_to "Edit",
@@ -22,4 +26,5 @@
   </div>
   </div>
 <% end %>
+
 </div>

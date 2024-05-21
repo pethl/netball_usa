@@ -14,7 +14,7 @@
 
 <div class="border border-blue-900 rounded ">
   <div class="border border-white rounded m-2">
-      <div class="grid grid-cols-3 gap-4">
+      <div class="flex flex-wrap gap-4">
         <div>
           <%= form.label :first_name, "First Name*", class: label_class %>
           <%= form.text_field :first_name, class: input_class  %>
@@ -46,13 +46,13 @@
        </div>
 
         <div>
-          <%= form.label :dob, class: label_class %>
-          <%= form.datetime_field :dob, class: input_class  %>
-        </div>
+          <%= form.label :age_status, "Youth(under 21) or Adult", class: label_class %>
+          <%= form.select :age_status, options_for_select(member_age_status, :selected => member.age_status),{:prompt=>true}, class: input_class %>
+       </div>
 
         <div>
           <%= form.label :place_of_birth, class: label_class %>
-          <%= form.date_field :place_of_birth, class: input_class  %>
+          <%= form.text_field :place_of_birth, class: input_class  %>
         </div>
         </div>
   

@@ -20,6 +20,7 @@ class TeamsController < ApplicationController
         else current_user.role =="teamlead"
           @teams = current_user.teams
           @team = current_user.teams.first
+         # @team.president = @team_president
        end
   end
   
@@ -35,6 +36,7 @@ class TeamsController < ApplicationController
   # GET /teams/1
   def show
      @members = @team.members.ordered
+     @member_key_roles = @team.member_key_roles.ordered
   end
 
   # GET /teams/new

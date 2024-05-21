@@ -75,6 +75,13 @@ module ApplicationHelper
      "text-sm text-blue-900"
    end
    
+   #TURBO USAGE ONLY
+   def nested_dom_id(*args)
+       args.map { |arg| arg.respond_to?(:to_key) ? dom_id(arg) : arg }.join("_")
+     end
+   
+   
+    #REFERENECE DATA ONLY
    def reference_group
      reference_group = Reference.all.order(group: :asc)
      reference_group = reference_group.pluck(:group) 
@@ -202,6 +209,16 @@ module ApplicationHelper
     def timezones
       timezones = Reference.where(active: "TRUE", group: 'timezones')
       timezones = timezones.pluck(:value)       
+    end
+    
+    def member_age_status
+      member_age_status = Reference.where(active: "TRUE", group: 'member_age_status')
+      member_age_status = member_age_status.pluck(:value)     
+    end
+    
+    def member_positions
+      member_positions = Reference.where(active: "TRUE", group: 'member_positions')
+      member_positions = member_positions.pluck(:value)     
     end
     
      def get_teams_per_state(state)

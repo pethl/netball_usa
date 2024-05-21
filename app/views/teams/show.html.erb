@@ -1,29 +1,52 @@
-<% content_for(:page_title, "Team")%>
+<% content_for(:page_title, "Team: #{@team.name}")%>
 
-<main class="container max-w-1/2">
+<main class="container max-w-1/3">
 
-<div class="header">
-  <div class="m-2">
-   <span class="font-semibold"> <%= @team.name  %></span>
-   <br>
-   <span class="font-light"> <%= @team.city  %>, <%= @team.state  %></span>
-   <br> <br>
-   <span class="text-gray-600 text-sm"> Team administered by: </span><%= @team.creator.full_name %>
-  </div>
-  <hr>
-  <br>
-    <%= link_to "New member",
-                new_team_member_path(@team),
-                data: { turbo_frame: dom_id(Member.new) },
-                class: form_button_class %>
-                  <br> <br>  
-  </div>
+    <div class="m-2 ">
+       <span class="font-semibold"> <%= @team.name  %></span><br>
+       <span class="font-light"> <%= @team.city  %>, <%= @team.state  %></span><br> <br>
+       <span class="text-gray-600 text-sm"> Team administered by: </span><%= @team.creator.full_name %>
+    </div>
    
-  <%= turbo_frame_tag Member.new %>
-   <%= turbo_frame_tag "members" do %>
-    <%= render @members, team: @team %>
-  <% end %>
+    
+    <div class="flex flex-rowflex-wrap">
+      <div class="w-1/2 m-2 border border-grey-500 shadow-xl shadow-blue-900 hover:border-black rounded-lg">
+      <br>
+        <%= link_to "Add new member",
+                    new_team_member_path(@team),
+                    data: { turbo_frame: dom_id(Member.new) },
+                    class: form_button_class %>
+                      <br> <br>
+   
+   
+      <%= turbo_frame_tag Member.new %>
+       <%= turbo_frame_tag "members" do %>
+         <div class="text-sm">
+        <%= render @members, team: @team %>
+      <% end %>
+      <div class="ml-2 mt-4 text-sm text-gray-500">*Player must be removed from key role before deleting.
+      </div>
+     
+  </div>
+     </div>
+     
+     <div class="w-1/2 m-2 border border-grey-500 shadow-xl shadow-blue-900 hover:border-black rounded-lg">
+     <br>
+       <%= link_to "Add key role",
+                   new_team_member_key_role_path(@team),
+                   data: { turbo_frame: dom_id(MemberKeyRole.new) },
+                   class: form_button_class %>
+                     <br> <br>
   
-    <hr><br>
+  
+      <%= turbo_frame_tag MemberKeyRole.new %>
+    
+      <%= turbo_frame_tag "member_key_roles" do %>
+        <div class="text-sm">
+       <%= render @member_key_roles, team: @team %>
+     <% end %>
+     </div>
+      </div>     </div>
+    <br>
     <%= link_to sanitize("&larr; Back to teams"), teams_path %>
 </main>

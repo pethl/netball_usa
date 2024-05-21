@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Member key roles</h1>
+
+<div id="member_key_roles">
+  <% @member_key_roles.each do |member_key_role| %>
+    <%= render member_key_role %>
+    <p>
+      <%= link_to "Show this member key role", member_key_role %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New member key role", new_member_key_role_path %>

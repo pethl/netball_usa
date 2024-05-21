@@ -28,7 +28,7 @@ class MembersController < ApplicationController
 
        if @member.save
          respond_to do |format|
-                format.html { redirect_to team_path(@quote), notice: "Member was successfully created." }
+                format.html { redirect_to team_path(@team), notice: "Member was successfully created." }
                 format.turbo_stream { flash.now[:notice] = "Member was successfully created." }
               end 
             else
@@ -48,7 +48,10 @@ class MembersController < ApplicationController
   # DELETE /members/1
   def destroy
      @member.destroy
-       redirect_to team_path(@team), notice: "Member was successfully destroyed."
+     respond_to do |format|
+        format.html { redirect_to team_path(@team), notice: "Member was successfully deleted." }
+        format.turbo_stream { flash.now[:notice] = "Member was successfully deleted." }
+      end
   end
 
   private
@@ -67,6 +70,6 @@ class MembersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def member_params
-      params.require(:member).permit(:team_id, :first_name, :last_name, :email, :city, :state, :gender, :interested_in_coaching, :interested_in_umpiring, :interested_in_usa_team, :dob, :place_of_birth, :notes)
+      params.require(:member).permit(:team_id, :first_name, :last_name, :email, :city, :state, :gender, :interested_in_coaching, :interested_in_umpiring, :interested_in_usa_team, :dob, :age_status, :place_of_birth, :notes)
     end
 end

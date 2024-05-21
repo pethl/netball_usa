@@ -1,0 +1,7 @@
+<%= turbo_stream.update MemberKeyRole.new, "" %>
+
+
+  <%= turbo_stream.prepend "member_key_roles" do %>
+    <%= render @member_key_role, team: @team %>
+  <% end %>
+

@@ -30,11 +30,15 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/define_check_abilities.md
     # With CanCanCan, the update action covers both the edit and update actions
     
-    
-    can :update, Team, user: teamlead 
-    can :manage, Team, user: office 
-    can :manage, Grant, user: office 
     can :manage, all, user: admin 
+    
+    can :manage, Grant, user: office
+    can :sponsor, Grant, user: office 
+     
+    can :manage, Team, user: teamlead 
+    can :manage, Team, user: office 
+    
+   
  
     
   end

@@ -114,6 +114,11 @@ Reference.create(group:	'transfer_departure_type',	value:	'Drop off Rental Bus',
 Reference.create(group:	'transfer_departure_type',	value:	'Drop off Rental Van', active:	'TRUE');
 Reference.create(group:	'us_open_hotel_name',	value:	'2023 - Marriott French Quarter', active:	'TRUE');
 Reference.create(group:	'us_open_hotel_name',	value:	'2023- Best Western', active:	'TRUE');
+Reference.create(group:	'member_age_status',	value:	'Youth', active:	'TRUE');
+Reference.create(group:	'member_age_status',	value:	'Adult', active:	'TRUE');
+Reference.create(group:	'member_positions',	value:	'Team President', active:	'TRUE');
+Reference.create(group:	'member_positions',	value:	'Head Coach', active:	'TRUE');
+Reference.create(group:	'member_positions',	value:	'Head Umpire', active:	'TRUE');
 Reference.create(group:	'people_invite_back',	value:	'Yes', active:	'TRUE');
 Reference.create(group:	'people_invite_back',	value:	'No', active:	'TRUE');
 Reference.create(group:	'people_invite_back',	value:	'Conditional', active:	'TRUE');
