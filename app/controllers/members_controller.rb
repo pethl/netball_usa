@@ -5,7 +5,7 @@ class MembersController < ApplicationController
   
   # GET /members
   def index
-    @members = Member.all
+    @members = Member.all.ordered
   end
 
   # GET /members/1
