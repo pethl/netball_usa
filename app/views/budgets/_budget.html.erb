@@ -18,7 +18,7 @@
       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
       <%= number_to_currency(budget.flight, precision: 2) %>
       </p></div>
-     <div class="block w-full text-center text-xs text-grey-600">
+     <div class="block w-full text-left text-xs text-grey-600">
        <%= budget.flight_notes %>
     </div>
  
@@ -29,7 +29,7 @@
         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
         <%= number_to_currency(budget.hotel, precision: 2) %>
         </p></div>
-       <div class="block w-full text-center text-xs text-grey-600">
+       <div class="block w-full text-left text-xs text-grey-600">
          <%= budget.hotel_notes %>
       </div>
   
@@ -40,7 +40,7 @@
           <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
           <%= number_to_currency(budget.transport, precision: 2) %>
           </p></div>
-         <div class="block w-full text-center text-xs text-grey-600">
+         <div class="block w-full text-left text-xs text-grey-600">
            <%= budget.transport_notes %>
         </div>
     
@@ -51,7 +51,7 @@
           <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
           <%= number_to_currency(budget.shipping, precision: 2) %>
           </p></div>
-         <div class="block w-full text-center text-xs text-grey-600">
+         <div class="block w-full text-left text-xs text-grey-600">
            <%= budget.shipping_notes %>
         </div>
     
@@ -62,7 +62,7 @@
               <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
               <%= number_to_currency(budget.booth, precision: 2) %>
               </p></div>
-             <div class="block w-full text-center text-xs text-grey-600">
+             <div class="block w-full text-left text-xs text-grey-600">
                <%= budget.booth_notes %>
             </div>
             
@@ -73,7 +73,7 @@
               <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
               <%= number_to_currency(budget.carpet, precision: 2) %>
               </p></div>
-             <div class="block w-full text-center text-xs text-grey-600">
+             <div class="block w-full text-left text-xs text-grey-600">
                <%= budget.carpet_notes %>
             </div>
            
@@ -84,7 +84,7 @@
               <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
               <%= number_to_currency(budget.banners, precision: 2) %>
               </p></div>
-             <div class="block w-full text-center text-xs text-grey-600">
+             <div class="block w-full text-left text-xs text-grey-600">
                <%= budget.banner_notes %>
             </div>
       
@@ -95,17 +95,28 @@
             <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
             <%= number_to_currency(budget.giveaways, precision: 2) %>
             </p></div>
-           <div class="block mb-2 w-full border-y-2 border-gray-900 text-center text-xs text-grey-600">
+            <div class="block w-full text-left text-xs text-grey-600">
              <%= budget.giveaway_notes %>
           </div>
-            
-            <div class="flex w-full justify-between mt-4">
-           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-              TOTAL
-           </p>
-           <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-           <%= number_to_currency(budget.budget_total, precision: 2) %>
-           </p></div>
 
+          <div class="flex w-full justify-between mt-4">
+            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+               Per Diem:
+            </p>
+            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+            <%= number_to_currency(budget.per_diem_total, precision: 2) %>
+            </p></div>
+            <div class="block w-full text-left text-xs text-grey-600">
+              Per diem $:<%= budget.per_diem %> x People: <%= budget.number_of_people %> x Days: <%= budget.number_of_days %>
+          </div>
+
+          <div class="flex w-full justify-between mt-4 border-y-2 border-gray-900">
+            <p class="text-md text-gray-500 truncate dark:text-gray-400">
+               TOTAL:
+            </p>
+            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+            <%= number_to_currency(budget.budget_total, precision: 2) %>
+            </p></div>
+            
 
 

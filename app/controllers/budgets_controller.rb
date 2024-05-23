@@ -63,6 +63,6 @@ class BudgetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def budget_params
-      params.require(:budget).permit(:event_id, :flight, :flight_notes, :hotel, :hotel_notes, :transport, :transport_notes, :shipping, :shipping_notes, :booth, :booth_notes, :carpet, :carpet_notes, :banners, :banner_notes, :giveaways, :giveaway_notes)
+      params.require(:budget).permit(:event_id, :flight, :flight_notes, :hotel, :hotel_notes, :transport, :transport_notes, :shipping, :shipping_notes, :booth, :booth_notes, :carpet, :carpet_notes, :banners, :banner_notes, :giveaways, :giveaway_notes, :per_diem, :number_of_people, :number_of_days)
     end
 end

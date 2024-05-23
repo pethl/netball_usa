@@ -19,6 +19,10 @@ module ApplicationHelper
      "block w-sm appearance-none text-right rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
    end
 
+   def number_input_class
+    "block w-xs appearance-none text-right rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
+  end
+
    def form_button_class
      "m-2 bg-blue-900 hover:bg-blue-700 text-white font-light py-2 px-4 rounded"
    end

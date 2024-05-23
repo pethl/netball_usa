@@ -1,5 +1,3 @@
-<div class=" sm:mx-auto sm:w-full sm:max-w-md max-w-md">
-  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
 
 <%= form_with(model: budget) do |form| %>
   <% if budget.errors.any? %>
@@ -14,129 +12,144 @@
     </div>
   <% end %>
 
-  <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
- 
-  <div class="mb-6">
-   <%= form.label :event_id, "Event",class: label_class%>
-    <div class="mt-1">
-    <%= form.collection_select(:event_id, @events, :id, :name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
-  }) %>
-    </div> 
-  </div>
+<div class="max-w-4/5 p-4 bg-white border border-gray-200 rounded-lg shadow ">
 
-
- <div class="block justify-between p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-blue-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
- <div class="mb-6">
-  <%= form.label :flight, class: label_class%>
-   <div class="mt-1">
-    <%= form.number_field :flight, step: 0.01, placeholder: "$ 0.00",  class: small_input_class %>
-    </div>
-  </div>
-
-   <div class="mb-2">
-      <%= form.text_area :flight_notes, placeholder: "Enter flight notes here", class: input_class  %>
-   </div>   
- </div>
- 
- <div class="block justify-between p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-blue-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
-  <div class="mb-6">
-   <%= form.label :hotel, class: label_class%>
-    <div class="mt-1">
-     <%= form.number_field :hotel, step: 0.01, placeholder: "$ 0.00", class: small_input_class %>
+<div class="flex max-w-screen">
+  <div class="mt-2 ml-4 mb-4 text-lg">
+      Event: <%= budget.event.name%>
      </div>
-   </div>
+</div>
 
-   <div class="mb-2">
-      <%= form.text_area :hotel_notes, placeholder: "Enter hotel notes here", class: input_class  %>
-   </div> 
-   </div>
- 
- <div class="block justify-between p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-blue-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+<div class="flex flex-row flex-wrap space-x-4 space-y-4 max-w-screen justify-end">
+  <div class="m-2 basis-1/7 mt-4 grow-0 text-left">
+    <%= form.label :flight, class: label_class%>
+  </div>
+  <div class="m-2 basis-1/6">
+    <%= form.number_field :flight, step: 0.01, placeholder: "$ 0.00",  class: number_input_class %>
+  </div>
+  <div class="m-2 basis-1/2">
+    <%= form.text_area :flight_notes, placeholder: "Enter flight notes here", class: input_class  %>
+  </div>
+</div>
 
- <div class="mb-6">
-  <%= form.label :transport, class: label_class%>
-   <div class="mt-1">
-    <%= form.number_field :transport, step: 0.01, placeholder: "$ 0.00",  class: small_input_class %>
-    </div>
+<div class="flex flex-row flex-wrap space-x-4 space-y-4 max-w-screen justify-end">
+  <div class="m-2 basis-1/7 mt-6 grow-0 text-left">
+    <%= form.label :hotel, class: label_class%>
+  </div>
+  <div class="m-2 basis-1/6">
+    <%= form.number_field :hotel, step: 0.01, placeholder: "$ 0.00",  class: number_input_class %>
+  </div>
+  <div class="m-2 basis-1/2">
+    <%= form.text_area :hotel_notes, placeholder: "Enter hotel notes here", class: input_class  %>
+  </div>
+</div>
+
+
+<div class="flex flex-row flex-wrap space-x-4 space-y-4 max-w-screen justify-end">
+  <div class="m-2 basis-1/7 mt-6 grow-0 text-left">
+    <%= form.label :transport, class: label_class%>
+  </div>
+  <div class="m-2 basis-1/6">
+    <%= form.number_field :transport, step: 0.01, placeholder: "$ 0.00",  class: number_input_class %>
+  </div>
+  <div class="m-2 basis-1/2">
+    <%= form.text_area :transport_notes, placeholder: "Enter transport notes here", class: input_class  %>
+  </div>
+</div>
+
+<div class="flex flex-row flex-wrap space-x-4 space-y-4 max-w-screen justify-end">
+  <div class="m-2 basis-1/7 mt-6 grow-0 text-left">
+    <%= form.label :shipping, class: label_class%>
+  </div>
+  <div class="m-2 basis-1/6">
+    <%= form.number_field :shipping, step: 0.01, placeholder: "$ 0.00",  class: number_input_class %>
+  </div>
+  <div class="m-2 basis-1/2">
+    <%= form.text_area :shipping_notes, placeholder: "Enter shipping notes here", class: input_class  %>
+  </div>
+</div>
+
+<div class="flex flex-row flex-wrap space-x-4 space-y-4 max-w-screen justify-end">
+  <div class="m-2 basis-1/7 mt-6 grow-0 text-left">
+    <%= form.label :booth, class: label_class%>
+  </div>
+  <div class="m-2 basis-1/6">
+    <%= form.number_field :booth, step: 0.01, placeholder: "$ 0.00",  class: number_input_class %>
+  </div>
+  <div class="m-2 basis-1/2">
+    <%= form.text_area :booth_notes, placeholder: "Enter booth notes here", class: input_class  %>
+  </div>
+</div>
+
+<div class="flex flex-row flex-wrap space-x-4 space-y-4 max-w-screen justify-end">
+<div class="m-2 basis-1/7 mt-6 grow-0 text-left">  
+    <%= form.label :carpet, class: label_class%>
+  </div>
+  <div class="m-2 basis-1/6">
+    <%= form.number_field :carpet, step: 0.01, placeholder: "$ 0.00",  class: number_input_class %>
+  </div>
+  <div class="m-2 basis-1/2">
+    <%= form.text_area :carpet_notes, placeholder: "Enter carpet notes here", class: input_class  %>
+  </div>
+</div>
+
+<div class="flex flex-row flex-wrap space-x-4 space-y-4 max-w-screen justify-end">
+  <div class="m-2 basis-1/7 mt-6 grow-0 text-left">
+    <%= form.label :banners, class: label_class%>
+  </div>
+  <div class="m-2 basis-1/6">
+    <%= form.number_field :banners, step: 0.01, placeholder: "$ 0.00",  class: number_input_class %>
+  </div>
+  <div class="m-2 basis-1/2">
+    <%= form.text_area :banner_notes, placeholder: "Enter banner notes here", class: input_class  %>
+  </div>
+</div>
+
+<div class="flex flex-row flex-wrap space-x-4 space-y-4 max-w-screen justify-end">
+  <div class="m-2 basis-1/7 mt-6 grow-0">
+    <%= form.label :giveaways, class: label_class%>
+  </div>
+  <div class="m-2 basis-1/6">
+    <%= form.number_field :giveaways, step: 0.01, placeholder: "$ 0.00",  class: number_input_class %>
+  </div>
+  <div class="m-2 basis-1/2">
+    <%= form.text_area :giveaway_notes, placeholder: "Enter giveaway notes here", class: input_class  %>
+  </div>
+</div>
+
+<div class="flex flex-row flex-wrap space-x-4 space-y-4 max-w-screen justify-end">
+  <div class="m-2 basis-1/7 mt-6 grow-0">
+    <%= form.label :per_diems, "Per Diem Amount", class: label_class%>
+  </div>
+  <div class="m-2 basis-1/6">
+    <%= form.number_field :per_diem, step: 0.05, placeholder: "$ 0.00",  class: number_input_class %>
+  </div>
+  <div class="m-2 basis-1/2">
+  </div>
   </div>
 
-   <div class="mb-2">
-      <%= form.text_area :transport_notes, placeholder: "Enter transport notes here", class: input_class  %>
-   </div>   
- </div>
- 
- <div class="block justify-between p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-blue-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
- <div class="mb-6">
-  <%= form.label :shipping, class: label_class%>
-   <div class="mt-1">
-    <%= form.number_field :shipping, step: 0.01, placeholder: "$ 0.00",  class: small_input_class %>
-    </div>
+  <div class="flex flex-row flex-wrap space-x-4 space-y-4 max-w-screen justify-end">
+  <div class="m-2 basis-1/7 mt-6 grow-0">
+    <%= form.label :number_of_people,class: label_class%>
   </div>
-
-   <div class="mb-2">
-      <%= form.text_area :shipping_notes, placeholder: "Enter shipping notes here", class: input_class  %>
-   </div>   
- </div>
-  
- <div class="block justify-between p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-blue-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
- <div class="mb-6">
-  <%= form.label :booth, class: label_class%>
-   <div class="mt-1">
-    <%= form.number_field :booth, step: 0.01, placeholder: "$ 0.00",  class: small_input_class %>
-    </div>
+  <div class="m-2 basis-1/6">
+    <%= form.number_field :number_of_people, step: 1, placeholder: "Number of people",  class: number_input_class %>
   </div>
-
-   <div class="mb-2">
-      <%= form.text_area :booth_notes, placeholder: "Enter booth notes here", class: input_class  %>
-   </div>   
- </div>
- 
- <div class="block justify-between p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-blue-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
- <div class="mb-6">
-  <%= form.label :carpet, class: label_class%>
-   <div class="mt-1">
-    <%= form.number_field :carpet, step: 0.01, placeholder: "$ 0.00",  class: small_input_class %>
-    </div>
+  <div class="m-2 basis-1/2">
   </div>
-
-   <div class="mb-2">
-      <%= form.text_area :carpet_notes, placeholder: "Enter carpet notes here", class: input_class  %>
-   </div>   
- </div>
- 
- <div class="block justify-between p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-blue-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
- <div class="mb-6">
-  <%= form.label :banners, class: label_class%>
-   <div class="mt-1">
-    <%= form.number_field :banners, step: 0.01, placeholder: "$ 0.00",  class: small_input_class %>
-    </div>
   </div>
+  <div class="flex flex-row flex-wrap space-x-4 space-y-4 max-w-screen justify-end">
+  <div class="m-2 basis-1/7 mt-6 grow-0 text-left">
+  <%= form.label :number_of_days, class: label_class%>
+</div>
+<div class="m-2 basis-1/6">
+<%= form.number_field :number_of_days, step: 0.5, placeholder: "Number of days/half days",  class: number_input_class %>
+</div>
+<div class="m-2 basis-1/2">
+</div>   
+</div>
 
-   <div class="mb-2">
-      <%= form.text_area :banner_notes, placeholder: "Enter banner notes here", class: input_class  %>
-   </div>   
- </div>
- 
- <div class="block justify-between p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-blue-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
- <div class="mb-6">
-  <%= form.label :giveaways, class: label_class%>
-   <div class="mt-1">
-    <%= form.number_field :giveaways, step: 0.01, placeholder: "$ 0.00",  class: small_input_class %>
-    </div>
-  </div>
-
-   <div class="mb-4">
-      <%= form.text_area :giveaway_notes, placeholder: "Enter giveaways notes here", class: input_class  %>
-   </div>   
- </div>
- 
- <br>
+<br>
   <div>
    <%= form.submit "Save Record", class: form_button_class %>
   </div>

@@ -39,6 +39,9 @@
                     Giveaways
                 </th>
                 <th scope="col" class="px-6 py-3 w-60 truncate">
+                    Per Diems
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 truncate">
                     Total
                 </th>
                 
@@ -91,6 +94,10 @@
                 
                 <td class="px-6 py-4">
                     <%= number_to_currency(budget.giveaways, precision: 2) %> 
+                </td>
+
+                <td class="px-6 py-4">
+                    <%= number_to_currency(budget.per_diem_total, precision: 2) %> 
                 </td>
                 
                 <td class="px-6 py-4 font-medium">

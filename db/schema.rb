@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_20_104251) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_22_120222) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -63,6 +63,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_20_104251) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "event_id"
+    t.decimal "per_diem", precision: 7, scale: 2
+    t.integer "number_of_people"
+    t.decimal "number_of_days", precision: 7, scale: 2
   end
 
   create_table "educators", force: :cascade do |t|
