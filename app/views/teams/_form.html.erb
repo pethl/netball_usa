@@ -25,11 +25,11 @@
      <div class="mb-2 mt-4">
       <%= form.label :state, "State*",  class: label_class%>
        <div class="mt-1">
-       <%= form.select :state, options_for_select(us_states, :selected => team.state),{}, class: input_class %>
+       <%= form.select :state, options_for_select(us_states, :selected => team.state),{:prompt=>true}, class: input_class %>
         </div> </div>
       </div>
       
-      <div class="block mb-2 mt-2 text-gray-400">Web and Social Media</div>
+      <div class="block mb-2 mt-2 text-gray-400">Web and Social Media (optional)</div>
       <div class="flex flex-wrap w-full">
          <div class="mb-2">
             <%= form.label :website, "Team Website", class: label_class%>

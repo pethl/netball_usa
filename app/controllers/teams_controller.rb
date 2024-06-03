@@ -55,7 +55,7 @@ class TeamsController < ApplicationController
 
     if @team.save
       respond_to do |format|
-           format.html { redirect_to quotes_path, notice: "Team was successfully created." }
+           format.html { redirect_to teams_path, notice: "Team was successfully created." }
            format.turbo_stream
          end
     else

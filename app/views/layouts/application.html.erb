@@ -81,8 +81,8 @@
           <div class="block border-0 w-screen bg-blue-900 text-center text-white">
            <div class="flex flex-row">
               <div class="w-1/5 ">
-                <div class="pb-2 pt-2 text-md font-2xl text-white underline underline-offset-6 text-left justify-middle text-sm ml-4">
-                    Hi <%= current_user.full_name %>
+                <div class="pb-2 pt-2 font-mono text-md font-2xl text-white text-left justify-middle text-sm ml-4">
+                    Hello <%= current_user.first_name %>
                 </div>
               </div>
               <div class="w-4/5">
@@ -256,8 +256,11 @@
                </li>
                <% end %>
                  <% if current_user.teamlead? %>
-                 
-                   <li class="mt-6">
+
+                   <li class="mt-8">
+                       <a href="/teams/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
+                   </li>
+                   <li class="mt-2">
                        <a href="/teams/" class="text-gray-100 hover:font-bold">My Team(s)</a>
                    </li>
                     <% end %>
@@ -298,11 +301,10 @@
                 <div class="m-2 mr-4 bg-white py-2 px-2 text-sm">
                  
                     <main>
-                    <div class="text-center text-blue-700 text-lg">
-                    <p class="notice"><%= notice %></p>
-                    <p class="alert"><%= alert %></p>
-                   
-                   </div>  
+                     <div class="text-center text-blue-700 text-lg">
+                      <p class="notice"><%= notice %></p>
+                      <p class="alert"><%= alert %></p>
+                     </div>  
                       <div class="overflow-x-auto overflow-y-auto overflow-scroll">
                        <%= yield %>
                       </div>
@@ -313,7 +315,7 @@
               
               </div>
             </div>
-                     </div>
+          </div>
             <!--Main bucket end -->
          
         </div>

@@ -19,6 +19,10 @@ class Team < ApplicationRecord
     Region.where(state: self.state).first.region
   end
   
+  def members?
+    members.any?
+  end
+  
   def team_president
     @member_key_role = MemberKeyRole.where(team_id: self.id, key_role: "Team President").first
     if @member_key_role.blank?
