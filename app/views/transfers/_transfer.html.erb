@@ -110,12 +110,13 @@
         </div>
        
     <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Umpire Badge Level (if applicable):
-    </p>
-    <p class="text-sm font-medium text-gray-900 dark:text-white">
-    <%= transfer.umpire_badge_level %>
-    </p>
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            Umpire Badge Level (if applicable):
+        </p>
+        <p class="text-sm font-medium text-gray-900 dark:text-white">
+        <%= transfer.umpire_badge_level %>
+        </p>
+    </div>
 
     <div class="mt-2">
     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -124,6 +125,7 @@
     <p class="text-sm font-medium text-gray-900 dark:text-white">
     <%= transfer.certification_date.to_formatted_s(:usa) unless (transfer.certification_date.to_s.empty?)  %>
     </p>
+    </div>
 
     <div class="mt-2">
     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -132,6 +134,37 @@
     <p class="text-sm font-medium text-gray-900 dark:text-white">
     <%= transfer.visa_type %>
     </p>
+    </div>
+
+    <div class="mt-2">
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+       Headshot:
+    </p>
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
+    <% if transfer.headshot_url.to_s.empty? %>
+        <span class="ml-4"> Headshot not uploaded</span>
+    <% else %>
+        <%= image_tag transfer.headshot_url, :class => "h-15 w-auto"  %>
+        </p>
+        <% end %>
+    </div>
+
+
+    <div class="mt-2">
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Certification Proof:
+    </p>
+   
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
+    <% if transfer.certification_url.to_s.empty? %>
+    <span class="ml-4"> Certification Proof not uploaded</span>
+        <% else %>
+            <%= image_tag transfer.certification_url, :class => "h-15 w-auto" %>
+    </p>
+    <% end %>
+   
+          </p>
+    </div>
 
 
      <div class="mt-2">

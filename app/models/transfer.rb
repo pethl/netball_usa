@@ -1,9 +1,12 @@
 class Transfer < ApplicationRecord
+  include ImageUploader::Attachment(:headshot)   # ImageUploader will attach and manage `headshot`
+  include ImageUploader::Attachment(:certification)   # ImageUploader will attach and manage `certification`
 
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :role, presence: true
-  validates :check_out, comparison: { greater_than: :check_in }
+  validates :check_in, allow_blank: true, comparison: { less_than: :check_out }
+  validates :check_out, allow_blank: true, comparison: { greater_than: :check_in }
  
   def full_name
     "#{self.first_name} #{self.last_name}"

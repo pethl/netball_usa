@@ -15,7 +15,6 @@
         </ul>
   </div>
 
-  <br>
 
   <div id="transfers">
   <div class="relative overflow-x-auto">
@@ -116,7 +115,7 @@
                   </td> 
 
                   <td class="px-6 py-4 whitespace-nowrap">
-                    <%= transfer.certification_date.to_formatted_s(:usa)  %>
+                    <%= transfer.certification_date.to_formatted_s(:usa) unless (transfer.certification_date.to_s.empty?)  %>
                   </td>
 
                   <td class="px-6 py-4 whitespace-nowrap">
