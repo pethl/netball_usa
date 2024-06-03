@@ -1,0 +1,161 @@
+<div class="max-w-2xl">
+
+<%= form_with(model: transfer) do |form| %>
+  <% if transfer.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(transfer.errors.count, "error") %> prohibited this transfer from being saved:</h2>
+
+      <ul>
+        <% transfer.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="mb-4 mt-2 font-lg font-medium">
+    Hi <%= transfer.first_name %>   <%= transfer.last_name %>,  <br>
+    <span class="text-sm text-gray-500"> [ <%= transfer.role %> ] </span>
+  </div>
+  
+  <div class="block max-w-md p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow hover:border-gray-700 ">
+    <div class="font-xl mb-4 text-center text-gray-800 font-medium border-b-2 border-gray-200">
+       Hotel Details
+  </div>
+
+<div class="flex flex-row gap-4">
+  <div class="mb-4 basis-1/2">
+   <%= form.label :check_in, class: label_class%>
+    <div class="mt-1">
+   <%= form.date_field :check_in, class: input_class  %>
+  </div> </div>
+  
+  <div class="mb-4 basis-1/2">
+   <%= form.label :check_out,  class: label_class%>
+    <div class="mt-1">
+   <%= form.date_field :check_out, class: input_class  %>
+  </div> </div>
+  </div>
+  
+  <div class="mb-4">
+   <%= form.label :room_type, class: label_class%>
+    <div class="mt-1">
+   <%= form.select :room_type, options_for_select(transfer_room_type, :selected => transfer.room_type),{prompt: true}, class: input_class %>
+  </div> </div>
+
+  <div class="mb-4">
+   <%= form.label :share_volunteer, "Room Share", class: label_class%>
+    <div class="mt-1">
+   <%= form.text_field :share_volunteer, placeholder: "preferred room share volunteer - if applicable", class: input_class  %>
+  </div> </div>
+  </div>
+
+   <div class="flex items-center mb-2 mt-2">
+       <%= form.check_box :no_pick_up, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
+       <%= form.label :no_pick_up, "Is Airport Pickup Required?",class: "ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"%>
+        </div>
+    <div class="text-xs mb-6">
+     Tick Box for YES. Leave blank for NO.
+      </div>
+  
+    <div class="mb-4">
+     <%= form.label :phone, "Phone (Required if requesting airport pick up)", class: label_class%>
+      <div class="mt-1">
+     <%= form.text_field :phone, placeholder: "please include country code and area code", class: input_class  %>
+    </div> </div>
+
+    <div class="mb-4 text-blue-800">
+    <span class="text-sm tracking-tight">NOTE: Only enter Arrival / Departure flight details if you want airport pick-up.<span>
+     </div>
+  
+  <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-gray-700 ">
+  <div class="font-xl mb-4 text-center text-gray-800 font-medium border-b-2 border-gray-200">
+  Flight Arrival Details
+      </div>
+ 
+      <div class="mb-4 mt-2">
+       <%= form.label :arrival_airline, "Airline", class: label_class%>
+        <div class="mt-1">
+        <%= form.select :arrival_airline, options_for_select(airline, :selected => transfer.arrival_airline),{prompt: true}, class: input_class %>
+      </div> </div>
+
+      <div class="mb-4">
+       <%= form.label :arrival_flight, "Flight Number", class: label_class%>
+        <div class="mt-1">
+       <%= form.text_field :arrival_flight, placeholder: "format XX1234", class: small_input_class  %>
+      </div> </div>
+   
+      <div class="mb-4">
+       <%= form.label :arrival_time, "Date & Time", class: label_class%>
+        <div class="mt-1">
+       <%= form.datetime_field :arrival_time, class: input_class  %>
+      </div> </div>
+    </div>
+
+   <br>
+
+     <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-gray-700 ">
+  <div class="font-xl mb-4 text-center text-gray-800 font-medium border-b-2 border-gray-200">
+  Flight Departure Details
+      </div>
+  
+    <div class="mb-4 mt-4">
+     <%= form.label :departure_airline, "Airline", class: label_class%>
+      <div class="mt-1">
+      <%= form.select :departure_airline, options_for_select(airline, :selected => transfer.departure_airline),{prompt: true}, class: input_class %>
+    </div> </div>
+
+    <div class="mb-4">
+     <%= form.label :departure_flight, "Flight Number", class: label_class%>
+      <div class="mt-1">
+     <%= form.text_field :departure_flight, placeholder: "format XX1234", class: small_input_class  %>
+    </div> </div>
+   
+    <div class="mb-4">
+     <%= form.label :departure_time, "Date & Time", class: label_class%>
+      <div class="mt-1">
+     <%= form.datetime_field :departure_time, class: input_class  %>
+    </div> </div>
+</div>
+
+<br>
+
+<div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-gray-700 ">
+  <div class="font-xl mb-4 text-center text-gray-800 font-medium border-b-2 border-gray-200">
+    Qualification / Visa Details
+  </div>
+
+    <div class="mb-4">
+     <%= form.label :umpire_badge_level, "Umpire Badge Level (if applicable)", class: label_class%>
+      <div class="mt-1">
+     <%= form.text_field :umpire_badge_level, placeholder: "enter awarding country and badge level", class: input_class  %>
+    </div> </div>
+   
+    <div class="mb-4">
+     <%= form.label :certification_date, "Certification Date (approx if exact date not known)", class: label_class%>
+      <div class="mt-1">
+     <%= form.date_field :certification_date, class: input_class  %>
+    </div> </div>
+
+    <div class="mb-4">
+    <%= form.label :visa_type, class: label_class%>
+     <div class="mt-1">
+     <%= form.text_field :visa_type, class: input_class  %> </div> </div>
+    </div>  
+
+
+   <div class="mb-6 mt-4">
+    <%= form.label :notes, class: label_class%>
+     <div class="mt-1">
+    <%= form.text_area :notes, placeholder: "please add any further notes you need to communicate re hotels or travel", class: input_class  %>
+   </div> </div>
+
+   <div>
+     <%= form.submit "Save Record", class: form_button_class %>
+   </div>
+<% end %>
+
+
+
+
+

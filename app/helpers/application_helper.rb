@@ -16,7 +16,7 @@ module ApplicationHelper
    end
    
    def small_input_class
-     "block w-sm appearance-none text-right rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
+     "block w-sm appearance-none text-right rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm hover:bg-gray-100"
    end
 
    def number_input_class
@@ -203,6 +203,11 @@ module ApplicationHelper
     def people_invite_back
       people_invite_back = Reference.where(active: "TRUE", group: 'people_invite_back')
       people_invite_back = people_invite_back.pluck(:value)       
+    end
+
+    def airline
+      airline = Reference.where(active: "TRUE", group: 'airline')
+      airline = airline.pluck(:value)       
     end
     
     def regions

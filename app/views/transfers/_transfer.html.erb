@@ -86,29 +86,54 @@
        </p>
      </div>
 
-     <div class="mt-4">
+     <div class="mt-2">
      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
          Arrival Info
      </p>
      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-     <%= transfer.arrival_airline %> <br>
+     <%= transfer.arrival_airline %> 
       <%= transfer.arrival_flight %>  <br>
       <%= transfer.arrival_time.to_formatted_s(:usa_dt) unless (transfer.arrival_time.to_s.empty?)  %> 
      </p>
       </div>
       
 
-      <div class="mt-4 block">
+      <div class="mt-2 block">
       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
           Departures Info:
       </p>
       <p class="text-sm font-medium text-gray-900 dark:text-white">
-       <%= transfer.departure_airline %> <br>
+       <%= transfer.departure_airline %> 
        <%= transfer.departure_flight %>  <br>
        <%= transfer.departure_time.to_formatted_s(:usa_dt) unless (transfer.departure_time.to_s.empty?)  %> 
       </p>
         </div>
        
+    <div class="mt-2">
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Umpire Badge Level (if applicable):
+    </p>
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
+    <%= transfer.umpire_badge_level %>
+    </p>
+
+    <div class="mt-2">
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Certification Date:
+    </p>
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
+    <%= transfer.certification_date.to_formatted_s(:usa) unless (transfer.certification_date.to_s.empty?)  %>
+    </p>
+
+    <div class="mt-2">
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Visa type (if applicable):
+    </p>
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
+    <%= transfer.visa_type %>
+    </p>
+
+
      <div class="mt-2">
        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
            Notes:

@@ -1,4 +1,4 @@
-<% content_for(:page_title, "US Open")%>
+<% content_for(:page_title, "US Open #{Date.current.year}")%>
 
 <% if user_signed_in? %> 
   <div class="">
@@ -49,6 +49,15 @@
                   <th scope="col" colspan="2" class="px-6 py-3 w-52">
                      Departure
                   </th>
+                  <th scope="col" class="px-6 py-3 w-60  text-left">
+                      Umpire Badge Level
+                  </th>
+                  <th scope="col" class="px-6 py-3 w-60  text-left">
+                      Certification Date
+                  </th>
+                  <th scope="col" class="px-6 py-3 w-60  text-left">
+                      Visa
+                  </th>
                   <th scope="col" class="px-6 py-3 w-60 truncate text-left">
                       Notes
                   </th>
@@ -59,19 +68,19 @@
            <% @transfers.each do |transfer| %>
               <tr class="bg-white border-b hover:bg-gray-100">
                
-                  <td class="px-6 py-4">
+                  <td class="px-6 py-4 whitespace-nowrap">
                      <%= link_to transfer.full_name, edit_transfer_path(transfer), class: link_class %>
                      </td>
                
-                  <td class="px-6 py-4">
+                  <td class="px-6 py-4 whitespace-nowrap">
                      <%= transfer.role %>
                   </td>
                 
-                  <td class="px-6 py-4">
+                  <td class="px-6 py-4 whitespace-nowrap">
                      <%= transfer.check_in.to_formatted_s(:usa) unless (transfer.check_in.to_s.empty?) %>
                    </td>
                 
-                  <td class="px-6 py-4">
+                  <td class="px-6 py-4 whitespace-nowrap">
                     <%= transfer.check_out.to_formatted_s(:usa) unless (transfer.check_out.to_s.empty?) %>
                   </td>
                 
@@ -87,19 +96,31 @@
                      <%= transfer.no_pick_up? ? 'Yes' : 'No'  %>
                   </td>
                 
-                  <td class="px-6 py-4">
+                  <td class="px-6 py-4  whitespace-nowrap">
                      <%= transfer.arrival_airline  %> <br> <%= transfer.arrival_flight %>
                     </td>
-                  <td class="px-6 py-4">
+                  <td class="px-6 py-4 whitespace-nowrap">
                      <%= transfer.arrival_time.to_formatted_s(:usa_dt) unless (transfer.arrival_time.to_s.empty?)  %>
                   </td>
                 
-                  <td class="px-6 py-4">
+                  <td class="px-6 py-4 whitespace-nowrap">
                      <%= transfer.departure_airline  %><br> <%= transfer.departure_flight  %>
                   </td>
                 
-                  <td class="px-6 py-4">
-                   <%= transfer.departure_time.to_formatted_s(:usa_dt) unless (transfer.departure_time.to_s.empty?)  %>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <%= transfer.departure_time.to_formatted_s(:usa_dt) unless (transfer.departure_time.to_s.empty?)  %>
+                  </td>
+
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <%= transfer.umpire_badge_level  %>
+                  </td> 
+
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <%= transfer.certification_date.to_formatted_s(:usa)  %>
+                  </td>
+
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <%= transfer.visa_type  %>
                   </td>
 
                    <td class="px-6 py-4">
@@ -125,15 +146,15 @@
 <% else %>
 
 <div class="text-sm text-blue-900">
-Please click on your name and enter details in the form provided.<br><br> Please remember to click SAVE RECORD when finished.<br><br>
+Please click on your name and enter details in the form provided.<br><br> Please remember to click SAVE RECORD when finished.<br>
 </div>
 
-<div class="bg-white py-4 px-2 shadow sm:rounded-lg sm:px-4 text-sm">
+<div class="bg-white py-4 px-2 text-sm">
 <div class="relative overflow-x-auto">
     <table class="table-auto w-full text-left rtl:text-right">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
              <tr>
-                <th scope="col" class="px-6 py-3 w-52">
+                <th scope="col" class="px-4 py-3 w-64">
                     Name 
                 </th>
               </tr>
@@ -142,7 +163,7 @@ Please click on your name and enter details in the form provided.<br><br> Please
               <% @transfers.each do |transfer| %>
                  <tr class="bg-white border-b hover:bg-gray-100">
                
-                     <td class="px-6 py-4">
+                     <td class="px-6 py-2">
                         <%= link_to transfer.full_name, edit_transfer_path(transfer), class: link_class %>
                         </td>
                         <% end %>

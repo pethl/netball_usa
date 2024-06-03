@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_22_120222) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_03_124706) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -331,6 +331,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_22_120222) do
     t.integer "departure_grouping"
     t.string "departure_type"
     t.string "departure_note"
+    t.string "umpire_badge_level"
+    t.datetime "certification_date"
+    t.string "visa_type"
+    t.string "t_shirt_size"
   end
 
   create_table "umpires", force: :cascade do |t|

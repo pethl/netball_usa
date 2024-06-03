@@ -11,13 +11,13 @@
 
   <br>
 
+  <% if user_signed_in? %> 
   <div>
     <%= link_to "Edit this record", edit_transfer_path(@transfer), class:link_class %> <br>
     <%= link_to "Back to hotel & flights", transfers_path, class:link_class %><br>
     <a href="/transfers/index_inbound_pickup/" class="text-md font-medium text-blue-900 italic">Arrivals Transfers</a> | 
     <a href="/transfers/index_outbound_pickup/" class="text-md font-medium text-blue-900 italic">Departures Transfers</a>
      
-   <% if user_signed_in? %> 
     <%= button_to "Destroy this transfer", @transfer, method: :delete %>
     <% end %>
   </div>

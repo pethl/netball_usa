@@ -1,6 +1,9 @@
 class Transfer < ApplicationRecord
-  
+
+  validates :first_name, presence: true
+  validates :last_name, presence: true
   validates :role, presence: true
+  validates :check_out, comparison: { greater_than: :check_in }
  
   def full_name
     "#{self.first_name} #{self.last_name}"
