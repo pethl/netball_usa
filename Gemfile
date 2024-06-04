@@ -76,6 +76,10 @@ group :development do
   # gem "spring"
 end
 
+group :production do
+  gem "aws-sdk-s3", "~> 1.14"
+end
+
 # file uploader
 gem "shrine", "~> 3.0"
 
