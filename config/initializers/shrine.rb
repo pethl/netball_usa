@@ -17,8 +17,8 @@ else
     s3 = Shrine::Storage::S3.new(
       bucket: "cloud-cube-us2",
       region: "us-east-1",
-      access_key_id: CLOUDCUBE_ACCESS_KEY_ID,
-      secret_access_key: CLOUDCUBE_SECRET_ACCESS_KEY
+      access_key_id: ENV.fetch('CLOUDCUBE_ACCESS_KEY_ID'),
+      secret_access_key: ENV.fetch('CLOUDCUBE_SECRET_ACCESS_KEY')
 )
 Shrine.storages = {
   cache: Shrine::Storage::S3.new(prefix: "cache", **s3_options),
