@@ -206,6 +206,12 @@
       <div class="mt-1">
       <%= form.text_area :notes, placeholder: "please add any further notes you need to communicate re hotels or travel", class: input_class  %>
     </div> </div>
+    <%=  form.fields_for :person do |person_subform|%>%>
+      # this will run once for each of the people
+      <%= person_subform.text_field :level_submitted %>
+      
+      <% end %>
+
   
   
   <div class="mb-6 self-end">  

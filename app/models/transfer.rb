@@ -3,12 +3,11 @@ class Transfer < ApplicationRecord
   include ImageUploader::Attachment(:certification)   # ImageUploader will attach and manage `certification`
 
   has_one :event
-  has_one :person
-  accepts_nested_attributes_for :people
+  belongs_to :person, foreign_key: 'person_id'
+  accepts_nested_attributes_for :person, update_only: true
   
   validates :person_id, presence: true
   validates :event_id, presence: true  
-  validates :role, presence: true
   validates :role, presence: true
   validates :check_in, allow_blank: true, comparison: { less_than: :check_out }
   validates :check_out, allow_blank: true, comparison: { greater_than: :check_in }

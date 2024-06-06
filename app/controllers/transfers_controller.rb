@@ -57,6 +57,8 @@ class TransfersController < ApplicationController
 
   # PATCH/PUT /transfers/1
   def update
+    @events= Event.all.ordered
+    @people = Person.all.ordered
     if @transfer.update(transfer_params)
       redirect_to @transfer, notice: "Transfer was successfully updated.", status: :see_other
     else
@@ -196,7 +198,7 @@ class TransfersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transfer_params
-      params.require(:transfer).permit(:person_id, :event_id, :role, :check_in, :check_out, :room_type, :hotel_reservation, :share_volunteer, :arrival_airline, :arrival_flight, :arrival_time, :departure_airline, :departure_flight, :departure_time, :no_pick_up, :notes, :phone, :hotel_name, :pick_up_grouping, :pickup_type, :pickup_note, :departure_grouping, :departure_type, :departure_note, :t_shirt_size, :visa_type, :umpire_badge_level, :certification_date,  :headshot, :certification, :people_attributes => [ :level, :phone, :address, :associated, :gender, :tshirt_size, :uniform_size, :certification, :certification_date] )
+      params.require(:transfer).permit(:id, :person_id, :event_id, :role, :check_in, :check_out, :room_type, :hotel_reservation, :share_volunteer, :arrival_airline, :arrival_flight, :arrival_time, :departure_airline, :departure_flight, :departure_time, :no_pick_up, :notes, :phone, :hotel_name, :pick_up_grouping, :pickup_type, :pickup_note, :departure_grouping, :departure_type, :departure_note, :t_shirt_size, :visa_type, :umpire_badge_level, :certification_date,  :headshot, :certification, person_attributes: [ :level_submitted, :phone, :address, :associated, :gender, :tshirt_size, :uniform_size, :certification, :certification_date] )
     end
 end
 

@@ -125,10 +125,16 @@
     Visa / Qualification Details
   </div>
     <div class="mb-4">
-      <%= form.label :visa_type, "Visa to enter the USA", class: label_class%>
+      <%= form.label :visa_type, "Visa to enter the USA", class: label_class %>
     <div class="mt-1">
       <%= form.text_field :visa_type, class: input_class  %> </div> 
     </div>  
+
+    <%=  form.fields_for :person do |person_subform|%>
+      # this will run once for each of the people
+      <%= person_subform.text_field :level_submitted %>
+      
+      <% end %>
 
     <div class="mb-4">
      <%= form.label :umpire_badge_level, "Umpire Badge Level (if applicable)", class: label_class%>
