@@ -1,166 +1,131 @@
 <div id="<%= dom_id person %>">
+<div class="container m-4 mr-4 w-fit">
 
-  <% if ["Scorer", "Umpire"].include? person.role %>
-<div class="max-w-sm">
-<div class="flex justify-between p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
-   <div class="">
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          Role:
-      </p>
-      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-        <%= person.role %> 
-      </p>
-     </div> 
-  
-   <div class="">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Region
-    </p>
-    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-    <%= person.region %> 
-    </p>
-  </div> 
-   </div> 
-
-  <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-         Name:
-     </p>
-     <p class="text-xl font-medium text-gray-900 truncate dark:text-white">
-     <%= person.first_name %>  <%= person.last_name %> 
-     </p> 
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 m-4">
+    <div class="mb-0 font-medium text-gray-900 ">
+    <span class="text-gray-500 font-light">First Name: </span><br>
+        <%= person.first_name %> 
+    </div> 
     
-       <div class="mt-2">
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          Location:
-      </p>
-      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= person.location %> 
-      </p>
-       </div>
+    <div class="mb-0 font-medium text-gray-900 ">
+    <span class="text-gray-500 font-light">Last Name: </span><br>
+      <%= person.last_name %> 
+    </div> 
+    <div></div>
 
-      <div class="mt-2">
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          Level:
-      </p>
-      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= person.level %> :  <%= person.level_note %> 
-      </p>
-       </div>
+    <div class="mb-0 font-medium text-gray-900 ">
+    <span class="text-gray-500 font-light">Role: </span><br>
+        <%= person.role %> 
+    </div> 
+    
+    <div class="mb-0 font-medium text-gray-900 ">
+    <span class="text-gray-500 font-light">Region: </span><br>
+      <%= person.region %> 
+    </div> 
+    <div> <span class="text-gray-500 font-light">Location: </span><br>
+    <%= person.location %> </div>
+
+    <div class="mb-0 font-medium text-gray-900 ">
+    <span class="text-gray-500 font-light">Associated or Independent?: </span><br>
+        <%= person.associated %> 
+    </div> 
+    
+    <div class="mb-0 font-medium text-gray-900 ">
+    <span class="text-gray-500 font-light">Gender: </span><br>
+      <%= person.gender %> 
+    </div> 
+    <div></div>
+
+    <div class="mb-0 font-medium text-gray-900 ">
+    <span class="text-gray-500 font-light">Email: </span><br>
+        <%= person.email %> 
+    </div> 
+    
+    <div class="mb-0 font-medium text-gray-900 ">
+    <span class="text-gray-500 font-light">Phone: </span><br>
+      <%= person.phone %> 
+    </div> 
+
+    <div> 
+    <span class="text-gray-500 font-light">Address: </span><br>
+    <%= person.address %> </div>
+    <div> 
+  
+    
+      <div class="p-4 border-double border-2 border-blue-900 rounded-md mt-2">
+        <div class="text-sm text-center text-gray-500 m-2">Umpires/Scorers Only</div>
        
-       <div class="mt-2">
-       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-           Associated?:
-       </p>
-       <p class="text-sm font-medium text-gray-900 dark:text-white">
-       <%= person.associated %> 
-       </p>
-        </div>
-    </div>
-
-    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-    <div class="">
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          Email:
-      </p>
-      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= person.email %> 
-      </p>
-     </div>
-
-     <div class="mt-2">
-     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-         Phone:
-     </p>
-     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-     <%= person.phone %> 
-     </p>
-      </div>
+      <div class="mb-0 font-medium text-gray-900 ">
+        <span class="text-gray-500 font-light">Umpire Badge Level: </span><br>
+        <%= person.level %> 
+      </div> 
+    
+      <div class="mb-0 font-medium text-gray-900 ">
+        <span class="text-gray-500 font-light">Certification Date: </span><br>
+          <%= person.certification_date %> 
+      </div> 
       
+      <div class="mb-0 font-medium text-gray-900 ">
+      <span class="text-gray-500 font-light">Level Notes: </span><br>
+        <%= person.level_note %> 
+      </div> 
 
-      <div class="mt-2 block">
+      <div class="">
+        <% unless person.certification_url.to_s.empty? %>
+        <%= image_tag person.certification_url, :class => "h-20 w-auto" %>
+        <span class="italic text-sm">To change file, use Certification Upload above.</span>
+        <% end %>
+    </div>
+  </div>  </div>
+
+  <div class="col-2">
+    <div class="p-4 border-double border-2 border-blue-900 rounded-md mt-2">
+    <div class="text-sm text-center text-gray-500 m-2">Event Related</div>
+
+        <div class="mb-0 font-medium text-gray-900 ">
+        <span class="text-gray-500 font-light">T-Shirt Size: </span><br>
+          <%= person.tshirt_size %> 
+        </div> 
+        <div> <span class="text-gray-500 font-light">Inferno Uniform Size: </span><br>
+        <%= person.uniform_size %> </div>
+
+        <div class="mb-0 font-medium text-gray-900 ">
+        <span class="text-gray-500 font-light">Invite Back?: </span><br>
+            <%= person.invite_back %> 
+        </div> 
+   </div>
+
+  <div class="p-4 border-double border-2 border-blue-900 rounded-md mt-2">
+  <div class="text-sm text-center text-gray-500 m-2">Trainers/Ambassadors Only</div>
+ 
+      <div class="">
       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          Address:
+        In Person Trained?:
       </p>
       <p class="text-sm font-medium text-gray-900 dark:text-white">
-      <%= person.address %> 
+      <%= person.in_person_trained?? 'Yes' : 'No' %> 
       </p>
-       </div>
-      
-     <div class="mt-2">
-     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Gender:
-     </p>
-     <p class="text-sm font-medium text-gray-900 dark:text-white">
-     <%= person.gender %> 
-     </p>
       </div>
-     </div>
-  
-     <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-  
-      <div class="">
-        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-            T-shirt size:
-        </p>
-        <p class="text-sm font-medium text-gray-900 dark:text-white">
-        <%= person.tshirt_size %> 
-        </p>
-        </div>
-   
 
-       <div class="mt-2">
-         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-             Uniform Size:
-         </p>
-         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-         <%= person.uniform_size %> 
-         </p>
-        </div>
+    <div class="mt-2">
+      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+          Virtually Trained?:
+      </p>
+      <p class="text-sm font-medium text-gray-900 dark:text-white">
+      <%= person.virtually_trained?? 'Yes' : 'No' %> 
+      </p>
+    </div>
 
-        <div class="mt-2">
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-              Headshot:
-          </p>
-          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-          <%= person.headshot? ? 'Yes' : 'No' %>
-          </p>
-        </div>
-        
-        <div class="mt-2">
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-              Headshot file path:
-          </p>
-          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-          <%= (link_to person.headshot_path, person.headshot_path, target: '_blank', class: link_class) unless (person.headshot_path.to_s.empty?)%>
-       
-          </p>
-        </div>
-
-        <div class="mt-2">
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-              Headshot file:
-          </p>
-          <p class="text-sm font-medium text-gray-900 dark:text-white">
-          <% if person.image.present? %>
-        <%= image_tag person.image_url %>
-        <% end %>
-          </p>
-         </div>
-        </div>
-
-    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-     <div class="">
-       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-           Invite Back?:
-       </p>
-       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-       <%= person.invite_back %>
-       </p>
-     </div>
-     
-     <div class="mt-2">
+    <div class="mt-2">
+      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+          Booth Trained?:
+      </p>
+      <p class="text-sm font-medium text-gray-900 dark:text-white">
+      <%= person.booth_trained?? 'Yes' : 'No' %> 
+      </p>
+    </div>
+      </div>
+      <div class="p-4 border-double border-2 border-blue-900 rounded-md mt-2">
        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
            Notes:
        </p>
@@ -168,10 +133,36 @@
       <%= person.notes %>
        </p>
       </div>
-      </div>
+   
       <br>
-      <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-       <div class="">
+      </div>
+    <div class="p-4 border-double border-2 border-blue-900 rounded-md mt-2">
+    <div class="text-sm text-center text-gray-500 m-2">Headshot</div>
+       
+      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Headshot?:
+        </p>
+        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+        <%= person.headshot_present? ? 'Yes' : 'No' %>
+        </p>
+<br >
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Headshot old file path:
+        </p>
+       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+        <%= (link_to person.headshot_path, person.headshot_path, target: '_blank', class: link_class) unless (person.headshot_path.to_s.empty?)%>
+       </p>
+       <br>
+       <% unless person.headshot_url.to_s.empty? %>
+       <%= image_tag person.headshot_url, :class => "h-20 w-auto" %>
+       <span class="italic text-sm">To change file, use Headshot Upload above.</span>
+       <% end %>
+
+
+  </div> 
+  
+  </div></div>
+    <div class="">
        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
            Events:
        </p>
@@ -183,149 +174,4 @@
             <% end %>
        </p>
      </div>
-     
-   
-   
-   
-   
-   
-   
-   
-    <% else %>
-     <div class="max-w-sm">
-     <div class="flex justify-between p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
-        <div class="">
-           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-               Role:
-           </p>
-           <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-             <%= person.role %> 
-           </p>
-          </div> 
-  
-        <div class="">
-         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-             Region
-         </p>
-         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-         <%= person.region %> 
-         </p>
-       </div> 
-        </div> 
-
-       <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-              Name:
-          </p>
-          <p class="text-xl font-medium text-gray-900 truncate dark:text-white">
-          <%= person.first_name %>  <%= person.last_name %> 
-          </p> 
     
-            <div class="mt-2">
-           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-               Location:
-           </p>
-           <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-           <%= person.location %> 
-           </p>
-            </div>
-         </div>
-
-         <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-         <div class="">
-           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-               Email:
-           </p>
-           <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-           <%= person.email %> 
-           </p>
-          </div>
-
-          <div class="mt-2">
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-              Phone:
-          </p>
-          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-          <%= person.phone %> 
-          </p>
-           </div>
-      
-
-           <div class="mt-2 block">
-           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-               Address:
-           </p>
-           <p class="text-sm font-medium text-gray-900 dark:text-white">
-           <%= person.address %> 
-           </p>
-            </div>
-      
-          <div class="mt-2">
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-             Gender:
-          </p>
-          <p class="text-sm font-medium text-gray-900 dark:text-white">
-          <%= person.gender %> 
-          </p>
-           </div>
-          </div>
-  
-          <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-  
-           <div class="">
-             <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                In Person Trained?:
-             </p>
-             <p class="text-sm font-medium text-gray-900 dark:text-white">
-             <%= person.in_person_trained?? 'Yes' : 'No' %> 
-             </p>
-             </div>
-   
-            <div class="mt-2">
-              <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                 Virtually Trained?:
-              </p>
-              <p class="text-sm font-medium text-gray-900 dark:text-white">
-              <%= person.virtually_trained?? 'Yes' : 'No' %> 
-              </p>
-            </div>
-
-            <div class="mt-2">
-              <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                 Booth Trained?:
-              </p>
-              <p class="text-sm font-medium text-gray-900 dark:text-white">
-              <%= person.booth_trained?? 'Yes' : 'No' %> 
-              </p>
-            </div>
-             </div>
-
-         <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-          
-          <div class="mt-2">
-            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                Notes:
-            </p>
-            <p class="text-sm font-medium text-gray-900 dark:text-white">
-           <%= person.notes %>
-            </p>
-           </div>
-           </div>
-           <br>
-           <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <div class="">
-            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                Events:
-            </p>
-            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-             <% if person.events.any? %>
-              <% person.events.each do |event| %>
-                <%= event.date.to_formatted_s(:usa) unless ( event.date.to_s.empty?)  %> <%= event.name %><br>
-                <% end %>
-                 <% end %>
-            </p>
-          </div>
-   <% end %>
-   
-</div>

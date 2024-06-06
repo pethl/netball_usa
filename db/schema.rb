@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_06_051947) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_06_093511) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -228,7 +228,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_06_051947) do
     t.string "gender"
     t.string "tshirt_size"
     t.string "uniform_size"
-    t.boolean "headshot"
+    t.boolean "headshot_present"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -241,6 +241,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_06_051947) do
     t.text "image_data"
     t.string "headshot_path"
     t.string "invite_back"
+    t.datetime "certification_date"
+    t.text "headshot_data"
+    t.text "certification_data"
   end
 
   create_table "references", force: :cascade do |t|

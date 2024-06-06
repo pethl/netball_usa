@@ -1,4 +1,4 @@
-<% content_for(:page_title, "Person ")%>
+<% content_for(:page_title, "#{@person.full_name} - #{@person.role} ")%>
 
   <div class="bg-white py-4 px-4 shadow sm:rounded-lg sm:px-10  ">
     <%= render @person %>

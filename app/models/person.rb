@@ -1,5 +1,8 @@
 class Person < ApplicationRecord
 include ImageUploader::Attachment(:image) 
+include ImageUploader::Attachment(:headshot)   # ImageUploader will attach and manage `headshot`
+include ImageUploader::Attachment(:certification)   # ImageUploader will attach and manage `certification`
+
    
   has_many :event_participants, dependent: :destroy
   has_many :events, through: :event_participants
