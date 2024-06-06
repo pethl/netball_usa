@@ -32,14 +32,20 @@ class TransfersController < ApplicationController
   # GET /transfers/new
   def new
     @transfer = Transfer.new
+    @events= Event.all.ordered
+    @people = Person.all.ordered
   end
 
   # GET /transfers/1/edit
   def edit
+    @events= Event.all.ordered
+    @people = Person.all.ordered
   end
 
   # POST /transfers
   def create
+    @events= Event.all.ordered
+    @people = Person.all.ordered
     @transfer = Transfer.new(transfer_params)
 
     if @transfer.save
@@ -190,6 +196,7 @@ class TransfersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transfer_params
-      params.require(:transfer).permit(:first_name, :last_name, :role, :check_in, :check_out, :room_type, :hotel_reservation, :share_volunteer, :arrival_airline, :arrival_flight, :arrival_time, :departure_airline, :departure_flight, :departure_time, :no_pick_up, :notes, :phone, :hotel_name, :pick_up_grouping, :pickup_type, :pickup_note, :departure_grouping, :departure_type, :departure_note, :t_shirt_size, :visa_type, :umpire_badge_level, :certification_date,  :headshot, :certification)
+      params.require(:transfer).permit(:person_id, :event_id, :role, :check_in, :check_out, :room_type, :hotel_reservation, :share_volunteer, :arrival_airline, :arrival_flight, :arrival_time, :departure_airline, :departure_flight, :departure_time, :no_pick_up, :notes, :phone, :hotel_name, :pick_up_grouping, :pickup_type, :pickup_note, :departure_grouping, :departure_type, :departure_note, :t_shirt_size, :visa_type, :umpire_badge_level, :certification_date,  :headshot, :certification)
     end
 end
+

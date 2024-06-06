@@ -4,7 +4,8 @@ include ImageUploader::Attachment(:image)
   has_many :event_participants, dependent: :destroy
   has_many :events, through: :event_participants
 
- 
+  scope :ordered, -> { order(first_name: :asc) }
+  
   validates :role, presence: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, format:     { with: VALID_EMAIL_REGEX },

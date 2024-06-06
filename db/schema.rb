@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_03_160631) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_06_051947) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -337,6 +337,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_03_160631) do
     t.string "t_shirt_size"
     t.text "headshot_data"
     t.text "certification_data"
+    t.bigint "event_id"
+    t.bigint "person_id"
+    t.index ["event_id"], name: "index_transfers_on_event_id"
+    t.index ["person_id"], name: "index_transfers_on_person_id"
   end
 
   create_table "umpires", force: :cascade do |t|
@@ -404,4 +408,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_03_160631) do
   add_foreign_key "member_key_roles", "teams"
   add_foreign_key "members", "teams"
   add_foreign_key "teams", "users"
+  add_foreign_key "transfers", "events"
+  add_foreign_key "transfers", "people"
 end

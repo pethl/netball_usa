@@ -89,6 +89,7 @@ Reference.create(group:	'event_type',	value:	'Virtual Workshop', active:	'TRUE')
 Reference.create(group:	'event_type',	value:	'In Person Workshop', active:	'TRUE');
 Reference.create(group:	'event_type',	value:	'PE Class', active:	'TRUE');
 Reference.create(group:	'event_type',	value:	'State Conference', active:	'TRUE');
+Reference.create(group:	'event_type',	value:	'US Open', active:	'TRUE');
 Reference.create(group:	'event_status',	value:	'Plan', active:	'TRUE');
 Reference.create(group:	'event_status',	value:	'Prep', active:	'TRUE');
 Reference.create(group:	'event_status',	value:	'Complete', active:	'TRUE');
