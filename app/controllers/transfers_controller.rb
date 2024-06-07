@@ -6,7 +6,9 @@ class TransfersController < ApplicationController
 
   # GET /transfers
   def index
-    @transfers = Transfer.all.order(first_name: :asc)
+   # @transfers = Transfer.all.ordered
+    @transfers = Transfer.includes(:person).order('people.first_name')
+  
   end
 
   def index_inbound_pickup

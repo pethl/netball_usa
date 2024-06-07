@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   get 'people/index_trainers_and_ambassadors' => 'people#index_trainers_and_ambassadors', :as => :index_trainers_and_ambassadors
   get 'people/index_int' => 'people#index_int', :as => :index_int
   get 'people/index_scorers' => 'people#index_scorers', :as => :index_scorers
+  get 'people/index_coaches' => 'people#index_coaches', :as => :index_coaches
+  get 'people/index_operations' => 'people#index_operations', :as => :index_operations
   get 'people/people_search' => 'people#people_search', :as => :people_search
   
   resources :people

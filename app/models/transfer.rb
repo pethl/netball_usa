@@ -13,6 +13,7 @@ class Transfer < ApplicationRecord
   validates :check_out, allow_blank: true, comparison: { greater_than: :check_in }
   
  
+ 
   def full_name
     "#{self.first_name} #{self.last_name}"
   end

@@ -4,13 +4,13 @@
   <div class="">
      <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
         <li class="me-2">
-          <a href="/transfers" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Hotel<br>& Flight</a>
+          <a href="/transfers" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Event Attendees</a>
         </li>
           <li class="me-2">
-             <a href="/transfers/index_inbound_pickup/" class="inline-block p-4 text-gray-600 rounded-t-lg active" aria-current="page">Arrivals<br>Transfers</a>
+             <a href="/transfers/index_inbound_pickup/" class="inline-block p-4 text-gray-600 rounded-t-lg active" aria-current="page">Arrivals Transfers</a>
           </li>
           <li class="me-2">
-             <a href="/transfers/index_outbound_pickup/" class="inline-block p-4 text-gray-600 rounded-t-lg active" aria-current="page">Departures<br>Transfers</a>
+             <a href="/transfers/index_outbound_pickup/" class="inline-block p-4 text-gray-600 rounded-t-lg active" aria-current="page">Departures Transfers</a>
           </li>
         </ul>
   </div>
@@ -127,7 +127,7 @@ Please click on your name and enter details in the form provided.<br><br> Please
                  <tr class="bg-white border-b hover:bg-gray-100">
                
                      <td class="px-6 py-2">
-                        <%= link_to transfer.full_name, edit_transfer_path(transfer), class: link_class %>
+                        <%= link_to transfer.person.full_name, edit_transfer_path(transfer), class: link_class %>
                         </td>
                         <% end %>
                           <% else %>
