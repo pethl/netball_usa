@@ -1,55 +1,204 @@
 <div id="<%= dom_id transfer %>">
 
-<div class="max-w-sm">
-<div class="flex justify-between p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+<div class="max-w-full">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 ml-4">
 
    <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+    <p class="text-sm text-gray-500 ">
         Name:
     </p>
-    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-    <%= transfer.full_name %> 
+    <p class="text-sm font-medium text-gray-900 ">
+    <%= transfer.person.full_name %> 
     </p>
-    
+    </div> 
+    <div>
+    </div>
+
      <div class="mt-2">
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+      <p class="text-sm text-gray-500 ">
           Role:
       </p>
-      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <p class="text-sm font-medium text-gray-900 ">
       <%= transfer.role %> 
       </p>
     </div> 
-    
-    
+
+    <div class="mt-2">
+      <p class="text-sm text-gray-500 ">
+          Position:
+      </p>
+      <p class="text-sm font-medium text-gray-900 ">
+      <%= transfer.event_title %> 
+      </p>
+    </div> 
+
+   
+    <div class="mt-2">
+        <p class="text-sm text-gray-500">
+            Registration form completed?:
+        </p>
+        <p class="text-sm font-medium text-gray-900 ">
+        <%= transfer.registration_form_completed? ? 'Yes' : 'No' %>
+        </p>
+    </div>
+
+    <div class="mt-2">
+        <p class="text-sm text-gray-500 ">
+            Waiver form completed?:
+        </p>
+        <p class="text-sm font-medium text-gray-900 ">
+        <%= transfer.waiver_form_completed? ? 'Yes' : 'No' %>
+        </p>
+    </div>
+
+    <div class="mt-2">
+        <p class="text-sm text-gray-500 ">
+            T&Cs completed?:
+        </p>
+        <p class="text-sm font-medium text-gray-900 ">
+        <%= transfer.read_and_agreed_tcs? ? 'Yes' : 'No' %>
+        </p>
+    </div>
+    </div> 
+    <br>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
+    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
+      <div class="font-xl">
+        PICK UP DETAILS
+      </div>
+
      <div class="mt-2">
-     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        <p class="text-sm text-gray-500 ">
+            Pick Up Grouping #:
+        </p>
+        <p class="text-sm font-medium text-gray-900 ">
+        <%= transfer.pick_up_grouping %> 
+        </p>
+      </div> 
+
+      <div class="mt-2">
+        <p class="text-sm text-gray-500 ">
+            Pick Up Type #:
+        </p>
+        <p class="text-sm font-medium text-gray-900 ">
+        <%= transfer.pickup_type %> 
+        </p>
+      </div> 
+
+      <div class="mt-2">
+        <p class="text-sm text-gray-500 ">
+            Pick Up Note :
+        </p>
+        <p class="text-sm font-medium text-gray-900 ">
+        <%= transfer.pickup_note %> 
+        </p>
+      </div>      
+    </div> 
+
+    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
+    <div class: "font-xl">
+          DEPARTURE DETAILS 
+          </div>
+
+    <div class="mt-2">
+        <p class="text-sm text-gray-500 ">
+            Departure Grouping # :
+        </p>
+        <p class="text-sm font-medium text-gray-900 ">
+        <%= transfer.departure_grouping %> 
+        </p>
+      </div>   
+
+      <div class="mt-2">
+        <p class="text-sm text-gray-500 ">
+            Departure Type
+        </p>
+        <p class="text-sm font-medium text-gray-900 ">
+        <%= transfer.departure_type %> 
+        </p>
+      </div>   
+
+      <div class="mt-2">
+        <p class="text-sm text-gray-500 ">
+            Departure Note
+        </p>
+        <p class="text-sm font-medium text-gray-900 ">
+        <%= transfer.departure_note %> 
+        </p>
+      </div>   
+    </div> 
+
+    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
+    <div class="font-xl">
+    HOTEL DETAILS 
+    </div>
+
+    <div class="mt-2">
+        <p class="text-sm text-gray-500 ">
+           Hotel Reservation #
+        </p>
+        <p class="text-sm font-medium text-gray-900 ">
+        <%= transfer.hotel_reservation %> 
+        </p>
+      </div>   
+
+      <div class="mt-2">
+      <p class="text-sm text-gray-500 ">
+         Hotel Name
+      </p>
+      <p class="text-sm font-medium text-gray-900 ">
+      <%= transfer.hotel_name %> 
+      </p>
+    </div>  
+  </div>  
+
+
+<div class="block p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
+  <div class="mt-2">
+      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Visa type (if applicable):
+      </p>
+      <p class="text-sm font-medium text-gray-900 dark:text-white">
+      <%= transfer.visa_type %>
+      </p>
+    </div>
+    </div>
+
+  </div>  
+  <br>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
+  <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
+
+     <div class="mt-2">
+     <p class="text-sm text-gray-500">
          Check In:
      </p>
      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
      <%= transfer.check_in.to_formatted_s(:usa) unless (transfer.check_in.to_s.empty?) %>
      </p>
-      </div>
+    </div>
       
-      <div class="mt-2">
+    <div class="mt-2">
       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
           Check Out:
       </p>
       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
       <%= transfer.check_out.to_formatted_s(:usa) unless (transfer.check_out.to_s.empty?) %> 
       </p>
-       </div>
+    </div>
 
-       <div class="mt-2">
+    <div class="mt-2">
         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
             Room type:
         </p>
         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
         <%= transfer.room_type %>  
         </p> 
-         </div>
-       
-     <% unless current_user.nil? %>  
-       <div class="mt-2">
+    </div>
+      
+    <div class="mt-2">
        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
            Hotel Reservation #:
        </p>
@@ -57,8 +206,7 @@
        <%= transfer.hotel_reservation %> 
        </p>
     </div>
-    <% end %>
-
+   
     <div class="mt-2">
       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
           Room Share - Volunteer Name:
@@ -67,113 +215,94 @@
       <%= transfer.share_volunteer %> 
       </p>
      </div>
+    </div>
+    
+    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
+    <div class="mt-2">
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            Pickup Required?:
+        </p>
+        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+        <%= transfer.no_pick_up? ? 'Yes' : 'No' %>
+        </p>
+    </div>
 
-     <div class="mt-2">
-       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-           Airport Pick-up Not Required:
-       </p>
-       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-       <%= transfer.no_pick_up? ? 'Yes' : 'No' %>
-       </p>
-     </div>
-     
-     <div class="mt-2">
-       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-           Phone (if requesting pick-up):
-       </p>
-       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-       <%= transfer.phone %>
-       </p>
+    <div class="mt-2">
+        <p class="text-sm text-gray-500 ">
+        Contact Phone
+        </p>
+        <p class="text-sm font-medium text-gray-900 ">
+        <%= transfer.phone %> 
+        </p>
+   </div>  
+   </div>  
+
+   <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
+   <div class: "font-xl">
+     Arrival Details
      </div>
 
-     <div class="mt-2">
-     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-         Arrival Info
-     </p>
      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-     <%= transfer.arrival_airline %> 
+     <%= transfer.arrival_airline %>  <br>
       <%= transfer.arrival_flight %>  <br>
       <%= transfer.arrival_time.to_formatted_s(:usa_dt) unless (transfer.arrival_time.to_s.empty?)  %> 
      </p>
-      </div>
+    </div>
+   
       
-
-      <div class="mt-2 block">
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          Departures Info:
+    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
+    <div class: "font-xl">
+         Departures Info:
       </p>
       <p class="text-sm font-medium text-gray-900 dark:text-white">
-       <%= transfer.departure_airline %> 
+       <%= transfer.departure_airline %>  <br>
        <%= transfer.departure_flight %>  <br>
        <%= transfer.departure_time.to_formatted_s(:usa_dt) unless (transfer.departure_time.to_s.empty?)  %> 
       </p>
-        </div>
+    </div>
+    </div>
        
-    <div class="mt-2">
+    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
+    
         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-            Umpire Badge Level (if applicable):
+        Headshot:
         </p>
         <p class="text-sm font-medium text-gray-900 dark:text-white">
-        <%= transfer.umpire_badge_level %>
-        </p>
-    </div>
-
-    <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Certification Date:
-    </p>
-    <p class="text-sm font-medium text-gray-900 dark:text-white">
-    <%= transfer.certification_date.to_formatted_s(:usa) unless (transfer.certification_date.to_s.empty?)  %>
-    </p>
-    </div>
-
-    <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Visa type (if applicable):
-    </p>
-    <p class="text-sm font-medium text-gray-900 dark:text-white">
-    <%= transfer.visa_type %>
-    </p>
-    </div>
-
-    <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-       Headshot:
-    </p>
-    <p class="text-sm font-medium text-gray-900 dark:text-white">
-    <% if transfer.headshot_url.to_s.empty? %>
-        <span class="ml-4"> Headshot not uploaded</span>
-    <% else %>
-        <%= image_tag transfer.headshot_url, :class => "h-15 w-auto"  %>
-        </p>
-        <% end %>
-    </div>
-
-
-    <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Certification Proof:
-    </p>
-   
-    <p class="text-sm font-medium text-gray-900 dark:text-white">
-    <% if transfer.certification_url.to_s.empty? %>
-    <span class="ml-4"> Certification Proof not uploaded</span>
+        <% if transfer.headshot_url.to_s.empty? %>
+            <span class="ml-4"> Headshot not uploaded</span>
         <% else %>
-            <%= image_tag transfer.certification_url, :class => "h-15 w-auto" %>
-    </p>
-    <% end %>
+            <%= image_tag transfer.headshot_url, :class => "h-15 w-auto"  %>
+            </p>
+        <% end %>
+        
+     </div>
+
+      <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
+    
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+           Certification Proof:
+        </p>
    
-          </p>
+            <p class="text-sm font-medium text-gray-900 dark:text-white">
+            <% if transfer.certification_url.to_s.empty? %>
+            <span class="ml-4"> Certification Proof not uploaded</span>
+                <% else %>
+                    <%= image_tag transfer.certification_url, :class => "h-15 w-auto" %>
+            </p>
+            <% end %>
+        
+            </p>
+     
     </div>
 
-
-     <div class="mt-2">
+    <div class="block row-span-2 max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
            Notes:
        </p>
        <p class="text-sm font-medium text-gray-900 dark:text-white">
       <%= transfer.notes %>
        </p>
+    </div>
 
-</div>
-</div>
+</div></div>
+

@@ -25,35 +25,22 @@
                       Name 
                   </th>
                   <th scope="col" class="px-6 py-3 w-52">
-                      Role
+                      Role: Title
                   </th>
                   <th scope="col" class="px-6 py-3 w-52">
-                      Check In
+                    Reg Form
+                 </th>
+                  <th scope="col" class="px-6 py-3 w-52">
+                    Waiver
                   </th>
                   <th scope="col" class="px-6 py-3 w-52">
-                      Check Out
+                    T&Cs
                   </th>
-                  <th scope="col" class="px-6 py-3 w-52">
-                      Room Type
-                  </th>
-                  <th scope="col" class="px-6 py-3 w-52">
-                      Room Share
-                  </th>
+                  
                   <th scope="col" class="px-6 py-3 w-60">
                       Pick Up Required
                   </th>
-                  <th scope="col" colspan="2" class="px-6 py-3 w-40">
-                      Arrival  Details
-                  </th>
-                  <th scope="col" colspan="2" class="px-6 py-3 w-52">
-                     Departure
-                  </th>
-                  <th scope="col" class="px-6 py-3 w-60  text-left">
-                      Umpire Badge Level
-                  </th>
-                  <th scope="col" class="px-6 py-3 w-60  text-left">
-                      Certification Date
-                  </th>
+                  
                   <th scope="col" class="px-6 py-3 w-60  text-left">
                       Visa
                   </th>
@@ -68,55 +55,32 @@
               <tr class="bg-white border-b hover:bg-gray-100">
                
                   <td class="px-6 py-4 whitespace-nowrap">
-                     <%= link_to transfer.full_name, edit_transfer_path(transfer), class: link_class %>
+                     <%= link_to transfer.person.full_name, edit_transfer_path(transfer), class: link_class %>
                      </td>
                
                   <td class="px-6 py-4 whitespace-nowrap">
-                     <%= transfer.role %>
+                     <%= transfer.role %> <% unless transfer.event_title.to_s.empty? %> : <%= transfer.event_title %><% end %>
                   </td>
-                
-                  <td class="px-6 py-4 whitespace-nowrap">
-                     <%= transfer.check_in.to_formatted_s(:usa) unless (transfer.check_in.to_s.empty?) %>
-                   </td>
-                
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <%= transfer.check_out.to_formatted_s(:usa) unless (transfer.check_out.to_s.empty?) %>
-                  </td>
-                
-                   <td class="px-6 py-4">
-                      <%= transfer.room_type %>
-                  </td>
-                
+
                   <td class="px-6 py-4">
-                     <%= transfer.share_volunteer %>
+                     <%= transfer.registration_form_completed? ? 'Yes' : 'No'  %>
                   </td>
+
+                  <td class="px-6 py-4">
+                    <%= transfer.waiver_form_completed? ? 'Yes' : 'No'  %>
+                  </td>
+
+                  <td class="px-6 py-4">
+                     <%= transfer.read_and_agreed_tcs? ? 'Yes' : 'No'  %>
+                  </td>
+                
+                  
                 
                   <td class="px-6 py-4">
                      <%= transfer.no_pick_up? ? 'Yes' : 'No'  %>
                   </td>
                 
-                  <td class="px-6 py-4  whitespace-nowrap">
-                     <%= transfer.arrival_airline  %> <br> <%= transfer.arrival_flight %>
-                    </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                     <%= transfer.arrival_time.to_formatted_s(:usa_dt) unless (transfer.arrival_time.to_s.empty?)  %>
-                  </td>
-                
-                  <td class="px-6 py-4 whitespace-nowrap">
-                     <%= transfer.departure_airline  %><br> <%= transfer.departure_flight  %>
-                  </td>
-                
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <%= transfer.departure_time.to_formatted_s(:usa_dt) unless (transfer.departure_time.to_s.empty?)  %>
-                  </td>
-
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <%= transfer.umpire_badge_level  %>
-                  </td> 
-
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <%= transfer.certification_date.to_formatted_s(:usa) unless (transfer.certification_date.to_s.empty?)  %>
-                  </td>
+                 
 
                   <td class="px-6 py-4 whitespace-nowrap">
                     <%= transfer.visa_type  %>

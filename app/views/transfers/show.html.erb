@@ -1,14 +1,17 @@
-<% content_for(:page_title, "Airport : Hotel : Qualifications : Visas ")%>
-<% unless current_user.nil? %>  
-  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md md:max-w-lg justify-center">
-    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-    <% end %>
-      <br>
-
-      <%= render @transfer %>
+  <% if user_signed_in? %> 
+   
+    <%= render @transfer %>
+    <% content_for(:page_title, "Hotel and Airport: Edit")%>
+  
+  <% else %>
+  
+    <%= render "transfer_external", transfer: @transfer %>
+    <% content_for(:page_title, "Airport : Hotel : Qualifications : Visas ")%>
     </div>
   </div>
-
+  
+  <% end %>
+    
   <br>
 
   <% if user_signed_in? %> 
@@ -19,5 +22,6 @@
     <a href="/transfers/index_outbound_pickup/" class="text-md font-medium text-blue-900 italic">Departures Transfers</a>
      
     <%= button_to "Destroy this transfer", @transfer, method: :delete %>
-    <% end %>
+    
   </div>
+  <% end %>

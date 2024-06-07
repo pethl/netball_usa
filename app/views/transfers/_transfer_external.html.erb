@@ -1,0 +1,182 @@
+<div id="<%= dom_id transfer %>">
+
+   <div class="mt-2">
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Name:
+    </p>
+    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+    <%= transfer.full_name %> 
+    </p>
+    
+     <div class="mt-2">
+      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+          Role:
+      </p>
+      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <%= transfer.role %> 
+      </p>
+    </div> 
+    
+    
+     <div class="mt-2">
+     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+         Check In:
+     </p>
+     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+     <%= transfer.check_in.to_formatted_s(:usa) unless (transfer.check_in.to_s.empty?) %>
+     </p>
+      </div>
+      
+      <div class="mt-2">
+      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+          Check Out:
+      </p>
+      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <%= transfer.check_out.to_formatted_s(:usa) unless (transfer.check_out.to_s.empty?) %> 
+      </p>
+       </div>
+
+       <div class="mt-2">
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            Room type:
+        </p>
+        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+        <%= transfer.room_type %>  
+        </p> 
+         </div>
+       
+     
+    <div class="mt-2">
+      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+          Room Share - Volunteer Name:
+      </p>
+      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <%= transfer.share_volunteer %> 
+      </p>
+     </div>
+
+     <div class="mt-2">
+       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+           Is Airport Pick-up Required?:
+       </p>
+       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+       <%= transfer.no_pick_up? ? 'Yes' : 'No' %>
+       </p>
+     </div>
+     
+     <div class="mt-2">
+       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+           Phone (if requesting pick-up):
+       </p>
+       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+       <%= transfer.phone %>
+       </p>
+     </div>
+
+     <div class="mt-2">
+     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+         Arrival Info
+     </p>
+     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+     <%= transfer.arrival_airline %> 
+      <%= transfer.arrival_flight %>  <br>
+      <%= transfer.arrival_time.to_formatted_s(:usa_dt) unless (transfer.arrival_time.to_s.empty?)  %> 
+     </p>
+      </div>
+      
+
+      <div class="mt-2 block">
+      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+          Departures Info:
+      </p>
+      <p class="text-sm font-medium text-gray-900 dark:text-white">
+       <%= transfer.departure_airline %> 
+       <%= transfer.departure_flight %>  <br>
+       <%= transfer.departure_time.to_formatted_s(:usa_dt) unless (transfer.departure_time.to_s.empty?)  %> 
+      </p>
+        </div>
+       
+        <div class="mt-2">
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            Visa type (if applicable):
+        </p>
+        <p class="text-sm font-medium text-gray-900 dark:text-white">
+        <%= transfer.visa_type %>
+        </p>
+        </div>
+
+    <div class="mt-2">
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            Umpire Badge Level (if applicable):
+        </p>
+        <p class="text-sm font-medium text-gray-900 dark:text-white">
+        <%= transfer.person.level_submitted %>
+        </p>
+    </div>
+
+    <div class="mt-2">
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Certification Date:
+    </p>
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
+    <%= transfer.person.certification_date.to_formatted_s(:usa) unless (transfer.person.certification_date.to_s.empty?)  %>
+    </p>
+    </div>
+
+    <div class="mt-2">
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Certification Proof:
+    </p>
+   
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
+    <% if transfer.person.certification_url.to_s.empty? %>
+    <span class="ml-4"> Certification Proof not uploaded</span>
+        <% else %>
+            <%= image_tag transfer.person.certification_url, :class => "h-15 w-auto" %>
+    </p>
+    <% end %>
+   
+          </p>
+    </div>
+
+    <div class="mt-2">
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        T Shirt Size :
+    </p>
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
+    <%= transfer.person.tshirt_size %>
+    </p>
+    </div>
+
+    <div class="mt-2">
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Uniform Size (Umpires Only) :
+    </p>
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
+    <%= transfer.person.uniform_size %>
+    </p>
+    </div>
+
+    <div class="mt-2">
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+       Headshot:
+    </p>
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
+    <% if transfer.person.headshot_url.to_s.empty? %>
+        <span class="ml-4"> Headshot not uploaded</span>
+    <% else %>
+        <%= image_tag transfer.person.headshot_url, :class => "h-15 w-auto"  %>
+        </p>
+        <% end %>
+    </div>
+
+    <div class="mt-2">
+       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+           Notes:
+       </p>
+       <p class="text-sm font-medium text-gray-900 dark:text-white">
+      <%= transfer.notes %>
+       </p>
+
+</div>
+</div>

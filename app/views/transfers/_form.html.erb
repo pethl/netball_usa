@@ -13,20 +13,18 @@
     </div>
   <% end %>
   
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 ">
     <div class="mb-6">
      <%= form.label :event_id, class: label_class%>
       <div class="mt-1">
-        <%= form.collection_select(:event_id, @events, :id, :name,{:prompt=>true}, {:class=>"bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 hover:border-blue-900 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
-      }) %> 
+        <%= form.collection_select(:event_id, @events, :id, :name,{}, class: input_class) %> 
       </div>  </div>
 
 
   <div class="mb-6">
     <%= form.label :person_id, class: label_class%>
     <div class="mt-1">
-    <%= form.collection_select(:person_id, @people, :id, :full_name,{:prompt=>true}, {:class=>"bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 hover:border-blue-900 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
-      }) %> 
+    <%= form.collection_select(:person_id, @people, :id, :full_name,{:prompt=>true}, class: input_class) %> 
       </div> </div>
 
 
@@ -35,6 +33,28 @@
     <div class="mt-1">
      <%= form.select :role, options_for_select(us_open_role, :selected => transfer.role),{prompt: true}, class: input_class %>
     </div> </div>
+
+    <div class="mb-6">
+   <%= form.label :event_title, class: label_class%>
+    <div class="mt-1">
+    <%= form.text_field :event_title, placeholder: "us open position", class: input_class  %>
+    </div> </div>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 ">
+     <div class="mb-2">
+       <%= form.check_box :registration_form_completed, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded hover:bg-gray-100 focus:ring-blue-500 focus:ring-2 " %>      
+       <%= form.label :registration_form_completed, class: "ms-2 text-sm font-medium text-gray-700 hover:text-black hover:bg-gray-100 "%>
+    </div>
+    <div class="mb-2">
+       <%= form.check_box :waiver_form_completed, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded hover:bg-gray-100 focus:ring-blue-500 focus:ring-2 " %>      
+       <%= form.label :waiver_form_completed, class: "ms-2 text-sm font-medium text-gray-700 hover:text-black hover:bg-gray-100"%>
+    </div>
+    <div class="mb-2">
+       <%= form.check_box :read_and_agreed_tcs, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded hover:bg-gray-100 focus:ring-blue-500 focus:ring-2 " %>      
+       <%= form.label :read_and_agreed_tcs, class: "ms-2 text-sm font-medium text-gray-700 hover:text-black hover:bg-gray-100"%>
+    </div>
+    
   </div>
 
 <hr><br>
@@ -103,13 +123,23 @@
               <%= form.select :hotel_name, options_for_select(us_open_hotel_name, :selected => transfer.hotel_name),{prompt: true}, class: input_class %>
              </div> </div>
            </div>
-        </div>
+
+           <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
+        
+           <div class="mb-6 mt-6">
+             <%= form.label :visa_type, class: label_class%>
+              <div class="mt-1">
+                <%= form.text_area :visa_type, class: input_class  %>
+              </div> 
+           </div>
+           </div>
+          </div>
 
 <br>
   
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
-    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
-  
+  <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
+   
       <div class="mb-6">
       <%= form.label :check_in, class: label_class%>
         <div class="mt-1">
@@ -135,8 +165,8 @@
       </div> </div>
 </div>
       
-<div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
-  
+<div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
+    
    <div class="mb-2">
        <%= form.check_box :no_pick_up, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
        <%= form.label :no_pick_up, "Is Airport Pickup Required?",class: "ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"%>
@@ -152,7 +182,7 @@
     </div> </div>
     </div>
   
-  <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
+    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
     <div class: "font-xl">
       Arrival Details
       </div>
@@ -176,8 +206,8 @@
       </div> </div>
     </div>
    
-    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
-    <div class: "font-xl border ">
+    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
+   <div class: "font-xl border ">
     Departure Details
     </div>
   
@@ -206,14 +236,7 @@
       <div class="mt-1">
       <%= form.text_area :notes, placeholder: "please add any further notes you need to communicate re hotels or travel", class: input_class  %>
     </div> </div>
-    <%=  form.fields_for :person do |person_subform|%>%>
-      # this will run once for each of the people
-      <%= person_subform.text_field :level_submitted %>
-      
-      <% end %>
-
-  
-  
+    
   <div class="mb-6 self-end">  
      <%= form.submit "Save Record", class: form_button_class %>
    </div>
