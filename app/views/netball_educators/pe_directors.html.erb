@@ -46,7 +46,7 @@
                   <%= link_to image_tag("view.png", :class=>"mx-2 h-6 w-auto"), educator  %>
                 </td>
                 
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 whitespace-nowrap">
                    <%= link_to educator.full_name, edit_netball_educator_path(educator), class: link_class %>
                 </td>
                 
@@ -91,7 +91,8 @@
                 </td>
 
                  <td class="px-6 py-4">
-                  <p class="text-wrap truncate"> <%= educator.mgmt_notes %></p>
+                  <p class=" whitespace-nowrap truncate"> 
+                  <%= educator.mgmt_notes %></p>
                 </td>
             </tr>
             <% end %>

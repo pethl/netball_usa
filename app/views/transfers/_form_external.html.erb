@@ -157,7 +157,7 @@
             <div class="mb-4 mt-4">
               <% if transfer.person.certification_url.to_s.empty? %>
                 <div class="mt-2 mb-2">
-                  <%= person_subform.label :certification, "Certification file upload", class: label_class %>
+                  <%= person_subform.label :certification, "Certification file upload: (jpg/jpeg/png only)", class: label_class %>
                   <div class="mt-1">
                     <%= person_subform.hidden_field :certification, value: person_subform.object.cached_certification_data, id: nil %>
                     <%= person_subform.file_field :certification, class:"block w-4/5 ml-5 mb-5 text-xs text-gray-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-30 focus:outline-none" %>
@@ -195,7 +195,7 @@
             <div class="mt-2">
              <%=  person_subform.label :headshot, "Please upload a recent headshot photograph:", class: label_class %>
               <div class="mb-4 mt-4">
-                <%=  person_subform.label :headshot, "Headshot file upload", class: label_class %>
+                <%=  person_subform.label :headshot, "Headshot file upload: (jpg/jpeg/png only)", class: label_class %>
                 <div class="mt-1">
                   <%=  person_subform.hidden_field :headshot, value:  person_subform.object.cached_headshot_data, id: nil %>
                   <%=  person_subform.file_field :headshot, class:"block w-4/5 ml-5 mb-5 text-xs text-gray-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-30 focus:outline-none" %>
