@@ -6,7 +6,7 @@ class TransfersController < ApplicationController
 
   # GET /transfers
   def index
-   # @transfers = Transfer.all.ordered
+    @transfers_priority= Transfer.all.ordered
     @transfers = Transfer.includes(:person).order('people.first_name')
   
   end

@@ -12,7 +12,7 @@ class Transfer < ApplicationRecord
   validates :check_in, allow_blank: true, comparison: { less_than: :check_out }
   validates :check_out, allow_blank: true, comparison: { greater_than: :check_in }
   
- 
+  scope :ordered, -> { order(id: :asc) }
  
   def full_name
     "#{self.first_name} #{self.last_name}"

@@ -13,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
   </head>
 
-  <body class="bg-blue-900">
+  <body class="bg-blue-900 max-h-2xl">
 
    <% if current_user %> 
      
@@ -80,7 +80,7 @@
       <div class="container">
           <div class="block border-0 w-screen bg-blue-900 text-center text-white">
            <div class="flex flex-row">
-              <div class="w-1/5 ">
+              <div class="w-1/5 max-h-full ">
                 <div class="pb-2 pt-2 font-mono text-md font-2xl text-white text-left justify-middle text-sm ml-4">
                     Hello <%= current_user.first_name %>
                 </div>
@@ -239,6 +239,9 @@
                <li class="mt-2 ml-2">
                    <a href="/people/people_search" class="text-gray-100 hover:font-bold">- Search</a>
                </li>
+               <li class="mt-2 ml-2">
+                   <a href="/people/new" class="text-gray-100 hover:font-bold">- Add New Person</a>
+               </li>
                 <li class="mt-2">
                    <a href="/events/" class="text-gray-100 hover:font-bol">EVENTS</a>
                </li>
@@ -249,7 +252,10 @@
                    <a href="/transfers/" class="text-gray-100 hover:font-bol">US OPEN</a>
                </li>
                <li class="mt-2 ml-2">
-                   <a href="/transfers/" class="text-gray-100 hover:font-bold">- Hotel & Flight</a>
+                   <a href="/transfers/new" class="text-gray-100 hover:font-bold">- Add New Attendee</a>
+               </li>
+               <li class="mt-2 ml-2">
+                   <a href="/transfers/" class="text-gray-100 hover:font-bold">- Event Attendees</a>
                </li>
                  <li class="mt-2 ml-2">
                    <a href="/transfers/index_inbound_pickup" class="text-gray-100 hover:font-bold">- Arrivals Transfers</a>

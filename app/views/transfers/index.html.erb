@@ -14,6 +14,10 @@
           </li>
         </ul>
   </div>
+  <div class="mt-1">
+  <%= link_to "Add New Record", new_transfer_path, class: form_button_class %>
+  <br>  <br>
+</div>
 
 
   <div id="transfers">
@@ -27,17 +31,17 @@
                   <th scope="col" class="px-6 py-3 w-52">
                       Role: Title
                   </th>
-                  <th scope="col" class="px-6 py-3 w-52">
+                  <th scope="col" class="px-6 py-3 w-52 text-center">
                     Reg Form
                  </th>
-                  <th scope="col" class="px-6 py-3 w-52">
+                  <th scope="col" class="px-6 py-3 w-52 text-center">
                     Waiver
                   </th>
-                  <th scope="col" class="px-6 py-3 w-52">
+                  <th scope="col" class="px-6 py-3 w-52 text-center">
                     T&Cs
                   </th>
                   
-                  <th scope="col" class="px-6 py-3 w-60">
+                  <th scope="col" class="px-6 py-3 w-60 text-center">
                       Pick Up Required
                   </th>
                   
@@ -50,8 +54,8 @@
               </tr>
           </thead>
           <tbody>
-           <% if @transfers.count >0 %>
-           <% @transfers.each do |transfer| %>
+           <% if @transfers_priority.count >0 %>
+           <% @transfers_priority.each do |transfer| %>
               <tr class="bg-white border-b hover:bg-gray-100">
                
                   <td class="px-6 py-4 whitespace-nowrap">
@@ -62,26 +66,22 @@
                      <%= transfer.role %> <% unless transfer.event_title.to_s.empty? %> : <%= transfer.event_title %><% end %>
                   </td>
 
-                  <td class="px-6 py-4">
+                  <td class="px-6 py-4 text-center">
                      <%= transfer.registration_form_completed? ? 'Yes' : 'No'  %>
                   </td>
 
-                  <td class="px-6 py-4">
+                  <td class="px-6 py-4 text-center">
                     <%= transfer.waiver_form_completed? ? 'Yes' : 'No'  %>
                   </td>
 
-                  <td class="px-6 py-4">
+                  <td class="px-6 py-4 text-center">
                      <%= transfer.read_and_agreed_tcs? ? 'Yes' : 'No'  %>
                   </td>
                 
-                  
-                
-                  <td class="px-6 py-4">
-                     <%= transfer.no_pick_up? ? 'Yes' : 'No'  %>
+                  <td class="px-6 py-4 text-center">
+                     <%= transfer.no_pick_up? ? 'Yes' : ''  %>
                   </td>
                 
-                 
-
                   <td class="px-6 py-4 whitespace-nowrap">
                     <%= transfer.visa_type  %>
                   </td>
@@ -99,13 +99,7 @@
     </div>
  
 </div>
-
 <br>
-<div class="mt-1">
-  <%= link_to "Add New Record", new_transfer_path, class: form_button_class %>
-  <br>  <br>
-</div>
-
 <% else %>
 
 <div class="text-sm text-blue-900">
