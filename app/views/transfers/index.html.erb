@@ -14,9 +14,9 @@
           </li>
         </ul>
   </div>
-  <div class="mt-1">
+  <div class="mt-4 mb-4">
   <%= link_to "Add New Record", new_transfer_path, class: form_button_class %>
-  <br>  <br>
+  <br>  
 </div>
 
 
@@ -28,7 +28,7 @@
                   <th scope="col" class="px-6 py-3 w-52">
                       Name 
                   </th>
-                  <th scope="col" class="px-6 py-3 w-52">
+                  <th scope="col" class="px-6 py-3 w-52 truncate">
                       Role: Title
                   </th>
                   <th scope="col" class="px-6 py-3 w-52 text-center">
@@ -48,6 +48,11 @@
                   <th scope="col" class="px-6 py-3 w-60  text-left">
                       Visa
                   </th>
+
+                  <th scope="col" class="px-6 py-3 w-60  text-left">
+                      Arrv Flight
+                  </th>
+
                   <th scope="col" class="px-6 py-3 w-60 truncate text-left">
                       Notes
                   </th>
@@ -84,6 +89,10 @@
                 
                   <td class="px-6 py-4 whitespace-nowrap">
                     <%= transfer.visa_type  %>
+                  </td>
+
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <%= transfer.arrival_time.to_formatted_s(:usa) unless (transfer.arrival_time.to_s.empty?)  %>
                   </td>
 
                    <td class="px-6 py-4">

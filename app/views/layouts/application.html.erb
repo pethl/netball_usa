@@ -12,7 +12,7 @@
     <script src="https://kit.fontawesome.com/d868e3ba9e.js" crossorigin="anonymous"></script>
     </head>
 
-  <body class="bg-blue-900 max-h-2xl">
+  <body class="bg-blue-900 max-h-xl">
 
    <% if current_user %> 
      
@@ -49,7 +49,7 @@
                <div class="tooltip-arrow" data-popper-arrow></div>
            </div>
            </div>
-        
+           
          <div class="p-2">
            <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
              <i data-tooltip-target="tooltip-logout" class="fa-solid fa-arrow-right-from-bracket text-blue-800"> </i>
@@ -79,7 +79,7 @@
       <div class="container">
           <div class="block border-0 w-screen bg-blue-900 text-center text-white">
            <div class="flex flex-row">
-              <div class="w-1/5 max-h-full ">
+              <div class="w-1/5 max-h-xl ">
                 <div class="pb-2 pt-2 font-mono text-md font-2xl text-white text-left justify-middle text-sm ml-4">
                     Hello <%= current_user.first_name %>
                 </div>
@@ -179,7 +179,7 @@
      
   <!--Sidebar nav starts -->
   <div class="container">
-     <div class="relative md:flex flex-row h-screen w-screen overflow-hidden">
+     <div class="relative md:flex flex-row h-2xl w-screen">
       
     
        <div class="hidden md:flex flex-col w-1/5 h-screen bg-blue-900 border-0 relative">
