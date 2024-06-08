@@ -55,19 +55,24 @@
       <div class="p-4 border-double border-2 border-blue-900 rounded-md mt-2">
         <div class="text-sm text-center text-gray-500 m-2">Umpires/Scorers Only</div>
        
-      <div class="mb-0 font-medium text-gray-900 ">
-        <span class="text-gray-500 font-light">Umpire Badge Level: </span><br>
+      <div class="mb-2 font-medium text-gray-900 ">
+        <span class="text-gray-500 font-light">Umpire Badge Level (office rating): </span><br>
         <%= person.level %> 
       </div> 
     
-      <div class="mb-0 font-medium text-gray-900 ">
+      <div class="mb-2 font-medium text-gray-900 ">
         <span class="text-gray-500 font-light">Certification Date: </span><br>
-          <%= person.certification_date %> 
+          <%= person.certification_date.to_formatted_s(:usa) unless (person.certification_date.to_s.empty?)  %> 
       </div> 
       
-      <div class="mb-0 font-medium text-gray-900 ">
+      <div class="mb-2 font-medium text-gray-900 ">
       <span class="text-gray-500 font-light">Level Notes: </span><br>
         <%= person.level_note %> 
+      </div> 
+
+      <div class="mb-2 font-medium text-gray-900 ">
+      <span class="text-gray-500 font-light">Level (as submitted by individual): </span><br>
+        <%= person.level_submitted %> 
       </div> 
 
       <div class="">
@@ -82,14 +87,14 @@
     <div class="p-4 border-double border-2 border-blue-900 rounded-md mt-2">
     <div class="text-sm text-center text-gray-500 m-2">Event Related</div>
 
-        <div class="mb-0 font-medium text-gray-900 ">
+        <div class="mb-2 font-medium text-gray-900 ">
         <span class="text-gray-500 font-light">T-Shirt Size: </span><br>
           <%= person.tshirt_size %> 
         </div> 
         <div> <span class="text-gray-500 font-light">Inferno Uniform Size: </span><br>
         <%= person.uniform_size %> </div>
 
-        <div class="mb-0 font-medium text-gray-900 ">
+        <div class="mb-2 font-medium text-gray-900 ">
         <span class="text-gray-500 font-light">Invite Back?: </span><br>
             <%= person.invite_back %> 
         </div> 

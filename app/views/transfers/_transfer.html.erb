@@ -8,7 +8,8 @@
         Name:
     </p>
     <p class="text-sm font-medium text-gray-900 ">
-    <%= transfer.person.full_name %> 
+      <%= link_to transfer.person.full_name, edit_person_path(transfer.person), class: link_class %>
+  
     </p>
     </div> 
     <div>

@@ -1,6 +1,6 @@
 class TransfersController < ApplicationController
   before_action :set_transfer, only: %i[ show edit update destroy ]
-  skip_before_action :authenticate_user!, only:[:show, :create, :edit, :update, :index]
+  skip_before_action :authenticate_user!, only:[:show, :edit, :update, :index]
   require 'prawn'
   require 'prawn/table'
 
@@ -65,6 +65,7 @@ class TransfersController < ApplicationController
     if @transfer.update(transfer_params)
       redirect_to @transfer, notice: "Transfer was successfully updated.", status: :see_other
     else
+      Rails.logger.info @transfer.errors.full_messages.join(",")
       render :edit, status: :unprocessable_entity
     end
   end
@@ -201,7 +202,8 @@ class TransfersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transfer_params
-      params.require(:transfer).permit(:id, :person_id, :event_id, :role, :check_in, :check_out, :room_type, :hotel_reservation, :share_volunteer, :arrival_airline, :arrival_flight, :arrival_time, :departure_airline, :departure_flight, :departure_time, :no_pick_up, :notes, :phone, :hotel_name, :pick_up_grouping, :pickup_type, :pickup_note, :departure_grouping, :departure_type, :departure_note, :t_shirt_size, :visa_type, :umpire_badge_level, :certification_date,  :headshot, :certification, :event_title, :registration_form_completed, :waiver_form_completed, :read_and_agreed_tcs, person_attributes: [ :level_submitted, :associated, :gender, :tshirt_size, :uniform_size, :certification, :certification_date] )
+      params.require(:transfer).permit(:id, :person_id, :event_id, :role, :check_in, :check_out, :room_type, :hotel_reservation, :share_volunteer, :arrival_airline, :arrival_flight, :arrival_time, :departure_airline, :departure_flight, :departure_time, :no_pick_up, :notes, :phone, :hotel_name, :pick_up_grouping, :pickup_type, :pickup_note, :departure_grouping, :departure_type, :departure_note, :t_shirt_size, :visa_type, :umpire_badge_level, :certification_date,  :headshot, :certification, :event_title, :registration_form_completed, :waiver_form_completed, :read_and_agreed_tcs, 
+      person_attributes: [ :level_submitted, :associated, :gender, :tshirt_size, :uniform_size, :certification, :certification_date, :headshot ] )
     end
 end
 

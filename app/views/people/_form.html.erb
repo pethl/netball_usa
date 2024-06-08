@@ -111,12 +111,13 @@
       <%= form.hidden_field :certification, value: form.object.cached_certification_data, id: nil %>
       <%= form.file_field :certification, class:"block w-fit ml-5 mb-5 text-xs text-gray-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-30 focus:outline-none" %>
     </div></div>
-    <div class="">
-        <% unless person.certification_url.to_s.empty? %>
-        <%= image_tag person.certification_url, :class => "h-20 w-auto" %>
-        <span class="italic text-sm">To change file, use Certification Upload above.</span>
-        <% end %>
+      <div class="">
+          <% unless person.certification_url.to_s.empty? %>
+            <%= image_tag person.certification_url, :class => "h-20 w-auto" %>
+          <span class="italic text-sm">To change file, use Certification Upload above.</span>
+          <% end %>
       </div>
+      
  </div></div>
 
  <div>
