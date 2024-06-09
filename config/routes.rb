@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :na_teams
   get 'regions/team_list_index' => 'regions#team_list_index', :as => :team_list_index
   get 'teams/teams_list_index' => 'teams#teams_list_index', :as => :teams_list_index
 
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
   resources :equipment
   resources :sample_words
   resources :budgets
+  resources :taems
  
   get '/download_transfers_in_sheet_pdf' => "transfers#download_transfers_in_sheet_pdf" 
   get '/download_transfers_out_sheet_pdf' => "transfers#download_transfers_out_sheet_pdf" 

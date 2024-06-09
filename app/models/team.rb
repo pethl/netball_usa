@@ -9,11 +9,11 @@ class Team < ApplicationRecord
     inverse_of: :teams
   )
   validates :name, presence: true
-  validates :city, presence: true
-  validates :state, presence: true
+  #validates :city, presence: true
+  #validates :state, presence: true
  
-  
-  scope :ordered, -> { order(name: :asc) }
+  scope :ordered, -> { order(id: :asc) }
+  #scope :ordered, -> { order(name: :asc) }
   
   def region_name
     Region.where(state: self.state).first.region

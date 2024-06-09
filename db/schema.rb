@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_06_203859) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_09_150835) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -195,6 +195,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_06_203859) do
     t.index ["team_id"], name: "index_members_on_team_id"
   end
 
+  create_table "na_teams", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "city", null: false
+    t.string "state", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "netball_educators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -291,6 +300,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_06_203859) do
     t.integer "user_id"
     t.string "city"
     t.string "state"
+  end
+
+  create_table "taems", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "teams", force: :cascade do |t|

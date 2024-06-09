@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @na_team %>
+
+<div>
+  <%= link_to "Edit this na team", edit_na_team_path(@na_team) %> |
+  <%= link_to "Back to na teams", na_teams_path %>
+
+  <%= button_to "Destroy this na team", @na_team, method: :delete %>
+</div>

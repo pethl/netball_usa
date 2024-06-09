@@ -3,6 +3,21 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only:[:educator_sign_up]
   
   def home
+    @created_last_7_days = NetballEducator.where("created_at > ?", Time.now-7.days).count
+    @created_last_30_days = NetballEducator.where("created_at > ?", Time.now-30.days).count
+    @created_this_year = NetballEducator.where("created_at > ?", Time.now.beginning_of_year).count
+
+    @us_umpires = Person.where(role: "Umpire", region: "US & Canada").count
+    @int_umpires = Person.where(role: "Umpire", region: "International").count
+    @scorers = Person.where(role: "Scorer").count
+    @trainers = Person.where(role: "Trainer").count
+    @coaches = Person.where(role: "Coach").count
+    @operations = Person.where(role: "Operations").count
+
+    @admins = User.where(role: 0).count
+    @office = User.where(role: 1).count
+    @teamleads = User.where(role: 2).count
+
   end
   
   def educator_sign_up

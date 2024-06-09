@@ -1,67 +1,13 @@
 
 <%= form_with(model: team) do |form| %>
-  
   <% if team.errors.any? %>
+
      <div class="error-message">
        <%= team.errors.full_messages.to_sentence.capitalize %>
      </div>
    <% end %>
-
-  <div class="flex flex-wrap w-full">
-     <div class="mb-2 mt-4">
-        <%= form.label :name, "Team Name*", class: label_class%>
-      <div class="mt-1">
-        <%= form.text_field :name, class: required_input_class  %>
-        </div> 
-      </div> 
-      
-      <div class="mb-2 mt-4">
-         <%= form.label :city, "City*",  class: label_class%>
-       <div class="mt-1">
-         <%= form.text_field :city, class: input_class  %>
-         </div> 
-       </div> 
-   
-     <div class="mb-2 mt-4">
-      <%= form.label :state, "State*",  class: label_class%>
-       <div class="mt-1">
-       <%= form.select :state, options_for_select(us_states, :selected => team.state),{:prompt=>true}, class: input_class %>
-        </div> </div>
-      </div>
-      
-      <div class="block mb-2 mt-2 text-gray-400">Web and Social Media (optional)</div>
-      <div class="flex flex-wrap w-full">
-         <div class="mb-2">
-            <%= form.label :website, "Team Website", class: label_class%>
-          <div class="mt-1">
-            <%= form.text_field :website, class: input_class  %>
-            </div> 
-          </div> 
-          
-          <div class="mb-2">
-             <%= form.label :facebook, "Team Facebook", class: label_class%>
-           <div class="mt-1">
-             <%= form.text_field :facebook, class: input_class  %>
-             </div> 
-           </div> 
-           
-         <div class="mb-2">
-              <%= form.label :instagram, "Team Instagram", class: label_class%>
-            <div class="mt-1">
-              <%= form.text_field :instagram, class: input_class  %>
-              </div> 
-            </div> 
-            
-        <div class="mb-2">
-             <%= form.label :twitter, "Team Twitter/X", class: label_class%>
-           <div class="mt-1">
-             <%= form.text_field :twitter, class: input_class  %>
-             </div> 
-           </div>     
-        </div>  
-   
-    <%= link_to "Cancel", teams_path, class: clear_button_class %>
-   
-   <%= form.submit class: form_button_class%>
-<% end %>
-
+  
+    
+    <%= form.text_field  :name, input_html: { autofocus: true } %>
+    <%= form.submit class: "btn btn--secondary" %>
+  <% end %>

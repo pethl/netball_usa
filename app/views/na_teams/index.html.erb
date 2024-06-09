@@ -27,16 +27,18 @@
     <div class="header">
      <br>
       <%= link_to "(1) Create team",
-                  new_team_path,                  
+                new_na_team_path,                  
                   class: form_button_class,
-                    data: { turbo_frame: dom_id(Team.new) }   %>
+                  data: { turbo_frame: dom_id(NaTeam.new) }  %>
     </div>
   <% end %>
 <br>
-<%= turbo_frame_tag Team.new %>
 
+<%= turbo_frame_tag NaTeam.new %>
 
-<%= turbo_frame_tag "teams" do %>
-    <%= render @teams %>
+<%= turbo_frame_tag "na_teams" do %>
+    <%= render @na_teams %>
   <% end %>  
 </main>
+
+

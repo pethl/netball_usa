@@ -1,0 +1,11 @@
+<main class="container">
+  <%= link_to sanitize("&larr; Back to team"), na_team_path(@na_team) %>
+
+  <div class="header">
+    <h1>Edit team</h1>
+  </div>
+
+  <%= turbo_frame_tag @na_team do %>
+    <%= render "form", na_team: @na_team %>
+  <% end %>
+</main>

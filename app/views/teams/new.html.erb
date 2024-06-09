@@ -1,18 +1,12 @@
-<% content_for(:page_title, "Teams: Add new team")%>
-
 <main class="container">
+  <%= link_to sanitize("&larr; Back to teams"), teams_path %>
 
   <div class="header">
+    <h1>New team</h1>
   </div>
 
   <%= turbo_frame_tag @team do %>
-    <%= render "form", team: @team %>
-   <% end %>
-
-   <%= turbo_frame_tag "first_turbo_frame" do %>
-    <%= render "form", team: @team %>
+    <%= render "form", team: @taem %>
   <% end %>
- 
-  <br>
-   <%= link_to sanitize("&larr; Back to teams"), teams_path %>
 </main>
+

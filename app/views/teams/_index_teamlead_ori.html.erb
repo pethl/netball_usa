@@ -1,4 +1,4 @@
-<% content_for(:page_title, "Membership Administration Hub")%>
+ <% content_for(:page_title, "Membership Administration Hub")%>
  
 <div class="container m-4 ml-4">
  
@@ -11,7 +11,7 @@
       <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-1"></i></div>
       <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-2"></i></div>
       <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-3"></i></div>
-      <div class="text-base w-50 mt-1">Create Team</div>
+      <div class="text-base w-50 mt-1">Create Your Team</div>
       <div class="text-base w-50 mt-1">Add Team Members</div>
       <div class="text-base w-50 mt-1">Assign Key Roles</div>
       <div class="text-green-500 justify-start-end text-semibold pt-2"><% if @teams.any? %> <i class="fa-solid fa-check"></i><% end %></div>
@@ -23,27 +23,55 @@
      <p class="text-sm text-gray-500 mt-2">Mandatory fields are marked with a *, please provide as much information as you can,<br> it helps us to better understand and serve our membership group.</p>
    </div> 
 </div> 
-<br>
+  
+<hr>
 
-<main class="container">
+<main class="container mt-4 mb-4">
   <%= turbo_frame_tag "first_turbo_frame" do %>
-    <div class="header">
-     <br>
-      <%= link_to "(1) Create team",
-                  new_team_path,                  
-                  class: form_button_class,
-                  data: { turbo_frame: dom_id(Team.new) }  %>
+    <div class="header ml-2">
+      
+    <%= link_to "(1) Create Your Team", new_team_path, class: form_button_class %>
     </div>
   <% end %>
-<br>
-<%= turbo_frame_tag Team.new %>
-
-<%= turbo_frame_tag "teams" do %>
-    <%= render @teams %>
-  <% end %>  
+      
+  <%= turbo_frame_tag "second_frame" do %>
+      <%= render @teams %>
+  <% end %>
 </main>
+  <hr>
 
+  <% if @teams.any? %>
+ <div class="w-1/2 pr-10 justify-self-end">
+   <div class="text-gray-700 text-lg text-left font-semibold mt-4 ml-2">
+   Key Roles 
+    </div>
+    
+     <div class="items-left m-4">
+    <div class="border border-grey-500 shadow-xl shadow-blue-900 hover:border-black rounded-lg">
+      <div class="m-6">
+        <div class="col-span-4 bg-white m-4 pb-2 text-sm text-right">
+             <%= link_to "(3) Assign Key Roles", team_path(@team), class: small_button_class %>
+        </div>
+      
+        <div class="m-6 font-light">
+            Team President:  <span class="text-blue-900"> <%= @team.team_president %></span><br>
+            Head Coach:   <span class="text-blue-900"><%= @team.head_coach %></span><br>
+            Head Umpire:   <span class="text-blue-900"> <%= @team.head_umpire %></span><br>
+        </div>
+     </div>
+    </div>
+ 
+          <% end %>
+     
+   </div>
+  </div>
+  </div>
 
-
-
-
+  <% if @teams.any?%>
+ <br><hr>
+ <div class="col-span-4 bg-white align-bottom text-left p-4">
+     <%= link_to "Add Another Team", new_team_path, class: form_button_class %>
+ </div>
+<hr>
+<% end %>
+  <br><br> 

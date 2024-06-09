@@ -269,7 +269,7 @@ GEM
     timeout (0.4.1)
     ttfunk (1.8.0)
       bigdecimal (~> 3.1)
-    turbo-rails (2.0.5)
+    turbo-rails (1.5.0)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
@@ -318,7 +318,7 @@ DEPENDENCIES
   sprockets-rails
   stimulus-rails
   thor (~> 1.0.0)
-  turbo-rails
+  turbo-rails (~> 1.0)
   tzinfo-data
   web-console
 

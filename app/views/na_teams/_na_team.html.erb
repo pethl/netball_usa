@@ -1,0 +1,25 @@
+<div id="<%= dom_id na_team %>">
+<%= turbo_frame_tag "na_team_#{na_team.id}" do %>
+  <div class="na_team">
+    
+    <div class="flex w-1/3 justify-between items-center border border-blue-900 rounded-lg shadow-lg shadow-blue-900 hover:border-black mx-8 p-4">
+     <div>
+        <span class="text-lg">  <%= link_to na_team.name, na_team_path(na_team) %></span><br>
+        <span class="font-light text-sm"> - city, state</span>
+     </div>
+
+    <div class="na_team__actions">
+      <%= button_to "Delete",
+                  na_team_path(na_team),
+                    method: :delete,
+                    class: "btn btn--light" %>
+      <%= link_to "Edit",
+                  edit_na_team_path(na_team),
+                  class: "btn btn--light" %>
+    </div>
+  </div>
+<br>
+  <% end %>
+</div>
+
+</div>

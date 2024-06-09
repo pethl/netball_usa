@@ -19,6 +19,9 @@
         </li>
       </ul>
 </div>
+<div class="mt-4 mb-2">
+<%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
+</div>
 
 <% if @netball_educators.any? %>
   
@@ -122,10 +125,6 @@
 </div>
 <br>
 
-<div class="mt-1">
-<%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
-<br><br>
-</div>
 
 
     

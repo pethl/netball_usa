@@ -20,7 +20,10 @@
       </li>
       </ul>
 </div>
-<br>
+<div class="mt-4 mb-2">
+<%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
+</div>
+
 <% if @netball_educators.any? %>
   
 <div id="educators">
@@ -100,7 +103,7 @@
                    <%= educator.formatted_phone %><br><%= educator.email %>
                 </td>
                 
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 text-wrap truncate">
                   <%= educator.school_name %><br>
                   <%= (link_to educator.website, educator.website, target: '_blank', class: link_class) unless (educator.website.to_s.empty?)%>
                   
@@ -150,10 +153,7 @@
     <% end %>
  
 <br>
-<div class="m-1">
-  <%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
-  <br><br>
-</div>
+
 
 
 
