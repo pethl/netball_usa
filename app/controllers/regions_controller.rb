@@ -3,6 +3,7 @@ class RegionsController < ApplicationController
 
   # GET /regions
   def index
+    authorize! :read, @regions
      @regions = Region.all.order("region ASC, state ASC")
      @regions_by_region = Region.all.group_by(&:region)
   end

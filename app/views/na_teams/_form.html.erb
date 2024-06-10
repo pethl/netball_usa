@@ -11,27 +11,31 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
+  <div class="flex flex-wrap w-full">
+     <div class="mb-2 mt-4">
+        <%= form.label :name, "Team Name*", class: label_class%>
+      <div class="mt-1">
+        <%= form.text_field :name, class: required_input_class  %>
+        </div> 
+      </div> 
 
-  <div>
-    <%= form.label :city, style: "display: block" %>
-    <%= form.text_field :city %>
+      <div class="mb-2 mt-4">
+         <%= form.label :city, "City*",  class: label_class%>
+       <div class="mt-1">
+         <%= form.text_field :city, class: input_class  %>
+         </div> 
+       </div> 
+   
+     <div class="mb-2 mt-4">
+      <%= form.label :state, "State*",  class: label_class%>
+       <div class="mt-1">
+       <%= form.select :state, options_for_select(us_states, :selected => na_team.state),{:prompt=>true}, class: input_class %>
+        </div> </div>
+      </div>
   </div>
-
   <div>
-    <%= form.label :state, style: "display: block" %>
-    <%= form.text_field :state %>
-  </div>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.number_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <%= link_to "Cancel", na_teams_path, class: clear_button_class %>
+  
+    <%= form.submit  "Save Team", class: form_button_class %>
   </div>
 <% end %>

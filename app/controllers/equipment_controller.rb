@@ -3,6 +3,7 @@ class EquipmentController < ApplicationController
   
   # GET /equipment
   def index
+    authorize! :read, @equipments
     @equipment = Equipment.all
   end
 

@@ -3,6 +3,7 @@ class SampleWordsController < ApplicationController
 
   # GET /sample_words
   def index
+    authorize! :read, @sample_words
     @sample_words = SampleWord.all
   end
 

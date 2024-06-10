@@ -5,6 +5,7 @@ class SponsorsController < ApplicationController
 
   # GET /sponsors
   def index
+    authorize! :read, @sponsors
    
     if is_admin? 
        @sponsors = Sponsor.all

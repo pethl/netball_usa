@@ -3,30 +3,36 @@ class GrantsController < ApplicationController
 
   # GET /grants
   def index
-   
+    
     if is_admin? 
        @grants = Grant.all
     else
        @grants = Grant.where(user_id: current_user.id)
     end
+   
   end
 
   # GET /grants/1
   def show
+    
   end
 
   # GET /grants/new
   def new
+   
     @grant = Grant.new
   end
 
   # GET /grants/1/edit
   def edit
+   
   end
 
   # POST /grants
   def create
+    
     @grant = Grant.new(grant_params)
+   
     if @grant.user_id.blank? 
       @grant.user_id =current_user.id
     end
@@ -40,6 +46,7 @@ class GrantsController < ApplicationController
 
   # PATCH/PUT /grants/1
   def update
+   
     if @grant.update(grant_params)
       redirect_to @grant, notice: "Grant was successfully updated.", status: :see_other
     else

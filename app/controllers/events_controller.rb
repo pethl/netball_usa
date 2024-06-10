@@ -4,6 +4,7 @@ class EventsController < ApplicationController
 
   # GET /events
   def index
+    authorize! :read, @events
     @events = Event.all
     @events = @events.order(date: :desc)
     @events_by_year = @events.group_by { |t| t.event_date_year }

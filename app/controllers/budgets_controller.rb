@@ -4,6 +4,7 @@ class BudgetsController < ApplicationController
   
   # GET /budgets
   def index
+    authorize! :read, @budgets
     @budgets = Budget.all
   end
 

@@ -3,6 +3,7 @@ class FollowUpsController < ApplicationController
 
   # GET /follow_ups
   def index
+    authorize! :read, @follow_ups
     if is_admin? 
        @follow_ups = FollowUp.all
        @follow_ups = @follow_ups.order(created_at: :desc)

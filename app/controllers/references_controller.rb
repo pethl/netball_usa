@@ -3,6 +3,7 @@ class ReferencesController < ApplicationController
 
   # GET /references
   def index
+    authorize! :read, @references
     @references = Reference.all.order(group: :asc)
     @references_by_group = @references.group_by { |t| t.group }
   end

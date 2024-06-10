@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
-  
+  #include AbstractController::Rendering
   helper_method :is_admin?
  
   def after_sign_in_path_for(resource)
@@ -19,6 +19,19 @@ class ApplicationController < ActionController::Base
 
     def is_admin?
       user_signed_in? ? current_user.admin : false
+    end
+
+    # rescue_from StandardError,
+    # :with => :render_error
+    # rescue_from ActionController::RoutingError,
+    # :with => :render_not_found
+    # rescue_from AbstractController::ActionNotFound,
+    # :with => :render_not_found
+    rescue_from ActionController::InvalidAuthenticityToken do |exception|
+      redirect_to main_app.new_user_session_url, :alert => "Email or Password Incorrect"
+    end
+    rescue_from CanCan::AccessDenied do |exception|
+      redirect_to main_app.root_url, :alert => exception.message
     end
     
   protected

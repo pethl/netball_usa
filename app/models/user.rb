@@ -14,7 +14,18 @@ class User < ApplicationRecord
     inverse_of: :creator
   )
   
-  enum role: [:admin, :office, :teamlead]
+  #enum role: [:admin, :office, :teamlead]
+  enum role: {
+    admin: 0,
+    teams_grants: 1,
+    teamlead: 2,
+    grants: 3,
+    educators: 4 
+  }
+
+  # User::Roles
+  # The available roles
+  Roles = [ :admin , :teams_grants, :grants, :teamlead, :educators  ]
   after_initialize :set_default_role, :if => :new_record?
   
   def set_default_role
@@ -25,6 +36,21 @@ class User < ApplicationRecord
     "#{self.first_name} #{self.last_name}"
   end
   
+  def teams_grants?
+    self.role == 'teams_grants'
+  end
+
+  def grants?
+    self.role == 'grants'
+  end
+
+  def teamlead?
+    self.role == 'teamlead'
+  end
+
+  def educators?
+    self.role == 'educators'
+  end
  
 #  def active_for_authentication? 
 #    super && approved?

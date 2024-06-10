@@ -1,5 +1,4 @@
 class PagesController < ApplicationController
-
   skip_before_action :authenticate_user!, only:[:educator_sign_up]
   
   def home
@@ -13,10 +12,12 @@ class PagesController < ApplicationController
     @trainers = Person.where(role: "Trainer").count
     @coaches = Person.where(role: "Coach").count
     @operations = Person.where(role: "Operations").count
-
+    
     @admins = User.where(role: 0).count
-    @office = User.where(role: 1).count
-    @teamleads = User.where(role: 2).count
+    @teams_grants = User.where(role: 1).count
+    @grants = User.where(role: 2).count
+    @teamleads = User.where(role: 3).count
+    @educators = User.where(role: 4).count
 
   end
   
