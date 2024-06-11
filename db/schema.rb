@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_09_150835) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_11_074046) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -163,6 +163,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_09_150835) do
     t.string "timezone"
     t.datetime "action_by"
     t.string "state"
+    t.integer "old_user_id"
   end
 
   create_table "member_key_roles", force: :cascade do |t|
@@ -202,6 +203,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_09_150835) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "member_key_role_id"
+    t.bigint "member_id"
+    t.index ["member_id"], name: "index_na_teams_on_member_id"
+    t.index ["member_key_role_id"], name: "index_na_teams_on_member_key_role_id"
   end
 
   create_table "netball_educators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

@@ -1,10 +1,34 @@
-<p style="color: green"><%= notice %></p>
+<% content_for(:page_title, "Team: Add Members #{@na_team.name}")%>
 
 <%= render @na_team %>
 
-<div>
-  <%= link_to "Edit this na team", edit_na_team_path(@na_team) %> |
-  <%= link_to "Back to na teams", na_teams_path %>
+<div class="flex flex-row flex-wrap">
+<div class="min-w-80 m-2 border border-grey-500 shadow-xl shadow-blue-900 hover:border-black rounded-lg">
+ <div class="mt-4 ml-4 text-gray-700 text-lg text-left font-semibold mt-4">
+   Build Your Team
+ </div>
+<br>
+  <%= link_to "Add new member",
+              new_na_team_member_path(@na_team),
+              data: { turbo_frame: dom_id(Member.new) },
+              class: form_button_class %>
+              <br> <br>
 
-  <%= button_to "Destroy this na team", @na_team, method: :delete %>
+
+<%= turbo_frame_tag Member.new %>
+ <%= turbo_frame_tag "members" do %>
+   <div class="text-sm">
+    <%= render @members, na_team: @na_team %>
+  <% end %>
+<div class="min-w-64 ml-2 mt-4 text-sm text-gray-500">
+  *Player must be removed from key role<br> before deleting.<br><br>
+</div>
+</div>
+</div>
+
+
+
+
+<div>
+  <%= link_to "<< Back to Teams", na_teams_path %>
 </div>

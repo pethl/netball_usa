@@ -123,7 +123,7 @@
        <%= form.text_area :notes, class: input_class %>
       </div>
      </div>
-     
+     <%= form.hidden_field :old_user_id, value: grant.user_id%>
    <div>
      <%= form.submit "Save Record", class: form_button_class %>
    </div>

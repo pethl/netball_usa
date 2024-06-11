@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  resources :na_teams
+  #resources :na_teams
   get 'regions/team_list_index' => 'regions#team_list_index', :as => :team_list_index
   get 'teams/teams_list_index' => 'teams#teams_list_index', :as => :teams_list_index
 
   resources :regions
-  resources :teams do
+  resources :na_teams do
     resources :members, except: [:index, :show]
   end
-  resources :teams do
+  resources :na_teams do
     resources :member_key_roles, except: [:index, :show]
   end
   resources :follow_ups

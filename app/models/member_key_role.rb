@@ -1,11 +1,11 @@
 class MemberKeyRole < ApplicationRecord
-  belongs_to :team
+  belongs_to :na_team
 
   
    validates :key_role, presence: true
-   validates :member_id, presence: true
+   validates :na_member_id, presence: true
    validates :team_id, presence: true
- validates_uniqueness_of :team_id, scope: :key_role 
+   validates_uniqueness_of :na_team_id, scope: :key_role 
 #   validate :limit_key_roles
    
    

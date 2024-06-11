@@ -17,6 +17,8 @@
                   edit_na_team_path(na_team),
                   class: "font-semibold text-green-500" %>
     </div>
+            <%= link_to "Add team members >>", na_team_path(na_team),
+            data: { turbo_frame: "_top" } %>
   </div>
 <br>
   <% end %>

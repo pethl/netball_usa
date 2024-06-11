@@ -1,5 +1,5 @@
 class Member < ApplicationRecord
-  belongs_to :team
+  belongs_to :na_team
    
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -17,7 +17,7 @@ class Member < ApplicationRecord
   end
   
   def is_key_role
-    if MemberKeyRole.where(team_id: self.team_id, member_id: self.id).count>0
+    if MemberKeyRole.where(na_team_id: self.na_team_id, member_id: self.id).count>0
       return true
     else false
     end

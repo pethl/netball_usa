@@ -15,7 +15,7 @@ class MembersController < ApplicationController
   # GET /members/new
   def new
    # @member = Member.new
-     @member = @team.members.build
+     @member = @na_team.members.build
   end
 
   # GET /members/1/edit
@@ -24,7 +24,7 @@ class MembersController < ApplicationController
 
   # POST /members
   def create
-   @member = @team.members.build(member_params)
+   @member = @na_team.members.build(member_params)
 
        if @member.save
          respond_to do |format|
@@ -39,7 +39,7 @@ class MembersController < ApplicationController
   # PATCH/PUT /members/1
   def update
     if @member.update(member_params)
-         redirect_to team_path(@team), notice: "Member was successfully updated."
+         redirect_to na_team_path(@team), notice: "Member was successfully updated."
        else
          render :edit, status: :unprocessable_entity
        end
@@ -49,7 +49,7 @@ class MembersController < ApplicationController
   def destroy
      @member.destroy
      respond_to do |format|
-        format.html { redirect_to team_path(@team), notice: "Member was successfully deleted." }
+        format.html { redirect_to na_team_path(@na_team), notice: "Member was successfully deleted." }
         format.turbo_stream { flash.now[:notice] = "Member was successfully deleted." }
       end
   end
@@ -61,11 +61,11 @@ class MembersController < ApplicationController
 #    end
     
     def set_team
-       @team = Team.find(params[:team_id])
+       @na_team = NaTeam.find(params[:team_id])
      end
      
      def set_member
-         @member = @team.members.find(params[:id])
+        @member = @na_team.members.find(params[:id])
        end
 
     # Only allow a list of trusted parameters through.

@@ -92,3 +92,4 @@ gem 'thor', '~> 1.0.0'
 gem "cancancan", "~> 3.5"
 gem 'bootstrap-datepicker-rails'
 gem 'htmlbeautifier'
+gem 'mail', '~> 2.7'

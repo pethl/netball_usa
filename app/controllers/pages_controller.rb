@@ -19,6 +19,17 @@ class PagesController < ApplicationController
     @teamleads = User.where(role: 3).count
     @educators = User.where(role: 4).count
 
+    @events_this_year = Event.where('date > ?', Time.now.beginning_of_year)
+    @events_this_year_by_status = @events_this_year.group_by { |t| t.status }
+    @events_next_year = Event.where('date > ?', Time.now.end_of_year)
+    @events_next_year_by_status = @events_next_year.group_by { |t| t.status }
+
+    @operations = Transfer.where(role: "Operations").count
+    @umpires = Transfer.where(role: "US Umpire").count
+    @int_umpires = Transfer.where(role: "Int Umpire").count
+    @scorers = Transfer.where(role: "Scorer").count
+    @medics = Transfer.where(role: "Medic").count
+  
   end
   
   def educator_sign_up

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
  
   def after_sign_in_path_for(resource)
     if current_user.teamlead?
-        teams_path
+        na_teams_path
       else
         '/'
       end

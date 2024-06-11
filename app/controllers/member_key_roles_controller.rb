@@ -63,6 +63,6 @@ class MemberKeyRolesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def member_key_role_params
-      params.require(:member_key_role).permit(:team_id, :member_id, :key_role)
+      params.require(:member_key_role).permit(:team_id, :na_member_id, :key_role)
     end
 end

@@ -1,5 +1,6 @@
 class GrantsController < ApplicationController
   before_action :set_grant, only: %i[ show edit update destroy ]
+  
 
   # GET /grants
   def index
@@ -68,6 +69,7 @@ class GrantsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def grant_params
-      params.require(:grant).permit(:name, :apply, :amount, :location, :state, :due_date, :timezone, :purpose, :grant_link, :notes, :status, :date_submitted, :program, :application_link, :login, :user_id, :action_by)
+      params.require(:grant).permit(:name, :apply, :amount, :location, :state, :due_date, :timezone, :purpose, :grant_link, :notes, :status, :date_submitted, :program, :application_link, :login, :user_id, :old_user_id, :action_by)
     end
+
 end

@@ -73,6 +73,7 @@ Rails.application.configure do
   #config.gem "prawn-format", :version => "0.1.1", :lib => "prawn/format"
   
   config.action_mailer.delivery_method = :letter_opener
+  #config.action_mailer.mail_delivery_job = :letter_opener
   
  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   
