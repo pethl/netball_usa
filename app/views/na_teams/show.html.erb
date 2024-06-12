@@ -1,34 +1,42 @@
-<% content_for(:page_title, "Team: Add Members #{@na_team.name}")%>
+<% content_for(:page_title, "Team  #{@na_team.name}: Add Members")%>
+<div class="container m-4 ml-4">
 
-<%= render @na_team %>
+<div class="text-xl text-blue-900 m-4">
+  <%= @na_team.name %><br>
+  <span class="text-sm text-gray-500">administered by: <%= @na_team.creator.full_name %></span>
+</div>
 
 <div class="flex flex-row flex-wrap">
-<div class="min-w-80 m-2 border border-grey-500 shadow-xl shadow-blue-900 hover:border-black rounded-lg">
- <div class="mt-4 ml-4 text-gray-700 text-lg text-left font-semibold mt-4">
-   Build Your Team
- </div>
-<br>
-  <%= link_to "Add new member",
+  <div class="min-w-80 m-2 border border-grey-500 shadow-lg shadow-blue-900 hover:border-black rounded-lg">
+    <div class="mt-4 ml-4 text-gray-700 text-lg text-left font-semibold mt-4">
+      Build Your Team
+    </div>
+    <br>
+  
+    <%= link_to "Add new member",
               new_na_team_member_path(@na_team),
               data: { turbo_frame: dom_id(Member.new) },
               class: form_button_class %>
               <br> <br>
 
 
-<%= turbo_frame_tag Member.new %>
- <%= turbo_frame_tag "members" do %>
-   <div class="text-sm">
-    <%= render @members, na_team: @na_team %>
-  <% end %>
+      <%= turbo_frame_tag Member.new %>
+      <%= turbo_frame_tag "members" do %>
+        <div class="text-sm">
+          <% if @na_team.members.any? %>
+            <%= render @na_team.members, na_team: @na_team %>
+          <% end %>
+      <% end %>
+
 <div class="min-w-64 ml-2 mt-4 text-sm text-gray-500">
   *Player must be removed from key role<br> before deleting.<br><br>
 </div>
 </div>
 </div>
-
-
-
-
+</div>
 <div>
+<br>
   <%= link_to "<< Back to Teams", na_teams_path %>
+</div>
+
 </div>

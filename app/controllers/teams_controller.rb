@@ -47,7 +47,7 @@ class TeamsController < ApplicationController
     private
   
     def set_team
-      @team = Team.find(params[:id])
+      @team = NaTeam.find(params[:id])
     end
   
 

@@ -1,7 +1,6 @@
 class MembersController < ApplicationController
-  #before_action :set_member, only: %i[ show edit update destroy ]
   before_action :set_team
-  before_action :set_member, only: [:edit, :update, :destroy]
+  before_action :set_member, only: [:edit, :update, :destroy, :show]
   
   # GET /members
   def index
@@ -39,7 +38,7 @@ class MembersController < ApplicationController
   # PATCH/PUT /members/1
   def update
     if @member.update(member_params)
-         redirect_to na_team_path(@team), notice: "Member was successfully updated."
+         redirect_to na_team_path(@na_team), notice: "Member was successfully updated."
        else
          render :edit, status: :unprocessable_entity
        end
@@ -61,7 +60,7 @@ class MembersController < ApplicationController
 #    end
     
     def set_team
-       @na_team = NaTeam.find(params[:team_id])
+       @na_team = NaTeam.find(params[:na_team_id])
      end
      
      def set_member
@@ -70,6 +69,6 @@ class MembersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def member_params
-      params.require(:member).permit(:team_id, :first_name, :last_name, :email, :city, :state, :gender, :interested_in_coaching, :interested_in_umpiring, :interested_in_usa_team, :dob, :age_status, :place_of_birth, :notes)
+      params.require(:member).permit(:na_team_id, :first_name, :last_name, :email, :city, :state, :gender, :interested_in_coaching, :interested_in_umpiring, :interested_in_usa_team, :dob, :age_status, :place_of_birth, :notes)
     end
 end

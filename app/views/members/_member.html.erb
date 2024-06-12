@@ -10,17 +10,17 @@
   <div class="justify-between flex items-center m-2 w-28">
     <div>
     
-    <% if member.is_key_role == false %>
+   
       <%= button_to "Delete",
-                    team_member_path(team, member),
+                    na_team_member_path(@na_team, member),
                     method: :delete,
                     form: { data: { turbo_confirm: "Are you sure?" } },
                     class: red_link_class %>
-       <% end %>             
+           
     </div>
     <div>
       <%= link_to "Edit",
-                [:edit, team, member],
+                [:edit, @na_team, member],
                 class: green_link_class %>
     </div>
   </div>

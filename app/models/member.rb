@@ -16,11 +16,11 @@ class Member < ApplicationRecord
     "#{self.first_name} #{self.last_name}"
   end
   
-  def is_key_role
-    if MemberKeyRole.where(na_team_id: self.na_team_id, member_id: self.id).count>0
-      return true
-    else false
-    end
-  end
+  # def is_key_role
+  #   if MemberKeyRole.where(na_team_id: self.na_team_id, member_id: self.id).count>0
+  #     return true
+  #   else false
+  #   end
+  # end
  
 end

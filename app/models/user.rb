@@ -8,8 +8,8 @@ class User < ApplicationRecord
   after_create :send_admin_mail
   
   has_many(
-    :teams,
-    class_name: 'Team',
+    :na_teams,
+    class_name: 'NaTeam',
     foreign_key: 'user_id',
     inverse_of: :creator
   )

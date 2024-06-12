@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_11_074046) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_11_154050) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -167,17 +167,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_11_074046) do
   end
 
   create_table "member_key_roles", force: :cascade do |t|
-    t.bigint "team_id", null: false
+    t.bigint "na_team_id", null: false
     t.bigint "member_id", null: false
     t.string "key_role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["member_id"], name: "index_member_key_roles_on_member_id"
-    t.index ["team_id"], name: "index_member_key_roles_on_team_id"
+    t.index ["na_team_id"], name: "index_member_key_roles_on_na_team_id"
   end
 
   create_table "members", force: :cascade do |t|
-    t.bigint "team_id", null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "email"
@@ -193,7 +192,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_11_074046) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "age_status"
-    t.index ["team_id"], name: "index_members_on_team_id"
+    t.bigint "na_team_id"
+    t.index ["na_team_id"], name: "index_members_on_na_team_id"
   end
 
   create_table "na_teams", force: :cascade do |t|
@@ -433,8 +433,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_11_074046) do
   add_foreign_key "event_participants", "events"
   add_foreign_key "event_participants", "people"
   add_foreign_key "member_key_roles", "members"
-  add_foreign_key "member_key_roles", "teams"
-  add_foreign_key "members", "teams"
+  add_foreign_key "member_key_roles", "teams", column: "na_team_id"
   add_foreign_key "teams", "users"
   add_foreign_key "transfers", "events"
   add_foreign_key "transfers", "people"

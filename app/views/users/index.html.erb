@@ -12,9 +12,10 @@
        <th scope="col" class="text-left p-2 w-52">Last Name</th>
        <th scope="col" class="text-left p-2 py-3 w-52">Email</th>
        <th scope="col" class="text-left p-2 py-3 w-52">Account Created</th>
-       <th scope="col" class="text-left p-2 py-3 w-52">Last Sign In</th>
+       <th scope="col" class="text-left p-2 py-3 w-52 whitespace-nowrap">Last Sign In</th>
        <th scope="col" class="text-left p-2 py-3 w-52">Role</th>
        <th scope="col" class="text-left p-2 py-3 w-52">Is_admin?</th>
+       <th scope="col" class="text-left p-2 py-3 w-52">[:Id]</th>
        </tr>
     </thead>
   
@@ -28,6 +29,7 @@
       <td class="p-2 border-b text-left"><%= user.last_sign_in_at.to_formatted_s(:usa_dt) unless (user.last_sign_in_at.to_s.empty?)%></td>
       <td class="p-2 border-b text-left"><%= user.role %></td>
       <td class="p-2 border-b text-left"><%= user.admin? ? 'Yes' : 'No'   %></td>
+      <td class="p-2 border-b text-left"><%= user.id %></td>
      </tr>
   <% end %>
  </tbody>
@@ -64,4 +66,16 @@
  </tbody>
 </table>
 </div>
-</div>
+
+
+[OFFICE USE]
+User Roles:
+<ul>
+<li>0 : admin</li>
+<li>1 : teams_grants (teams and grants)</li>
+<li>2 : teamlead (teams only)</li>
+<li>3 : grants only </li>
+<li>4 : educators only</li>
+<li>All access to update Transfers</li>
+<li>All access to create Educator</li>
+</ul>
