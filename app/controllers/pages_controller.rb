@@ -15,9 +15,11 @@ class PagesController < ApplicationController
     
     @admins = User.where(role: 0).count
     @teams_grants = User.where(role: 1).count
-    @grants = User.where(role: 2).count
-    @teamleads = User.where(role: 3).count
+    @teamleads = User.where(role: 2).count
+    @grants = User.where(role: 3).count
     @educators = User.where(role: 4).count
+    @teams_admin = User.where(role: 5).count
+    @sponsors = User.where(role: 6).count
 
     @events_this_year = Event.where('date > ?', Time.now.beginning_of_year)
     @events_this_year_by_status = @events_this_year.group_by { |t| t.status }
