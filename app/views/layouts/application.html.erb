@@ -267,40 +267,51 @@
                    <a href="/na_teams/" class="text-gray-100 hover:font-bold">MEMBERSHIP</a>
                </li>
                <% elsif current_user.teamlead? %>
-
                    <li class="mt-8">
                        <a href="/na_teams/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
                    </li>
                    <li class="mt-2">
                        <a href="/na_teams/" class="text-gray-100 hover:font-bold">My Team(s)</a>
                    </li>
-                    <% elsif current_user.teams_grants? %>
-                <li class="mt-8">
+
+                <% elsif current_user.teams_grants? %>
+                    <li class="mt-8">
                        <a href="/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
-                   </li>
+                    </li>
                    <li class="mt-2">
                        <a href="/na_teams/" class="text-gray-100 hover:font-bold">Teams</a>
                    </li>
                    <li class="mt-2">
                        <a href="/grants/" class="text-gray-100 hover:font-bold">Grants</a>
                    </li>
-                    <% elsif current_user.grants? %>
+                <% elsif current_user.grants? %>
                     <li class="mt-8">
                        <a href="/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
                    </li>
-                   
                    <li class="mt-2">
                        <a href="/grants/" class="text-gray-100 hover:font-bold">Grants</a>
                    </li>
-                   <% elsif current_user.educators? %>
+                <% elsif current_user.educators? %>
                    <li class="mt-8">
                        <a href="/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
                    </li>
-                   
                    <li class="mt-2">
                        <a href="/netball_educators/" class="text-gray-100 hover:font-bold">Educators</a>
                    </li>
-                   <% end %>
+                <% elsif current_user.teams_admin? %>
+                   <li class="mt-8">
+                       <a href="/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
+                   </li>
+                   <li class="mt-2">
+                       <a href="/na_teams/index_admin" class="text-gray-100 hover:font-bold">All Teams</a>
+                   </li>
+                   <li class="mt-2">
+                       <a href="/na_teams/teams_list_index" class="text-gray-100 hover:font-bold">Teams by Region</a>
+                   </li>
+                   <li class="mt-2">
+                       <a href="/na_teams/" class="text-gray-100 hover:font-bold">Set Up Teams</a>
+                   </li>
+                <% end %>
                     
               
             <% if current_user.admin? %>  

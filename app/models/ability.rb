@@ -32,6 +32,10 @@ class Ability
       can :manage, Grant # like managing all comments in the website
       can :manage, NaTeam # like managing all comments in the website
     end
+
+    if  user.teams_admin?
+      can :manage, NaTeam # all teams inc proper index and regions list
+    end
   
     if user.admin?
     can :manage, :all # finally we give all remaining permissions only to the admins

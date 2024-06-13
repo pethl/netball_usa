@@ -1,0 +1,92 @@
+<% content_for(:page_title, "Teams Year End Report")%>
+
+<main class="container m-6">
+
+    <div class="relative overflow-x-auto">
+         <table class="table-fixed w-full text-left rtl:text-right">
+             <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+                 <tr>
+                 <tr>
+                 <th scope="col" class="px-6 py-3 w-52">
+                     Team Name
+                 </th>
+                 <th scope="col" class="px-6 py-3 w-52">
+                     City
+                 </th>
+                 <th scope="col" class="px-6 py-3 w-52">
+                     State
+                 </th>
+                 <th scope="col" class="px-6 py-3 w-52 text-center">
+                     Members #
+                 </th>
+                 <th scope="col" class="px-6 py-3 w-52 text-center">
+                     Has Youth?
+                 </th>
+                 <th scope="col" class="px-6 py-3 w-60 truncate">
+                     Website
+                 </th>
+                 <th scope="col" class="px-6 py-3 w-60 ">
+                     Date Created
+                 </th>
+                 <th scope="col" class="px-6 py-3 w-60 text-left">
+                     Administered By
+                 </th>
+                  </tr>
+                 </thead>
+        
+      <%  @regions_by_region.each do |region, states| %>
+        <tbody>
+            <tr>
+              <th scope="row" colspan="5" class="text-2xl text-blue-900 mt-8 py-4 font-medium whitespace-nowrap dark:text-white">
+               <%= region %>
+              </th>
+            </tr>
+
+         <% @teams_by_state.each do |state, na_teams| %>
+           <% if Region.where(["region = ? and state = ?", region, state]).any? %>
+      
+                          <% na_teams.each do |na_team| %>
+                              <tr class="bg-white border-b hover:bg-gray-100">
+                             
+                              <td class="px-6 py-4 truncate">
+                              <%= link_to na_team.name, edit_na_team_path(na_team), class: link_class %>
+                           </td>
+                           
+                           <td class="px-6 py-4">
+                              <%= na_team.city  %>
+                           </td>
+                           
+                           <td class="px-6 py-4">
+                              <%= na_team.state %>
+                           </td>
+                           
+                           <td class="px-6 py-4 text-center">
+                             <%= na_team.members.count %>
+                           </td>
+                           <td class="px-6 py-4 text-center">
+                             
+                              <%= na_team.has_youth? ? 'Yes' : 'No'  %>
+                           </td>
+                           
+                           <td class="px-6 py-4 truncate">
+                            <%=  %>
+                          </td>
+                          
+                            <td class="px-6 py-4">
+                            <%= na_team.created_at.to_formatted_s(:usa) unless (na_team.created_at.to_s.empty?)  %>
+                           </td>
+           
+                           <td class="px-6 py-4 text-left whitespace-nowrap">
+                            <%=  na_team.creator.full_name %>
+                          </td>
+                                  </tr>
+                       </tbody>
+                   <% end %>
+                     <% end %>
+                     <% end %>
+                      <% end %>
+            </table>
+        
+     </div>
+</main>
+

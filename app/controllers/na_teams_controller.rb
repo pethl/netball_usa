@@ -2,9 +2,22 @@ class NaTeamsController < ApplicationController
   before_action :set_na_team, only: %i[ show edit update destroy ]
 
   # GET /na_teams
-  def index
+  def index_admin
     @na_teams = NaTeam.all
   end
+  
+  # GET /na_teams
+  def index
+    @na_teams = NaTeam.where(user_id: current_user.id)
+  end
+
+   def teams_list_index
+      @na_teams = NaTeam.all
+      @na_teams = @na_teams.order(state: :asc)
+      @teams_by_state = @na_teams.group_by { |t| t.state }
+      @regions = Region.all.order(region: :asc)
+      @regions_by_region = @regions.group_by { |t| t.region }
+   end
 
   # GET /na_teams/1
   def show

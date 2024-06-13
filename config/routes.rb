@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  #resources :na_teams
+  get 'na_teams/index_admin' => 'na_teams#index_admin', :as => :index_admin
   get 'regions/team_list_index' => 'regions#team_list_index', :as => :team_list_index
-  get 'teams/teams_list_index' => 'teams#teams_list_index', :as => :teams_list_index
+  get 'na_teams/teams_list_index' => 'na_teams#teams_list_index', :as => :teams_list_index
 
   resources :regions
   resources :na_teams do

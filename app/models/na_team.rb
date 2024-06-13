@@ -22,6 +22,10 @@ class NaTeam < ApplicationRecord
   def members?
     members.any?
   end
+
+  def has_youth?
+    Member.where(na_team_id: self.id, age_status: "Youth").any?
+  end
   
   def team_president
     @member_key_role = MemberKeyRole.where(na_team_id: self.id, key_role: "Team President").first

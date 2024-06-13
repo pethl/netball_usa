@@ -1,0 +1,90 @@
+<% content_for(:page_title, "Teams by Region")%>
+
+<% if @na_teams.any? %>
+<div id="na_teams">
+<div class="relative overflow-x-auto">
+    <table class="table-fixed w-full text-left rtl:text-right">
+        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+             <tr>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Team Name
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    City
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    State
+                </th>
+                <th scope="col" class="px-6 py-3 w-52 text-center">
+                    Members #
+                </th>
+                <th scope="col" class="px-6 py-3 w-52 text-center">
+                    Has Youth?
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 truncate">
+                    Website
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 ">
+                    Date Created
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 text-left">
+                    Administered By
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @na_teams.each do |na_team| %>
+            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+               
+                <td class="px-6 py-4 truncate">
+                   <%= link_to na_team.name, edit_na_team_path(na_team), class: link_class %>
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= na_team.city  %>
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= na_team.state %>
+                </td>
+                
+                <td class="px-6 py-4 text-center">
+                  <%= na_team.members.count %>
+                </td>
+                <td class="px-6 py-4 text-center">
+                  
+                   <%= na_team.has_youth? ? 'Yes' : 'No'  %>
+                </td>
+                
+                <td class="px-6 py-4 truncate">
+                 <%=  %>
+               </td>
+               
+                 <td class="px-6 py-4">
+                 <%= na_team.created_at.to_formatted_s(:usa) unless (na_team.created_at.to_s.empty?)  %>
+                </td>
+
+                <td class="px-6 py-4 text-left">
+                 <%=  na_team.creator.full_name %>
+               </td>
+                
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+ </div>
+</div>
+
+    <% else %>
+    <p class="px-6 py-4">
+    No records to view</p>
+    <% end %>
+<br>
+
+<div class="mt-1">
+<%= link_to "Add New Team", na_teams_path, class: form_button_class %>
+<br><br>
+</div>
+
+

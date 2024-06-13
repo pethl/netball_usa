@@ -20,7 +20,8 @@ class User < ApplicationRecord
     teams_grants: 1,
     teamlead: 2,
     grants: 3,
-    educators: 4 
+    educators: 4,
+    teams_admin: 5
   }
 
   # User::Roles
@@ -50,6 +51,10 @@ class User < ApplicationRecord
 
   def educators?
     self.role == 'educators'
+  end
+
+  def teams_admin?
+    self.role == 'teams_admin'
   end
  
 #  def active_for_authentication? 
