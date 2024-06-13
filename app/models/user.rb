@@ -21,7 +21,8 @@ class User < ApplicationRecord
     teamlead: 2,
     grants: 3,
     educators: 4,
-    teams_admin: 5
+    teams_admin: 5,
+    sponsors: 6
   }
 
   # User::Roles
@@ -55,6 +56,10 @@ class User < ApplicationRecord
 
   def teams_admin?
     self.role == 'teams_admin'
+  end
+
+  def sponsors?
+    self.role == 'sponsors'
   end
  
 #  def active_for_authentication? 

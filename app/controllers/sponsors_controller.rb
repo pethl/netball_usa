@@ -1,11 +1,11 @@
 class SponsorsController < ApplicationController
   before_action :set_sponsor, only: %i[ show edit update destroy ]
   before_action :set_select_collections, only: [:edit, :update, :new, :create]
+  load_and_authorize_resource
  
 
   # GET /sponsors
   def index
-    authorize! :read, @sponsors
    
     if is_admin? 
        @sponsors = Sponsor.all

@@ -36,10 +36,14 @@ class Ability
     if  user.teams_admin?
       can :manage, NaTeam # all teams inc proper index and regions list
     end
+
+    if user.sponsors?
+      can :manage, Sponsor
+    end
   
     if user.admin?
     can :manage, :all # finally we give all remaining permissions only to the admins
+    end
   end
-end
     
 end
