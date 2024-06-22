@@ -1,3 +1,4 @@
+<div class="container m-4">
 <%= form_for [@na_team, member], html: { class: "form member" } do |form| %>
 
   <% if member.errors.any? %>
@@ -12,7 +13,7 @@
     </div>
   <% end %>
 
-<div class="border border-blue-900 rounded ">
+<div class="border border-blue-900 rounded pr-8 mr-8">
   <div class="border border-white rounded m-2">
       <div class="flex flex-wrap gap-4">
         <div>
@@ -56,7 +57,7 @@
         </div>
         </div>
   
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid grid-cols-4 gap-4">
         <div class="mt-4">
           <%= form.label :interested_in_coaching, class: label_class %>
           <%= form.check_box :interested_in_coaching, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
@@ -70,6 +71,8 @@
          <div class="mt-4">
           <%= form.label :interested_in_usa_team, class: label_class%>
           <%= form.check_box :interested_in_usa_team, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+        </div>
+        <div>
         </div>
 
         <div class="col-span-2">
@@ -91,3 +94,4 @@
   <% end %>
    </div> 
  </div>
+</div>

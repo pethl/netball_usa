@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_11_154050) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_15_085207) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -66,21 +66,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_11_154050) do
     t.decimal "per_diem", precision: 7, scale: 2
     t.integer "number_of_people"
     t.decimal "number_of_days", precision: 7, scale: 2
-  end
-
-  create_table "educators", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.string "phone"
-    t.string "school_name"
-    t.string "city"
-    t.string "state"
-    t.text "educator_notes"
-    t.text "mgmt_notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id"
   end
 
   create_table "equipment", force: :cascade do |t|
@@ -167,13 +152,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_11_154050) do
   end
 
   create_table "member_key_roles", force: :cascade do |t|
-    t.bigint "na_team_id", null: false
     t.bigint "member_id", null: false
     t.string "key_role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "teams_id"
+    t.integer "na_team_id"
     t.index ["member_id"], name: "index_member_key_roles_on_member_id"
-    t.index ["na_team_id"], name: "index_member_key_roles_on_na_team_id"
+    t.index ["teams_id"], name: "index_member_key_roles_on_teams_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -307,12 +293,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_11_154050) do
     t.string "state"
   end
 
-  create_table "taems", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "teams", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -433,7 +413,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_11_154050) do
   add_foreign_key "event_participants", "events"
   add_foreign_key "event_participants", "people"
   add_foreign_key "member_key_roles", "members"
-  add_foreign_key "member_key_roles", "teams", column: "na_team_id"
   add_foreign_key "teams", "users"
   add_foreign_key "transfers", "events"
   add_foreign_key "transfers", "people"

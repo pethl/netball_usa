@@ -1,5 +1,5 @@
 class MemberKeyRolesController < ApplicationController
-  before_action :set_team
+  before_action :set_na_team
   before_action :set_member_key_role, only: %i[ show edit update destroy ]
 
 
@@ -10,7 +10,7 @@ class MemberKeyRolesController < ApplicationController
   # GET /member_key_roles/new
   def new
    # @member_key_role = MemberKeyRole.new
-    @member_key_role = @team.member_key_roles.build
+    @member_key_role = @na_team.member_key_roles.build
   end
 
   # GET /member_key_roles/1/edit
@@ -19,12 +19,12 @@ class MemberKeyRolesController < ApplicationController
 
   # POST /member_key_roles
   def create
-    @member_key_role = @team.member_key_roles.build(member_key_role_params)
+    @member_key_role = @na_team.member_key_roles.build(member_key_role_params)
    # @member_key_role = MemberKeyRole.new(member_key_role_params)
 
     if @member_key_role.save
       respond_to do |format|
-         format.html { redirect_to @team, notice: "Key role  was successfully created." }
+         format.html { redirect_to @na_team, notice: "Key role  was successfully created." }
          format.turbo_stream { flash.now[:notice] = "Key role was successfully created." }
        end
     else
@@ -35,7 +35,7 @@ class MemberKeyRolesController < ApplicationController
   # PATCH/PUT /member_key_roles/1
   def update
     if @member_key_role.update(member_key_role_params)
-      redirect_to team_path(@team), notice: "Member key role was successfully updated."
+      redirect_to na_team_path(@na_team), notice: "Member key role was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -52,17 +52,18 @@ class MemberKeyRolesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_team
-       @team = Team.find(params[:team_id])
+    def set_na_team
+       @na_team = NaTeam.find(params[:na_team_id])
      end
      
     
     def set_member_key_role
-      @member_key_role = MemberKeyRole.find(params[:id])
+      @member_key_role = @na_team.member_key_roles.find(params[:id])
+  
     end
 
     # Only allow a list of trusted parameters through.
     def member_key_role_params
-      params.require(:member_key_role).permit(:team_id, :na_member_id, :key_role)
+      params.require(:member_key_role).permit(:na_team_id, :member_id, :key_role)
     end
 end

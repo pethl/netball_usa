@@ -1,19 +1,20 @@
-<% content_for(:page_title, "Team  #{@na_team.name}: Add Members")%>
-<div class="container m-4 ml-4">
+<% content_for(:page_title, "Team  #{@na_team.name}: Next Actions")%>
+<div class="container m-2 mr-6">
 
 <div class="text-xl text-blue-900 m-4">
   <%= @na_team.name %><br>
   <span class="text-sm text-gray-500">administered by: <%= @na_team.creator.full_name %></span>
 </div>
 
-<div class="flex flex-row flex-wrap">
+
+<div class="flex flex-row flex-wrap m-4">
   <div class="min-w-80 m-2 border border-grey-500 shadow-lg shadow-blue-900 hover:border-black rounded-lg">
     <div class="mt-4 ml-4 text-gray-700 text-lg text-left font-semibold mt-4">
       Build Your Team
     </div>
     <br>
   
-    <%= link_to "Add new member",
+    <%= link_to "(2) Add team member",
               new_na_team_member_path(@na_team),
               data: { turbo_frame: dom_id(Member.new) },
               class: form_button_class %>
@@ -33,7 +34,34 @@
 </div>
 </div>
 </div>
+
+<div class="min-w-80 m-2 border border-grey-500 shadow-xl shadow-blue-900 hover:border-black rounded-lg">
+    <div class="mt-4 ml-4 text-gray-700 text-lg text-left font-semibold mt-4">
+       Assign Key Roles
+    </div>
+     <br>
+     
+     <%= link_to "(3) Add key role",
+          new_na_team_member_key_role_path(@na_team),
+          data: { turbo_frame: dom_id(MemberKeyRole.new) },
+          class: form_button_class %>
+          <br> <br>
+      
+          <%= turbo_frame_tag MemberKeyRole.new %>
+          <%= turbo_frame_tag "member_key_roles" do %>
+            <div class="text-sm">
+              <% if @na_team.member_key_roles.any? %>
+                <%= render @na_team.member_key_roles, na_team: @na_team %>
+              <% end %>
+              
+              <% end %>
+
+        </div>
+    </div>    
+  </div>
+    <br>
 </div>
+
 <div>
 <br>
   <%= link_to "<< Back to Teams", na_teams_path %>
