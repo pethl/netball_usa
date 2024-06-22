@@ -156,10 +156,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_15_085207) do
     t.string "key_role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "teams_id"
+    t.bigint "na_teams_id"
     t.integer "na_team_id"
     t.index ["member_id"], name: "index_member_key_roles_on_member_id"
-    t.index ["teams_id"], name: "index_member_key_roles_on_teams_id"
+    t.index ["na_teams_id"], name: "index_member_key_roles_on_na_teams_id"
   end
 
   create_table "members", force: :cascade do |t|
