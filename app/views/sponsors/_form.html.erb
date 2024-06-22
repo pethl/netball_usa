@@ -33,6 +33,12 @@
      <div class="mt-1">
     <%= form.select :opportunity_area, options_for_select(sponsor_opportunity_area, :selected => sponsor.opportunity_area),{:prompt=>true}, class: form_input_class %>
    </div> </div>
+
+   <div class="mb-4">
+    <%= form.label :sponsor_type, "Type", class: label_class%>
+     <div class="mt-1">
+    <%= form.select :sponsor_type, options_for_select(sponsor_type, :selected => sponsor.sponsor_type),{:prompt=>true}, class: form_input_class %>
+   </div> </div>
       </div>
 
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">

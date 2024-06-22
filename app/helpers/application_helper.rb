@@ -118,6 +118,11 @@ module ApplicationHelper
      sponsor_opportunity_area = sponsor_opportunity_area.pluck(:value)       
    end
 
+   def sponsor_type
+    sponsor_type = Reference.where(active: "TRUE", group: 'sponsor_type')
+    sponsor_type = sponsor_type.pluck(:value)  
+  end
+
    def educator_level
      educator_level = Reference.where(active: "TRUE", group: 'educator_level')
      educator_level = educator_level.pluck(:value)       

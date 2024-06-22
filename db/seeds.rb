@@ -28,6 +28,7 @@ Reference.create(group:	'sponsor_industry',	value:	'Retail - Clothing', active:	
 Reference.create(group:	'sponsor_industry',	value:	'Retail - Care Products', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Software', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Sports', active:	'TRUE');
+Reference.create(group:	'sponsor_industry',	value:	'Technology', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Telecommunications', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Tourism', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Transport', active:	'TRUE');
@@ -36,6 +37,10 @@ Reference.create(group:	'sponsor_status',	value:	'Not Allocated', active:	'TRUE'
 Reference.create(group:	'sponsor_status',	value:	'Not Started', active:	'TRUE');
 Reference.create(group:	'sponsor_status',	value:	'In Progress', active:	'TRUE');
 Reference.create(group:	'sponsor_status',	value:	'Completed', active:	'TRUE');
+Reference.create(group:	'sponsor_type',	value:	'Cash', active:	'TRUE');
+Reference.create(group:	'sponsor_type',	value:	'Product', active:	'TRUE');
+Reference.create(group:	'sponsor_type',	value:	'Giftcard', active:	'TRUE');
+Reference.create(group:	'sponsor_type',	value:	'Volunteer', active:	'TRUE');
 Reference.create(group:	'sponsor_opportunity_area',	value:	'Corporate', active:	'TRUE');
 Reference.create(group:	'sponsor_opportunity_area',	value:	'BAI', active:	'TRUE');
 Reference.create(group:	'sponsor_opportunity_area',	value:	'U.S. Open', active:	'TRUE');
