@@ -106,13 +106,13 @@
    <div class="mb-4 md:col-span-2">
     <%= form.label :key_contacts, "Key Contact Names", class: label_class%>
      <div class="mt-1">
-    <%= form.text_area :key_contacts, class: form_input_class  %>
+    <%= form.text_area :key_contacts, class: form_input_class,  size: "20x8"  %>
    </div> </div>
 
    <div class="mb-4 md:col-span-2">
     <%= form.label :phone_numbers_emails, "Key Contact Phone/email", class: label_class%>
      <div class="mt-1">
-    <%= form.text_area :phone_numbers_emails, class: form_input_class  %>
+    <%= form.text_area :phone_numbers_emails, class: form_input_class,  size: "20x8"  %>
     </div> 
    </div>
       </div>
@@ -121,14 +121,14 @@
      <div class="mb-4 md:col-span-2">
       <%= form.label :pitch, class: label_class%>
        <div class="mt-1">
-        <%= form.text_area :pitch, class: form_input_class  %>
+        <%= form.text_area :pitch, class: form_input_class,  size: "20x10"  %>
      </div>
     </div>
 
    <div class="mb-4 md:col-span-2">
     <%= form.label :follow_up_actions, class: label_class%>
      <div class="mt-1">
-      <%= form.text_area :follow_up_actions, class: form_input_class  %>
+      <%= form.text_area :follow_up_actions, class: form_input_class,  size: "20x10"  %>
       </div> 
     </div>
     </div>
@@ -137,10 +137,10 @@
     <div class="mb-4 md:col-span-3">
     <%= form.label :notes, class: label_class%>
      <div class="mt-1">
-      <%= form.text_area :notes, class: form_input_class  %>
+      <%= form.text_area :notes, class: form_input_class,  size: "20x20"  %>
      </div> 
    </div>
-    
+   <%= form.hidden_field :old_user_id, value: sponsor.user_id%>
    <div class="justify-self-center self-center">
      <%= form.submit "Save Record", class: form_button_class %>
    </div>

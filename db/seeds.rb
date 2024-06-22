@@ -26,7 +26,7 @@ Reference.create(group:	'sponsor_industry',	value:	'Health and Wellness', active
 Reference.create(group:	'sponsor_industry',	value:	'Media', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Retail - Clothing', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Retail - Care Products', active:	'TRUE');
-Reference.create(group:	'sponsor_industry',	value:	'Software', active:	'TRUE');
+Reference.create(group:	'sponsor_category',	value:	'Software', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Sports', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Technology', active:	'TRUE');
 Reference.create(group:	'sponsor_industry',	value:	'Telecommunications', active:	'TRUE');
