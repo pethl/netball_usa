@@ -1,0 +1,7 @@
+<% content_for(:page_title, "New Opportunity for: #{@sponsor.company_name}")%>
+
+<%= render "form", sponsor: @sponsor, opportunity: @opportunity %>
+
+<div class = "ml-4 mb-4">
+  <%= link_to "<< Back to Sponsor", sponsor_path(@sponsor) %>
+</div>

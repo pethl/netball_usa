@@ -1,37 +1,17 @@
 <div id="<%= dom_id sponsor %>">
 
-<div class="max-w-sm">
-<div class="flex justify-between p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 border border-blue-900 rounded-lg shadow  ">
 
-  <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Status:
-    </p>
-    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-   <%= sponsor.status %>
-    </p>
-    </div>
-    
-   <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Allocated To:
-    </p>
-    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= sponsor.user.full_name unless (sponsor.user_id.to_s.empty?) %>
-    </p>
-</div>
-</div>
-
-<div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
+<div class="">
     <p class="text-sm text-gray-500 dark:text-gray-400">
-        Category:
+        Company name:
     </p>
-    <p class="text-sm font-medium text-gray-900 dark:text-white">
-   <%= sponsor.sponsor_category %>
+    <p class="text-lg font-medium text-gray-900 dark:text-white">
+      <%= sponsor.company_name %>
     </p>
-    
-   <div class="mt-2">
+  </div>
+
+  <div class="">
     <p class="text-sm text-gray-500 dark:text-gray-400">
         Industry:
     </p>
@@ -40,37 +20,43 @@
     </p>
   </div>
 
-   <div class="mt-2">
+  <div class="">
     <p class="text-sm text-gray-500 dark:text-gray-400">
-        Company name:
+      Category:
     </p>
-    <p class="text-lg font-medium text-gray-900 dark:text-white">
-      <%= sponsor.company_name %>
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
+      <%= sponsor.sponsor_category %>
     </p>
   </div>
-  
-  <div class="mt-2">
-   <p class="text-sm text-gray-500 dark:text-gray-400">
-       About:
-   </p>
-   <p class="text-sm font-medium text-gray-900 dark:text-white">
-     <%= sponsor.about %>
-   </p>
- </div>
+
+  <div class="">
+    <p class="text-sm text-gray-500 dark:text-gray-400">
+        Location:
+    </p>
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
+      <%= sponsor.location %>
+    </p>
   </div>
-  
-  <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-  
- <div class="mt-2">
+
+  <div class="">
+    <p class="text-sm text-gray-500 dark:text-gray-400">
+        City:
+    </p>
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
+      <%= sponsor.city %>
+    </p>
+  </div>
+
+  <div class="">
   <p class="text-sm text-gray-500 dark:text-gray-400">
-      Location:
+      State:
   </p>
   <p class="text-sm font-medium text-gray-900 dark:text-white">
-    <%= sponsor.location %>
+    <%= sponsor.state %>
   </p>
 </div>
 
- <div class="mt-2">
+<div class="md:col-span-2">
   <p class="text-sm text-gray-500 dark:text-gray-400">
       Website:
   </p>
@@ -79,69 +65,21 @@
   </p>
 </div>
 
- <div class="mt-2">
-  <p class="text-sm text-gray-500 dark:text-gray-400">
-     Key contacts:
-  </p>
-  <p class="text-sm font-medium text-gray-900 dark:text-white">
-    <%= sponsor.key_contacts %>
-  </p>
-</div>
+<div class=" md:col-span-4 p-2 border border-gray-200 rounded-lg hover:bg-gray-100">
+   <p class="text-sm text-gray-500 dark:text-gray-400">
+       About:
+   </p>
+   <p class="text-sm font-medium text-gray-900 dark:text-white">
+     <%= sponsor.about %>
+   </p>
+ </div>
 
- <div class="mt-2">
-  <p class="text-sm text-gray-500 dark:text-gray-400">
-      Phone numbers & emails:
-  </p>
-  <p class="text-sm font-medium text-gray-900 dark:text-white">
-    <%= sponsor.phone_numbers_emails %>
-  </p>
-</div>
-</div>
-
-<div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
- <div class="mt-2">
-  <p class="text-sm text-gray-500 dark:text-gray-400">
-      Opportunity area:
-  </p>
-  <p class="text-sm font-medium text-gray-900 dark:text-white">
-    <%= sponsor.opportunity_area %>
-  </p>
-</div>
-
-<div class="mt-2">
-  <p class="text-sm text-gray-500 dark:text-gray-400">
-      Type:
-  </p>
-  <p class="text-sm font-medium text-gray-900 dark:text-white">
-    <%= sponsor.sponsor_type %>
-  </p>
-</div>
-
- <div class="mt-2">
-  <p class="text-sm text-gray-500 dark:text-gray-400">
-      Pitch:
-  </p>
-  <p class="text-sm font-medium text-gray-900 dark:text-white">
-    <%= sponsor.pitch %>
-  </p>
-</div>
-
- <div class="mt-2">
-  <p class="text-sm text-gray-500 dark:text-gray-400">
-      Follow up actions:
-  </p>
-  <p class="text-sm font-medium text-gray-900 dark:text-white">
-    <%= sponsor.follow_up_actions %>
-  </p>
-</div>
-
- <div class="mt-2">
+<div class="md:col-span-4 p-2 border border-gray-200 rounded-lg hover:bg-gray-100">
   <p class="text-sm text-gray-500 dark:text-gray-400">
       Notes:
   </p>
   <p class="text-sm font-medium text-gray-900 dark:text-white">
     <%= sponsor.notes %>
   </p>
-</div>
 </div>
 </div>

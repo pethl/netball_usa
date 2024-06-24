@@ -10,18 +10,25 @@
                     Company 
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Ind:Cat
+                    Type
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Allocated To
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Status
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    City
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    State
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Location
                 </th>
-                <th scope="col" class="px-6 py-3 text-center">
-                    Opps(#)
-                </th>
-                
-
                 <th scope="col" class="px-6 py-3">
-                    Opp Details
+                    Website
                 </th>
                 <th scope="col" class="px-6 py-3 truncate">
                     Key Contacts
@@ -29,8 +36,10 @@
                 <th scope="col" class="px-6 py-3">
                     Phone/Email
                 </th>
-                
-                <th scope="col" class="px-6 py-3 truncate">
+                <th scope="col" class="px-6 py-3">
+                    Opportunity Area
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Notes
                 </th>
             </tr>
@@ -38,27 +47,28 @@
         <tbody>
         <% @sponsors.each do |sponsor| %>
             <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
-                <td scope="row" class="align-top px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
-                    <%= link_to sponsor.company_name, sponsor_path(sponsor), class: link_class %>
-                </td>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                    <%= link_to sponsor.company_name, edit_sponsor_path(sponsor), class: link_class %>
+                </th>
                 <td class="px-6 py-4">
                   <%= sponsor.sponsor_category %>  <br>
                    <%= sponsor.industry %>
                 </td>
                 <td class="px-6 py-4">
-                   <%= sponsor.location %><br> 
-                   <%= sponsor.city %>, <%= sponsor.state %> 
+                    <%= sponsor.user.full_name unless (sponsor.user_id.to_s.empty?) %>
                 </td>
-                <td class="px-6 py-4 text-center  align-top ">
-                    [<%= sponsor.opportunities.count %>]<br>
-                   
+                <td class="px-6 py-4">
+                    <%= sponsor.status %>
                 </td>
-                <td class="px-6 py-4 text-left">
-                <% sponsor.opportunities.each do |opportunity| %>
-                    <%= opportunity.opportunity_type %> - <%= opportunity.status %><br>
-                <% end %>
+                <td class="px-6 py-4">
+                   <%= sponsor.city %>
                 </td>
-               
+                <td class="px-6 py-4">
+                   <%= sponsor.state %>
+                </td>
+                <td class="px-6 py-4">
+                   <%= sponsor.location %>
+                </td>
                  <td class="px-6 py-4">
                     <%= sponsor.website %>
                 </td>
@@ -71,7 +81,7 @@
                 <td class="px-6 py-4">
                    <%= sponsor.opportunity_area %>
                 </td>
-                <td class="px-6 py-4 truncate">
+                <td class="px-6 py-4">
                    <%= sponsor.notes %>
                 </td>
             </tr>

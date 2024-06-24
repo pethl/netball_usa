@@ -7,15 +7,20 @@ class SponsorsController < ApplicationController
   # GET /sponsors
   def index
    
-    if is_admin? 
+   # if is_admin? 
        @sponsors = Sponsor.all
-    else
-        @sponsors = Sponsor.where(user_id: current_user.id)
-      end
+    #else
+      #  @sponsors = Sponsor.where(user_id: current_user.id)
+     # end
   end
 
   # GET /sponsors/1
   def show
+    if is_admin? 
+      @opportunities = @sponsor.ordered
+    else
+     @opportunities = @sponsor.opportunities.where(user_id: current_user.id)
+    end
   end
 
   # GET /sponsors/new

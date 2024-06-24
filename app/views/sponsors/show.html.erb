@@ -1,17 +1,30 @@
 <% content_for(:page_title, "Sponsor Target: #{@sponsor.company_name}")%>
 
-  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md md:max-w-lg">
-  
-   <br>
- 
-<%= render @sponsor %>
+<div class="m-4">
+  <%= render @sponsor %>
+</div>
+<br>
+<%= link_to "New Opportunity",
+                new_sponsor_opportunity_path(@sponsor),
+                class: form_button_class %>
+  </div>
+
+
+<% if @sponsor.opportunities.any? %>
+<span class="text-lg text-gray-800 ml-6">Opportunities</span>
+<div class="ml-4 mr-4 p-4">
+<%= render @opportunities, sponsor: @sponsor %>
+</div>
+<% end %>
+
 
 
 <br>
-<div>
+<div class="p-2">
   <%= link_to "Edit this sponsor", edit_sponsor_path(@sponsor), class: link_class %> |
   <%= link_to "Back to sponsors", sponsors_path, class: link_class %>
-
-  <%= button_to "Delete this record", @sponsor, method: :delete %>
+<% if current_user.admin? %>
+  <%= button_to "Delete this sponsor", @sponsor, method: :delete  %>
+  <% end %>
 </div>
 

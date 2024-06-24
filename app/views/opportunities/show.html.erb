@@ -1,0 +1,12 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="m-4">
+  <%= render @opportunity %>
+</div>
+
+<div>
+  <%= link_to "Edit this opportunity", edit_opportunity_path(@opportunity) %> |
+  <%= link_to "Back to opportunities", opportunities_path %>
+
+  <%= button_to "Destroy this opportunity", @opportunity, method: :delete %>
+</div>

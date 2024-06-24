@@ -1,11 +1,12 @@
 <% content_for(:page_title, "Sponsor Targets: Edit:  #{@sponsor.company_name}")%>
 
-<div class="m-4">
+<div class="m-8">
 <%= render "form", sponsor: @sponsor %>
-</div>
+
 <br>
 
 <div>
   <%= link_to "Show this sponsor", @sponsor, class: link_class %> |
   <%= link_to "Back to sponsors", sponsors_path, class: link_class %>
+</div>
 </div>

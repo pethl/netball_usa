@@ -1,0 +1,92 @@
+
+<div class="p-4">
+<%= form_for [@sponsor, opportunity], html: { class: "form opportunity" } do |form| %>
+
+  <% if opportunity.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(opportunity.errors.count, "error") %> prohibited this opportunity from being saved:</h2>
+
+      <ul>
+        <% opportunity.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
+ 
+  <div class="">
+    <%= form.label :area, class: label_class%>
+    <div class="mt-1">
+    <%= form.select :area, options_for_select(sponsor_opportunity_area, :selected => opportunity.area),{:prompt=>true}, class: form_input_class %>
+    </div> 
+  </div>
+  
+  <div class="">
+    <%= form.label :opportunity_type, "Type", class: label_class%>
+    <div class="mt-1">
+    <%= form.select :opportunity_type, options_for_select(sponsor_type, :selected => opportunity.opportunity_type),{:prompt=>true}, class: form_input_class %>
+    </div> 
+  </div>
+
+  <div class="">
+    <%= form.label :status, class: label_class%>
+    <div class="mt-1">
+    <%= form.select :status, options_for_select(sponsor_status, :selected => opportunity.status),{}, class: form_input_class %>
+    </div> 
+  </div>
+
+  <div class="">
+    <%= form.label :allocated_to, class: label_class%>
+    <div class="mt-1">
+    <%= form.collection_select(:user_id, @users, :id, :full_name,{:prompt=>true}, {:class=>"bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 hover:border-blue-900 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
+    }) %>
+    </div> 
+  </div>
+
+  <div class="md:col-span-2">
+    <%= form.label :website, class: label_class%>
+    <div class="mt-1">
+    <%= form.text_field :website, class: form_input_class  %>
+    </div> 
+  </div>
+  <div class="md:col-span-2">
+  </div>
+
+  <div class="md:col-span-2">
+    <%= form.label :pitch, class: label_class%>
+      <div class="mt-1">
+      <%= form.text_area :pitch, class: form_input_class,  size: "20x5"  %>
+    </div>
+  </div>
+
+  <div class="md:col-span-2">
+    <%= form.label :follow_up_actions, class: label_class%>
+    <div class="mt-1">
+    <%= form.text_area :follow_up_actions, class: form_input_class,  size: "20x5"  %>
+    </div> 
+  </div>
+
+  <div class="col-span-2 md:col-span-4">
+    <%= form.label :notes, class: label_class%>
+    <div class="mt-1">
+    <%= form.text_area :notes, class: form_input_class,  size: "20x5"  %>
+    </div> 
+  </div>
+
+<%= form.hidden_field :old_user_id, value: opportunity.user_id%>
+
+<div class="mt-4 justify-self-end">
+    <%= link_to "Cancel", sponsor_path(@sponsor), class: clear_button_class %>
+  </div>
+
+  <div class="justify-self-stretch">
+    <%= form.submit class: form_button_class %>
+  </div>
+  </div>
+<% end %>
+
+</div>
+

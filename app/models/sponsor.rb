@@ -1,12 +1,12 @@
 class Sponsor < ApplicationRecord
-  
   belongs_to :user
-  before_save :send_allocation_email
+  has_many :opportunities, dependent: :destroy
+  #before_save :send_allocation_email
   
   validates :sponsor_category, presence: true
   validates :industry, presence: true
   validates :company_name, presence: true, length: { maximum: 40 }
-  validates :user_id, presence: true
+  #validates :user_id, presence: true
  
 
   def send_allocation_email

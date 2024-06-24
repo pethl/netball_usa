@@ -44,7 +44,9 @@ Rails.application.routes.draw do
   get 'netball_educators/index_user' => 'netball_educators#index_user', :as => :index_user
  
   resources :netball_educators
-  resources :sponsors
+  resources :sponsors do
+    resources :opportunities, except: [:index, :show]
+  end
   resources :educators
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

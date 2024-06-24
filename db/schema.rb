@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_22_100318) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_23_102322) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -214,6 +214,23 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_22_100318) do
     t.string "website"
   end
 
+  create_table "opportunities", force: :cascade do |t|
+    t.bigint "sponsor_id"
+    t.string "status"
+    t.bigint "user_id"
+    t.string "opportunity_type"
+    t.string "website"
+    t.string "area"
+    t.text "pitch"
+    t.text "follow_up_actions"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "old_user_id"
+    t.index ["sponsor_id"], name: "index_opportunities_on_sponsor_id"
+    t.index ["user_id"], name: "index_opportunities_on_user_id"
+  end
+
   create_table "people", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -415,6 +432,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_22_100318) do
   add_foreign_key "event_participants", "events"
   add_foreign_key "event_participants", "people"
   add_foreign_key "member_key_roles", "members"
+  add_foreign_key "opportunities", "sponsors"
+  add_foreign_key "opportunities", "users"
   add_foreign_key "teams", "users"
   add_foreign_key "transfers", "events"
   add_foreign_key "transfers", "people"
