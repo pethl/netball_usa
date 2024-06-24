@@ -1,6 +1,6 @@
 <div id="<%= dom_id sponsor %>">
 
-<div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 border border-blue-900 rounded-lg shadow  ">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-4 border border-blue-900 rounded-lg shadow  ">
 
 <div class="">
     <p class="text-sm text-gray-500 dark:text-gray-400">
@@ -13,20 +13,16 @@
 
   <div class="">
     <p class="text-sm text-gray-500 dark:text-gray-400">
-        Industry:
+        Industry / Category
     </p>
     <p class="text-sm font-medium text-gray-900 dark:text-white">
-      <%= sponsor.industry %>
+      <%= sponsor.industry %> /  <%= sponsor.sponsor_category %>
     </p>
   </div>
 
   <div class="">
-    <p class="text-sm text-gray-500 dark:text-gray-400">
-      Category:
-    </p>
-    <p class="text-sm font-medium text-gray-900 dark:text-white">
-      <%= sponsor.sponsor_category %>
-    </p>
+  </div>
+  <div class="">
   </div>
 
   <div class="">
@@ -34,28 +30,11 @@
         Location:
     </p>
     <p class="text-sm font-medium text-gray-900 dark:text-white">
-      <%= sponsor.location %>
+      <%= sponsor.location %>,  <%= sponsor.city %>,  <%= sponsor.state %>
     </p>
   </div>
 
-  <div class="">
-    <p class="text-sm text-gray-500 dark:text-gray-400">
-        City:
-    </p>
-    <p class="text-sm font-medium text-gray-900 dark:text-white">
-      <%= sponsor.city %>
-    </p>
-  </div>
-
-  <div class="">
-  <p class="text-sm text-gray-500 dark:text-gray-400">
-      State:
-  </p>
-  <p class="text-sm font-medium text-gray-900 dark:text-white">
-    <%= sponsor.state %>
-  </p>
-</div>
-
+  
 <div class="md:col-span-2">
   <p class="text-sm text-gray-500 dark:text-gray-400">
       Website:

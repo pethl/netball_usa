@@ -17,7 +17,7 @@ class SponsorsController < ApplicationController
   # GET /sponsors/1
   def show
     if is_admin? 
-      @opportunities = @sponsor.ordered
+      @opportunities = @sponsor.opportunities.ordered
     else
      @opportunities = @sponsor.opportunities.where(user_id: current_user.id)
     end
