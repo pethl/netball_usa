@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_23_102322) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_24_164345) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -66,6 +66,28 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_23_102322) do
     t.decimal "per_diem", precision: 7, scale: 2
     t.integer "number_of_people"
     t.decimal "number_of_days", precision: 7, scale: 2
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "prefix"
+    t.string "suffix"
+    t.string "nickname"
+    t.string "email"
+    t.string "phone"
+    t.string "linked_in"
+    t.string "job_title"
+    t.string "department"
+    t.string "organisation"
+    t.bigint "sponsor_id"
+    t.bigint "grant_id"
+    t.string "location"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["grant_id"], name: "index_contacts_on_grant_id"
+    t.index ["sponsor_id"], name: "index_contacts_on_sponsor_id"
   end
 
   create_table "equipment", force: :cascade do |t|
@@ -227,6 +249,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_23_102322) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "old_user_id"
+    t.integer "contact_id"
     t.index ["sponsor_id"], name: "index_opportunities_on_sponsor_id"
     t.index ["user_id"], name: "index_opportunities_on_user_id"
   end
@@ -425,6 +448,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_23_102322) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "contacts", "grants"
+  add_foreign_key "contacts", "sponsors"
   add_foreign_key "equipment", "netball_educators"
   add_foreign_key "equipment", "people"
   add_foreign_key "event_assignments", "events"

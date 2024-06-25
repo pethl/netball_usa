@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :contacts
   get 'na_teams/index_admin' => 'na_teams#index_admin', :as => :index_admin
   get 'regions/team_list_index' => 'regions#team_list_index', :as => :team_list_index
   get 'na_teams/teams_list_index' => 'na_teams#teams_list_index', :as => :teams_list_index
@@ -46,6 +47,10 @@ Rails.application.routes.draw do
   resources :netball_educators
   resources :sponsors do
     resources :opportunities, except: [:index, :show]
+  end
+
+  resources :sponsors  do
+    resources :contacts, except: [:index, :show]
   end
   resources :educators
   devise_for :users

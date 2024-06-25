@@ -16,6 +16,7 @@ class SponsorsController < ApplicationController
 
   # GET /sponsors/1
   def show
+    @contacts = @sponsor.contacts.ordered
     if is_admin? 
       @opportunities = @sponsor.opportunities.ordered
     else
@@ -32,6 +33,7 @@ class SponsorsController < ApplicationController
   # GET /sponsors/1/edit
   def edit
     @users = User.all
+    @contacts = @sponsor.contacts.ordered
   end
 
   # POST /sponsors

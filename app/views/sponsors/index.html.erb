@@ -18,16 +18,17 @@
                 <th scope="col" class="px-6 py-3 text-center">
                     Opps(#)
                 </th>
-                
-
                 <th scope="col" class="px-6 py-3">
                     Opp Details
                 </th>
+                <th scope="col" class="px-6 py-3 text-center">
+                    Contacts(#)
+                </th>
                 <th scope="col" class="px-6 py-3 truncate">
-                    Key Contacts
+                    Contact Details
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Phone/Email
+                    Website
                 </th>
                 
                 <th scope="col" class="px-6 py-3 truncate">
@@ -41,35 +42,32 @@
                 <td scope="row" class="align-top px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
                     <%= link_to sponsor.company_name, sponsor_path(sponsor), class: link_class %>
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 align-top">
                   <%= sponsor.sponsor_category %>  <br>
                    <%= sponsor.industry %>
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 align-top">
                    <%= sponsor.location %><br> 
                    <%= sponsor.city %>, <%= sponsor.state %> 
                 </td>
-                <td class="px-6 py-4 text-center  align-top ">
-                    [<%= sponsor.opportunities.count %>]<br>
-                   
+                <td class="px-6 py-4 text-center align-top ">
+                    [<%= sponsor.opportunities.count %>]
                 </td>
-                <td class="px-6 py-4 text-left">
+                <td class="px-6 py-4 text-left align-top">
                 <% sponsor.opportunities.each do |opportunity| %>
                     <%= opportunity.opportunity_type %> - <%= opportunity.status %><br>
                 <% end %>
                 </td>
-               
-                 <td class="px-6 py-4">
+                <td class="px-6 py-4 text-center align-top ">
+                [<%= sponsor.contacts.count %>]
+                </td>
+                <td class="px-6 py-4 text-left align-top">
+                <% sponsor.contacts.each do |contact| %>
+                    <%= contact.full_name %> - <%= contact.phone %><br>
+                <% end %>
+                </td>
+                <td class="px-6 py-4">
                     <%= sponsor.website %>
-                </td>
-                <td class="px-6 py-4 truncate">
-                    <%= sponsor.key_contacts %>
-                </td>
-                <td class="px-6 py-4">
-                   <%= sponsor.phone_numbers_emails %>
-                </td>
-                <td class="px-6 py-4">
-                   <%= sponsor.opportunity_area %>
                 </td>
                 <td class="px-6 py-4 truncate">
                    <%= sponsor.notes %>

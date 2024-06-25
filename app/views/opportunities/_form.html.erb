@@ -2,7 +2,7 @@
 <div class="p-4">
 <%= form_for [@sponsor, opportunity], html: { class: "form opportunity" } do |form| %>
 
-  <% if opportunity.errors.any? %>
+  <% if opportunity.errors.any? %> 
     <div style="color: red">
       <h2><%= pluralize(opportunity.errors.count, "error") %> prohibited this opportunity from being saved:</h2>
 
@@ -52,7 +52,14 @@
     <%= form.text_field :website, class: form_input_class  %>
     </div> 
   </div>
-  <div class="md:col-span-2">
+  <div class="">
+    <%= form.label :contact_id, "Primary Contact", class: label_class%>
+    <div class="mt-1">
+    <%= form.collection_select(:contact_id, @contacts, :id, :full_name,{:prompt=>true}, {:class=>"bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 hover:border-blue-900 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
+    }) %>
+    </div> 
+  </div>
+  <div>
   </div>
 
   <div class="md:col-span-2">

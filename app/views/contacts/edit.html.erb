@@ -1,0 +1,10 @@
+<% content_for(:page_title, "Contact: Edit")%>
+
+<%= render "form", contact: @contact %>
+
+<br>
+
+<div>
+  <%= link_to "Show this contact", @contact %> |
+  <%= link_to "Back to sponsor", sponsors_path(@sponsor) %>
+</div>

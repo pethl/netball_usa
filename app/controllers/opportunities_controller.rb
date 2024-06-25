@@ -21,6 +21,7 @@ class OpportunitiesController < ApplicationController
   # GET /opportunities/1/edit
   def edit
     @users = User.all
+    @contacts = @sponsor.contacts.ordered
   end
 
   # POST /opportunities
@@ -64,6 +65,6 @@ class OpportunitiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def opportunity_params
-      params.require(:opportunity).permit(:sponsor_id, :status, :user_id, :old_user_id, :opportunity_type, :website, :area, :pitch, :follow_up_actions, :notes)
+      params.require(:opportunity).permit(:sponsor_id, :contact_id, :status, :user_id, :old_user_id, :opportunity_type, :website, :area, :pitch, :follow_up_actions, :notes)
     end
 end

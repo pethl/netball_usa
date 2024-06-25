@@ -1,0 +1,36 @@
+<div id="<%= dom_id contact %>">
+
+<div class="block rounded-lg border border-blue-900 bg-white p-4 mb-2 shadow-md">
+  <div class="flex flex-row justify-between mb-2">
+    <div class="basis-2/3 text-lg font-medium leading-tight text-gray-600"> <%= contact.full_name %>  <% if contact.nickname? %><span class="text-md">(<%= contact.nickname %>)<% end %></div>
+    <div class="basis-1/3 text-sm font-light justify-between text-right flex flex-row">
+        <div class="flex ml-6">
+          <%= button_to "Delete2",
+          sponsor_contact_path(@sponsor, contact),
+          method: :delete,
+          form: { data: { turbo_confirm: "Are you sure?" } },
+          class: red_link_class %>
+        </div>
+        <div class="flex mr-6">
+            <%= link_to "Edit",
+              [:edit, @sponsor, contact],
+              class: green_link_class %>
+        </div>
+       </div>
+  </div>
+  
+  <span class="text-gray-500"><%= contact.job_title %> </span>
+      <% if contact.department? %>
+      <span class="text-gray-700"><%= contact.department %> - </span><% end %>
+      <span class="text-gray-900"><%= contact.organisation %>, <%= contact.location %> </span>
+  <div class="flex flex-row justify-between">
+    <div class="text-md font-medium text-gray-500"><i class="fa-regular fa-envelope"> </i> <%= contact.email %></div>
+    <div class="text-md font-medium text-gray-500"><i class="fa-regular fa-phone"> </i> <%= contact.phone %></div>
+    <div class="text-md font-medium text-gray-500"><i class="fa-brands fa-linkedin"> </i> <%= contact.linked_in %></div>
+  </div> 
+  <% if contact.notes? %>
+    <div class="p-1 text-sm italic text-blue-900 text-light"><%= contact.notes %></div> 
+    <% end %>
+</div>
+
+</div>
