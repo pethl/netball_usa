@@ -9,12 +9,16 @@ class OpportunitiesController < ApplicationController
 
   # GET /opportunities/1
   def show
+   
   end
 
   # GET /opportunities/new
   def new
     #@opportunity = Opportunity.new
+    @contacts = @sponsor.contacts.ordered
     @opportunity = @sponsor.opportunities.build
+   # @opportunity.user_id = current_user.id
+    @opportunity.old_user_id = current_user.id
     @users = User.all
   end
 
@@ -27,8 +31,7 @@ class OpportunitiesController < ApplicationController
   # POST /opportunities
   def create  
     @opportunity = @sponsor.opportunities.build(opportunity_params)
-
-
+   
     if @opportunity.save
      
       redirect_to sponsor_path(@sponsor), notice: "Opportunity was successfully created."

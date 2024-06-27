@@ -1,43 +1,45 @@
 <div id="<%= dom_id opportunity %>">
 
-<div class="relative overflow-x-auto">
-  <table class="table-fixed w-full text-left rtl:text-right ">
-    <thead class="bg-white border-b text-gray-300 font-light text-xs mb-2">
-     <tr>
-      <th>Type</th>
-      <th>Area</th>
-      <th>Status</th>
-      <th>Allocated To</th>
-      <th>Website</th>
-      <th>Primary Contact</th>
-      <th>Pitch</th>
-      <th>Follow Up Actions</th>
-      <th>Notes</th>
-      <th>Actions</th>
-     </tr>
-</thead>
-<tbody>
-  <tr>
-   
-    <td> <%= link_to opportunity.opportunity_type,[:edit, @sponsor, opportunity], class: link_class %></td>
-    <td> <%= opportunity.area %></td>
-    <td> <%= opportunity.status %></td>
-    <td> <%= User.find(opportunity.user_id).full_name %></td>
-    <td class="truncate"> <%= opportunity.website %></td>
-    <td class="truncate"> <%= Contact.find(opportunity.contact_id).full_name %></td>
-    <td class="truncate"> <%= opportunity.pitch %></td>
-    <td class="truncate"> <%= opportunity.follow_up_actions %></td>
-    <td class="truncate"> <%= opportunity.notes %></td>
-    <td> <%= button_to "Delete",
-    [@sponsor, opportunity],
-    method: :delete,
-    class: red_link_class %>
-    <%= link_to "Edit",
-      [:edit, @sponsor, opportunity],
-      class: green_link_class %></td>
-  </tr>
-</tbody>
-</table>
-<br>
+  <div class="relative overflow-x-auto">
+    <table class="table-fixed w-full text-left rtl:text-right ">
+      <thead class="bg-white border-b text-gray-300 font-light text-xs mb-2">
+      <tr>
+        <th>Type</th>
+        <th>Area</th>
+        <th>Status</th>
+        <th>Allocated To</th>
+        <th>Website</th>
+        <th>Primary Contact</th>
+        <th>Pitch</th>
+        <th>Follow Up Actions</th>
+        <th>Notes</th>
+        <th>Actions</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr>
+    
+      <td> <%= link_to opportunity.opportunity_type,[:edit, @sponsor, opportunity], class: link_class %></td>
+      <td> <%= opportunity.area %></td>
+      <td> <%= opportunity.status %></td>
+      <td> <% if opportunity.user_id? %><%= User.find(opportunity.user_id).full_name %><% end %></td>
+    
+      <td class="truncate"> <%= opportunity.website %></td>
+      <td class="truncate"> <% if opportunity.contact_id? %><%= Contact.find(opportunity.contact_id).full_name %><% end %></td>
+      <td class="truncate"> <%= opportunity.pitch %></td>
+      <td class="truncate"> <%= opportunity.follow_up_actions %></td>
+      <td class="truncate"> <%= opportunity.notes %></td>
+      <td> <%= button_to "Delete",
+      [@sponsor, opportunity],
+      method: :delete,
+      class: red_link_class %>
+      <%= link_to "Edit",
+        [:edit, @sponsor, opportunity],
+        class: green_link_class %></td>
+    </tr>
+  </tbody>
+  </table>
+  <br>
 
-</div>
+  </div>
+  </div>

@@ -5,27 +5,28 @@
   <div class="basis-1/2">
     <div class="ml-2 text-lg font-bold text-gray-800 mb-2">Sponsor Details</div>
       <%= render @sponsor %>
-    </div>
-
-
- <div class="basis-1/2">
-  <div class="flex flex-row justify-between">
-    <div class=" text-lg font-bold text-gray-800 ml-6">Contacts</div>
-    <div class="">
-        <%= link_to "New Contact",
-                    new_sponsor_contact_path(@sponsor),
-                    class: form_button_class %>
-    </div>
   </div>
+
+
+  <div class="basis-1/2">
+    <div class="flex flex-row justify-between">
+      <div class=" text-lg font-bold text-gray-800 ml-6">Contacts</div>
+        <div class="">
+          <%= link_to "New Contact",
+            new_sponsor_contact_path(@sponsor),
+            class: form_button_class %>
+        </div>
+      </div>
+      
       <% if @sponsor.contacts.any? %>
-       
         <div class="ml-2 p-2">
-          <%= render @contacts, sponsor: @sponsor %>
+            <%= render @contacts, sponsor: @sponsor %>
         </div>
       <% end %>
+    </div>
   </div>
-</div></div>
-  </div>
+</div>
+ 
 
 <div class="flex flex-row justify-between">
   <div class="ml-2 text-lg font-bold text-gray-800 ml-6">Opportunities</div>
@@ -35,21 +36,22 @@
                     class: form_button_class %>
     </div>
   </div>
-  <div class="border border-blue-900 rounded m-2 mr-4 pr-4">
+  
+  <div class="border border-blue-900 rounded m-2 mr-4 pr-4 min-h-20">
     <% if @sponsor.opportunities.any? %>
         <div class="ml-4 mr-2 p-4">
         <%= render @opportunities, sponsor: @sponsor %>
         </div>
     <% end %>
   </div>
-</div>
-</div>
 
-<div class="p-2">
-  <%= link_to "Edit this sponsor", edit_sponsor_path(@sponsor), class: link_class %> |
-  <%= link_to "<< Back to sponsors", sponsors_path, class: link_class %>
-<% if current_user.admin? %>
-  <%= button_to "Delete this sponsor", @sponsor, method: :delete  %>
-  <% end %>
-</div>
 
+  <div class="p-2">
+    <%= link_to "Edit this sponsor", edit_sponsor_path(@sponsor), class: link_class %> |
+    <%= link_to "<< Back to sponsors", sponsors_path, class: link_class %>
+    <% if current_user.admin? %>
+      <%= button_to "Delete this sponsor", @sponsor, method: :delete  %>
+    <% end %>
+  </div>
+
+  </div>

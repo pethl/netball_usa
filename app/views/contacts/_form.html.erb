@@ -36,18 +36,20 @@
     </div> 
   </div>
 
-  <div class="">
-    <%= form.label :suffix, class: label_class%>
-    <div class="mt-1  max-w-20 ">
-      <%= form.text_field :suffix, class: form_input_class  %>
-    </div> 
-  </div>
+  <div class="flex justify-between">
+    <div class="">
+      <%= form.label :suffix, class: label_class%>
+      <div class="mt-1  max-w-20 ">
+        <%= form.text_field :suffix, class: form_input_class  %>
+      </div> 
+    </div>
   
-  <div class="">
-    <%= form.label :nickname, class: label_class%>
-    <div class="mt-1">
-      <%= form.text_field :nickname, class: form_input_class  %>
-    </div> 
+    <div class="">
+      <%= form.label :nickname, class: label_class%>
+      <div class="mt-1 max-w-25">
+        <%= form.text_field :nickname, class: form_input_class  %>
+      </div> 
+    </div>
   </div>
 
   <div class="">
@@ -58,7 +60,14 @@
   </div>
 
   <div class="">
-    <%= form.label :phone, class: label_class%>
+    <%= form.label :mobile, "Cell Phone", class: label_class%>
+    <div class="mt-1">
+      <%= form.text_field :mobile, class: form_input_class  %>
+    </div> 
+  </div>
+
+  <div class="">
+    <%= form.label :phone, "Other phone", class: label_class%>
     <div class="mt-1">
       <%= form.text_field :phone, class: form_input_class  %>
     </div> 
