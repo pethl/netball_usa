@@ -10,8 +10,8 @@ class Transfer < ApplicationRecord
   validates :event_id, presence: true  
   validates_uniqueness_of :person_id 
   validates :role, presence: true
-  validates :check_in, allow_blank: true, comparison: { less_than: :check_out }
-  validates :check_out, allow_blank: true, comparison: { greater_than: :check_in }
+  #validates :check_in, allow_blank: true, comparison: { less_than: :check_out }
+  #validates :check_out, allow_blank: true, comparison: { greater_than: :check_in }
   
   scope :ordered, -> { order(id: :asc) }
  

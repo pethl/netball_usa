@@ -21,7 +21,7 @@
         </div>
     </div>
     
-    <div class="mb-2 md:col-span-2">
+    <div class="mb-2">
       <%= form.label :industry, class: label_class %>
         <div class="mt-1">
          <%= form.select :industry, options_for_select(sponsor_industry, :selected => sponsor.industry),{:prompt=>true}, class: form_input_class %>  
