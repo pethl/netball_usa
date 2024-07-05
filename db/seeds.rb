@@ -120,8 +120,14 @@ Reference.create(group:	'transfer_departure_type',	value:	'Taxi/Uber to Airport'
 Reference.create(group:	'transfer_departure_type',	value:	'Share Taxi/Uber to Airport', active:	'TRUE');
 Reference.create(group:	'transfer_departure_type',	value:	'Drop off Rental Bus', active:	'TRUE');
 Reference.create(group:	'transfer_departure_type',	value:	'Drop off Rental Van', active:	'TRUE');
-Reference.create(group:	'us_open_hotel_name',	value:	'2023 - Marriott French Quarter', active:	'TRUE');
-Reference.create(group:	'us_open_hotel_name',	value:	'2023- Best Western', active:	'TRUE');
+Reference.create(group:	'us_open_hotel_name',	value:	'2023 - Marriott French Quarter', active:	'FALSE');
+Reference.create(group:	'us_open_hotel_name',	value:	'2023- Best Western', active:	'FALSE');
+Reference.create(group:	'us_open_hotel_name',	value:	'2024 - DoubleTree Hotel by Hilton', desc: '#1 VIP and volunteers', active:	'TRUE');
+Reference.create(group:	'us_open_hotel_name',	value:	'2024 - Courtyard by Marriott, Phoenix', desc: '#2', active:	'TRUE');
+Reference.create(group:	'us_open_hotel_name',	value:	'2024 - Residence Inn by Marriott', desc: '#3',  active:	'TRUE');
+Reference.create(group:	'transfer_hotel_arrival',	value:	'Thurs 7th Nov', active:	'TRUE');
+Reference.create(group:	'transfer_hotel_arrival',	value:	'Frid 8th Nov', active:	'TRUE');
+Reference.create(group:	'transfer_hotel_departure',	value:	'Sun 10th Nov', active:	'TRUE');
 Reference.create(group:	'member_age_status',	value:	'Youth', active:	'TRUE');
 Reference.create(group:	'member_age_status',	value:	'Adult', active:	'TRUE');
 Reference.create(group:	'member_positions',	value:	'Team President', active:	'TRUE');

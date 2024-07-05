@@ -20,19 +20,19 @@
     
      <div class="mt-2">
      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-         Check In:
+         Hotel Arrival:
      </p>
      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-     <%= transfer.check_in.to_formatted_s(:usa) unless (transfer.check_in.to_s.empty?) %>
+     <%= transfer.hotel_arrival %>
      </p>
       </div>
       
       <div class="mt-2">
       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          Check Out:
+          Hotel Departure:
       </p>
       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= transfer.check_out.to_formatted_s(:usa) unless (transfer.check_out.to_s.empty?) %> 
+      <%= transfer.hotel_departure %> 
       </p>
        </div>
 

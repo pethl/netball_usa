@@ -16,7 +16,7 @@
   <% end %>
   
   <div class="mb-4  font-lg font-medium">
-      Hi <%= transfer.person.first_name %>   <%= transfer.person.last_name %>,  <br>
+      Hi <%= transfer.person.first_name %> <%= transfer.person.last_name %>,  <br>
       <span class="text-sm text-gray-500"> [ <%= transfer.role %> ] </span><br><br>
       <p>Please complete all requested information. You can SAVE your progress and complete at a later stage if you do not have all information to hand.</p>
       <br>
@@ -27,21 +27,43 @@
         Hotel Details
       </div>
 
+      <% if current_user %> 
+          <% if current_user.admin?%>
+          <div class="flex flex-row gap-4">
+            
+            <div class="mb-4 basis-1/2">
+              <%= form.label :check_in, class: label_class %>
+                <div class="mt-1">
+                  <%= form.date_field :check_in, class: input_class  %>
+                </div> 
+            </div>
+
+            <div class="mb-4 basis-1/2">
+              <%= form.label :check_out,  class: label_class %>
+                <div class="mt-1">
+                  <%= form.date_field :check_out, class: input_class  %>
+                </div> 
+            </div>
+          </div>
+      <% end %><% end %>
+      <div class="mb-4 text-blue-800">
+        <span class="text-sm tracking-tight">NOTE: Hotel dates covered by Netball America only.<span>
+      </div>
       <div class="flex flex-row gap-4">
-        
-        <div class="mb-4 basis-1/2">
-          <%= form.label :check_in, class: label_class %>
-            <div class="mt-1">
-              <%= form.date_field :check_in, class: input_class  %>
-            </div> 
-        </div>
-    
-        <div class="mb-4 basis-1/2">
-          <%= form.label :check_out,  class: label_class %>
-            <div class="mt-1">
-              <%= form.date_field :check_out, class: input_class  %>
-            </div> 
-        </div>
+      
+      <div class="mb-4 basis-1/2">
+        <%= form.label :hotel_arrival, class: label_class %>
+          <div class="mt-1">
+            <%= form.select :hotel_arrival, options_for_select(transfer_hotel_arrival, :selected => transfer.hotel_arrival),{prompt: true}, class: input_class %>
+          </div> 
+      </div>
+
+      <div class="mb-4 basis-1/2">
+        <%= form.label :hotel_departure, class: label_class %>
+          <div class="mt-1">
+            <%= form.select :hotel_departure, options_for_select(transfer_hotel_departure, :selected => transfer.hotel_departure),{}, class: input_class %>
+          </div> 
+      </div>
       </div>
     
       <div class="mb-4">

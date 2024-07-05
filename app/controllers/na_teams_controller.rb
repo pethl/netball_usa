@@ -2,7 +2,7 @@ class NaTeamsController < ApplicationController
   before_action :set_na_team, only: %i[ show edit update destroy ]
   load_and_authorize_resource
 
-  # GET /na_teams
+  # GET /na_teams 
   def index_admin
     @na_teams = NaTeam.all
   end

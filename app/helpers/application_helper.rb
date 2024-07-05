@@ -219,6 +219,16 @@ module ApplicationHelper
       regions = Reference.where(active: "TRUE", group: 'regions')
       regions = regions.pluck(:value)       
     end
+
+    def transfer_hotel_arrival
+      transfer_hotel_arrival = Reference.where(active: "TRUE", group: 'transfer_hotel_arrival')
+      transfer_hotel_arrival = transfer_hotel_arrival.pluck(:value)       
+    end
+
+    def transfer_hotel_departure
+      transfer_hotel_departure = Reference.where(active: "TRUE", group: 'transfer_hotel_departure')
+      transfer_hotel_departure = transfer_hotel_departure.pluck(:value)       
+    end
     
     def timezones
       timezones = Reference.where(active: "TRUE", group: 'timezones')

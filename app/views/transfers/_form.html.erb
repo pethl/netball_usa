@@ -120,7 +120,7 @@
           
       <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
         <div class= "font-xl font-semibold">
-          HOTEL DETAILS 
+          HOTEL BOOKING 
         </div>
 
         <div class="mb-6 mt-2">
@@ -136,23 +136,40 @@
               <%= form.select :hotel_name, options_for_select(us_open_hotel_name, :selected => transfer.hotel_name),{prompt: true}, class: input_class %>
             </div> 
         </div>
+
+        <div class="mb-6">
+        <%= form.label :check_in, class: label_class%>
+          <div class="mt-1">
+            <%= form.date_field :check_in, class: input_class  %>
+          </div> 
+      </div>
+              
+      <div class="mb-6">
+        <%= form.label :check_out, class: label_class%>
+          <div class="mt-1">
+            <%= form.date_field :check_out, class: input_class  %>
+          </div> 
+      </div>
       </div>
       
       
       <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
-        <div class="mb-6">
-          <%= form.label :check_in, class: label_class%>
+      <div class= "font-xl font-semibold">
+        HOTEL REQUEST 
+      </div> 
+      <div class="mb-6 mt-2">
+          <%= form.label :hotel_arrival, "Hotel Arrival (requested)",class: label_class %>
             <div class="mt-1">
-              <%= form.date_field :check_in, class: input_class  %>
+              <%= form.select :hotel_arrival, options_for_select(transfer_hotel_arrival, :selected => transfer.hotel_arrival),{prompt: true}, class: input_class %>
             </div> 
         </div>
                 
         <div class="mb-6">
-          <%= form.label :check_out, class: label_class%>
-            <div class="mt-1">
-              <%= form.date_field :check_out, class: input_class  %>
-            </div> 
-        </div>
+        <%= form.label :hotel_departure, "Hotel Departure (requested)", class: label_class %>
+          <div class="mt-1">
+            <%= form.select :hotel_departure, options_for_select(transfer_hotel_departure, :selected => transfer.hotel_departure),{}, class: input_class %>
+          </div> 
+      </div>
                 
         <div class="mb-6">
           <%= form.label :room_type, class: label_class%>
