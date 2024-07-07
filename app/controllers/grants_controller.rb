@@ -37,6 +37,7 @@ class GrantsController < ApplicationController
    
     if @grant.user_id.blank? 
       @grant.user_id =current_user.id
+      @grant.old_user_id =current_user.id
     end
 
     if @grant.save

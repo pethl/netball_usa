@@ -1,4 +1,5 @@
 class NaTeamsController < ApplicationController
+  include ActionView::RecordIdentifier
   before_action :set_na_team, only: %i[ show edit update destroy ]
   load_and_authorize_resource
 
@@ -10,6 +11,7 @@ class NaTeamsController < ApplicationController
   # GET /na_teams
   def index
     @na_teams = NaTeam.where(user_id: current_user.id)
+    @na_teams=@na_teams.ordered
   end
 
    def teams_list_index
@@ -75,7 +77,7 @@ class NaTeamsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def na_team_params
-      params.require(:na_team).permit(:name, :city, :state, :user_id)
+      params.require(:na_team).permit(:name, :city, :state, :user_id, :website, :facebook, :twitter, :instagram, :other_sm)
     end
 end
 

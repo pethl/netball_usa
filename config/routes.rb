@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :na_teams do
     resources :member_key_roles, except: [:index, :show]
   end
+  
   resources :follow_ups
   resources :equipment
   resources :sample_words

@@ -11,27 +11,64 @@
     </div>
   <% end %>
 
-  <div class="flex flex-wrap w-full">
-     <div class="mb-2 mt-4">
+  <div class="flex flex-wrap w-full gap-2">
+     <div class="mt-2">
         <%= form.label :name, "Team Name*", class: label_class%>
-      <div class="mt-1">
+       <div class="mt-1">
         <%= form.text_field :name, class: required_input_class  %>
+       </div> 
+     </div> 
+
+     <div class="mt-2">
+       <%= form.label :city, "City*",  class: label_class%>
+        <div class="mt-1">
+          <%= form.text_field :city, style: "width:150px", class: input_class  %>
+        </div> 
+      </div> 
+   
+     <div class="mt-2">
+      <%= form.label :state, "State*",  class: label_class%>
+       <div class="mt-1">
+         <%= form.select :state, options_for_select(us_states, :selected => na_team.state),{:prompt=>true}, style: "width:150px", class: "text-sm rounded-md border-gray-300 focus:ring-blue-900 hover:bg-gray-100" %>
+        </div>
+     </div>
+
+     <div class="mt-2">
+       <%= form.label :website, "Team Website",  class: label_class%>
+        <div class="mt-3">
+          <%= form.text_field :website, placeholder: "Team Website", class: input_class  %>
+        </div> 
+      </div> 
+    
+      <div class="mt-2">
+      <span class="text-lg"><i class="fa-brands fa-facebook"></i></span>
+        <div class="mt-1">
+          <%= form.text_field :facebook, placeholder: "Team Facebook", class: input_class  %>
+        </div> 
+      </div> 
+      
+      <div class="mt-2">
+      <span class="text-lg"><i class="fa-brands fa-instagram"></i></span>
+        <div class="mt-1">
+          <%= form.text_field :instagram, placeholder: "Team Instagram", class: input_class  %>
         </div> 
       </div> 
 
-      <div class="mb-2 mt-4">
-         <%= form.label :city, "City*",  class: label_class%>
-       <div class="mt-1">
-         <%= form.text_field :city, class: input_class  %>
-         </div> 
-       </div> 
-   
-     <div class="mb-2 mt-4">
-      <%= form.label :state, "State*",  class: label_class%>
-       <div class="mt-1">
-       <%= form.select :state, options_for_select(us_states, :selected => na_team.state),{:prompt=>true}, class: input_class %>
-        </div> </div>
-      </div>
+      <div class="mt-2">
+      <span class="text-lg"><i class="fa-brands fa-twitter"></i></span>
+        <div class="mt-1">
+          <%= form.text_field :twitter, placeholder: "Team X [Twitter]", class: input_class  %>
+        </div> 
+      </div> 
+      
+      <div class="mt-2">
+      <span class="text-lg"><i class="fa-regular fa-thumbs-up"></i></span>
+        <div class="mt-1">
+          <%= form.text_field :other_sm, placeholder: "Other Socials", style: "width:300px", class: input_class  %>
+        </div> 
+      </div> 
+      
+    </div>
   </div>
   <div>
   <%= link_to "Cancel", na_teams_path, class: clear_button_class %>
