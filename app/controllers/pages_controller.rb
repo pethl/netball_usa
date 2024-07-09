@@ -39,7 +39,8 @@ class PagesController < ApplicationController
   end
 
   def membership_landing
-    #@member_type = get_membership_type
+    @member_type = get_membership_type
+    @individual_member =  IndividualMember.where(email: current_user.email)
   end
   
   private
@@ -52,6 +53,18 @@ class PagesController < ApplicationController
     def educator_params
       params.require(:educator).permit(:first_name, :last_name, :email, :phone, :school_name, :city, :state, :educator_notes, :mgmt_notes, :user_id)
     end
-
+    
+    def get_membership_type
+      @individual_membership = IndividualMember.where(email: current_user.email)
+      @team_membership = NaTeam.where(user_id: current_user.id)
+      
+      if @individual_membership.any?
+        return "Individual"
+      elsif @team_membership.any?
+        return "Team"
+      else
+        return "None"
+      end 
+  end
     
 end
