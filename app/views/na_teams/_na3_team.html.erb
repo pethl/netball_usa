@@ -1,0 +1,98 @@
+<div id="<%= dom_id na_team %>">
+
+<div class="border border-blue-900 rounded-lg shadow-lg shadow-blue-900 hover:shadow-2xl mx-8 p-4 mb-2">
+
+<%= turbo_frame_tag "na_team_#{na_team.id}"  do %>
+ <div class="na_team">
+  <div class="flex justify-between">
+    <div class="mb-2">  
+      <span class="whitespace-nowrap"> <%= link_to na_team.name, na_team_path(na_team) %></span>
+      <span class="font-light text-sm"> - <%= na_team.city %>,  <%= na_team.state %></span>
+        <div class="mb-2">
+            <% if na_team.website? %>
+              <span class="text-gray-500"><i class="fa-solid fa-globe"></i> <%= na_team.website %> </span><% end %>
+            <% if na_team.facebook? %>
+              <span class="text-gray-500"><i class="fa-brands fa-facebook"></i> <%= na_team.facebook %>  </span><% end %>
+            <% if na_team.instagram? %>
+              <span class="text-gray-500"><i class="fa-brands fa-instagram"></i> <%= na_team.facebook %>  </span><% end %>
+            <% if na_team.twitter? %>
+              <span class="text-gray-500"><i class="fa-brands fa-twitter"></i> <%= na_team.twitter %> </span><% end %>
+            <% if na_team.other_sm? %>
+              <span class="text-gray-500"><i class="fa-regular fa-thumbs-up"></i> <%= na_team.twitter %> </span><% end %>
+        </div>
+    </div>
+    
+    <div class="na_team__actions">
+        <%= button_to "Delete",
+          na_team_path(na_team),
+          method: :delete,
+          class: "font-semibold text-red-500" %>
+        <%= link_to "Edit",
+          edit_na_team_path(na_team),
+          class: "font-semibold text-green-500" %>
+      </div>
+  </div>
+</div>
+<br>
+<% end %>
+  
+    <div>
+            <%= link_to "(2) Add team members ", na_team_path(na_team), class: small_button_class,
+            data: { turbo_frame: "_top" } %>
+    </div>
+    <br> <br>
+      <div class"block font-light text-gray-400 text-sm">
+        <div class="font-light text-blue-900 mb-2"> 
+          <table class="w-full">
+            <thead class="bg-white border-b text-gray-400 font-light text-xs text-left">
+              <tr>
+              <th scope="col" class="">
+                Name
+              </th>
+              <th scope="col" class="">
+                Email
+              </th>
+              <th scope="col" class="">
+                Location
+              </th>
+              <th scope="col" class="">
+                Gender
+              </th>
+              <th scope="col" class="">
+                Active / PT?
+              </th>
+              <th scope="col" class="">
+                U18 / Adult
+              </th>
+              </tr>
+           </thead>
+          <tbody>
+          <% na_team.members.each do |member| %>
+          <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+            <td class="px-2">
+              <%= member.full_name  %>
+            </td>
+            <td class="px-2">
+              <%= member.email  %>
+            </td>
+            <td class="px-2">
+              <%= member.city  %> <%= member.state  %>
+            </td>
+            <td class="px-2">
+              <%= member.gender  %>
+            </td>
+            <td class="px-2">
+              <%= member.gender  %>
+            </td>
+            <td class="px-2">
+              <%= member.age_status  %>
+            </td>
+            <% end %> 
+            </tbody>
+          </table> 
+      </div>
+          
+</div>
+</div>
+</div>
+

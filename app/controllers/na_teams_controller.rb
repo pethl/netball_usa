@@ -54,10 +54,11 @@ class NaTeamsController < ApplicationController
   # PATCH/PUT /na_teams/1
   def update
     if @na_team.update(na_team_params)
-      redirect_to @na_team, notice: "Na team was successfully updated.", status: :see_other
+      redirect_to na_teams_path, notice: "Team was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
+    
   end
 
   # DELETE /na_teams/1

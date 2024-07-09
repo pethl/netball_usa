@@ -130,6 +130,8 @@ Reference.create(group:	'transfer_hotel_arrival',	value:	'Frid 8th Nov', active:
 Reference.create(group:	'transfer_hotel_departure',	value:	'Sun 10th Nov', active:	'TRUE');
 Reference.create(group:	'member_age_status',	value:	'Youth', active:	'TRUE');
 Reference.create(group:	'member_age_status',	value:	'Adult', active:	'TRUE');
+Reference.create(group:	'member_engagement_status',	value:	'Active', active:	'TRUE');
+Reference.create(group:	'member_engagement_status',	value:	'Part-Time', active:	'TRUE');
 Reference.create(group:	'member_positions',	value:	'Team President', active:	'TRUE');
 Reference.create(group:	'member_positions',	value:	'Head Coach', active:	'TRUE');
 Reference.create(group:	'member_positions',	value:	'Head Umpire', active:	'TRUE');

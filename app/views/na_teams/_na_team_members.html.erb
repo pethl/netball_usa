@@ -1,0 +1,52 @@
+<div class"block font-light text-gray-400 text-sm">
+    <div class="font-light text-blue-900 mb-2"> 
+        <table class="w-full">
+            <thead class="bg-white border-b text-gray-400 font-light text-xs text-left">
+                <tr>
+                    <th scope="col" class="">
+                        Name
+                    </th>
+                    <th scope="col" class="">
+                        Email
+                    </th>
+                    <th scope="col" class="">
+                        Location
+                    </th>
+                    <th scope="col" class="">
+                        Gender
+                    </th>
+                    <th scope="col" class="">
+                        Active / PT?
+                    </th>
+                    <th scope="col" class="">
+                        U18 / Adult
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% na_team.members.each do |member| %>
+                    <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+                        <td class="pr-2">
+                        <%= member.full_name  %>
+                        </td>
+                        <td class="pr-2">
+                        <%= member.email  %>
+                        </td>
+                        <td class="pr-2">
+                        <%= member.city  %> <%= member.state  %>
+                        </td>
+                        <td class="pr-2">
+                        <%= member.gender  %>
+                        </td>
+                        <td class="pr-2">
+                        <%= member.gender  %>
+                        </td>
+                        <td class="pr-2">
+                        <%= member.age_status  %>
+                        </td>
+                     </tr>   
+                <% end %> 
+            </tbody>
+        </table> 
+    </div>
+</div>

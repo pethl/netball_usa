@@ -32,23 +32,31 @@
         </div>
 
         <div>
-          <%= form.label :city, class: label_class %>
+          <%= form.label :gender, "Gender*", class: label_class%>
+          <%= form.select :gender, options_for_select(gender, :selected => member.gender),{:prompt=>true}, style: "width:206px", class: input_class %>
+       </div>
+
+        <div>
+          <%= form.label :city,  "City*", class: label_class %>
           <%= form.text_field :city, class: input_class  %>
         </div>
 
         <div>
-          <%= form.label :state, class: label_class %>
-          <%= form.select :state, options_for_select(us_states, :selected => member.state),{:prompt=>true}, class: input_class %>
+          <%= form.label :state, "State*", class: label_class %>
+          <%= form.select :state, options_for_select(us_states, :selected => member.state),{:prompt=>true}, style: "width:206px", class: input_class %>
         </div>
 
-        <div>
-          <%= form.label :gender, class: label_class%>
-          <%= form.select :gender, options_for_select(gender, :selected => member.gender),{:prompt=>true}, class: input_class %>
-       </div>
+        
 
         <div>
-          <%= form.label :age_status, "Youth(under 21) or Adult", class: label_class %>
-          <%= form.select :age_status, options_for_select(member_age_status, :selected => member.age_status),{:prompt=>true}, class: input_class %>
+          <%= form.label :age_status, "Youth(under 18) or Adult*", class: label_class %>
+          <%= form.select :age_status, options_for_select(member_age_status, :selected => member.age_status),{:prompt=>true}, style: "width:206px", class: input_class %>
+       </div>
+
+
+       <div>
+          <%= form.label :engagement_status, "Player Engagement*", class: label_class %>
+          <%= form.select :engagement_status, options_for_select(member_engagement_status, :selected => member.engagement_status),{:prompt=>true}, style: "width:206px", class: input_class %>
        </div>
 
         <div>

@@ -30,6 +30,10 @@ module ApplicationHelper
    def small_button_class
     "justify-center rounded-md border border-transparent bg-blue-900 py-2 px-4 text-sm font-light text-white shadow-sm hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2"
   end
+
+  def teal_button_class
+    "justify-center rounded-md border border-transparent bg-teal-600 py-1 px-4 text-sm font-light text-white shadow-sm hover:border-black hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2"
+  end
   
   def clear_button_class
     "bg-transparent hover:bg-blue-300 text-blue-900 font-semibold hover:text-white py-2 px-4 border border-blue-900 hover:border-transparent rounded"
@@ -244,6 +248,11 @@ module ApplicationHelper
       member_positions = Reference.where(active: "TRUE", group: 'member_positions')
       member_positions = member_positions.pluck(:value)     
     end
+
+    def member_engagement_status
+      member_engagement_status = Reference.where(active: "TRUE", group: 'member_engagement_status')
+      member_engagement_status = member_engagement_status.pluck(:value)     
+    end
     
      def get_teams_per_state(state)
      state = params[:state]
@@ -261,5 +270,12 @@ module ApplicationHelper
        @list_of_states= @list_of_states.pluck(:state)
        @teams = Team.where('state IN (?)', @list_of_states)
        @teams_group_by_state = @teams.group_by { |t| t.state }
+     end
+
+     def members_belonging_to_administrator
+      teams_owned_by_user = NaTeam.where(user_id: @current_user.id)
+      teams_owned_by_user = teams_owned_by_user.pluck(:id) 
+      members_belonging_to_administrator = Member.where(na_team_id: teams_owned_by_user)
+      members_belonging_to_administrator = members_belonging_to_administrator.pluck(:first_name)
      end
 end

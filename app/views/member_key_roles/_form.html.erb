@@ -23,7 +23,8 @@
             
           <div>
             <%= form.label :member_id, "Member Name",class: label_class %>
-            <%= form.collection_select(:member_id, @na_team.members.all, :id, :full_name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 hover:bg-gray-100 sm:text-sm"}) %>
+           
+            <%= form.collection_select(:member_id, @members_belonging_to_administrator, :id, :full_name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 hover:bg-gray-100 sm:text-sm"}) %>
         </div>
           <br>
       <div>

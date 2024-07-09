@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_05_085413) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_08_154103) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -202,6 +202,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_05_085413) do
     t.datetime "updated_at", null: false
     t.string "age_status"
     t.bigint "na_team_id"
+    t.string "engagement_status"
     t.index ["na_team_id"], name: "index_members_on_na_team_id"
   end
 

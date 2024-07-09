@@ -22,9 +22,10 @@
    <div class="mt-4">    
      <p class="text-sm text-gray-500 mt-2">Mandatory fields are marked with a *, please provide as much information as you can,<br> it helps us to better understand and serve our membership group.</p>
    </div> 
-</div> 
+
   
 <hr>
+
 <main class="container">
 
   <%= turbo_frame_tag "first_turbo_frame" do %>
@@ -32,41 +33,50 @@
      <br>
       <%= link_to "(1) Create team",
                 new_na_team_path,                  
-                  class: form_button_class,
+                  class: teal_button_class,
                   data: { turbo_frame: dom_id(NaTeam.new) }  %>
     </div>
   <% end %>
 <br>
-
 <%= turbo_frame_tag NaTeam.new %>
 
-<div class="flex flex-row">
-  <div class="w-1/2 pr-10 justify-self-end">
-    <%= turbo_frame_tag "na_teams" do %>
-      <%= render @na_teams %>
-    <% end %>  
-  </div>
 
+<hr>
+<div class="flex flex-row gap-4"> 
+
+  <div class="basis-1/2 grow-0" >  
+    <div id="na_teams">
+      <% @na_teams.each do |na_team| %>
+       
+        <%= turbo_frame_tag na_team do %>
+            <%= render na_team %>
+         <% end %>
+        
+      <% end %> 
+    </div> 
+  </div> 
+ 
+  
   <% if @na_teams.any? %>
-  <div class="w-1/2 pr-10 justify-self-end">
 
-    <div class="border border-blue-900 shadow-lg shadow-blue-900 hover:border-black rounded-lg">
-      <div class="m-6">
-        <span class="text-lg"> Key Roles</span>
+  <div class="basis-1/2 grow-0 h-50 pr-8">
+  <div class="ml-4 p-3 mb-2 mt-2 border border-blue-900 rounded-lg shadow-md shadow-blue-900 hover:shadow-2xlmb-2">
+  
+      <div class="flex justify-between">
+        <div class="text-lg pt-2"> Key Roles</div>
           <div class="col-span-4 bg-white m-4 pb-2 text-sm text-right">
-              <%= link_to "(3) Assign Key Roles", na_team_path(@na_teams.first), class: small_button_class %>
+              <%= link_to "(3) Assign Key Roles", na_team_path(@na_teams.first), class: teal_button_class %>
           </div>
+      </div>
       
-          <div class="m-6 font-light">
+          <div class="ml-6 mb-2 font-light">
               Team President:  <span class="text-blue-900"> <%= @na_teams.first.team_president %></span><br>
               Head Coach:   <span class="text-blue-900"><%= @na_teams.first.head_coach %></span><br>
               Head Umpire:   <span class="text-blue-900"> <%= @na_teams.first .head_umpire %></span><br>
           </div>
       </div>
-    </div>
- 
-   <% end %>
   </div>
-</div>
+    <br>
+  <% end %>
+  </div>
 </main>
-<br>

@@ -1,7 +1,7 @@
 <div id="<%= dom_id member_key_role %>">
 
 <%= turbo_frame_tag member_key_role do %>
-<div class="block justify-between items-center border border-gray-600 rounded m-2 ">
+<div class="block justify-between items-center">
   <div class="ml-4 mt-4">
    <span class="text-base text-gray-500">  <%= member_key_role.key_role  %></span>
    : <span class= "ml-2"><%= Member.find(member_key_role.member_id).full_name  %></span>

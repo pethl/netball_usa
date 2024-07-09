@@ -7,9 +7,10 @@
     <h1>Edit team</h1>
   </div>
 
-  
-
-  <%= turbo_frame_tag "na_team_#{@na_team.id}" do %>
+  <%= turbo_frame_tag @na_team do %>
     <%= render "form", na_team: @na_team %>
+   
   <% end %>
+
+
 </main>
