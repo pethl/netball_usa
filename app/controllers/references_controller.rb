@@ -25,8 +25,10 @@ class ReferencesController < ApplicationController
   # POST /references
   def create
     @reference = Reference.new(reference_params)
-
+    
     if @reference.save
+      ReferenceMailer.with(reference: @reference).new_reference_email.deliver_later
+      
       redirect_to @reference, notice: "Reference was successfully created."
     else
       render :new, status: :unprocessable_entity
@@ -36,6 +38,7 @@ class ReferencesController < ApplicationController
   # PATCH/PUT /references/1
   def update
     if @reference.update(reference_params)
+      ReferenceMailer.with(reference: @reference).update_reference_email.deliver_later
       redirect_to @reference, notice: "Reference was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity

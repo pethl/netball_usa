@@ -11,6 +11,9 @@
 #NetballEducator.create(first_name: 'Robin',last_name: 'Hall',email: 'robinhall@gmail.com',phone: '162345676',school_name: 'Jackson High School',city: 'Austin',state: 'TX', educator_notes: 'Callback for equipment', mgmt_notes: 'Spoke at session', );
 Reference.destroy_all
 Reference.create(group:	'sponsor_category',	value:	"Fitness", active:	'TRUE');
+Reference.create(group:	'sponsor_category',	value:	"Teams", active:	'TRUE');
+Reference.create(group:	'sponsor_category',	value:	"Theme Park", active:	'TRUE');
+Reference.create(group:	'sponsor_category',	value:	"Airline", active:	'TRUE');
 Reference.create(group:	'sponsor_category',	value:	"Women's Products", active:	'TRUE');
 Reference.create(group:	'sponsor_category',	value:	'Oz companies', active:	'TRUE');
 Reference.create(group:	'sponsor_category',	value:	'UK companies', active:	'TRUE');
