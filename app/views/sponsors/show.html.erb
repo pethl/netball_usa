@@ -22,10 +22,12 @@
         </div>
       </div>
         
-      <div class="ml-2 p-2">
-        <% if @sponsor.contacts.any? %>
-         <%= render @contacts, sponsor: @sponsor %>
-        <% end %>
+      <div class="container">
+        <div class="ml-2 p-2 overflow-auto utility">
+          <% if @sponsor.contacts.any? %>
+          <%= render @contacts, sponsor: @sponsor %>
+          <% end %>
+        </div>
       </div>
     </div>
     </div>

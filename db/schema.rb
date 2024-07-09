@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_08_154103) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_09_190258) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -174,6 +174,25 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_08_154103) do
     t.integer "old_user_id"
   end
 
+  create_table "individual_members", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "city"
+    t.string "state"
+    t.string "gender"
+    t.boolean "interested_in_coaching"
+    t.boolean "interested_in_umpiring"
+    t.boolean "interested_in_usa_team"
+    t.string "place_of_birth"
+    t.string "age_status"
+    t.string "engagement_status"
+    t.string "membership_type"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "member_key_roles", force: :cascade do |t|
     t.bigint "member_id", null: false
     t.string "key_role"
@@ -203,6 +222,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_08_154103) do
     t.string "age_status"
     t.bigint "na_team_id"
     t.string "engagement_status"
+    t.string "membership_type"
     t.index ["na_team_id"], name: "index_members_on_na_team_id"
   end
 
@@ -257,6 +277,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_08_154103) do
     t.datetime "updated_at", null: false
     t.integer "old_user_id"
     t.integer "contact_id"
+    t.string "outcome"
+    t.datetime "outcome_date"
+    t.text "outcome_received"
     t.index ["sponsor_id"], name: "index_opportunities_on_sponsor_id"
     t.index ["user_id"], name: "index_opportunities_on_user_id"
   end

@@ -62,12 +62,12 @@
   <div>
   </div>
 
-  <div class="md:col-span-2">
-    <%= form.label :pitch, class: label_class%>
-      <div class="mt-1">
-      <%= form.text_area :pitch, class: form_input_class,  size: "20x5"  %>
+    <div class="md:col-span-2">
+      <%= form.label :pitch, class: label_class%>
+        <div class="mt-1">
+        <%= form.text_area :pitch, class: form_input_class,  size: "20x5"  %>
+      </div>
     </div>
-  </div>
 
   <div class="md:col-span-2">
     <%= form.label :follow_up_actions, class: label_class%>
@@ -75,6 +75,27 @@
     <%= form.text_area :follow_up_actions, class: form_input_class,  size: "20x5"  %>
     </div> 
   </div>
+
+  <div class="">
+  <%= form.label :outcome, class: label_class%>
+  <div class="mt-1">
+  <%= form.select :outcome, options_for_select(opportunity_outcome, :selected => opportunity.outcome),{}, class: form_input_class %>
+  </div> 
+</div>
+
+<div class="mb-6">
+    <%= form.label :outcome_date, class: label_class%>
+     <div class="mt-1">
+    <%= form.date_field :outcome_date, class: input_class  %>
+   </div> </div>
+
+  <div class="md:col-span-2">
+    <%= form.label :outcome_received, class: label_class%>
+      <div class="mt-1">
+      <%= form.text_area :outcome_received, class: form_input_class,  size: "20x3"  %>
+    </div>
+  </div>
+
 
   <div class="col-span-2 md:col-span-4">
     <%= form.label :notes, class: label_class%>

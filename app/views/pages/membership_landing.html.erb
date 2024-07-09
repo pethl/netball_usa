@@ -1,0 +1,39 @@
+<div class="container mx-auto">
+<div class="h-14 bg-transparent"></div>
+
+<div class="flex flex-col">
+  <div class="">
+    <p class="p-4 font-bold text-center text-blue-900 text-2xl">Welcome to Netball America Membership</p>
+  </div>
+  <div class="">
+    <p class="text-center text-gray-600 text-base">Please click on one of the buttons below to continue.</p>
+  </div>
+</div>
+<div class="h-14 bg-transparent"></div>
+
+        <div class="grid grid-cols-2 items-start place-items-center">
+            <div class="p-2 grow-0 shrink-0 basis-64">
+              <%= button_to "Team Membership", na_teams_path, :class => "h-20 w-60 bg-blue-900 hover:bg-white text-lg text-white font-semibold hover:text-blue-900 py-2 px-4 border border-blue-900 rounded", :method => :get %>
+                <div class="w-60 p-2 text-center font-light text-wrap text-sm text-gray-600">I manage or adminisiter a team/teams and want to set up Team Membership.</div>
+               
+                </div>
+
+
+            <div class="p-2 grow-0 shrink-0 basis-64">
+            <%= button_to "Individual Membership", new_individual_member_path, :class => "h-20 w-60 bg-teal-900 hover:bg-white text-lg text-white font-semibold hover:text-teal-900 py-2 px-4 border border-blue-900 rounded", :method => :get %>
+           <div class="w-60 p-2 text-center font-light text-gray-600 text-sm">I am an Educator, Individual, Umpire or coach and I want to set up Individual Membership for myself only. </div>
+            </div>
+            
+            <div class=""></div>
+        </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+</div>

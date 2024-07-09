@@ -82,10 +82,10 @@
               <div class="w-1/5 max-h-xl ">
                 <div class="pb-2 pt-2 font-mono text-md font-2xl text-white text-left justify-middle text-sm ml-4">
                     Hello <%= current_user.first_name %><br>
-                    <%= current_user.role %>
+                   <% if current_user.admin? %> <%= current_user.role %><% end %>
                 </div>
               </div>
-              <div class="w-4/5">
+              <div class="w-4/5 self-center">
                 <% if content_for(:page_title)%>
                     <p class="pt-2 text-xl font-2xl text-left font-semibold text-white">
                     <%= yield(:page_title)%></p>
@@ -269,6 +269,9 @@
                <li class="mt-2 ml-2">
                    <a href="/na_teams/teams_list_index" class="text-gray-100 hover:font-bold">- View All Teams</a>
                </li>
+               <li class="mt-2 ml-2">
+                      <a href="/individual_members/" class="text-gray-100 hover:font-bold">- Individual Members</a>
+                    </li>
                <% elsif current_user.teamlead? %>
                    <li class="mt-8">
                        <a href="/na_teams/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
@@ -289,6 +292,9 @@
                       </li>
                     <li class="mt-2">
                       <a href="/na_teams/" class="text-gray-100 hover:font-bold">Set Up Teams</a>
+                    </li>
+                    <li class="mt-2">
+                      <a href="/individual_members/" class="text-gray-100 hover:font-bold">Individual Members</a>
                     </li>
                    <li class="mt-2">
                        <a href="/grants/" class="text-gray-100 hover:font-bold">Grants</a>

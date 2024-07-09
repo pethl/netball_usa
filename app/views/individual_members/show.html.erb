@@ -1,0 +1,7 @@
+<% content_for(:page_title, "Individual Member: #{@individual_member.full_name} ")%>
+
+<%= render @individual_member %>
+
+<div class="mt-8">
+  <%= link_to "Edit my details", edit_individual_member_path(@individual_member), class: green_link_class %> 
+   </div>

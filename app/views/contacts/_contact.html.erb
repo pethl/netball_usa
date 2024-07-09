@@ -42,11 +42,12 @@
              <div class="whitespace-nowrap text-left ml-2 mr-2 text-md font-medium text-gray-500"><i class="fa-regular fa-phone"> </i> <%= contact.phone %></div>
             <% end %>
         </div>
-      </div> 
-      <% if contact.notes? %>
+        <% if contact.notes? %>
         <div class="p-1 text-sm italic text-blue-900 text-light">
           <%= contact.notes %>
         </div> 
       <% end %>
+      </div> 
+      
     </div>
 

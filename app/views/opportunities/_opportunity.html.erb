@@ -10,25 +10,27 @@
           <th>Allocated To</th>
           <th>Website</th>
           <th>Primary Contact</th>
-          <th>Pitch</th>
+                   <th>Pitch</th>
           <th>Follow Up Actions</th>
+          <th>Outcome</th>
           <th>Notes</th>
-          <th>Actions</th>
+          <th class="text-right">Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td> <%= link_to opportunity.opportunity_type,[:edit, @sponsor, opportunity], class: link_class %></td>
-          <td> <%= opportunity.area %></td>
-          <td> <%= opportunity.status %></td>
-          <td> <% if opportunity.user_id? %><%= User.find(opportunity.user_id).full_name %><% end %></td>
+          <td class="align-top"> <%= link_to opportunity.opportunity_type,[:edit, @sponsor, opportunity], class: link_class %></td>
+          <td class="align-top"> <%= opportunity.area %></td>
+          <td class="align-top"> <%= opportunity.status %></td>
+          <td class="align-top"> <% if opportunity.user_id? %><%= User.find(opportunity.user_id).full_name %><% end %></td>
         
-          <td class="truncate"> <%= opportunity.website %></td>
-          <td class="truncate"> <% if opportunity.contact_id? %><%= Contact.find(opportunity.contact_id).full_name %><% end %></td>
-          <td class="truncate"> <%= opportunity.pitch %></td>
-          <td class="truncate"> <%= opportunity.follow_up_actions %></td>
-          <td class="truncate"> <%= opportunity.notes %></td>
-          <td> <%= button_to "Delete",
+          <td class="align-top truncate"> <%= opportunity.website %></td>
+          <td class="align-top truncate"> <% if opportunity.contact_id? %><%= Contact.find(opportunity.contact_id).full_name %><% end %></td>
+          <td class="align-top truncate"> <%= opportunity.pitch %></td>
+          <td class="align-top truncate"> <%= opportunity.follow_up_actions %></td>
+          <td class="align-top truncate"> <%= opportunity.outcome %></td>
+          <td class="align-top truncate"> <%= opportunity.notes %></td>
+          <td class="align-top text-right"> <%= button_to "Delete",
           [@sponsor, opportunity],
           method: :delete,
           class: red_link_class %>

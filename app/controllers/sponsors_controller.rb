@@ -8,7 +8,7 @@ class SponsorsController < ApplicationController
   def index
    
    # if is_admin? 
-       @sponsors = Sponsor.all
+       @sponsors = Sponsor.all.ordered
     #else
       #  @sponsors = Sponsor.where(user_id: current_user.id)
      # end

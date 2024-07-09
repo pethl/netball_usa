@@ -27,7 +27,7 @@ class MembersController < ApplicationController
 
        if @member.save
          respond_to do |format|
-                format.html { redirect_to team_path(@team), notice: "Member was successfully created." }
+                format.html { redirect_to member_path(@member), notice: "Record successfully created." }
                 format.turbo_stream { flash.now[:notice] = "Member was successfully created." }
               end 
             else
@@ -61,7 +61,7 @@ class MembersController < ApplicationController
     
     def set_team
        @na_team = NaTeam.find(params[:na_team_id])
-     end
+           end
      
      def set_member
         @member = @na_team.members.find(params[:id])
@@ -69,6 +69,6 @@ class MembersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def member_params
-      params.require(:member).permit(:na_team_id, :first_name, :last_name, :email, :city, :state, :gender, :interested_in_coaching, :interested_in_umpiring, :interested_in_usa_team, :dob, :age_status, :member_engagement_status, :place_of_birth, :notes)
+      params.require(:member).permit(:na_team_id, :membership_type, :first_name, :last_name, :email, :city, :state, :gender, :interested_in_coaching, :interested_in_umpiring, :interested_in_usa_team, :dob, :age_status, :engagement_status, :place_of_birth, :notes)
     end
 end

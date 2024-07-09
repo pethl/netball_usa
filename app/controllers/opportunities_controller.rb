@@ -30,10 +30,15 @@ class OpportunitiesController < ApplicationController
 
   # POST /opportunities
   def create  
-    @opportunity = @sponsor.opportunities.build(opportunity_params)
+    @opportunity = @sponsor.opportunities.build(opportunity_params) 
+    @opportunity.old_user_id = current_user.id
+
+    if @opportunity.user_id.blank? 
+      @opportunity.user_id =current_user.id
+     end
    
     if @opportunity.save
-     
+      send_allocation_email(@opportunity)
       redirect_to sponsor_path(@sponsor), notice: "Opportunity was successfully created."
  
     else
@@ -44,6 +49,7 @@ class OpportunitiesController < ApplicationController
   # PATCH/PUT /opportunities/1
   def update
     if @opportunity.update(opportunity_params)
+      send_allocation_email(@opportunity)
       redirect_to sponsor_path(@sponsor), notice: "Opportunity was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
@@ -68,6 +74,13 @@ class OpportunitiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def opportunity_params
-      params.require(:opportunity).permit(:sponsor_id, :contact_id, :status, :user_id, :old_user_id, :opportunity_type, :website, :area, :pitch, :follow_up_actions, :notes)
+      params.require(:opportunity).permit(:sponsor_id, :contact_id, :status, :user_id, :old_user_id, :opportunity_type, :website, :area, :pitch, :follow_up_actions, :notes, :outcome, :outcome_date, :outcome_received)
+    end
+
+    def send_allocation_email(opportunity)
+        unless opportunity.user_id == opportunity.old_user_id
+          OpportunityMailer.with(opportunity: opportunity).record_allocation_notification.deliver_later
+        end
+      
     end
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :individual_members
   resources :contacts
   get 'na_teams/index_admin' => 'na_teams#index_admin', :as => :index_admin
   get 'regions/team_list_index' => 'regions#team_list_index', :as => :team_list_index
@@ -61,6 +62,7 @@ Rails.application.routes.draw do
   root "pages#home"
   
   get "pages/educator_sign_up"
+  get "pages/membership_landing"
   match '/users',   to: 'users#index',   via: 'get'
  
   

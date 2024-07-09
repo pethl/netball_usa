@@ -1,0 +1,67 @@
+<div id="<%= dom_id individual_member %>">
+
+<div class="w-3/4">
+  <div class="border border-white rounded m-2">
+
+  <div class="mt-2 mb-4 font-medium text-gray-900 ">
+    <span class="text-gray-500 font-light">Membership Type: </span><br>
+      <%= individual_member.membership_type %> 
+  </div> 
+     
+  <div class="flex flex-wrap gap-8">
+      <div class="font-medium text-gray-900 ">
+        <span class="text-gray-500 font-light">Name: </span><br>
+          <%= individual_member.full_name %> 
+      </div> 
+      
+      <div class="font-medium text-gray-900 ">
+        <span class="text-gray-500 font-light">Email: </span><br>
+          <%= individual_member.email %> 
+      </div> 
+      
+      <div class="font-medium text-gray-900 ">
+       <span class="text-gray-500 font-light">City, State: </span><br>
+        <%= individual_member.city %>,  <%= individual_member.state %> 
+     </div> 
+
+     <div class="font-medium text-gray-900 ">
+     <span class="text-gray-500 font-light">Gender: </span><br>
+      <%= individual_member.gender %>,  <%= individual_member.state %> 
+   </div> 
+   
+      <div class="font-medium text-gray-900 ">
+      <span class="text-gray-500 font-light">U18/Adult: </span><br>
+        <%= individual_member.age_status %>
+      </div> 
+
+      <div class="font-medium text-gray-900 ">
+      <span class="text-gray-500 font-light">Engagement Status: </span><br>
+        <%= individual_member.engagement_status %>
+      </div> 
+
+      <div class="font-medium text-gray-900 ">
+      <span class="text-gray-500 font-light">Place of birth: </span><br>
+        <%= individual_member.place_of_birth %>
+      </div> 
+
+      <div class="font-medium text-gray-900 ">
+      <span class="text-gray-500 font-light">Interested in Coaching: </span><br>
+        <%= individual_member.interested_in_coaching %>
+      </div> 
+
+      <div class="font-medium text-gray-900 ">
+      <span class="text-gray-500 font-light">Interested in Umpiring: </span><br>
+        <%= individual_member.interested_in_umpiring %>
+      </div> 
+
+      <div class="font-medium text-gray-900 ">
+      <span class="text-gray-500 font-light">Interested in Team USA: </span><br>
+        <%= individual_member.interested_in_usa_team %>
+      </div> 
+
+      <div class="font-medium text-gray-900 flex-wrap">
+      <span class="text-gray-500 font-light">Member Notes: </span><br>
+        <%= individual_member.notes %>
+      </div> 
+      <br>
+</div>

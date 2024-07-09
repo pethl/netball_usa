@@ -34,13 +34,13 @@ class GrantsController < ApplicationController
   def create
     
     @grant = Grant.new(grant_params)
-   
+    @grant.old_user_id =current_user.id
     if @grant.user_id.blank? 
       @grant.user_id =current_user.id
-      @grant.old_user_id =current_user.id
-    end
+     end
 
     if @grant.save
+       send_allocation_email(@grant)
       redirect_to @grant, notice: "Grant was successfully created."
     else
       render :new, status: :unprocessable_entity
@@ -51,6 +51,7 @@ class GrantsController < ApplicationController
   def update
    
     if @grant.update(grant_params)
+      send_allocation_email(@grant)
       redirect_to @grant, notice: "Grant was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
@@ -73,5 +74,11 @@ class GrantsController < ApplicationController
     def grant_params
       params.require(:grant).permit(:name, :apply, :amount, :location, :state, :due_date, :timezone, :purpose, :grant_link, :notes, :status, :date_submitted, :program, :application_link, :login, :user_id, :old_user_id, :action_by)
     end
+
+  def send_allocation_email(grant)
+    unless grant.user_id == grant.old_user_id
+      GrantMailer.with(grant: grant).record_allocation_notification.deliver_later
+    end
+  end
 
 end

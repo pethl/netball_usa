@@ -253,6 +253,16 @@ module ApplicationHelper
       member_engagement_status = Reference.where(active: "TRUE", group: 'member_engagement_status')
       member_engagement_status = member_engagement_status.pluck(:value)     
     end
+
+    def member_membership_type
+      member_membership_type = Reference.where(active: "TRUE", group: 'member_membership_type')
+      member_membership_type = member_membership_type.pluck(:value)     
+    end
+
+    def opportunity_outcome
+      opportunity_outcome = Reference.where(active: "TRUE", group: 'opportunity_outcome')
+      opportunity_outcome = opportunity_outcome.pluck(:value)     
+    end
     
      def get_teams_per_state(state)
      state = params[:state]

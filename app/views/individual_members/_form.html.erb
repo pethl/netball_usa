@@ -1,45 +1,43 @@
-<div class="container m-4">
-<%= form_for [@na_team, member], html: { class: "form member" } do |form| %>
-
-  <% if member.errors.any? %>
+<%= form_with(model: individual_member) do |form| %>
+  <% if individual_member.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(member.errors.count, "error") %> prohibited this member from being saved:</h2>
+      <h2><%= pluralize(individual_member.errors.count, "error") %> prohibited this individual_member from being saved:</h2>
 
       <ul>
-        <% member.errors.each do |error| %>
+        <% individual_member.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-<div class="border border-blue-900 rounded pr-8 mr-8">
+  <div class="w-4/5">
   <div class="border border-white rounded m-2">
-  <div class="mb-4
-  ">
+  <div class="mb-4">
   <%= form.label :membership_type, "Membership Type*", class: label_class%>
-  <%= form.select :membership_type, options_for_select(member_membership_type, :selected => member.membership_type),{:prompt=>true}, style: "width:206px", class: input_class %>
+  <%= form.select :membership_type, options_for_select(member_membership_type, :selected => individual_member.membership_type),{:prompt=>true}, style: "width:206px", class: input_class %>
 </div>
       <div class="flex flex-wrap gap-4">
         <div>
           <%= form.label :first_name, "First Name*", class: label_class %>
-          <%= form.text_field :first_name, class: input_class  %>
+          <%= form.text_field :first_name, :value => (current_user.first_name), class: input_class  %>
         </div>
 
         <div>
           <%= form.label :last_name, "Last Name*",  class: label_class %>
-          <%= form.text_field :last_name, class: input_class  %>
+          <%= form.text_field :last_name, :value => (current_user.last_name), class: input_class  %>
         </div>
 
         <div>
           <%= form.label :email,  "Email*", class: label_class%>
-          <%= form.text_field :email, class: input_class  %>
+          <%= form.text_field :email, :value => (current_user.email), class: input_class  %>
         </div>
 
         <div>
           <%= form.label :gender, "Gender*", class: label_class%>
-          <%= form.select :gender, options_for_select(gender, :selected => member.gender),{:prompt=>true}, style: "width:206px", class: input_class %>
+          <%= form.select :gender, options_for_select(gender, :selected => individual_member.gender),{:prompt=>true}, style: "width:206px", class: input_class %>
        </div>
+      
 
         <div>
           <%= form.label :city,  "City*", class: label_class %>
@@ -48,20 +46,20 @@
 
         <div>
           <%= form.label :state, "State*", class: label_class %>
-          <%= form.select :state, options_for_select(us_states, :selected => member.state),{:prompt=>true}, style: "width:206px", class: input_class %>
+          <%= form.select :state, options_for_select(us_states, :selected => individual_member.state),{:prompt=>true}, style: "width:206px", class: input_class %>
         </div>
 
         
 
         <div>
           <%= form.label :age_status, "Youth(under 18) or Adult*", class: label_class %>
-          <%= form.select :age_status, options_for_select(member_age_status, :selected => member.age_status),{:prompt=>true}, style: "width:206px", class: input_class %>
+          <%= form.select :age_status, options_for_select(member_age_status, :selected => individual_member.age_status),{:prompt=>true}, style: "width:206px", class: input_class %>
        </div>
 
 
        <div>
           <%= form.label :engagement_status, "Player Engagement*", class: label_class %>
-          <%= form.select :engagement_status, options_for_select(member_engagement_status, :selected => member.engagement_status),{:prompt=>true}, style: "width:206px", class: input_class %>
+          <%= form.select :engagement_status, options_for_select(member_engagement_status, :selected => individual_member.engagement_status),{:prompt=>true}, style: "width:206px", class: input_class %>
        </div>
 
         <div>
@@ -93,18 +91,12 @@
           <%= form.text_area :notes, class: input_class  %>
         </div>
           </div>
-          <%= form.hidden_field :team_id, value: @na_team.id%>
+          
        <div class="flex items-center">
-        <div>
-        <br>   <%= link_to "Cancel", na_team_path(@na_team), class: clear_button_class %>
-        </div>
-
+       
         <div>
            <br> <%= form.submit "Save Record", class: form_button_class %>
          </div>
       </div>
     </div>
   <% end %>
-   </div> 
- </div>
-</div>

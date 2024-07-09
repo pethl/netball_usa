@@ -7,4 +7,5 @@ class Sponsor < ApplicationRecord
   validates :industry, presence: true
   validates :company_name, presence: true, length: { maximum: 40 }
   
+  scope :ordered, -> { order(company_name: :asc) }
 end

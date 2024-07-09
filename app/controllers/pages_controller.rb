@@ -37,6 +37,10 @@ class PagesController < ApplicationController
   def educator_sign_up
      @educator = NetballEducator.new
   end
+
+  def membership_landing
+    #@member_type = get_membership_type
+  end
   
   private
 
@@ -48,4 +52,6 @@ class PagesController < ApplicationController
     def educator_params
       params.require(:educator).permit(:first_name, :last_name, :email, :phone, :school_name, :city, :state, :educator_notes, :mgmt_notes, :user_id)
     end
+
+    
 end

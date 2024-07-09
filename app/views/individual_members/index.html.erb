@@ -1,0 +1,85 @@
+<% content_for(:page_title, "Individual Members (Not linked to a Team)") %>
+<br>
+<% if @individual_members.any? %>
+
+<div class="relative overflow-x-auto">
+    <table class="w-full text-left rtl:text-right">
+        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Full Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Email
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    City
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    State
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Gender
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Age Status
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Engagement
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Coaching Interest?
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Umpiring Interest?
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Team USA Interest?
+                </th>
+               </tr>
+        </thead>
+        <tbody>
+        <% @individual_members.each do |individual_member| %>
+            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+                
+                <td class="px-6 py-4">
+                    <%= (link_to individual_member.full_name, edit_individual_member_path(individual_member), class: link_class)  %>
+                </td>
+                <td class="px-6 py-4">
+                    <%= individual_member.email %>
+                </td>
+                <td class="px-6 py-4">
+                    <%= individual_member.city %>
+                </td>
+                <td class="px-6 py-4">
+                   <%= individual_member.state %>
+                </td>
+                 <td class="px-6 py-4">
+                    <%= individual_member.gender %>
+                </td>
+                <td class="px-6 py-4">
+                    <%= individual_member.age_status %>
+                </td>
+                <td class="px-6 py-4">
+                    <%= individual_member.engagement_status %>
+                </td>
+                <td class="px-6 py-4">
+                    <%= individual_member.interested_in_coaching? ? 'Yes' : 'No'  %>
+                </td>
+                <td class="px-6 py-4">
+                    <%= individual_member.interested_in_umpiring? ? 'Yes' : 'No'  %>
+                </td>
+                <td class="px-6 py-4">
+                    <%= individual_member.interested_in_usa_team? ? 'Yes' : 'No'  %>
+                </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+ </div>
+<% else %>
+<p class="px-6 py-4">
+No records to view</p>
+<% end %>
+<br>

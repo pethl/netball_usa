@@ -7,11 +7,13 @@ class GrantMailer < Devise::Mailer
         @grant = params[:grant]
         logger.debug "*******Granthash: #{@grant.attributes.inspect}"
         
-        @email = User.find(@grant.user_id).email
+        @user = User.find(@grant.user_id)
+        @old_user = User.find(@grant.old_user_id)
+        @email = @user.email
         @object_type = @grant.class.name
         @record_id =  @grant.id
-        @old_name = User.find(@grant.old_user_id).first_name
-        @name = User.find( @grant.user_id).first_name
+        @old_name = @old_user.first_name
+        @name = @user.first_name
         @link = "https://netball-america-923def44b63e.herokuapp.com/grants/#{(@record_id)}/edit?locale=en"
         mail(to: @email, subject: "IMPORTANT: A Grant has been allocation to you for action by #{@old_name}.")
       end
