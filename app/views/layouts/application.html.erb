@@ -273,13 +273,14 @@
                       <a href="/individual_members/" class="text-gray-100 hover:font-bold">- Individual Members</a>
                     </li>
                <% elsif current_user.teamlead? %>
+               <!-- commenting out link for now
                    <li class="mt-8">
                        <a href="/na_teams/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
                    </li>
                    <li class="mt-2">
                        <a href="/na_teams/" class="text-gray-100 hover:font-bold">My Team(s)</a>
                    </li>
-
+                   //-->
                 <% elsif current_user.teams_grants? %>
                     <li class="mt-8">
                        <a href="/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>

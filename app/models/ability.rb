@@ -17,11 +17,14 @@ class Ability
     end
 
     if user.teamlead?
-      can :manage, NaTeam, user_id: user.id # if the user is logged in can manage it's own posts
+      can :manage, NaTeam, user_id: user.id # if the user is logged in can manage it's own teams
+      can :manage, Member 
+      can :manage, IndividualMember
     end 
 
     if user.educators?
       can :manage, NetballEducator
+      can :manage, FollowUp
     end
 
     if user.grants?
@@ -29,16 +32,20 @@ class Ability
     end
 
     if  user.teams_grants?
-      can :manage, Grant # like managing all comments in the website
-      can :manage, NaTeam # like managing all comments in the website
+      can :manage, Grant 
+      can :manage, NaTeam 
+      can :manage, IndividualMember 
     end
 
     if  user.teams_admin?
       can :manage, NaTeam # all teams inc proper index and regions list
+      can :manage, IndividualMember 
     end
 
     if user.sponsors?
       can :manage, Sponsor
+      can :manage, Contact
+      can :manage, Opportunities, user_id: user.id # if the user is assigned in can manage 
     end
   
     if user.admin?

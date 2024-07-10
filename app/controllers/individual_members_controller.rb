@@ -1,5 +1,6 @@
 class IndividualMembersController < ApplicationController
   before_action :set_individual_member, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
 
   # GET /individual_members
   def index
