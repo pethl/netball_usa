@@ -202,7 +202,7 @@ class TransfersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transfer_params
-      params.require(:transfer).permit(:id, :person_id, :event_id, :role, :hotel_arrival, :hotel_departure, :check_in, :check_out, :room_type, :hotel_reservation, :share_volunteer, :arrival_airline, :arrival_flight, :arrival_time, :departure_airline, :departure_flight, :departure_time, :no_pick_up, :notes, :phone, :hotel_name, :pick_up_grouping, :pickup_type, :pickup_note, :departure_grouping, :departure_type, :departure_note, :t_shirt_size, :visa_type, :umpire_badge_level, :certification_date,  :headshot, :certification, :event_title, :registration_form_completed, :waiver_form_completed, :read_and_agreed_tcs, 
+      params.require(:transfer).permit(:id, :person_id, :event_id, :consent, :role, :hotel_arrival, :hotel_departure, :check_in, :check_out, :room_type, :hotel_reservation, :share_volunteer, :arrival_airline, :arrival_flight, :arrival_time, :departure_airline, :departure_flight, :departure_time, :no_pick_up, :notes, :phone, :hotel_name, :pick_up_grouping, :pickup_type, :pickup_note, :departure_grouping, :departure_type, :departure_note, :t_shirt_size, :visa_type, :umpire_badge_level, :certification_date,  :headshot, :certification, :event_title, :registration_form_completed, :waiver_form_completed, :read_and_agreed_tcs, 
       person_attributes: [ :level_submitted, :associated, :gender, :tshirt_size, :uniform_size, :certification, :certification_date, :headshot ] )
     end
 end

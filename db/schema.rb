@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_09_190258) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_10_185028) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -421,6 +421,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_09_190258) do
     t.boolean "read_and_agreed_tcs"
     t.string "hotel_arrival"
     t.string "hotel_departure"
+    t.boolean "consent"
     t.index ["event_id"], name: "index_transfers_on_event_id"
     t.index ["person_id"], name: "index_transfers_on_person_id"
   end

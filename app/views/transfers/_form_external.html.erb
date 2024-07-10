@@ -19,7 +19,18 @@
       Hi <%= transfer.person.first_name %> <%= transfer.person.last_name %>,  <br>
       <span class="text-sm text-gray-500"> [ <%= transfer.role %> ] </span><br><br>
       <p>Please complete all requested information. You can SAVE your progress and complete at a later stage if you do not have all information to hand.</p>
-      <br>
+      
+    </div>
+
+    <div class="block max-w-md p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow hover:border-gray-700 ">
+      <div class="font-xl mb-4 text-center text-gray-800 font-medium border-b-2 border-gray-200">
+        Data Consent
+      </div>
+      <div class="mb-2 mt-2">
+        <p class="text-blue-800 mb-2">I hearby give consent for my data to be used for the purpose of US Open Netball America.</p>
+        <%= form.check_box :consent, class: "p-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
+        <%= form.label :consent, "Tick box to give consent",class: "ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"%>
+      </div>
     </div>
     
     <div class="block max-w-md p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow hover:border-gray-700 ">

@@ -129,7 +129,7 @@ Reference.create(group:	'us_open_hotel_name',	value:	'2024 - DoubleTree Hotel by
 Reference.create(group:	'us_open_hotel_name',	value:	'2024 - Courtyard by Marriott, Phoenix', desc: '#2', active:	'TRUE');
 Reference.create(group:	'us_open_hotel_name',	value:	'2024 - Residence Inn by Marriott', desc: '#3',  active:	'TRUE');
 Reference.create(group:	'transfer_hotel_arrival',	value:	'Thurs 7th Nov', active:	'TRUE');
-Reference.create(group:	'transfer_hotel_arrival',	value:	'Frid 8th Nov', active:	'TRUE');
+Reference.create(group:	'transfer_hotel_arrival',	value:	'Fri 8th Nov', active:	'TRUE');
 Reference.create(group:	'transfer_hotel_departure',	value:	'Sun 10th Nov', active:	'TRUE');
 Reference.create(group:	'member_age_status',	value:	'Youth', active:	'TRUE');
 Reference.create(group:	'member_age_status',	value:	'Adult', active:	'TRUE');

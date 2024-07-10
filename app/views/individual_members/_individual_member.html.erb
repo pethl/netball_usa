@@ -1,12 +1,12 @@
 <div id="<%= dom_id individual_member %>">
 
-<div class="w-3/4">
-  <div class="border border-white rounded m-2">
-
-  <div class="mt-2 mb-4 font-medium text-gray-900 ">
-    <span class="text-gray-500 font-light">Membership Type: </span><br>
-      <%= individual_member.membership_type %> 
-  </div> 
+<div class="w-full">
+  <div class="border border-2 border-blue-900 rounded-xl m-2">
+   <div class="p-4">
+    <div class="mt-2 mb-4 font-medium text-gray-900 ">
+      <span class="text-gray-500 font-light">Membership Type: </span><br>
+        <%= individual_member.membership_type %> 
+    </div> 
      
   <div class="flex flex-wrap gap-8">
       <div class="font-medium text-gray-900 ">
@@ -25,9 +25,9 @@
      </div> 
 
      <div class="font-medium text-gray-900 ">
-     <span class="text-gray-500 font-light">Gender: </span><br>
-      <%= individual_member.gender %>,  <%= individual_member.state %> 
-   </div> 
+       <span class="text-gray-500 font-light">Gender: </span><br>
+        <%= individual_member.gender %>,  <%= individual_member.state %> 
+     </div> 
    
       <div class="font-medium text-gray-900 ">
       <span class="text-gray-500 font-light">U18/Adult: </span><br>
@@ -64,4 +64,11 @@
         <%= individual_member.notes %>
       </div> 
       <br>
+      <div class="mt-4">
+    <%= link_to "Edit my details", edit_individual_member_path(@individual_member), class: clear_button_class %> 
+  </div>
+  <br>
+</div>
+</div>
+</div>
 </div>

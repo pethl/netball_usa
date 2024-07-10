@@ -1,0 +1,73 @@
+<div class="flex flex-col p-4">
+  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 sm:px-4 lg:px-6">
+      <div class="overflow-hidden">
+        <table
+          class="min-w-full text-left text-sm font-light text-surface dark:text-white">
+          <thead
+            class="border-b border-neutral-200 font-medium dark:border-white/10">
+            <tr>
+              <th scope="col" class="px-2 py-2 text-md">Level</th>
+              <th scope="col" class="px-2 py-2 text-md">Fee</th>
+              <th scope="col" class="px-2 py-2 text-left text-md"><i class="text-blue-500 fa-brands fa-paypal"></i> Paypal or <br><i class="fa-solid fa-credit-card"></i> Credit Card </th>
+              <th scope="col" class="px-2 py-2 text-md"><%= image_tag 'Zelle-Logo-PNG-Photo.png', :align=>"left",:class => "mx-auto h-4 w-auto" %></th>
+              <th scope="col" class="px-2 py-2 text-left text-md"><i class="fa-solid fa-money-check-dollar"></i> Check</th>
+              <th scope="col" class="px-2 py-2 text-md">Paypal QR<br><span class="font-light"> (scan with phone camera)</span></th>
+            </tr>
+           </thead>
+          <tbody>
+            <tr class="border-b border-neutral-200 dark:border-white/10">
+              <td class="whitespace-nowrap px-2 py-2">Development Team</td>
+              <td class="whitespace-nowrap px-2 py-2">$70</td>
+              <td class="whitespace-nowrap px-2 py-2"><%= link_to "Development Team click here", 'https://www.paypal.com/ncp/payment/9LFJDXCZYB9UN', target: '_blank', class: link_class %></td>
+              <td class="whitespace-nowrap px-2 py-2">Send $70 to:<br><span class="font-medium"> Info@NetballAmerica.com</span></td>
+              <td class="whitespace-nowrap px-2 py-2">Check $70 payable to:<br> <span class="font-medium">Netball America</span></td>
+              <td class="whitespace-nowrap px-2 py-2"><%= image_tag 'Development_Te_qrcode.png', :align=>"center",:class => "max-h-8 w-auto" %>
+            </tr>
+            <tr class="border-b border-neutral-200 dark:border-white/10">
+              <td class="whitespace-nowrap px-2 py-2">1 Team</td>
+              <td class="whitespace-nowrap px-2 py-2">$90</td>
+              <td class="whitespace-nowrap px-2 py-2"> <%= link_to "1 Team click here", 'https://www.paypal.com/ncp/payment/S4RXHVT9NNR4J, target: '_blank', class: link_class %></td>
+              <td class="whitespace-nowrap px-2 py-2">Send $90 to:<br><span class="font-medium"> Info@NetballAmerica.com</span></td>
+              <td class="whitespace-nowrap px-2 py-2">Check $90 payable to:<br> <span class="font-medium">Netball America</span></td>
+              <td class="whitespace-nowrap px-2 py-2"><%= image_tag '1_Team-qrcode.png', :align=>"center",:class => "max-h-8 w-auto" %>
+            </tr>
+            <tr class="border-b border-neutral-200 dark:border-white/10">
+              <td class="whitespace-nowrap px-2 py-2">2 Teams</td>
+              <td class="whitespace-nowrap px-2 py-2">$180</td>
+              <td class="whitespace-nowrap px-2 py-2"><%= link_to "2 Teams click here", 'https://www.paypal.com/ncp/payment/AEYMB6KLPQYUG', target: '_blank', class: link_class %></td>
+              <td class="whitespace-nowrap px-2 py-2">Send $180 to:<br><span class="font-medium"> Info@NetballAmerica.com</span></td>
+              <td class="whitespace-nowrap px-2 py-2">Check $180 payable to:<br> <span class="font-medium">Netball America</span></td>
+              <td class="whitespace-nowrap px-2 py-2"><%= image_tag '2_Teams-qrcode.png', :align=>"center",:class => "max-h-8 w-auto" %>
+            </tr>
+            <tr class="border-b border-neutral-200 dark:border-white/10">
+              <td class="whitespace-nowrap px-2 py-2">3 Teams</td>
+              <td class="whitespace-nowrap px-2 py-2">$270</td>
+              <td class="whitespace-nowrap px-2 py-2"><%= link_to "3 Teams click here", 'https://www.paypal.com/ncp/payment/RUG5NN6SUHWJE', target: '_blank', class: link_class %></td>
+              <td class="whitespace-nowrap px-2 py-2">Send $270 to:<br><span class="font-medium"> Info@NetballAmerica.com</span></td>
+              <td class="whitespace-nowrap px-2 py-2">Check $270 payable to:<br> <span class="font-medium">Netball America</span></td>
+              <td class="whitespace-nowrap px-2 py-2"><%= image_tag '3_Teams-qrcode.png', :align=>"center",:class => "max-h-8 w-auto" %>
+            </tr>
+            <tr class="border-b border-neutral-200 dark:border-white/10">
+              <td class="whitespace-nowrap px-2 py-2">4 Teams</td>
+              <td class="whitespace-nowrap px-2 py-2">$360</td>
+              <td class="whitespace-nowrap px-2 py-2"><%= link_to "4 Teams click here", 'https://www.paypal.com/ncp/payment/Y8D9B339RSFKC', target: '_blank', class: link_class %></td>
+              <td class="whitespace-nowrap px-2 py-2">Send $360 to:<br><span class="font-medium"> Info@NetballAmerica.com</span></td>
+              <td class="whitespace-nowrap px-2 py-2">Check $360 payable to:<br> <span class="font-medium">Netball America</span></td>
+              <td class="whitespace-nowrap px-2 py-2"><%= image_tag '4_Teams-qrcode.png', :align=>"center",:class => "max-h-8 w-auto" %>
+            </tr>
+            <tr class="border-b border-neutral-200 dark:border-white/10">
+            <td class="whitespace-nowrap px-2 py-2">5 Teams</td>
+            <td class="whitespace-nowrap px-2 py-2">$450</td>
+            <td class="whitespace-nowrap px-2 py-2"><%= link_to "5 Teams click here", 'https://www.paypal.com/ncp/payment/22FXN4755XSC8', target: '_blank', class: link_class %></td>
+            <td class="whitespace-nowrap px-2 py-2">Send $450 to:<br><span class="font-medium"> Info@NetballAmerica.com</span></td>
+            <td class="whitespace-nowrap px-2 py-2">Check $450 payable to:<br> <span class="font-medium">Netball America</span></td>
+            <td class="whitespace-nowrap px-2 py-2"><%= image_tag '5_Teams-qrcode.png', :align=>"center",:class => "max-h-8 w-auto" %>
+          </tr>
+          </tbody>
+        </table>
+        <div class="my-4 font-light italic text-left">Mail Check To: </span><span class="font-normal">P O Box 11531, Westminster, CA, 92685</div>
+      </div>
+    </div>
+  </div>
+</div>
