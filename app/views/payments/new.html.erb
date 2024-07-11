@@ -1,0 +1,9 @@
+<% content_for(:page_title, "Record Membership Payments")%>
+
+<%= render "form", payment: @payment %>
+
+<br>
+
+<div class="my-2">
+  <%= link_to "<< Back to payments", payments_path %>
+</div>

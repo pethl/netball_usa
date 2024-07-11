@@ -1,0 +1,93 @@
+<div class="m-4">
+<%= form_with(model: payment) do |form| %>
+  <% if payment.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+
+      <ul>
+        <% payment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="w-2/3">
+    <div class="border border-white rounded m-2">
+      <div class="flex flex-wrap gap-4">
+      
+        <div class="mb-4">
+          <%= form.label :payment_year, "Year ",class: label_class%>
+            <div class="mt-1">
+              <%= form.text_field :payment_year, value: Date.today.year , class: input_class  %>
+            </div> 
+        </div>
+
+
+        <div class="mb-4">
+          <%= form.label :payment_type, "Type", class: label_class%>
+          <div class="mt-1">
+          <%= form.select :payment_type, options_for_select(payment_type, :selected => payment.payment_type),{:prompt=>true}, style: "width:206px", class: input_class %>
+          </div>
+        </div>
+
+        <div class="mb-4">
+           <%= form.label :amount, class: label_class%>
+             <div class="mt-1">
+              <%= form.number_field :amount, step: 5.00, placeholder: "$ 0.00",  class: number_input_class %>
+             </div> 
+         </div>
+         </div>
+
+         <div class="flex flex-wrap gap-4">
+          <div class="mb-4">
+            <%= form.label :na_team_id, 'Team Membership', class: label_class%>
+            <div class="mt-1 w-52">
+              <%= form.collection_select(:na_team_id, NaTeam.all, :id, :name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 hover:bg-gray-100 sm:text-sm"
+              }) %>
+            </div> 
+          </div>
+
+          <div> OR
+          </div>
+
+          <div class="mb-4">
+          <%= form.label :individual_member_id, 'Individual Membership', class: label_class%>
+          <div class="mt-1 w-52">
+            <%= form.collection_select(:individual_member_id, IndividualMember.all, :id, :full_name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 hover:bg-gray-100 sm:text-sm"
+            }) %>
+          </div> 
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-4">
+
+           <div class="mb-4">
+            <%= form.label :payment_received_date, class: label_class%>
+            <div class="mt-1">
+              <%= form.date_field :payment_received_date, class: input_class  %>
+            </div> 
+           </div>
+      
+      <div class="mb-4">
+        <%= form.label :payment_transaction_reference, "Transaction Reference", class: label_class%>
+          <div class="mt-1 w-80">
+            <%= form.text_field :payment_transaction_reference, class: input_class  %>
+          </div> 
+      </div>
+
+      </div>
+
+      <div class="mb-4">
+      <%= form.label :payment_notes, "Notes", class: label_class%>
+        <div class="mt-1">
+          <%= form.text_area :payment_notes, class: input_class  %>
+        </div> 
+      </div>
+  
+      <div>
+        <%= form.submit class: form_button_class  %>
+      </div>
+<% end %>
+
+</div>

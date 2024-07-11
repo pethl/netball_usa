@@ -1,0 +1,93 @@
+<% content_for(:page_title, "Membership Payments")%>
+
+<div id="payments">
+
+<% if @payments.any? %>
+<div class="relative overflow-x-auto">
+    <table class="table-auto w-full text-left rtl:text-right">
+        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+             <tr>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Year
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Type
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Amount
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Team
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Individual
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 ">
+                    Date Received
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 ">
+                    Recorded By
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 ">
+                    Transaction Ref
+                </th>
+                <th scope="col" class="px-6 py-3 w-52 truncate">
+                    Notes
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        <% @payments.each do |payment| %>
+            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+               
+                <td class="px-6 py-4 truncate">
+                   <%= link_to payment.payment_year, edit_payment_path(payment), class: link_class %>
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= payment.payment_type  %>
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= number_to_currency(payment.amount, precision: 0) %>
+                </td>
+                
+                <td class="px-6 py-4">
+                  <%= NaTeam.find(payment.na_team_id).name %><br>
+                  
+                </td>
+                <td class="px-6 py-4">
+                  <%= payment.individual_member_id%><br>
+                </td>
+                <td class="px-6 py-4">
+                   <%= payment.payment_received_date.to_formatted_s(:usa) unless (payment.payment_received_date.to_s.empty?) %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= User.find(payment.payment_recorded_by_id).full_name %>
+                </td>
+                <td class="px-6 py-4">
+                 <%= payment.payment_transaction_reference %>
+               </td>
+               
+                 <td class="px-6 py-4 truncate">
+                 <%= payment.payment_notes %>
+                </td>
+               
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+ </div>
+</div>
+
+    <% else %>
+    <p class="px-6 py-4">
+    No records to view</p>
+    <% end %>
+<br>
+
+<div class="mt-1">
+  <%= link_to "New payment", new_payment_path, class: form_button_class %>
+<br><br>

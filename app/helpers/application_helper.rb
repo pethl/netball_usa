@@ -263,6 +263,11 @@ module ApplicationHelper
       opportunity_outcome = Reference.where(active: "TRUE", group: 'opportunity_outcome')
       opportunity_outcome = opportunity_outcome.pluck(:value)     
     end
+
+    def payment_type
+      payment_type = Reference.where(active: "TRUE", group: 'payment_type')
+      payment_type = payment_type.pluck(:value)     
+    end
     
      def get_teams_per_state(state)
      state = params[:state]

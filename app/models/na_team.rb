@@ -1,6 +1,7 @@
 class NaTeam < ApplicationRecord
   has_many :members, dependent: :destroy
   has_many :member_key_roles, dependent: :destroy
+  has_many :payments
   
   belongs_to(
     :creator,

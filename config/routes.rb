@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :payments
   resources :individual_members
   resources :contacts
   get 'na_teams/index_admin' => 'na_teams#index_admin', :as => :index_admin

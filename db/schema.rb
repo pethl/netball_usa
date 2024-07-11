@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_10_185028) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_11_083124) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -284,6 +284,23 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_10_185028) do
     t.index ["user_id"], name: "index_opportunities_on_user_id"
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.integer "payment_year"
+    t.string "payment_type"
+    t.bigint "na_team_id"
+    t.bigint "individual_member_id"
+    t.bigint "payment_recorded_by_id"
+    t.datetime "payment_received_date"
+    t.string "payment_transaction_reference"
+    t.text "payment_notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "amount", precision: 7, scale: 2
+    t.index ["individual_member_id"], name: "index_payments_on_individual_member_id"
+    t.index ["na_team_id"], name: "index_payments_on_na_team_id"
+    t.index ["payment_recorded_by_id"], name: "index_payments_on_payment_recorded_by_id"
+  end
+
   create_table "people", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -492,6 +509,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_10_185028) do
   add_foreign_key "member_key_roles", "members"
   add_foreign_key "opportunities", "sponsors"
   add_foreign_key "opportunities", "users"
+  add_foreign_key "payments", "individual_members"
+  add_foreign_key "payments", "na_teams"
+  add_foreign_key "payments", "users", column: "payment_recorded_by_id"
   add_foreign_key "teams", "users"
   add_foreign_key "transfers", "events"
   add_foreign_key "transfers", "people"
