@@ -100,7 +100,7 @@ class TransfersController < ApplicationController
                 transfer_table_data = Array.new
                 transfer_table_data << ["Grouping", "Name", "Phone", "Arrv. Time", "Flight", "Airline", "PickUp", "Hotel", "Notes" ]
                 transfers.each do |transfer|
-                  transfer_table_data << [transfer.pick_up_grouping, transfer.full_name, transfer.phone, transfer.arrival_time.to_datetime.strftime('%H:%M'), transfer.arrival_flight, transfer.arrival_airline, transfer.pickup_type, transfer.hotel_name, transfer.pickup_note]
+                  transfer_table_data << [transfer.pick_up_grouping, transfer.person.full_name, transfer.phone, transfer.arrival_time.to_datetime.strftime('%H:%M'), transfer.arrival_flight, transfer.arrival_airline, transfer.pickup_type, transfer.hotel_name, transfer.pickup_note]
                   end
              pdf.table(transfer_table_data) do 
                 self.width = 545
@@ -160,7 +160,7 @@ class TransfersController < ApplicationController
                 transfer_table_data = Array.new
                 transfer_table_data << ["Grouping", "Name", "Phone", "Dep. Time", "Flight", "Airline", "PickUp", "Hotel", "Notes" ]
                 transfers.each do |transfer|
-                  transfer_table_data << [transfer.departure_grouping, transfer.full_name, transfer.phone, transfer.departure_time.to_datetime.strftime('%H:%M'), transfer.departure_flight, transfer.departure_airline, transfer.departure_type, transfer.hotel_name, transfer.departure_note]
+                  transfer_table_data << [transfer.departure_grouping, transfer.person.full_name, transfer.phone, transfer.departure_time.to_datetime.strftime('%H:%M'), transfer.departure_flight, transfer.departure_airline, transfer.departure_type, transfer.hotel_name, transfer.departure_note]
                   end
              pdf.table(transfer_table_data) do 
                 self.width = 545
