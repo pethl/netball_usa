@@ -62,6 +62,7 @@ Rails.application.routes.draw do
   root "pages#home"
   
   get "pages/educator_sign_up"
+  get "pages/teams_membership_fees"
   get "pages/membership_landing"
   match '/users',   to: 'users#index',   via: 'get'
  

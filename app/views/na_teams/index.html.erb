@@ -7,18 +7,22 @@
   </div> 
 
   <div class="container max-w-md">
-    <div class="grid grid-rows-3 grid-flow-col gap-2 max-w-1/2">
+    <div class="grid grid-rows-4 grid-flow-col gap-2 max-w-1/2">
       <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-1"></i></div>
       <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-2"></i></div>
       <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-3"></i></div>
+      <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-4"></i></div>
      
       <div class="text-base w-50 mt-1">Create Your Team</div>
       <div class="text-base w-50 mt-1">Add Team Members</div>
       <div class="text-base w-50 mt-1">Assign Key Roles</div>
+      <div class="text-base w-50 mt-1">Pay Membership<br><span class="text-sm"><%= link_to "See Membership Structure & Payment Info >>", pages_teams_membership_fees_path, class: link_class %> </span></div>
    
       <div class="text-green-500 justify-start-end text-semibold pt-2"><% if @na_teams.any? %> <i class="fa-solid fa-check"></i><% end %></div>
       <div class="text-green-500 justify-start-end text-semibold pt-2"><% if (@na_teams.any? && @na_teams.first.members.any?)  %> <i class="fa-solid fa-check"></i><% end %></div>
       <div class="text-green-500 justify-start-end text-semibold pt-2"><% if @na_teams.any? && @na_teams.first.member_key_roles.any? %> <i class="fa-solid fa-check"></i><% end %></div>
+      <div class="text-green-500 justify-start-end text-semibold pt-2"></div>
+      </div>
     </div>
   </div>
    <div class="mt-4">    
