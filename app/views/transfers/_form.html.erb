@@ -59,6 +59,10 @@
         <%= form.check_box :read_and_agreed_tcs, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded hover:bg-gray-100 focus:ring-blue-500 focus:ring-2 " %>      
         <%= form.label :read_and_agreed_tcs, class: "ms-2 text-sm font-medium text-gray-700 hover:text-black hover:bg-gray-100"%>
       </div>
+      <div class="mb-2">
+      <%= form.check_box :consent, disabled: true, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded hover:bg-gray-100 focus:ring-blue-500 focus:ring-2 " %>      
+      <%= form.label :consent, "Data Consent (User update only)", class: "ms-2 text-sm font-medium text-gray-700 hover:text-black hover:bg-gray-100"%>
+    </div>
       
     </div>
 
