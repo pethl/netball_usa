@@ -31,6 +31,8 @@ class PagesController < ApplicationController
     @int_umpires = Transfer.where(role: "Int Umpire").count
     @scorers = Transfer.where(role: "Scorer").count
     @medics = Transfer.where(role: "Medic").count
+
+    @total_members = (Member.all.count)+(IndividualMember.all.count)
   
   end
   

@@ -79,7 +79,7 @@
       <div class="container">
           <div class="block border-0 w-screen bg-blue-900 text-center text-white">
            <div class="flex flex-row">
-              <div class="w-1/5 max-h-xl ">
+              <div class="w-64 max-h-xl ">
                 <div class="pb-2 pt-2 font-mono text-md font-2xl text-white text-left justify-middle text-sm ml-4">
                     Hello <%= current_user.first_name %><br>
                    <% if current_user.admin? %> <%= current_user.role %><% end %>
@@ -271,7 +271,10 @@
                </li>
                <li class="mt-2 ml-2">
                       <a href="/individual_members/" class="text-gray-100 hover:font-bold">- Individual Members</a>
-                    </li>
+                </li>
+                <li class="mt-2 ml-2">
+                 <a href="/payments/" class="text-gray-100 hover:font-bold">- Payments</a>
+              </li>
                <% elsif current_user.teamlead? %>
                <!-- commenting out link for now
                    <li class="mt-8">
@@ -297,6 +300,9 @@
                     <li class="mt-2">
                       <a href="/individual_members/" class="text-gray-100 hover:font-bold">Individual Members</a>
                     </li>
+                    <li class="mt-2">
+                      <a href="/payments/" class="text-gray-100 hover:font-bold">Payments</a>
+                    </li>
                    <li class="mt-2">
                        <a href="/grants/" class="text-gray-100 hover:font-bold">Grants</a>
                    </li>
@@ -319,7 +325,7 @@
                        <a href="/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
                    </li>
                    <li class="mt-2">
-                       <a href="/na_teams/index_admin" class="text-gray-100 hover:font-bold">Teams By Region</a>
+                       <a href="/na_teams/index_admin" class="text-gray-100 hover:font-bold">All Teams</a>
                    </li>
                    <li class="mt-2">
                        <a href="/na_teams/teams_list_index" class="text-gray-100 hover:font-bold">Teams by Region</a>
@@ -327,6 +333,12 @@
                    <li class="mt-2">
                        <a href="/na_teams/" class="text-gray-100 hover:font-bold">Set Up Teams</a>
                    </li>
+                   <li class="mt-2">
+                      <a href="/individual_members/" class="text-gray-100 hover:font-bold">Individual Members</a>
+                    </li>
+                    <li class="mt-2">
+                      <a href="/payments/" class="text-gray-100 hover:font-bold">Payments</a>
+                    </li>
                    <% elsif current_user.sponsors? %>
                    <li class="mt-8">
                        <a href="/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>

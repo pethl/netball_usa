@@ -19,4 +19,14 @@ class IndividualMember < ApplicationRecord
     "#{self.first_name} #{self.last_name}"
   end
   
+  def has_paid
+    year = Date.today.year 
+    payments_for_year = Payment.where(payment_year: year, individual_member_id: self)
+    if payments_for_year.any?
+      return payments_for_year.first.payment_summary
+    else
+      return "Payment Due"
+    end
+  end
+
 end

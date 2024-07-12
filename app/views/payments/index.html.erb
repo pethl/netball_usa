@@ -54,11 +54,11 @@
                 </td>
                 
                 <td class="px-6 py-4">
-                  <%= NaTeam.find(payment.na_team_id).name %><br>
+                  <% if payment.na_team_id? %><%= NaTeam.find(payment.na_team_id).name %><% end %><br>
                   
                 </td>
                 <td class="px-6 py-4">
-                  <%= payment.individual_member_id%><br>
+                <% if payment.individual_member_id? %><%= IndividualMember.find(payment.individual_member_id).full_name %><% end %><br>
                 </td>
                 <td class="px-6 py-4">
                    <%= payment.payment_received_date.to_formatted_s(:usa) unless (payment.payment_received_date.to_s.empty?) %>
