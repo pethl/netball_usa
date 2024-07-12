@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  get 'payments/index_indiv' => 'payments#index_indiv', :as => :payments_index_indiv
   resources :payments
   resources :individual_members
   resources :contacts

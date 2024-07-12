@@ -5,13 +5,13 @@ class NaTeamsController < ApplicationController
 
   # GET /na_teams 
   def index_admin
-    @na_teams = NaTeam.all
+    @na_teams = NaTeam.all.ordered
   end
   
   # GET /na_teams
   def index
     @na_teams = NaTeam.where(user_id: current_user.id)
-    @na_teams=@na_teams.ordered
+    @na_teams = @na_teams.order(id: :asc)
   end
 
    def teams_list_index

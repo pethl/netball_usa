@@ -13,7 +13,7 @@ class NaTeam < ApplicationRecord
   validates :city, presence: true
   validates :state, presence: true
  
-  scope :ordered, -> { order(id: :asc) }
+  scope :ordered, -> { order(name: :asc) }
   #scope :ordered, -> { order(name: :asc) }
   
   def region_name

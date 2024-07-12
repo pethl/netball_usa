@@ -1,20 +1,20 @@
-<% content_for(:page_title, "Team Membership Payments")%>
+<% content_for(:page_title, "Individual Membership Payments")%>
 
 <div id="payments">
 
 <div class="">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
-            <a href="/payments/" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Team Payments</a>
+            <a href="/payments/" class="inline-block p-4 rounded-t-lg active" >Team Payments</a>
         </li>
         <li class="me-2">
-            <a href="/payments/index_indiv" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Individual Payments</a>
+            <a href="/payments/index_indiv" class="inline-block p-4 text-blue-900  bg-gray-100 rounded-t-lg hover:text-gray-600 hover:bg-gray-50" aria-current="page">Individual Payments</a>
         </li>
         
       </ul>
 </div>
 
-<% if @team_payments.any? %>
+<% if @individual_payments.any? %>
 <div class="relative overflow-x-auto">
     <table class="table-auto w-full text-left rtl:text-right">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
@@ -50,7 +50,7 @@
             </tr>
         </thead>
         <tbody>
-        <% @team_payments.each do |payment| %>
+        <% @individual_payments.each do |payment| %>
             <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
                
                 <td class="px-6 py-4 truncate">

@@ -1,10 +1,11 @@
-<p style="color: green"><%= notice %></p>
+<% content_for(:page_title, "Payment Details")%>
+  <div class="m-4>
+  <%= render @payment %>
 
-<%= render @payment %>
+  <div>
+    <%= link_to "Edit this payment", edit_payment_path(@payment) %> |
+    <%= link_to "<< Back to all payments", payments_path %>
 
-<div>
-  <%= link_to "Edit this payment", edit_payment_path(@payment) %> |
-  <%= link_to "Back to payments", payments_path %>
-
-  <%= button_to "Destroy this payment", @payment, method: :delete %>
+    <%= button_to "Destroy this payment", @payment, method: :delete %>
+  </div>
 </div>

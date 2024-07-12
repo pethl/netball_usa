@@ -3,7 +3,14 @@ class PaymentsController < ApplicationController
 
   # GET /payments
   def index
-    @payments = Payment.all
+    @team_payments = Payment.where("na_team_id is not null")
+    @team_payments = @team_payments.order('payment_year desc, payment_received_date desc')
+  end
+
+  # GET /payments
+  def index_indiv
+    @individual_payments = Payment.where("individual_member_id is not null")
+    @individual_payments = @individual_payments.order('payment_year desc, payment_received_date desc')
   end
 
   # GET /payments/1
