@@ -33,6 +33,7 @@ class PagesController < ApplicationController
     @medics = Transfer.where(role: "Medic").count
 
     @total_members = (Member.all.count)+(IndividualMember.all.count)
+    @grants_submitted_this_year = Grant.where('date_submitted > ?', Time.now.beginning_of_year).count
   
   end
   

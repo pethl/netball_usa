@@ -73,7 +73,7 @@ class NetballEducatorsController < ApplicationController
   def pe_directors
     if is_admin? 
         @netball_educators = NetballEducator.where(level: "School/District Lead")
-        @netball_educators = @netball_educators.order(state: :asc)
+        @netball_educators = @netball_educators.order(state: :asc, first_name: :asc)
        
     else
         @netball_educators = NetballEducator.where(user_id: current_user.id).where(level: "School/District Lead")

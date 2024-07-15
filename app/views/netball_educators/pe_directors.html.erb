@@ -1,5 +1,11 @@
 <% content_for(:page_title, "P.E. Directors")%>
 
+<div class="my-2">
+<%= link_to "Add New Educator", new_netball_educator_path, class: small_button_class %>
+<br>
+</div>
+
+
 <% if @netball_educators.any? %>
   
 <div id="educators">
@@ -17,14 +23,15 @@
                     State
                 </th>
                 <th scope="col" class="px-6 py-3 w-52">
+                    City
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
                     Contact
                 </th>
                 <th scope="col" class="px-6 py-3 w-52">
                     School/District
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
-                    City
-                </th>
+                
                 <th scope="col" class="px-6 py-3 w-40 text-center">
                     Equip. Sale?
                 </th>
@@ -53,7 +60,11 @@
                 <td class="px-6 py-4">
                    <%= educator.state %>
                 </td>
-                
+
+                <td class="px-6 py-4">
+                    <%= educator.city %>
+                </td>
+                 
                 <td class="px-6 py-4">
                    <%= educator.formatted_phone %><br><%= educator.email %>
                 </td>
@@ -61,14 +72,7 @@
                 <td class="px-6 py-4">
                   <%= educator.school_name %><br>
                   <%= (link_to educator.website, educator.website, target: '_blank', class: link_class) unless (educator.website.to_s.empty?)%>
-                  
                 </td>
-               
-                
-                 <td class="px-6 py-4">
-                    <%= educator.city %>
-                </td>
-                
                
                 <td class="px-6 py-4 text-center">
                 <% if  educator.equipment.count == 1%>
@@ -106,10 +110,6 @@
 </div>
 
 <br>
-<div class="mt-1">
-<%= link_to "Add New Educator", new_netball_educator_path, class: small_button_class %>
-<br>
-</div>
 
 
     
