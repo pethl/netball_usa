@@ -1,5 +1,6 @@
-<% content_for(:page_title, "System Users")%>
 
+<% content_for(:page_title, "System Users")%>
+<div class="m-4 lg:m-8">
 <div id="users">
   <div class="text-xl text-blue-900 mt-8">
   Confirmed Users
@@ -15,13 +16,18 @@
        <th scope="col" class="text-left p-2 py-3 w-52 whitespace-nowrap">Last Sign In</th>
        <th scope="col" class="text-left p-2 py-3 w-52">Role</th>
        <th scope="col" class="text-left p-2 py-3 w-52">Is_admin?</th>
+       <th scope="col" class="text-left p-2 py-3 w-52">Is_active?</th>
        <th scope="col" class="text-left p-2 py-3 w-52">[:Id]</th>
        </tr>
     </thead>
   
   <tbody>
   <% @users.each do |user| %>
+    <% if user.account_active == false %>
+    <tr class=" bg-gray-300">
+    <% else %>
      <tr class=" hover:bg-gray-100">
+     <% end %>
       <td class="p-2 border-b text-left"><%= user.first_name %></td>
       <td class="p-2 border-b text-left"><%= user.last_name %></td>
       <td class="p-2 border-b text-left"><%= user.email %></td>
@@ -29,6 +35,11 @@
       <td class="p-2 border-b text-left"><%= user.last_sign_in_at.to_formatted_s(:usa_dt) unless (user.last_sign_in_at.to_s.empty?)%></td>
       <td class="p-2 border-b text-left"><%= user.role %></td>
       <td class="p-2 border-b text-left"><%= user.admin? ? 'Yes' : 'No'   %></td>
+          <% if user.account_active== false %>
+          <td class="p-2 border-b text-left font-semibold italic"><%= user.account_active? ? 'Active' : 'Locked'   %></td>
+          <% else %>
+          <td class="p-2 border-b text-left"><%= user.account_active? ? 'Active' : 'Locked'   %></td>
+          <% end %>
       <td class="p-2 border-b text-left"><%= user.id %></td>
      </tr>
   <% end %>
@@ -67,16 +78,21 @@
 </table>
 </div>
 
+<div class="mt-8 mb-4">
 
-[OFFICE USE]
-User Roles:
-<ul>
-<li>0 : admin</li>
-<li>1 : teams_grants (teams and grants)</li>
-<li>2 : teamlead (teams only)</li>
-<li>3 : grants only </li>
-<li>4 : educators only</li>
-<li>5 : teams admin level</li>
-<li>All access to update Transfers</li>
-<li>All access to create Educator</li>
-</ul>
+    [OFFICE USE]
+    User Roles:
+    <ul>
+    <li>0 : admin</li>
+    <li>1 : teams_grants (teams and grants)</li>
+    <li>2 : teamlead (teams only)</li>
+    <li>3 : grants only </li>
+    <li>4 : educators only</li>
+    <li>5 : teams admin level</li>
+    <li>All access to update Transfers</li>
+    <li>All access to create Educator</li>
+    </ul>
+
+ </div>
+ </div>
+ </div>
