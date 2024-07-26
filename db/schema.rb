@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_16_092134) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_25_081736) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -495,6 +495,38 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_16_092134) do
     t.index ["approved"], name: "index_users_on_approved"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "venues", force: :cascade do |t|
+    t.string "facility_type"
+    t.string "venue_name"
+    t.string "street"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "website"
+    t.string "contact_name"
+    t.string "phone"
+    t.string "email"
+    t.string "permit_application_link"
+    t.string "grant_information_link"
+    t.string "number_of_courts"
+    t.string "size_of_courts"
+    t.string "retractable_basketball_hoops"
+    t.string "space_from_courts_to_wall"
+    t.string "seating_available"
+    t.text "restaurant_onsite"
+    t.text "facilities_close_by"
+    t.string "locker_rooms_onsite"
+    t.string "pool"
+    t.string "hot_tub"
+    t.string "bed_types"
+    t.decimal "cost_per_hour"
+    t.decimal "cost_per_day"
+    t.decimal "cost_per_night"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

@@ -1,0 +1,92 @@
+<% content_for(:page_title, "Venues")%>
+
+<div class="mt-1">
+<%= link_to "Add New Venue", new_venue_path, class: form_button_class %>
+<br><br>
+</div>
+<% if @venues.any? %> 
+<div id="venues">
+<div class="relative overflow-x-auto">
+    <table class="table-fixed w-full text-left rtl:text-right">
+        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+             <tr>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Type
+                </th>
+               <th scope="col" class="px-6 py-3 w-52">
+                     Name
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Address
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Website
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Contact
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    # Courts
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 truncate">
+                    Date Added
+                </th>
+                <th scope="col" class="px-6 py-3 w-96">
+                   Notes
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @venues.each do |venue| %>
+            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+                <td class="px-6 py-4">
+                  <%= venue.facility_type%><br>
+                </td>
+
+                <td class="px-6 py-4 truncate">
+                  <%= link_to venue.venue_name, edit_venue_path(venue), class: link_class %>
+                </td>
+                
+                <td class="px-6 py-4 truncate">
+                  <%= venue.street %><br><%= venue.city %> <%= venue.state %> <%= venue.zip %>
+                </td>
+                
+                <td class="px-6 py-4 truncate">
+                  <%= (link_to venue.website, venue.website, target: '_blank', class: link_class) unless (venue.website.to_s.empty?)%>
+                </td>
+                
+                <td class="px-6 py-4">
+                  <%= venue.contact_name %><br>
+                  <%= venue.phone %>
+                </td>
+
+                <td class="px-6 py-4">
+                  <%= venue.number_of_courts %>
+                </td>
+                
+                <td class="px-6 py-4">
+                 <%= venue.created_at.to_formatted_s(:usa) unless (venue.created_at.to_s.empty?) %> 
+                </td>
+               
+                 <td class="px-6 py-4">
+                  <%= venue.notes %>
+                </td>
+               
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+ </div>
+</div>
+
+    <% else %>
+    <p class="px-6 py-4">
+    No records to view</p>
+    <% end %>
+<br>
+
+
+
+
+

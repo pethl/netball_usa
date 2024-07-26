@@ -1,0 +1,217 @@
+<div class="m-4 lg:m-8">
+
+<%= form_with(model: venue) do |form| %> 
+  <% if venue.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(venue.errors.count, "error") %> prohibited this venue from being saved:</h2>
+
+      <ul>
+        <% venue.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
+
+  <div class="mb-2">
+      <%= form.label :facility_type, class: label_class %>
+        <div class="mt-1">
+         <%= form.select :facility_type, options_for_select(facility_type, :selected => venue.facility_type),{:prompt=>true}, class: form_input_class %>  
+        </div> 
+    </div>
+  
+  <div class="mb-2 md:col-span-2 sm:mt-4 md:mt-0">
+      <%= form.label :venue_name, class: label_class%>
+        <div class="mt-1">
+          <%= form.text_field :venue_name, class: form_input_class  %>
+        </div>
+    </div>
+
+  <div class="mb-2">
+    <%= form.label :website, class: label_class%>
+    <div class="mt-1">
+      <%= form.text_field :website, class: form_input_class  %>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :street, class: label_class%>
+    <div class="mt-1">
+      <%= form.text_field :street, class: form_input_class  %>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :city, class: label_class%>
+    <div class="mt-1">
+      <%= form.text_field :city, class: form_input_class  %>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :state, "State*", class: label_class  %>
+      <div class="mt-1">
+        <%= form.select :state, options_for_select(us_states, :selected => venue.state),{:prompt=>true}, class: form_input_class %>
+      </div>
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :zip, "Zip Code", class: label_class%>
+    <div class="mt-1">
+      <%= form.text_field :zip, class: form_input_class  %>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :contact_name, class: label_class%>
+    <div class="mt-1">
+      <%= form.text_field :contact_name, class: form_input_class  %>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :phone, class: label_class%>
+    <div class="mt-1">
+      <%= form.text_field :phone, class: form_input_class  %>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :email, class: label_class%>
+    <div class="mt-1">
+      <%= form.text_field :email, class: form_input_class  %>
+    </div>
+  </div>
+
+  <div class="mb-2 md:col-span-2 sm:mt-4 md:mt-0">
+      <%= form.label :permit_application_link, class: label_class%>
+        <div class="mt-1">
+          <%= form.text_field :permit_application_link, class: form_input_class  %>
+        </div>
+  </div>
+
+  <div class="mb-2 md:col-span-2 sm:mt-4 md:mt-0">
+      <%= form.label :grant_information_link, class: label_class%>
+        <div class="mt-1">
+          <%= form.text_field :grant_information_link, class: form_input_class  %>
+        </div>
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :number_of_courts, class: label_class%>
+    <div class="mt-1">
+      <%= form.text_area :number_of_courts, class: form_input_class,  size: "20x2"  %>
+    </div> 
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :size_of_courts, class: label_class%>
+    <div class="mt-1">
+      <%= form.text_area :size_of_courts, class: form_input_class,  size: "20x2"  %>
+    </div> 
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :space_from_courts_to_wall, class: label_class%>
+    <div class="mt-1">
+      <%= form.text_area :space_from_courts_to_wall, class: form_input_class,  size: "20x2"  %>
+    </div> 
+ </div>
+
+<div class="mb-2">
+  <%= form.label :retractable_basketball_hoops, class: label_class %>
+    <div class="mt-1">
+      <%= form.select :retractable_basketball_hoops, options_for_select(generic_option, :selected => venue.locker_rooms_onsite),{:prompt=>true}, class: form_input_class %>  
+    </div> 
+</div>
+
+  <div class="mb-2">
+    <%= form.label :seating_available, class: label_class%>
+      <div class="mt-1">
+        <%= form.text_area :seating_available, class: form_input_class,  size: "20x2"  %>
+      </div> 
+ </div>
+
+  <div class="mb-2">
+    <%= form.label :restaurant_onsite, class: label_class%>
+      <div class="mt-1">
+        <%= form.text_area :restaurant_onsite, class: form_input_class,  size: "20x2"  %>
+      </div> 
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :facilities_close_by, class: label_class%>
+    <div class="mt-1">
+      <%= form.text_area :facilities_close_by, class: form_input_class,  size: "20x2"  %>
+    </div> 
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :locker_rooms_onsite, class: label_class %>
+      <div class="mt-1">
+        <%= form.select :locker_rooms_onsite, options_for_select(generic_option, :selected => venue.locker_rooms_onsite),{:prompt=>true}, class: form_input_class %>  
+      </div> 
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :pool, class: label_class %>
+      <div class="mt-1">
+      <%= form.select :pool, options_for_select(generic_option, :selected => venue.pool),{:prompt=>true}, class: form_input_class %>  
+      </div> 
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :hot_tub, class: label_class %>
+      <div class="mt-1">
+      <%= form.select :hot_tub, options_for_select(generic_option, :selected => venue.hot_tub),{:prompt=>true}, class: form_input_class %>  
+      </div> 
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :bed_types, class: label_class%>
+    <div class="mt-1">
+      <%= form.text_area :bed_types, class: form_input_class,  size: "20x2"  %>
+    </div> 
+  </div>
+
+  <div>
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :cost_per_hour, class: label_class %>
+      <div class="mt-1">
+      <%= form.number_field :cost_per_hour, step: 0.01, placeholder: "$ 0.00",  class: number_input_class %>
+      </div>
+  </div>
+   
+  <div class="mb-2">
+  <%= form.label :cost_per_day, class: label_class %>
+    <div class="mt-1">
+    <%= form.number_field :cost_per_day, step: 0.01, placeholder: "$ 0.00",  class: number_input_class %>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :cost_per_night, class: label_class %>
+      <div class="mt-1">
+      <%= form.number_field :cost_per_night, step: 0.01, placeholder: "$ 0.00",  class: number_input_class %>
+      </div>
+  </div>
+
+  <div>
+  </div>
+
+  <div class="mb-2 md:col-span-3">
+  <%= form.label :notes, class: label_class%>
+   <div class="mt-1">
+    <%= form.text_area :notes, class: form_input_class,  size: "20x3"  %>
+   </div> 
+ </div>
+ </div>
+
+  <div>
+    <%= form.submit class: form_button_class %>
+  </div>
+<% end %>

@@ -268,6 +268,16 @@ module ApplicationHelper
       payment_type = Reference.where(active: "TRUE", group: 'payment_type')
       payment_type = payment_type.pluck(:value)     
     end
+
+    def facility_type
+      facility_type = Reference.where(active: "TRUE", group: 'facility_type')
+      facility_type = facility_type.pluck(:value)     
+    end
+
+    def generic_option
+      generic_option = Reference.where(active: "TRUE", group: 'generic_option')
+      generic_option = generic_option.pluck(:value)     
+    end
     
      def get_teams_per_state(state)
      state = params[:state]

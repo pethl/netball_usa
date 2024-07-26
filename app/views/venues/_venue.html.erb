@@ -1,0 +1,154 @@
+<div id="<%= dom_id venue %>">
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 "> 
+    <p>
+      <strong>Facility type:</strong><br>
+      <%= venue.facility_type %>
+    </p>
+
+    <p>
+      <strong>Venue name:</strong><br>
+      <%= venue.venue_name %>
+    </p>
+
+    <p>
+    </p>
+
+    <p>
+      <strong>Website:</strong><br>
+      <%= (link_to venue.website, venue.website, target: '_blank', class: link_class) unless (venue.website.to_s.empty?)%>
+     </p>
+
+    <p>
+      <strong>Address:</strong><br>
+      <%= venue.street %> 
+    </p>
+
+    <p>
+      <strong>City:</strong><br>
+      <%= venue.city %>
+    </p>
+
+    <p>
+      <strong>State:</strong><br>
+      <%= venue.state %>
+    </p>
+
+    <p>
+      <strong>Zip:</strong><br>
+      <%= venue.zip %>
+    </p>
+
+    
+    <p>
+      <strong>Contact name:</strong><br>
+      <%= venue.contact_name %>
+    </p>
+
+    <p>
+      <strong>Phone:</strong><br>
+      <%= venue.phone %>
+    </p>
+
+    <p>
+      <strong>Email:</strong><br>
+      <%= venue.email %>
+    </p>
+
+    <p>
+    </p>
+
+    <p class="col-span-2">
+      <strong>Permit application link:</strong><br>
+      <%= (link_to venue.permit_application_link, venue.permit_application_link, target: '_blank', class: link_class) unless (venue.permit_application_link.to_s.empty?)%>
+   </p>
+
+    <p class="col-span-2">
+      <strong>Grant information link:</strong><br>
+      <%= (link_to venue.grant_information_link, venue.grant_information_link, target: '_blank', class: link_class) unless (venue.grant_information_link.to_s.empty?)%>
+ 
+    </p>
+
+    <p>
+      <strong>Number of courts:</strong><br>
+      <%= venue.number_of_courts %>
+    </p>
+
+    <p>
+      <strong>Size of courts:</strong><br>
+      <%= venue.size_of_courts %>
+    </p>
+
+    <p>
+      <strong>Space from courts to wall:</strong><br>
+      <%= venue.space_from_courts_to_wall %>
+    </p>
+
+    <p>
+      <strong>Retractable basketball hoops:</strong><br>
+      <%= venue.retractable_basketball_hoops %>
+    </p>
+
+    <p>
+      <strong>Seating available:</strong><br>
+      <%= venue.seating_available %>
+    </p>
+
+    <p>
+      <strong>Restaurant onsite:</strong><br>
+      <%= venue.restaurant_onsite %>
+    </p>
+
+    <p>
+      <strong>Facilities close by:</strong><br>
+      <%= venue.facilities_close_by %>
+    </p>
+
+    <p>
+      <strong>Locker rooms onsite:</strong><br>
+      <%= venue.locker_rooms_onsite %>
+    </p>
+
+    <p>
+      <strong>Pool:</strong><br>
+      <%= venue.pool %>
+    </p>
+
+    <p>
+      <strong>Hot tub:</strong><br>
+      <%= venue.hot_tub %>
+    </p>
+
+    <p>
+      <strong>Bed types:</strong><br>
+      <%= venue.bed_types %>
+    </p>
+
+    <p>
+    </p>
+
+    <p>
+      <strong>Cost per hour:</strong><br>
+      <%= venue.cost_per_hour %>
+    </p>
+
+    <p>
+      <strong>Cost per day:</strong><br>
+      <%= venue.cost_per_day %>
+    </p>
+
+    <p>
+      <strong>Cost per night:</strong><br>
+      <%= venue.cost_per_night %>
+    </p>
+
+    <p>
+    </p>
+
+    <p class="col-span-3">
+      <strong>Notes:</strong><br>
+      <%= venue.notes %>
+    </p>
+
+    </div>
+</div>

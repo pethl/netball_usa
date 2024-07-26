@@ -10,6 +10,16 @@
 #NetballEducator.create(first_name: 'Katlin',last_name: 'Smith',email: 'katlin99@gmail.com',phone: '1314888876',school_name: 'Valleyview High School',city: 'Dallas',state: 'TX', educator_notes: 'Callback for equipment', mgmt_notes: 'Spoke at meeting', );
 #NetballEducator.create(first_name: 'Robin',last_name: 'Hall',email: 'robinhall@gmail.com',phone: '162345676',school_name: 'Jackson High School',city: 'Austin',state: 'TX', educator_notes: 'Callback for equipment', mgmt_notes: 'Spoke at session', );
 Reference.destroy_all
+Reference.create(group:	'facility_type', value:	'Parks & Rec', active:	'TRUE');
+Reference.create(group:	'facility_type', value:	'Private', active:	'TRUE');
+Reference.create(group:	'facility_type', value:	'Tourism Bureau', active:	'TRUE');
+Reference.create(group:	'facility_type', value:	'School', active:	'TRUE');
+Reference.create(group:	'facility_type', value:	'University', active:	'TRUE');
+Reference.create(group:	'facility_type', value:	'YMCA', active:	'TRUE');
+Reference.create(group:	'facility_type', value:	'Hotel', active:'TRUE');
+Reference.create(group:	'generic_option', value:'Yes', active:'TRUE');
+Reference.create(group:	'generic_option', value:'No', active:'TRUE');
+Reference.create(group:	'generic_option', value:'NA', active:'TRUE');
 Reference.create(group:	'sponsor_category',	value:	"Supermarkets", active:	'TRUE');
 Reference.create(group:	'sponsor_category',	value:	"Restaurant", active:	'TRUE');
 Reference.create(group:	'sponsor_category',	value:	"Fitness", active:	'TRUE');
