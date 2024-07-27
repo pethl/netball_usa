@@ -13,13 +13,13 @@ class PagesController < ApplicationController
     @coaches = Person.where(role: "Coach").count
     @operations = Person.where(role: "Operations").count
     
-    @admins = User.where(role: 0).count
-    @teams_grants = User.where(role: 1).count
-    @teamleads = User.where(role: 2).count
-    @grants = User.where(role: 3).count
-    @educators = User.where(role: 4).count
-    @teams_admin = User.where(role: 5).count
-    @sponsors = User.where(role: 6).count
+    @admins = User.where(role: 0, account_active: true).count
+    @teams_grants = User.where(role: 1, account_active: true).count
+    @teamleads = User.where(role: 2, account_active: true).count
+    @grants = User.where(role: 3, account_active: true).count
+    @educators = User.where(role: 4, account_active: true).count
+    @teams_admin = User.where(role: 5, account_active: true).count
+    @sponsors = User.where(role: 6, account_active: true).count
 
     @events_this_year = Event.where('date > ?', Time.now.beginning_of_year)
     @events_this_year_by_status = @events_this_year.group_by { |t| t.status }
@@ -34,6 +34,13 @@ class PagesController < ApplicationController
 
     @total_members = (Member.all.count)+(IndividualMember.all.count)
     @grants_submitted_this_year = Grant.where('date_submitted > ?', Time.now.beginning_of_year).count
+
+    @opportunities = Opportunity.all.order(status: :asc)
+    @opportunities_by_status = @opportunities.group_by { |t| t.status }
+
+    @grants_sub = Grant.all.order(status: :asc)
+    @grants_by_status = @grants_sub.group_by { |t| t.status }
+  
   
   end
   

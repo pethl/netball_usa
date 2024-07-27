@@ -34,6 +34,11 @@
               <p class="text-2xl"><%= link_to "Sponsors", sponsors_path %></p>
               <br>
               <p class="text-blue-200">Sponsor Opportunities: <%=  Opportunity.all.count %></p>
+               <% @opportunities_by_status.each do |status, opportunities| %>
+                <p class="text-gray-300 font-light">
+                  <%= status %>: <%= opportunities.count %>
+                </p>
+               <% end %>
              
             </div>
           </div>
@@ -47,7 +52,11 @@
              <p class="text-2xl"><%= link_to "Grants", grants_path %></p>
              <br>
               <p class="text-blue-200">Submitted in <%= Date.today.year %>: <%= @grants_submitted_this_year %></p>
-              
+              <% @grants_by_status.each do |status, grants| %>
+                <p class="text-gray-300 font-light">
+                  <%= status %>: <%= grants.count %>
+                </p>
+               <% end %>
             </div>
           </div>
           
@@ -78,17 +87,17 @@
               <p class="text-2xl"><%= link_to "Events", events_path %></p>
               <br>
               <p class="text-blue-200">This Year (<%= Date.current.year %>): <%= @events_this_year.count %></p>
-              <table class="w-2/3 ">
-                <% @events_this_year_by_status.each do |status, events|%>
-                  <tr><td><%= status %> </td><td class="text-right"><%= events.count %></td><tr>
-                  <% end %>
-              </table>
+              <% @events_this_year_by_status.each do |status, events| %>
+                <p class="text-gray-300 font-light">
+                  <%= status %>: <%= events.count %>
+                </p>
+               <% end %>
               <p class="text-blue-200">Next Year (<%= Date.current.year+1 %>): <%= @events_next_year.count %></p>
-              <table class="w-2/3">
-              <% @events_next_year_by_status.each do |status, events|%>
-                <tr><td><%= status %> </td><td><%= events.count %></td><tr>
-                <% end %>
-            </table>
+              <% @events_next_year_by_status.each do |status, events| %>
+                <p class="text-gray-300 font-light">
+                  <%= status %>: <%= events.count %>
+                </p>
+               <% end %>
               </div>
           </div>
           
@@ -109,7 +118,7 @@
               <i class="fa-solid fa-users-rectangle text-xl text-blue-800 dark:text-white hover:underline"></i>
             </div>
             <div class="text-right">
-              <p class="text-2xl"><%= link_to User.all.count, users_path %></p>
+              <p class="text-2xl"><%= link_to User.where(account_active: true).count, users_path %></p>
              <p class="text-2xl"><%= link_to "Users", users_path %></p>
              <br>
              <p class="text-blue-200">Admins: <%= @admins %></p>

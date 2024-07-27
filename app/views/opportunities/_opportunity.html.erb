@@ -13,6 +13,7 @@
                    <th>Pitch</th>
           <th>Follow Up Actions</th>
           <th>Outcome</th>
+          <th>Submitted Date</th>
           <th>Notes</th>
           <th class="text-right">Actions</th>
         </tr>
@@ -29,6 +30,7 @@
           <td class="align-top truncate"> <%= opportunity.pitch %></td>
           <td class="align-top truncate"> <%= opportunity.follow_up_actions %></td>
           <td class="align-top truncate"> <%= opportunity.outcome %></td>
+          <td class="align-top truncate"><%= opportunity.date_submitted.to_formatted_s(:usa) unless (opportunity.date_submitted.to_s.empty?) %> 
           <td class="align-top truncate"> <%= opportunity.notes %></td>
           <td class="align-top text-right"> <%= button_to "Delete",
           [@sponsor, opportunity],

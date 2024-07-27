@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_25_081736) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_27_101640) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -280,6 +280,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_25_081736) do
     t.string "outcome"
     t.datetime "outcome_date"
     t.text "outcome_received"
+    t.datetime "date_submitted"
     t.index ["sponsor_id"], name: "index_opportunities_on_sponsor_id"
     t.index ["user_id"], name: "index_opportunities_on_user_id"
   end
