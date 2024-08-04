@@ -40,6 +40,9 @@
                   <th scope="col" class="px-6 py-3 w-52 text-center">
                     T&Cs
                   </th>
+                  <th scope="col" class="px-6 py-3 w-52 text-center">
+                    Consent
+                  </th>
                   
                   <th scope="col" class="px-6 py-3 w-60 text-center">
                       Pick Up Required
@@ -80,11 +83,15 @@
                   </td>
 
                   <td class="px-6 py-4 text-center">
-                     <%= transfer.read_and_agreed_tcs? ? 'Yes' : 'No'  %>
+                    <%= transfer.read_and_agreed_tcs? ? 'Yes' : 'No'  %>
+                  </td>
+
+                  <td class="px-6 py-4 text-center">
+                    <%= transfer.consent? ? 'Yes' : 'No'  %>
                   </td>
                 
                   <td class="px-6 py-4 text-center">
-                     <%= transfer.no_pick_up? ? 'Yes' : ''  %>
+                    <%= transfer.no_pick_up? ? 'Yes' : ''  %>
                   </td>
                 
                   <td class="px-6 py-4 whitespace-nowrap">
