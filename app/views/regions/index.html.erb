@@ -1,6 +1,6 @@
 <% content_for(:page_title, "Region Mapping")%>
 
-<div class="">
+<div class="m-4">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
           <a href="/references/" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Ref Data</a>
@@ -10,42 +10,44 @@
         </li>
       </ul>
 </div>
-<p class="text-base text-left font-light">IMPORTANT: If you need a new  <strong>Region </strong> add it via References as <strong>regions.</strong> 
-</p>
+<div class="m-4">
+    <p class="text-base text-left font-light">IMPORTANT: If you need a new  <strong>Region </strong> add it via References as <strong>regions.</strong> 
+    </p>
 
-  <% @regions_by_region.each do |region, states| %>
-  <div class="text-xl pt-10 pb-4">
-      <%= region %>
-  </div>
+    <% @regions_by_region.each do |region, states| %>
+    <div class="text-xl pt-10 pb-4">
+        <%= region %>
+    </div>
 
-  <div id="regions">
-  <div class="relative">
-      <table class="table-auto place-content-center text-left rtl:text-right pl-20">
-          <thead class="bg-white border-b-3 text-gray-300 font-light text-xs ">
-               <tr>
-                  <th scope="col" class="px-6 py-3 w-52">
-                      State
-                  </th>
-                 
-                </tr>
-          </thead>
-          <tbody>
-        
-          <% states.each do |state| %>
-              <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
-               
-                  <td class="px-6 py-4">
-                     <%= link_to state.state, edit_region_path(state), class: link_class %>
-                     <% %>
-                  </td>
-                
-              </tr>
-              <% end %>
+    <div id="regions">
+    <div class="relative">
+        <table class="table-auto place-content-center text-left rtl:text-right pl-20">
+            <thead class="bg-white border-b-3 text-gray-300 font-light text-xs ">
+                <tr>
+                    <th scope="col" class="px-6 py-3 w-52">
+                        State
+                    </th>
+                    
+                    </tr>
+            </thead>
+            <tbody>
             
-          </tbody>
-          </table>
-       <br>  <br>
-    <% end %>
-   </div>
-  </div>
+            <% states.each do |state| %>
+                <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+                
+                    <td class="px-6 py-4">
+                        <%= link_to state.state, edit_region_path(state), class: link_class %>
+                        <% %>
+                    </td>
+                    
+                </tr>
+                <% end %>
+                
+            </tbody>
+            </table>
+        <br>  <br>
+        <% end %>
+    </div>
+    </div>
+</div>
 

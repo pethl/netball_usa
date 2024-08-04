@@ -1,0 +1,19 @@
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/stringio-3.1.0/ext/stringio
+/Users/lisap/.rbenv/versions/3.3.4/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/stringio-3.1.0/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-pnc3kq sitelibdir\=./.gem.20240728-71036-pnc3kq clean
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/stringio-3.1.0/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-pnc3kq sitelibdir\=./.gem.20240728-71036-pnc3kq
+compiling stringio.c
+linking shared-object stringio.bundle
+ld: warning: -undefined dynamic_lookup may not work with chained fixups
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/stringio-3.1.0/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-pnc3kq sitelibdir\=./.gem.20240728-71036-pnc3kq install
+/usr/local/bin/ginstall -c -m 0755 stringio.bundle ./.gem.20240728-71036-pnc3kq
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/stringio-3.1.0/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-pnc3kq sitelibdir\=./.gem.20240728-71036-pnc3kq clean

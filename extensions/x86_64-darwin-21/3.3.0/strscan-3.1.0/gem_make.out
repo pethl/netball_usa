@@ -1,0 +1,21 @@
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/strscan-3.1.0/ext/strscan
+/Users/lisap/.rbenv/versions/3.3.4/bin/ruby extconf.rb
+checking for onig_region_memsize() in ruby.h... yes
+checking for rb_reg_onig_match() in ruby.h... yes
+creating Makefile
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/strscan-3.1.0/ext/strscan
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-ly2cy1 sitelibdir\=./.gem.20240728-71036-ly2cy1 clean
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/strscan-3.1.0/ext/strscan
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-ly2cy1 sitelibdir\=./.gem.20240728-71036-ly2cy1
+compiling strscan.c
+linking shared-object strscan.bundle
+ld: warning: -undefined dynamic_lookup may not work with chained fixups
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/strscan-3.1.0/ext/strscan
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-ly2cy1 sitelibdir\=./.gem.20240728-71036-ly2cy1 install
+/usr/local/bin/ginstall -c -m 0755 strscan.bundle ./.gem.20240728-71036-ly2cy1
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/strscan-3.1.0/ext/strscan
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-ly2cy1 sitelibdir\=./.gem.20240728-71036-ly2cy1 clean

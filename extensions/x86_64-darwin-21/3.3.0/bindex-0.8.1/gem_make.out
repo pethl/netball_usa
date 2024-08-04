@@ -1,0 +1,19 @@
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/bindex-0.8.1/ext/skiptrace
+/Users/lisap/.rbenv/versions/3.3.4/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-4kfvdy sitelibdir\=./.gem.20240728-71036-4kfvdy clean
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-4kfvdy sitelibdir\=./.gem.20240728-71036-4kfvdy
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.bundle
+ld: warning: -undefined dynamic_lookup may not work with chained fixups
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-4kfvdy sitelibdir\=./.gem.20240728-71036-4kfvdy install
+/usr/local/bin/ginstall -c -m 0755 cruby.bundle ./.gem.20240728-71036-4kfvdy/skiptrace/internal
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-4kfvdy sitelibdir\=./.gem.20240728-71036-4kfvdy clean

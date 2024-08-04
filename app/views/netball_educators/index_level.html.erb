@@ -1,6 +1,6 @@
 <% content_for(:page_title, "Educators - By Level")%>
 
-<div class="">
+<div class="m-4">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
             <a href="/netball_educators/" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Created Date</a>
@@ -25,6 +25,7 @@
 
 <% if @netball_educators.any? %>
   
+<div class="m-4">
   <% @netball_educators_by_level.each do |level, educators| %>
  
     <% if educators.count> 0 %>

@@ -1,6 +1,7 @@
 <% content_for(:page_title, "Reference Data")%>
 
-<div class="">
+
+<div class="m-4">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
           <a href="/references/" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Ref Data</a>
@@ -11,74 +12,75 @@
       </ul>
 </div>
 
+<div class="m-4">
+    <p class="text-base text-left font-light">IMPORTANT: values cannot be deleted, they can be made <strong>Inactive.</strong> 
+    <br>When adding a new value you must assign the correct <strong>group</strong> and mark as <strong>Active</strong> for it to show up in the system.
+    </p>
+    <br>
+    <div class="mt-1">
+    <%= link_to "Add New Reference", new_reference_path, class: form_button_class %>
+    <br>
+    </div>
 
-<p class="text-base text-left font-light">IMPORTANT: values cannot be deleted, they can be made <strong>Inactive.</strong> 
-<br>When adding a new value you must assign the correct <strong>group</strong> and mark as <strong>Active</strong> for it to show up in the system.
-</p>
-<br>
-<div class="mt-1">
-<%= link_to "Add New Reference", new_reference_path, class: form_button_class %>
-<br>
+    <% @references_by_group.each do |group, references| %>
+    <div class="text-xl pt-10 pb-4">
+        <%= group %>
+    </div>
+
+    <div id="references">
+    <div class="relative">
+        <table class="table-auto place-content-center text-left rtl:text-right pl-20">
+            <thead class="bg-white border-b-3 text-gray-300 font-light text-xs ">
+                <tr>
+                    <th scope="col" class="px-6 py-3 w-52">
+                        Value
+                    </th>
+                    <th scope="col" class="px-6 py-3 w-52">
+                        Key (if required)
+                    </th>
+                    <th scope="col" class="px-6 py-3 w-52">
+                        Description
+                    </th>
+                    <th scope="col" class="px-6 py-3 w-52">
+                        Active?
+                    </th>
+                    </tr>
+            </thead>
+            <tbody>
+            
+            <% references.each do |reference| %>
+                <tr class="bg-white border-b hover:bg-gray-100">
+                
+                    <td class="px-6 py-4">
+                        <%= link_to reference.value, edit_reference_path(reference), class: link_class %>
+                    </td>
+                
+                    <td class="px-6 py-4">
+                        <%= reference.key%>
+                    </td>
+                    
+                    <td class="px-6 py-4">
+                        <%= reference.desc %>
+                    </td>
+                
+                    <td class="px-6 py-4">
+                        <%= reference.active? ? 'Yes' : 'No'  %>
+                    </td>
+                    
+                </tr>
+                <% end %>
+                
+            </tbody>
+        
+        </table>
+        <br>  <br>
+        <% end %>
+    
+    </div>
+    </div>
 </div>
 
-  <% @references_by_group.each do |group, references| %>
-  <div class="text-xl pt-10 pb-4">
-      <%= group %>
-  </div>
-
-  <div id="references">
-  <div class="relative">
-      <table class="table-auto place-content-center text-left rtl:text-right pl-20">
-          <thead class="bg-white border-b-3 text-gray-300 font-light text-xs ">
-               <tr>
-                  <th scope="col" class="px-6 py-3 w-52">
-                      Value
-                  </th>
-                  <th scope="col" class="px-6 py-3 w-52">
-                      Key (if required)
-                  </th>
-                  <th scope="col" class="px-6 py-3 w-52">
-                      Description
-                  </th>
-                  <th scope="col" class="px-6 py-3 w-52">
-                      Active?
-                  </th>
-                </tr>
-          </thead>
-          <tbody>
-        
-          <% references.each do |reference| %>
-              <tr class="bg-white border-b hover:bg-gray-100">
-               
-                  <td class="px-6 py-4">
-                     <%= link_to reference.value, edit_reference_path(reference), class: link_class %>
-                  </td>
-              
-                  <td class="px-6 py-4">
-                    <%= reference.key%>
-                  </td>
-                
-                  <td class="px-6 py-4">
-                    <%= reference.desc %>
-                  </td>
-              
-                  <td class="px-6 py-4">
-                     <%= reference.active? ? 'Yes' : 'No'  %>
-                  </td>
-                
-              </tr>
-              <% end %>
-            
-          </tbody>
-      
-      </table>
-       <br>  <br>
-    <% end %>
- 
-   </div>
-  </div>
-
- 
+    
 
 
 

@@ -1,0 +1,28 @@
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/io-console-0.7.2/ext/io/console
+/Users/lisap/.rbenv/versions/3.3.4/bin/ruby extconf.rb
+checking for rb_io_path()... yes
+checking for rb_io_descriptor()... yes
+checking for rb_io_get_write_io()... yes
+checking for rb_io_closed_p()... yes
+checking for rb_io_open_descriptor()... yes
+checking for termios.h... yes
+checking for cfmakeraw() in termios.h... yes
+checking for sys/ioctl.h... yes
+checking for HAVE_RUBY_FIBER_SCHEDULER_H... yes
+creating Makefile
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/io-console-0.7.2/ext/io/console
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-20bjnc sitelibdir\=./.gem.20240728-71036-20bjnc clean
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/io-console-0.7.2/ext/io/console
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-20bjnc sitelibdir\=./.gem.20240728-71036-20bjnc
+compiling console.c
+linking shared-object io/console.bundle
+ld: warning: -undefined dynamic_lookup may not work with chained fixups
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/io-console-0.7.2/ext/io/console
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-20bjnc sitelibdir\=./.gem.20240728-71036-20bjnc install
+/usr/local/bin/ginstall -c -m 0755 console.bundle ./.gem.20240728-71036-20bjnc/io
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/io-console-0.7.2/ext/io/console
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-20bjnc sitelibdir\=./.gem.20240728-71036-20bjnc clean

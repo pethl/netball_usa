@@ -1,6 +1,6 @@
 <% content_for(:page_title, "Educators - By State")%>
 
-<div class="">
+<div class="m-4">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
             <a href="/netball_educators/" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Created Date</a>
@@ -24,7 +24,7 @@
 </div>
 
 <% if @netball_educators.any? %>
-  
+<div class="m-4">
   <% @netball_educators_by_state.each do |state, educators| %>
     
       <% if educators.count> 0 %>
@@ -123,7 +123,7 @@
       <p class="px-6 py-4">
       No records to view</p>
     <% end %>
-
+    </div>
 <br>
 
 

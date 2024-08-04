@@ -1,0 +1,19 @@
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/websocket-driver-0.7.6/ext/websocket-driver
+/Users/lisap/.rbenv/versions/3.3.4/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/websocket-driver-0.7.6/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-vickf8 sitelibdir\=./.gem.20240728-71036-vickf8 clean
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/websocket-driver-0.7.6/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-vickf8 sitelibdir\=./.gem.20240728-71036-vickf8
+compiling websocket_mask.c
+linking shared-object websocket_mask.bundle
+ld: warning: -undefined dynamic_lookup may not work with chained fixups
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/websocket-driver-0.7.6/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-vickf8 sitelibdir\=./.gem.20240728-71036-vickf8 install
+/usr/local/bin/ginstall -c -m 0755 websocket_mask.bundle ./.gem.20240728-71036-vickf8
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/websocket-driver-0.7.6/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-vickf8 sitelibdir\=./.gem.20240728-71036-vickf8 clean

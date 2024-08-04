@@ -1,0 +1,23 @@
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/bootsnap-1.18.3/ext/bootsnap
+/Users/lisap/.rbenv/versions/3.3.4/bin/ruby extconf.rb
+checking for fdatasync() in unistd.h... yes
+checking for whether -D_GNU_SOURCE is accepted as CPPFLAGS... yes
+checking for whether -O3 is accepted as CFLAGS... yes
+checking for whether -std=c99 is accepted as CFLAGS... yes
+creating Makefile
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/bootsnap-1.18.3/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-3otxjd sitelibdir\=./.gem.20240728-71036-3otxjd clean
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/bootsnap-1.18.3/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-3otxjd sitelibdir\=./.gem.20240728-71036-3otxjd
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+ld: warning: -undefined dynamic_lookup may not work with chained fixups
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/bootsnap-1.18.3/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-3otxjd sitelibdir\=./.gem.20240728-71036-3otxjd install
+/usr/local/bin/ginstall -c -m 0755 bootsnap.bundle ./.gem.20240728-71036-3otxjd/bootsnap
+
+current directory: /Users/lisap/Documents/rails/netball_usa/gems/bootsnap-1.18.3/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20240728-71036-3otxjd sitelibdir\=./.gem.20240728-71036-3otxjd clean

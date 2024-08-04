@@ -1,6 +1,6 @@
 <% content_for(:page_title, "Educators - By User Allocation")%>
 
-  <div class="">
+  <div class="m-4">
      <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
         <li class="me-2">
               <a href="/netball_educators/" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Created Date</a>
@@ -25,7 +25,7 @@
 </div>
 
     <% if @netball_educators.any? %>
-    <br>
+    <div class="m-4">
     <% @netball_educators_by_user.each do |user, educators| %>
     <div class="text-xl text-blue-900">
         Allocated to <%= User.find(user).first_name unless user.nil? %>  <%= User.find(user).last_name unless user.nil? %>
@@ -121,6 +121,7 @@
 
 <br>
 
+</div>
 </div>
 
 

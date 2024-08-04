@@ -1,5 +1,6 @@
 <% content_for(:page_title, "Events")%>
 
+<div class="m-4">
 <% if @events.any? %>
     <% @events_by_year.each do |year, events| %>
       
@@ -92,6 +93,7 @@
      <br>
    </div>
 
+   </div>
 
  
    
