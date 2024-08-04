@@ -1,6 +1,6 @@
 class SponsorsController < ApplicationController
   before_action :set_sponsor, only: %i[ show edit update destroy ]
-  before_action :set_select_collections, only: [:edit, :update, :new, :create]
+ # before_action :set_select_collections, only: [:edit, :update, :new, :create]
   load_and_authorize_resource
  
 
@@ -27,12 +27,12 @@ class SponsorsController < ApplicationController
   # GET /sponsors/new
   def new
     @sponsor = Sponsor.new
-    @users = User.all
+   # @users = helpers.active_admin_users
   end
 
   # GET /sponsors/1/edit
   def edit
-    @users = User.all
+   # @users = helpers.active_admin_users
     @contacts = @sponsor.contacts.ordered
   end
 
@@ -73,7 +73,7 @@ class SponsorsController < ApplicationController
       params.require(:sponsor).permit(:sponsor_category, :sponsor_type, :industry, :company_name, :status, :about, :city, :state, :location, :website, :key_contacts, :phone_numbers_emails, :opportunity_area, :pitch, :follow_up_actions, :notes, :user_id, :old_user_id)
     end
     
-    def set_select_collections
-      @users = User.all
-    end
+   # def set_select_collections
+   #   @users = helpers.active_admin_users
+   # end
 end

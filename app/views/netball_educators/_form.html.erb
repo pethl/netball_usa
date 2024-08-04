@@ -103,7 +103,7 @@
       <div class="mb-6">
        <%= form.label :user_id, 'Allocated To', class: label_class%>
         <div class="mt-1">
-        <%= form.collection_select(:user_id, User.all, :id, :full_name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
+        <%= form.collection_select(:user_id, @users, :id, :full_name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
        }) %>
      </div> </div>
 

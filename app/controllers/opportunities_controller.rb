@@ -19,12 +19,12 @@ class OpportunitiesController < ApplicationController
     @opportunity = @sponsor.opportunities.build
    # @opportunity.user_id = current_user.id
     @opportunity.old_user_id = current_user.id
-    @users = User.all
+    @users = helpers.active_admin_users
   end
 
   # GET /opportunities/1/edit
   def edit
-    @users = User.all
+    @users = helpers.active_admin_users
     @contacts = @sponsor.contacts.ordered
   end
 

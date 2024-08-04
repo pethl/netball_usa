@@ -103,12 +103,12 @@ module ApplicationHelper
    end
    
    def sponsor_category
-     sponsor_category = Reference.where(active: "TRUE", group: 'sponsor_category')
+     sponsor_category = Reference.where(active: "TRUE", group: 'sponsor_category').order(:value)
      sponsor_category = sponsor_category.pluck(:value)  
    end
    
    def sponsor_industry
-     sponsor_industry = Reference.where(active: "TRUE", group: 'sponsor_industry')
+     sponsor_industry = Reference.where(active: "TRUE", group: 'sponsor_industry').order(:value)
      sponsor_industry = sponsor_industry.pluck(:value)  
    end
    
@@ -118,14 +118,14 @@ module ApplicationHelper
    end
    
    def sponsor_opportunity_area
-     sponsor_opportunity_area = Reference.where(active: "TRUE", group: 'sponsor_opportunity_area')
+     sponsor_opportunity_area = Reference.where(active: "TRUE", group: 'sponsor_opportunity_area').order(:value)
      sponsor_opportunity_area = sponsor_opportunity_area.pluck(:value)       
    end
 
    def sponsor_type
     sponsor_type = Reference.where(active: "TRUE", group: 'sponsor_type')
     sponsor_type = sponsor_type.pluck(:value)  
-  end
+   end
 
    def educator_level
      educator_level = Reference.where(active: "TRUE", group: 'educator_level')
@@ -303,4 +303,10 @@ module ApplicationHelper
       members_belonging_to_administrator = Member.where(na_team_id: teams_owned_by_user)
       members_belonging_to_administrator = members_belonging_to_administrator.pluck(:first_name)
      end
+
+     def active_admin_users # a method to get all active users  but not TeamLead role uers, typically used to assign work.
+       User.where(account_active: true).where.not(role: 2) 
+     end
+
+     
 end

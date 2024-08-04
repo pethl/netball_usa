@@ -88,12 +88,12 @@ class NetballEducatorsController < ApplicationController
   # GET /netball_educators/new
   def new
     @netball_educator = NetballEducator.new
-    @users = User.all
+    @users = helpers.active_admin_users
   end
 
   # GET /netball_educators/1/edit
   def edit
-     @users = User.all
+     @users = helpers.active_admin_users
   end
 
   # POST /netball_educators
