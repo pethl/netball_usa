@@ -93,3 +93,7 @@ gem "cancancan", "~> 3.5"
 gem 'bootstrap-datepicker-rails'
 gem 'htmlbeautifier'
 gem 'mail', '~> 2.7'
+
+# required after 3.3.4 upgrade, may be able to remove eventuallybu
+gem 'base64', '~> 0.2.0'
+gem 'mutex_m', '~> 0.2.0'
