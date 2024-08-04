@@ -7,9 +7,9 @@ class GrantsController < ApplicationController
   def index
     
     if is_admin? 
-       @grants = Grant.all
+       @grants = Grant.all.order(:name)
     else
-       @grants = Grant.where(user_id: current_user.id)
+       @grants = Grant.where(user_id: current_user.id).order(:name)
     end
    
   end
@@ -21,13 +21,13 @@ class GrantsController < ApplicationController
 
   # GET /grants/new
   def new
-   
     @grant = Grant.new
+    @users = helpers.active_admin_users
   end
 
   # GET /grants/1/edit
   def edit
-   
+    @users = helpers.active_admin_users
   end
 
   # POST /grants
