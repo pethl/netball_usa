@@ -16,8 +16,14 @@
   <div>
   <%= link_to "Edit this educator", edit_netball_educator_path(@netball_educator), class: block_link_class %> 
   <%= link_to "Back to PE Directors", pe_directors_path, class: block_link_class %>
+  <%= link_to "Back to Educators", pe_directors_path, class: block_link_class %>
 
   <%= button_to "Delete this record",  @netball_educator, method: :delete %>
+
+  <div class="my-4">
+  <%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
+  </div>
+
   </div>
   </div>
 </div>
