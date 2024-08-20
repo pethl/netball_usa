@@ -97,3 +97,8 @@ gem 'mail', '~> 2.7'
 # required after 3.3.4 upgrade, may be able to remove eventuallybu
 gem 'base64', '~> 0.2.0'
 gem 'mutex_m', '~> 0.2.0'
+
+# required for excel export
+gem 'rubyzip', '>= 2.3.0'
+gem 'caxlsx'
+gem 'caxlsx_rails'

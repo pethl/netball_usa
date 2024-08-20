@@ -1,0 +1,11 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Educators") do |sheet|
+  # this is the head row of your spreadsheet
+  sheet.add_row %w(date_created first_name last_name level email phone school_name city state website authorize feedback educator_notes mgmt_notes)
+  
+  # each user is a row on your spreadsheet
+  @netball_educators.each do |netball_educator|
+    sheet.add_row [netball_educator.created_at.to_formatted_s(:default_date), netball_educator.first_name, netball_educator.last_name, netball_educator.level, netball_educator.email, netball_educator.phone, netball_educator.school_name, netball_educator.city, netball_educator.state, netball_educator.website, netball_educator.authorize, netball_educator.feedback, netball_educator.educator_notes, netball_educator.mgmt_notes]
+        end
+end

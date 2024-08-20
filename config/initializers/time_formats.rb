@@ -6,3 +6,4 @@ Time::DATE_FORMATS[:global_date_time] = '%Y-%m-%d %H:%M'
 Time::DATE_FORMATS[:usa] = '%b %d, %Y'
 Time::DATE_FORMATS[:usa_dt] = '%b %d, %Y %H:%M'
 Time::DATE_FORMATS[:hour_clock_12] = '%I:%M %p'
+Time::DATE_FORMATS[:default_date] = "%m/%d/%Y"

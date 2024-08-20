@@ -22,11 +22,16 @@ class NetballEducatorsController < ApplicationController
   # GET /netball_educators
   def index
     if (is_admin? || current_user.role=="educators")
-       @netball_educators = NetballEducator.where('level != ?', "School/District Lead")
+       @netball_educators = NetballEducator.all
        @netball_educators = @netball_educators.order(created_at: :desc)
     else
         @netball_educators = NetballEducator.where(user_id: current_user.id).where('level != ?', "School/District Lead")
         @netball_educators = @netball_educators.order(created_at: :desc)
+      end
+
+      respond_to do |format|
+        format.html
+        format.xlsx
       end
   end
 

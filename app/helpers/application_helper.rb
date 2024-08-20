@@ -35,6 +35,10 @@ module ApplicationHelper
      "m-2 bg-blue-900 hover:bg-blue-700 text-white font-light py-2 px-4 rounded"
   end
 
+  def clear_button_class
+    "m-2 bg-white hover:bg-blue-300 text-blue-900 border border-blue-900 font-normal py-2 px-4 rounded"
+ end
+
   def small_button_class
     "justify-center rounded-md border border-transparent bg-blue-900 py-2 px-4 text-sm font-light text-white shadow-sm hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2"
   end
