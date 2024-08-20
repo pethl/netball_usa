@@ -6,15 +6,10 @@ class SponsorsController < ApplicationController
 
   # GET /sponsors
   def index
-   
-   # if is_admin? 
        @sponsors = Sponsor.all.ordered
-    #else
-      #  @sponsors = Sponsor.where(user_id: current_user.id)
-     # end
-  end
+     end
 
-  # GET /sponsors/1
+  # GET /sponsors/1 
   def show
     @contacts = @sponsor.contacts.ordered
     if is_admin? 

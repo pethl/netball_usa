@@ -136,7 +136,7 @@ class TransfersController < ApplicationController
   
   
   
-   def download_transfers_out_sheet_pdf
+   def download_transfers_out_sheet_pdf 
      
      @start_date = Date.today.beginning_of_year # Current vacation calendar year
      @transfers = Transfer.where(no_pick_up: true).where("departure_time IS NOT NULL")

@@ -1,0 +1,259 @@
+
+<%= form_with(model: partner) do |form| %>
+  <% if partner.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(partner.errors.count, "error") %> prohibited this partner from being saved:</h2>
+
+      <ul>
+        <% partner.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="flex flex-row gap-4">
+
+  <div class="basis-3/5 grid grid-cols-1 md:grid-cols-3 gap-2 border border-blue-900 rounded-lg p-2 ">
+    <span class="font-semibold text-sm">Parner Details</span><br>
+
+    <div class="mb-0 md:col-span-2 md:mt-0">
+      <%= form.label :company, class: label_class%>
+        <div class="mt-1">
+          <%= form.text_field :company, class: tight_form_input_class  %>
+        </div>
+    </div>
+
+    <div class="mb-0">
+      <%= form.label :date_initially_connected, style: "display: block" %>
+      <div class="mt-1">
+        <%= form.date_field :date_initially_connected, class: tight_form_input_class %>
+        </div>
+    </div>
+    
+    <div class="mb-0 md:col-span-3">
+      <%= form.label :website, class: label_class%>
+      <div class="mt-1">
+        <%= form.text_field :website, placeholder: "Enter with prefix Http:// or https://", class: tight_form_input_class  %>
+      </div> 
+    </div>
+    
+    <div class="mb-0 md:col-span-1">
+      <%= form.label :location, class: label_class%>
+        <div class="mt-1">
+        <%= form.text_field :location, class: tight_form_input_class  %>
+      </div>
+    </div> 
+
+    <div class="mb-0">
+      <%= form.label :city, "City", class: label_class  %>
+        <div class="mt-1">
+          <%= form.text_field :city, class: tight_form_input_class %>
+        </div>
+    </div>
+
+    <div class="mb-0">
+      <%= form.label :us_state, "State", class: label_class  %>
+        <div class="mt-1">
+        <%= form.select :us_state, options_for_select(us_states, :selected => partner.us_state),{:prompt=>true}, class: tight_form_input_class %>
+        </div>
+    </div>
+
+    <div class="mb-0 md:col-span-3 sm:mt-2 md:mt-0">
+      <%= form.label :description, class: label_class%>
+        <div class="mt-1">
+          <%= form.text_area :description, size: "30x5", class: tight_form_input_class  %>
+        </div>
+    </div>
+
+    <div class="mb-0 md:col-span-3 sm:mt-2 md:mt-0">
+      <%= form.label :pitch_to_na, "Pitch to NA", class: label_class%>
+        <div class="mt-1">
+          <%= form.text_area :pitch_to_na, size: "30x5", class: tight_form_input_class  %>
+        </div>
+    </div>
+
+    <div class="mb-0 md:col-span-3 sm:mt-2 md:mt-0">
+      <%= form.label :pitch_by_na, "Pitch by NA", class: label_class%>
+        <div class="mt-1">
+          <%= form.text_area :pitch_by_na, size: "30x5", class: tight_form_input_class  %>
+        </div>
+    </div>
+
+    <div class="mb-0 md:col-span-3 md:row-span-2 sm:mt-4 md:mt-0">
+      <%= form.label :follow_up_action, "Follow Up Actions", class: label_class%>
+        <div class="mt-1">
+          <%= form.text_area :follow_up_action, size: "30x5", class: tight_form_input_class  %>
+        </div>
+    </div>
+
+    <div class="mb-0 md:col-span-2 md:row-span-2 sm:mt-4 md:mt-0">
+      <%= form.label :partnership_agreement, class: label_class%>
+        <div class="mt-1">
+          <%= form.text_area :partnership_agreement, size: "30x5", class: tight_form_input_class  %>
+        </div>
+    </div>
+  
+    <div>
+      <%= form.label :accept_partnership, "Partnership Decision", style: "display: block" %>
+      <div class="mt-1">
+        <%= form.select :state, options_for_select(partner_decision, :selected => partner.accept_partnership),{:prompt=>true}, class: tight_form_input_class %>
+      </div>
+    </div>
+
+    <div>
+      <%= form.label :date_of_decision, style: "display: block" %>
+      <%= form.date_field :date_of_decision, class: tight_form_input_class %>
+    </div>
+    </div>
+
+   <div class="basis-2/5">
+     <div class="grid grid-cols-2 gap-2 border border-blue-900 rounded-lg p-2">
+     <span class="font-semibold text-sm ">Primary Contact</span><br>
+     <div>    
+        <%= form.label :first_name_primary, "First Name", class: label_class %>
+          <div class="mt-1">
+            <%= form.text_field :first_name_primary, class: tight_form_input_class   %>
+          </div>
+      </div>
+      
+      <div class="justify-end">    
+        <%= form.label :last_name_primary, "Last Name", class: label_class%>
+          <div class="mt-1">
+            <%= form.text_field :last_name_primary, class: tight_form_input_class  %>
+          </div>
+      </div>
+
+      <div class="col-span-2">    
+        <%= form.label :last_name_primary, "Role / Title", class: label_class%>
+          <div class="mt-1">
+            <%= form.text_field :role_primary, class: tight_form_input_class  %>
+          </div>
+      </div>
+
+      <div class="col-span-2">    
+        <%= form.label :email_primary, "Email", class: label_class%>
+          <div class="mt-1">
+            <%= form.text_field :email_primary, class: tight_form_input_class  %>
+          </div>
+      </div>
+
+      <div>    
+        <%= form.label :cell_primary, "Cell Phone", class: label_class %>
+          <div class="mt-1">
+            <%= form.text_field :cell_primary, class: tight_form_input_class   %>
+          </div>
+      </div>
+      
+      <div class="justify-end">    
+        <%= form.label :work_phone_primary, "Work Phone", class: label_class%>
+          <div class="mt-1">
+            <%= form.text_field :work_phone_primary, class: tight_form_input_class  %>
+          </div>
+      </div>
+    </div> 
+<br>
+  <div class="basis-2/5">
+     <div class="grid grid-cols-2 gap-2 border border-blue-900 rounded-lg p-2">
+     <span class="font-semibold text-sm ">Contact</span><br>
+     <div>    
+        <%= form.label :first_name_secondary, "First Name", class: label_class %>
+          <div class="mt-1">
+            <%= form.text_field :first_name_secondary, class: tight_form_input_class  %>
+          </div>
+      </div>
+      
+      <div class="justify-end">    
+        <%= form.label :last_name_secondary, "Last Name", class: label_class%>
+          <div class="mt-1">
+            <%= form.text_field :last_name_secondary, class: tight_form_input_class  %>
+          </div>
+      </div>
+
+      <div class="col-span-2">    
+        <%= form.label :last_name_secondary, "Role / Title", class: label_class%>
+          <div class="mt-1">
+            <%= form.text_field :role_secondary, class: tight_form_input_class  %>
+          </div>
+      </div>
+
+      <div class="col-span-2">    
+        <%= form.label :email_secondary, "Email", class: label_class%>
+          <div class="mt-1">
+            <%= form.text_field :email_secondary, class: tight_form_input_class  %>
+          </div>
+      </div>
+
+      <div>    
+        <%= form.label :cell_secondary, "Cell Phone", class: label_class %>
+          <div class="mt-1">
+            <%= form.text_field :cell_secondary, class: tight_form_input_class   %>
+          </div>
+      </div>
+      
+      <div class="justify-end">    
+        <%= form.label :work_phone_secondary, "Work Phone", class: label_class%>
+          <div class="mt-1">
+            <%= form.text_field :work_phone_secondary, class: tight_form_input_class  %>
+          </div>
+      </div>
+   </div>
+  </div>
+
+<br>
+  <div class="basis-2/5">
+     <div class="grid grid-cols-2 gap-2 border border-blue-900 rounded-lg p-2">
+     <span class="font-semibold text-sm ">Contact</span><br>
+     <div>    
+        <%= form.label :first_name_third, "First Name", class: label_class %>
+          <div class="mt-1">
+            <%= form.text_field :first_name_third, class: tight_form_input_class  %>
+          </div>
+      </div>
+      
+      <div class="justify-end">    
+        <%= form.label :last_name_third, "Last Name", class: label_class%>
+          <div class="mt-1">
+            <%= form.text_field :last_name_third, class: tight_form_input_class %>
+          </div>
+      </div>
+
+      <div class="col-span-2">    
+        <%= form.label :last_name_third, "Role / Title", class: label_class%>
+          <div class="mt-1">
+            <%= form.text_field :role_third, class: tight_form_input_class  %>
+          </div>
+      </div>
+
+      <div class="col-span-2">    
+        <%= form.label :email_third, "Email", class: label_class%>
+          <div class="mt-1">
+            <%= form.text_field :email_third, class: tight_form_input_class  %>
+          </div>
+      </div>
+
+      <div>    
+        <%= form.label :cell_third, "Cell Phone", class: label_class %>
+          <div class="mt-1">
+            <%= form.text_field :cell_third, class: tight_form_input_class   %>
+          </div>
+      </div>
+      
+      <div class="justify-end">    
+        <%= form.label :work_phone_third, "Work Phone", class: label_class%>
+          <div class="mt-1">
+            <%= form.text_field :work_phone_third, class: tight_form_input_class %>
+          </div>
+      </div>
+  
+  </div>
+  </div>
+  </div>  
+  </div>
+<br>
+
+      <div>
+          <%= form.submit "Save Partner", class: form_button_class %>
+      </div>
+    <% end %>
+

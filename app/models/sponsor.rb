@@ -1,7 +1,7 @@
 class Sponsor < ApplicationRecord
   belongs_to :user
   has_many :opportunities, dependent: :destroy
-  has_many :contacts, dependent: :destroy
+  has_many :contacts
   
   validates :sponsor_category, presence: true
   validates :industry, presence: true

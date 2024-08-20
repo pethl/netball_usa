@@ -10,6 +10,14 @@ module ApplicationHelper
    def form_input_class
      "w-full appearance-none rounded-md border border-gray-300 p-4 px-3 py-2 placeholder-gray-400 shadow-sm hover:border-blue-900 focus:border-blue-900 focus:outline-none focus:ring-blue-900 bg-gray-100 sm:text-sm"
    end
+
+   def tight_form_input_class
+    "w-full appearance-none rounded-md border border-gray-300 placeholder-gray-400 shadow-sm hover:border-blue-900 focus:border-blue-900 focus:outline-none focus:ring-blue-900 bg-gray-100 sm:text-sm"
+  end
+
+  def tight_form_input_class_with_gap
+    "w-11/12 appearance-none rounded-md border border-gray-300 placeholder-gray-400 shadow-sm hover:border-blue-900 focus:border-blue-900 focus:outline-none focus:ring-blue-900 bg-gray-100 sm:text-sm"
+  end
    
    def required_input_class
      "required:border-red-500 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 hover:bg-gray-100 sm:text-sm"
@@ -140,6 +148,11 @@ module ApplicationHelper
     def people_role
       people_role = Reference.where(active: "TRUE", group: 'people_role')
       people_role = people_role.pluck(:value)       
+    end
+
+    def partner_decision
+      partner_decision = Reference.where(active: "TRUE", group: 'partner_decision')
+      partner_decision = partner_decision.pluck(:value)       
     end
     
     def people_region

@@ -1,0 +1,104 @@
+<% content_for(:page_title, "Partner: #{@partner.company}")%>
+
+<div class="m-2">
+
+ <div class="flex flex-row">
+    <div class="basis-1/2  max-w-1/2">
+        <div class="ml-2 text-lg font-bold text-gray-800 mb-2">
+          Partner Details
+        </div>
+          <%= render "partner_summary", partner: @partner %>
+    </div>
+    
+    <div class="basis-1/2 max-w-1/2">
+      <div class="flex flex-row justify-between">
+        <div class=" text-lg font-bold text-gray-800 ml-6">
+          Contacts
+        </div>
+        <div class="">
+         
+        </div>
+      </div>
+        
+      <div class="container">
+        <div class="ml-2 p-2 overflow-auto utility">
+          <%= render 'partner_contacts'%>
+          
+        </div>
+      </div>
+    </div>
+    </div>
+  
+ <br>
+
+    <div class="border border-blue-900 rounded-lg mr-4 pr-4 min-h-20">
+      <div class="m-2 p-2 border border-gray-200 rounded-lg hover:bg-gray-100">
+        <p class="text-sm text-gray-500 ">
+            Pitch To NA:
+        </p>
+        <p class="text-sm font-medium text-gray-900 ">
+          <%= simple_format(@partner.pitch_to_na) %>
+        </p>
+      </div>
+
+      <div class="m-2 p-2 border border-gray-200 rounded-lg hover:bg-gray-100">
+        <p class="text-sm text-gray-500 ">
+            Pitch By NA:
+        </p>
+        <p class="text-sm font-medium text-gray-900 ">
+          <%= simple_format(@partner.pitch_by_na) %>
+        </p>
+      </div>
+
+      <div class="m-2 p-2 border border-gray-200 rounded-lg hover:bg-gray-100">
+        <p class="text-sm text-gray-500 ">
+            Follow Up Actions:
+        </p>
+        <p class="text-sm font-medium text-gray-900 ">
+          <%= simple_format(@partner.follow_up_action) %>
+        </p>
+      </div>
+
+      <div class="m-2 p-2 border border-gray-200 rounded-lg hover:bg-gray-100">
+        <p class="text-sm text-gray-500 ">
+            Partnership Agreement:
+        </p>
+        <p class="text-sm font-medium text-gray-900 ">
+          <%= simple_format(@partner.partnership_agreement) %>
+        </p>
+      </div>
+
+     
+        <div class="flex">
+        <div class="basis-1/5 m-2 p-2 border border-gray-200 rounded-lg hover:bg-gray-100">
+            <p class="text-sm text-gray-500 ">
+              Decision:
+            </p>
+            <p class="text-sm font-medium text-gray-900 ">
+            <%= @partner.accept_partnership %>
+          </p>
+          </div>
+          <div class="basis-1/5 m-2 p-2 border border-gray-200 rounded-lg hover:bg-gray-100">
+            <p class="text-sm text-gray-500 ">
+              Date:
+            </p>
+            <p class="text-sm font-medium text-gray-900 ">
+            <%= @partner.date_of_decision.to_formatted_s(:usa) unless @partner.date_of_decision.to_s.empty? %>
+          </p>
+      
+          </div>
+        </div>
+      </div>
+     
+ 
+    <div class="p-4">
+      <%= link_to "Edit this partner", edit_partner_path(@partner), class:form_button_class %> <br>
+    </div> 
+      <%= link_to "<< Back to partners", partners_path, class: link_class %>
+      <% if current_user.admin? %>
+        <%= button_to "Delete this partner", @partner, method: :delete,
+        form: { data: { turbo_confirm: "Are you sure?" } }  %>
+      <% end %>
+    </div>
+    </div>
+    </div>

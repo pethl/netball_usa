@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   resources :sample_words
   resources :budgets
   resources :taems
- 
+  
   get '/download_transfers_in_sheet_pdf' => "transfers#download_transfers_in_sheet_pdf" 
   get '/download_transfers_out_sheet_pdf' => "transfers#download_transfers_out_sheet_pdf" 
  
@@ -53,6 +53,10 @@ Rails.application.routes.draw do
   resources :netball_educators
   resources :sponsors do
     resources :opportunities, except: [:index, :show]
+  end
+
+  resources :partners do
+    resources :contacts, except: [:index, :show]
   end
 
   resources :sponsors  do

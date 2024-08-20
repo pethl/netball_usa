@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_30_091118) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_20_093339) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -87,6 +87,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_30_091118) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "mobile"
+    t.integer "partner_id"
     t.index ["grant_id"], name: "index_contacts_on_grant_id"
     t.index ["sponsor_id"], name: "index_contacts_on_sponsor_id"
   end
@@ -283,6 +284,44 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_30_091118) do
     t.datetime "date_submitted"
     t.index ["sponsor_id"], name: "index_opportunities_on_sponsor_id"
     t.index ["user_id"], name: "index_opportunities_on_user_id"
+  end
+
+  create_table "partners", force: :cascade do |t|
+    t.string "company"
+    t.text "description"
+    t.string "location"
+    t.string "city"
+    t.string "website"
+    t.datetime "date_initially_connected"
+    t.datetime "date_pitch_to_na"
+    t.datetime "date_pitch_by_na"
+    t.text "pitch_to_na"
+    t.text "pitch_by_na"
+    t.text "follow_up_action"
+    t.text "partnership_agreement"
+    t.string "accept_partnership"
+    t.datetime "date_of_decision"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "first_name_primary"
+    t.string "last_name_primary"
+    t.string "role_primary"
+    t.string "email_primary"
+    t.string "cell_primary"
+    t.string "work_phone_primary"
+    t.string "first_name_secondary"
+    t.string "last_name_secondary"
+    t.string "role_secondary"
+    t.string "email_secondary"
+    t.string "cell_secondary"
+    t.string "work_phone_secondary"
+    t.string "first_name_third"
+    t.string "last_name_third"
+    t.string "role_third"
+    t.string "email_third"
+    t.string "cell_third"
+    t.string "work_phone_third"
+    t.string "us_state"
   end
 
   create_table "payments", force: :cascade do |t|

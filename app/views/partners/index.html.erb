@@ -1,0 +1,68 @@
+<% content_for(:page_title, "Partners")%>
+
+<% if @partners.any? %>
+<div id="partners">
+<div class="relative overflow-x-auto">
+    <table class="w-full text-left rtl:text-right">
+        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+            <tr>
+               
+                
+                <th scope="col" class="px-6 py-3">
+                    Location
+                </th>
+                
+                <th scope="col" class="px-6 py-3 truncate">
+                    Website
+                </th>
+                
+                <th scope="col" class="px-6 py-3 truncate">
+                    Date of Initial Connect
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Description
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @partners.each do |partner| %>
+            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+                
+                <td scope="row" class="align-top px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                    <%= link_to partner.company, partner_path(partner), class: link_class %>
+                </td>
+               
+                <td class="px-6 py-4 align-top">
+                   <%= partner.location %><br> 
+                   <%= partner.city %>, <%= partner.us_state %> 
+                </td>
+                <td class="px-6 py-4 align-top truncate">
+                    <%= partner.website %>
+                </td>
+                <td class="px-6 py-4 align-top truncate">
+                   <%= partner.date_initially_connected.to_formatted_s(:usa) unless  partner.date_initially_connected.to_s.empty? %>
+                </td> 
+                <td class="px-6 py-4 align-top truncate">
+                <%= partner.description %>
+             </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+ </div>
+
+<% else %>
+<p class="px-6 py-4">
+No records to view</p>
+<% end %>
+<br>
+<div class="m-2">
+    <%= link_to "Add New Partner", new_partner_path, class: form_button_class %>
+    <br>
+   </div>
+
+
+ 
+   
+

@@ -1,5 +1,6 @@
 class Contact < ApplicationRecord
     belongs_to :sponsor
+    #belongs_to :partner, optional: true
 
     validates :first_name, presence: true
     validates :last_name, presence: true
