@@ -38,7 +38,7 @@ class NetballEducatorsController < ApplicationController
   # GET /netball_educators
   def index_state
     if (is_admin? || current_user.role=="educators")
-       @netball_educators = NetballEducator.where('level != ?', "School/District Lead")
+       @netball_educators = NetballEducator.all
        @netball_educators = @netball_educators.order(state: :asc)
        @netball_educators_by_state = @netball_educators.group_by { |t| t.state }
       
@@ -51,7 +51,7 @@ class NetballEducatorsController < ApplicationController
 
   def index_user
     if (is_admin? || current_user.role=="educators")
-       @netball_educators = NetballEducator.where('level != ?', "School/District Lead")
+       @netball_educators = NetballEducator.all
        @netball_educators = @netball_educators.order(user_id: :asc)
        @netball_educators_by_user = @netball_educators.group_by { |t| t.user_id }
       

@@ -39,10 +39,12 @@
             </span>
         </p>
     </div>
+
 </div>
 
-<br>
 
+<% if @partner.contact_two_blank== true%>
+<br>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 p-2 border border-blue-900 rounded-lg shadow  ">
 
     <div class="">
@@ -85,9 +87,10 @@
         </p>
     </div>
 </div>
+<% end %>
 
+<% if @partner.contact_three_blank ==true %>
 <br>
-
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 p-2 border border-blue-900 rounded-lg shadow  ">
 
     <div class="">
@@ -130,4 +133,4 @@
         </p>
     </div>
 </div>
-
+<% end %>
