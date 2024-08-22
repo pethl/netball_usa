@@ -1,5 +1,5 @@
 require 'devise/mailer'
-require 'admin_mailer'
+require 'mailer/admin_mailer'
 # frozen_string_literal: true
 
 # Assuming you have not yet modified this file, each configuration option below
