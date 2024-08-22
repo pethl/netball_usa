@@ -6,7 +6,7 @@
 </div> 
 <% end %>
 
-  
+
 <div class="m-4">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
@@ -26,25 +26,9 @@
       </li>
       </ul>
 </div>
-<div class="mt-4 mb-4">
+<div class="mt-4 mb-2">
 <%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
 </div>
-
-
-<form method="get">
-<%= select_tag("state", options_for_select(us_states)) %>
-<input type="submit" value="Filter">
-</form>
-
-<div class="w-64">
-<%= form_with url: "/makesheets", method: :get do |form| %>
-    <%= form.select :state, options_for_select(us_states),{:prompt=>true}, class: input_class %>
-   <div=class="m-2>
-    <%= form.submit "Filter", class: small_button_class %>
-    </div>
-  <% end %>
-  </div>
-
 
 <% if @netball_educators.any? %>
   

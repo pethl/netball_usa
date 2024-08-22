@@ -5,11 +5,10 @@
 #
 #   movies = Movie.create([ name: "Star Wars" ,  name: "Lord of the Rings" ])
 #   Character.create(name: "Luke", movie: movies.first)
-#NetballEducator.destroy_all
-#NetballEducator.create(first_name: 'Jenna',last_name: 'Jones',email: 'jennajones88@gmail.com',phone: '1314555676',school_name: 'Hillview High School',city: 'Houston',state: 'TX', educator_notes: 'Callback for equipment', mgmt_notes: 'Spoke at meeting', );
-#NetballEducator.create(first_name: 'Katlin',last_name: 'Smith',email: 'katlin99@gmail.com',phone: '1314888876',school_name: 'Valleyview High School',city: 'Dallas',state: 'TX', educator_notes: 'Callback for equipment', mgmt_notes: 'Spoke at meeting', );
-#NetballEducator.create(first_name: 'Robin',last_name: 'Hall',email: 'robinhall@gmail.com',phone: '162345676',school_name: 'Jackson High School',city: 'Austin',state: 'TX', educator_notes: 'Callback for equipment', mgmt_notes: 'Spoke at session', );
-#Reference.destroy_all
+# NetballEducator.create(first_name: 'Jenna',last_name: 'Jones',email: 'jennajones88@gmail.com',phone: '1314555676',school_name: 'Hillview High School',city: 'Houston',state: 'TX', educator_notes: 'Callback for equipment', mgmt_notes: 'Spoke at meeting', );
+# NetballEducator.create(first_name: 'Katlin',last_name: 'Smith',email: 'katlin99@gmail.com',phone: '1314888876',school_name: 'Valleyview High School',city: 'Dallas',state: 'TX', educator_notes: 'Callback for equipment', mgmt_notes: 'Spoke at meeting', );
+# NetballEducator.create(first_name: 'Robin',last_name: 'Hall',email: 'robinhall@gmail.com',phone: '162345676',school_name: 'Jackson High School',city: 'Austin',state: 'TX', educator_notes: 'Callback for equipment', mgmt_notes: 'Spoke at session', );
+# Reference.destroy_all
 # Reference.create(group:	'facility_type', value:	'Parks & Rec', active:	'TRUE');
 # Reference.create(group:	'facility_type', value:	'Private', active:	'TRUE');
 # Reference.create(group:	'facility_type', value:	'Tourism Bureau', active:	'TRUE');
@@ -20,9 +19,9 @@
 # Reference.create(group:	'generic_option', value:'Yes', active:'TRUE');
 # Reference.create(group:	'generic_option', value:'No', active:'TRUE');
 # Reference.create(group:	'generic_option', value:'NA', active:'TRUE');
-Reference.create(group:	'partner_decision', value:'Accept', active:'TRUE');
-Reference.create(group:	'partner_decision', value:'Reject', active:'TRUE');
-#Partner.create(company:"redrink", description:"desc words", location:"26 Grove Place", city:"Boston", state:"MA", website:"www.redrink.co.uk", date_initially_connected:"01/07/2024", date_pitch_to_na:"01/07/2024", date_pitch_by_na:"01/07/2024", pitch_to_na:"pitch_to_words", pitch_by_na:"pitch_by_words", follow_up_action:"follow up actions", partnership_agreement:"partnership", accept_partnership:"accept or deny", date_of_decision:"01/09/2024");
+# Reference.create(group:	'partner_decision', value:'Accept', active:'TRUE');
+# Reference.create(group:	'partner_decision', value:'Reject', active:'TRUE');
+# Partner.create(company:"redrink", description:"desc words", location:"26 Grove Place", city:"Boston", state:"MA", website:"www.redrink.co.uk", date_initially_connected:"01/07/2024", date_pitch_to_na:"01/07/2024", date_pitch_by_na:"01/07/2024", pitch_to_na:"pitch_to_words", pitch_by_na:"pitch_by_words", follow_up_action:"follow up actions", partnership_agreement:"partnership", accept_partnership:"accept or deny", date_of_decision:"01/09/2024");
 # Reference.create(group:	'sponsor_category',	value:	"Supermarkets", active:	'TRUE');
 # Reference.create(group:	'sponsor_category',	value:	"Restaurant", active:	'TRUE');
 # Reference.create(group:	'sponsor_category',	value:	"Fitness", active:	'TRUE');
