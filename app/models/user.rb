@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
          
   validates :first_name, :last_name, presence: true
-  #after_create :send_admin_mail
+  after_create :send_admin_mail
   
   has_many(
     :na_teams,
