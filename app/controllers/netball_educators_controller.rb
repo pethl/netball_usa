@@ -23,12 +23,12 @@ class NetballEducatorsController < ApplicationController
   def index
     if (is_admin? || current_user.role=="educators")
      # @netball_educators = NetballEducator.where(:state => params[:netball_educator][:state], :level => params[:netball_educator][:level]).all
-      @netball_educators = NetballEducator.all # Or whatever criteria you might have here
-      @netball_educators = @netball_educators.select { |v| v.state == params[:state] } if !params[:state].blank?
-      @netball_educators = @netball_educators.select { |v| v.level == params[:level] } if !params[:level].blank?
+     # @netball_educators = NetballEducator.all # Or whatever criteria you might have here
+     # @netball_educators = @netball_educators.select { |v| v.state == params[:state] } if !params[:state].blank?
+     # @netball_educators = @netball_educators.select { |v| v.level == params[:level] } if !params[:level].blank?
      
-      #  @netball_educators = NetballEducator.all
-     #  @netball_educators = @netball_educators.order(created_at: :desc)
+        @netball_educators = NetballEducator.all
+       @netball_educators = @netball_educators.order(created_at: :desc)
     else
         @netball_educators = NetballEducator.where(user_id: current_user.id).where('level != ?', "School/District Lead")
         @netball_educators = @netball_educators.order(created_at: :desc)

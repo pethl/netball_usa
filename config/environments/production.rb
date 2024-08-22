@@ -63,7 +63,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "netball_usa_production"
 
   config.action_mailer.perform_caching = false
-
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = 
       { :host => 'netball-america-923def44b63e.herokuapp.com' }  #if it is local then 'localhost:3000'
 
