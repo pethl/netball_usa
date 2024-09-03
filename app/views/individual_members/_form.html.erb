@@ -20,17 +20,17 @@
       <div class="flex flex-wrap gap-4">
         <div>
           <%= form.label :first_name, "First Name*", class: label_class %>
-          <%= form.text_field :first_name, :value => (current_user.first_name), class: input_class  %>
+          <%= form.text_field :first_name, class: input_class  %>
         </div>
 
         <div>
           <%= form.label :last_name, "Last Name*",  class: label_class %>
-          <%= form.text_field :last_name, :value => (current_user.last_name), class: input_class  %>
+          <%= form.text_field :last_name,  class: input_class  %>
         </div>
 
         <div>
           <%= form.label :email,  "Email*", class: label_class%>
-          <%= form.text_field :email, :value => (current_user.email), class: input_class  %>
+          <%= form.text_field :email, class: input_class  %>
         </div>
 
         <div>
