@@ -1,13 +1,13 @@
-<% content_for(:page_title, "Partner: #{@partner.company}")%>
+<% content_for(:page_title, "Tour: #{@tour.company}")%>
 
 <div class="m-2">
 
  <div class="flex flex-row">
     <div class="basis-1/2  max-w-1/2">
         <div class="ml-2 text-lg font-bold text-gray-800 mb-2">
-          Partner Details
+          Tour Details
         </div>
-          <%= render "partner_summary", partner: @partner %>
+          <%= render "tour_summary", tour: @tour %>
     </div>
     
     <div class="basis-1/2 max-w-1/2">
@@ -22,7 +22,7 @@
         
       <div class="container">
         <div class="ml-2 p-2 overflow-auto utility">
-          <%= render 'partner_contacts'%>
+          <%= render 'tour_contacts'%>
           
         </div>
       </div>
@@ -37,7 +37,7 @@
             Pitch To NA:
         </p>
         <p class="text-sm font-medium text-gray-900 ">
-          <%= simple_format(@partner.pitch_to_na) %>
+          <%= simple_format(@tour.pitch_to_na) %>
         </p>
       </div>
 
@@ -46,7 +46,7 @@
             Pitch By NA:
         </p>
         <p class="text-sm font-medium text-gray-900 ">
-          <%= simple_format(@partner.pitch_by_na) %>
+          <%= simple_format(@tour.pitch_by_na) %>
         </p>
       </div>
 
@@ -55,16 +55,16 @@
             Follow Up Actions:
         </p>
         <p class="text-sm font-medium text-gray-900 ">
-          <%= simple_format(@partner.follow_up_action) %>
+          <%= simple_format(@tour.follow_up_action) %>
         </p>
       </div>
 
       <div class="m-2 p-2 border border-gray-200 rounded-lg hover:bg-gray-100">
         <p class="text-sm text-gray-500 ">
-            Partnership Agreement:
+            Tour Agreement:
         </p>
         <p class="text-sm font-medium text-gray-900 ">
-          <%= simple_format(@partner.partnership_agreement) %>
+          <%= simple_format(@tour.tour_agreement) %>
         </p>
       </div>
 
@@ -75,7 +75,7 @@
               Decision:
             </p>
             <p class="text-sm font-medium text-gray-900 ">
-            <%= @partner.accept_partnership %>
+            <%= @tour.accept_tour %>
           </p>
           </div>
           <div class="basis-1/5 m-2 p-2 border border-gray-200 rounded-lg hover:bg-gray-100">
@@ -83,7 +83,7 @@
               Date:
             </p>
             <p class="text-sm font-medium text-gray-900 ">
-            <%= @partner.date_of_decision.to_formatted_s(:usa) unless @partner.date_of_decision.to_s.empty? %>
+            <%= @tour.date_of_decision.to_formatted_s(:usa) unless @tour.date_of_decision.to_s.empty? %>
           </p>
       
           </div>
@@ -92,11 +92,11 @@
      
  
     <div class="p-4">
-      <%= link_to "Edit this partner", edit_partner_path(@partner), class:form_button_class %> <br>
+      <%= link_to "Edit this tour", edit_tour_path(@tour), class:form_button_class %> <br>
     </div> 
-      <%= link_to "<< Back to partners", partners_path, class: link_class %>
+      <%= link_to "<< Back to tours", tours_path, class: link_class %>
       <% if current_user.admin? %>
-        <%= button_to "Delete this partner", @partner, method: :delete,
+        <%= button_to "Delete this tour", @tour, method: :delete,
         form: { data: { turbo_confirm: "Are you sure?" } }  %>
       <% end %>
     </div>

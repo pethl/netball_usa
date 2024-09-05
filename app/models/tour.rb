@@ -1,6 +1,8 @@
-class Partner < ApplicationRecord
-    has_many :contacts
+class Tour < ApplicationRecord
 
+
+
+    #SEE DUPLICATED CODE TO PARTNER
     def contact_two_blank
         if (first_name_secondary.to_s +
             last_name_secondary.to_s +
@@ -27,6 +29,7 @@ class Partner < ApplicationRecord
         end
     end
 
+
     def address_condensed
         if self.location.to_s.blank? && self.city.to_s.blank? && self.us_state.to_s.blank?
             return ""
@@ -52,4 +55,5 @@ class Partner < ApplicationRecord
             "#{self.location}, #{self.city}, #{self.us_state}"
         end
     end
+
 end

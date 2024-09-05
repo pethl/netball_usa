@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tours
   resources :venues
 
   get 'payments/index_indiv' => 'payments#index_indiv', :as => :payments_index_indiv

@@ -1,11 +1,11 @@
 
-<%= form_with(model: partner) do |form| %>
-  <% if partner.errors.any? %>
+<%= form_with(model: tour) do |form| %>
+  <% if tour.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(partner.errors.count, "error") %> prohibited this partner from being saved:</h2>
+      <h2><%= pluralize(tour.errors.count, "error") %> prohibited this tour from being saved:</h2>
 
       <ul>
-        <% partner.errors.each do |error| %>
+        <% tour.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -15,7 +15,7 @@
 <div class="flex flex-row gap-4">
 
   <div class="basis-3/5 grid grid-cols-1 md:grid-cols-3 gap-2 border border-blue-900 rounded-lg p-2 ">
-    <span class="font-semibold text-sm">Partner Details</span><br>
+    <span class="font-semibold text-sm">Tour Details</span><br>
 
     <div class="mb-0 md:col-span-2 md:mt-0">
       <%= form.label :company, class: label_class%>
@@ -55,7 +55,7 @@
     <div class="mb-0">
       <%= form.label :us_state, "State", class: label_class  %>
         <div class="mt-1">
-        <%= form.select :us_state, options_for_select(us_states, :selected => partner.us_state),{:prompt=>true}, class: tight_form_input_class %>
+        <%= form.select :us_state, options_for_select(us_states, :selected => tour.us_state),{:prompt=>true}, class: tight_form_input_class %>
         </div>
     </div>
 
@@ -88,16 +88,16 @@
     </div>
 
     <div class="mb-0 md:col-span-2 md:row-span-2 sm:mt-4 md:mt-0">
-      <%= form.label :partnership_agreement, class: label_class%>
+      <%= form.label :tour_agreement, class: label_class%>
         <div class="mt-1">
-          <%= form.text_area :partnership_agreement, size: "30x5", class: tight_form_input_class  %>
+          <%= form.text_area :tour_agreement, size: "30x5", class: tight_form_input_class  %>
         </div>
     </div>
   
     <div>
-      <%= form.label :accept_partnership, "Partnership Decision", style: "display: block" %>
+      <%= form.label :accept_tour, "Tour Decision", style: "display: block" %>
       <div class="mt-1">
-        <%= form.select :accept_partnership, options_for_select(partner_decision, :selected => partner.accept_partnership),{:prompt=>true}, class: tight_form_input_class %>
+        <%= form.select :accept_tour, options_for_select(partner_decision, :selected => tour.accept_tour),{:prompt=>true}, class: tight_form_input_class %>
       </div>
     </div>
 
@@ -253,7 +253,6 @@
 <br>
 
       <div>
-          <%= form.submit "Save Partner", class: form_button_class %>
+          <%= form.submit "Save Tour", class: form_button_class %>
       </div>
     <% end %> 
-

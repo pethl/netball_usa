@@ -1,0 +1,58 @@
+<div id="<%= dom_id tour %>">
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 p-2 border border-blue-900 rounded-lg shadow  ">
+
+ <div class="">
+    <p class="text-sm text-gray-500 ">
+        Company name:
+    </p>
+    <p class="text-lg font-medium text-gray-900 ">
+      <%= tour.company %>
+    </p>
+  </div>
+
+  <div class="">
+    <p class="text-sm text-gray-500 ">
+       Date Initially Connected
+    </p>
+    <p class="text-sm font-medium text-gray-900 ">
+    <%= tour.date_initially_connected.to_formatted_s(:usa) unless tour.date_initially_connected.to_s.empty? %>
+    </p>
+  </div>
+
+  <div class="">
+  </div>
+ 
+  <div class="">
+  </div>
+
+  <div class="">
+    <p class="text-sm text-gray-500 ">
+        Location:
+    </p>
+    <p class="text-sm font-medium text-gray-900">
+      <%= tour.address_condensed %>
+     </p>
+  </div>
+
+  
+<div class="md:col-span-2">
+  <p class="text-sm text-gray-500 ">
+      Website:
+  </p>
+  <p class="text-sm font-medium text-gray-900 truncate">
+   <%= (link_to tour.website, tour.website, target: '_blank', class: link_class) unless (tour.website.to_s.empty?)%>
+   </p>
+</div>
+
+<div class=" md:col-span-4 p-2 border border-gray-200 rounded-lg hover:bg-gray-100">
+   <p class="text-sm text-gray-500 ">
+       Description:
+   </p>
+   <p class="text-sm font-medium text-gray-900 ">
+     <%= simple_format(tour.description) %>
+   </p>
+ </div>
+
+</div>
+</div>

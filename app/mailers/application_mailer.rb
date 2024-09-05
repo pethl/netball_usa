@@ -8,4 +8,6 @@ class ApplicationMailer < Devise::Mailer
       @email = email
       mail(to: 'pethicklisa@gmail.com', subject: 'IMPORTANT: New user awaiting admin approval')
     end
+
+  
 end

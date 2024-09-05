@@ -72,16 +72,20 @@ class User < ApplicationRecord
 #    approved? ? super : :not_approved
 #  end
   
-def active_for_authentication?
-  # Uncomment the below debug statement to view the properties of the returned self model values.
-  # logger.debug self.to_yaml
-    
-  super && account_active?
-end
+  def active_for_authentication?
+    # Uncomment the below debug statement to view the properties of the returned self model values.
+    # logger.debug self.to_yaml
+      
+    super && account_active?
+  end
 
-def inactive_message
-  account_active? ? super : :account_inactive
-end
+  def inactive_message
+    account_active? ? super : :account_inactive
+  end
+
+  def send_admin_mail
+    ApplicationMailer.new_user_waiting_for_approval(email).deliver
+  end
 
   def send_admin_mail
     ApplicationMailer.new_user_waiting_for_approval(email).deliver

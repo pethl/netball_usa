@@ -1,13 +1,13 @@
-<% content_for(:page_title, "Partners")%> 
+<% content_for(:page_title, "Tours")%> 
 
-<% if @partners.any? %>
-<div id="partners">
+<% if @tours.any? %>
+<div id="tours">
 <div class="relative overflow-x-auto">
     <table class="w-full text-left rtl:text-right">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Company
+                    Company 
                 </th>
                 
                 <th scope="col" class="px-6 py-3">
@@ -27,24 +27,24 @@
             </tr>
         </thead>
         <tbody>
-        <% @partners.each do |partner| %>
+        <% @tours.each do |tour| %>
             <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
                 
                 <td scope="row" class="align-top px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
-                    <%= link_to partner.company, partner_path(partner), class: link_class %>
+                    <%= link_to tour.company, tour_path(tour), class: link_class %>
                 </td>
                
-                <td class="px-6 py-4 align-top">
-                   <%= partner.address_condensed %><br> 
+                <td class="px-6 py-4 align-top text-wrap">
+                   <%= tour.address_condensed %>
                 </td>
                 <td class="px-6 py-4 align-top truncate">
-                    <%= partner.website %>
+                    <%= tour.website %>
                 </td>
                 <td class="px-6 py-4 align-top truncate">
-                   <%= partner.date_initially_connected.to_formatted_s(:usa) unless  partner.date_initially_connected.to_s.empty? %>
+                   <%= tour.date_initially_connected.to_formatted_s(:usa) unless  tour.date_initially_connected.to_s.empty? %>
                 </td> 
                 <td class="px-6 py-4 align-top truncate">
-                <%= partner.description %>
+                <%= tour.description %>
              </td>
             </tr>
             <% end %>
@@ -59,11 +59,12 @@ No records to view</p>
 <% end %>
 <br>
 <div class="m-2">
-    <%= link_to "Add New Partner", new_partner_path, class: form_button_class %>
+    <%= link_to "Add New Tour", new_tour_path, class: form_button_class %>
     <br>
    </div>
 
 
  
    
+
 
