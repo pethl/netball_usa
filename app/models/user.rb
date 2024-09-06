@@ -6,6 +6,7 @@ class User < ApplicationRecord
          
   validates :first_name, :last_name, presence: true
   after_create :send_admin_mail
+  after_create :send_sonya_mail
   
   has_many(
     :na_teams,
@@ -84,11 +85,13 @@ class User < ApplicationRecord
   end
 
   def send_admin_mail
+    # originally intended for users needed approval, approval switched off so left for alerting security
     ApplicationMailer.new_user_waiting_for_approval(email).deliver
   end
 
-  def send_admin_mail
-    ApplicationMailer.new_user_waiting_for_approval(email).deliver
+  def send_sonya_mail
+    # email to advise Sonya / info@netballamerica.com that a new user has registered, most are club admins
+    ApplicationMailer.new_team_sign_up(email).deliver
   end
   
 end

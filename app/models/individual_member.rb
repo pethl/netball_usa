@@ -1,4 +1,5 @@
 class IndividualMember < ApplicationRecord
+  belongs_to :user
     
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :first_name, presence: true

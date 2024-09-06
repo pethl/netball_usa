@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_05_135507) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_06_102111) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -66,6 +66,23 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_05_135507) do
     t.decimal "per_diem", precision: 7, scale: 2
     t.integer "number_of_people"
     t.decimal "number_of_days", precision: 7, scale: 2
+  end
+
+  create_table "clubs", force: :cascade do |t|
+    t.string "name"
+    t.string "city"
+    t.string "us_state"
+    t.string "membership_category"
+    t.string "website"
+    t.string "facebook"
+    t.string "twitter"
+    t.string "instagram"
+    t.text "other_sm"
+    t.integer "estimate_total_number_of_club_members"
+    t.integer "estimate_total_active_members"
+    t.integer "estimate_total_part_time_members"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -192,6 +209,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_05_135507) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "member_key_roles", force: :cascade do |t|

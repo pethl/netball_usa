@@ -1,0 +1,77 @@
+<%= form_with(model: club) do |form| %>
+  <% if club.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(club.errors.count, "error") %> prohibited this club from being saved:</h2>
+
+      <ul>
+        <% club.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :city, style: "display: block" %>
+    <%= form.text_field :city %>
+  </div>
+
+  <div>
+    <%= form.label :us_state, style: "display: block" %>
+    <%= form.text_field :us_state %>
+  </div>
+
+  <div>
+    <%= form.label :membership_category, style: "display: block" %>
+    <%= form.text_field :membership_category %>
+  </div>
+
+  <div>
+    <%= form.label :website, style: "display: block" %>
+    <%= form.text_field :website %>
+  </div>
+
+  <div>
+    <%= form.label :facebook, style: "display: block" %>
+    <%= form.text_field :facebook %>
+  </div>
+
+  <div>
+    <%= form.label :twitter, style: "display: block" %>
+    <%= form.text_field :twitter %>
+  </div>
+
+  <div>
+    <%= form.label :instagram, style: "display: block" %>
+    <%= form.text_field :instagram %>
+  </div>
+
+  <div>
+    <%= form.label :other_sm, style: "display: block" %>
+    <%= form.text_area :other_sm %>
+  </div>
+
+  <div>
+    <%= form.label :estimate_total_number_of_club_members, style: "display: block" %>
+    <%= form.number_field :estimate_total_number_of_club_members %>
+  </div>
+
+  <div>
+    <%= form.label :estimate_total_active_members, style: "display: block" %>
+    <%= form.number_field :estimate_total_active_members %>
+  </div>
+
+  <div>
+    <%= form.label :estimate_total_part_time_members, style: "display: block" %>
+    <%= form.number_field :estimate_total_part_time_members %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

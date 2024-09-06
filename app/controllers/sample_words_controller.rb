@@ -1,5 +1,6 @@
 class SampleWordsController < ApplicationController
   before_action :set_sample_word, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
 
   # GET /sample_words
   def index

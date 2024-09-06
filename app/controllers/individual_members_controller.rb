@@ -4,7 +4,12 @@ class IndividualMembersController < ApplicationController
 
   # GET /individual_members
   def index
-    @individual_members = IndividualMember.all
+   
+    if is_admin? 
+      @individual_members = IndividualMember.all.order(:first_name)
+   else
+     @individual_members = IndividualMember.where(user_id: current_user.id)
+   end
   end
 
   # GET /individual_members/1
@@ -23,7 +28,8 @@ class IndividualMembersController < ApplicationController
   # POST /individual_members
   def create
     @individual_member = IndividualMember.new(individual_member_params)
-
+    @individual_member.user_id =current_user.id
+   
     if @individual_member.save
       redirect_to @individual_member, notice: "Individual member was successfully created."
     else

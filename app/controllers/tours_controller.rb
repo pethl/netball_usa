@@ -1,5 +1,6 @@
 class ToursController < ApplicationController
   before_action :set_tour, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
 
   # GET /tours
   def index
