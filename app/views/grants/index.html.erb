@@ -3,7 +3,7 @@
 <% if @grants.any? %>
 <div id="grants">
 <div class="relative overflow-x-auto">
-    <table class="table-fixed w-full text-left rtl:text-right">
+    <table class="table-auto w-full text-left rtl:text-right">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
              <tr>
                 <th scope="col" class="px-6 py-3 w-52">
@@ -22,13 +22,16 @@
                     Due Date
                 </th>
                 <th scope="col" class="px-6 py-3 w-60 truncate">
-                    Allocated To
-                </th>
-                <th scope="col" class="px-6 py-3 w-60 truncate">
                     Status
                 </th>
                 <th scope="col" class="px-6 py-3 w-60 truncate">
+                    Allocated To
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 truncate">
                     Action by
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 truncate">
+                    Date Submitted
                 </th>
                 <th scope="col" class="px-6 py-3 w-52">
                     Purpose
@@ -39,10 +42,7 @@
                 <th scope="col" class="px-6 py-3 w-52">
                    Notes
                 </th>
-               
-                <th scope="col" class="px-6 py-3 w-60 truncate">
-                    Date Submitted
-                </th>
+                
             </tr>
         </thead>
         <tbody>
@@ -78,9 +78,12 @@
                 </td>
                
                 <td class="px-6 py-4">
-                <%= grant.action_by.to_formatted_s(:usa) unless (grant.action_by.to_s.empty?) %> 
-           
+                 <%= grant.action_by.to_formatted_s(:usa) unless (grant.action_by.to_s.empty?) %> 
                </td>
+
+               <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                    <%= grant.date_submitted.to_formatted_s(:usa) unless (grant.date_submitted.to_s.empty?) %>
+                </th>
                 
                  <td class="px-6 py-4 truncate">
                   <%= grant.purpose %>
@@ -93,15 +96,7 @@
                 <td class="px-6 py-4 truncate">
                    <%= grant.notes %>
                 </td>
-
                
-               
-                
-               
-                <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
-                    <%= grant.date_submitted.to_formatted_s(:usa) unless (grant.date_submitted.to_s.empty?) %>
-                </th>
-                
             </tr>
             <% end %>
         </tbody>

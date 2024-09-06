@@ -3,7 +3,7 @@
 <% if @partners.any? %>
 <div id="partners">
 <div class="relative overflow-x-auto">
-    <table class="w-full text-left rtl:text-right">
+    <table class="w-full table-fixed text-left rtl:text-right">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
             <tr>
                 <th scope="col" class="px-6 py-3">
@@ -38,7 +38,7 @@
                    <%= partner.address_condensed %><br> 
                 </td>
                 <td class="px-6 py-4 align-top truncate">
-                    <%= partner.website %>
+                    <%= (link_to partner.website, partner.website, target: '_blank', class: link_class) unless (partner.website.to_s.empty?)%>
                 </td>
                 <td class="px-6 py-4 align-top truncate">
                    <%= partner.date_initially_connected.to_formatted_s(:usa) unless  partner.date_initially_connected.to_s.empty? %>

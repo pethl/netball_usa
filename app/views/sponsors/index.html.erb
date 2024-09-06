@@ -47,8 +47,7 @@
                    <%= sponsor.industry %>
                 </td>
                 <td class="px-6 py-4 align-top">
-                   <%= sponsor.location %><br> 
-                   <%= sponsor.city %>, <%= sponsor.state %> 
+                   <%= sponsor.address_condensed %>
                 </td>
                 <td class="px-6 py-4 text-center align-top ">
                     [<%= sponsor.opportunities.count %>]
@@ -67,7 +66,7 @@
                 <% end %>
                 </td>
                 <td class="px-6 py-4 truncate">
-                    <%= sponsor.website %>
+                     <%= (link_to sponsor.website, sponsor.website, target: '_blank', class: link_class) unless (sponsor.website.to_s.empty?)%>
                 </td>
                 <td class="px-6 py-4 truncate">
                    <%= sponsor.notes %>

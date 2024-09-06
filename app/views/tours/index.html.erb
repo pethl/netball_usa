@@ -38,7 +38,7 @@
                    <%= tour.address_condensed %>
                 </td>
                 <td class="px-6 py-4 align-top truncate">
-                    <%= tour.website %>
+                     <%= (link_to tour.website, tour.website, target: '_blank', class: link_class) unless (tour.website.to_s.empty?)%>
                 </td>
                 <td class="px-6 py-4 align-top truncate">
                    <%= tour.date_initially_connected.to_formatted_s(:usa) unless  tour.date_initially_connected.to_s.empty? %>

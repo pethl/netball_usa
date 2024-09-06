@@ -30,11 +30,9 @@
     <p class="text-sm text-gray-500 ">
         Location:
     </p>
-    <p class="text-sm font-medium text-gray-900">
-      <%= sponsor.location %>
-      <% if sponsor.city? %>,  <%= sponsor.city %><% end %>
-      <% if sponsor.state? %>,  <%= sponsor.state %><% end %>
-    </p>
+    <p class="text-sm font-base text-gray-900">
+      <%= sponsor.address_condensed %>
+     </p>
   </div>
 
   
@@ -52,7 +50,7 @@
    <p class="text-sm text-gray-500 ">
        About:
    </p>
-   <p class="text-sm font-medium text-gray-900 ">
+   <p class="text-sm font-base text-gray-900 ">
      <%= sponsor.about %>
    </p>
  </div>

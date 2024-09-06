@@ -47,8 +47,8 @@
                   <%= link_to venue.venue_name, edit_venue_path(venue), class: link_class %>
                 </td>
                 
-                <td class="px-6 py-4 truncate">
-                  <%= venue.street %><br><%= venue.city %> <%= venue.state %> <%= venue.zip %>
+                <td class="px-6 py-4 text-wrap">
+                  <%= venue.address_condensed %><br> <%= venue.zip %>
                 </td>
                 
                 <td class="px-6 py-4 truncate">

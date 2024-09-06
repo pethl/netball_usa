@@ -1,5 +1,6 @@
 Date::DATE_FORMATS[:default] = "%m/%d/%Y"
-Time::DATE_FORMATS[:month_and_year] = '%B %Y'
+Time::DATE_FORMATS[:month_and_year] = '%B %Y' #August 2024
+Time::DATE_FORMATS[:month_and_year_short] = '%m/%y' #08/24
 Time::DATE_FORMATS[:short_ordinal] = lambda { |time| time.strftime("%B #{time.day.ordinalize}") }
 Time::DATE_FORMATS[:time_24] = lambda { |time| time.strftime("%H:%M ") }
 Time::DATE_FORMATS[:global_date_time] = '%Y-%m-%d %H:%M'

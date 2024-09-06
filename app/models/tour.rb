@@ -29,7 +29,7 @@ class Tour < ApplicationRecord
         end
     end
 
-
+#DUP TO SPONSOR PARTNET
     def address_condensed
         if self.location.to_s.blank? && self.city.to_s.blank? && self.us_state.to_s.blank?
             return ""

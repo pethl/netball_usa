@@ -51,7 +51,9 @@
               <p class="text-2xl"><%= link_to Grant.all.count, grants_path %></p>
              <p class="text-2xl"><%= link_to "Grants", grants_path %></p>
              <br>
-              <p class="text-blue-200">Submitted in <%= Date.today.year %>: <%= @grants_submitted_this_year %></p>
+             <p class="text-blue-200">Applying for : <%= @grants_applying_for.count %></p>
+             
+              <p class="text-blue-200">of which - </p>
               <% @grants_by_status.each do |status, grants| %>
                 <p class="text-gray-300 font-light">
                   <%= status %>: <%= grants.count %>

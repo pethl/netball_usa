@@ -27,7 +27,7 @@
                  </th>
                 
                  <th scope="col" class="px-6 py-3 text-nowrap">
-                     Date Created
+                     Date Added
                  </th>
                  <th scope="col" class="px-6 py-3 w-60 text-left">
                      Administered By
@@ -78,7 +78,7 @@
                            </td>
                            
                             <td class="px-6 py-4">
-                             <%= na_team.created_at.to_formatted_s(:usa) unless (na_team.created_at.to_s.empty?)  %>
+                             <%= na_team.created_at.to_formatted_s(:month_and_year_short) unless (na_team.created_at.to_s.empty?)  %>
                            </td>
            
                            <td class="px-6 py-4 text-left whitespace-nowrap">

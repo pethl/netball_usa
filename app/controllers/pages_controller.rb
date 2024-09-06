@@ -38,8 +38,9 @@ class PagesController < ApplicationController
     @opportunities = Opportunity.all.order(status: :asc)
     @opportunities_by_status = @opportunities.group_by { |t| t.status }
 
-    @grants_sub = Grant.all.order(status: :asc)
-    @grants_by_status = @grants_sub.group_by { |t| t.status }
+    @grants_applying_for = Grant.where(apply: true).order(status: :desc)
+   # @grants_sub = Grant.all.order(status: :asc)
+    @grants_by_status = @grants_applying_for.group_by { |t| t.status }
   
   
   end
