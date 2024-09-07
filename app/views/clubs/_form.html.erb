@@ -1,4 +1,4 @@
-<%= form_with(model: club) do |form| %>
+<%= form_with(model: club ) do |form| %>
   <% if club.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(club.errors.count, "error") %> prohibited this club from being saved:</h2>
@@ -11,67 +11,107 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
+  <div class="flex flex-wrap gap-2">
+     <div class="mt-2">
+        <%= form.label :name, "Team Name*", class: label_class%>
+       <div class="mt-3">
+        <%= form.text_field :name, class: required_input_class  %>
+       </div> 
+     </div> 
 
-  <div>
-    <%= form.label :city, style: "display: block" %>
-    <%= form.text_field :city %>
-  </div>
+     <div class="mt-2">
+       <%= form.label :city, "City*",  class: label_class%>
+        <div class="mt-3">
+          <%= form.text_field :city, style: "width:150px", class: input_class  %>
+        </div> 
+      </div> 
+   
+     <div class="mt-2">
+      <%= form.label :us_state, "State*",  class: label_class%>
+       <div class="mt-3">
+         <%= form.select :us_state, options_for_select(us_states, :selected => club.us_state),{:prompt=>true}, style: "width:150px", class: "text-sm rounded-md border-gray-300 focus:ring-blue-900 hover:bg-gray-100" %>
+        </div>
+     </div>
 
-  <div>
-    <%= form.label :us_state, style: "display: block" %>
-    <%= form.text_field :us_state %>
-  </div>
+     <div class="mt-2">
+       <%= form.label :website, "Team Website",  class: label_class%>
+        <div class="mt-3">
+          <%= form.text_field :website, placeholder: "Team Website", class: input_class  %>
+        </div> 
+      </div> 
+    </div>
 
-  <div>
-    <%= form.label :membership_category, style: "display: block" %>
-    <%= form.text_field :membership_category %>
-  </div>
+    
+  <div class="flex flex-wrap gap-2">
+      <div class="mt-2">
+      <span class="text-lg"><i class="fa-brands fa-facebook"></i></span>
+        <div class="mt-1">
+          <%= form.text_field :facebook, placeholder: "Team Facebook", class: input_class  %>
+        </div> 
+      </div> 
+      
+      <div class="mt-2">
+      <span class="text-lg"><i class="fa-brands fa-instagram"></i></span>
+        <div class="mt-1">
+          <%= form.text_field :instagram, placeholder: "Team Instagram", class: input_class  %>
+        </div> 
+      </div> 
 
-  <div>
-    <%= form.label :website, style: "display: block" %>
-    <%= form.text_field :website %>
-  </div>
+      <div class="mt-2">
+      <span class="text-lg"><i class="fa-brands fa-twitter"></i></span>
+        <div class="mt-1">
+          <%= form.text_field :twitter, placeholder: "Team X [Twitter]", class: input_class  %>
+        </div> 
+      </div> 
+      
+      <div class="mt-2">
+      <span class="text-lg"><i class="fa-regular fa-thumbs-up"></i></span>
+        <div class="mt-1">
+          <%= form.text_field :other_sm, placeholder: "Other Socials", style: "width:300px", class: input_class  %>
+        </div> 
+      </div> 
+    </div>
 
-  <div>
-    <%= form.label :facebook, style: "display: block" %>
-    <%= form.text_field :facebook %>
-  </div>
+    <div class="mt-4 text-gray-600 text-lg">
+    <p>Please provide the following estimates for club size:</p>
+   </div>
+ 
+  <div class="flex flex-wrap gap-2">
+  
+      <div class="mt-4">
+        <%= form.label :estimate_total_number_of_club_members, " Total # of Club Members",  class: label_class%>
+        <div class="mt-1">
+          <%= form.number_field :estimate_total_number_of_club_members, class: input_class %>
+          </div> 
+      </div> 
 
-  <div>
-    <%= form.label :twitter, style: "display: block" %>
-    <%= form.text_field :twitter %>
-  </div>
+     <div class="mt-4">
+      <%= form.label :estimate_total_active_members, " ACTIVE Members",  class: label_class%>
+      <div class="mt-1">
+        <%= form.number_field :estimate_total_active_members, class: input_class %>
+        </div> 
+     </div> 
 
-  <div>
-    <%= form.label :instagram, style: "display: block" %>
-    <%= form.text_field :instagram %>
-  </div>
+    <div class="mt-4">
+      <%= form.label :estimate_total_part_time_members, "PART TIME Members",  class: label_class%>
+      <div class="mt-1">
+        <%= form.number_field :estimate_total_part_time_members, class: input_class %>
+        </div> 
+      </div> 
+      </div> 
+    <div class="mt-2 mb-4">
+      <%= form.label :membership_category, "Membership Category",  class: label_class%>
+       <div class="mt-1">
+         <%= form.select :membership_category, options_for_select(club_membership_category, :selected => club.membership_category),{:prompt=>true}, style: "width:150px", class: "text-sm rounded-md border-gray-300 focus:ring-blue-900 hover:bg-gray-100" %>
+        </div>
+     </div>
+      
 
-  <div>
-    <%= form.label :other_sm, style: "display: block" %>
-    <%= form.text_area :other_sm %>
   </div>
-
   <div>
-    <%= form.label :estimate_total_number_of_club_members, style: "display: block" %>
-    <%= form.number_field :estimate_total_number_of_club_members %>
-  </div>
-
-  <div>
-    <%= form.label :estimate_total_active_members, style: "display: block" %>
-    <%= form.number_field :estimate_total_active_members %>
-  </div>
-
-  <div>
-    <%= form.label :estimate_total_part_time_members, style: "display: block" %>
-    <%= form.number_field :estimate_total_part_time_members %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <%= link_to "Cancel", na_teams_path, class: clear_button_class %>
+  
+    <%= form.submit  "Save Club", class: form_button_class %>
   </div>
 <% end %>
+

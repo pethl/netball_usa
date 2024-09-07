@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_06_102111) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_07_111603) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -340,6 +340,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_06_102111) do
     t.string "cell_third"
     t.string "work_phone_third"
     t.string "us_state"
+    t.string "country"
   end
 
   create_table "payments", force: :cascade do |t|

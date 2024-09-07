@@ -1,14 +1,73 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Clubs</h1>
-
-<div id="clubs">
-  <% @clubs.each do |club| %>
-    <%= render club %>
-    <p>
-      <%= link_to "Show this club", club %>
-    </p>
-  <% end %>
-</div>
-
 <%= link_to "New club", new_club_path %>
+
+<% content_for(:page_title, "Membership Administration Hub")%>
+ 
+<div class="container m-4 ml-4">
+ 
+  <div class="text-gray-700 text-lg font-semibold mb-4">
+    Team Administrator Actions List:
+  </div> 
+
+  <div class="container max-w-screen-md">
+    <div class="grid grid-rows-5 grid-flow-col gap-1 max-w-2/3">
+      <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-1"></i></div>
+      <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-2"></i></div>
+      <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-3"></i></div>
+      <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-4"></i></div>
+      <div></div>
+      <div class="text-base w-60 self-center mb-2 ml-2">Create Your Club</div>
+      <div class="text-base w-60 self-center mb-2 ml-2">Add Team Members</div>
+      <div class="text-base w-60 self-center mb-2 ml-2">Assign Key Roles</div>
+      <div class="text-base w-60 self-center mb-2 ml-2">Pay Membership</div>
+      <div class="text-sm w-70 self-center ml-2"><%= link_to "See Membership Structure & Payment Info >>", pages_teams_membership_fees_path, class: link_class %> </div>
+      <div class="text-green-500 justify-start-end text-bold mb-1 self-center"><% if @clubs.any? %> <i class="fa-solid fa-check"></i><% end %></div>
+      <div class="text-green-500 justify-start-end text-bold mb-1 self-center"><% if (@clubs.any? && @clubs.first.members.any?)  %> <i class="fa-solid fa-check"></i><% end %></div>
+      <div class="text-green-500 justify-start-end text-bold mb-1 self-center"><% if @clubs.any? && @clubs.first.member_key_roles.any? %> <i class="fa-solid fa-check"></i><% end %></div>
+      <div class="text-green-500 w-full justify-start-end text-bold mb-1 self-center">
+      <% if @clubs.any? %> 
+       <% if @na_teams.first.has_paid=="Payment Due" %>
+          <span class="text-red-600"><%=  @clubs.first.has_paid %></span> </i>
+        <% else %>
+        <span class="text-green-600"> <i class="fa-solid fa-check"></i> <%=  @clubs.first.has_paid %></span>
+        <% end %>
+        <% end %>
+      </div>
+      <div></div>
+    </div>
+  </div>
+  
+   <div class="mt-4 ml-4">    
+     <p class="text-sm text-gray-500 mt-2">Mandatory fields are marked with a *, please provide as much information as you can,<br> it helps us to better understand and serve our membership group.</p>
+   </div> 
+  
+<hr>
+<main class="container m-2">
+
+  <%= turbo_frame_tag "first_turbo_frame" do %>
+    <div class="header">
+     <br>
+      <%= link_to "(1) Create club",
+                new_club_path,                  
+                  class: teal_button_class,
+                  data: { turbo_frame: dom_id(Club.new) }  %>
+    </div>
+  <% end %>
+<br>
+<%= turbo_frame_tag Club.new %>
+
+<hr>
+<div class="flex flex-row gap-4"> 
+
+  <div class="basis-1/2 grow-0" >  
+    <div id="clubs">
+      <% @clubs.each do |club| %>
+       
+        <%= turbo_frame_tag club do %>
+            <%= render club %>
+         <% end %>
+        
+      <% end %> 
+    </div> 
+  </div> 
+
+</div> 

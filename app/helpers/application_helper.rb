@@ -114,6 +114,11 @@ module ApplicationHelper
      us_states = us_states.pluck(column_names.join(',')) 
    end
    
+   def club_membership_category
+    club_membership_category = Reference.where(active: "TRUE", group: 'club_membership_category').order(:value)
+    club_membership_category = club_membership_category.pluck(:value)  
+   end
+
    def sponsor_category
      sponsor_category = Reference.where(active: "TRUE", group: 'sponsor_category').order(:value)
      sponsor_category = sponsor_category.pluck(:value)  

@@ -31,9 +31,8 @@
         Location:
     </p>
     <p class="text-sm font-medium text-gray-900">
-      <%= partner.location %>
-      <% unless partner.city.to_s.empty? %>,  <%= partner.city %><% end %>
-      <% unless partner.us_state.to_s.empty? %>,  <%= partner.us_state %><% end %>
+      <%= partner.address_condensed %>
+     
     </p>
   </div>
 

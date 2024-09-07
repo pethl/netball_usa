@@ -31,12 +31,19 @@
         </div>
     </div>
     
-    <div class="mb-0 md:col-span-3">
+    <div class="mb-0 md:col-span-2">
       <%= form.label :website, class: label_class%>
       <div class="mt-1">
         <%= form.text_field :website, placeholder: "Enter with prefix Http:// or https://", class: tight_form_input_class  %>
       </div> 
     </div>
+
+    <div class="mb-0 md:col-span-1">
+      <%= form.label :country, class: label_class%>
+        <div class="mt-1">
+        <%= form.text_field :country, class: tight_form_input_class  %>
+      </div>
+    </div> 
     
     <div class="mb-0 md:col-span-1">
       <%= form.label :location, class: label_class%>

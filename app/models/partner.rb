@@ -31,25 +31,25 @@ class Partner < ApplicationRecord
         if self.location.to_s.blank? && self.city.to_s.blank? && self.us_state.to_s.blank?
             return ""
         elsif self.location.to_s.blank? && self.city.to_s.blank?
-           return "#{self.us_state}"
+           return "#{self.us_state} #{country}"
     
         elsif self.location.to_s.blank? && self.us_state.to_s.blank?
-            "#{self.city}"
+            "#{self.city} #{country}"
         
         elsif self.city.to_s.blank? && self.us_state.to_s.blank?
-            "#{self.location}"
+            "#{self.location} #{country}"
     
         elsif self.location.to_s.blank? 
-            "#{self.city}, #{self.us_state}"
+            "#{self.city}, #{self.us_state}  #{country}"
         
         elsif self.city.to_s.blank? 
-            "#{self.location}, #{self.us_state}"
+            "#{self.location}, #{self.us_state} #{country}"
            
         elsif self.us_state.to_s.blank? 
-            "#{self.location}, #{self.city}"
+            "#{self.location}, #{self.city} #{country}"
         
         else
-            "#{self.location}, #{self.city}, #{self.us_state}"
+            "#{self.location}, #{self.city}, #{self.us_state} #{country}"
         end
     end
 end
