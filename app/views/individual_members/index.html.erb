@@ -1,5 +1,9 @@
 <% content_for(:page_title, "Individual Members (Not linked to a Team)") %>
 <br>
+<div class="m-4">
+    <%= link_to "Add Individual Member", new_individual_member_path, class: form_button_class %>
+     <br>
+   </div>
 <% if @individual_members.any? %>
 
 <div class="relative overflow-x-auto">

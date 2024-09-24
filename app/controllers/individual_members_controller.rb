@@ -5,7 +5,7 @@ class IndividualMembersController < ApplicationController
   # GET /individual_members
   def index
    
-    if is_admin? 
+    if is_admin? || current_user.role=="teams_grants"
       @individual_members = IndividualMember.all.order(:first_name)
    else
      @individual_members = IndividualMember.where(user_id: current_user.id)
@@ -60,6 +60,6 @@ class IndividualMembersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def individual_member_params
-      params.require(:individual_member).permit(:first_name, :last_name, :email, :city, :state, :gender, :interested_in_coaching, :interested_in_umpiring, :interested_in_usa_team, :place_of_birth, :age_status, :engagement_status, :membership_type, :notes)
+      params.require(:individual_member).permit(:first_name, :last_name, :email, :phone, :address, :city, :state, :zip, :gender, :interested_in_coaching, :interested_in_umpiring, :interested_in_usa_team, :place_of_birth, :age_status, :engagement_status, :membership_type, :notes)
     end
 end

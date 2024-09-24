@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_07_111603) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_23_210735) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -83,6 +83,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_07_111603) do
     t.integer "estimate_total_part_time_members"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -210,6 +211,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_07_111603) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.string "phone"
+    t.string "address"
+    t.string "zip"
   end
 
   create_table "member_key_roles", force: :cascade do |t|
@@ -219,6 +223,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_07_111603) do
     t.datetime "updated_at", null: false
     t.bigint "na_teams_id"
     t.integer "na_team_id"
+    t.integer "club_id"
     t.index ["member_id"], name: "index_member_key_roles_on_member_id"
     t.index ["na_teams_id"], name: "index_member_key_roles_on_na_teams_id"
   end
@@ -242,6 +247,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_07_111603) do
     t.bigint "na_team_id"
     t.string "engagement_status"
     t.string "membership_type"
+    t.integer "club_id"
+    t.string "phone"
+    t.string "address"
+    t.string "zip"
     t.index ["na_team_id"], name: "index_members_on_na_team_id"
   end
 
@@ -280,6 +289,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_07_111603) do
     t.boolean "authorize"
     t.string "level"
     t.string "website"
+    t.string "address"
   end
 
   create_table "opportunities", force: :cascade do |t|
@@ -355,6 +365,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_07_111603) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "amount", precision: 7, scale: 2
+    t.integer "club_id"
     t.index ["individual_member_id"], name: "index_payments_on_individual_member_id"
     t.index ["na_team_id"], name: "index_payments_on_na_team_id"
     t.index ["payment_recorded_by_id"], name: "index_payments_on_payment_recorded_by_id"
@@ -391,6 +402,29 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_07_111603) do
     t.text "headshot_data"
     t.text "certification_data"
     t.string "level_submitted"
+  end
+
+  create_table "programs", force: :cascade do |t|
+    t.string "program_stage"
+    t.string "program_name"
+    t.string "na_program_contact_email"
+    t.string "na_program_contact_phone"
+    t.string "location_name"
+    t.string "location_contact_phone"
+    t.string "location_contact_email"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "country"
+    t.bigint "people_id"
+    t.datetime "program_event_datetime"
+    t.string "timezone"
+    t.string "funded_by"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["people_id"], name: "index_programs_on_people_id"
   end
 
   create_table "references", force: :cascade do |t|
@@ -446,13 +480,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_07_111603) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.string "state"
-    t.string "city"
-    t.string "website"
-    t.string "facebook"
-    t.string "twitter"
-    t.string "instagram"
-    t.string "other_sm"
+    t.integer "club_id"
     t.index ["user_id"], name: "index_teams_on_user_id"
   end
 
@@ -624,10 +652,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_07_111603) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "role"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "clubs", "users"
   add_foreign_key "contacts", "grants"
   add_foreign_key "contacts", "sponsors"
   add_foreign_key "equipment", "netball_educators"
@@ -636,12 +666,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_07_111603) do
   add_foreign_key "event_assignments", "umpires"
   add_foreign_key "event_participants", "events"
   add_foreign_key "event_participants", "people"
+  add_foreign_key "member_key_roles", "clubs"
   add_foreign_key "member_key_roles", "members"
+  add_foreign_key "members", "clubs"
   add_foreign_key "opportunities", "sponsors"
   add_foreign_key "opportunities", "users"
+  add_foreign_key "payments", "clubs"
   add_foreign_key "payments", "individual_members"
   add_foreign_key "payments", "na_teams"
   add_foreign_key "payments", "users", column: "payment_recorded_by_id"
+  add_foreign_key "programs", "people", column: "people_id"
   add_foreign_key "teams", "users"
   add_foreign_key "transfers", "events"
   add_foreign_key "transfers", "people"

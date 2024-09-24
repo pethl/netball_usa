@@ -3,10 +3,10 @@
 <main class="container">
  
  <%= turbo_frame_tag @member do %>
-  <%= render "form", na_team: @na_team, member: @member  %>
+  <%= render "form", club: @club, member: @member  %>
 <% end %>
   
   <br>
-  <%= link_to sanitize("&larr; Back to team"), na_team_path(@na_team) %>
+  <%= link_to sanitize("&larr; Back to club"), club_path(@club) %>
   
 </main>

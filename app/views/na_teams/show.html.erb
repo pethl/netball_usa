@@ -2,8 +2,11 @@
 
 
 <div class="container m-2 mr-6">
+<div class="font-semibold text-gray-500 m-4">
+  <%= link_to "<< Back to Overview", na_teams_path %>
+</div>
 
-<div class="text-xl text-blue-900 m-4">
+<div class="text-2xl text-blue-900 m-4">
   <%= @na_team.name %><br>
   <span class="text-sm text-gray-500">administered by: <%= @na_team.creator.full_name %></span>
 </div>
@@ -11,17 +14,18 @@
 
 <div class="flex flex-row flex-wrap">
   <div class=" p-4 min-w-100 m-2 border border-grey-500 shadow-lg shadow-blue-900 hover:border-black rounded-lg">
-    <div class="mt-4 ml-4 text-gray-700 text-lg text-left font-semibold mt-4">
+    <div class=" ml-4 text-gray-700 text-lg text-left font-semibold mt-4">
       Build Your Team
     </div>
     <br>
-  
+    
+    <div class="ml-2">
     <%= link_to "(2) Add team member",
               new_na_team_member_path(@na_team),
               data: { turbo_frame: dom_id(Member.new) },
               class: teal_button_class %>
               <br> <br>
-
+    </div>
 
       <%= turbo_frame_tag Member.new %>
       <%= turbo_frame_tag "members" do %>
@@ -38,17 +42,17 @@
 </div>
 
 <div class="p-4 min-w-120 m-2 border border-grey-500 shadow-xl shadow-blue-900 hover:border-black rounded-lg">
-    <div class="mt-4 ml-4 text-gray-700 text-lg text-left font-semibold mt-4">
+    <div class=" ml-4 text-gray-700 text-lg text-left font-semibold mt-4">
        Assign Key Roles
     </div>
      <br>
-     
+     <div class="ml-2">
      <%= link_to "(3) Add key role",
           new_na_team_member_key_role_path(@na_team),
           data: { turbo_frame: dom_id(MemberKeyRole.new) },
           class: teal_button_class %>
           <br> <br>
-      
+      </div>
           <%= turbo_frame_tag MemberKeyRole.new %>
           <%= turbo_frame_tag "member_key_roles" do %>
             <div class="text-sm">
@@ -64,9 +68,8 @@
     <br>
 </div>
 
-<div class="text-lg">
-<br>
-  <%= link_to "<< Back to Teams", na_teams_path %>
+<div class="font-semibold text-gray-500 m-4">
+  <%= link_to "<< Back to Overview", na_teams_path %>
 </div>
 
 </div>

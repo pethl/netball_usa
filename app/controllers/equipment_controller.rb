@@ -4,7 +4,10 @@ class EquipmentController < ApplicationController
   # GET /equipment
   def index
     authorize! :read, @equipments
-    @equipment = Equipment.all
+   # @equipment = Equipment.all
+    @equipment = NetballEducator.joins(:equipment)
+    @equipment  =  @equipment.order(state: :ASC, city: :ASC ) 
+   
   end
 
   # GET /equipment/1

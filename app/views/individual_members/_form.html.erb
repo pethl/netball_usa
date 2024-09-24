@@ -34,10 +34,14 @@
         </div>
 
         <div>
-          <%= form.label :gender, "Gender*", class: label_class%>
-          <%= form.select :gender, options_for_select(gender, :selected => individual_member.gender),{:prompt=>true}, style: "width:206px", class: input_class %>
-       </div>
-      
+          <%= form.label :phone,  "Phone", class: label_class%>
+          <%= form.text_field :phone, class: input_class  %>
+        </div>
+
+        <div>
+          <%= form.label :address,  "Address", class: label_class %>
+          <%= form.text_field :address, class: input_class  %>
+        </div>
 
         <div>
           <%= form.label :city,  "City*", class: label_class %>
@@ -49,13 +53,20 @@
           <%= form.select :state, options_for_select(us_states, :selected => individual_member.state),{:prompt=>true}, style: "width:206px", class: input_class %>
         </div>
 
-        
+        <div>
+         <%= form.label :zip, "Zip", class: label_class %>
+         <%= form.text_field :zip, class: input_class  %>
+        </div>
+
+        <div>
+          <%= form.label :gender, "Gender*", class: label_class%>
+          <%= form.select :gender, options_for_select(gender, :selected => individual_member.gender),{:prompt=>true}, style: "width:206px", class: input_class %>
+        </div>
 
         <div>
           <%= form.label :age_status, "Youth(under 18) or Adult*", class: label_class %>
           <%= form.select :age_status, options_for_select(member_age_status, :selected => individual_member.age_status),{:prompt=>true}, style: "width:206px", class: input_class %>
        </div>
-
 
        <div>
           <%= form.label :engagement_status, "Player Engagement*", class: label_class %>

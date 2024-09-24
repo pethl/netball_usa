@@ -1,4 +1,4 @@
 <%= turbo_stream.update Member.new, "" %>
 <%= turbo_stream.prepend "members" do %>
-   <%= render @member, team: @team %>
+   <%= render @member, club: @club %>
  <% end %>

@@ -1,7 +1,8 @@
 class Member < ApplicationRecord
-  belongs_to :na_team
+  belongs_to :club
    
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :club_id, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence:   true,
@@ -14,21 +15,10 @@ class Member < ApplicationRecord
   validates :engagement_status, presence: true
   #validates :membership_type, presence: true
   
- 
-  
-  
-
   scope :ordered, -> { order(first_name: :asc) }
   
   def full_name
     "#{self.first_name} #{self.last_name}"
   end
-  
-  # def is_key_role
-  #   if MemberKeyRole.where(na_team_id: self.na_team_id, member_id: self.id).count>0
-  #     return true
-  #   else false
-  #   end
-  # end
  
 end

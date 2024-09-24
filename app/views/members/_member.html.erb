@@ -1,29 +1,30 @@
 <div id="<%= dom_id member %>">
 
 <%= turbo_frame_tag member do %>
-<div class="flex justify-between items-center border border-gray-600 rounded m-2 ">
+<div class="flex justify-between items-center border border-gray-600 rounded m-2 gap-4">
   <div class="ml-4">
-   <span class="text-sm">  <%= member.full_name  %></span>
+   <span class="font-semibold">  
+     <%= member.full_name  %>  </span>| 
+     <span class="text-sm text-gray-500">  
+      <%= member.engagement_status  %> - 
+      <%= member.age_status  %> </span>
+   </div> 
   
-  </div>
-  
-  <div class="justify-between flex items-center m-2 w-28">
-    <div>
-    
-   
-      <%= button_to "Delete",
-                    na_team_member_path(@na_team, member),
-                    method: :delete,
-                    form: { data: { turbo_confirm: "Are you sure?" } },
-                    class: red_link_class %>
-           
+    <div class="justify-between flex items-center m-2 w-28">
+      <div>
+        <%= button_to "Delete",
+                      club_member_path(@club, member),
+                      method: :delete,
+                      form: { data: { turbo_confirm: "Are you sure?" } },
+                      class: red_link_class %>
+            
+      </div>
+      <div>
+        <%= link_to "Edit",
+                  [:edit, @club, member],
+                  class: green_link_class %>
+      </div>
     </div>
-    <div>
-      <%= link_to "Edit",
-                [:edit, @na_team, member],
-                class: green_link_class %>
-    </div>
-  </div>
   </div>
 <% end %>
 

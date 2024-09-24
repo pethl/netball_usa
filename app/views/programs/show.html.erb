@@ -1,0 +1,15 @@
+<% content_for(:page_title, "BAI Program: #{@program.program_name}")%>
+<div class="m-4 lg:m-8">
+
+  <%= render @program %>
+
+  <div class="mt-4">
+    <%= link_to "Edit this BAI Program", edit_program_path(@program) %> <br>
+    <%= link_to "<< Back to BAI Programs", programs_path %>
+
+    <%= button_to "Delete this record", @program, method: :delete,
+    form: { data: { turbo_confirm: "Are you sure?" } }, class: form_button_class %>
+ 
+  </div>
+
+</div> 

@@ -46,47 +46,49 @@
               </th>
             </tr>
 
-         <% @teams_by_state.each do |state, na_teams| %>
+         <% @clubs_by_us_state.each do |state, clubs| %>
            <% if Region.where(["region = ? and state = ?", region, state]).any? %>
       
-                          <% na_teams.each do |na_team| %>
+                          <% clubs.each do |club| %>
                               <tr class="bg-white border-b hover:bg-gray-100">
                              
                               <td class="px-6 py-4 truncate">
-                              <%= link_to na_team.name, na_team_path(na_team), class: link_class %>
+                              <%= link_to club.name, club_path(club), class: link_class %>
                            </td>
                            
                            <td class="px-6 py-4">
-                              <%= na_team.city  %>
+                              <%= club.city  %>
                            </td>
                            
                            <td class="px-6 py-4">
-                              <%= na_team.state %>
+                              <%= club.us_state %>
                            </td>
                            <td class="px-6 py-4">
-                                <% if na_team.payments.count>0 %>
-                                <%=  number_to_currency(na_team.payments.first.amount, precision: 2)   %>
+                                <% if club.club_payments_total>0 %>
+                                 <%=  number_to_currency(club.club_payments_total, precision: 2)   %>
+                                <% else %>
+                                 <span class="text-red-500">Payment Due</span>
                                 <% end %>
                            </td>
                            
                            <td class="px-6 py-4 text-center">
-                             <%= na_team.members.count %>
+                              <%= club.members.count %>
                            </td>
                            <td class="px-6 py-4 text-center">
                              
-                              <%= na_team.has_youth? ? 'Yes' : 'No'  %>
+                              <%= club.has_youth? ? 'Yes' : 'No'  %>
                            </td>
                            
                             <td class="px-6 py-4">
-                             <%= na_team.created_at.to_formatted_s(:month_and_year_short) unless (na_team.created_at.to_s.empty?)  %>
+                             <%= club.created_at.to_formatted_s(:month_and_year_short) unless (club.created_at.to_s.empty?)  %>
                            </td>
            
                            <td class="px-6 py-4 text-left whitespace-nowrap">
-                            <%=  na_team.creator.full_name %>
+                            <%=  club.creator.full_name %>
                           </td>
 
                           <td class="px-6 py-4 truncate">
-                          <%=  na_team.website  %>
+                          <%=  club.website  %>
                            </td>
                                   </tr>
                        </tbody>

@@ -4,8 +4,20 @@ class ClubsController < ApplicationController
 
   # GET /clubs
   def index
-    @clubs = Club.all
+    @club = Club.where(user_id: current_user.id).first
   end
+
+  def index_admin
+    @clubs = Club.all.ordered
+  end
+
+  def teams_list_index
+    @clubs = Club.all
+    @clubs = @clubs.order(us_state: :asc)
+    @clubs_by_us_state = @clubs.group_by { |t| t.us_state }
+    @regions = Region.all.order(region: :asc)
+    @regions_by_region = @regions.group_by { |t| t.region }
+ end
 
   # GET /clubs/1
   def show
@@ -23,9 +35,13 @@ class ClubsController < ApplicationController
   # POST /clubs
   def create
     @club = Club.new(club_params)
+    @club.user_id = current_user.id
 
     if @club.save
-      redirect_to @club, notice: "Club was successfully created."
+      respond_to do |format|
+        format.html { redirect_to clubs_path, notice: "Club was successfully created." }
+        format.turbo_stream
+      end
     else
       render :new, status: :unprocessable_entity
     end
@@ -34,7 +50,7 @@ class ClubsController < ApplicationController
   # PATCH/PUT /clubs/1
   def update
     if @club.update(club_params)
-      redirect_to @club, notice: "Club was successfully updated.", status: :see_other
+      redirect_to clubs_path, notice: "Club was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end

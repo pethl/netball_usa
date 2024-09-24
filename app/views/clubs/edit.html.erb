@@ -1,6 +1,11 @@
-<h1>Editing club</h1>
+<% content_for(:page_title, "Team: Edit #{@club.name}")%>
 
-<%= render "form", club: @club %>
+
+<%= turbo_frame_tag @club do %>
+  <%= render "form", club: @club %>
+ 
+<% end %>
+
 
 <br>
 

@@ -1,10 +1,113 @@
-<p style="color: green"><%= notice %></p>
+<% content_for(:page_title, "#{@club.name}: Next Actions")%>
 
-<%= render @club %>
+<div class="container m-2 mr-6">
 
-<div>
-  <%= link_to "Edit this club", edit_club_path(@club) %> |
-  <%= link_to "Back to clubs", clubs_path %>
+    <div class="font-semibold text-gray-500 m-4">
+    <% if is_admin? %>  
+    <%= link_to "<< Back to Overview", index_admin_path %>
+    <% else %>
+      <%= link_to "<< Back to Overview", clubs_path %>
+    <% end %>
+    </div>
 
-  <%= button_to "Destroy this club", @club, method: :delete %>
+    <div class="text-2xl text-blue-900 m-4">
+      <%= @club.name %><br>
+      <span class="text-sm text-gray-500">administered by: <%= @club.creator.full_name %></span>
+    </div>
+
+
+   
+    <div class="p-4 m-2 border border-grey-500 shadow-md shadow-blue-900 hover:border-black rounded-lg">
+      <div class="ml-4 text-gray-700 text-lg text-left font-semibold">
+        Club Members
+      </div>
+      <br>
+      
+      <div class="ml-2">
+          <%= link_to "(2) Add / Edit active members",
+                new_club_member_path(@club),
+                data: { turbo_frame: dom_id(Member.new) },
+                class: teal_button_class %>
+                <br> <br>
+      </div>
+
+        <%= turbo_frame_tag Member.new %>
+        <%= turbo_frame_tag "members" do %>
+          <div class="text-sm">
+            <% if @club.members.any? %>
+              <%= render @club.members, club: @club %>
+            <% end %>
+            </div>
+        <% end %>
+
+        <div class="min-w-64 ml-2 mt-4 text-sm text-gray-500">
+          *Player must be removed from any key role before record can be deleted.<br><br>
+        </div>
+
+    </div>
+
+    <div class="flex flex-row flex-wrap">
+    <div class="basis-1/2">
+    <div class="p-4 basis-1/3 m-2 border border-grey-500 shadow-md shadow-blue-900 hover:border-black rounded-lg">
+      <div class=" ml-4 text-gray-700 text-lg text-left font-semibold">
+        Key Roles
+      </div>
+      <br>
+      <div class="ml-2">
+      <%= link_to "(3) Assign key roles",
+            new_club_member_key_role_path(@club),
+            data: { turbo_frame: dom_id(MemberKeyRole.new) },
+            class: teal_button_class %>
+            <br> <br>
+        </div>
+            <%= turbo_frame_tag MemberKeyRole.new %>
+            <%= turbo_frame_tag "member_key_roles" do %>
+              <div class="text-sm">
+                <% if @club.member_key_roles.any? %>
+                  <%= render @club.member_key_roles, club: @club %>
+                <% end %>
+                
+            <% end %>
+
+          </div>
+      </div>    
+    </div>
+
+    <div class="basis-1/2">
+      <div class="p-4 m-2 border border-grey-500 shadow-md shadow-blue-900 hover:border-black rounded-lg">
+        <div class="ml-4 text-gray-700 text-lg text-left font-semibold"> 
+          Teams <span class="text-grey-300 text-sm">(if multiple teams)</span>
+        </div>
+        <br>
+        
+        <div class="ml-2">
+        <%= link_to "Add / Edit teams",
+              new_club_team_path(@club),
+              data: { turbo_frame: dom_id(Team.new) },
+              class: teal_button_class %>
+              <br> <br>
+          </div>
+              <%= turbo_frame_tag Team.new %>
+                <%= turbo_frame_tag "teams" do %>
+                  <div class="text-sm">
+                    <% if @club.teams.any? %>
+                      <%= render @club.teams, team: @team %>
+                    <% end %>
+                    
+              <% end %>
+  
+            </div>
+        </div>    
+      </div>
+  </div>
+  </div>
+
+  <div class="font-semibold text-gray-500 m-4">
+  <% if is_admin? %>  
+  <%= link_to "<< Back to Overview", index_admin_path %>
+  <% else %>
+    <%= link_to "<< Back to Overview", clubs_path %>
+  <% end %>
+  </div>
+
 </div>

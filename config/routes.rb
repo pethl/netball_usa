@@ -1,5 +1,21 @@
 Rails.application.routes.draw do
-  resources :clubs
+  resources :programs
+
+  get 'clubs/index_admin' => 'clubs#index_admin', :as => :index_admin
+  get 'regions/team_list_index' => 'regions#team_list_index', :as => :team_list_index
+  get 'clubs/teams_list_index' => 'clubs#teams_list_index', :as => :teams_list_index
+
+  resources :clubs do
+    resources :member_key_roles, except: [:index, :show]
+  end
+  resources :clubs do
+    resources :members, except: [:index, :show]
+  end
+
+  resources :clubs do
+    resources :teams, except: [:index, :show]
+  end
+
   resources :tours
   resources :venues
 
@@ -7,10 +23,7 @@ Rails.application.routes.draw do
   resources :payments
   resources :individual_members
   resources :contacts
-  get 'na_teams/index_admin' => 'na_teams#index_admin', :as => :index_admin
-  get 'regions/team_list_index' => 'regions#team_list_index', :as => :team_list_index
-  get 'na_teams/teams_list_index' => 'na_teams#teams_list_index', :as => :teams_list_index
-
+  
   resources :regions
   resources :na_teams do
     resources :members, except: [:index, :show]

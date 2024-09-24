@@ -54,6 +54,6 @@ class VenuesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def venue_params
-      params.require(:venue).permit(:facility_type, :venue_name, :street, :city, :state, :zip, :website, :contact_name, :phone, :email, :permit_application_link, :grant_information_link, :number_of_courts, :size_of_courts, :retractable_basketball_hoops, :space_from_courts_to_wall, :seating_available, :restaurant_onsite, :facilities_close_by, :locker_rooms_onsite, :pool, :hot_tub, :bed_types, :cost_per_hour, :cost_per_day, :cost_per_night, :notes)
+      params.require(:venue).permit(:facility_type, :venue_name, :street, :city, :state, :zip, :website, :contact_name, :role, :phone, :email, :permit_application_link, :grant_information_link, :number_of_courts, :size_of_courts, :retractable_basketball_hoops, :space_from_courts_to_wall, :seating_available, :restaurant_onsite, :facilities_close_by, :locker_rooms_onsite, :pool, :hot_tub, :bed_types, :cost_per_hour, :cost_per_day, :cost_per_night, :notes)
     end
 end

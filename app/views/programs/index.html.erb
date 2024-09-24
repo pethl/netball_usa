@@ -1,0 +1,148 @@
+<% content_for(:page_title, "BAI Programs")%>
+
+<div class="mt-2">
+<%= link_to "Add New BAI Program", new_program_path, class: form_button_class %>
+<br><br>
+</div>
+
+<% if @programs.any? %>
+<div id="programs">
+<div class="relative overflow-x-auto">
+    <table class="table-auto w-full text-left rtl:text-right">
+        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+             <tr>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Stage
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Name of Program
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                   NA Program Contact Email
+                  </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    NA Program Contact Phone
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                   Location Name
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 ">
+                  Location<br> Contact Email
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 ">
+                  Location<br> Contact Phone
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 ">
+                  Address
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 ">
+                  City
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                  State
+                </th>
+                <th scope="col" class="px-6 py-3 w-40">
+                  Zip
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                  Country
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                  Coach Assigned
+                </th>
+                <th scope="col" class="px-6 py-3 w-40">
+                  Program Event Date / Time
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                  Funded by
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                  Notes
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        <% @programs.each do |program| %>
+            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+               
+                <td class="px-6 py-4 truncate">
+                  <%= program.program_stage%><br>
+                </td>
+                
+                <td class="px-6 py-4">
+                  <%= link_to program.program_name, edit_program_path(program), class: link_class %>
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= program.na_program_contact_email %>
+                </td>
+                
+                <td class="px-6 py-4 truncate">
+                  <%= program.na_program_contact_phone %><br>
+                  
+                </td>
+                <td class="px-6 py-4">
+                   <%= program.location_name %>
+                </td>
+
+                <td class="px-6 py-4">
+                   <%= program.location_contact_email %>
+                </td>
+
+                <td class="px-6 py-4">
+                 <%= program.location_contact_phone %>
+                </td>
+
+                <td class="px-6 py-4">
+                 <%= program.address %>
+               </td>
+              
+                <td class="px-6 py-4">
+                 <%= program.city %>
+               </td>
+               
+                 <td class="px-6 py-4">
+                 <%= program.state %>
+                </td>
+               
+                <td class="px-6 py-4">
+                 <%= program.zip %> 
+               </td>
+
+               <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">
+                    <%= program.country %>
+                </th>
+                
+                 <td class="px-6 py-4 truncate">
+                    <%= Person.where(id: program.people_id).first.full_name  unless  program.people_id.to_s.empty? %>
+                </td>
+                
+                <td class="px-6 py-4 truncate">
+                   <%= program.program_event_datetime.to_formatted_s(:usa_dt) unless (program.program_event_datetime.to_s.empty?) %> <br> <%= program.timezone %>
+                </td>
+                
+                <td class="px-6 py-4 truncate">
+                   <%= program.funded_by %>
+                </td>
+               
+                <td class="px-6 py-4 truncate">
+                <%= program.notes %>
+             </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+ </div>
+</div>
+
+    <% else %>
+    <p class="px-6 py-4">
+    No records to view</p>
+    <% end %>
+<br>
+
+
+
+

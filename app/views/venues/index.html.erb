@@ -26,6 +26,9 @@
                     Contact
                 </th>
                 <th scope="col" class="px-6 py-3 w-52">
+                    Role
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
                     # Courts
                 </th>
                 <th scope="col" class="px-6 py-3 w-60 truncate">
@@ -48,7 +51,7 @@
                 </td>
                 
                 <td class="px-6 py-4 text-wrap">
-                  <%= venue.address_condensed %><br> <%= venue.zip %>
+                  <%= venue.street %><br> <%= venue.city %><br><%= venue.state %> <%= venue.zip %>
                 </td>
                 
                 <td class="px-6 py-4 truncate">
@@ -58,6 +61,10 @@
                 <td class="px-6 py-4">
                   <%= venue.contact_name %><br>
                   <%= venue.phone %>
+                </td>
+
+                <td class="px-6 py-4">
+                  <%= venue.role %>
                 </td>
 
                 <td class="px-6 py-4">

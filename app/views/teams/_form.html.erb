@@ -1,13 +1,31 @@
-
-<%= form_with(model: team) do |form| %>
+ <div class="container m-4">
+ <%= form_for [@club, team], html: { class: "form member" } do |form| %>
+ 
   <% if team.errors.any? %>
-
-     <div class="error-message">
+   <div class="error-message">
        <%= team.errors.full_messages.to_sentence.capitalize %>
      </div>
-   <% end %>
+   <% end %> 
   
+   <div class="border border-blue-900 rounded pr-8 mr-8">
+
+   <%= form.hidden_field :user_id, value: current_user.id %>
+   <%= form.hidden_field :club_id, value: @club.id%>
+    <div class="m-2 min-w-50">
+      <%= form.label :name,  "Team Name*", class: label_class%>
+      <%= form.text_field :name, class: input_class  %>
+    </div>
     
-    <%= form.text_field  :name, input_html: { autofocus: true } %>
-    <%= form.submit class: "btn btn--secondary" %>
-  <% end %>
+    <div class="flex items-center ml-2">
+    <div>
+    <%= link_to "Cancel", club_path(@club), class: clear_button_class %>
+    </div>
+
+    <div>
+      <%= form.submit "Save Record", class: form_button_class %>
+     </div>
+  </div>
+    <% end %> 
+    </div>
+
+  </div> 

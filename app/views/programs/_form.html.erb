@@ -1,0 +1,146 @@
+<div class="m-4 lg:m-6">
+
+<%= form_with(model: program) do |form| %> 
+  <% if program.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(program.errors.count, "error") %> prohibited this program from being saved:</h2>
+
+      <ul>
+        <% program.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
+
+  <div class="mb-2">
+      <%= form.label :program_stage, class: label_class %>
+        <div class="mt-1">
+         <%= form.select :program_stage, options_for_select(program_stage, :selected => program.program_stage),{:prompt=>true}, class: form_input_class %>  
+        </div> 
+  </div>
+
+  <div class="col-span-3">
+  </div>
+  
+  <div class="mb-2 md:col-span-2 sm:mt-4 md:mt-0">
+      <%= form.label :program_name, class: label_class%>
+        <div class="mt-1">
+          <%= form.text_field :program_name, class: form_input_class  %>
+        </div>
+    </div>
+
+  <div class="mb-2">
+    <%= form.label :na_program_contact_email, "NA Program Contact Email", class: label_class%>
+    <div class="mt-1">
+      <%= form.text_field :na_program_contact_email, class: form_input_class  %>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :na_program_contact_phone, "NA Program Contact Phone", class: label_class%>
+    <div class="mt-1">
+      <%= form.text_field :na_program_contact_phone, class: form_input_class  %>
+    </div>
+  </div>
+
+  <div class="mb-2 col-span-2">
+    <%= form.label :location_name, class: label_class%>
+    <div class="mt-1">
+      <%= form.text_field :location_name, class: form_input_class  %>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :location_contact_email, "Location Contact Email", class: label_class%>
+    <div class="mt-1">
+      <%= form.text_field :location_contact_email, class: form_input_class  %>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :location_contact_phone, "Location Contact Phone", class: label_class%>
+    <div class="mt-1">
+      <%= form.text_field :location_contact_phone, class: form_input_class  %>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :address, class: label_class%>
+    <div class="mt-1">
+      <%= form.text_field :address, class: form_input_class  %>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :city, class: label_class%>
+    <div class="mt-1">
+      <%= form.text_field :city, class: form_input_class  %>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :state, "State*", class: label_class  %>
+      <div class="mt-1">
+        <%= form.select :state, options_for_select(us_states, :selected => program.state),{:prompt=>true}, class: form_input_class %>
+      </div>
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :zip, "Zip Code", class: label_class%>
+    <div class="mt-1">
+      <%= form.text_field :zip, class: form_input_class  %>
+    </div>
+  </div>
+
+  <div class="mb-2">
+      <%= form.label :country, class: label_class%>
+        <div class="mt-1">
+        <%= form.text_field :country, class: tight_form_input_class  %>
+      </div>
+    </div> 
+
+    <div class="mb-2">
+    <p class="block text-sm font-medium text-gray-700" %>Coach Assigned</p>
+      <div class="mt-1">
+        <%= form.collection_select(:people_id, @people, :id, :full_name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 hover:bg-gray-100 sm:text-sm"
+        }) %>
+      </div>
+    </div>
+    
+  <div class="mb-2">
+    <%= form.label :program_event_datetime, class: label_class%>
+    <div class="mt-1">
+      <%= form.datetime_field :program_event_datetime, class: input_class  %>
+    </div> 
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :timezone, "Evente Time Zone", class: label_class%>
+     <div class="mt-1">
+       <%= form.select :timezone, options_for_select(timezones, :selected => program.timezone),{:prompt=>true}, class: input_class %>
+     </div> 
+  </div>
+
+  <div class="mb-2 md:col-span-2 sm:mt-4 md:mt-0">
+      <%= form.label :funded_by, class: label_class%>
+        <div class="mt-1">
+          <%= form.text_field :funded_by, class: form_input_class  %>
+        </div>
+  </div>
+
+  <div class="mb-2 md:col-span-3">
+    <%= form.label :notes, class: label_class%>
+    <div class="mt-1">
+      <%= form.text_area :notes, class: form_input_class,  size: "20x3"  %>
+    </div> 
+  </div>
+ </div>
+
+  <div>
+    <%= form.submit class: form_button_class %>
+  </div>
+<% end %>
+

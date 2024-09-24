@@ -1,58 +1,76 @@
-<% content_for(:page_title, "Equipment Sales")%>
+<% content_for(:page_title, "Equipment Purchased")%>
 
 <div class="font-xl border p-4 text-blue-900 m-4 font-semibold">
   Please ensure educator details exist before creating equipment sale record. Go to <span class="font-light border m-2 border-blue-900"> <%= link_to "Educator Search >>", search_path %></span>
 </div>
  
-<br>
+<div class="m-2 my-4">
+    <%= link_to "Add New Equipment Sale", new_equipment_path, class: form_button_class %>
+</div>
+
 <% if @equipment.any? %>
 <div id="equipment">
+
 <div class="relative overflow-x-auto">
-    <table class="w-full text-left rtl:text-right">
+    <table class="w-full text-left rtl:text-right table-auto">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
             <tr>
+                 <th scope="col" class="px-6 py-3">
+                    State
+                </th>
                 <th scope="col" class="px-6 py-3">
-                    Details
+                    City
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Date of Sale
+                </th>
+                <th scope="col" class="px-6 py-3 text-right">
+                    Purchase Amount
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Items Purchased 
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Purchase Ammount
-                </th>
-                <th scope="col" colspan="3" class="px-6 py-3">
                     Sale To:
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    School
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Contact Details
                 </th>
                </tr>
         </thead>
         <tbody>
-        <% @equipment.each do |equipment| %>
+        <% @equipment.each do |netball_educator| %>
             <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
-                    <%= link_to image_tag("view.png", :class=>"mx-2 h-6 w-auto"), equipment  %>
-                </th>
-                <td class="px-6 py-4">
-                    <%= (link_to equipment.sale_date.to_formatted_s(:usa), edit_equipment_path(equipment), class: link_class) unless ( equipment.sale_date.to_s.empty?)  %>
-                </td>
-                <td class="px-6 py-4">
-                    <%= equipment.items_purchased %>
-                </td>
-                <td class="px-6 py-4">
-                    <%= equipment.purchase_amount %>
-                </td>
-                <td class="px-6 py-4">
-                   <%= equipment.netball_educator.full_name %>
-                </td>
                  <td class="px-6 py-4">
-                    <%= equipment.netball_educator.school_and_location %>
+                     <%= netball_educator.state %>
+                 </td>  
+                 <td class="px-6 py-4">
+                     <%= netball_educator.city %>
+                 </td>  
+                 
+                 <td class="px-6 py-4 text-wrap">
+                 <%= (link_to netball_educator.equipment.first.sale_date.to_formatted_s(:usa), edit_equipment_path(netball_educator.equipment.first.id), class: link_class) unless ( netball_educator.equipment.first.sale_date.to_s.empty?)  %>
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <%= number_to_currency(netball_educator.equipment.first.purchase_amount, precision: 2) unless netball_educator.equipment.first.purchase_amount.to_s.empty? %>
                 </td>
                 <td class="px-6 py-4">
-                    <%= equipment.netball_educator.contact_details %>
+                    <%= netball_educator.equipment.first.items_purchased %>
                 </td>
-                </tr>
+                
+                <td class="px-6 py-4">
+                    <%= netball_educator.full_name %>
+                </td>
+                <td class="px-6 py-4">
+                    <%= netball_educator.school_name %>
+                </td>
+                <td class="px-6 py-4">
+                    <%= netball_educator.contact_details %>
+                </td>
+            </tr>
             <% end %>
         </tbody>
     </table>
@@ -64,6 +82,3 @@ No records to view</p>
 <% end %>
 <br>
 
-<div class="m-2">
-    <%= link_to "Add New Equipment", new_equipment_path, class: form_button_class %>
-</div>

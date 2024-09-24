@@ -1,30 +1,30 @@
 
 <% if current_user.role=="admin" %>
   <% content_for(:page_title, "Management Summary")%>
-  <%= render "admin_home" %>
+    <%= render "admin_home" %>
 
-<% elsif current_user.role=="teams_grants" %>
-  <% content_for(:page_title, "Dashboard")%>
-  <%= render "office_home" %>
+  <% elsif current_user.role=="teams_grants" %>
+    <% content_for(:page_title, "Dashboard")%>
+    <%= render "office_home" %>
 
-<% elsif current_user.role=="grants" %>
-  <% content_for(:page_title, "Dashboard")%>
-  <%= render "office_home" %>
+  <% elsif current_user.role=="grants" %>
+    <% content_for(:page_title, "Dashboard")%>
+    <%= render "office_home" %>
   
-<% elsif current_user.role=="educators" %>
-  <% content_for(:page_title, "Dashboard")%>
-  <%= render "office_home" %>
+  <% elsif current_user.role=="educators" %>
+    <% content_for(:page_title, "Dashboard")%>
+    <%= render "office_home" %>
 
   <% elsif current_user.role=="sponsors" %>
-  <% content_for(:page_title, "Dashboard")%>
-  <%= render "office_home" %>  
+    <% content_for(:page_title, "Dashboard")%>
+    <%= render "office_home" %>  
   
   <% elsif current_user.role=="sponsors" %>
-  <% content_for(:page_title, "Dashboard")%>
-  <%= render "office_home" %>  
+    <% content_for(:page_title, "Dashboard")%>
+    <%= render "office_home" %>  
 
 <% else %>
   <% content_for(:page_title, "Welcome to Netball America Members Zone")%>
-  <%= render "teamlead_home" %>
+    <%= render "teamlead_home" %>
 
 <% end %>

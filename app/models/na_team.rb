@@ -1,14 +1,14 @@
 class NaTeam < ApplicationRecord
   has_many :members, dependent: :destroy
   has_many :member_key_roles, dependent: :destroy
-  has_many :payments
+  
   
   belongs_to(
     :creator,
     class_name: 'User',
     foreign_key: 'user_id',
     inverse_of: :na_teams
-  )
+  ) 
   validates :name, presence: true
   validates :city, presence: true
   validates :state, presence: true
@@ -35,6 +35,16 @@ class NaTeam < ApplicationRecord
      else
       @member = Member.find(@member_key_role.member_id)
       @member.full_name
+    end
+  end
+
+  def team_president_phone
+    @member_key_role = MemberKeyRole.where(na_team_id: self.id, key_role: "Team President").first
+    if @member_key_role.blank?
+       "Please nominate"
+     else
+      @member = Member.find(@member_key_role.member_id)
+      @member.phone
     end
   end
   

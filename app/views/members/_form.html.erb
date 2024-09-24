@@ -1,5 +1,5 @@
 <div class="container m-4">
-<%= form_for [@na_team, member], html: { class: "form member" } do |form| %>
+<%= form_for [@club, member], html: { class: "form member" } do |form| %>
 
   <% if member.errors.any? %>
     <div style="color: red">
@@ -33,9 +33,14 @@
         </div>
 
         <div>
-          <%= form.label :gender, "Gender*", class: label_class%>
-          <%= form.select :gender, options_for_select(gender, :selected => member.gender),{:prompt=>true}, style: "width:206px", class: input_class %>
-       </div>
+          <%= form.label :email,  "Phone", class: label_class%>
+          <%= form.text_field :phone, class: input_class  %>
+        </div>
+
+        <div>
+          <%= form.label :address,  "Address", class: label_class %>
+          <%= form.text_field :address, class: input_class  %>
+        </div>
 
         <div>
           <%= form.label :city,  "City*", class: label_class %>
@@ -47,13 +52,20 @@
           <%= form.select :state, options_for_select(us_states, :selected => member.state),{:prompt=>true}, style: "width:206px", class: input_class %>
         </div>
 
-        
+        <div>
+          <%= form.label :zip,  "Zip", class: label_class %>
+          <%= form.text_field :zip, class: input_class  %>
+        </div>
+
+        <div>
+          <%= form.label :gender, "Gender*", class: label_class%>
+          <%= form.select :gender, options_for_select(gender, :selected => member.gender),{:prompt=>true}, style: "width:206px", class: input_class %>
+        </div>
 
         <div>
           <%= form.label :age_status, "Youth(under 18) or Adult*", class: label_class %>
           <%= form.select :age_status, options_for_select(member_age_status, :selected => member.age_status),{:prompt=>true}, style: "width:206px", class: input_class %>
        </div>
-
 
        <div>
           <%= form.label :engagement_status, "Player Engagement*", class: label_class %>
@@ -89,10 +101,10 @@
           <%= form.text_area :notes, class: input_class  %>
         </div>
           </div>
-          <%= form.hidden_field :team_id, value: @na_team.id%>
+          <%= form.hidden_field :team_id, value: @club.id%>
        <div class="flex items-center">
         <div>
-        <br>   <%= link_to "Cancel", na_team_path(@na_team), class: clear_button_class %>
+        <br>   <%= link_to "Cancel", club_path(@club), class: clear_button_class %>
         </div>
 
         <div>

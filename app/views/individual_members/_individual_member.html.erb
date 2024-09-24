@@ -18,15 +18,25 @@
         <span class="text-gray-500 font-light">Email: </span><br>
           <%= individual_member.email %> 
       </div> 
+
+      <div class="font-medium text-gray-900 ">
+        <span class="text-gray-500 font-light">Phone: </span><br>
+          <%= individual_member.phone %> 
+      </div> 
       
       <div class="font-medium text-gray-900 ">
+       <span class="text-gray-500 font-light">Address, City: </span><br>
+        <%= individual_member.address %> <br> <%= individual_member.city %> 
+     </div> 
+
+      <div class="font-medium text-gray-900 ">
        <span class="text-gray-500 font-light">City, State: </span><br>
-        <%= individual_member.city %>,  <%= individual_member.state %> 
+        <%= individual_member.state %> <%= individual_member.zip %> 
      </div> 
 
      <div class="font-medium text-gray-900 ">
        <span class="text-gray-500 font-light">Gender: </span><br>
-        <%= individual_member.gender %>,  <%= individual_member.state %> 
+        <%= individual_member.gender %>
      </div> 
    
       <div class="font-medium text-gray-900 ">
@@ -37,11 +47,6 @@
       <div class="font-medium text-gray-900 ">
       <span class="text-gray-500 font-light">Engagement Status: </span><br>
         <%= individual_member.engagement_status %>
-      </div> 
-
-      <div class="font-medium text-gray-900 ">
-      <span class="text-gray-500 font-light">Place of birth: </span><br>
-        <%= individual_member.place_of_birth %>
       </div> 
 
       <div class="font-medium text-gray-900 ">
@@ -57,6 +62,11 @@
       <div class="font-medium text-gray-900 ">
       <span class="text-gray-500 font-light">Interested in Team USA: </span><br>
         <%= individual_member.interested_in_usa_team %>
+      </div> 
+
+      <div class="font-medium text-gray-900 ">
+      <span class="text-gray-500 font-light">Place of birth: </span><br>
+        <%= individual_member.place_of_birth %>
       </div> 
 
       <div class="font-medium text-gray-900 flex-wrap">

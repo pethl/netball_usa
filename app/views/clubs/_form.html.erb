@@ -13,7 +13,7 @@
 
   <div class="flex flex-wrap gap-2">
      <div class="mt-2">
-        <%= form.label :name, "Team Name*", class: label_class%>
+        <%= form.label :name, "Club Name*", class: label_class%>
        <div class="mt-3">
         <%= form.text_field :name, class: required_input_class  %>
        </div> 
@@ -36,7 +36,7 @@
      <div class="mt-2">
        <%= form.label :website, "Team Website",  class: label_class%>
         <div class="mt-3">
-          <%= form.text_field :website, placeholder: "Team Website", class: input_class  %>
+          <%= form.text_field :website, placeholder: "Club Website", class: input_class  %>
         </div> 
       </div> 
     </div>
@@ -103,13 +103,13 @@
       <%= form.label :membership_category, "Membership Category",  class: label_class%>
        <div class="mt-1">
          <%= form.select :membership_category, options_for_select(club_membership_category, :selected => club.membership_category),{:prompt=>true}, style: "width:150px", class: "text-sm rounded-md border-gray-300 focus:ring-blue-900 hover:bg-gray-100" %>
-        </div>
+        </div> 
      </div>
       
 
   </div>
   <div>
-  <%= link_to "Cancel", na_teams_path, class: clear_button_class %>
+  <%= link_to "Cancel", clubs_path, class: clear_button_class %>
   
     <%= form.submit  "Save Club", class: form_button_class %>
   </div>

@@ -67,12 +67,12 @@ class PagesController < ApplicationController
     
     def get_membership_type
       @individual_membership = IndividualMember.where(user_id: current_user.id)
-      @team_membership = NaTeam.where(user_id: current_user.id)
+      @team_membership = Club.where(user_id: current_user.id)
       
       if @individual_membership.any?
         return "Individual"
       elsif @team_membership.any?
-        return "Team"
+        return "Club"
       else
         return "None"
       end 

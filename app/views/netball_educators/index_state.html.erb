@@ -1,9 +1,15 @@
 <% content_for(:page_title, "Educators - By State")%>
 
+<% if current_user.admin?  %>
+<div class="p-2">
+<%= link_to "Export educators as spreadsheet", netball_educators_path(format: "xlsx"), class: clear_button_class %>
+</div> 
+<% end %>
+
 <div class="m-4">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
-            <a href="/netball_educators/" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Created Date</a>
+            <a href="/netball_educators/" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Date Added</a>
         </li>
         <li class="me-2">
             <a href="/netball_educators/index_state" class="inline-block p-2 text-blue-900 bg-gray-100 rounded-t-lg active " aria-current="page">By State</a>
@@ -28,7 +34,7 @@
   <% @netball_educators_by_state.each do |state, educators| %>
     
       <% if educators.count> 0 %>
-        <div class="text-xl text-blue-900 mt-8">
+        <div class="text-xl text-blue-900 mt-8 bg-blue-100">
           <th scope="row" colspan="9" class="px-6 py-4 font-medium text-blue-900 whitespace-nowrap dark:text-white">
             <%= state %>
           </th>
@@ -40,23 +46,23 @@
             <thead class="bg-white border-b text-gray-300 font-light text-xs ">
                 <tr>
                     <th scope="col" class="px-6 py-3 w-52">
-                        Date Created 
+                       City
                     </th>
+
+                    <th scope="col" class="px-6 py-3 w-52">
+                        Level
+                    </th>
+                    <th scope="col" class="px-6 py-3 w-52">
+                        School/District
+                    </th>
+                    
                     <th scope="col" class="px-6 py-3 w-52">
                         Name
                     </th>
                     <th scope="col" class="px-6 py-3 w-52">
                         Contact
                     </th>
-                    <th scope="col" class="px-6 py-3 w-52">
-                        School/District
-                    </th>
-                    <th scope="col" class="px-6 py-3 w-52">
-                        Level
-                    </th>
-                    <th scope="col" class="px-6 py-3 w-52">
-                        City
-                    </th>
+                    
                     <th scope="col" class="px-6 py-3 w-40">
                         State
                     </th>
@@ -66,34 +72,33 @@
                     <th scope="col" class="px-6 py-3 w-60 truncate">
                         Notes
                     </th>
+                    <th scope="col" class="px-6 py-3 w-52">
+                        Date Created
+                    </th>
                 </tr>
             </thead>
             <tbody>
             <% educators.each do |educator| %>
                 <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
-                    <th scope="row" class="px-6 py-2 font-medium text-gray-800 whitespace-nowrap dark:text-white">
-                        <%= educator.created_at.to_formatted_s(:usa) unless (educator.created_at.to_s.empty?) %>
-                    </th>
-                
+                     <td class="px-6 py-2">
+                        <%= educator.city %>
+                    </td>    
+
+                    <td class="px-6 py-2">
+                       <%= educator.level %>
+                    </td>
+
+                    <td class="px-6 py-2 text-wrap truncate">
+                      <%= educator.school_name %><br>
+                      <%= (link_to educator.website, educator.website, target: '_blank', class: link_class) unless (educator.website.to_s.empty?)%>
+                    </td>
+
                     <td class="px-6 py-2">
                        <%= link_to educator.full_name, edit_netball_educator_path(educator), class: link_class %>
                     </td>
                 
                     <td class="px-6 py-2 truncate">
                        <%= educator.formatted_phone %><br><%= educator.email %>
-                    </td>
-                
-                    <td class="px-6 py-2 text-wrap truncate">
-                      <%= educator.school_name %><br>
-                      <%= (link_to educator.website, educator.website, target: '_blank', class: link_class) unless (educator.website.to_s.empty?)%>
-                  
-                    </td>
-                    <td class="px-6 py-2">
-                       <%= educator.level %>
-                    </td>
-                
-                     <td class="px-6 py-2">
-                        <%= educator.city %>
                     </td>
                 
                     <td class="px-6 py-2">
@@ -104,9 +109,13 @@
                        <%= educator.user.full_name unless (educator.user_id.to_s.empty?)  %>
                     </td>
 
-                     <td class="px-6 py-2">
+                    <td class="px-6 py-2">
                       <p class="text-wrap truncate"> <%= educator.mgmt_notes %></p>
                     </td>
+
+                    <th scope="row" class="px-6 py-2 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                        <%= educator.created_at.to_formatted_s(:usa) unless (educator.created_at.to_s.empty?) %>
+                    </th>
                 </tr>
                 <% end %>
               <% end %>

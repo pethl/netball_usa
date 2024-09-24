@@ -14,13 +14,17 @@
       </ul>
 </div>
 
+<div class="m-4">
+  <%= link_to "New payment", new_payment_path, class: form_button_class %>
+</div>
+
 <% if @team_payments.any? %>
 <div class="relative overflow-x-auto">
     <table class="table-auto w-full text-left rtl:text-right">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
              <tr>
-                <th scope="col" class="px-6 py-3 w-52">
-                    Year
+                <th scope="col" class="px-6 py-3 w-52 whitespace-nowrap">
+                    For Year
                 </th>
                 <th scope="col" class="px-6 py-3 w-52">
                     Type
@@ -54,7 +58,7 @@
             <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
                
                 <td class="px-6 py-4 truncate">
-                   <%= link_to payment.payment_year, edit_payment_path(payment), class: link_class %>
+                   <%= link_to payment.payment_year, payment_path(payment), class: link_class %>
                 </td>
                 
                 <td class="px-6 py-4">
@@ -66,7 +70,10 @@
                 </td>
                 
                 <td class="px-6 py-4">
-                  <% if payment.na_team_id? %><%= NaTeam.find(payment.na_team_id).name %><% end %><br>
+               
+                  <% if payment.club_id? %>
+                  <%= link_to Club.find(payment.club_id).name, club_path(payment.club_id), class: link_class %>
+                  <% end %><br>
                   
                 </td>
                 <td class="px-6 py-4">
@@ -100,6 +107,3 @@
     <% end %>
 <br>
 
-<div class="mt-1">
-  <%= link_to "New payment", new_payment_path, class: form_button_class %>
-<br><br>

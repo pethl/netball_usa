@@ -1,11 +1,10 @@
+<% content_for(:page_title, "Team: Edit #{@team.name}")%>
+
 <main class="container">
-  <%= link_to sanitize("&larr; Back to taem"), taem_path(@taem) %>
-
-  <div class="header">
-    <h1>Edit taem</h1>
-  </div>
-
-  <%= turbo_frame_tag @taem do %>
-  <%= render "form", taem: @taem %>
+ 
+ <%= turbo_frame_tag @team do %>
+  <%= render "form", club: @club, team: @team  %>
 <% end %>
+  
+  
 </main>

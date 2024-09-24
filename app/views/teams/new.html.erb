@@ -1,12 +1,7 @@
 <main class="container">
-  <%= link_to sanitize("&larr; Back to teams"), teams_path %>
-
-  <div class="header">
-    <h1>New team</h1>
-  </div>
 
   <%= turbo_frame_tag @team do %>
-    <%= render "form", team: @taem %>
-  <% end %>
-</main>
+    <%= render "form",  club: @club, team: @team %>
+ <% end %>
+</main> 
 

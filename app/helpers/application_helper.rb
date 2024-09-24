@@ -115,7 +115,7 @@ module ApplicationHelper
    end
    
    def club_membership_category
-    club_membership_category = Reference.where(active: "TRUE", group: 'club_membership_category').order(:value)
+    club_membership_category = Reference.where(active: "TRUE", group: 'club_membership_category').order(:id)
     club_membership_category = club_membership_category.pluck(:value)  
    end
 
@@ -294,6 +294,11 @@ module ApplicationHelper
     def facility_type
       facility_type = Reference.where(active: "TRUE", group: 'facility_type')
       facility_type = facility_type.pluck(:value)     
+    end
+
+    def program_stage
+      program_stage = Reference.where(active: "TRUE", group: 'program_stage')
+      program_stage = program_stage.pluck(:value)    
     end
 
     def generic_option

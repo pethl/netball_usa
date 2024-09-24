@@ -14,6 +14,13 @@ class User < ApplicationRecord
     foreign_key: 'user_id',
     inverse_of: :creator
   )
+
+  has_many(
+    :clubs,
+    class_name: 'Club',
+    foreign_key: 'user_id',
+    inverse_of: :creator
+  )
   
   #enum role: [:admin, :office, :teamlead]
   enum role: {

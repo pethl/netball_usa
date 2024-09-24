@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_action :set_team
+  before_action :set_club
   before_action :set_member, only: [:edit, :update, :destroy, :show]
   
   # GET /members
@@ -14,7 +14,7 @@ class MembersController < ApplicationController
   # GET /members/new
   def new
    # @member = Member.new
-     @member = @na_team.members.build
+     @member = @club.members.build
   end
 
   # GET /members/1/edit
@@ -23,7 +23,7 @@ class MembersController < ApplicationController
 
   # POST /members
   def create
-   @member = @na_team.members.build(member_params)
+   @member = @club.members.build(member_params)
 
        if @member.save
          respond_to do |format|
@@ -38,7 +38,7 @@ class MembersController < ApplicationController
   # PATCH/PUT /members/1
   def update
     if @member.update(member_params)
-         redirect_to na_team_path(@na_team), notice: "Member was successfully updated."
+         redirect_to club_path(@club), notice: "Member was successfully updated."
        else
          render :edit, status: :unprocessable_entity
        end
@@ -48,7 +48,7 @@ class MembersController < ApplicationController
   def destroy
      @member.destroy
      respond_to do |format|
-        format.html { redirect_to na_team_path(@na_team), notice: "Member was successfully deleted." }
+        format.html { redirect_to club_path(@club), notice: "Member was successfully deleted." }
         format.turbo_stream { flash.now[:notice] = "Member was successfully deleted." }
       end
   end
@@ -59,16 +59,16 @@ class MembersController < ApplicationController
 #      @member = Member.find(params[:id])
 #    end
     
-    def set_team
-       @na_team = NaTeam.find(params[:na_team_id])
-           end
+    def set_club
+       @club = Club.find(params[:club_id])
+    end
      
-     def set_member
-        @member = @na_team.members.find(params[:id])
-       end
+    def set_member
+       @member = @club.members.find(params[:id])
+    end
 
     # Only allow a list of trusted parameters through.
     def member_params
-      params.require(:member).permit(:na_team_id, :membership_type, :first_name, :last_name, :email, :city, :state, :gender, :interested_in_coaching, :interested_in_umpiring, :interested_in_usa_team, :dob, :age_status, :engagement_status, :place_of_birth, :notes)
+      params.require(:member).permit(:na_team_id, :club_id, :membership_type, :first_name, :last_name, :email, :phone,  :address, :city, :state, :zip,  :gender, :interested_in_coaching, :interested_in_umpiring, :interested_in_usa_team, :dob, :age_status, :engagement_status, :place_of_birth, :notes)
     end
 end

@@ -3,7 +3,7 @@ class PaymentsController < ApplicationController
 
   # GET /payments
   def index
-    @team_payments = Payment.where("na_team_id is not null")
+    @team_payments = Payment.where("club_id is not null")
     @team_payments = @team_payments.order('payment_year desc, payment_received_date desc')
   end
 
@@ -61,6 +61,6 @@ class PaymentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def payment_params
-      params.require(:payment).permit(:payment_type, :na_team_id, :individual_member_id, :payment_recorded_by_id, :payment_received_date, :payment_transaction_reference, :payment_year, :amount, :payment_notes)
+      params.require(:payment).permit(:payment_type, :club_id, :individual_member_id, :payment_recorded_by_id, :payment_received_date, :payment_transaction_reference, :payment_year, :amount, :payment_notes)
     end
 end

@@ -1,0 +1,10 @@
+<% content_for(:page_title, "Edit: #{@program.program_name}")%>
+
+<%= render "form", program: @program %>
+
+<br>
+
+<div>
+  <%= link_to "Show this BAI Porgram", @program %> |<br>
+  <%= link_to "<< Back to BAI Programs", programs_path %>
+</div>

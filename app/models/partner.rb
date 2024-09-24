@@ -1,5 +1,6 @@
 class Partner < ApplicationRecord
     has_many :contacts
+    has_one :person
 
     def contact_two_blank
         if (first_name_secondary.to_s +

@@ -22,15 +22,10 @@ class NetballEducatorsController < ApplicationController
   # GET /netball_educators
   def index
     if (is_admin? || current_user.role=="educators")
-     # @netball_educators = NetballEducator.where(:state => params[:netball_educator][:state], :level => params[:netball_educator][:level]).all
-     # @netball_educators = NetballEducator.all # Or whatever criteria you might have here
-     # @netball_educators = @netball_educators.select { |v| v.state == params[:state] } if !params[:state].blank?
-     # @netball_educators = @netball_educators.select { |v| v.level == params[:level] } if !params[:level].blank?
-     
-        @netball_educators = NetballEducator.all
-       @netball_educators = @netball_educators.order(created_at: :desc)
+       @netball_educators = NetballEducator.all
+       @netball_educators = @netball_educators.order("created_at DESC, state ASC, city ASC")
     else
-        @netball_educators = NetballEducator.where(user_id: current_user.id).where('level != ?', "School/District Lead")
+        @netball_educators = NetballEducator.where(user_id: current_user.id)
         @netball_educators = @netball_educators.order(created_at: :desc)
       end
 
@@ -44,13 +39,17 @@ class NetballEducatorsController < ApplicationController
   def index_state
     if (is_admin? || current_user.role=="educators")
        @netball_educators = NetballEducator.all
-       @netball_educators = @netball_educators.order(state: :asc)
-       @netball_educators_by_state = @netball_educators.group_by { |t| t.state }
+       @netball_educators_by_state = @netball_educators.order("state ASC, city ASC").group_by(&:state)
       
     else
         @netball_educators = NetballEducator.where(user_id: current_user.id).where('level != ?', "School/District Lead")
         @netball_educators = @netball_educators.order(state: :asc)
         @netball_educators_by_state = @netball_educators.group_by { |t| t.state }
+      end
+
+      respond_to do |format|
+        format.html
+        format.xlsx
       end
   end
 
@@ -70,8 +69,8 @@ class NetballEducatorsController < ApplicationController
   def index_level
     if (is_admin? || current_user.role=="educators")
         @netball_educators = NetballEducator.all
-        @netball_educators = @netball_educators.order(level: :asc)
-        @netball_educators_by_level = @netball_educators.group_by { |t| t.level }
+        @netball_educators_by_level = @netball_educators.order("level ASC, state ASC, city ASC").group_by(&:level)
+      
      
     else
         @netball_educators = NetballEducator.where(user_id: current_user.id)
@@ -140,6 +139,6 @@ class NetballEducatorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def netball_educator_params
-      params.require(:netball_educator).permit(:feedback, :first_name, :last_name, :level, :website, :authorize, :user_id, :email, :phone, :school_name, :city, :state, :educator_notes, :mgmt_notes)
+      params.require(:netball_educator).permit(:feedback, :first_name, :last_name, :level, :website, :authorize, :user_id, :email, :phone, :school_name, :address, :city, :state, :educator_notes, :mgmt_notes)
     end
 end
