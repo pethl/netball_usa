@@ -24,7 +24,7 @@
                 </tr>
             </thead>
             <tbody>
-                <% club.members.each do |member| %>
+                <% club.individual_members.each do |member| %>
                     <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
                         <td class="pr-2">
                         <%= member.full_name  %>
@@ -39,7 +39,7 @@
                         <%= member.gender  %>
                         </td>
                         <td class="pr-2 text-center">
-                        <%= member.engagement_status  %>
+                        <%= member.engagement_status %>
                         </td>
                         <td class="pr-2 text-center">
                         <%= member.age_status  %>

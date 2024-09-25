@@ -60,6 +60,6 @@ class IndividualMembersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def individual_member_params
-      params.require(:individual_member).permit(:first_name, :last_name, :email, :phone, :address, :city, :state, :zip, :gender, :interested_in_coaching, :interested_in_umpiring, :interested_in_usa_team, :place_of_birth, :age_status, :engagement_status, :membership_type, :notes)
+      params.require(:individual_member).permit(:first_name, :last_name, :email, :phone, :address, :city, :state, :zip, :gender, :interested_in_coaching, :interested_in_umpiring, :interested_in_usa_team, :place_of_birth, :age_status, :engagement_status, :membership_type, :notes, :club_id)
     end
 end

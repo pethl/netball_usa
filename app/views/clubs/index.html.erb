@@ -1,145 +1,170 @@
-<% content_for(:page_title, "Membership Administration Hub")%>
- 
-<div class="container m-4">
-  <!-- 1.1 HEADER -->
-    <div class="text-gray-700 text-lg font-semibold mb-4">
-    Club Administrator Actions List:
-    </div> 
 
-  <!-- 1.1 BODY -->
-    <div class="container max-w-screen-md">
-      <div class="grid grid-rows-6 grid-flow-col gap-1 max-w-2/3">
-        <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-1"></i></div>
-        <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-2"></i></div>
-        <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-3"></i></div>
-        <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-4"></i></div>
-        <div></div> 
-        <div></div>
-        <div class="text-base w-60 self-center mb-2 ml-2">Create Your Club</div>
-        <div class="text-base w-60 self-center mb-2 ml-2">Add Active Members</div>
-        <div class="text-base w-60 self-center mb-2 ml-2">Assign Key Roles</div>
-        <div class="text-base w-60 self-center mb-2 ml-2">Pay Membership</div>
-        <div class="text-sm w-70 self-center ml-2"><%= link_to "See Membership Structure & Payment Info >>", pages_teams_membership_fees_path, class: link_class %> </div>
-        <div class="text-sm w-70 self-center ml-2"><%= link_to "Netball America Membership Information >>", "https://www.canva.com/design/DAF6lkdLaPg/27ttOqb7-siKFLro0JCZUA/view?utm_content=DAF6lkdLaPg&utm_campaign=designshare&utm_medium=link&utm_source=editor#1", target: '_blank', class: link_class %> </div>
 
-        <div class="text-green-500 justify-start-end text-bold mb-1 self-center"><% unless @club.nil? %> <i class="fa-solid fa-check"></i><% end %></div>
-        <div class="text-green-500 justify-start-end text-bold mb-1 self-center"><% if !@club.nil? && @club.members.any?  %> <i class="fa-solid fa-check"></i><% end %></div>
-        <div class="text-green-500 justify-start-end text-bold mb-1 self-center"><% if !@club.nil? && @club.member_key_roles.any?  %> <i class="fa-solid fa-check"></i><% end %></div>
-        <div class="text-green-500 w-full justify-start-end text-bold mb-1 self-center">
-        
-        <% if @clubs.any? %> 
-          <% if @clubs.first.has_paid=="Payment Due" %>
-              <span class="text-red-600"><%=  @club.has_paid %></span> </i>
-            <% else %>
-            <span class="text-green-500"> <i class="fa-solid fa-check"></i> <%=  @club.has_paid %></span>
-            <% end %>
-          <% end %>
-      </div>
-  </div>
+<% if is_admin? %>
+<% content_for(:page_title, "Clubs Managed by NA Administrators")%>
 
-    <div class="mt-4 ml-4">    
-     <p class="text-sm text-gray-500 mt-2">Mandatory fields are marked with a *, please provide as much information as you can,<br> it helps us to better understand and serve our membership group.</p>
-    </div> 
-</div>
-
-<!-- 2.1 CLUB HEADER  NO CLUB-->
-
-<% if @club.nil? %>
-
-  <%= turbo_frame_tag "first_turbo_frame" do %>
-    <div class="header">
-     <br>
-      <%= link_to "(1) Create club",
-                new_club_path,                  
-                  class: teal_button_class,
-                  data: { turbo_frame: dom_id(Club.new) }  %>
-    </div>
-  <% end %>
-  <br>
-    <%= turbo_frame_tag Club.new %>
-  <hr>
-<% end %>
-
-<!-- 2.2 CLUB HEADER WITH CLUB-->
-<div class="container m-4 w-5/6">
-<div id="clubs">
-  <div class="grid grid-cols-3 gap-4">
-    <div class="col-span-3">
-      
-       <% unless @club.nil? %>
-
-          <%= turbo_frame_tag @club do %>
-              <%= render @club %>
-          <% end %>
-        
-        <% end %> 
-      </div> 
-
-      <!-- 2.3 CLUB MEMBERSHIP ROLES-->
-      <% if !@club.nil? %>
-    
-        <% if @club.members.any? %>
-    
-      <div class="col-span-3">
-        <div class="p-3 mb-2 border border-blue-900 rounded-lg shadow-md shadow-blue-900 hover:shadow-2xlmb-2">
-          <div class="flex justify-between">
-              
-            <div class="text-lg text-gray-600"> Key Roles</div>
-              <div class="col-span-4 bg-white m-2 pb-2 text-sm text-right">
-                  <%= link_to "(3) Assign Key Roles", club_path(@club), class: teal_button_class, data: { turbo_frame: "_top" } %>
-              </div>
-            </div>
-        
-            <div class="ml-6 mb-2 font-semibold">
-              <div class="flex justify-between mx-8">
-                    <div>
-                      Team President:<br><span class="text-xl text-blue-900"> <%= @club.team_president %></span>
-                    </div>
-                    <div >
-                      Head Coach:<br><span class="text-xl text-blue-900"><%= @club.head_coach %></span>
-                    </div>
-                    <div>
-                      Head Umpire:<br><span class="text-xl text-blue-900"> <%= @club.head_umpire %></span>
-                    </div>
-                </div>
-            </div>
-    
+      <%= turbo_frame_tag "first_turbo_frame" do %>
+          <div class="header">
+          <br>
+            <%= link_to "Create club",
+                      new_club_path,                  
+                        class: form_button_class,
+                        data: { turbo_frame: dom_id(Club.new) }  %>
+          </div>
+        <% end %>
+        <br>
+          <%= turbo_frame_tag Club.new %>
+        <hr>
+        <div id="clubs">
+         <%= render @clubs %>
         </div>
+ 
+<% else %>      <!-- 1.0 ALL NON ADMIN CONTINUES HERE -->
+<% content_for(:page_title, "Membership Administration Hub")%>
+
+    <div class="container m-4">
+      <!-- 1.1 HEADER -->
+        <div class="text-gray-700 text-lg font-semibold mb-4">
+        Club Administrator Actions List:
+        </div> 
+
+      <!-- 1.1 BODY -->
+        <div class="container max-w-screen-md">
+          <div class="grid grid-rows-6 grid-flow-col gap-1 max-w-2/3">
+            <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-1"></i></div>
+            <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-2"></i></div>
+            <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-3"></i></div>
+            <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-4"></i></div>
+            <div></div> 
+            <div></div>
+            <div class="text-base w-60 self-center mb-2 ml-2">Create Your Club</div>
+            <div class="text-base w-60 self-center mb-2 ml-2">Add Active Members</div>
+            <div class="text-base w-60 self-center mb-2 ml-2">Assign Key Roles</div>
+            <div class="text-base w-60 self-center mb-2 ml-2">Pay Membership</div>
+            <div class="text-sm w-70 self-center ml-2"><%= link_to "See Membership Structure & Payment Info >>", pages_teams_membership_fees_path, class: link_class %> </div>
+            <div class="text-sm w-70 self-center ml-2"><%= link_to "Netball America Membership Information >>", "https://www.canva.com/design/DAF6lkdLaPg/27ttOqb7-siKFLro0JCZUA/view?utm_content=DAF6lkdLaPg&utm_campaign=designshare&utm_medium=link&utm_source=editor#1", target: '_blank', class: link_class %> </div>
+
+            <div class="text-green-500 justify-start-end text-bold mb-1 self-center"><% unless @club.nil? %> <i class="fa-solid fa-check"></i><% end %></div>
+            <div class="text-green-500 justify-start-end text-bold mb-1 self-center"><% if !@club.nil? && @club.members.any?  %> <i class="fa-solid fa-check"></i><% end %></div>
+            <div class="text-green-500 justify-start-end text-bold mb-1 self-center"><% if !@club.nil? && @club.member_key_roles.any?  %> <i class="fa-solid fa-check"></i><% end %></div>
+            <div class="text-green-500 w-full justify-start-end text-bold mb-1 self-center">
+            
+            <% if @clubs.any? %> 
+              <% if @clubs.first.has_paid=="Payment Due" %>
+                  <span class="text-red-600"><%=  @club.has_paid %></span> </i>
+                <% else %>
+                <span class="text-green-500"> <i class="fa-solid fa-check"></i> <%=  @club.has_paid %></span>
+                <% end %>
+              <% end %>
+          </div>
       </div>
-     </div>
-        <% end %>
-        <% end %>
-    
-        <!-- 2.3 CLUB TEAMS-->
-        <% if !@club.nil? %>
-          <% if @club.teams.any? %>
-           <div class="col-span-3">
-             <div class="p-3 mb-2 border border-blue-900 rounded-lg shadow-md shadow-blue-900 hover:shadow-2xl">
-              
-             <div class="flex justify-between">
-               <div class="text-lg text-gray-600"> 
-                Teams <span class="text-sm text-gray-500">(only required if more than one team)</span>
-                </div>
-                
-                <div class="col-span-4 bg-white m-2 pb-2 text-sm text-right">
-                    <%= link_to "Add / Edit Teams", club_path(@club), class: teal_button_class, data: { turbo_frame: "_top" } %>
-                </div>
-              </div>
+
+        <div class="mt-4 ml-4">    
+        <p class="text-sm text-gray-500 mt-2">Mandatory fields are marked with a *, please provide as much information as you can,<br> it helps us to better understand and serve our membership group.</p>
+        </div> 
+    </div>
+
+    <!-- 2.1 CLUB HEADER  NO CLUB-->
+
+    <% if @club.nil? %>
+
+      <%= turbo_frame_tag "first_turbo_frame" do %>
+        <div class="header">
+        <br>
+          <%= link_to "(1) Create club",
+                    new_club_path,                  
+                      class: teal_button_class,
+                      data: { turbo_frame: dom_id(Club.new) }  %>
+        </div>
+      <% end %>
+      <br>
+        <%= turbo_frame_tag Club.new %>
+      <hr>
+    <% end %>
+
+    <!-- 2.2 CLUB HEADER WITH CLUB-->
+    <div class="container m-4 w-5/6">
+    <div id="clubs">
+      <div class="grid grid-cols-3 gap-4">
+        <div class="col-span-3">
+          
+          <% unless @club.nil? %>
+
+              <%= turbo_frame_tag @club do %>
+                  <%= render @club %>
+              <% end %>
+            
+            <% end %> 
+          </div> 
+
+          <!-- 2.3 CLUB MEMBERSHIP ROLES-->
+          <% if !@club.nil? %>
         
-                <div class="w-1/2">
-                  <% if @club.teams.any? %>
-                    <%= render @club.teams, team: @team %>
-                  <% end %>
+            <% if @club.members.any? %>
+        
+          <div class="col-span-3">
+            <div class="p-3 mb-2 border border-blue-900 rounded-lg shadow-md shadow-blue-900 hover:shadow-2xlmb-2">
+              <div class="flex justify-between">
+                  
+                <div class="text-lg text-gray-600"> Key Roles</div>
+                  <div class="col-span-4 bg-white m-2 pb-2 text-sm text-right">
+                      <%= link_to "(3) Assign Key Roles", club_path(@club), class: teal_button_class, data: { turbo_frame: "_top" } %>
+                  </div>
                 </div>
-           
-             </div>
-            </div> 
-          <% end %>
-          <% end %>
+            
+                <div class="ml-6 mb-2 font-semibold">
+                  <div class="flex justify-between mx-8">
+                        <div>
+                          Team President:<br><span class="text-xl text-blue-900"> <%= @club.team_president %></span>
+                        </div>
+                        <div >
+                          Head Coach:<br><span class="text-xl text-blue-900"><%= @club.head_coach %></span>
+                        </div>
+                        <div>
+                          Head Umpire:<br><span class="text-xl text-blue-900"> <%= @club.head_umpire %></span>
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
           </div>
         </div>
-        </div>
-        </div>
+            <% end %>
+            <% end %>
         
-        </div> <!-- FULL END-->
+            <!-- 2.3 CLUB TEAMS-->
+            <% if !@club.nil? %>
+              <% if @club.teams.any? %>
+              <div class="col-span-3">
+                <div class="p-3 mb-2 border border-blue-900 rounded-lg shadow-md shadow-blue-900 hover:shadow-2xl">
+                  
+                <div class="flex justify-between">
+                  <div class="text-lg text-gray-600"> 
+                    Teams <span class="text-sm text-gray-500">(only required if more than one team)</span>
+                    </div>
+                    
+                    <div class="col-span-4 bg-white m-2 pb-2 text-sm text-right">
+                        <%= link_to "Add / Edit Teams", club_path(@club), class: teal_button_class, data: { turbo_frame: "_top" } %>
+                    </div>
+                  </div>
+            
+                    <div class="w-1/2">
+                      <% if @club.teams.any? %>
+                        <%= render @club.teams, team: @team %>
+                      <% end %>
+                    </div>
+              
+                </div>
+                </div> 
+              <% end %>
+              <% end %>
+              </div>
+            </div>
+            </div>
+            </div>
+            
+            </div> 
+  <!-- TEAM LEAD END-->
+<% end %>
+<!-- FULL END-->
          

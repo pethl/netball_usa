@@ -5,97 +5,136 @@
     <div class="relative overflow-x-auto">
          <table class="table-auto w-full text-left rtl:text-right">
              <thead class="bg-white border-b text-gray-300 font-light text-xs ">
-                 <tr>
-                 <tr>
-                 <th scope="col" class="px-6 py-3 w-52">
-                     Team Name
-                 </th>
-                 <th scope="col" class="px-6 py-3">
-                     City
-                 </th>
-                 <th scope="col" class="px-6 py-3">
-                     State
-                 </th>
-                 <th scope="col" class="px-6 py-3">
-                    Paid?
-                </th>
-                 <th scope="col" class="px-6 py-3 text-center">
-                     Members #
-                 </th>
-                 <th scope="col" class="px-6 py-3 text-center">
-                     Has Youth?
-                 </th>
-                
-                 <th scope="col" class="px-6 py-3 text-nowrap">
-                     Date Added
-                 </th>
-                 <th scope="col" class="px-6 py-3 w-60 text-left">
-                     Administered By
-                 </th>
-                 <th scope="col" class="px-6 py-3 w-60 truncate">
-                    Website
-                </th>
-                  </tr>
-                 </thead>
+             <tr>
+             <th scope="col" class="px-6 py-3 w-52">
+                 Club Name
+             </th>
+             <th scope="col" class="px-6 py-3">
+                 City
+             </th>
+             <th scope="col" class="px-6 py-3">
+                 State
+             </th>
+             <th scope="col" class="px-6 py-3 text-right">
+                 Paid?
+              </th>
+              <th scope="col" class="px-6 py-3 w-52 text-center">
+                 Members Category
+             </th>
+             <th scope="col" class="px-6 py-3 w-52 text-center whitespace-nowrap">
+                 Members Estimate<br>
+                 Total: <br>
+                 [Active/P-T]
+             </th>
+             <th scope="col" class="px-6 py-3 w-52 text-center">
+                 Members Records #
+             </th>
+             <th scope="col" class="px-6 py-3 w-52 text-center">
+                 Has Youth?
+             </th>
+             <th scope="col" class="px-6 py-3 w-60 text-left">
+                 Administered By
+             </th>
+             <th scope="col" class="px-6 py-3 w-60 truncate">
+                 Team President
+             </th>
+             <th scope="col" class="px-6 py-3 w-60 truncate">
+                 Website
+             </th>
+             <th scope="col" class="px-6 py-3 w-60 ">
+                 Date Created
+             </th>
+             <th scope="col" class="px-6 py-3 w-60 truncate">
+                 Club Id
+             </th>
+            </tr>
+        </thead>
         
       <%  @regions_by_region.each do |region, states| %>
         <tbody>
             <tr>
-              <th scope="row" colspan="5" class="text-2xl text-blue-900 mt-8 py-4 font-medium whitespace-nowrap dark:text-white">
+              <th scope="row" colspan="13" class="bg-blue-100 text-xl text-blue-900 mt-8 py-2 font-medium whitespace-nowrap dark:text-white">
                <%= region %>
               </th>
             </tr>
 
          <% @clubs_by_us_state.each do |state, clubs| %>
            <% if Region.where(["region = ? and state = ?", region, state]).any? %>
-      
-                          <% clubs.each do |club| %>
-                              <tr class="bg-white border-b hover:bg-gray-100">
-                             
-                              <td class="px-6 py-4 truncate">
-                              <%= link_to club.name, club_path(club), class: link_class %>
-                           </td>
-                           
-                           <td class="px-6 py-4">
-                              <%= club.city  %>
-                           </td>
-                           
-                           <td class="px-6 py-4">
-                              <%= club.us_state %>
-                           </td>
-                           <td class="px-6 py-4">
-                                <% if club.club_payments_total>0 %>
-                                 <%=  number_to_currency(club.club_payments_total, precision: 2)   %>
-                                <% else %>
-                                 <span class="text-red-500">Payment Due</span>
-                                <% end %>
-                           </td>
-                           
-                           <td class="px-6 py-4 text-center">
-                              <%= club.members.count %>
-                           </td>
-                           <td class="px-6 py-4 text-center">
-                             
-                              <%= club.has_youth? ? 'Yes' : 'No'  %>
-                           </td>
-                           
-                            <td class="px-6 py-4">
-                             <%= club.created_at.to_formatted_s(:month_and_year_short) unless (club.created_at.to_s.empty?)  %>
-                           </td>
-           
-                           <td class="px-6 py-4 text-left whitespace-nowrap">
-                            <%=  club.creator.full_name %>
-                          </td>
+                    <% clubs.each do |club| %>
 
-                          <td class="px-6 py-4 truncate">
-                          <%=  club.website  %>
-                           </td>
-                                  </tr>
-                       </tbody>
-                   <% end %>
-                     <% end %>
-                     <% end %>
-                      <% end %>
+                     <tr class="bg-white border-b hover:bg-gray-100">
+                        <td class="px-6 py-4 truncate">
+                        <%= link_to club.name, club_path(club), class: link_class %>
+                        </td>
+                        
+                        <td class="px-6 py-4">
+                            <%= club.city  %>
+                        </td>
+                        
+                        <td class="px-6 py-4">
+                            <%= club.us_state %>
+                        </td>
+        
+                        <td class="px-6 py-4 text-right">
+                            <% if club.club_payments_total>0 %>
+                                <%=  number_to_currency(club.club_payments_total, precision: 2)   %>
+                            <% else %>
+                                <span class="text-red-500">Payment Due</span>
+                            <% end %>
+                        </td>
+                                    
+                        <td class="px-6 py-4 text-center">
+                            <%= club.membership_category %>
+                        </td>   
+                        
+                        <td class="px-6 py-4 text-center">
+                        <%= club.estimate_total_number_of_club_members %>
+                        [<span class="text-blue-600"><%= club.estimate_total_active_members %></span> / 
+                        <span class="text-gray-600"><%= club.estimate_total_part_time_members %>]</span> 
+                        
+                        </td>   
+        
+                        <td class="px-6 py-4 text-center">
+                            <%= club.members.count %>
+                        </td>
+                        
+                        <td class="px-6 py-4 text-center">
+                            <%= club.has_youth? ? 'Yes' : 'No'  %>
+                        </td>
+                        
+                        <td class="px-6 py-4 text-left">
+                        <%=  club.creator.full_name %>
+                        </td>
+        
+                        <td class="px-6 py-4 text-left">
+                        <% if  club.team_president== "Please nominate" %>
+                            <span class="text-sm text-gray-400 italic"><%=  club.team_president %><br> </span>
+                            <% else %>
+                            <%=  club.team_president %><br>
+                            <% end %>
+                        <% unless  club.team_president_phone.to_s.empty? %>
+                            <span class="text-sm text-gray-500"><i class="fa-solid fa-phone"></i></span>
+                            <%=  club.team_president_phone %>
+                            <% end %>
+                        </td>
+        
+                        <td class="px-6 py-4 truncate">
+                            <%=  club.website %>
+                        </td>
+        
+                        <td class="px-6 py-4">
+                        <%= club.created_at.to_formatted_s(:usa) unless (club.created_at.to_s.empty?)  %>
+                        </td>
+        
+                        <td class="px-6 py-4 truncate">
+                            <%=  club.id %>
+                        </td>
+                    </tr>
+                </tbody>
+            <% end %>
+                <% end %>
+                <% end %>
+                <% end %>
             </table>
         
      </div>

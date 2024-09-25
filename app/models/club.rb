@@ -1,6 +1,7 @@
 class Club < ApplicationRecord
     has_many :members, dependent: :destroy
     has_many :member_key_roles, dependent: :destroy
+    has_many :individual_members
     has_many :payments
     has_many :teams
 
@@ -91,6 +92,24 @@ class Club < ApplicationRecord
     arr = self.payments
     arr.each {|x| total=total+x[:amount]}
     return total
+  end
+
+  def club_total_members
+    members = Member.where(club_id: self.id).count
+    individuals = IndividualMember.where(club_id: self.id).count
+   return members+individuals
+  end
+
+  def club_total_active_members
+    members = Member.where(club_id: self.id, engagement_status: "Active").count
+    individuals = IndividualMember.where(club_id: self.id, engagement_status: "Active").count
+    return members+individuals
+  end
+
+  def club_total_parttime_members
+    members = Member.where(club_id: self.id, engagement_status: "Part-Time").count
+    individuals = IndividualMember.where(club_id: self.id, engagement_status: "Part-Time").count
+    return members+individuals
   end
  
 end

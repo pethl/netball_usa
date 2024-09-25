@@ -76,7 +76,7 @@ module ApplicationHelper
    end
    
    def link_class
-     "text-md font-medium text-blue-900 italic"
+     "text-md font-medium text-blue-900 italic hover:text-blue-600 hover:underline hover:underline-offset-4"
    end
    
    def red_link_class
@@ -334,6 +334,8 @@ module ApplicationHelper
      def active_admin_users # a method to get all active users  but not TeamLead role uers, typically used to assign work.
        User.where(account_active: true).where.not(role: 2) 
      end
+
+    
 
      
 end

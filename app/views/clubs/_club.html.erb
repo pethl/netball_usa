@@ -9,17 +9,17 @@
         <div class="flex justify-between">
 
           <div class="mb-2 bg-blue-100">  
-            <span class="whitespace-nowrap text-2xl"> <%= link_to club.name, club_path(club) %>  </span>
+            <span class="whitespace-nowrap text-2xl"> <%= club.name %>  </span>
             <span class="font-light text-base"> - <%= club.city %>,  <%= club.us_state %>
             : (Estimated Active: <%= club.estimate_total_active_members %>/ Part-Time: <%= club.estimate_total_part_time_members %>) </span>
           </div>
           
           <div class="club__actions">
-           
+
             <%= link_to "Edit club",
               edit_club_path(club),
-              class: "font-semibold text-green-500 border border-gray-600 p-2 rounded-lg hover:border-green-500" %>
-          </div>
+              class: "font-semibold text-teal-600 border border-teal-600 p-1 rounded-lg hover:bg-teal-100" %>
+                </div>
         </div>
 
         <div class="flex justify-left gap-4">
@@ -50,14 +50,48 @@
         </div>
 
         <br>
+        <% if is_admin? %>
+        <%= link_to "Add / Edit Members, Roles or Teams ", club_path(club), class: teal_button_class,
+        data: { turbo_frame: "_top" } %>
+           
+        <% else %>
+
         <%= link_to "(2) Add / Edit active members ", club_path(club), class: teal_button_class,
         data: { turbo_frame: "_top" } %>
-      <br><br>
-    
+        <% end %>
+      
+        <br><br>
+      <div>
       <%= render "club_members", club: club %>
       </div>  
-     
 
+      <% if is_admin? %>
+        <br>
+      <div class="my-2">
+        Individual Members (self managed)
+      </div>
+      <div>
+       <%= render "club_individual_members", club: club %>
+      </div>  
+
+     <br>
+      
+       <div class="my-2">
+          Key Roles
+        </div>
+        <div>
+          <%= render "club_key_roles", club: club %>
+        </div>  
+    
+        <br>
+    
+        <div class="my-2">
+         Teams
+      </div>
+        <div>
+        <%= render "club_teams", club: club %>
+        </div>  
+     <% end %>
 
       <div>
     </div>

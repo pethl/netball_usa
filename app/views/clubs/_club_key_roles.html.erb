@@ -1,0 +1,36 @@
+<div class"block font-light text-gray-400 text-sm">
+    <div class="font-light text-blue-900 mb-2"> 
+        <table class="w-1/2">
+            <thead class="bg-white border-b text-gray-400 font-light text-xs text-left">
+                <tr>
+                    <th scope="col" class="">
+                        Role
+                    </th>
+                    <th scope="col" class="">
+                        Name
+                    </th>
+                    <th scope="col" class="">
+                        Phone
+                    </th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <% club.member_key_roles.each do |key_role| %>
+                    <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+                        <td class="pr-2">
+                        <%= key_role.key_role  %>
+                        </td>
+                        <td class="pr-2">
+                        <%= Member.find(key_role.member_id).full_name %>
+                        </td>
+                        <td class="pr-2">
+                        <%= Member.find(key_role.member_id).phone %>
+                        </td>
+                        
+                     </tr>   
+                <% end %> 
+            </tbody>
+        </table> 
+    </div>
+</div>

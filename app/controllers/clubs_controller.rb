@@ -4,7 +4,11 @@ class ClubsController < ApplicationController
 
   # GET /clubs
   def index
-    @club = Club.where(user_id: current_user.id).first
+    if is_admin?
+      @clubs = Club.where(user_id: active_admin_users)
+    else
+     @club = Club.where(user_id: current_user.id).first
+    end
   end
 
   def index_admin
@@ -12,9 +16,9 @@ class ClubsController < ApplicationController
   end
 
   def teams_list_index
-    @clubs = Club.all
-    @clubs = @clubs.order(us_state: :asc)
-    @clubs_by_us_state = @clubs.group_by { |t| t.us_state }
+    @clubs_for_report = Club.all
+    @clubs_for_report = @clubs_for_report.order(us_state: :asc)
+    @clubs_by_us_state = @clubs_for_report.group_by { |t| t.us_state }
     @regions = Region.all.order(region: :asc)
     @regions_by_region = @regions.group_by { |t| t.region }
  end
@@ -72,4 +76,8 @@ class ClubsController < ApplicationController
     def club_params
       params.require(:club).permit(:name, :city, :us_state, :membership_category, :website, :facebook, :twitter, :instagram, :other_sm, :estimate_total_number_of_club_members, :estimate_total_active_members, :estimate_total_part_time_members)
     end
+
+    def active_admin_users
+      User.where(admin: true, role: 0).pluck(:id)
+     end
 end
