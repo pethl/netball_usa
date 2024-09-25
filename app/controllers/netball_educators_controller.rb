@@ -139,6 +139,7 @@ class NetballEducatorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def netball_educator_params
-      params.require(:netball_educator).permit(:feedback, :first_name, :last_name, :level, :website, :authorize, :user_id, :email, :phone, :school_name, :address, :city, :state, :educator_notes, :mgmt_notes)
+      params.require(:netball_educator).permit(:feedback, :first_name, :last_name, :title, :level, :website, :authorize, :user_id, :email, :phone, :school_name, :address, :city, :state, :educator_notes, :mgmt_notes)
     end
 end
+ 

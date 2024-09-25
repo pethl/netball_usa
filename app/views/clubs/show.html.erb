@@ -15,8 +15,6 @@
       <%= @club.name %><br>
       <span class="text-sm text-gray-500">administered by: <%= @club.creator.full_name %></span>
     </div>
-
-
    
     <div class="p-4 m-2 border border-grey-500 shadow-md shadow-blue-900 hover:border-black rounded-lg">
       <div class="ml-4 text-gray-700 text-lg text-left font-semibold">
@@ -44,8 +42,31 @@
         <div class="min-w-64 ml-2 mt-4 text-sm text-gray-500">
           *Player must be removed from any key role before record can be deleted.<br><br>
         </div>
-
     </div>
+
+    <% if is_admin? %>
+    <div class="p-4 m-2 border border-grey-500 shadow-md shadow-blue-900 hover:border-black rounded-lg">
+    <div class="ml-4 text-gray-700 text-lg text-left font-semibold">
+      Individual Members
+    </div>
+    
+    <div class="ml-2 my-2">
+       <%= link_to "To add or remove Individual Memberhship records click here", individual_members_path, class: link_class %>
+    </div>
+
+      <%= turbo_frame_tag Member.new %>
+      <%= turbo_frame_tag "members" do %>
+        <div class="text-sm">
+          <% if @club.individual_members.any? %>
+          <%= render "club_individual_members", club: @club %>
+          <% end %>
+          </div>
+      <% end %>
+
+  </div>
+    <% end %>
+
+
 
     <div class="flex flex-row flex-wrap">
     <div class="basis-1/2">

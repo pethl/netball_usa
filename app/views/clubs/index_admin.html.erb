@@ -1,5 +1,16 @@
 <% content_for(:page_title, "All Clubs")%>
 
+<div class="">
+   <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
+      <li class="me-2">
+            <a href="/clubs/index_admin" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50" aria-current="page">All Clubs</a>
+         </li>
+        <li class="me-2">
+            <a href="/clubs/" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active">Admin Managed Clubs</a>
+        </li>
+      </ul>
+</div>
+
 <div class="m-2">
     <%= link_to "Click Here to Add New Club", clubs_path, class: link_class %>
 </div>

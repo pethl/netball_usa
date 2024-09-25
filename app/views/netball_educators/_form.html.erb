@@ -44,6 +44,13 @@
       </div>
 
       <div class="mb-6">
+      <%= form.label :title, "Title", class: label_class  %>
+      <div class="mt-1">
+      <%= form.text_field :title, class: input_class %>
+     </div>
+    </div>
+
+      <div class="mb-6">
         <%= form.label :school_name, "School Name*", class: label_class  %>
         <div class="mt-1">
         <%= form.text_field :school_name, class: input_class %>

@@ -10,16 +10,19 @@
   
 <div id="educators">
 <div class="relative overflow-x-auto">
-    <table class="table-auto w-full text-left rtl:text-right">
+    <table class="table-fixed w-full text-left rtl:text-right">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
              <tr>
-                 <th scope="col" class="px-6 py-3 w-52">
+                 <th scope="col" class="px-6 py-3 w-32">
                      See Details
                  </th>
                 <th scope="col" class="px-6 py-3 w-52">
-                    Name
+                    Name 
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
+                <th scope="col" class="px-6 py-3 w-80">
+                    Title
+                </th>
+                <th scope="col" class="px-6 py-3 w-20">
                     State
                 </th>
                 <th scope="col" class="px-6 py-3 w-52">
@@ -28,14 +31,14 @@
                 <th scope="col" class="px-6 py-3 w-52">
                     Contact
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
+                <th  colspan="2" class="px-6 py-3 w-52">
                     School/District
                 </th>
                 
-                <th scope="col" class="px-6 py-3 w-40 text-center">
+                <th scope="col" class="px-6 py-3 w-40 text-right">
                     Equip. Sale?
                 </th>
-                <th scope="col" class="px-6 py-3 w-40 text-center">
+                <th scope="col" class="px-6 py-3 w-40 text-right">
                     Follow Up?
                 </th>
                 <th scope="col" class="px-6 py-3 w-52">
@@ -56,6 +59,10 @@
                 <td class="px-6 py-4 whitespace-nowrap">
                    <%= link_to educator.full_name, edit_netball_educator_path(educator), class: link_class %>
                 </td>
+
+                <td class="px-6 py-4">
+                   <%= educator.title %>
+                </td>
                 
                 <td class="px-6 py-4">
                    <%= educator.state %>
@@ -69,12 +76,12 @@
                    <%= educator.formatted_phone %><br><%= educator.email %>
                 </td>
                 
-                <td class="px-6 py-4">
+                <td colspan="2" class="px-6 py-4 whitespace-wrap">
                   <%= educator.school_name %><br>
                   <%= (link_to educator.website, educator.website, target: '_blank', class: link_class) unless (educator.website.to_s.empty?)%>
                 </td>
                
-                <td class="px-6 py-4 text-center">
+                <td class="px-6 py-4 text-right">
                 <% if  educator.equipment.count == 1%>
                    <%= link_to educator.equipment.count, equipment_path(educator.equipment.first.id), class: link_class %>
                   <% else %>
@@ -82,7 +89,7 @@
                <% end %>
                 </td>
                 
-                <td class="px-6 py-4 text-center">
+                <td class="px-6 py-4 text-right">
                 <% if  educator.follow_up.count == 1%>
                    <%= link_to educator.follow_up.count, follow_up_path(educator.follow_up.first.id), class: link_class %>
                   <% else %>

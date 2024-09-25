@@ -11,12 +11,21 @@
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
             <tr>
                 <th scope="col" class="px-6 py-3">
+                    Membership Type
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Team
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Full Name
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Email
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Payments
+                </th>
+                 <th scope="col" class="px-6 py-3">
                     City
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -45,13 +54,26 @@
         <tbody>
         <% @individual_members.each do |individual_member| %>
             <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
-                
+                <td class="px-6 py-4">
+                    <%= individual_member.membership_type %>
+                </td>
+                <td class="px-6 py-4">
+                    <%= individual_member.club.name unless individual_member.club_id.to_s.empty? %>
+                 </td>
                 <td class="px-6 py-4">
                     <%= (link_to individual_member.full_name, edit_individual_member_path(individual_member), class: link_class)  %>
                 </td>
                 <td class="px-6 py-4">
                     <%= individual_member.email %>
                 </td>
+               
+                <td class="px-6 py-4 text-right">
+                <% if individual_member.payments.count>0 %>
+                    <%=  number_to_currency(individual_member.payments.first.amount, precision: 2)   %>
+                <% else %>
+                    <span class="text-red-500">Payment Due</span>
+                <% end %>
+            </td>
                 <td class="px-6 py-4">
                     <%= individual_member.city %>
                 </td>

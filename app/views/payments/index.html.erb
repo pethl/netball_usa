@@ -35,9 +35,7 @@
                 <th scope="col" class="px-6 py-3 w-52">
                     Team
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
-                    Individual
-                </th>
+               
                 <th scope="col" class="px-6 py-3 w-60 ">
                     Date Received
                 </th>
@@ -76,9 +74,7 @@
                   <% end %><br>
                   
                 </td>
-                <td class="px-6 py-4">
-                <% if payment.individual_member_id? %><%= IndividualMember.find(payment.individual_member_id).full_name %><% end %><br>
-                </td>
+               
                 <td class="px-6 py-4">
                    <%= payment.payment_received_date.to_formatted_s(:usa) unless (payment.payment_received_date.to_s.empty?) %>
                 </td>

@@ -3,12 +3,23 @@
 <div class="w-full">
   <div class="border border-2 border-blue-900 rounded-xl m-2">
    <div class="p-4">
-    <div class="mt-2 mb-4 font-medium text-gray-900 ">
-      <span class="text-gray-500 font-light">Membership Type: </span><br>
-        <%= individual_member.membership_type %> 
-    </div> 
+   
      
   <div class="flex flex-wrap gap-8">
+
+      <div class="mt-2 mb-4 font-medium text-gray-900 ">
+        <span class="text-gray-500 font-light">Membership Type: </span><br>
+        <%= individual_member.membership_type %> 
+      </div> 
+    <% if is_admin? %>
+      <div class="mt-2 mb-4 font-medium text-gray-900 ">
+        <span class="text-gray-500 font-light">Team: </span><br>
+        <%= individual_member.club.name unless individual_member.club_id.to_s.empty? %> 
+      </div> 
+      <% end %>
+    </div>
+    <div class="flex flex-wrap gap-8">
+
       <div class="font-medium text-gray-900 ">
         <span class="text-gray-500 font-light">Name: </span><br>
           <%= individual_member.full_name %> 
