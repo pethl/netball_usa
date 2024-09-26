@@ -66,8 +66,6 @@
   </div>
     <% end %>
 
-
-
     <div class="flex flex-row flex-wrap">
     <div class="basis-1/2">
     <div class="p-4 basis-1/3 m-2 border border-grey-500 shadow-md shadow-blue-900 hover:border-black rounded-lg">
@@ -88,9 +86,7 @@
                 <% if @club.member_key_roles.any? %>
                   <%= render @club.member_key_roles, club: @club %>
                 <% end %>
-                
             <% end %>
-
           </div>
       </div>    
     </div>
@@ -122,7 +118,16 @@
         </div>    
       </div>
   </div>
+
+  <% if is_admin? %>
+      <% if @club.payments.any? %>
+        <%= render partial: "payments_simple", clubs: @clubs %>
+    <% end %>
+  <% end %>
+
   </div>
+
+  
 
   <div class="font-semibold text-gray-500 m-4">
     <% if is_admin? %>  

@@ -1,0 +1,74 @@
+<div class="p-4 m-2 border border-grey-500 shadow-md shadow-blue-900 hover:border-black rounded-lg">
+<div class="text-sm">
+  <div class="ml-4 text-gray-700 text-lg text-left font-semibold"> 
+        Payments <span class="text-grey-300 text-sm"></span>
+      </div>
+  
+        <table class="ml-4 m-2 p-2 table-fixed text-left rtl:text-right">
+        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+            <tr>
+                <th scope="col" class="px-2 py-2 whitespace-nowrap">
+                    For Year
+                </th>
+                <th scope="col" class="px-2 py-2">
+                    Type
+                </th>
+                <th scope="col" class="px-2 py-2 text-right">
+                    Amount
+                </th>
+               
+                <th scope="col" class="px-2 py-2 ">
+                    Date Received
+                </th>
+                <th scope="col" class="px-2 py-3 ">
+                    Recorded By
+                </th>
+                <th scope="col" class="px-2 py-3  ">
+                    Transaction Ref
+                </th>
+                <th scope="col" class="px-2 py-3  truncate">
+                    Notes
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        <% @club.payments.each do |payment| %>
+            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+                
+                <td class="px-2 py-4 truncate">
+                    <%= link_to payment.payment_year, payment_path(payment), class: link_class %>
+                </td>
+                
+                <td class="px-2 py-4">
+                    <%= payment.payment_type  %>
+                </td>
+                
+                <td class="px-2 py-4 text-right">
+                    <%= number_to_currency(payment.amount, precision: 0) %>
+                </td>
+                
+               
+                <td class="px-2 py-4">
+                    <%= payment.payment_received_date.to_formatted_s(:usa) unless (payment.payment_received_date.to_s.empty?) %>
+                </td>
+                <td class="px-2 py-4">
+                    <%= User.find(payment.payment_recorded_by_id).full_name %>
+                </td>
+                <td class="px-2 py-4">
+                <%= payment.payment_transaction_reference %>
+                </td>
+                
+                <td class="px-2 py-4 truncate">
+                <%= payment.payment_notes %>
+                </td>
+                
+            </tr>
+            <% end %>
+        </tbody>
+        </table>
+   
+    </div>
+  </div>
+
+<br>
