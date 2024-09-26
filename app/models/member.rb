@@ -1,5 +1,7 @@
 class Member < ApplicationRecord
   belongs_to :club
+  belongs_to :team, optional: true
+  
    
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :club_id, presence: true

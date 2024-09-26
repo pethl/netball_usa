@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_25_185808) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_26_062932) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -252,6 +252,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_25_185808) do
     t.string "phone"
     t.string "address"
     t.string "zip"
+    t.integer "team_id"
     t.index ["na_team_id"], name: "index_members_on_na_team_id"
   end
 
@@ -672,6 +673,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_25_185808) do
   add_foreign_key "member_key_roles", "clubs"
   add_foreign_key "member_key_roles", "members"
   add_foreign_key "members", "clubs"
+  add_foreign_key "members", "teams"
   add_foreign_key "opportunities", "sponsors"
   add_foreign_key "opportunities", "users"
   add_foreign_key "payments", "clubs"

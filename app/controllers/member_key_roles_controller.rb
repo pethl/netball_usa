@@ -31,7 +31,7 @@ class MemberKeyRolesController < ApplicationController
     @members_belonging_to_administrator = Member.where(club_id: teams_owned_by_user)
     @members_belonging_to_administrator = @members_belonging_to_administrator.order(first_name: :asc)
     @member_key_role = @club.member_key_roles.build(member_key_role_params)
-   
+    
 
     if @member_key_role.save
       respond_to do |format|

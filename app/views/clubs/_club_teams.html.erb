@@ -6,18 +6,16 @@
                     <th scope="col" class="">
                         Name
                     </th>
-                    
-                    
                 </tr>
             </thead>
             <tbody>
                 <% club.teams.each do |team| %>
                     <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
                         <td class="pr-2">
-                        <%= team.name  %>
+                            <%= team.name  %>
                         </td>
-                        
                      </tr>   
+                    
                 <% end %> 
             </tbody>
         </table> 
