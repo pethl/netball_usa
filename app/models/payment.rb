@@ -4,7 +4,7 @@ class Payment < ApplicationRecord
 
     validates :payment_year, presence: true
     validates :payment_type, presence: true
-    validates :amount, presence: true
+    #validates :amount, presence: true
    # validates :payment_received_date, presence: true
 
    def payment_summary

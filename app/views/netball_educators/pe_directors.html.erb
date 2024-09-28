@@ -16,6 +16,9 @@
                  <th scope="col" class="px-6 py-3 w-32">
                      See Details
                  </th>
+                 <th scope="col" class="px-6 py-3 w-32">
+                     Is PE Director?
+                 </th>
                 <th scope="col" class="px-6 py-3 w-52">
                     Name 
                 </th>
@@ -54,6 +57,10 @@
             <tr class="bg-white border-b hover:bg-gray-100">
                 <td class="px-6 py-4">
                   <%= link_to image_tag("view.png", :class=>"mx-2 h-6 w-auto"), educator  %>
+                </td>
+
+                <td class="px-6 py-4">
+                    <%= educator.is_pe_director? ? 'Yes' : 'No' %>
                 </td>
                 
                 <td class="px-6 py-4 whitespace-nowrap">

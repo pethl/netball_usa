@@ -6,6 +6,18 @@
   </div>
 
   <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+  <% if is_admin? %>
+    <div class="mt-2 mb-2">
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+           Is P.E. Director?:
+        </p>
+        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+        
+        <%= netball_educator.is_pe_director? ? 'Yes' : 'No' %>
+        </p>
+        </div>
+        <% end %>
+
 
         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
             Name:
@@ -62,10 +74,10 @@
        
          <div class="mt-2">
          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-             Address, City, State:
+             Address, City, State, ZIP:
          </p>
          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-         <%= netball_educator.address %> <%= netball_educator.city %>,   <%= netball_educator.state %> 
+         <%= netball_educator.address %> <%= netball_educator.city %>,   <%= netball_educator.state %>  <%= netball_educator.zip %> 
          </p>
           </div>
        

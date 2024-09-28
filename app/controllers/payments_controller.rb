@@ -4,12 +4,14 @@ class PaymentsController < ApplicationController
   
   # GET /payments
   def index
-    #@payments = Payment.where("club_id is not null")
-    #@payments = @payments.order('payment_year desc, payment_received_date desc')
-    @payments = Payment.where("club_id is not null")#.includes(:club)
-    @payments = @payments.where('payment_type like ?', "%#{params[:payment_type]}%") if params[:payment_type].present?
-    @payments = @payments.order("#{params[:column]} #{params[:direction]}")
+    @payments = Payment.where("club_id is not null")
+    @payments = @payments.order('payment_year desc, payment_received_date desc')
+    #@payments = Payment.where("club_id is not null")#.includes(:club)
+    #@payments = @payments.where('payment_type like ?', "%#{params[:payment_type]}%") if params[:payment_type].present?
+    #@payments = @payments.order("#{params[:column]} #{params[:direction]}")
     #render(partial: 'payments', locals: { @payments: payments })
+    #@payments = Club.joins(:payments)
+    #@payments  =  @payments.order(name: :ASC ) 
   end
 
   # GET /payments
