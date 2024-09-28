@@ -1,0 +1,83 @@
+<%= turbo_frame_tag "players", class: "shadow overflow-hidden rounded border-b border-gray-200" do %>
+
+<div class="relative overflow-x-auto">
+    <table class="table-auto w-full text-left rtl:text-right">
+        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+        
+             <tr>
+                <th scope="col" class="px-6 py-3 w-52 whitespace-nowrap">
+                    For Year
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Type
+                </th>
+                <th scope="col" class="px-6 py-3 w-52 text-right">
+                    Amount
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Team
+                </th>
+               
+                <th scope="col" class="px-6 py-3 w-60 ">
+                    Date Received
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 ">
+                    Recorded By
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 ">
+                    Transaction Ref
+                </th>
+                <th scope="col" class="px-6 py-3 w-52 truncate">
+                    Notes
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        <% @payments.each do |payment| %>
+            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+               
+                <td class="px-6 py-4 truncate">
+                   <%= link_to payment.payment_year, payment_path(payment), class: link_class %>
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= payment.payment_type  %>
+                </td>
+                
+                <td class="px-6 py-4 text-right">
+                   <%= number_to_currency(payment.amount, precision: 0) %>
+                </td>
+                
+                <td class="px-6 py-4">
+               
+                  <% if payment.club_id? %>
+                  <%= link_to Club.find(payment.club_id).name, club_path(payment.club_id), class: link_class %>
+                  <% end %><br>
+                  
+                </td>
+               
+                <td class="px-6 py-4">
+                   <%= payment.payment_received_date.to_formatted_s(:usa) unless (payment.payment_received_date.to_s.empty?) %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= User.find(payment.payment_recorded_by_id).full_name %>
+                </td>
+                <td class="px-6 py-4">
+                 <%= payment.payment_transaction_reference %>
+               </td>
+               
+                 <td class="px-6 py-4 truncate">
+                 <%= payment.payment_notes %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+ </div>
+</div>
+
+ 
+<br>
+<% end %>

@@ -1,10 +1,15 @@
 class PaymentsController < ApplicationController
   before_action :set_payment, only: %i[ show edit update destroy ]
-
+  load_and_authorize_resource
+  
   # GET /payments
   def index
-    @team_payments = Payment.where("club_id is not null")
-    @team_payments = @team_payments.order('payment_year desc, payment_received_date desc')
+    #@payments = Payment.where("club_id is not null")
+    #@payments = @payments.order('payment_year desc, payment_received_date desc')
+    @payments = Payment.where("club_id is not null")#.includes(:club)
+    @payments = @payments.where('payment_type like ?', "%#{params[:payment_type]}%") if params[:payment_type].present?
+    @payments = @payments.order("#{params[:column]} #{params[:direction]}")
+    #render(partial: 'payments', locals: { @payments: payments })
   end
 
   # GET /payments

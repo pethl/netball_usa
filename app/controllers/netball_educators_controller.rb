@@ -81,11 +81,11 @@ class NetballEducatorsController < ApplicationController
 
   def pe_directors
     if is_admin? 
-        @netball_educators = NetballEducator.where(level: "School/District Lead")
+        @netball_educators = NetballEducator.where(is_pe_director: true)
         @netball_educators = @netball_educators.order(state: :asc, first_name: :asc)
        
     else
-        @netball_educators = NetballEducator.where(user_id: current_user.id).where(level: "School/District Lead")
+        @netball_educators = NetballEducator.where(user_id: current_user.id).where(is_pe_director: true)
         @netball_educators = @netball_educators.order(state: :asc)
       end
   end
@@ -139,7 +139,7 @@ class NetballEducatorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def netball_educator_params
-      params.require(:netball_educator).permit(:feedback, :first_name, :last_name, :title, :level, :website, :authorize, :user_id, :email, :phone, :school_name, :address, :city, :state, :educator_notes, :mgmt_notes)
+      params.require(:netball_educator).permit(:feedback, :first_name, :last_name, :title, :level, :website, :authorize, :user_id, :email, :phone, :school_name, :address, :city, :state, :zip, :is_pe_director, :educator_notes, :mgmt_notes)
     end
 end
  

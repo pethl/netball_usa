@@ -20,7 +20,11 @@ Rails.application.routes.draw do
   resources :venues
 
   get 'payments/index_indiv' => 'payments#index_indiv', :as => :payments_index_indiv
-  resources :payments
+  resources :payments do
+  collection do
+    get 'list'
+  end 
+end
   resources :individual_members
   resources :contacts
   

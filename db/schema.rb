@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_26_062932) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_28_005203) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -293,6 +293,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_26_062932) do
     t.string "website"
     t.string "address"
     t.string "title"
+    t.string "zip"
+    t.boolean "is_pe_director"
   end
 
   create_table "opportunities", force: :cascade do |t|
