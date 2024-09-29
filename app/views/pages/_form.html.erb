@@ -34,6 +34,13 @@
  </div>
 
  <div class="mb-6">
+    <%= form.label :title, "Title", class: label_class  %>
+    <div class="mt-1">
+    <%= form.text_field :title, class: input_class %>
+   </div>
+  </div>
+
+ <div class="mb-6">
     <%= form.label :email, "Email*", autofocus: true, autocomplete: "email", class: label_class  %>
     <div class="mt-1">
     <%= form.text_field :email, class: input_class, autocomplete: "email" %>
@@ -81,6 +88,14 @@
     <%= form.select :state, options_for_select(us_states),{:prompt=>true}, class: input_class %>
    </div>
   </div>
+
+  <div class="mb-6">
+    <%= form.label :zip, "Zip Code", class: label_class  %>
+    <div class="mt-1">
+    <%= form.text_field :zip, class: input_class %>
+   </div>
+  </div>
+
 
    <div class="mb-6">
     <%= form.label :level, "Role/Level*", class: label_class  %>
