@@ -4,7 +4,7 @@ class Event < ApplicationRecord
   has_many :event_assignments, dependent: :destroy
   has_many :transfers, through: :event_assignments
   belongs_to :budget, optional: true 
-  
+   
   validates :event_type, presence: true
   validates :name, presence: true
 
@@ -27,6 +27,10 @@ class Event < ApplicationRecord
   def event_date_name
    "#{self.event_date_formatted}, #{self.name} "
   end
+
+  def event_date_type_name
+    "#{self.event_date_formatted}, #{self.event_type}:  #{self.name} "
+   end
   
   def event_date_formatted
     self.date.to_formatted_s(:usa) 

@@ -1,14 +1,17 @@
 <% content_for(:page_title, "#{@person.full_name} - #{@person.role} ")%>
 
-  <div class="bg-white py-4 px-4 shadow sm:rounded-lg sm:px-10  ">
+  <div class="max-w-4/5">
     <%= render @person %>
   </div>
 
-  <br>
-<div>
+  
+<div class="m-4">
   <%= link_to "Edit this person", edit_person_path(@person), class: link_class  %> |
   <%= link_to "Back to people", people_path, class: link_class  %> | 
-  <%= link_to "Add new people", new_person_path, class: link_class  %>
-  <%= button_to "Delete this record", @person, method: :delete %>
+  <%= link_to "Add new person", new_person_path, class: link_class  %>
+  
+  <%= button_to "Delete this record", @person, method: :delete,
+  form: { data: { turbo_confirm: "Are you sure?" } }, class: link_class %>
+
 </div>
-</div>
+

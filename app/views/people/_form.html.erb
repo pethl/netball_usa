@@ -202,10 +202,7 @@
  
 </div>
 
-<div class="text-right">
-<%= form.submit "Save Record", class: form_button_class %>
-</div>
-<% end %>
+
 
 </div></div>
 
@@ -223,7 +220,23 @@
         <% end %>
        <% end %>
      </p>
-    
+    <br> <br>
     <%= link_to "Assign to New Event? >>", events_path, class: routing_link_class %>
+    <div class="mb-6">
+     <p class="block text-sm font-medium text-gray-700" %>Personnel (check box to assign)</p>
+     <div class="mt-1">
+        <%= form.collection_check_boxes :event_ids, @events, :id, :event_date_type_name, not_checked: Event.all.map(&:id) do |b| %>
+          <span class="indent-3">
+            <%= b.check_box %>
+            <%= b.label %><br>
+          </span>
+      <% end %>
+     <div>
+     <br>
     </div>
+
+    <div class="text-right">
+<%= form.submit "Save Record", class: form_button_class %>
+</div>
+<% end %>
     

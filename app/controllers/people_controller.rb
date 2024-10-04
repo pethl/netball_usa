@@ -69,6 +69,9 @@ class PeopleController < ApplicationController
 
   # GET /people/1/edit
   def edit
+    compare_datetime = Time.now-1.month
+    @events = Event.where("date > ?",compare_datetime)
+    @events = @events.order(date: :asc)
   end
 
   # POST /people
@@ -105,6 +108,6 @@ class PeopleController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def person_params
-      params.require(:person).permit(:first_name, :last_name, :role, :region, :location, :email, :level, :level_note, :level_submitted, :phone, :address, :associated, :gender, :tshirt_size, :uniform_size, :headshot, :headshot_path, :description, :image, :invite_back, :accept_notes, :notes, :in_person_trained, :virtually_trained, :booth_trained, :headshot_present, :certification, :certification_date)
+      params.require(:person).permit(:first_name, :last_name, :role, :region, :location, :email, :level, :level_note, :level_submitted, :phone, :address, :associated, :gender, :tshirt_size, :uniform_size, :headshot, :headshot_path, :description, :image, :invite_back, :accept_notes, :notes, :in_person_trained, :virtually_trained, :booth_trained, :headshot_present, :certification, :certification_date, event_ids: [])
     end
 end

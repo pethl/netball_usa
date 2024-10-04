@@ -1,58 +1,65 @@
 <div id="<%= dom_id person %>">
-<div class="container m-4 mr-4 w-fit">
+<div class="container p-2">
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4 m-4">
-    <div class="mb-0 font-medium text-gray-900 ">
-    <span class="text-gray-500 font-light">First Name: </span><br>
-        <%= person.first_name %> 
-    </div> 
-    
-    <div class="mb-0 font-medium text-gray-900 ">
-    <span class="text-gray-500 font-light">Last Name: </span><br>
-      <%= person.last_name %> 
-    </div> 
-    <div></div>
+    <div class="border border-blue-900 rounded-md mt-2 p-4">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-2 m-4">
 
-    <div class="mb-0 font-medium text-gray-900 ">
-    <span class="text-gray-500 font-light">Role: </span><br>
-        <%= person.role %> 
-    </div> 
-    
-    <div class="mb-0 font-medium text-gray-900 ">
-    <span class="text-gray-500 font-light">Region: </span><br>
-      <%= person.region %> 
-    </div> 
-    <div> <span class="text-gray-500 font-light">Location: </span><br>
-    <%= person.location %> </div>
+        <div class="mb-0 font-medium text-gray-900 ">
+          <span class="text-gray-500 font-light">First Name: </span><br>
+            <%= person.first_name %> 
+        </div> 
+        
+        <div class="mb-0 font-medium text-gray-900 ">
+          <span class="text-gray-500 font-light">Last Name: </span><br>
+          <%= person.last_name %> 
+        </div> 
+      
+        <div class="mb-0 font-medium text-gray-900 ">
+          <span class="text-gray-500 font-light">Role: </span><br>
+            <%= person.role %> 
+        </div> 
+        
+        <div class="mb-0 font-medium text-gray-900 ">
+          <span class="text-gray-500 font-light">Region: </span><br>
+          <%= person.region %> 
+        </div> 
+      
+        <div class="mb-0 font-medium text-gray-900 ">
+          <span class="text-gray-500 font-light">Associated or Independent?: </span><br>
+            <%= person.associated %> 
+        </div> 
 
-    <div class="mb-0 font-medium text-gray-900 ">
-    <span class="text-gray-500 font-light">Associated or Independent?: </span><br>
-        <%= person.associated %> 
-    </div> 
-    
-    <div class="mb-0 font-medium text-gray-900 ">
-    <span class="text-gray-500 font-light">Gender: </span><br>
-      <%= person.gender %> 
-    </div> 
-    <div></div>
+        <div class="mb-0 font-medium text-gray-900 ">
+          <span class="text-gray-500 font-light">Gender: </span><br>
+          <%= person.gender %> 
+        </div> 
 
-    <div class="mb-0 font-medium text-gray-900 ">
-    <span class="text-gray-500 font-light">Email: </span><br>
-        <%= person.email %> 
-    </div> 
-    
-    <div class="mb-0 font-medium text-gray-900 ">
-    <span class="text-gray-500 font-light">Phone: </span><br>
-      <%= person.phone %> 
-    </div> 
+        <div class="mb-0 font-medium text-gray-900 ">
+          <span class="text-gray-500 font-light">Phone: </span><br>
+          <%= person.phone %> 
+        </div> 
 
-    <div> 
-    <span class="text-gray-500 font-light">Address: </span><br>
-    <%= person.address %> </div>
-    <div> 
-  
-    
-      <div class="p-4 border-double border-2 border-blue-900 rounded-md mt-2">
+        <div class="mb-0 font-medium text-gray-900 ">
+          <span class="text-gray-500 font-light">Email: </span><br>
+          <%= person.email %> 
+        </div> 
+        
+        <div> 
+          <span class="text-gray-500 font-light">Address: </span><br>
+          <%= person.address %> 
+        </div>
+        
+        <div>
+        <span class="text-gray-500 font-light">Location: </span><br>
+          <%= person.location %> 
+        </div>
+
+        </div> 
+      </div> 
+
+    <div class="flex gap-2">
+
+      <div class="basis-1/2 grow-0 p-4 border border-blue-900 rounded-md mt-2">
         <div class="text-sm text-center text-gray-500 m-2">Umpires/Scorers Only</div>
        
       <div class="mb-2 font-medium text-gray-900 ">
@@ -80,12 +87,12 @@
         <%= image_tag person.certification_url, :class => "h-20 w-auto" %>
         <span class="italic text-sm">To change file, use Certification Upload above.</span>
         <% end %>
-    </div>
-  </div>  </div>
+      </div>
+    </div>  
 
-  <div class="col-2">
-    <div class="p-4 border-double border-2 border-blue-900 rounded-md mt-2">
-    <div class="text-sm text-center text-gray-500 m-2">Event Related</div>
+  <div class="basis-1/2 grow-0">
+    <div class="p-4 border border-blue-900 rounded-md mt-2">
+     <div class="text-sm text-center text-gray-500 m-2">Event Related</div>
 
         <div class="mb-2 font-medium text-gray-900 ">
         <span class="text-gray-500 font-light">T-Shirt Size: </span><br>
@@ -98,85 +105,88 @@
         <span class="text-gray-500 font-light">Invite Back?: </span><br>
             <%= person.invite_back %> 
         </div> 
+     </div>
+   </div>
    </div>
 
-  <div class="p-4 border-double border-2 border-blue-900 rounded-md mt-2">
-  <div class="text-sm text-center text-gray-500 m-2">Trainers/Ambassadors Only</div>
- 
-      <div class="">
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        In Person Trained?:
-      </p>
-      <p class="text-sm font-medium text-gray-900 dark:text-white">
-      <%= person.in_person_trained?? 'Yes' : 'No' %> 
-      </p>
+   <div class="flex gap-2">
+      <div class="basis-1/2 grow-0 shrink-0 p-4 border border-blue-900 rounded-md mt-2">
+       <div class="text-sm text-center text-gray-500 m-2">Trainers/Ambassadors Only</div>
+      
+          <div class="">
+            <p class="text-sm text-gray-500 truncate ">
+              In Person Trained?:
+            </p>
+            <p class="text-sm font-medium text-gray-900 ">
+            <%= person.in_person_trained?? 'Yes' : 'No' %> 
+            </p>
+          </div>
+
+        <div class="mt-2">
+          <p class="text-sm text-gray-500 truncate">
+              Virtually Trained?:
+          </p>
+          <p class="text-sm font-medium text-gray-900 ">
+          <%= person.virtually_trained?? 'Yes' : 'No' %> 
+          </p>
+        </div>
+    
+        <div class="mt-2">
+          <p class="text-sm text-gray-500 truncate ">
+              Booth Trained?:
+          </p>
+          <p class="text-sm font-medium text-gray-900 ">
+          <%= person.booth_trained?? 'Yes' : 'No' %> 
+          </p>
+        </div>
       </div>
 
-    <div class="mt-2">
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          Virtually Trained?:
-      </p>
-      <p class="text-sm font-medium text-gray-900 dark:text-white">
-      <%= person.virtually_trained?? 'Yes' : 'No' %> 
-      </p>
-    </div>
-
-    <div class="mt-2">
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          Booth Trained?:
-      </p>
-      <p class="text-sm font-medium text-gray-900 dark:text-white">
-      <%= person.booth_trained?? 'Yes' : 'No' %> 
-      </p>
-    </div>
+    <div class="basis-1/2 grow-0 shrink-0 p-4 border border-blue-900 rounded-md mt-2">
+      <div class="text-sm text-center text-gray-500 m-2">Headshot</div>
+       
+          <p class="text-sm text-gray-500 truncate ">
+            Headshot?:
+            </p>
+            <p class="text-sm font-medium text-gray-900 truncate">
+            <%= person.headshot_present? ? 'Yes' : 'No' %>
+            </p>
+            <br >
+            <p class="text-sm text-gray-500 truncate ">
+            Headshot old file path:
+            </p>
+          <p class="text-sm font-medium text-gray-900 break-all">
+            <%= (link_to person.headshot_path, person.headshot_path, target: '_blank', class: link_class) unless (person.headshot_path.to_s.empty?)%>
+          </p>
+          <br>
+          <% unless person.headshot_url.to_s.empty? %>
+          <%= image_tag person.headshot_url, :class => "h-20 w-auto" %>
+          <span class="italic text-sm">To change file, use Headshot Upload above.</span>
+          <% end %>
+        </div> 
       </div>
-      <div class="p-4 border-double border-2 border-blue-900 rounded-md mt-2">
-       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-           Notes:
-       </p>
-       <p class="text-sm font-medium text-gray-900 dark:text-white">
-      <%= person.notes %>
-       </p>
+
+
+     <div class="p-4 border border-blue-900 rounded-md mt-2">
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            Notes:
+        </p>
+        <p class="text-sm font-medium text-gray-900 dark:text-white">
+          <%= person.notes %>
+        </p>
       </div>
    
-      <br>
-      </div>
-    <div class="p-4 border-double border-2 border-blue-900 rounded-md mt-2">
-    <div class="text-sm text-center text-gray-500 m-2">Headshot</div>
-       
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Headshot?:
+      <div class="p-4 border border-blue-900 rounded-md mt-2">
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+          Events:
         </p>
         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-        <%= person.headshot_present? ? 'Yes' : 'No' %>
-        </p>
-<br >
-        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Headshot old file path:
-        </p>
-       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-        <%= (link_to person.headshot_path, person.headshot_path, target: '_blank', class: link_class) unless (person.headshot_path.to_s.empty?)%>
-       </p>
-       <br>
-       <% unless person.headshot_url.to_s.empty? %>
-       <%= image_tag person.headshot_url, :class => "h-20 w-auto" %>
-       <span class="italic text-sm">To change file, use Headshot Upload above.</span>
-       <% end %>
-
-
-  </div> 
-  
-  </div></div>
-    <div class="">
-       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-           Events:
-       </p>
-       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-        <% if person.events.any? %>
-         <% person.events.each do |event| %>
-           <%= event.date.to_formatted_s(:usa) unless ( event.date.to_s.empty?)  %> <%= event.name %><br>
-           <% end %>
+          <% if person.events.any? %>
+          <% person.events.each do |event| %>
+          <%= event.date.to_formatted_s(:usa) unless ( event.date.to_s.empty?)  %> <%= event.name %><br>
             <% end %>
-       </p>
-     </div>
+          <% end %>
+          </p>
+      </div>
+    </div>
+       
     
