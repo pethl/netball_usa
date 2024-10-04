@@ -65,6 +65,9 @@ class PeopleController < ApplicationController
   # GET /people/new
   def new
     @person = Person.new
+    compare_datetime = Time.now-1.month
+    @events = Event.where("date > ?",compare_datetime)
+    @events = @events.order(date: :asc)
   end
 
   # GET /people/1/edit
