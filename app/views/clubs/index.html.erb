@@ -30,20 +30,25 @@
 
       <!-- 1.1 BODY -->
         <div class="container max-w-screen-md">
-          <div class="grid grid-rows-6 grid-flow-col gap-1 max-w-2/3">
+          <div class="grid grid-rows-7 grid-flow-col gap-1 max-w-2/3">
             <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-1"></i></div>
             <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-2"></i></div>
             <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-3"></i></div>
             <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-4"></i></div>
             <div></div> 
             <div></div>
+            <div></div>
             <div class="text-base w-60 self-center mb-2 ml-2">Create Your Club</div>
             <div class="text-base w-60 self-center mb-2 ml-2">Add Active Members</div>
             <div class="text-base w-60 self-center mb-2 ml-2">Assign Key Roles</div>
             <div class="text-base w-60 self-center mb-2 ml-2">Pay Membership</div>
-            <div class="text-sm w-70 self-center ml-2"><%= link_to "See Membership Structure & Payment Info >>", pages_teams_membership_fees_path, class: link_class %> </div>
-            <div class="text-sm w-70 self-center ml-2"><%= link_to "Netball America Membership Information >>", "https://www.canva.com/design/DAF6lkdLaPg/27ttOqb7-siKFLro0JCZUA/view?utm_content=DAF6lkdLaPg&utm_campaign=designshare&utm_medium=link&utm_source=editor#1", target: '_blank', class: link_class %> </div>
-
+            <div class="text-sm w-70 self-center ml-2"> <i class="fa-solid fa-book"></i>
+            <%= link_to "PLEASE READ: New Club Information Pack >>", "https://www.canva.com/design/DAF5WqztxRU/zFpGHN93GTXKOVzqb4Hqsw/view?utm_content=DAF5WqztxRU&utm_campaign=designshare&utm_medium=link&utm_source=editor#2", target: '_blank', class: link_class %></div>
+            <div class="text-sm w-70 self-center ml-2"><i class="fa-solid fa-table"></i>
+            <%= link_to "View Membership Structure & Payment Info >>", pages_teams_membership_fees_path, class: link_class %> </div>
+            <div class="text-sm w-70 self-center ml-2"><i class="fa-regular fa-clipboard"></i>
+            <%= link_to "Netball America Membership Information >>", "https://www.canva.com/design/DAF6lkdLaPg/27ttOqb7-siKFLro0JCZUA/view?utm_content=DAF6lkdLaPg&utm_campaign=designshare&utm_medium=link&utm_source=editor#1", target: '_blank', class: link_class %> </div>
+           
             <div class="text-green-500 justify-start-end text-bold mb-1 self-center"><% unless @club.nil? %> <i class="fa-solid fa-check"></i><% end %></div>
             <div class="text-green-500 justify-start-end text-bold mb-1 self-center"><% if !@club.nil? && @club.members.any?  %> <i class="fa-solid fa-check"></i><% end %></div>
             <div class="text-green-500 justify-start-end text-bold mb-1 self-center"><% if !@club.nil? && @club.member_key_roles.any?  %> <i class="fa-solid fa-check"></i><% end %></div>
