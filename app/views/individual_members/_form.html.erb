@@ -19,7 +19,7 @@
         <%= form.label :membership_type, "Membership Type*", class: label_class%>
         <%= form.select :membership_type, options_for_select(member_membership_type, :selected => individual_member.membership_type),{:prompt=>true}, style: "width:206px", class: input_class %>
       </div>
-      <% if is_admin? %>
+      <% if is_admin? ||  current_user.teams_grants?  %>
         <div class="mb-4">
         <%= form.label :club_id, "Club", class: label_class%>
         <%= form.collection_select(:club_id, Club.all.ordered, :id, :name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 hover:bg-gray-100 sm:text-sm"

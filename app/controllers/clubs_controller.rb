@@ -4,7 +4,9 @@ class ClubsController < ApplicationController
 
   # GET /clubs
   def index
-    if is_admin?
+    if is_admin? 
+      @clubs = Club.where(user_id: active_admin_users)
+    elsif current_user.teams_grants?
       @clubs = Club.where(user_id: active_admin_users)
     else
      @club = Club.where(user_id: current_user.id).first

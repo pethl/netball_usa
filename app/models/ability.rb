@@ -35,6 +35,7 @@ class Ability
     if  user.teams_grants?
       can :manage, Grant 
       can :manage, Club 
+      can :manage, Payment
       can :manage, IndividualMember 
     end
 

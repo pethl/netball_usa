@@ -1,10 +1,10 @@
 class MembersController < ApplicationController
-  before_action :set_club
+  before_action :set_club, only: [:edit, :update, :destroy, :show]
   before_action :set_member, only: [:edit, :update, :destroy, :show]
   
   # GET /members
   def index
-    @members = Member.all.ordered
+    @members = Member.all.order(last_name: :asc)
   end
 
   # GET /members/1

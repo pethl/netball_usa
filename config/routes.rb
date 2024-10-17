@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'clubs/index_admin' => 'clubs#index_admin', :as => :index_admin
   get 'regions/team_list_index' => 'regions#team_list_index', :as => :team_list_index
   get 'clubs/teams_list_index' => 'clubs#teams_list_index', :as => :teams_list_index
+  get 'members' => 'members#index', :as => :members
 
   resources :clubs do
     resources :member_key_roles, except: [:index, :show]

@@ -24,7 +24,7 @@
                 </tr>
             </thead>
             <tbody>
-                <% club.members.each do |member| %>
+                <% club.members.ordered.each do |member| %>
                     <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
                         <td class="pr-2">
                         <%= member.full_name  %>

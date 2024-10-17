@@ -1,6 +1,6 @@
 
 
-<% if is_admin? %>
+<% if is_admin? ||  current_user.teams_grants? %>
 <% content_for(:page_title, "Clubs Managed by NA Administrators")%>
 
       <%= turbo_frame_tag "first_turbo_frame" do %>
@@ -58,7 +58,7 @@
               <% if @clubs.first.has_paid=="Payment Due" %>
                   <span class="text-red-600"><%=  @club.has_paid %></span> </i>
                 <% else %>
-                <span class="text-green-500"> <i class="fa-solid fa-check"></i> <%=  @club.has_paid %></span>
+                <span class="text-green-500"> <i class="fa-solid fa-check"></i> <% if !@club.nil? %><%= @club.has_paid %><% end %></span>
                 <% end %>
               <% end %>
           </div>

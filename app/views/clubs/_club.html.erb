@@ -50,7 +50,7 @@
         </div>
 
         <br>
-        <% if is_admin? %>
+        <% if is_admin? ||  current_user.teams_grants?  %>
         <%= link_to "Add / Edit Members, Roles or Teams ", club_path(club), class: teal_button_class,
         data: { turbo_frame: "_top" } %>
            
@@ -65,7 +65,7 @@
       <%= render "club_members", club: club %>
       </div>  
 
-      <% if is_admin? %>
+      <% if is_admin? ||  current_user.teams_grants? %>
         <br>
       <div class="my-2">
         Individual Members (self managed)

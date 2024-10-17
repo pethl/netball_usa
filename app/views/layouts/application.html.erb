@@ -282,6 +282,9 @@
                    <a href="/clubs/index_admin" class="text-gray-100 hover:font-bold">- All Clubs</a>
                </li>
                <li class="mt-2 ml-2">
+                <a href="/members" class="text-gray-100 hover:font-bold">- All Members</a>
+              </li>
+               <li class="mt-2 ml-2">
                    <a href="/clubs" class="text-gray-100 hover:font-bold">- Admin Managed Clubs</a>
                </li>
                <li class="mt-2 ml-2">
@@ -299,7 +302,7 @@
                        <a href="/clubs/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
                    </li>
                    <li class="mt-2">
-                       <a href="/clubs/" class="text-gray-100 hover:font-bold">My Team(s)</a>
+                       <a href="/clubs/" class="text-gray-100 hover:font-bold">My Club</a>
                    </li>
                    //-->
                 <% elsif current_user.teams_grants? %>
@@ -307,20 +310,22 @@
                        <a href="/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
                     </li>
                     <li class="mt-2">
-                      <a href="/clubs/index_admin" class="text-gray-100 hover:font-bold">All Teams</a>
+                      <a href="/clubs/index_admin" class="text-gray-100 hover:font-bold">All Clubs</a>
+                    </li>
+                    
+                    <li class="mt-2">
+                      <a href="/clubs/teams_list_index" class="text-gray-100 hover:font-bold">Clubs by Region</a>
                     </li>
                     <li class="mt-2">
-                      <a href="/clubs/teams_list_index" class="text-gray-100 hover:font-bold">Teams by Region</a>
-                      </li>
+                      <a href="/clubs" class="text-gray-100 hover:font-bold">Admin Managed Clubs</a>
+                    </li>
                     <li class="mt-2">
-                      <a href="/clubs/" class="text-gray-100 hover:font-bold">Set Up Teams</a>
+                      <a href="/members" class="text-gray-100 hover:font-bold">All Members</a>
                     </li>
                     <li class="mt-2">
                       <a href="/individual_members/" class="text-gray-100 hover:font-bold">Individual Members</a>
                     </li>
-                    <li class="mt-2">
-                      <a href="/payments/" class="text-gray-100 hover:font-bold">Payments</a>
-                    </li>
+                   
                    <li class="mt-2">
                        <a href="/grants/" class="text-gray-100 hover:font-bold">Grants</a>
                    </li>

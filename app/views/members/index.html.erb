@@ -1,14 +1,124 @@
-<p style="color: green"><%= notice %></p>
+<% content_for(:page_title, "All Members")%>
 
-<h1>Members</h1>
 
 <div id="members">
-  <% @members.each do |member| %>
-    <%= render member %>
-    <p>
-      <%= link_to "Show this member", member %>
-    </p>
-  <% end %>
+  
+    <% if @members.any? %>
+
+    <div class="relative overflow-x-auto">
+    <table class="table-auto w-full text-left rtl:text-right">
+        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+             <tr>
+                <th scope="col" class="px-6 py-3">
+                    First Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Last Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    City
+                </th>
+                <th scope="col" class="px-6 py-3 ">
+                    State
+                 </th>
+                 <th scope="col" class="px-6 py-3">
+                    Club
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Email
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Phone
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Address
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    ZIP
+                </th>                
+                <th scope="col" class="px-6 py-3 w-60 text-left">
+                    Gender
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 truncate">
+                    Place of Birth
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 truncate">
+                    Age Status
+                </th>
+               
+                <th scope="col" class="px-6 py-3 w-60 ">
+                    Engagement Status
+                </th>
+               
+            </tr>
+        </thead>
+        <tbody>
+        <% @members.each do |member| %>
+            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+               
+                <td class="px-6 py-4 ">
+                   <%= link_to member.first_name, club_path(member.club_id), class: link_class %>
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= member.last_name  %>
+                </td>
+                
+                <td class="px-6 py-4">
+                   <%= member.city  %>
+                </td>
+
+                <td class="px-6 py-4">
+                  <%= member.state  %>
+                </td>
+
+                <td class="px-6 py-4">
+                  <%= member.club_name  %>
+                </td>
+
+                <td class="px-6 py-4">
+                  <%= member.email  %>
+                </td>
+
+                <td class="px-6 py-4">
+                  <%= member.phone  %>
+                </td>
+
+                <td class="px-6 py-4">
+                  <%= member.address  %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= member.zip  %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= member.gender  %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= member.place_of_birth  %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= member.age_status  %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= member.engagement_status  %>
+                </td>
+
+                
+               
+              
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
 </div>
 
-<%= link_to "New member", new_member_path %>
+    <% else %>
+        <p class="px-6 py-4">
+        No records to view</p>
+    <% end %>
+<br>
+
+
+
+</div>
+

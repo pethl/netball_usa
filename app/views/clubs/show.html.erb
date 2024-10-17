@@ -34,7 +34,7 @@
         <%= turbo_frame_tag "members" do %>
           <div class="text-sm">
             <% if @club.members.any? %>
-              <%= render @club.members, club: @club %>
+              <%= render @club.members.ordered, club: @club %>
             <% end %>
             </div>
         <% end %>
@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <% if is_admin? %>
+    <% if is_admin? ||  current_user.teams_grants?  %>
     <div class="p-4 m-2 border border-grey-500 shadow-md shadow-blue-900 hover:border-black rounded-lg">
     <div class="ml-4 text-gray-700 text-lg text-left font-semibold">
       Individual Members
@@ -130,7 +130,7 @@
   
 
   <div class="font-semibold text-gray-500 m-4">
-    <% if is_admin? %>  
+    <% if is_admin? ||  current_user.teams_grants? %>  
     <%= link_to "<< Back to All Clubs", index_admin_path %><br>
     <%= link_to "<< Back to Admin Managed Clubs", clubs_path %>
     <% else %>
