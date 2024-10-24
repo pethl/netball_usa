@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_action :set_club, only: [:edit, :update, :destroy, :show]
+  before_action :set_club, only: [:edit, :update, :destroy, :show, :new, :create]
   before_action :set_member, only: [:edit, :update, :destroy, :show]
   
   # GET /members
