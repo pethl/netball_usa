@@ -65,7 +65,7 @@
       <%= render "club_members", club: club %>
       </div>  
 
-      <% if is_admin? ||  current_user.teams_grants? %>
+     
         <br>
       <div class="my-2">
         Individual Members (self managed)
@@ -75,7 +75,7 @@
       </div>  
 
      <br>
-      
+     <% if is_admin? ||  current_user.teams_grants? %>
        <div class="my-2">
           Key Roles
         </div>
@@ -84,6 +84,8 @@
         </div>  
     
         <br>
+
+       
     
         <div class="my-2">
          Teams

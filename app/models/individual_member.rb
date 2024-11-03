@@ -1,5 +1,6 @@
 class IndividualMember < ApplicationRecord
   belongs_to :user
+  belongs_to :team, optional: true
   belongs_to :club, optional: true
   has_many :payments
     

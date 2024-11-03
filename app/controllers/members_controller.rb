@@ -19,6 +19,7 @@ class MembersController < ApplicationController
 
   # GET /members/1/edit
   def edit
+    @teams = Team.where(club_id: @club)
   end
 
   # POST /members
@@ -52,7 +53,7 @@ class MembersController < ApplicationController
         format.turbo_stream { flash.now[:notice] = "Member was successfully deleted." }
       end
   end
-
+ 
   private
     # Use callbacks to share common setup or constraints between actions.
 #    def set_member
@@ -62,7 +63,7 @@ class MembersController < ApplicationController
     def set_club
        @club = Club.find(params[:club_id])
     end
-     
+      
     def set_member
        @member = @club.members.find(params[:id])
     end

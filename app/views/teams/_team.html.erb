@@ -32,6 +32,14 @@
           <% end %>
         </ul>
         <% end %>
+        <hr>
+        <% if team.individual_members.any? %>
+        <ul>
+        <% team.individual_members.each do |individual_member| %>
+          <li> o <%= individual_member.full_name %></li>
+          <% end %>
+        </ul>
+        <% end %>
       </div>
     </div>
     

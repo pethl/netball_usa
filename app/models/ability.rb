@@ -34,6 +34,13 @@ class Ability
 
     if  user.teams_grants?
       can :manage, Grant 
+     # can :manage, Person
+      can :manage, Member
+      can :manage, Program
+      can :manage, Event
+      can :manage, Venue
+      can :manage, Tour
+      can :manage, Partner
       can :manage, Club 
       can :manage, Payment
       can :manage, IndividualMember 

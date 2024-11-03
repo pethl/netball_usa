@@ -31,7 +31,7 @@
       </div>
 
         <%= turbo_frame_tag Member.new %>
-        <%= turbo_frame_tag "members" do %>
+        <%= turbo_frame_tag  "members" do %>
           <div class="text-sm">
             <% if @club.members.any? %>
               <%= render @club.members.ordered, club: @club %>
@@ -44,15 +44,17 @@
         </div>
     </div>
 
-    <% if is_admin? ||  current_user.teams_grants?  %>
+   
     <div class="p-4 m-2 border border-grey-500 shadow-md shadow-blue-900 hover:border-black rounded-lg">
     <div class="ml-4 text-gray-700 text-lg text-left font-semibold">
       Individual Members
     </div>
     
+    <% if is_admin? ||  current_user.teams_grants?  %>
     <div class="ml-2 my-2">
        <%= link_to "To add or remove Individual Membership records click here", individual_members_path, class: link_class %>
     </div>
+    <% end %>
 
       <%= turbo_frame_tag Member.new %>
       <%= turbo_frame_tag "members" do %>
@@ -64,7 +66,7 @@
       <% end %>
 
   </div>
-    <% end %>
+
 
     <div class="flex flex-row flex-wrap">
     <div class="basis-1/2">

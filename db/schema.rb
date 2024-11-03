@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_28_005203) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_03_170836) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
@@ -215,6 +216,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_28_005203) do
     t.string "address"
     t.string "zip"
     t.integer "club_id"
+    t.integer "team_id"
   end
 
   create_table "member_key_roles", force: :cascade do |t|
@@ -672,6 +674,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_28_005203) do
   add_foreign_key "event_participants", "events"
   add_foreign_key "event_participants", "people"
   add_foreign_key "individual_members", "clubs"
+  add_foreign_key "individual_members", "teams"
   add_foreign_key "member_key_roles", "clubs"
   add_foreign_key "member_key_roles", "members"
   add_foreign_key "members", "clubs"
