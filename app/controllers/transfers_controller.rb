@@ -98,26 +98,27 @@ class TransfersController < ApplicationController
           @transfers_by_arrival_date_only.each do |arrival_date_only, transfers|
              pdf.text transfers.first.arrival_time.strftime('%A') + "   "+ arrival_date_only, size: 12
                 transfer_table_data = Array.new
-                transfer_table_data << ["Grouping", "Name", "Phone", "Arrv. Time", "Flight", "Airline", "PickUp", "Hotel", "Notes" ]
+                transfer_table_data << ["GP", "Name", "Phone", "Arrv. Time", "Flight", "Airline & Term.", "PickUp", "Pick Up Location", "Hotel", "Notes" ]
                 transfers.each do |transfer|
-                  transfer_table_data << [transfer.pick_up_grouping, transfer.person.full_name, transfer.phone, transfer.arrival_time.to_datetime.strftime('%H:%M'), transfer.arrival_flight, transfer.arrival_airline, transfer.pickup_type, transfer.hotel_name, transfer.pickup_note]
+                  transfer_table_data << [transfer.pick_up_grouping, transfer.person.full_name, transfer.phone, transfer.arrival_time.to_datetime.strftime('%H:%M'), transfer.arrival_flight, transfer.arrival_airline_and_terminal, transfer.pickup_type, transfer.pickup_location, transfer.hotel_name, transfer.pickup_note]
                   end
              pdf.table(transfer_table_data) do 
-                self.width = 545
+                self.width = 520
                 self.cell_style = { :inline_format => true, size: 6 } 
                 {:borders => [:top, :left, :bottom, :right],
                 :border_width => 1,
                 :border_color => "B2BEB5"}
                 row(0).font_style = :bold
-                columns(0).width = 40
-                columns(1).width = 90
-                columns(2).width = 50
-                columns(3).width = 30
+                columns(0).width = 20
+                columns(1).width = 70
+                columns(2).width = 40
+                columns(3).width = 25
                 columns(4).width = 35
                 columns(5).width = 60
-                columns(6).width = 60
-                columns(7).width = 80
-                columns(8).width = 100
+                columns(6).width = 50
+                columns(7).width = 50
+                columns(8).width = 80
+                columns(8).width = 80
                 columns(0).align = :left
                 columns(1).align = :left
                 columns(2).align = :right
@@ -158,9 +159,9 @@ class TransfersController < ApplicationController
           @transfers_by_departure_date_only.each do |departure_date_only, transfers|
              pdf.text transfers.first.departure_time.strftime('%A') + "   "+ departure_date_only, size: 12
                 transfer_table_data = Array.new
-                transfer_table_data << ["Grouping", "Name", "Phone", "Dep. Time", "Flight", "Airline", "PickUp", "Hotel", "Notes" ]
+                transfer_table_data << ["Grouping", "Name", "Phone", "Dep. Time", "Flight", "Airline & Term.", "PickUp", "Hotel", "Notes" ]
                 transfers.each do |transfer|
-                  transfer_table_data << [transfer.departure_grouping, transfer.person.full_name, transfer.phone, transfer.departure_time.to_datetime.strftime('%H:%M'), transfer.departure_flight, transfer.departure_airline, transfer.departure_type, transfer.hotel_name, transfer.departure_note]
+                  transfer_table_data << [transfer.departure_grouping, transfer.person.full_name, transfer.phone, transfer.departure_time.to_datetime.strftime('%H:%M'), transfer.departure_flight, transfer.departure_airline_and_terminal, transfer.departure_type, transfer.hotel_name, transfer.departure_note]
                   end
              pdf.table(transfer_table_data) do 
                 self.width = 545
@@ -202,7 +203,7 @@ class TransfersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transfer_params
-      params.require(:transfer).permit(:id, :person_id, :event_id, :consent, :role, :hotel_arrival, :hotel_departure, :check_in, :check_out, :room_type, :hotel_reservation, :share_volunteer, :arrival_airline, :arrival_flight, :arrival_time, :departure_airline, :departure_flight, :departure_time, :no_pick_up, :notes, :phone, :hotel_name, :pick_up_grouping, :pickup_type, :pickup_note, :departure_grouping, :departure_type, :departure_note, :t_shirt_size, :visa_type, :umpire_badge_level, :certification_date,  :headshot, :certification, :event_title, :registration_form_completed, :waiver_form_completed, :read_and_agreed_tcs, 
+      params.require(:transfer).permit(:id, :person_id, :event_id, :consent, :role, :hotel_arrival, :hotel_departure, :check_in, :check_out, :room_type, :hotel_reservation, :share_volunteer, :arrival_airline, :arrival_flight, :arrival_terminal, :arrival_time, :departure_airline, :departure_flight, :departure_terminal, :departure_time, :no_pick_up, :notes, :phone, :hotel_name, :pick_up_grouping, :pickup_type, :pickup_location, :pickup_note, :departure_grouping, :departure_type, :departure_note, :t_shirt_size, :visa_type, :umpire_badge_level, :certification_date,  :headshot, :certification, :event_title, :registration_form_completed, :waiver_form_completed, :read_and_agreed_tcs, 
       person_attributes: [ :id, :level_submitted, :associated, :gender, :tshirt_size, :uniform_size, :certification, :certification_date, :headshot ] )
     end
 end

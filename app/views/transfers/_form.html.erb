@@ -86,6 +86,13 @@
               <%= form.select :pickup_type, options_for_select(transfer_pickup_type, :selected => transfer.pickup_type),{prompt: true}, class: input_class %>
             </div> 
         </div>
+
+        <div class="mb-6">
+        <%= form.label :pickup_location, "Pick-up Location", class: label_class%>
+          <div class="mt-1">
+            <%= form.text_field :pickup_location, class: input_class  %>
+          </div> 
+        </div>
     
         <div class="mb-2">
           <%= form.label :pickup_note, "Pick-up Notes", class: label_class%>
@@ -245,9 +252,16 @@
         </div>
 
         <div class="mb-6">
-          <%= form.label :arrival_flight, "Flight Number", class: label_class%>
+          <%= form.label :arrival_flight, "Flight Number", class: label_class %>
             <div class="mt-1">
-              <%= form.text_field :arrival_flight, placeholder: "format XX1234", class: small_input_class  %>
+              <%= form.text_field :arrival_flight, placeholder: "format XX1234", class: xs_input_class  %>
+            </div> 
+        </div>
+
+        <div class="mb-6">
+          <%= form.label :arrival_terminal, "Flight Terminal", class: label_class%>
+            <div class="mt-1">
+              <%= form.text_field :arrival_terminal, class: xs_input_class  %>
             </div> 
         </div>
     
@@ -277,6 +291,13 @@
                 <%= form.text_field :departure_flight, placeholder: "format XX1234", class: small_input_class  %>
               </div> 
           </div>
+
+          <div class="mb-6">
+          <%= form.label :departure_terminal, "Flight Terminal", class: label_class%>
+            <div class="mt-1">
+              <%= form.text_field :departure_terminal, class: xs_input_class  %>
+            </div> 
+        </div>
     
           <div class="mb-6">
             <%= form.label :departure_time, "Date & Time", class: label_class%>

@@ -29,37 +29,43 @@
    <% transfers_by_arrival_flight = transfers.group_by { |t| t.arrival_flight } %>   
      <% transfers_by_arrival_flight.each do |arrival_flight, transfers| %>
       
-       <div class="text-xl text-gray-500">
+       <div class="text-2xl text-gray-800 ml-6 ">
         <%= arrival_flight %>   <%= transfers.first.arrival_time.to_formatted_s(:time_24) unless (transfers.first.arrival_time.to_s.empty?)  %>
         </div>
         <div id="transfers">
         <div class="relative overflow-x-auto">
-            <table class="table-auto w-full text-left rtl:text-right">
+            <table class="table-fixed w-full text-left rtl:text-right">
                 <thead class="bg-white border-b text-gray-300 font-light text-xs ">
                      <tr>
-                       <th scope="col" class="px-6 py-3 w-52">
-                           Grouping 
+                       <th scope="col" class="px-6 py-3 w-10">
+                           Group
                        </th>
-                        <th scope="col" class="px-6 py-3 w-52">
+                        <th scope="col" class="px-6 py-3 w-40">
                             Name 
                         </th>
-                        <th scope="col" class="px-6 py-3 w-52">
+                        <th scope="col" class="px-6 py-3 w-40">
                             Phone
                         </th>
-                        <th scope="col" class="px-6 py-3 w-52">
+                        <th scope="col" class="px-6 py-3 w-32">
                             Arr. Date
                         </th>
-                        <th scope="col" class="px-6 py-3 w-52">
+                        <th scope="col" class="px-6 py-3 w-32">
                             Arr. Time
                         </th>
-                        <th scope="col" class="px-6 py-3 w-52">
+                        <th scope="col" class="px-6 py-3 w-24">
                             Flight #
                         </th>
-                        <th scope="col" class="px-6 py-3 w-52">
+                        <th scope="col" class="px-6 py-3 w-40">
                             Airline
                         </th>
-                        <th scope="col" class="px-6 py-3 w-52">
+                        <th scope="col" class="px-6 py-3 w-16">
+                            Terminal
+                        </th>
+                        <th scope="col" class="px-6 py-3 w-40">
                             Pick Up
+                        </th>
+                        <th scope="col" class="px-6 py-3 w-52">
+                            Pick Up Location
                         </th>
                         <th scope="col" class="px-6 py-3 w-52">
                             Hotel 
@@ -107,15 +113,23 @@
                    <%= transfer.arrival_airline %>
                  </td>
 
-                  <td class="px-6 py-4">
+                 <td class="px-6 py-4">
+                  <%= transfer.arrival_terminal %>
+                  </td>
+
+                  <td class="px-6 py-4 whitespace-nowrap">
                      <%= transfer.pickup_type %>
                  </td>
+
+                 <td class="px-6 py-4">
+                 <%= transfer.pickup_location %>
+             </td>
 
                  <td class="px-6 py-4">
                     <%= transfer.hotel_name %>
                  </td>
 
-                 <td colspan="10" class="px-6 py-4">
+                 <td colspan="10" class="px-6 py-4 whitespace-nowrap">
                     <%= transfer.pickup_note  %>
                  </td>
 

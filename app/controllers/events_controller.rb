@@ -1,10 +1,11 @@
 class EventsController < ApplicationController
   before_action :set_event_collections, only: %i[ new show edit update ]
   before_action :set_event, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
 
   # GET /events
   def index
-    authorize! :read, @events
+    
     @events = Event.all
     @events = @events.order(date: :desc)
     @events_by_year = @events.group_by { |t| t.event_date_year }

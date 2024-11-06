@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: %i[ show edit update destroy ]
-  skip_before_action :authenticate_user!, only:[:show, :edit, :update, :index]
+  load_and_authorize_resource
 
 
   def people_search

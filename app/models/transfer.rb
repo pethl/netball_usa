@@ -18,6 +18,14 @@ class Transfer < ApplicationRecord
   def full_name
     "#{self.first_name} #{self.last_name}"
   end
+
+  def arrival_airline_and_terminal
+    "#{self.arrival_airline} #{self.arrival_terminal}"
+  end
+
+  def departure_airline_and_terminal
+    "#{self.departure_airline} #{self.departure_terminal}"
+  end
   
   def arrival_date_only
      if !self.arrival_time.blank?

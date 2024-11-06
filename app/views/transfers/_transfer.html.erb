@@ -88,6 +88,15 @@
       </div> 
 
       <div class="mt-2">
+      <p class="text-sm text-gray-500 ">
+          Pick Up Location #:
+      </p>
+      <p class="text-sm font-medium text-gray-900 ">
+      <%= transfer.pickup_location %> 
+      </p>
+    </div> 
+
+      <div class="mt-2">
         <p class="text-sm text-gray-500 ">
             Pick Up Note :
         </p>
@@ -243,9 +252,10 @@
      Arrival Details
      </div>
 
-     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-     <%= transfer.arrival_airline %>  <br>
-      <%= transfer.arrival_flight %>  <br>
+     <p class="text-sm font-medium text-gray-500 truncate dark:text-white">
+     <br><%= transfer.arrival_airline %>  <br><br>
+      <%= transfer.arrival_flight %>  <br><br>
+      <span class="text-sm font-medium text-gray-900">Terminal: </span><%= transfer.arrival_terminal %>  <br><br>
       <%= transfer.arrival_time.to_formatted_s(:usa_dt) unless (transfer.arrival_time.to_s.empty?)  %> 
      </p>
     </div>
@@ -255,9 +265,10 @@
     <div class: "font-xl">
          Departures Info:
       </p>
-      <p class="text-sm font-medium text-gray-900 dark:text-white">
-       <%= transfer.departure_airline %>  <br>
-       <%= transfer.departure_flight %>  <br>
+      <p class="text-sm font-medium text-gray-500 dark:text-white">
+      <br><%= transfer.departure_airline %>  <br><br>
+       <%= transfer.departure_flight %>  <br><br>
+       <span class="text-sm font-medium text-gray-900">Terminal: </span><%= transfer.departure_terminal %>  <br><br>
        <%= transfer.departure_time.to_formatted_s(:usa_dt) unless (transfer.departure_time.to_s.empty?)  %> 
       </p>
     </div>
