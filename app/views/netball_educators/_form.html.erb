@@ -88,10 +88,10 @@
       </div>
 
       <div class="mb-6">
-      <%= form.label :zip, "Zip Code", class: label_class  %>
-      <div class="mt-1">
-      <%= form.text_field :zip, class: input_class %>  </div>
-    </div>
+          <%= form.label :zip, "Zip Code", class: label_class  %>
+          <div class="mt-1">
+        <%= form.text_field :zip, class: input_class %>  </div>
+      </div>
 
       <div class="mb-6">
         <%= form.label :website, "School Website", class: label_class  %>
@@ -106,13 +106,6 @@
          <%= form.select :level, options_for_select(educator_level, :selected => netball_educator.level),{:prompt=>true}, class: input_class %>
         </div>
       </div>
-
-      <div class="mb-6">
-      <%= form.label :role,  class: label_class  %>
-      <div class="mt-1">
-      <%= form.text_field :role, class: input_class %>
-     </div>
-    </div>
 
      <div class="mb-6">
         <%= form.label :educator_notes, 'What would you like more information on?', style: "display: block", class: label_class  %>
