@@ -72,58 +72,65 @@
         </p>
          </div>
        
-         <div class="mt-2">
-         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-             Address, City, State, ZIP:
-         </p>
-         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-         <%= netball_educator.address %> <%= netball_educator.city %>,   <%= netball_educator.state %>  <%= netball_educator.zip %> 
-         </p>
-          </div>
-       
-           <div class="mt-2">
+        <div class="mt-2">
           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-              Role/Level:
+             Address, City, State, ZIP:
+          </p>
+          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+           <%= netball_educator.address %> <%= netball_educator.city %>,   <%= netball_educator.state %>  <%= netball_educator.zip %> 
+          </p>
+        </div>
+       
+        <div class="mt-2">
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+              Level:
           </p>
           <p class="text-sm font-medium text-gray-900 dark:text-white">
           <%= netball_educator.level %> 
           </p>
-           </div>
+        </div>
+
+        <div class="mt-2">
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            Role:
+        </p>
+        <p class="text-sm font-medium text-gray-900 dark:text-white">
+        <%= netball_educator.role %> 
+        </p>
+      </div>
        
 
-           <div class="mt-2">
-           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        <div class="mt-2">
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                More Information:
-           </p>
-           <p class="text-sm font-medium text-gray-900 dark:text-white">
+          </p>
+          <p class="text-sm font-medium text-gray-900 dark:text-white">
            <%= netball_educator.educator_notes %> 
-           </p>
-            </div>
+          </p>
+        </div>
             
             <% unless netball_educator.level=="School/District Lead" %>
-            <div class="mt-2">
-            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        <div class="mt-2">
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                 Feedback:
-            </p>
-            <p class="text-sm font-medium text-gray-900 dark:text-white">
+          </p>
+          <p class="text-sm font-medium text-gray-900 dark:text-white">
             <%= netball_educator.feedback %> 
-            </p>
-             </div>
+          </p>
+        </div>
              
        
-             <div class="mt-2">
-             <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        <div class="mt-2">
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                  Authorize use of feedback on social media?:
-             </p>
-             <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-             
+          </p>
+          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
              <%= netball_educator.authorize? ? 'Yes' : 'No' %>
-             </p>
-              </div>
+          </p>
+        </div>
               
-              <% end %>
+        <% end %>
  
-  
 <% if user_signed_in? %>
   
         <div class="mt-2">
@@ -142,14 +149,13 @@
             <p class="text-sm font-medium text-gray-900 dark:text-white">
             <%= netball_educator.mgmt_notes %> 
             </p>
-           </div>
+        </div>
            
-           
-           <div class="mt-2">
-              <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        <div class="mt-2">
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                   Equipment Sales:
-              </p>
-              <p class="text-sm font-medium text-gray-900 dark:text-white">
+          </p>
+          <p class="text-sm font-medium text-gray-900 dark:text-white">
               <% if netball_educator.equipment.any? %>
                 <% netball_educator.equipment.each do |equipment| %>
                   <ul>
@@ -157,10 +163,9 @@
                   </li></ul>
                  <% end %>
                 <% end %>
-              </p>
-             </div>
-          
-    
+          </p>
+        </div>
+        
   <% end %>  
 </div>
 

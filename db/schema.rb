@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_06_164353) do
+ActiveRecord::Schema[7.0].define(version: 2025_01_09_090918) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -297,6 +297,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_06_164353) do
     t.string "title"
     t.string "zip"
     t.boolean "is_pe_director"
+    t.string "role"
   end
 
   create_table "opportunities", force: :cascade do |t|
