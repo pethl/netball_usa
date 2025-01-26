@@ -11,14 +11,14 @@
     <!-- City Filter -->
     <div class="flex flex-col">
       <%= label_tag :city, "City", class: "text-sm font-medium text-gray-700" %>
-      <%= text_field_tag :city, params[:city], placeholder: "Enter a City", class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+      <%= text_field_tag :city, params[:city], class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
     </div>
 
     <!-- State Filter -->
     <div class="flex flex-col">
       <%= label_tag :state, "State", class: "text-sm font-medium text-gray-700" %>
       <%= select_tag :state, options_for_select(us_states, params[:state]),
-        include_blank: "Select a state",
+        include_blank: "Select",
         class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
     </div>
 
@@ -26,7 +26,7 @@
     <div class="flex flex-col">
       <%= label_tag :expat_co, "ExPat Co", class: "text-sm font-medium text-gray-700" %>
       <%= select_tag :expat_co, options_for_select(expat_co, params[:expat_co]),
-        include_blank: "Select an ExPat Co",
+        include_blank: "Select",
         class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
     </div>
 
