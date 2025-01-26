@@ -309,6 +309,11 @@ module ApplicationHelper
       generic_option = Reference.where(active: "TRUE", group: 'generic_option')
       generic_option = generic_option.pluck(:value)     
     end
+
+    def expat_co
+      expat_co = Reference.where(active: "TRUE", group: 'expat_co')
+      expat_co = expat_co.pluck(:value)     
+    end
     
      def get_teams_per_state(state)
      state = params[:state]

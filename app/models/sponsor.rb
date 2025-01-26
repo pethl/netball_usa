@@ -9,6 +9,14 @@ class Sponsor < ApplicationRecord
   
   scope :ordered, -> { order(company_name: :asc) }
 
+  scope :filter_by_city_and_state, ->(city, state) {
+    where('city = ? state = ?', city, state)
+  }
+
+  def city_state
+    self.city + " " + self.state
+  end
+
   #DUP TO TOUR PARTNET
     def address_condensed
         if self.location.to_s.blank? && self.city.to_s.blank? && self.state.to_s.blank?
