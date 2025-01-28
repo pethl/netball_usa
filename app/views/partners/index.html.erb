@@ -30,7 +30,7 @@
         <% @partners.each do |partner| %>
             <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
                 
-                <td scope="row" class="align-top px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                <td scope="row" class="align-top px-6 py-4 font-medium text-gray-800 whitespace-wrap dark:text-white">
                     <%= link_to partner.company, partner_path(partner), class: link_class %>
                 </td>
                

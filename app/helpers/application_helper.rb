@@ -344,6 +344,10 @@ module ApplicationHelper
        User.where(account_active: true).where.not(role: 2) 
      end
 
+     def us_open_events
+      Event.where(event_type: "US Open").pluck(:name)
+     end
+
     
 
      

@@ -6,22 +6,29 @@ class TransfersController < ApplicationController
 
   # GET /transfers
   def index
-    @transfers_priority= Transfer.all.ordered
-    @transfers = Transfer.includes(:person).order('people.first_name')
-  
+   
+      @event_name = params[:event_name]
+      
+      # Fetch Transfers with optional filtering by event_name
+      @transfers = if @event_name.present?
+        Transfer.joins(:event, :person).where(events: { name: @event_name }).order('people.first_name ASC')
+      else
+        Transfer.joins(:event, :person).where(events: { name: 'US Open 2025 - Austin' }).order('people.first_name ASC')
+      end
+    
   end
 
   def index_inbound_pickup
-    @no_transfers = Transfer.where(no_pick_up: false)
-    @transfers = Transfer.where(no_pick_up: true). where("arrival_time IS NOT NULL")
+    @no_transfers = Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(no_pick_up: false)
+    @transfers = Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(no_pick_up: true)
    
     @transfers = @transfers.order(arrival_time: :asc).order(arrival_airline: :asc)
     @transfers_by_arrival_date_only = @transfers.group_by { |t| t.arrival_date_only }
   end
   
   def index_outbound_pickup
-    @no_transfers = Transfer.where(no_pick_up: false)
-    @transfers = Transfer.where(no_pick_up: true).where("departure_time IS NOT NULL")
+    @no_transfers = Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(no_pick_up: false)
+    @transfers = Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(no_pick_up: true)
     
     @transfers = @transfers.order(departure_time: :asc).order(departure_airline: :asc)
     @transfers_by_departure_date_only = @transfers.group_by { |t| t.departure_date_only }
@@ -77,9 +84,11 @@ class TransfersController < ApplicationController
   end
   
    def download_transfers_in_sheet_pdf
+    begin
      
      @start_date = Date.today.beginning_of_year # Current vacation calendar year
-     @transfers = Transfer.where(no_pick_up: true).where("arrival_time IS NOT NULL")
+     @transfers = Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(no_pick_up: true).where("arrival_time IS NOT NULL")
+
      @transfers = @transfers.order(arrival_time: :asc).order(arrival_airline: :asc)
      @transfers_by_arrival_date_only = @transfers.group_by { |t| t.arrival_date_only }
    
@@ -131,6 +140,13 @@ class TransfersController < ApplicationController
           end   
         
           send_data pdf.render, filename: 'transfer_sheet.pdf', type: 'application/pdf', :disposition => 'inline'
+        rescue StandardError => e
+          Rails.logger.error("Error generating PDF: #{e.message}")
+
+          # Provide a user-friendly message
+          flash[:error] = "There was an error generating the PDF. Please alert tech support at techsupport@netballamerica.com."
+          redirect_to transfers_url 
+        end
        end
      end
    end
@@ -138,9 +154,9 @@ class TransfersController < ApplicationController
   
   
    def download_transfers_out_sheet_pdf 
-     
+     begin
      @start_date = Date.today.beginning_of_year # Current vacation calendar year
-     @transfers = Transfer.where(no_pick_up: true).where("departure_time IS NOT NULL")
+     @transfers = Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(no_pick_up: true).where("arrival_time IS NOT NULL")
      @transfers = @transfers.order(departure_time: :asc).order(departure_airline: :asc)
      @transfers_by_departure_date_only = @transfers.group_by { |t| t.departure_date_only }
    
@@ -191,7 +207,14 @@ class TransfersController < ApplicationController
           end   
         
           send_data pdf.render, filename: 'transfer_sheet.pdf', type: 'application/pdf', :disposition => 'inline'
-       end
+        rescue StandardError => e
+          Rails.logger.error("Error generating PDF: #{e.message}")
+
+          # Provide a user-friendly message
+          flash[:error] = "There was an error generating the PDF. Please alert tech support at techsupport@netballamerica.com."
+          redirect_to transfers_url 
+        end
+        end
      end
    end
 

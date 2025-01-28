@@ -5,23 +5,27 @@
 
   <% elsif current_user.role=="teams_grants" %>
     <% content_for(:page_title, "Dashboard")%>
-    <%= render "office_home" %>
+      <%= render "office_home" %>
+
+    <% elsif current_user.role=="us_open" %>
+    <% content_for(:page_title, "Dashboard")%>
+    <%= render "us_open_home" %> 
 
   <% elsif current_user.role=="grants" %>
     <% content_for(:page_title, "Dashboard")%>
     <%= render "office_home" %>
   
   <% elsif current_user.role=="educators" %>
-    <% content_for(:page_title, "Dashboard")%>
+    <% content_for(:page_title, "Dashboard")%> 
     <%= render "office_home" %>
 
   <% elsif current_user.role=="sponsors" %>
     <% content_for(:page_title, "Dashboard")%>
     <%= render "office_home" %>  
   
-  <% elsif current_user.role=="sponsors" %>
+  <% elsif current_user.role=="teams_admin" %>
     <% content_for(:page_title, "Dashboard")%>
-    <%= render "office_home" %>  
+    <%= render "office_home" %>   
 
 <% else %>
   <% content_for(:page_title, "Welcome to Netball America Members Zone")%>

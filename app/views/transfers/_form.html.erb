@@ -18,7 +18,7 @@
       <div class="mb-6">
         <%= form.label :event_id, class: label_class%>
         <div class="mt-1">
-          <%= form.collection_select(:event_id, @events, :id, :name,{}, class: input_class) %> 
+          <%= form.collection_select(:event_id, @events.ordered, :id, :name,{}, class: input_class) %> 
         </div>  
       </div>
 

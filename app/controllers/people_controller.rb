@@ -26,7 +26,8 @@ class PeopleController < ApplicationController
 
   # GET /umpires
   def index
-    authorize! :read, @people
+   # authorize! :read, @people
+    authorize! :manage, Person
      @people = Person.where(role: "Umpire", region: "US & Canada")
      @people =  @people.order(first_name: :asc)
   end

@@ -20,17 +20,21 @@ class PagesController < ApplicationController
     @educators = User.where(role: 4, account_active: true).count
     @teams_admin = User.where(role: 5, account_active: true).count
     @sponsors = User.where(role: 6, account_active: true).count
+    @us_open = User.where(role: 7, account_active: true).count
 
     @events_this_year = Event.where('date > ?', Time.now.beginning_of_year)
     @events_this_year_by_status = @events_this_year.group_by { |t| t.status }
     @events_next_year = Event.where('date > ?', Time.now.end_of_year)
     @events_next_year_by_status = @events_next_year.group_by { |t| t.status }
 
-    @operations = Transfer.where(role: "Operations").count
-    @umpires = Transfer.where(role: "US Umpire").count
-    @int_umpires = Transfer.where(role: "Int Umpire").count
-    @scorers = Transfer.where(role: "Scorer").count
-    @medics = Transfer.where(role: "Medic").count
+    Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(role: "Operations").count
+
+    @operations = Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(role: "Operations").count
+    @umpires = Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(role: "US Umpire").count
+    @int_umpires =  Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(role: "Int Umpire").count
+    @scorers = Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(role: "Scorer").count
+    @medics = Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(role: "Medic").count
+
 
     @total_members = (Member.all.count)+(IndividualMember.all.count)
     @grants_submitted_this_year = Grant.where('date_submitted > ?', Time.now.beginning_of_year).count

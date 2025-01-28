@@ -1,4 +1,4 @@
-<% content_for(:page_title, "US Open #{Date.current.year}")%>
+<% content_for(:page_title, "US Open ")%>
 
 <% if user_signed_in? %> 
   <div class="">
@@ -12,12 +12,34 @@
           <li class="me-2">
              <a href="/transfers/index_outbound_pickup/" class="inline-block p-4 text-gray-600 rounded-t-lg active" aria-current="page">Departures Transfers</a>
           </li>
-        </ul>
+        </ul> 
   </div>
+
+<div class="grid grid-cols-2">
   <div class="mt-4 mb-4">
-  <%= link_to "Add New Record", new_transfer_path, class: form_button_class %>
-  <br>  
-</div>
+    <%= link_to "Add New Record", new_transfer_path, class: form_button_class %>
+    <br>  
+  </div>
+
+  <div class="border border-gray-400 rounded-md ">
+  <!-- Inline Filter Form -->
+    <%= form_with url: transfers_path, method: :get, local: true, class: "flex items-center space-x-4" do %>
+    <!-- Event Name Input -->
+    <div class="flex items-center space-x-2 m-2">
+      <%= label_tag :event_name, "Filter by Event Name", class: "text-sm font-medium" %>
+      <%= select_tag :event_name, options_for_select(us_open_events, params[:event_name]),
+          include_blank: "Select",
+          class: input_class %>  
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex items-center space-x-2">
+      <%= submit_tag "Filter", class: form_button_class %>
+      <%= link_to "Clear", transfers_path, class: clear_button_class %>
+    </div>
+    <% end %>
+    </div>
+  </div>
 
 
   <div id="transfers">
@@ -25,6 +47,9 @@
       <table class="table-auto w-full text-left rtl:text-right">
           <thead class="bg-white border-b text-gray-300 font-light text-xs ">
                <tr>
+                  <th scope="col" class="px-6 py-3 w-52">
+                     Year 
+                  </th>
                   <th scope="col" class="px-6 py-3 w-52">
                       Name 
                   </th>
@@ -62,13 +87,17 @@
               </tr>
           </thead>
           <tbody>
-           <% if @transfers_priority.count >0 %>
-           <% @transfers_priority.each do |transfer| %>
+           <% if @transfers.count >0 %>
+           <% @transfers.each do |transfer| %>
               <tr class="bg-white border-b hover:bg-gray-100">
+
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <%= transfer.event.date.strftime('%Y') if transfer.event.date.present? %>
+                  </td>
                
                   <td class="px-6 py-4 whitespace-nowrap">
                      <%= link_to transfer.person.full_name, edit_transfer_path(transfer), class: link_class %>
-                     </td>
+                  </td>
                
                   <td class="px-6 py-4 whitespace-nowrap">
                      <%= transfer.role %> <% unless transfer.event_title.to_s.empty? %> : <%= transfer.event_title %><% end %>
@@ -103,12 +132,14 @@
                   </td>
 
                    <td class="px-6 py-4">
-                    <p class="text-wrap truncate"> <%= transfer.notes %></p>
+                    <p class=" truncate"> <%= transfer.notes %></p>
                   </td>
                </tr>
               <% end %>
                 <% else %>
+                <tr><td class="text-right">
                 No Records
+                </td></tr>
                 <% end %>
           </tbody>
       </table>

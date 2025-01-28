@@ -88,6 +88,11 @@
               <div class="w-4/5 self-center">
                 <% if content_for(:page_title)%>
                     <p class="pt-2 text-xl font-2xl text-left font-semibold text-white">
+                    <% if flash[:error] %>
+                    <div class="alert alert-danger">
+                      <%= flash[:error] %>
+                    </div>
+                  <% end %>
                     <%= yield(:page_title)%></p>
                   <% end %>
               </div>    
@@ -365,13 +370,13 @@
                        <a href="/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
                    </li>
                    <li class="mt-2">
-                       <a href="/clubs/index_admin" class="text-gray-100 hover:font-bold">All Teams</a>
+                       <a href="/clubs/index_admin" class="text-gray-100 hover:font-bold">All Clubs</a>
                    </li>
                    <li class="mt-2">
-                       <a href="/clubs/teams_list_index" class="text-gray-100 hover:font-bold">Teams by Region</a>
+                       <a href="/clubs/teams_list_index" class="text-gray-100 hover:font-bold">Clubs by Region</a>
                    </li>
                    <li class="mt-2">
-                       <a href="/clubs/" class="text-gray-100 hover:font-bold">Set Up Teams</a>
+                       <a href="/clubs/" class="text-gray-100 hover:font-bold">Set Up Club</a>
                    </li>
                    <li class="mt-2">
                       <a href="/individual_members/" class="text-gray-100 hover:font-bold">Individual Members</a>
@@ -394,7 +399,7 @@
                     Admin Only
                     </li>
                     <li class="mt-2 ml-2">
-                      <a href="/clubs/teams_list_index" class="text-blue-300 hover:font-bold">Teams Report</a>
+                      <a href="/clubs/teams_list_index" class="text-blue-300 hover:font-bold">Clubs Report</a>
                     </li>
                    <li class="mt-2 ml-2">
                        <a href="/budgets" class="text-blue-300 hover:font-bold">Budgets</a>

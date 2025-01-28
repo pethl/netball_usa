@@ -27,9 +27,14 @@ class Ability
       can :manage, NetballEducator
       can :manage, FollowUp
     end
-
+ 
     if user.grants?
       can :manage, Grant
+    end
+
+    if user.us_open?
+      can :manage, Transfer
+      can :manage, Person
     end
 
     if  user.teams_grants?
@@ -54,7 +59,7 @@ class Ability
     if user.sponsors?
       can :manage, Sponsor
       can :manage, Contact
-      can :manage, Opportunities, user_id: user.id # if the user is assigned in can manage 
+      can :manage, Opportunity, user_id: user.id # if the user is assigned in can manage 
     end
   
     if user.admin?

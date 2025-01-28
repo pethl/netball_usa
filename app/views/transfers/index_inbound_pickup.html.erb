@@ -22,7 +22,7 @@
  <% @transfers_by_arrival_date_only.each do |arrival_date_only, transfers| %>
    
    <div class="text-2xl text-center text-blue-900 mt-8 bg-gray-100">
-       <%= transfers.first.arrival_time.strftime("%A") %>  <%= arrival_date_only %> 
+       <%= transfers.first.arrival_time.strftime("%A") if transfers.first.arrival_time.present? %>  <%= arrival_date_only %> 
   </div>
  
      

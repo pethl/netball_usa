@@ -1,5 +1,11 @@
 <% content_for(:page_title, "Events")%>
 
+<div class="m-2">
+    <%= link_to "Add New Event", new_event_path, class: form_button_class %>
+     <br>
+</div>
+
+
 <div class="m-4">
 <% if @events.any? %>
     <% @events_by_year.each do |year, events| %>
@@ -31,9 +37,7 @@
                 <th scope="col" class="px-6 py-3">
                     City/State
                 </th>
-                <th scope="col" class="px-6 py-3">
-                    Personnel
-                </th>
+              
                 <% if is_admin? %>  
                 <th scope="col" class="px-6 py-3">
                     Budget Total
@@ -64,13 +68,7 @@
                 <td class="px-6 py-4">
                     <%= event.city %>,   <%= event.state %>
                 </td>
-                <td class="px-6 py-4">
-                <% if event.people.any? %>
-                   <% event.people.each do |person| %>
-                     <%= person.full_name %> <br>
-                    <% end %>
-                <% end %>
-                </td>
+               
                 <% if is_admin? %>  
                 <td class="px-6 py-4 text-right">
                    <%= number_to_currency(event.budget.budget_total, precision: 2) unless event.budget.to_s.empty? %>
@@ -88,12 +86,7 @@
         No records to view</p>
     <% end %>
 <br>
-<div class="m-2">
-    <%= link_to "Add New Event", new_event_path, class: form_button_class %>
-     <br>
-   </div>
-
-   </div>
+</div>
 
  
    
