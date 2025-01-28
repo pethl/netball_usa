@@ -33,7 +33,7 @@ class SponsorsController < ApplicationController
     else
      @opportunities = @sponsor.opportunities.where(user_id: current_user.id)
     end
-  end
+  end 
 
   # GET /sponsors/new
   def new

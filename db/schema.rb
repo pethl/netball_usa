@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_01_26_133703) do
+ActiveRecord::Schema[7.0].define(version: 2025_01_28_181649) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -217,6 +217,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_26_133703) do
     t.string "zip"
     t.integer "club_id"
     t.integer "team_id"
+    t.string "discount_code"
+    t.string "country"
   end
 
   create_table "member_key_roles", force: :cascade do |t|

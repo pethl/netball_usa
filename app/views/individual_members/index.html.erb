@@ -22,7 +22,7 @@
                 <th scope="col" class="px-6 py-3">
                     Email
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-3 text-right">
                     Payments
                 </th>
                  <th scope="col" class="px-6 py-3">
@@ -68,10 +68,13 @@
                 </td>
                
                 <td class="px-6 py-4 text-right">
-                <% if individual_member.payments.count>0 %>
-                    <%=  number_to_currency(individual_member.payments.first.amount, precision: 2)   %>
+                <% if individual_member.has_paid == "Discounted Member" %>
+                  <span class="text-green-500">Discounted member</span>
+                <% elsif individual_member.has_paid == "Payment Due" %>
+                  <span class="text-red-500">Payment Due</span>
                 <% else %>
-                    <span class="text-red-500">Payment Due</span>
+                 <span class="text-green-500">Paid $<%= individual_member.has_paid %></span>
+                  
                 <% end %>
             </td>
                 <td class="px-6 py-4">

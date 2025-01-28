@@ -15,6 +15,8 @@ class User < ApplicationRecord
     inverse_of: :creator
   )
 
+  has_many :opportunities
+
   has_many(
     :clubs,
     class_name: 'Club',
@@ -47,6 +49,12 @@ class User < ApplicationRecord
   
   def full_name
     "#{self.first_name} #{self.last_name}"
+  end
+
+  def initials
+    first_initial = first_name.present? ? first_name[0].upcase : ""
+    last_initial = last_name.present? ? last_name[0].upcase : ""
+    "#{first_initial}#{last_initial}"
   end
   
   def teams_grants?

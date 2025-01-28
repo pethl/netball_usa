@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <div class="w-4/5">
+<div class="w-4/5">
   <div class="border border-white rounded m-2">
 
     <div class="flex flex-wrap gap-4">
@@ -21,11 +21,12 @@
       </div>
       <% if is_admin? ||  current_user.teams_grants?  %>
         <div class="mb-4">
-        <%= form.label :club_id, "Club", class: label_class%>
-        <%= form.collection_select(:club_id, Club.all.ordered, :id, :name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 hover:bg-gray-100 sm:text-sm"
-        }) %> </div>
+          <%= form.label :club_id, "Club", class: label_class%>
+          <%= form.collection_select(:club_id, Club.all.ordered, :id, :name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 hover:bg-gray-100 sm:text-sm"}) %> 
+        </div>
       <% end %>
     </div>
+
       <div class="flex flex-wrap gap-4">
         <div>
           <%= form.label :first_name, "First Name*", class: label_class %>
@@ -58,12 +59,17 @@
         </div>
 
         <div>
-          <%= form.label :state, "State*", class: label_class %>
+          <%= form.label :state, "State (USA & Canada Only)*", class: label_class %>
           <%= form.select :state, options_for_select(us_states, :selected => individual_member.state),{:prompt=>true}, style: "width:206px", class: input_class %>
         </div>
 
         <div>
-         <%= form.label :zip, "Zip", class: label_class %>
+          <%= form.label :country, "Country (non-USA & Canada)*", class: label_class %>
+          <%= form.text_field :country, class: input_class  %>
+        </div>
+
+        <div>
+         <%= form.label :zip, "Zip / Postal Code", class: label_class %>
          <%= form.text_field :zip, class: input_class  %>
         </div>
 
@@ -75,20 +81,20 @@
         <div>
           <%= form.label :age_status, "Youth(under 18) or Adult*", class: label_class %>
           <%= form.select :age_status, options_for_select(member_age_status, :selected => individual_member.age_status),{:prompt=>true}, style: "width:206px", class: input_class %>
-       </div>
+        </div>
 
-       <div>
+        <div>
           <%= form.label :engagement_status, "Player Engagement*", class: label_class %>
           <%= form.select :engagement_status, options_for_select(member_engagement_status, :selected => individual_member.engagement_status),{:prompt=>true}, style: "width:206px", class: input_class %>
-       </div>
+        </div>
 
         <div>
           <%= form.label :place_of_birth, class: label_class %>
           <%= form.text_field :place_of_birth, class: input_class  %>
         </div>
-        </div>
+      </div>
   
-        <div class="grid grid-cols-4 gap-4">
+      <div class="grid grid-cols-4 gap-4">
         <div class="mt-4">
           <%= form.label :interested_in_coaching, class: label_class %>
           <%= form.check_box :interested_in_coaching, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
@@ -99,12 +105,19 @@
           <%= form.check_box :interested_in_umpiring, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
         </div>
 
-         <div class="mt-4">
+        <div class="mt-4">
           <%= form.label :interested_in_usa_team, class: label_class%>
           <%= form.check_box :interested_in_usa_team, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
         </div>
-        <div>
-        </div>
+      <div>
+  </div>
+  
+  <div class="col-span-3">
+  <p class="font-bold mb-2">If you have been given a Membership Discount Code, please enter it here:</p>
+    <%= form.label :discount_code, "Membership Discount Code", class: label_class %>
+    <%= form.text_field :discount_code, class: small_input_class  %>
+   </div>
+   <br>
 
         <div class="col-span-3">
           <%= form.label :notes, class: label_class %>

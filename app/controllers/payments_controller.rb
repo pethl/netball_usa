@@ -16,7 +16,7 @@ class PaymentsController < ApplicationController
 
   # GET /payments
   def index_indiv
-    @individual_payments = Payment.where("individual_member_id is not null")
+    @individual_payments = Payment.includes(:individual_member).where("individual_member_id is not null")
     @individual_payments = @individual_payments.order('payment_year desc, payment_received_date desc')
   end
 

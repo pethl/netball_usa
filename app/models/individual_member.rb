@@ -11,7 +11,7 @@ class IndividualMember < ApplicationRecord
                     format:     { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   validates :city, presence: true
-  validates :state, presence: true
+  validate :state_or_country
   validates :gender, presence: true
   validates :age_status, presence: true
   validates :engagement_status, presence: true
@@ -20,16 +20,27 @@ class IndividualMember < ApplicationRecord
   scope :ordered, -> { order(first_name: :asc) }
   
   def full_name
-    "#{self.first_name} #{self.last_name}"
+    [first_name, last_name].compact.join(" ")
   end
   
   def has_paid
     year = Date.today.year 
     payments_for_year = Payment.where(payment_year: year, individual_member_id: self)
-    if payments_for_year.any?
-      return payments_for_year.first.payment_summary
+
+    if self.discount_code =="AT25NET"
+      return "Discounted Member"
+    elsif payments_for_year.any?
+      return payments_for_year.sum(:amount)
     else
       return "Payment Due"
+    end
+  end
+
+  private
+
+  def state_or_country
+    if state.blank? && country.blank?
+      errors.add(:base, "Either state or country must be provided")
     end
   end
 

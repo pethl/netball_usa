@@ -1,6 +1,6 @@
 class Payment < ApplicationRecord
-    belongs_to :IndividualMember, optional: true
-    belongs_to :Club, optional: true
+    belongs_to :individual_member, optional: true
+    belongs_to :club, optional: true
 
     validates :payment_year, presence: true
     validates :payment_type, presence: true

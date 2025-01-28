@@ -35,7 +35,7 @@
           <%= Club.find(payment.club_id).name %>
           <% end %>
             <% if payment.individual_member_id? %>
-            <%= IndividualMember.where(id: payment.individual_member_id).full_name %>
+           <%= payment.individual_member.full_name %>
             <% end %>
           </p>
       </div>

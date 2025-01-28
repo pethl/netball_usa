@@ -64,7 +64,7 @@
                     ExPat Co
                 </th>
                 <th scope="col" class="px-4 py-2 w-1/5">
-                    Opp Details
+                    Opp Details - Assigned To
                 </th>
                 <th scope="col" class="px-4 py-2 w-1/4">
                     Contact Details
@@ -95,7 +95,7 @@
                 </td>
                 <td class="px-4 py-3 text-left align-top">
                 <% sponsor.opportunities.each do |opportunity| %>
-                    <%= opportunity.opportunity_type %> - <%= opportunity.status %><br>
+                    <%= opportunity.opportunity_type %> - <%= opportunity.status %> - <%= opportunity.user.initials %><br>
                 <% end %>
                 </td>
                 <td class="px-4 py-3 text-left align-top">
