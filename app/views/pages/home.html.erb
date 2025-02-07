@@ -21,7 +21,12 @@
 
   <% elsif current_user.role=="sponsors" %>
     <% content_for(:page_title, "Dashboard")%>
+    <%= render "office_home" %> 
+    
+  <% elsif current_user.role=="educators_events" %>
+    <% content_for(:page_title, "Dashboard")%>
     <%= render "office_home" %>  
+  
   
   <% elsif current_user.role=="teams_admin" %>
     <% content_for(:page_title, "Dashboard")%>

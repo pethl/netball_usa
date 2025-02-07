@@ -33,7 +33,8 @@ class User < ApplicationRecord
     educators: 4,
     teams_admin: 5,
     sponsors: 6,
-    us_open: 7
+    us_open: 7,
+    educators_events: 8
   }
 
   # User::Roles
@@ -83,6 +84,10 @@ class User < ApplicationRecord
 
   def us_open?
     self.role == 'us_open'
+  end
+
+  def educators_events?
+    self.role == 'educators_events'
   end
  
 #  def active_for_authentication? 

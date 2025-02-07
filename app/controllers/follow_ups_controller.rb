@@ -1,9 +1,10 @@
 class FollowUpsController < ApplicationController
   before_action :set_follow_up, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
 
   # GET /follow_ups
   def index
-    authorize! :read, @follow_ups
+   # authorize! :read, @follow_ups 
     if is_admin? 
        @follow_ups = FollowUp.all
        @follow_ups = @follow_ups.order(created_at: :desc)
