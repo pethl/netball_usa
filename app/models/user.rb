@@ -32,7 +32,7 @@ class User < ApplicationRecord
     grants: 3,
     educators: 4,
     teams_admin: 5,
-    sponsors: 6,
+    sponsors_events: 6,
     us_open: 7,
     educators_events: 8
   }
@@ -78,8 +78,8 @@ class User < ApplicationRecord
     self.role == 'teams_admin'
   end
 
-  def sponsors?
-    self.role == 'sponsors'
+  def sponsors_events?
+    self.role == 'sponsors_events'
   end
 
   def us_open?

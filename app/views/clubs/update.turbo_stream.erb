@@ -1,0 +1,7 @@
+<turbo-stream target="admin_notes">
+  <template>
+    <p><strong>Admin Notes:</strong></p>
+    <p><%= @club.admin_notes.presence || "No admin notes yet." %></p>
+    <%= link_to "Edit Notes", edit_admin_notes_club_path(@club, format: :turbo_stream), data: { turbo_frame: "admin_notes" }, class: "btn btn-sm btn-outline-secondary" %>
+  </template>
+</turbo-stream>

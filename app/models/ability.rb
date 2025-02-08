@@ -57,8 +57,8 @@ class Ability
       can :manage, IndividualMember 
     end
 
-    #role 6 sponsors
-    if user.sponsors?
+    #role 6 sponsors_events
+    if user.sponsors_events?
       can :manage, Sponsor
       can :manage, Contact
       can :manage, Opportunity, user_id: user.id # if the user is assigned in can manage 

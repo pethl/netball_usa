@@ -8,15 +8,10 @@ Rails.application.routes.draw do
 
   resources :clubs do
     resources :member_key_roles, except: [:index, :show]
-  end
-  resources :clubs do
     resources :members, except: [:index, :show]
-  end
-
-  resources :clubs do
     resources :teams, except: [:index, :show]
   end
-
+ 
   resources :tours
   resources :venues
 

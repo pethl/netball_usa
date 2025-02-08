@@ -1,6 +1,11 @@
 <% content_for(:page_title, "Sponsors")%>
 
+<div class="m-4">
+    <%= link_to "Add New Sponsor", new_sponsor_path, class: form_button_class %>
+   </div>
+
 <div class="bg-gray-100 p-2 rounded-lg border border-gray-200">
+<p class="text-sm">SEARCH OR FILTER BY ANY OF THESE PARAMETERS</p>
   <%= form_with(url: sponsors_path, method: :get, local: true, class: "flex flex-wrap items-center space-x-4") do %>
    <!-- Company Name Search -->
     <div class="flex flex-col">
@@ -121,8 +126,5 @@
 No records to view</p>
 <% end %>
 <br>
-<div class="m-2">
-    <%= link_to "Add New Sponsor", new_sponsor_path, class: form_button_class %>
-    <br>
-   </div>
+
 
