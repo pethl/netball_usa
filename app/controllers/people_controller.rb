@@ -66,21 +66,24 @@ class PeopleController < ApplicationController
   # GET /people/new
   def new
     @person = Person.new
-    compare_datetime = Time.now-1.month
-    @events = Event.where("date > ?",compare_datetime)
-    @events = @events.order(date: :asc)
+    # Always build 3 FrequentFlyerNumber records (even if they are empty)
+    3.times { @person.frequent_flyer_numbers.build }
+    @events = get_future_events
   end
 
   # GET /people/1/edit
   def edit
-    compare_datetime = Time.now-1.month
-    @events = Event.where("date > ?",compare_datetime)
-    @events = @events.order(date: :asc)
+   # @person.frequent_flyer_numbers.build if @person.frequent_flyer_numbers.empty? # Ensure a field is present
+   3.times { @person.frequent_flyer_numbers.build if @person.frequent_flyer_numbers.size < 3 } 
+   @events = get_future_events
   end
 
   # POST /people
   def create
     @person = Person.new(person_params)
+
+    @person.frequent_flyer_numbers = @person.frequent_flyer_numbers.reject { |ffn| ffn.airline.blank? && ffn.number.blank? }
+
 
     if @person.save
       redirect_to @person, notice: "Person was successfully created."
@@ -91,7 +94,11 @@ class PeopleController < ApplicationController
 
   # PATCH/PUT /people/1
   def update
+    @events = get_future_events
+    @person.frequent_flyer_numbers = @person.frequent_flyer_numbers.reject { |ffn| ffn.airline.blank? && ffn.number.blank? }
+
     if @person.update(person_params)
+
       redirect_to @person, notice: "Person was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
@@ -112,6 +119,20 @@ class PeopleController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def person_params
-      params.require(:person).permit(:first_name, :last_name, :role, :region, :location, :email, :level, :level_note, :level_submitted, :phone, :address, :associated, :gender, :tshirt_size, :uniform_size, :headshot, :headshot_path, :description, :image, :invite_back, :accept_notes, :notes, :in_person_trained, :virtually_trained, :booth_trained, :headshot_present, :certification, :certification_date, event_ids: [])
+      person_params = params.require(:person).permit(:name, :email, frequent_flyer_numbers_attributes: [:id, :airline, :number, :_destroy])
+
+       # Log the parameters to check their structure
+  Rails.logger.debug("Person Params: #{params.inspect}")
+
+      # Ensure we're checking each ffn correctly
+      person_params[:frequent_flyer_numbers_attributes].reject! do |index, ffn|
+        ffn[:airline].blank? && ffn[:number].blank?
+      end
+    
+      person_params
+    end
+
+    def get_future_events
+      @events = Event.where("date > ?", Time.now - 1.month).order(date: :asc)
     end
 end

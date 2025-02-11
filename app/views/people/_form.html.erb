@@ -15,102 +15,113 @@
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 m-4">
     <div class="mb-0">
-    <%= form.label :first_name, "First Name*", class: label_class%>
-      <div class="mt-1">
-    <%= form.text_field :first_name, class: input_class  %>
-    </div> </div>
+      <%= form.label :first_name, "First Name*", class: label_class%>
+        <div class="mt-1">
+          <%= form.text_field :first_name, class: input_class  %>
+        </div>
+    </div>
     
     <div class="mb-0">
-    <%= form.label :last_name, "Last Name*", class: label_class%>
-      <div class="mt-1">
-    <%= form.text_field :last_name, class: input_class  %>
-    </div> </div>
+      <%= form.label :last_name, "Last Name*", class: label_class%>
+        <div class="mt-1">
+          <%= form.text_field :last_name, class: input_class  %>
+        </div> 
+    </div>
 
     <div></div>
 
     <div class="mb-0">
-    <%= form.label :role,"Role*", class: label_class  %>
-    <div class="mt-1">
-    <%= form.select :role, options_for_select(people_role, :selected => person.role),{}, :required => true, class: input_class %>
-    </div> </div>
+      <%= form.label :role,"Role*", class: label_class  %>
+        <div class="mt-1">
+          <%= form.select :role, options_for_select(people_role, :selected => person.role),{}, :required => true, class: input_class %>
+        </div> 
+    </div>
 
     <div class="mb-0">
       <%= form.label :region,"Region*", class: label_class  %>
-      <div class="mt-1">
-      <%= form.select :region, options_for_select(people_region, :selected => person.region),{}, class: input_class %>
-      </div>
+        <div class="mt-1">
+          <%= form.select :region, options_for_select(people_region, :selected => person.region),{}, class: input_class %>
+        </div>
     </div>
     
     <div class="mb-0">
-    <%= form.label :location, class: label_class%>
-      <div class="mt-1">
-    <%= form.text_field :location, class: input_class  %>
-    </div> </div>
+      <%= form.label :location, class: label_class%>
+        <div class="mt-1">
+          <%= form.text_field :location, class: input_class  %>
+        </div> 
+    </div>
     
     <div class="mb-0">
-   <%= form.label :associated, "Associated or Independent?", class: label_class%>
-    <div class="mt-1">
-   <%= form.text_field :associated, class: input_class  %>
-  </div> </div>
-
-  <div class="mb-0">
-    <%= form.label :gender, class: label_class  %>
-    <div class="mt-1">
-     <%= form.select :gender, options_for_select(gender, :selected => person.gender),{:prompt=>true}, class: input_class %>
+      <%= form.label :associated, "Associated or Independent?", class: label_class%>
+        <div class="mt-1">
+          <%= form.text_field :associated, class: input_class  %>
+        </div> 
     </div>
-  </div>
 
-  <div></div>
+    <div class="mb-0">
+      <%= form.label :gender, class: label_class  %>
+        <div class="mt-1">
+          <%= form.select :gender, options_for_select(gender, :selected => person.gender),{:prompt=>true}, class: input_class %>
+        </div>
+    </div>
+
+    <div></div>
 
     <div class="mb-2">
-   <%= form.label :email, "Email*", class: label_class%>
-    <div class="mt-1">
-   <%= form.text_field :email, class: input_class  %>
-  </div> </div>
- 
-  <div class="mb-2">
-   <%= form.label :phone, class: label_class%>
-    <div class="mt-1">
-   <%= form.text_field :phone, class: input_class  %>
-  </div> </div>
-
-  <div class="mb-2">
-   <%= form.label :address, class: label_class%>
-    <div class="mt-1">
-   <%= form.text_field :address, class: input_class  %>
-  </div> </div>
+      <%= form.label :email, "Email*", class: label_class%>
+        <div class="mt-1">
+          <%= form.text_field :email, class: input_class  %>
+        </div> 
     </div>
+ 
+    <div class="mb-2">
+      <%= form.label :phone, class: label_class%>
+        <div class="mt-1">
+          <%= form.text_field :phone, class: input_class  %>
+        </div> 
+    </div>
+
+    <div class="mb-2">
+      <%= form.label :address, class: label_class%>
+        <div class="mt-1">
+          <%= form.text_field :address, class: input_class  %>
+        </div> 
+    </div>
+  </div>
    
     
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 m-4">
-  <div>
+   <div>
     <div class="p-2 border-double border-2 border-blue-900 rounded-md mt-2">
-    <div class="text-sm text-center text-gray-500 m-2">Umpires/Scorers Only</div>
+      <div class="text-sm text-center text-gray-500 m-2">Umpires/Scorers Only</div>
       <div class="mb-6">
-        <%= form.label :level, "Umpire Badge Level", class: label_class  %>
+         <%= form.label :level, "Umpire Badge Level", class: label_class  %>
         <div class="mt-1">
-        <%= form.select :level, options_for_select(people_level, :selected => person.level),{prompt: true}, class: input_class %>
+          <%= form.select :level, options_for_select(people_level, :selected => person.level),{prompt: true}, class: input_class %>
         </div>
       </div>
 
       <div class="mb-6">
         <%= form.label :certification_date, class: label_class  %>
         <div class="mt-1">
-        <%= form.date_field :certification_date, class: input_class  %> </div>
+          <%= form.date_field :certification_date, class: input_class  %> </div>
       </div>
       
       <div class="mb-4">
-      <%= form.label :level_note,"Level notes", class: label_class%>
-        <div class="mt-1">
-      <%= form.text_area :level_note, class: input_class  %>
-      </div> </div>
+        <%= form.label :level_note,"Level notes", class: label_class%>
+          <div class="mt-1">
+           <%= form.text_area :level_note, class: input_class  %>
+          </div> 
+      </div>
 
       <div class="mb-4 mt-4">
-      <%= form.label :certification, "Certification file upload", class: label_class %>
-      <div class="mt-1">
-      <%= form.hidden_field :certification, value: form.object.cached_certification_data, id: nil %>
-      <%= form.file_field :certification, class:"block w-fit ml-5 mb-5 text-xs text-gray-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-30 focus:outline-none" %>
-    </div></div>
+        <%= form.label :certification, "Certification file upload", class: label_class %>
+          <div class="mt-1">
+            <%= form.hidden_field :certification, value: form.object.cached_certification_data, id: nil %>
+            <%= form.file_field :certification, class:"block w-fit ml-5 mb-5 text-xs text-gray-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-30 focus:outline-none" %>
+          </div>
+      </div>
+      
       <div class="">
           <% unless person.certification_url.to_s.empty? %>
             <%= image_tag person.certification_url, :class => "h-20 w-auto" %>
@@ -118,11 +129,44 @@
           <% end %>
       </div>
       
- </div></div>
+ </div>
 
+ <div class="p-2 border-double border-2 border-blue-900 rounded-md mt-2">
+   <div class="text-sm text-center text-gray-500 m-2">
+   Frequent Flyer Numbers
+   </div>
+
+  
+    <div class="nested-fields p-2 ">
+      <% # Always render 3 FFN fields %>
+      <%= form.fields_for :frequent_flyer_numbers do |ffn_form| %>
+        <div class= "border border-gray-400 mb-2 rounded-sm p-2">
+          <div class="field">
+            <%= ffn_form.label :airline, class: label_class %>
+            <%= ffn_form.text_field :airline, class: input_class  %>
+          </div>
+          <div class="field">
+            <%= ffn_form.label :number, class: label_class  %>
+            <%= ffn_form.text_field :number, class: input_class  %>
+          </div>
+    
+          <div class="actions">
+            <%= ffn_form.check_box :_destroy %>
+            <%= ffn_form.label :_destroy, "Remove this FFN" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+ 
+  </div> 
+  </div> 
+  
  <div>
-  <div class="p-2 border border-2 border-blue-900 rounded-md mt-2">
-    <div class="text-sm text-center text-gray-500 m-2">Event Related</div>
+<div class="p-2 border border-2 border-blue-900 rounded-md mt-2">
+  <div class="text-sm text-center text-gray-500 m-2">
+  Event Related
+  </div>
  
   <div class="mb-6">
     <%= form.label :tshirt_size, class: label_class %>
@@ -134,26 +178,31 @@
   <div class="mb-6">
    <%= form.label :uniform_size, "Inferno Uniform Size", class: label_class %>
     <div class="mt-1">
-   <%= form.text_area :uniform_size, class: input_class %>
-  </div> </div>
+      <%= form.text_area :uniform_size, class: input_class %>
+    </div> 
+  </div>
 
   <div class="mb-6 mt-4">
    <%= form.label :invite_back, class: label_class %>
     <div class="mt-1">
-    <%= form.select :invite_back, options_for_select(people_invite_back, :selected => person.invite_back),{prompt: true}, class: input_class %>
-  </div> </div>
+      <%= form.select :invite_back, options_for_select(people_invite_back, :selected => person.invite_back),{prompt: true}, class: input_class %>
+    </div> 
   </div>
-  <div class="p-2 border-double border-2 border-blue-900 rounded-md mt-2">
-  <div class="text-sm text-center text-gray-500 m-2">Trainers/Ambassadors Only</div>
+</div>
+
+<div class="p-2 border-double border-2 border-blue-900 rounded-md mt-2">
+  <div class="text-sm text-center text-gray-500 m-2">
+  Trainers/Ambassadors Only
+  </div>
  
   <div class="flex items-center mb-4 p-2">
-      <%= form.check_box :in_person_trained, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
-      <%= form.label :in_person_trained, "In Person Trained?",class: "ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"  %>
+    <%= form.check_box :in_person_trained, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
+    <%= form.label :in_person_trained, "In Person Trained?",class: "ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"  %>
   </div>
   
   <div class="flex items-center mb-4 p-2">
-      <%= form.check_box :virtually_trained, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
-      <%= form.label :virtually_trained, "Virtually Trained?",class: "ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"  %>
+    <%= form.check_box :virtually_trained, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
+    <%= form.label :virtually_trained, "Virtually Trained?",class: "ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"  %>
   </div>
 
   <div class="flex items-center mb-4 p-2">
@@ -162,12 +211,7 @@
   </div>
   </div>
 
-<div class="mb-2 mt-4">
-<%= form.label :notes, style: "display: block", class: label_class  %>
-<div class="mt-1">
-<%= form.text_area :notes,  size: "20x8", class: input_class %>
-
-  </div></div></div>
+</div>
   
 <div>
   <div class="p-2 border-double border-2 border-blue-900 rounded-md mt-2">
@@ -201,15 +245,22 @@
   <div> 
  
 </div>
+</div>
+</div>
 
+<div class="m-4 p-2 border-double border-2 border-blue-900 rounded-md mt-2">
+  <div class="text-sm text-left text-gray-500 m-2">Notes</div>
+    <div class="mb-2 mt-4">
+     
+      <div class="mt-1">
+        <%= form.text_area :notes,  size: "20x4", class: input_class %>
+      </div>
+    </div>
+  </div>
 
-
-</div></div>
-
-  <div class="mt-2">
-     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-         Events:
-     </p>
+  <div class="m-4 p-2 border-double border-2 border-blue-900 rounded-md mt-2">
+  <div class="text-sm text-left text-gray-500 m-2">Events</div>
+     
      <p class="text-sm font-medium text-gray-900 dark:text-white">
      <% if person.events.any? %>
        <% person.events.each do |event| %>
@@ -220,7 +271,7 @@
         <% end %>
        <% end %>
      </p>
-    <br> <br>
+
     <%= link_to "Assign to New Event? >>", events_path, class: routing_link_class %>
     <div class="mb-6">
      <p class="block text-sm font-medium text-gray-700" %>Personnel (check box to assign)</p>
@@ -231,9 +282,11 @@
             <%= b.label %><br>
           </span>
       <% end %>
-     <div>
+     </div>
      <br>
     </div>
+    </div>
+
 
     <div class="text-right">
 <%= form.submit "Save Record", class: form_button_class %>

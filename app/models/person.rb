@@ -7,6 +7,8 @@ include ImageUploader::Attachment(:certification)   # ImageUploader will attach 
   has_many :event_participants, dependent: :destroy
   has_many :events, through: :event_participants
   #has_many :programs
+  has_many :frequent_flyer_numbers, dependent: :destroy
+  accepts_nested_attributes_for :frequent_flyer_numbers, allow_destroy: true
 
   scope :ordered, -> { order(first_name: :asc) }
   

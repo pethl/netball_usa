@@ -54,13 +54,26 @@
           <%= person.location %> 
         </div>
 
+        <div class="col-span-2">
+        <span class="text-gray-500 font-light">Frequent Flyer Numbers: </span><br>
+           
+            <% if @person.frequent_flyer_numbers.any? %>
+            <ul>
+              <% @person.frequent_flyer_numbers.each do |ffn| %>
+                <li><%= ffn.airline %>: <%= ffn.number %></li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p>No frequent flyer numbers added.</p>
+          <% end %>
+
         </div> 
       </div> 
 
     <div class="flex gap-2">
 
       <div class="basis-1/2 grow-0 p-4 border border-blue-900 rounded-md mt-2">
-        <div class="text-sm text-center text-gray-500 m-2">Umpires/Scorers Only</div>
+        <div class="text-sm text-center text-gray-600 mb-2">Umpires/Scorers Only</div>
        
       <div class="mb-2 font-medium text-gray-900 ">
         <span class="text-gray-500 font-light">Umpire Badge Level (office rating): </span><br>
@@ -92,7 +105,7 @@
 
   <div class="basis-1/2 grow-0">
     <div class="p-4 border border-blue-900 rounded-md mt-2">
-     <div class="text-sm text-center text-gray-500 m-2">Event Related</div>
+     <div class="text-sm text-center text-gray-600 mb-2">Event Related</div>
 
         <div class="mb-2 font-medium text-gray-900 ">
         <span class="text-gray-500 font-light">T-Shirt Size: </span><br>
@@ -111,7 +124,7 @@
 
    <div class="flex gap-2">
       <div class="basis-1/2 grow-0 shrink-0 p-4 border border-blue-900 rounded-md mt-2">
-       <div class="text-sm text-center text-gray-500 m-2">Trainers/Ambassadors Only</div>
+       <div class="text-sm text-center text-gray-600 mb-2">Trainers/Ambassadors Only</div>
       
           <div class="">
             <p class="text-sm text-gray-500 truncate ">
@@ -142,7 +155,7 @@
       </div>
 
     <div class="basis-1/2 grow-0 shrink-0 p-4 border border-blue-900 rounded-md mt-2">
-      <div class="text-sm text-center text-gray-500 m-2">Headshot</div>
+      <div class="text-sm text-center text-gray-600 mb-2">Headshot</div>
        
           <p class="text-sm text-gray-500 truncate ">
             Headshot?:
@@ -167,7 +180,7 @@
 
 
      <div class="p-4 border border-blue-900 rounded-md mt-2">
-        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        <p class="text-sm text-gray-600 truncate dark:text-gray-400">
             Notes:
         </p>
         <p class="text-sm font-medium text-gray-900 dark:text-white">

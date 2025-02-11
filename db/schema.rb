@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_01_28_181649) do
+ActiveRecord::Schema[7.0].define(version: 2025_02_09_090514) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -85,6 +85,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_28_181649) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.text "admin_notes"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -169,6 +170,15 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_28_181649) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+  end
+
+  create_table "frequent_flyer_numbers", force: :cascade do |t|
+    t.bigint "person_id", null: false
+    t.string "airline"
+    t.string "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_frequent_flyer_numbers_on_person_id"
   end
 
   create_table "grants", force: :cascade do |t|
@@ -680,6 +690,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_28_181649) do
   add_foreign_key "event_assignments", "umpires"
   add_foreign_key "event_participants", "events"
   add_foreign_key "event_participants", "people"
+  add_foreign_key "frequent_flyer_numbers", "people"
   add_foreign_key "individual_members", "clubs"
   add_foreign_key "individual_members", "teams"
   add_foreign_key "member_key_roles", "clubs"
