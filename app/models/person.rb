@@ -2,6 +2,7 @@ class Person < ApplicationRecord
 include ImageUploader::Attachment(:image) 
 include ImageUploader::Attachment(:headshot)   # ImageUploader will attach and manage `headshot`
 include ImageUploader::Attachment(:certification)   # ImageUploader will attach and manage `certification`
+include ImageUploader::Attachment(:resume)   # ImageUploader will attach and manage `resume`
 
   #has_many :transfers 
   has_many :event_participants, dependent: :destroy

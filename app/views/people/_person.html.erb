@@ -11,7 +11,7 @@
         
         <div class="mb-0 font-medium text-gray-900 ">
           <span class="text-gray-500 font-light">Last Name: </span><br>
-          <%= person.last_name %> 
+            <%= person.last_name %> 
         </div> 
       
         <div class="mb-0 font-medium text-gray-900 ">
@@ -21,7 +21,7 @@
         
         <div class="mb-0 font-medium text-gray-900 ">
           <span class="text-gray-500 font-light">Region: </span><br>
-          <%= person.region %> 
+            <%= person.region %> 
         </div> 
       
         <div class="mb-0 font-medium text-gray-900 ">
@@ -31,31 +31,31 @@
 
         <div class="mb-0 font-medium text-gray-900 ">
           <span class="text-gray-500 font-light">Gender: </span><br>
-          <%= person.gender %> 
+            <%= person.gender %> 
         </div> 
 
         <div class="mb-0 font-medium text-gray-900 ">
           <span class="text-gray-500 font-light">Phone: </span><br>
-          <%= person.phone %> 
+            <%= person.phone %> 
         </div> 
 
         <div class="mb-0 font-medium text-gray-900 ">
           <span class="text-gray-500 font-light">Email: </span><br>
-          <%= person.email %> 
+            <%= person.email %> 
         </div> 
         
         <div> 
           <span class="text-gray-500 font-light">Address: </span><br>
-          <%= person.address %> 
+            <%= person.address %> 
         </div>
         
         <div>
-        <span class="text-gray-500 font-light">Location: </span><br>
-          <%= person.location %> 
+          <span class="text-gray-500 font-light">Location: </span><br>
+            <%= person.location %> 
         </div>
 
         <div class="col-span-2">
-        <span class="text-gray-500 font-light">Frequent Flyer Numbers: </span><br>
+          <span class="text-gray-500 font-light">Frequent Flyer Numbers: </span><br>
            
             <% if @person.frequent_flyer_numbers.any? %>
             <ul>
@@ -66,95 +66,100 @@
           <% else %>
             <p>No frequent flyer numbers added.</p>
           <% end %>
-
         </div> 
-      </div> 
+     </div> 
 
-    <div class="flex gap-2">
+  <!-- End of Person Header-->
+
+  <!-- 2nd row area-->
+
+  <div class="flex gap-2">
+
+    <!-- Umpire/Scorer Section -->
 
       <div class="basis-1/2 grow-0 p-4 border border-blue-900 rounded-md mt-2">
         <div class="text-sm text-center text-gray-600 mb-2">Umpires/Scorers Only</div>
        
-      <div class="mb-2 font-medium text-gray-900 ">
-        <span class="text-gray-500 font-light">Umpire Badge Level (office rating): </span><br>
-        <%= person.level %> 
-      </div> 
-    
-      <div class="mb-2 font-medium text-gray-900 ">
-        <span class="text-gray-500 font-light">Certification Date: </span><br>
-          <%= person.certification_date.to_formatted_s(:usa) unless (person.certification_date.to_s.empty?)  %> 
-      </div> 
-      
-      <div class="mb-2 font-medium text-gray-900 ">
-      <span class="text-gray-500 font-light">Level Notes: </span><br>
-        <%= person.level_note %> 
-      </div> 
+          <div class="mb-2 font-medium text-gray-900 ">
+            <span class="text-gray-500 font-light">Umpire Badge Level (office rating): </span><br>
+            <%= person.level %> 
+          </div> 
+        
+          <div class="mb-2 font-medium text-gray-900 ">
+            <span class="text-gray-500 font-light">Certification Date: </span><br>
+              <%= person.certification_date.to_formatted_s(:usa) unless (person.certification_date.to_s.empty?)  %> 
+          </div> 
+          
+          <div class="mb-2 font-medium text-gray-900 ">
+          <span class="text-gray-500 font-light">Level Notes: </span><br>
+            <%= person.level_note %> 
+          </div> 
 
-      <div class="mb-2 font-medium text-gray-900 ">
-      <span class="text-gray-500 font-light">Level (as submitted by individual): </span><br>
-        <%= person.level_submitted %> 
-      </div> 
+          <div class="mb-2 font-medium text-gray-900 ">
+          <span class="text-gray-500 font-light">Level (as submitted by individual): </span><br>
+            <%= person.level_submitted %> 
+          </div> 
 
-      <div class="">
-        <% unless person.certification_url.to_s.empty? %>
-        <%= image_tag person.certification_url, :class => "h-20 w-auto" %>
-        <span class="italic text-sm">To change file, use Certification Upload above.</span>
-        <% end %>
-      </div>
+          <div class="">
+            <% unless person.certification_url.to_s.empty? %>
+            <%= image_tag person.certification_url, :class => "h-20 w-auto" %>
+            <span class="italic text-sm">To change file, use Certification Upload above.</span>
+            <% end %>
+          </div>
     </div>  
 
-  <div class="basis-1/2 grow-0">
-    <div class="p-4 border border-blue-900 rounded-md mt-2">
+    <!-- Event Related Section -->
+    <div class="basis-1/2 grow-0 p-4 border border-blue-900 rounded-md mt-2">
      <div class="text-sm text-center text-gray-600 mb-2">Event Related</div>
 
         <div class="mb-2 font-medium text-gray-900 ">
-        <span class="text-gray-500 font-light">T-Shirt Size: </span><br>
-          <%= person.tshirt_size %> 
+          <span class="text-gray-500 font-light">T-Shirt Size: </span><br>
+            <%= person.tshirt_size %> 
         </div> 
+        
         <div> <span class="text-gray-500 font-light">Inferno Uniform Size: </span><br>
-        <%= person.uniform_size %> </div>
+          <%= person.uniform_size %> 
+        </div>
 
         <div class="mb-2 font-medium text-gray-900 ">
-        <span class="text-gray-500 font-light">Invite Back?: </span><br>
+          <span class="text-gray-500 font-light">Invite Back?: </span><br>
             <%= person.invite_back %> 
         </div> 
      </div>
    </div>
-   </div>
+   <!-- End of 2nd Row -->
 
+   <!-- Start of 3rd Row -->
    <div class="flex gap-2">
-      <div class="basis-1/2 grow-0 shrink-0 p-4 border border-blue-900 rounded-md mt-2">
+
+   <!-- Trainers Section -->
+      <div class="basis-1/3 grow-0 shrink-0 p-4 border border-blue-900 rounded-md mt-2">
        <div class="text-sm text-center text-gray-600 mb-2">Trainers/Ambassadors Only</div>
       
-          <div class="">
-            <p class="text-sm text-gray-500 truncate ">
-              In Person Trained?:
-            </p>
-            <p class="text-sm font-medium text-gray-900 ">
-            <%= person.in_person_trained?? 'Yes' : 'No' %> 
-            </p>
-          </div>
+        <div class="">
+          <p class="text-sm text-gray-500 truncate ">In Person Trained?:</p>
+          <p class="text-sm font-medium text-gray-900 ">
+          <%= person.in_person_trained?? 'Yes' : 'No' %> 
+          </p>
+        </div>
 
         <div class="mt-2">
-          <p class="text-sm text-gray-500 truncate">
-              Virtually Trained?:
-          </p>
+          <p class="text-sm text-gray-500 truncate">Virtually Trained?:</p>
           <p class="text-sm font-medium text-gray-900 ">
           <%= person.virtually_trained?? 'Yes' : 'No' %> 
           </p>
         </div>
     
         <div class="mt-2">
-          <p class="text-sm text-gray-500 truncate ">
-              Booth Trained?:
-          </p>
+          <p class="text-sm text-gray-500 truncate ">Booth Trained?:</p>
           <p class="text-sm font-medium text-gray-900 ">
           <%= person.booth_trained?? 'Yes' : 'No' %> 
           </p>
         </div>
       </div>
 
-    <div class="basis-1/2 grow-0 shrink-0 p-4 border border-blue-900 rounded-md mt-2">
+    <!-- Headshot Section -->
+    <div class="basis-1/3 grow-0 shrink-0 p-4 border border-blue-900 rounded-md mt-2">
       <div class="text-sm text-center text-gray-600 mb-2">Headshot</div>
        
           <p class="text-sm text-gray-500 truncate ">
@@ -175,10 +180,24 @@
           <%= image_tag person.headshot_url, :class => "h-20 w-auto" %>
           <span class="italic text-sm">To change file, use Headshot Upload above.</span>
           <% end %>
+      </div>
+
+      <!-- Resume Section -->
+      <div class="basis-1/3 grow-0 shrink-0 p-4 border border-blue-900 rounded-md mt-2 pr-4 mr-4">
+        <div class="text-sm text-center text-gray-600 mb-2">Resume</div>
+       
+        <% if person.resume_url.to_s.empty? %>
+          <div class="text-sm text-center text-gray-500 m-2">
+            No resume loaded.
+          </div>
+        <% else %>
+          <%= link_to "View Resume", person.resume_url, target: "_blank", class: "text-blue-600" %>
+          <div class="italic text-sm">To change file, use the Resume Upload above.</div>
+        <% end %>
         </div> 
       </div>
 
-
+      <!-- Notes Section  4th row-->
      <div class="p-4 border border-blue-900 rounded-md mt-2">
         <p class="text-sm text-gray-600 truncate dark:text-gray-400">
             Notes:
