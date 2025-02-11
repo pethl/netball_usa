@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :media
   resources :programs
 
   get 'clubs/index_admin' => 'clubs#index_admin', :as => :index_admin

@@ -1,0 +1,11 @@
+<% content_for(:page_title, "Media: Edit #{@medium.company_name}")%>
+
+<%= render "form", medium: @medium %>
+
+<br>
+
+<div>
+  <%= link_to "Show this media company", @medium %> |
+  <%= link_to "Back to media", media_path %>
+</div> 
+

@@ -1,0 +1,20 @@
+<% content_for(:page_title, "Media: #{@medium.company_name}")%>
+
+<div class="m-4 border border-gray-200 p-4 rounded-md">
+
+<%= render @medium %>
+
+
+
+<div class="my-4">
+  <%= link_to "Edit this medium", edit_medium_path(@medium), class: form_button_class %> 
+</div>
+<div class="ml-2 my-2">
+  <%= button_to "Destroy this media company record", @medium, method: :delete, class: clear_button_class %>
+</div>
+  <%= link_to "<< Back to all media", media_path %>
+
+  
+</div>
+
+</div>

@@ -1,0 +1,149 @@
+<% content_for(:page_title, "Media")%> 
+
+<div class="m-4">
+    <%= link_to "New Media", new_medium_path, class: form_button_class %>
+    <br>
+   </div>
+
+   <div class="bg-gray-100 p-2 rounded-lg border border-gray-200">
+<p class="text-sm">SEARCH OR FILTER BY ANY OF THESE PARAMETERS</p>
+  <%= form_with(url: media_path, method: :get, local: true, class: "flex flex-wrap items-center space-x-4") do %>
+   
+    <!-- Media Type -->
+    <div class="flex flex-col">
+      <%= label_tag :media_type, "Media Type", class: "text-sm font-medium text-gray-700" %>
+      <%= select_tag :media_type, options_for_select(media_type, params[:media_type]),
+        include_blank: "Select",
+        class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+    </div>
+   
+    <!-- Company Name Search -->
+    <div class="flex flex-col">
+      <%= label_tag :company_name, "Company Name", class: "text-sm font-medium text-gray-700" %>
+      <%= text_field_tag :company_name, params[:company_name], class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+    </div>
+
+    <!-- City Filter -->
+    <div class="flex flex-col">
+      <%= label_tag :city, "City", class: "text-sm font-medium text-gray-700" %>
+      <%= text_field_tag :city, params[:city], class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+    </div>
+
+    <!-- State Filter -->
+    <div class="flex flex-col">
+      <%= label_tag :state, "State", class: "text-sm font-medium text-gray-700" %>
+      <%= select_tag :state, options_for_select(american_states, params[:state]),
+        include_blank: "Select",
+        class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+    </div>
+
+    <!-- Country Filter -->
+    <div class="flex flex-col">
+      <%= label_tag :country, "Country", class: "text-sm font-medium text-gray-700" %>
+      <%= text_field_tag :country, params[:country], class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+    </div>
+
+
+    <!-- Submit Button -->
+    <div class="mt-7">
+      <%= submit_tag "Filter", class: "block text-left px-2 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-800 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+    </div>
+
+    <!-- Clear Filter Button -->
+    <div class="mt-7">
+      <%= link_to "Clear", media_path, 
+        class: "block text-left px-2 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+    </div>
+  <% end %>
+</div>
+
+<br>
+
+<% if @media.any? %>
+<div id="media">
+<div class="relative overflow-x-auto">
+    <table class="w-full text-left rtl:text-right">
+        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Type 
+                </th>
+                
+                <th scope="col" class="px-6 py-3">
+                    Company
+                </th>
+                
+                <th scope="col" class="px-6 py-3 truncate">
+                    Contact
+                </th>
+                
+                <th scope="col" class="px-6 py-3 truncate">
+                    City
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    State
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @media.each do |medium| %>
+            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+                
+                <td scope="row" class="align-top px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                    <%= link_to medium.media_type, medium_path(medium), class: link_class %>
+                </td>
+               
+                <td scope="row" class="align-top px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                    <%= link_to medium.company_name, edit_medium_path(medium), class: link_class %>
+                </td>
+
+                <td class="px-6 py-4 align-top text-nowrap">
+                    <%= medium.contact_name %>
+                    <% if medium.phone.present? %>
+                        <br><%= medium.contact_position %>
+                    <% else %>
+                        <%= medium.contact_position %>
+                    <% end %>
+                </td>
+
+                <td class="px-6 py-4 align-top text-nowrap">
+                <%= medium.email %>
+                <% if medium.phone.present? %>
+                  <br><%= medium.phone %>
+                <% else %>
+                  <%= medium.phone %>
+                <% end %>
+                </td>
+                
+                <td class="px-6 py-4 align-top truncate">
+                    <%= medium.city %>
+                </td>
+
+                <td class="px-6 py-4 align-top truncate">
+                    <%= medium.state %>
+                </td>
+
+                <td class="px-6 py-4 align-top truncate">
+                    <%= medium.country %>
+                </td>
+
+                <td class="px-6 py-4 align-top truncate">
+                    <%= medium.pitch %>
+                </td>
+                <td class="px-6 py-4 align-top truncate">
+                  <%= (link_to medium.media_announcement_link, medium.media_announcement_link, target: '_blank', class: link_class) unless (medium.media_announcement_link.to_s.empty?)%>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+ </div>
+
+<% else %>
+<p class="px-6 py-4">
+No records to view</p>
+<% end %>
+<br>
+
+

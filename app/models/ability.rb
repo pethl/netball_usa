@@ -71,7 +71,7 @@ class Ability
       can :manage, Person
     end
 
-    #role 8 educators_events
+    #role 8 educators_events - Dr Marlene given view rights on all teachers - other person in role doesnt have yet
     if user.educators_events?
       can :manage, NetballEducator
       can :manage, FollowUp

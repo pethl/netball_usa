@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_11_124812) do
+ActiveRecord::Schema[7.0].define(version: 2025_02_11_185202) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -229,6 +229,22 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_11_124812) do
     t.integer "team_id"
     t.string "discount_code"
     t.string "country"
+  end
+
+  create_table "media", force: :cascade do |t|
+    t.string "media_type"
+    t.string "company_name"
+    t.string "contact_name"
+    t.string "contact_position"
+    t.string "email"
+    t.string "phone"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.text "pitch"
+    t.string "media_announcement_link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "member_key_roles", force: :cascade do |t|

@@ -314,6 +314,11 @@ module ApplicationHelper
       expat_co = Reference.where(active: "TRUE", group: 'expat_co')
       expat_co = expat_co.pluck(:value)     
     end
+
+    def media_type
+      media_type = Reference.where(active: "TRUE", group: 'media_type')
+      media_type = media_type.pluck(:value)     
+    end
     
      def get_teams_per_state(state)
      state = params[:state]
@@ -333,6 +338,8 @@ module ApplicationHelper
        @teams_group_by_state = @teams.group_by { |t| t.state }
      end
 
+     
+
      def members_belonging_to_administrator
       teams_owned_by_user = NaTeam.where(user_id: @current_user.id)
       teams_owned_by_user = teams_owned_by_user.pluck(:id) 
@@ -347,6 +354,25 @@ module ApplicationHelper
      def us_open_events
       Event.where(event_type: "US Open").pluck(:name)
      end
+
+     # american states only used for filtering
+     def american_states
+      [
+        ["Alabama", "AL"], ["Alaska", "AK"], ["Arizona", "AZ"], ["Arkansas", "AR"],
+        ["California", "CA"], ["Colorado", "CO"], ["Connecticut", "CT"], ["Delaware", "DE"],
+        ["Florida", "FL"], ["Georgia", "GA"], ["Hawaii", "HI"], ["Idaho", "ID"],
+        ["Illinois", "IL"], ["Indiana", "IN"], ["Iowa", "IA"], ["Kansas", "KS"],
+        ["Kentucky", "KY"], ["Louisiana", "LA"], ["Maine", "ME"], ["Maryland", "MD"],
+        ["Massachusetts", "MA"], ["Michigan", "MI"], ["Minnesota", "MN"], ["Mississippi", "MS"],
+        ["Missouri", "MO"], ["Montana", "MT"], ["Nebraska", "NE"], ["Nevada", "NV"],
+        ["New Hampshire", "NH"], ["New Jersey", "NJ"], ["New Mexico", "NM"], ["New York", "NY"],
+        ["North Carolina", "NC"], ["North Dakota", "ND"], ["Ohio", "OH"], ["Oklahoma", "OK"],
+        ["Oregon", "OR"], ["Pennsylvania", "PA"], ["Rhode Island", "RI"], ["South Carolina", "SC"],
+        ["South Dakota", "SD"], ["Tennessee", "TN"], ["Texas", "TX"], ["Utah", "UT"],
+        ["Vermont", "VT"], ["Virginia", "VA"], ["Washington", "WA"], ["West Virginia", "WV"],
+        ["Wisconsin", "WI"], ["Wyoming", "WY"]
+      ]
+    end
 
     
 
