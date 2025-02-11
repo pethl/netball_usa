@@ -40,6 +40,7 @@ class NetballEducatorsController < ApplicationController
     if  (is_admin? || current_user.role=="educators" || current_user.email=="drmarlene@netballamerica.com")
        @netball_educators = NetballEducator.all
        @netball_educators_by_state = @netball_educators.order("state ASC, city ASC").group_by(&:state)
+       
       
     else
         @netball_educators = NetballEducator.where(user_id: current_user.id).where('level != ?', "School/District Lead")

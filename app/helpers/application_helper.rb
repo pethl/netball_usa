@@ -80,7 +80,7 @@ module ApplicationHelper
    end
    
    def link_class
-     "text-md font-medium text-blue-900 italic hover:text-blue-600 hover:underline hover:underline-offset-4"
+     "text-md font-medium text-blue-800 italic hover:text-blue-600 hover:underline hover:underline-offset-4"
    end
    
    def red_link_class

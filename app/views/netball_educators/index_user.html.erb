@@ -51,20 +51,19 @@
             <th scope="col" class="px-6 py-3 w-52">
                 Name
             </th>
+
             <th scope="col" class="px-6 py-3 w-64 truncate">
                 Contact
             </th>
-                <th scope="col" class="px-6 py-3 w-52">
-                    Date Created 
-                </th>
-                
-                <th scope="col" class="px-6 py-3 w-52">
-                    Allocated To
-                </th>
-                <th scope="col" class="px-6 py-3 w-60 truncate">
-                    Notes
-                </th>
-            </tr>
+            <th scope="col" class="px-6 py-3 w-52">
+                Date Created 
+            </th>
+            
+            <th scope="col" class="px-6 py-3 w-52">
+                Allocated To
+            </th>
+           
+        </tr>
         </thead>
         <tbody>
         <% educators.each do |educator| %>
@@ -101,9 +100,7 @@
                     <%= educator.created_at.to_formatted_s(:usa) unless (educator.created_at.to_s.empty?) %>
                 </td>
                 
-                 <td class="px-6 py-4">
-                  <p class="text-wrap truncate"> <%= educator.mgmt_notes %></p>
-                </td>
+                
             </tr>
             <% end %>
         </tbody>

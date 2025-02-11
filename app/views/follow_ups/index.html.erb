@@ -3,6 +3,10 @@
   <div class="font-xl border p-4 text-blue-900 m-4 font-semibold">
     Please ensure educator details exist before creating follow_up record. Go to <span class="font-light border m-2 border-blue-900"> <%= link_to "Educator Search >>", search_path %></span>
   </div>
+
+  <div class="mt-4 mb-2 ml-2">
+  <%= link_to "Add New Follow-Up", new_follow_up_path, class: form_button_class %>
+</div>
  
   <br>
   <% if @follow_ups.any? %>
@@ -86,6 +90,4 @@
     No records to view</p>
   <% end %>
   <br>
-  <div class="m-2">
-  <%= link_to "Add New Follow-Up", new_follow_up_path, class: form_button_class %>
-</div></div>
+  </div>
