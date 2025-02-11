@@ -77,6 +77,13 @@ class Ability
       can :manage, FollowUp
       can :manage, Event
     end
+
+     #role 9 sponsors_only
+     if user.sponsors_only?
+      can :manage, Sponsor
+      can :manage, Contact
+      can :manage, Opportunity, user_id: user.id # if the user is assigned in can manage 
+    end
    
     if user.admin?
     can :manage, :all # finally we give all remaining permissions only to the admins
