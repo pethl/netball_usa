@@ -3,7 +3,7 @@ class MediaController < ApplicationController
 
   # GET /media
   def index
-    @media = Medium.all
+    @media = Medium.all.ordered
 
     @media = @media.where(media_type: params[:media_type]) if params[:media_type].present?
     @media = @media.where("company_name ILIKE ?", "%#{params[:company_name]}%") if params[:company_name].present?
