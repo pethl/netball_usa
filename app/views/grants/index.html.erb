@@ -1,12 +1,9 @@
-
 <% content_for(:page_title, "Grants")%>
 
 <div class="mt-2">
 <%= link_to "Add New Grant", new_grant_path, class: form_button_class %>
 <br><br>
 </div>
-
-
 
 <% if @grants.any? %>
 <div id="grants">
@@ -42,16 +39,19 @@
                     Date Submitted
                 </th>
                 <th scope="col" class="px-6 py-3 w-52">
+                    Notification Date
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
                     Purpose
                 </th>
+                
                 <th scope="col" class="px-6 py-3 w-40">
                     Grant Link
                 </th>
                 <th scope="col" class="px-6 py-3 w-52">
                    Notes
                 </th>
-                
-            </tr>
+             </tr>
         </thead>
         <tbody>
         <% @grants.each do |grant| %>
@@ -87,22 +87,28 @@
                
                 <td class="px-6 py-4">
                  <%= grant.action_by.to_formatted_s(:usa) unless (grant.action_by.to_s.empty?) %> 
-               </td>
+                </td>
 
-               <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
-                    <%= grant.date_submitted.to_formatted_s(:usa) unless (grant.date_submitted.to_s.empty?) %>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                  <%= grant.date_submitted.to_formatted_s(:usa) unless (grant.date_submitted.to_s.empty?) %>
+                </th>
+
+                <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                  <%= grant.notification_date.to_formatted_s(:usa) unless (grant.notification_date.to_s.empty?) %>
                 </th>
                 
                  <td class="px-6 py-4 truncate">
                   <%= grant.purpose %>
                 </td>
+
+               
                 
                 <td class="px-6 py-4 truncate">
-                   <%= (link_to grant.grant_link, grant.grant_link, target: '_blank', class: link_class) unless (grant.grant_link.to_s.empty?)%>
+                  <%= (link_to grant.grant_link, grant.grant_link, target: '_blank', class: link_class) unless (grant.grant_link.to_s.empty?)%>
                 </td>
                 
                 <td class="px-6 py-4 truncate">
-                   <%= grant.notes %>
+                  <%= grant.notes %>
                 </td>
                
             </tr>

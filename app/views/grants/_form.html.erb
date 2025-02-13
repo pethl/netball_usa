@@ -119,6 +119,12 @@
     <% end %>
 
     <div class="mb-6">
+    <%= form.label :notification_date, class: label_class%>
+     <div class="mt-1">
+    <%= form.date_field :notification_date, class: input_class  %>
+   </div> </div>
+
+    <div class="mb-6">
        <%= form.label :notes, style: "display: block", class: label_class  %>
        <div class="mt-1">
        <%= form.text_area :notes, class: input_class,  size: "20x8"  %>

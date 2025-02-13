@@ -81,7 +81,7 @@ class NetballEducatorsController < ApplicationController
   end
 
   def pe_directors
-    if is_admin? 
+    if  (is_admin? || current_user.role=="educators" || current_user.email=="drmarlene@netballamerica.com")
         @netball_educators = NetballEducator.where(is_pe_director: true)
         @netball_educators = @netball_educators.order(state: :asc, first_name: :asc)
        

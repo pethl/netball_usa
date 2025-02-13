@@ -128,6 +128,15 @@
           </p>
          </div>
          <% end %>
+
+          <div class="mt-2">
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+              Notification Date:
+          </p>
+          <p class="text-sm font-medium text-gray-900 dark:text-white">
+            <%= grant.notification_date.present? ? grant.notification_date.strftime("%m/%d, %Y") : "" %>
+          </p>
+         </div>
          
          <div class="mt-2">
            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
