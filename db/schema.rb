@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_13_214227) do
+ActiveRecord::Schema[7.0].define(version: 2025_02_15_112048) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -157,6 +157,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_13_214227) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "end_date"
+    t.string "attend"
   end
 
   create_table "follow_ups", force: :cascade do |t|

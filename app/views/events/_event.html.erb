@@ -4,149 +4,164 @@
 
  
   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-     Type:
+    Type:
   </p>
+
   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-  <%= event.event_type %> 
+    <%= event.event_type %> 
   </p>
 
   <div class="mt-2">
-  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-      Name:
-  </p>
-  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-  <%= event.name %> 
-  </p> 
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Name:
+    </p>
+
+    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+        <%= event.name %> 
+    </p> 
   </div>
 
   <div class="mt-2">
-  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
       Date(s):
-  </p>
-  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-  <%= event.date.to_formatted_s(:usa) unless (event.date.to_s.empty?) %> 
-  <% if !event.end_date.blank? %> - <%= event.end_date.to_formatted_s(:usa)  %><% end %>
+    </p>
   
-  </p>
-   </div>
+    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <%= event.date.to_formatted_s(:usa) unless (event.date.to_s.empty?) %> 
+        <% if !event.end_date.blank? %> - <%= event.end_date.to_formatted_s(:usa)  %><% end %>
+    </p>
+  </div>
   
-   <div class="mt-2">
+  <div class="mt-2">
    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
        Status:
    </p>
-   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-   <%= event.status %> 
-   </p> 
-   </div>
   
-   <div class="mt-2">
-   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-       Website:
-   </p>
    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-   <%= event.website %> 
+     <%= event.status %> 
    </p> 
+  </div>
+
+  <div class="mt-2">
+   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+       Attend?:
+   </p>
+  
+   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+     <%= event.attend %> 
+   </p> 
+  </div>
+  
+  <div class="mt-2">
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+      Website:
+    </p>
+    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <%= event.website %> 
+    </p> 
    </div>
    
    <div class="mt-2">
-   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-       Key Contact:
-   </p>
-   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-   <%= event.key_contact %> 
-   </p> 
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Key Contact:
+    </p>
+   
+    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+    <%= event.key_contact %> 
+    </p> 
    </div>
 
    <div class="mt-2">
-   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-       City:
-   </p>
-   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-   <%= event.city %> 
-   </p> 
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+      City:
+    </p>
+   
+    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <%= event.city %> 
+    </p> 
    </div>
  
-
    <div class="mt-2">
-   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-       State:
-   </p>
-   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-   <%= event.state %> 
-   </p> 
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+      State:
+    </p>
+    
+    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <%= event.state %> 
+    </p> 
    </div>
   
    <div class="mt-2">
-   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-       Location:
-   </p>
-   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-   <%= event.location %> 
-   </p> 
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+      Location:
+    </p>
+   
+    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <%= event.location %> 
+    </p> 
    </div>
    
    <div class="mt-2">
-   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-       Details:
-   </p>
-   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-   <%= event.details %> 
-   </p> 
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+      Details:
+    </p>
+    
+    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <%= event.details %> 
+    </p> 
    </div>
 
    <div class="mt-2">
-   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-       Booth #:
-   </p>
-   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-   <%= event.booth %> 
-   </p> 
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+      Booth #:
+    </p>
+   
+    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <%= event.booth %> 
+    </p> 
    </div>
 
    <div class="mt-2">
-   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-       Costs:
-   </p>
-   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-   <%= event.cost_notes %> 
-   </p> 
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+      Costs:
+    </p>
+    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <%= event.cost_notes %> 
+    </p> 
    </div>
    
    <div class="mt-2">
-   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-       Outcome:
-   </p>
-   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-   <%= event.outcome %> 
-   </p> 
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+      Outcome:
+    </p>
+    
+    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <%= event.outcome %> 
+    </p> 
    </div>
    
    <div class="mt-2">
-   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-       Personnel:
-   </p>
-   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-   <% if event.people.any? %>
-      <% event.people.each do |person| %>
-        <%= person.full_name %> <br>
-       <% end %>
-   <% end %>
-   </p> 
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+      Personnel:
+    </p>
+    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <% if event.people.any? %>
+        <% event.people.each do |person| %>
+            <%= person.full_name %> <br>
+        <% end %>
+      <% end %>
+    </p> 
    </div>
   
    <% if is_admin? %>  
    <div class="mt-2">
-   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-       Budget Total:
-   </p>
-   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-
-        <%= number_to_currency(event.budget.budget_total, precision: 2) unless event.budget.to_s.empty? %> <br>
-            <%=  link_to "View budget details =>", event.budget, class: link_class unless event.budget.to_s.empty? %>
-       <br> <%=  link_to "Edit budget details =>", edit_budget_path(event.budget), class: link_class unless event.budget.to_s.empty? %>
+    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Budget Total:
+    </p>
+    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <%= number_to_currency(event.budget.budget_total, precision: 2) unless event.budget.to_s.empty? %> <br>
+        <%=  link_to "View budget details =>", event.budget, class: link_class unless event.budget.to_s.empty? %>
+        <br> <%=  link_to "Edit budget details =>", edit_budget_path(event.budget), class: link_class unless event.budget.to_s.empty? %>
     </p> 
    </div>
    <% end %>
-  
-
-

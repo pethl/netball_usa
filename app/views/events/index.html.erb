@@ -1,45 +1,88 @@
 <% content_for(:page_title, "Events")%>
 
-<div class="m-2">
+<div class="m-4">
     <%= link_to "Add New Event", new_event_path, class: form_button_class %>
      <br>
 </div>
 
+<div class="ml-6 mr-4 bg-gray-100 p-2 rounded-lg border border-gray-200">
+<p class="text-sm">SEARCH OR FILTER BY ANY OF THESE PARAMETERS</p>
+  <%= form_with(url: events_path, method: :get, local: true, class: "flex flex-wrap items-center space-x-4") do %>
+   <!-- Company Name Search -->
+    <div class="flex flex-col">
+      <%= label_tag :event_type, "Type", class: "text-sm font-medium text-gray-700" %>
+       <%= select_tag :event_type, options_for_select(event_type, params[:event_type]),
+        include_blank: "Select",
+        class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+    </div>
+
+    <!-- City Filter -->
+    <div class="flex flex-col">
+      <%= label_tag :city, "City", class: "text-sm font-medium text-gray-700" %>
+      <%= text_field_tag :city, params[:city], class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+    </div>
+
+    <!-- State Filter -->
+    <div class="flex flex-col">
+      <%= label_tag :state, "State", class: "text-sm font-medium text-gray-700" %>
+      <%= select_tag :state, options_for_select(us_states, params[:state]),
+        include_blank: "Select",
+        class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+    </div>
+   
+    <!-- Submit Button -->
+    <div class="mt-7">
+      <%= submit_tag "Filter", class: "block text-left px-2 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-800 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+    </div>
+
+    <!-- Clear Filter Button -->
+    <div class="mt-7">
+      <%= link_to "Clear", events_path, 
+        class: "block text-left px-2 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+    </div>
+  <% end %>
+</div>
 
 <div class="m-4">
-<% if @events.any? %>
-    <% @events_by_year.each do |year, events| %>
-      
-      <div class="text-xl mt-6 text-blue-900">
-          <%= year %> 
-         </div>
+
+    <div class="">
+      <% if @events.any? %>
+        <% @events_by_year.each do |year, events| %>
+          <div class="text-xl mt-4 ml-2 text-blue-900">
+            <%= year %> 
+          </div>
+    </div>
       
 <div id="events">
 <div class="relative overflow-x-auto  mb-4">
-    <table class="w-full text-left rtl:text-right">
-        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+    <table class="w-full text-left rtl:text-right table-fixed">
+        <thead class="bg-white border-b text-gray-400 font-light text-xs ">
             <tr>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-2 py-2 w-48">
+                    Date
+                </th>    
+                <th scope="col" class="px-2 py-2 w-20">
                     Details
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-2 py- w-48">
                     Type 
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-2 py-2 w-64">
                     Name
                 </th>
-                <th scope="col" class="px-6 py-3">
-                    Date
-                </th>
-                <th scope="col" class="px-6 py-3">
+               
+                <th scope="col" class="px-2 py-2 text-left">
                     Status
                 </th>
-                <th scope="col" class="px-6 py-3">
-                    City/State
+                <th scope="col" class="px-2 py-2">
+                    City
+                </th>
+                <th scope="col" class="px-2 py-2 text-center">
+                    State
                 </th>
               
                 <% if is_admin? %>  
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-2 py-2 text-right">
                     Budget Total
                 </th>
                 <% end %>
@@ -49,28 +92,31 @@
         <tbody>
       <% events.each do |event| %>
             <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
-                    <%= link_to image_tag("view.png", :class=>"mx-2 h-6 w-auto"), event  %>
+                <td class="px-2 py-4">
+                  <%= event.date.to_formatted_s(:usa) unless ( event.date.to_s.empty?) %>
+                  <% if !event.end_date.blank? %>..<%= event.end_date.to_formatted_s(:usa)  %><% end %>
+                </td>
+                <th scope="row" class="px-2 py-4 font-medium text-gray-800 whitespace-nowrap text-right">
+                  <%= link_to image_tag("view.png", :class=>"mx-2 h-6 w-auto"), event  %>
                 </th>
-                <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
-                    <%= event.event_type %><br>
-                  </td>
-                <td class="px-6 py-4">
-                    <%= link_to event.name, edit_event_path(event), class: link_class %>
+                <th scope="row" class="px-2 py-4 font-medium text-gray-800 whitespace-nowrap">
+                  <%= event.event_type %><br>
                 </td>
-                <td class="px-6 py-4">
-                   <%= event.date.to_formatted_s(:usa) unless ( event.date.to_s.empty?) %>
-                   <% if !event.end_date.blank? %> - <%= event.end_date.to_formatted_s(:usa)  %><% end %>
+                <td class="px-2 py-4 truncate">
+                  <%= link_to event.name, edit_event_path(event), class: link_class %>
                 </td>
-                 <td class="px-6 py-4">
-                    <%= event.status %>
+                <td class="px-2 py-4">
+                  <%= event.status %>
                 </td>
-                <td class="px-6 py-4">
-                    <%= event.city %>,   <%= event.state %>
+                <td class="px-2 py-4">
+                  <%= event.city %>
+                </td>
+                <td class="px-2 py-4 text-center">
+                  <%= event.state %>
                 </td>
                
                 <% if is_admin? %>  
-                <td class="px-6 py-4 text-right">
+                <td class="px-2 py-4 text-right">
                    <%= number_to_currency(event.budget.budget_total, precision: 2) unless event.budget.to_s.empty? %>
                 </td>
                 <% end %>

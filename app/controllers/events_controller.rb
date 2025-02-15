@@ -6,9 +6,18 @@ class EventsController < ApplicationController
   # GET /events
   def index
     
-    @events = Event.all
-    @events = @events.order(date: :desc)
-    @events_by_year = @events.group_by { |t| t.event_date_year }
+    @events = Event.all.ordered
+
+    # Filter by city
+    @events = @events.where('city ILIKE ?', "%#{params[:city]}%").ordered if params[:city].present?
+
+    # Filter by state
+    @events = @events.where(state: params[:state]).ordered if params[:state].present?
+  
+    # Filter by event_type
+    @events = @events.where(event_type: params[:event_type]).ordered if params[:event_type].present?
+ 
+    @events_by_year = @events.group_by { |t| t.event_date_year } 
   end
   
   # GET /events
@@ -75,6 +84,6 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:event_type, :name, :date, :end_date, :website, :key_contact, :city, :state, :location, :details, :booth, :cost_notes, :status, :outcome, person_ids: [])
+      params.require(:event).permit(:event_type, :name, :date, :end_date, :attend, :website, :key_contact, :city, :state, :location, :details, :booth, :cost_notes, :status, :outcome, person_ids: [])
     end
 end

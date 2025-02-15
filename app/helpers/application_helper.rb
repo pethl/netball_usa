@@ -201,13 +201,18 @@ module ApplicationHelper
     end
     
     def event_type
-      event_type = Reference.where(active: "TRUE", group: 'event_type')
+      event_type = Reference.where(active: "TRUE", group: 'event_type').ordered
       event_type = event_type.pluck(:value)       
     end
     
     def event_status
       event_status = Reference.where(active: "TRUE", group: 'event_status')
       event_status = event_status.pluck(:value)       
+    end
+
+    def attendance
+      attendance = Reference.where(active: "TRUE", group: 'attendance')
+      attendance = attendance.pluck(:value)       
     end
     
     def follow_up_lead_type

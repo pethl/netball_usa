@@ -10,7 +10,7 @@ class Event < ApplicationRecord
   validates :event_type, presence: true
   validates :name, presence: true
 
-  scope :ordered, -> { order(date: :desc) }
+  scope :ordered, -> { order(date: :asc) }
 
 
   def budget
@@ -39,6 +39,6 @@ class Event < ApplicationRecord
   end
   
   def event_date_year
-    self.date.year
+    date.present? ? date.year : "Dates TBD"
   end
 end
