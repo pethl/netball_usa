@@ -5,6 +5,7 @@ require "active_support/core_ext/module/attribute_accessors"
 require "concurrent"
 require "fiber"
 
+
 module ActiveSupport
   module LoggerThreadSafeLevel # :nodoc:
     extend ActiveSupport::Concern

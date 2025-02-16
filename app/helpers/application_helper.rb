@@ -327,7 +327,7 @@ module ApplicationHelper
     
      def get_teams_per_state(state)
      state = params[:state]
-     logger.info "#{state}"
+     #logger.info "#{state}"
 #       @list_of_states= Region.where(region: @region)
 #        @list_of_states= @list_of_states.pluck(:state)
        @teams = Team.where(state: state.state)
@@ -336,7 +336,7 @@ module ApplicationHelper
      
      def get_teams_per_region(region)
       @region = params[:region]
-       logger.info "#{region}"
+       #logger.info "#{region}"
        @list_of_states= Region.where(region: @region)
        @list_of_states= @list_of_states.pluck(:state)
        @teams = Team.where('state IN (?)', @list_of_states)

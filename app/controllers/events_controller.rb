@@ -6,7 +6,8 @@ class EventsController < ApplicationController
   # GET /events
   def index
     
-    @events = Event.all.ordered
+   # @events = Event.all.ordered
+    @events = Event.where('date >= ?', Date.today.beginning_of_month).ordered
 
     # Filter by city
     @events = @events.where('city ILIKE ?', "%#{params[:city]}%").ordered if params[:city].present?
@@ -17,8 +18,27 @@ class EventsController < ApplicationController
     # Filter by event_type
     @events = @events.where(event_type: params[:event_type]).ordered if params[:event_type].present?
  
-    @events_by_year = @events.group_by { |t| t.event_date_year } 
+    #@events_by_year = @events.group_by { |t| t.event_date_year } 
   end
+
+   # GET /events
+   def index_past
+    #exact dup of index supporting past events view except for first filter
+    
+    # All past Events
+     @events = Event.where('date <= ?', Date.today.beginning_of_month).ordered
+ 
+     # Filter by city
+     @events = @events.where('city ILIKE ?', "%#{params[:city]}%").ordered if params[:city].present?
+ 
+     # Filter by state
+     @events = @events.where(state: params[:state]).ordered if params[:state].present?
+   
+     # Filter by event_type
+     @events = @events.where(event_type: params[:event_type]).ordered if params[:event_type].present?
+  
+     #@events_by_year = @events.group_by { |t| t.event_date_year } 
+   end
   
   # GET /events
   def calendar

@@ -4,7 +4,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.3.4"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.8"
+gem "rails", "> 7.0.8"
+
+# setting to get around upgrade error 337
+#gem 'activesupport', '7.0.8'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -13,7 +16,7 @@ gem "sprockets-rails"
 gem "pg", "~> 1.1"
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 5.0"
+gem "puma", "~> 6.0"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails"
@@ -87,7 +90,7 @@ gem "shrine", "~> 3.0"
 # PDF generator
 gem 'prawn', '~> 2.5'
 gem 'prawn-table', '~> 0.1.0'
-gem 'thor', '~> 1.0.0'
+gem 'thor', '~> 1.2.0'
 
 
 gem "cancancan", "~> 3.5"

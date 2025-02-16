@@ -55,7 +55,12 @@ end
   get 'people/people_search' => 'people#people_search', :as => :people_search
   
   resources :people
-  resources :events
+  resources :events do
+    collection do
+      get 'past', to: 'events#index_past', as: :past
+    end
+  end
+
   resources :transfers
   resources :references
   resources :grants
