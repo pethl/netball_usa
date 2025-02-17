@@ -84,14 +84,45 @@
         </div>  
     
         <br>
-
-       
     
         <div class="my-2">
-         Teams
-      </div>
+          Teams
+        </div>
         <div>
-        <%= render "club_teams", club: club %>
+         <%= render "club_teams", club: club %>
+        </div>  
+
+        <br>
+    
+        <div class="my-2">
+          Notes
+        </div>
+        <div>
+            <% if club.notes.any? %>
+            <table class="w-full table-auto max-w-full">
+              <thead class="bg-white border-b text-gray-400 font-light text-xs text-left">
+                <tr>
+                  <th scope="col" class="">
+                    
+                  </th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <% club.notes.each do |note| %>
+                  <tr class="bg-white border-b hover:bg-gray-100">
+                  <td> 
+                  <span class="pr-2 font-light uppercase">
+                      <%= note.status %>:  </span>
+                   </span>
+                      <%= note.body %>
+                    </span>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <% end %>
         </div>  
      <% end %>
 

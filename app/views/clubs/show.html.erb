@@ -122,9 +122,13 @@
   </div>
 
   <% if is_admin? %>
-      <% if @club.payments.any? %>
-        <%= render partial: "payments_simple", clubs: @clubs %>
+    <% if @club.payments.any? %>
+      <%= render partial: "payments_simple", clubs: @clubs %>
     <% end %>
+
+    <% if @club.notes.any? %>
+    <%= render partial: "club_notes", clubs: @clubs %>
+  <% end %>
   <% end %>
 
   </div>

@@ -224,6 +224,13 @@ module ApplicationHelper
       follow_up_status = Reference.where(active: "TRUE", group: 'follow_up_status')
       follow_up_status = follow_up_status.pluck(:value)       
     end
+
+    def club_note_status
+      #use a duplicate of followup for ease
+      follow_up_status = Reference.where(active: "TRUE", group: 'follow_up_status')
+      follow_up_status = follow_up_status.pluck(:value) 
+      club_note_status = follow_up_status.reject { |item| item == "Not Allocated" } 
+    end
     
     def transfer_pickup_type
       transfer_pickup_type = Reference.where(active: "TRUE", group: 'transfer_pickup_type')

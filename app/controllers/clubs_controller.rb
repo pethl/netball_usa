@@ -2,6 +2,11 @@ class ClubsController < ApplicationController
   before_action :set_club, only: %i[ show edit update destroy ]
   load_and_authorize_resource
 
+
+  def index_admin
+    @clubs = Club.all.ordered
+  end 
+  
   # GET /clubs
   def index
     if is_admin? 
@@ -13,9 +18,7 @@ class ClubsController < ApplicationController
     end
   end
 
-  def index_admin
-    @clubs = Club.all.ordered
-  end
+ 
 
   def teams_list_index
     @clubs_for_report = Club.all

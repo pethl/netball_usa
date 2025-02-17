@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_15_112048) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_16_142145) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -328,6 +328,15 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_112048) do
     t.string "zip"
     t.boolean "is_pe_director"
     t.string "role"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.text "body"
+    t.bigint "club_id", null: false
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_id"], name: "index_notes_on_club_id"
   end
 
   create_table "opportunities", force: :cascade do |t|
@@ -716,6 +725,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_112048) do
   add_foreign_key "member_key_roles", "members"
   add_foreign_key "members", "clubs"
   add_foreign_key "members", "teams"
+  add_foreign_key "notes", "clubs"
   add_foreign_key "opportunities", "sponsors"
   add_foreign_key "opportunities", "users"
   add_foreign_key "payments", "clubs"

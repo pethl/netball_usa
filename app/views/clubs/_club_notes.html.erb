@@ -1,0 +1,40 @@
+<div class="p-4 m-2 border border-grey-500 shadow-md shadow-blue-900 hover:border-black rounded-lg">
+<div class="text-sm">
+  <div class="ml-4 text-gray-700 text-lg text-left font-semibold"> 
+        Notes <span class="text-grey-300 text-sm font-thin">[Click on note to EDIT]</span>
+      </div>
+      <p class="italic text-blue-600 ml-4"><%= link_to 'Add Note', new_club_note_path(@club) %></p>      
+  
+        <table class="ml-4 m-2 p-2 table-fixed text-left rtl:text-right">
+        <thead class="bg-white border-b text-gray-400 font-light text-xs ">
+            <tr>
+                <th scope="col" class="px-2 py-2 whitespace-nowrap">
+                    Status
+                </th>
+                <th scope="col" class="px-2 py-2">
+                    Body
+                </th>
+                
+                
+            </tr>
+        </thead>
+        <tbody>
+        <% @club.notes.each do |note| %>
+            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+                
+                <td class="px-2 py-4">
+                 <%= link_to note.status,  edit_club_note_path(@club, note) %>
+                </td>
+                
+                <td class="px-2 py-4 whitespace-normal break-words max-w-full">
+                  <%= link_to note.body,  edit_club_note_path(@club, note) %>
+                </td>
+                
+            </tr>
+            <% end %>
+        </tbody>
+        </table>
+   
+    </div>
+  </div>
+

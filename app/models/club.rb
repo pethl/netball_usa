@@ -4,6 +4,7 @@ class Club < ApplicationRecord
     has_many :individual_members
     has_many :payments
     has_many :teams
+    has_many :notes, dependent: :destroy
 
 
     belongs_to(

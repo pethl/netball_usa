@@ -5,7 +5,7 @@
       </div>
   
         <table class="ml-4 m-2 p-2 table-fixed text-left rtl:text-right">
-        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+        <thead class="bg-white border-b text-gray-400 font-light text-xs ">
             <tr>
                 <th scope="col" class="px-2 py-2 whitespace-nowrap">
                     For Year
@@ -37,30 +37,31 @@
             <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
                 
                 <td class="px-2 py-4 truncate">
-                    <%= link_to payment.payment_year, payment_path(payment), class: link_class %>
+                  <%= link_to payment.payment_year, payment_path(payment), class: link_class %>
                 </td>
                 
                 <td class="px-2 py-4">
-                    <%= payment.payment_type  %>
+                  <%= payment.payment_type  %>
                 </td>
                 
                 <td class="px-2 py-4 text-right">
-                    <%= number_to_currency(payment.amount, precision: 0) %>
+                  <%= number_to_currency(payment.amount, precision: 0) %>
                 </td>
-                
-               
+                               
                 <td class="px-2 py-4">
-                    <%= payment.payment_received_date.to_formatted_s(:usa) unless (payment.payment_received_date.to_s.empty?) %>
+                  <%= payment.payment_received_date.to_formatted_s(:usa) unless (payment.payment_received_date.to_s.empty?) %>
                 </td>
+
                 <td class="px-2 py-4">
-                    <%= User.find(payment.payment_recorded_by_id).full_name %>
+                  <%= User.find(payment.payment_recorded_by_id).full_name %>
                 </td>
+
                 <td class="px-2 py-4">
-                <%= payment.payment_transaction_reference %>
+                  <%= payment.payment_transaction_reference %>
                 </td>
                 
                 <td class="px-2 py-4 truncate">
-                <%= payment.payment_notes %>
+                  <%= payment.payment_notes %>
                 </td>
                 
             </tr>
@@ -70,5 +71,3 @@
    
     </div>
   </div>
-
-<br>

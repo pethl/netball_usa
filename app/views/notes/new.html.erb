@@ -1,0 +1,37 @@
+<% content_for(:page_title, "Club / Note: New") %>
+
+<div class="m-4">
+
+  <%= form_with model: [@club, @note], local: true do |form| %>
+
+    <div class="mb-4 text-2xl">
+      Club: <%= @club.name %>
+    </div>
+
+    
+    <div class="grid grid-cols-4 gap-4 items-start">
+    <!-- Status (1 column) -->
+    <div>
+      <%= form.label :status, class: label_class %>
+      <%= form.select :status, options_for_select(club_note_status, :selected => @club.notes.first.status),{}, class: input_class %>
+    </div>
+  
+    <!-- Body (spanning 2 columns) -->
+    <div class="col-span-3">
+      <%= form.label :body, "Note", class: label_class %>
+      <%= form.text_area :body, size: "30x5",class: tight_form_input_class %>
+    </div>
+  </div>
+    
+    <div>
+        <%= form.submit "Save Note", class: form_button_class  %>
+    </div>
+  <% end %>
+
+  
+  <span class="ml-2"><%= link_to '<< Go to All Clubs', index_admin_path %></span><br>
+  <span class="ml-2"><%= link_to '<< Go to Admin Managed Clubs', clubs_path %></span><br>
+  <span class="ml-2"><%= link_to '<< Go to this Club', club_path(@club) %></span><br>
+
+
+</div>
