@@ -128,7 +128,14 @@
 
     <% if @club.notes.any? %>
     <%= render partial: "club_notes", clubs: @clubs %>
-  <% end %>
+    <% else %>
+      <div class="p-4 m-2 border border-grey-500 shadow-md shadow-blue-900 hover:border-black rounded-lg">
+        <div class="ml-4 text-gray-700 text-lg text-left font-semibold"> 
+          Notes <span class="text-grey-300 text-sm font-thin">[Click on note to EDIT]</span>
+          </div>
+      <p class="italic text-blue-600 ml-4 font-bold"><%= link_to 'Add Note', new_club_note_path(@club) %></p>  
+      </div> 
+    <% end %>
   <% end %>
 
   </div>

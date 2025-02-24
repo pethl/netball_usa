@@ -78,11 +78,12 @@ class Ability
       can :manage, Event
     end
 
-     #role 9 sponsors_only
-     if user.sponsors_only?
+     #role 9 sponsors_media
+     if user.sponsors_media?
       can :manage, Sponsor
       can :manage, Contact
       can :manage, Opportunity, user_id: user.id # if the user is assigned in can manage 
+      can :manage, Medium
     end
    
     if user.admin?

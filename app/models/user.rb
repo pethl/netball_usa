@@ -35,7 +35,7 @@ class User < ApplicationRecord
     sponsors_events: 6,
     us_open: 7,
     educators_events: 8,
-    sponsors_only: 9
+    sponsors_media: 9
   }
 
   # User::Roles
@@ -91,8 +91,8 @@ class User < ApplicationRecord
     self.role == 'educators_events'
   end
 
-  def sponsors_only?
-     self.role == 'sponsors_only'
+  def sponsors_media?
+     self.role == 'sponsors_media'
   end
  
 #  def active_for_authentication? 
