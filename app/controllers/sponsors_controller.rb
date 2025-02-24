@@ -2,10 +2,7 @@ class SponsorsController < ApplicationController
   before_action :set_sponsor, only: %i[ show edit update destroy ]
  # before_action :set_select_collections, only: [:edit, :update, :new, :create]
   load_and_authorize_resource
-
-
  
-
   # GET /sponsors
   def index
 
@@ -28,7 +25,7 @@ class SponsorsController < ApplicationController
   # GET /sponsors/1 
   def show
     @contacts = @sponsor.contacts.ordered
-    if is_admin? 
+    if (is_admin? || current_user.email=="marybeth@netballamerica.com")
       @opportunities = @sponsor.opportunities.ordered
     else
      @opportunities = @sponsor.opportunities.where(user_id: current_user.id)
