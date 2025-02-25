@@ -35,8 +35,9 @@
   </p>
 
   <p class="mt-2">
-    <strong>State:</strong>
-    <%= medium.state %>
+    <strong>State/Region:</strong>
+    <% if medium.state.present? %><%= medium.state %><% end %>
+    <% if medium.region_other.present? %><%= medium.region_other %><% end %>
   </p>
 
   <p class="mt-2">
@@ -53,5 +54,10 @@
     <strong>Media announcement link:</strong>
     <%= medium.media_announcement_link %>
   </p>
+
+  <p class="mt-2">
+  <strong>Action Taken:</strong>
+  <%= medium.action_taken %>
+</p>
 
 </div>

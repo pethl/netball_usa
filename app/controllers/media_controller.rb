@@ -9,6 +9,7 @@ class MediaController < ApplicationController
     @media = @media.where("company_name ILIKE ?", "%#{params[:company_name]}%") if params[:company_name].present?
     @media = @media.where(city: params[:city]) if params[:city].present?
     @media = @media.where(state: params[:state]) if params[:state].present?
+    @media = @media.where(region_other: params[:region_other]) if params[:region_other].present?
     @media = @media.where(country: params[:country]) if params[:country].present?
    
   end
@@ -60,6 +61,6 @@ class MediaController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def medium_params
-      params.require(:medium).permit(:media_type, :company_name, :contact_name, :contact_position, :email, :phone, :city, :state, :country, :pitch, :media_announcement_link)
+      params.require(:medium).permit(:media_type, :company_name, :contact_name, :action_taken, :region_other, :contact_position, :email, :phone, :city, :state, :country, :pitch, :media_announcement_link)
     end
 end

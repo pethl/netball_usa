@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_16_142145) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_25_170240) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -247,6 +247,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_16_142145) do
     t.string "media_announcement_link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "action_taken"
+    t.string "region_other"
   end
 
   create_table "member_key_roles", force: :cascade do |t|
