@@ -15,7 +15,7 @@
   <% end %>
 
   
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-x-4 gap-y-2 ">
  
   <div class="">
     <%= form.label :area, class: label_class%>
@@ -46,27 +46,33 @@
     </div> 
   </div>
 
-  <div class="md:col-span-2">
+  <div class="md:col-span-2 mb-2">
     <%= form.label :website, class: label_class%>
-    <div class="mt-1">
-    <%= form.text_field :website, class: form_input_class  %>
-    </div> 
+      <div class="mt-1">
+        <%= form.text_field :website, class: form_input_class  %>
+      </div> 
   </div>
+  
   <div class="">
     <%= form.label :contact_id, "Primary Contact", class: label_class%>
-    <div class="mt-1">
-    <%= form.collection_select(:contact_id, @contacts, :id, :full_name,{:prompt=>true}, {:class=>"bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 hover:border-blue-900 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
-    }) %>
+      <div class="mt-1">
+        <%= form.collection_select(:contact_id, @contacts, :id, :full_name,{:prompt=>true}, {:class=>"bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 hover:border-blue-900 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"}) %>
     </div> 
   </div>
 
-  <div class="mb-6">
+  <div class="">
     <%= form.label :date_submitted, class: label_class%>
      <div class="mt-1">
     <%= form.date_field :date_submitted, class: form_input_class  %>
    </div> 
   </div>
 
+  <div class="md:col-span-4">
+    <%= form.label :in_progress_status, class: label_class%>
+      <div class="mt-1">
+        <%= form.text_area :in_progress_status, class: form_input_class,  size: "20x3"  %>
+      </div>
+  </div>
 
     <div class="md:col-span-2">
       <%= form.label :pitch, class: label_class%>
@@ -89,7 +95,7 @@
   </div> 
 </div>
 
-  <div class="mb-6">
+  <div class="">
   <%= form.label :outcome_date, class: label_class%>
     <div class="mt-1">
   <%= form.date_field :outcome_date, class: form_input_class  %>
@@ -101,7 +107,6 @@
       <%= form.text_area :outcome_received, class: form_input_class,  size: "20x3"  %>
     </div>
   </div>
-
 
   <div class="col-span-2 md:col-span-4">
     <%= form.label :notes, class: label_class%>

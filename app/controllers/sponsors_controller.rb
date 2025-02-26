@@ -78,7 +78,7 @@ class SponsorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def sponsor_params
-      params.require(:sponsor).permit(:sponsor_category, :expat_co, :sponsor_type, :industry, :company_name, :status, :about, :city, :state, :location, :website, :key_contacts, :phone_numbers_emails, :opportunity_area, :pitch, :follow_up_actions, :notes, :user_id, :old_user_id)
+      params.require(:sponsor).permit(:sponsor_category, :expat_co, :sponsor_type, :industry, :company_name, :status, :about, :city, :state, :location, :other_locations, :website, :other_link, :key_contacts, :phone_numbers_emails, :opportunity_area, :pitch, :follow_up_actions, :notes, :user_id, :old_user_id)
     end
     
    # def set_select_collections

@@ -1,14 +1,17 @@
-<p style="color: green"><%= notice %></p>
+<% content_for(:page_title, "Sponsor Opportunities")%>
 
-<h1>Opportunities</h1>
+  <div class="mb-4">
+    <ul class="flex border-b">
+      <li class="mr-1">
+        <%= link_to "All Opportunities", opportunities_path, class: "border-blue-200 inline-block py-2 px-4 text-gray-700 border-b-2 border-transparent hover:border-gray-300" %>
+      </li>
+      <li>
+        <%= link_to "My Opportunities", my_index_opportunities_path, class: "inline-block py-2 px-4 text-gray-700 border-b-2 border-transparent hover:border-gray-300" %>
+      </li>
+    </ul>
+  </div>
 
-<div id="opportunities">
-  <% @opportunities.each do |opportunity| %>
-    <%= render opportunity %>
-    <p>
-      <%= link_to "Show this opportunity", opportunity %>
-    </p>
-  <% end %>
-</div>
+  <div class="relative overflow-x-auto p-4">
+    <%= render 'opportunities_table' %>
+  </div>
 
-<%= link_to "New opportunity", new_opportunity_path %>

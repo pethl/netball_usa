@@ -2,66 +2,87 @@
 
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 p-2 border border-blue-900 rounded-lg shadow  ">
 
- <div class="">
-    <p class="text-sm text-gray-500 ">
-        Company name:
-    </p>
-    <p class="text-lg font-medium text-gray-900 ">
-      <%= sponsor.company_name %>
-    </p>
-  </div>
+    <div class="">
+        <p class="text-sm text-gray-500 ">
+            Company name:
+        </p>
+        <p class="text-lg font-medium text-gray-900 ">
+          <%= sponsor.company_name %>
+        </p>
+      </div>
 
-  <div class="">
-    <p class="text-sm text-gray-500 ">
-        Industry / Category
-    </p>
-    <p class="text-sm font-medium text-gray-900 ">
-      <%= sponsor.industry %> /  <%= sponsor.sponsor_category %>
-    </p>
-  </div>
+      <div class="">
+        <p class="text-sm text-gray-500 ">
+            Industry / Category
+        </p>
+        <p class="text-sm font-medium text-gray-900 ">
+          <%= sponsor.industry %> /  <%= sponsor.sponsor_category %>
+        </p>
+      </div>
 
-  <div class="">
-  </div>
- 
-  <div class="">
-  </div>
+      <div class="">
+        <p class="text-sm text-gray-500 ">
+          Expat Country
+        </p>
+        <p class="text-sm font-medium text-gray-900 ">
+        <%= sponsor.expat_co %>
+        </p>
+      </div>
+    
+      <div class="">
+      </div>
 
-  <div class="">
-    <p class="text-sm text-gray-500 ">
-        Location:
-    </p>
-    <p class="text-sm font-base text-gray-900">
-      <%= sponsor.address_condensed %>
-     </p>
-  </div>
+      <div class="">
+        <p class="text-sm text-gray-500 ">
+            Primary Location:
+        </p>
+        <p class="text-sm font-base text-gray-900">
+          <%= sponsor.address_condensed %>
+        </p>
+      </div>
 
-  
-<div class="md:col-span-2">
-  <p class="text-sm text-gray-500 ">
-      Website:
-  </p>
-  <p class="text-sm font-medium text-gray-900 truncate">
-   <%= (link_to sponsor.website, sponsor.website, target: '_blank', class: link_class) unless (sponsor.website.to_s.empty?)%>
-    <%= sponsor.website %>
-  </p>
-</div>
+      <div class=" md:col-span-2">
+      <p class="text-sm text-gray-500 ">
+          Other Locations:
+      </p>
+      <p class="text-sm font-base overflow-hidden text-ellipsis text-gray-900 ">
+        <%= sponsor.other_locations %>
+      </p>
+    </div>
 
-<div class=" md:col-span-4 p-2 border border-gray-200 rounded-lg hover:bg-gray-100">
-   <p class="text-sm text-gray-500 ">
-       About:
-   </p>
-   <p class="text-sm font-base text-gray-900 ">
-     <%= sponsor.about %>
-   </p>
- </div>
+      
+    <div class="md:col-span-3">
+      <p class="text-sm text-gray-500 ">
+          Website:
+      <span class="text-sm font-medium text-gray-900 truncate">
+      <%= (link_to sponsor.website, sponsor.website, target: '_blank', class: link_class) unless (sponsor.website.to_s.empty?)%>
+      </span>
+    </div>
 
-<div class="md:col-span-4 p-2 border border-gray-200 rounded-lg hover:bg-gray-100">
-  <p class="text-sm text-gray-500 dark:text-gray-400">
-      Notes:
-  </p>
-  <p class="text-sm font-medium text-gray-900 ">
-    <%= sponsor.notes %>
-  </p>
-</div>
-</div>
+    <div class="md:col-span-3">
+      <p class="text-sm text-gray-500 ">
+          Apply Link:
+      <span class="text-sm font-medium text-gray-900 truncate">
+      <%= (link_to sponsor.other_link, sponsor.other_link, target: '_blank', class: link_class) unless (sponsor.other_link.to_s.empty?)%>
+      </span>
+    </div>
+
+    <div class=" md:col-span-4 p-2 border border-gray-200 rounded-lg hover:bg-gray-100">
+      <p class="text-sm text-gray-500 ">
+          About:
+      </p>
+      <p class="text-sm font-base text-gray-900 ">
+        <%= sponsor.about %>
+      </p>
+    </div>
+
+    <div class="md:col-span-4 p-2 border border-gray-200 rounded-lg hover:bg-gray-100">
+      <p class="text-sm text-gray-500 dark:text-gray-400">
+          Notes:
+      </p>
+      <p class="text-sm font-medium text-gray-900 ">
+        <%= sponsor.notes %>
+      </p>
+    </div>
+    </div>
 </div>

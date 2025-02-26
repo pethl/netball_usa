@@ -35,7 +35,7 @@
        </div> 
     </div>
 
-      <div class="mb-2 md:col-span-2">
+      <div class="mb-2 ">
         <%= form.label :location, class: label_class%>
          <div class="mt-1">
           <%= form.text_field :location, class: form_input_class  %>
@@ -56,19 +56,40 @@
           </div>
       </div>
 
+      <div class="mb-2">
+      <%= form.label :expat_co, "Expat Country", class: label_class  %>
+        <div class="mt-1">
+          <%= form.select :expat_co, options_for_select(expat_co, :selected => sponsor.expat_co),{:prompt=>true}, class: form_input_class %>
+        </div>
+    </div>
+
       <div class="mb-2 md:col-span-2">
        <%= form.label :about, class: label_class%>
          <div class="mt-1">
           <%= form.text_area :about, class: form_input_class,  size: "20x5" %>
          </div>
       </div>
-    
+
       <div class="mb-2 md:col-span-2">
-        <%= form.label :website, class: label_class%>
+       <%= form.label :other_locations,class: label_class%>
          <div class="mt-1">
-           <%= form.text_field :website, placeholder: "Enter with prefix Http:// or https://", class: form_input_class  %>
-         </div> 
+          <%= form.text_area :other_locations, class: form_input_class,  size: "20x5" %>
+         </div>
       </div>
+
+      <div class="mb-2 md:col-span-2 sm:mt-4 md:mt-0">
+      <%= form.label :website, class: label_class%>
+        <div class="mt-1">
+           <%= form.text_field :website, placeholder: "Enter with prefix Http:// or https://", class: form_input_class  %>
+        </div>
+      </div>
+
+      <div class="mb-2 md:col-span-2 sm:mt-4 md:mt-0">
+      <%= form.label :other_link, "Link to apply", class: label_class%>
+        <div class="mt-1">
+           <%= form.text_field :other_link, placeholder: "Enter with prefix Http:// or https://", class: form_input_class  %>
+        </div>
+    </div>
 
       <div class="mb-2 md:col-span-3">
       <%= form.label :notes, class: label_class%>

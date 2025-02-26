@@ -81,6 +81,12 @@ end
     resources :opportunities, except: [:index, :show]
   end
 
+  resources :opportunities, only: [:index] do
+    collection do
+      get :my_index  # This will be /opportunities/my_index route
+    end
+  end
+  
   resources :partners do
     resources :contacts, except: [:index, :show]
   end

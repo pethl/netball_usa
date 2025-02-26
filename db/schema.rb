@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_25_170240) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_26_092827) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -359,6 +359,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_25_170240) do
     t.datetime "outcome_date"
     t.text "outcome_received"
     t.datetime "date_submitted"
+    t.text "in_progress_status"
     t.index ["sponsor_id"], name: "index_opportunities_on_sponsor_id"
     t.index ["user_id"], name: "index_opportunities_on_user_id"
   end
@@ -524,6 +525,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_25_170240) do
     t.string "sponsor_type"
     t.integer "old_user_id"
     t.string "expat_co"
+    t.string "other_link"
+    t.string "other_locations"
   end
 
   create_table "teams", force: :cascade do |t|

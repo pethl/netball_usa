@@ -1,10 +1,17 @@
 class OpportunitiesController < ApplicationController
   before_action :set_opportunity, only: %i[ show edit update destroy ]
-  before_action :set_sponsor
+  before_action :set_sponsor, only: %i[ show edit update destroy ]
 
   # GET /opportunities
   def index
-    @opportunities = Opportunity.all
+    @opportunities = Opportunity.joins(:sponsor)
+                                .order("sponsors.company_name ASC") 
+  end
+
+  # Custom action to show opportunities belonging to the current user
+  def my_index
+    @opportunities = Opportunity.where(user_id: current_user.id).includes(:sponsor).order('sponsors.company_name')
+    #render :index # Reuse the same index view to avoid code duplication
   end
 
   # GET /opportunities/1
@@ -74,7 +81,7 @@ class OpportunitiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def opportunity_params
-      params.require(:opportunity).permit(:sponsor_id, :contact_id, :status, :user_id, :old_user_id, :opportunity_type, :website, :area, :pitch, :follow_up_actions, :notes, :outcome, :outcome_date, :outcome_received, :date_submitted)
+      params.require(:opportunity).permit(:sponsor_id, :contact_id, :status, :in_progress_status, :user_id, :old_user_id, :opportunity_type, :website, :area, :pitch, :follow_up_actions, :notes, :outcome, :outcome_date, :outcome_received, :date_submitted)
     end
 
     def send_allocation_email(opportunity)
