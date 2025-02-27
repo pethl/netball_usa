@@ -1,6 +1,6 @@
 class OpportunitiesController < ApplicationController
   before_action :set_opportunity, only: %i[ show edit update destroy ]
-  before_action :set_sponsor, only: %i[ show edit update destroy ]
+  before_action :set_sponsor, only: %i[ new show edit update destroy ]
 
   # GET /opportunities
   def index
@@ -22,6 +22,7 @@ class OpportunitiesController < ApplicationController
   # GET /opportunities/new
   def new
     #@opportunity = Opportunity.new
+   # @contacts = @sponsor&.contacts&.order(:name) || []
     @contacts = @sponsor.contacts.ordered
     @opportunity = @sponsor.opportunities.build
    # @opportunity.user_id = current_user.id
