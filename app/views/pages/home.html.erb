@@ -26,15 +26,20 @@
   <% elsif current_user.role=="educators_events" %>
     <% content_for(:page_title, "Dashboard")%>
     <%= render "office_home" %>  
-  
-  
+    
   <% elsif current_user.role=="teams_admin" %>
     <% content_for(:page_title, "Dashboard")%>
     <%= render "office_home" %>  
     
-    <% elsif current_user.role=="sponsors_media" %>
+  <% elsif current_user.role=="sponsors_media" %>
     <% content_for(:page_title, "Dashboard")%>
     <%= render "office_home" %>  
+
+   <% elsif current_user.role=="educators_events_medium" %>
+    <% content_for(:page_title, "Dashboard")%>
+    <%= render "office_home" %>  
+
+    
 
 <% else %>
   <% content_for(:page_title, "Welcome to Netball America Members Zone")%>

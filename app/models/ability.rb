@@ -85,6 +85,14 @@ class Ability
       can :manage, Opportunity, user_id: user.id # if the user is assigned in can manage 
       can :manage, Medium
     end
+
+    #role10 educators_events_medium - Dr Marlene given view rights on all teachers - other person in role doesnt have yet
+    if user.educators_events_medium?
+      can :manage, NetballEducator
+      can :manage, FollowUp
+      can :manage, Event
+      can :manage, Medium
+    end
    
     if user.admin?
     can :manage, :all # finally we give all remaining permissions only to the admins
