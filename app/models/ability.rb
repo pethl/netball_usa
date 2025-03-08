@@ -78,12 +78,13 @@ class Ability
       can :manage, Event
     end
 
-     #role 9 sponsors_media
-     if user.sponsors_media?
+     #role 9 sponsors_media_events
+     if user.sponsors_media_events?
       can :manage, Sponsor
       can :manage, Contact
       can :manage, Opportunity, user_id: user.id # if the user is assigned in can manage 
       can :manage, Medium
+      can :manage, Event
     end
 
     #role10 educators_events_medium - Dr Marlene given view rights on all teachers - other person in role doesnt have yet

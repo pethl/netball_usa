@@ -35,7 +35,7 @@ class User < ApplicationRecord
     sponsors_events: 6,
     us_open: 7,
     educators_events: 8,
-    sponsors_media: 9,
+    sponsors_media_events: 9,
     educators_events_medium: 10
   }
 
@@ -92,8 +92,8 @@ class User < ApplicationRecord
     self.role == 'educators_events'
   end
 
-  def sponsors_media?
-     self.role == 'sponsors_media'
+  def sponsors_media_events?
+     self.role == 'sponsors_media_events'
   end
 
   def educators_events_medium?
