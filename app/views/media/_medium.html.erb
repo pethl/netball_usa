@@ -1,88 +1,47 @@
 <div id="<%= dom_id medium %>">
-  <p class="mt-2">
-    <strong>Media Type:</strong>
-    <%= medium.media_type %>
-  </p>  
 
-  <p class="mt-2">
-    <strong>Company name:</strong>
-    <%= medium.company_name %>
-  </p>
+<div class="flex flex-wrap w-2/3">
+<%# Loop through the key-value pairs for consistency %>
+<%[
+  ["Media Type", medium.media_type],
+  ["Company Name", medium.company_name],
+  ["Contact Name", medium.contact_name],
+  ["Contact Position", medium.contact_position],
+  ["Socials", medium.socials],
+  ["Email", medium.email],
+  ["Phone", medium.phone],
+  ["City", medium.city],
+  ["State/Region", [medium.state, medium.region_other].compact.join(' ')],
+  ["Country", medium.country],
+  ["Region", medium.region_other],
+  ["Allocated To", medium.user_id? ? medium.user.full_name : nil],
+  ["Notes", medium.notes],
+  ["Pitch", medium.pitch],
+  ["Action Taken", medium.action_taken],
+  ["Media Announcement Link", medium.media_announcement_link]
+].each do |label, value| %>
+ 
+    <div class="w-1/3 p-2">
+      <strong><%= label %>:</strong>
+    </div>
+    <div class="w-2/3 p-2">
+      <%= value %>
+    </div>
+  <% end %>
 
-  <p class="mt-2">
-    <strong>Company website:</strong>
-    <%= medium.company_website %>
-  </p>
 
-  <p class="mt-2">
-    <strong>Contact name:</strong>
-    <%= medium.contact_name %>
-  </p>
+<%# Special case for company website (if present) %>
+<% if medium.company_website? %>
+  <div class="w-1/3 p-2">
+    <strong>Company Website:</strong>
+  </div>
+  <div class="w-2/3 p-2">
+    <span class="<%= link_class %>">
+      <%= link_to medium.company_website, medium.company_website, target: "_blank", rel: "noopener noreferrer" %>
+    </span>
+  </div>
+<% end %>
+</div>
 
-  <p class="mt-2">
-    <strong>Contact position:</strong>
-    <%= medium.contact_position %>
-  </p>
-
-  <p class="mt-2">
-    <strong>Socials:</strong>
-    <%= medium.socials %>
-  </p>
-
-  <p class="mt-2">
-    <strong>Email:</strong>
-    <%= medium.email %>
-  </p>
-
-  <p class="mt-2">
-    <strong>Phone:</strong>
-    <%= medium.phone %>
-  </p>
-
-  <p class="mt-2">
-    <strong>City:</strong>
-    <%= medium.city %>
-  </p>
-
-  <p class="mt-2">
-    <strong>State/Region:</strong>
-    <% if medium.state.present? %><%= medium.state %><% end %>
-    <% if medium.region_other.present? %><%= medium.region_other %><% end %>
-  </p>
-
-  <p class="mt-2">
-    <strong>Country:</strong>
-    <%= medium.country %>
-  </p>
-
-  <p class="mt-2">
-    <strong>Region:</strong>
-    <%= medium.region_other %>
-  </p>
-
-  <p class="mt-2">
-    <strong>Allocated to:</strong>
-    <% if medium.user_id? %><%= medium.user.full_name %><% end %>
-  </p>
-
-  <p class="mt-2">
-    <strong>Notes:</strong>
-    <%= medium.notes %>
-  </p>
-
-  <p class="mt-2">
-    <strong>Pitch:</strong>
-    <%= medium.pitch %>
-  </p>
-
-  <p class="mt-2">
-    <strong>Action Taken:</strong>
-    <%= medium.action_taken %>
-  </p>
-
-  <p class="mt-2">
-    <strong>Media announcement link:</strong>
-    <%= medium.media_announcement_link %>
-  </p>
 
 </div>

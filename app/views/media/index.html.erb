@@ -122,6 +122,10 @@
                   Media Link
                  </th>
 
+                 <th scope="col" class="px-6 py-3 w-48">
+                  Website
+                 </th>
+
                 <th scope="col" class="px-6 py-3 w-80">
                   Notes
                 </th>
@@ -185,8 +189,12 @@
                 </td>
 
                 <td class="px-6 py-4 align-top text-wrap break-words">
-                <%= medium.notes %>
-            </td>
+                  <%= (link_to medium.company_website, medium.company_website, target: '_blank', class: link_class) unless (medium.company_website.to_s.empty?)%>
+                </td>
+
+                <td class="px-6 py-4 align-top text-wrap break-words">
+                  <%= medium.notes %>
+                </td>
             </tr>
             <% end %>
         </tbody>
