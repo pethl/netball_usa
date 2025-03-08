@@ -16,6 +16,7 @@ class User < ApplicationRecord
   )
 
   has_many :opportunities
+  has_many :media
 
   has_many(
     :clubs,

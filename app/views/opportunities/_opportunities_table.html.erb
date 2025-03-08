@@ -1,4 +1,5 @@
 
+<% if @opportunities.any? %>
 <table class="table-auto w-full text-left rtl:text-right ">
 <thead class="bg-gray-200 text-gray-600 font-light text-xs mb-2">
 <tr class="border-b border-gray-200 rounded-md">
@@ -39,4 +40,9 @@
   <% end %>
 </tbody>
 </table>
+<% else %>
+  <div class="text-center py-6">
+    <p class="text-gray-500 text-lg">No opportunities currently assigned.</p>
+  </div>
+<% end %>
 <br>

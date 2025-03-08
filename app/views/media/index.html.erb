@@ -1,6 +1,17 @@
 <% content_for(:page_title, "Media")%> 
 
-<div class="m-4">
+<div class="mb-4">
+  <ul class="flex border-b">
+    <li class="mr-1">
+      <%= link_to "All Media", media_path, class: "border-blue-200 inline-block py-2 px-4 text-gray-700 border-b-2 border-transparent hover:border-gray-300" %>
+    </li>
+    <li>
+      <%= link_to "My Media", my_media_media_path, class: "inline-block py-2 px-4 text-gray-700 border-b-2 border-transparent hover:border-gray-300" %>
+    </li>
+  </ul>
+</div>
+
+<div class="my-4">
     <%= link_to "New Media", new_medium_path, class: form_button_class %>
     <br>
    </div>
@@ -69,35 +80,52 @@
 <div id="media">
 <div class="relative overflow-x-auto">
     <table class="w-full table-fixed text-left rtl:text-right">
-        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+        <thead class="bg-white border-b text-gray-800 font-light text-xs ">
             <tr>
                 <th scope="col" class="px-6 py-3 w-20">
-                    State
+                  State
                 </th>
 
-                <th scope="col" class="px-6 py-3 w-80">
-                    Company / Type
+                <th scope="col" class="px-6 py-3 w-40">
+                  City
+                </th>
+
+                <th scope="col" class="px-6 py-3 w-64">
+                  Company / Type
                 </th>
 
                 <th scope="col" class="px-6 py-3 text-wrap w-80">
-                    Pitch
+                  Action Taken
+                </th>
+
+                <th scope="col" class="px-6 py-3 text-wrap w-80">
+                  Pitch
                 </th>
                 
                 <th scope="col" class="px-6 py-3 w-48">
-                    Name / Role
+                  Name / Role
                 </th>
 
-                <th scope="col" class=" px-6 py-3 flex-wrap w-96">
-                    Contact Details
+                <th scope="col" class=" px-6 py-3 w-80">
+                  Contact Details
                 </th>
                
-                <th scope="col" class="px-6 py-3 w-48">
-                    City
+                <th scope="col" class="px-6 py-3 w-40">
+                  Country
+                </th>
+
+                <th scope="col" class="px-6 py-3 w-40">
+                  Allocated To
                 </th>
 
                 <th scope="col" class="px-6 py-3 w-48">
-                    Other
+                  Media Link
+                 </th>
+
+                <th scope="col" class="px-6 py-3 w-80">
+                  Notes
                 </th>
+
             </tr>
         </thead>
         <tbody>
@@ -107,17 +135,25 @@
                 <td scope="row" class="align-top px-6 py-4 font-medium text-gray-800 ">
                   <% if medium.state.present? %> <%= medium.state %><% else %> <%= medium.region_other %><% end %>
                 </td>
+
+                <td class="px-6 py-4 align-top truncate">
+                  <%= medium.city %>
+                </td>
                
-                <td scope="row" class="align-top px-6 py-4 font-medium text-gray-800 text-wrap">
+                <td scope="row" class="align-top px-6 py-4 font-medium text-gray-800 text-wrap break-words">
                     <%= link_to medium.company_name, edit_medium_path(medium), class: link_class %><br>
                      <%= medium.media_type %>
                 </td>
 
-                <td class="px-6 py-4 align-top text-wrap">
+                <td class="px-6 py-4 align-top text-wrap break-words">
+                    <%= medium.action_taken %>
+                </td>
+
+                <td class="px-6 py-4 align-top text-wrap break-words">
                     <%= medium.pitch %>
                 </td>
 
-                <td class="px-6 py-4 align-top text-nowrap">
+                <td class="px-6 py-4 align-top text-wrap break-words">
                 <strong><%= medium.contact_name %></strong>
                     <% if medium.contact_name.present? %>
                         <br><%= medium.contact_position %>
@@ -135,23 +171,22 @@
                      <% if medium.phone.present? %><i class="fa-solid fa-phone"> : </i><%= medium.phone %><% end %>
                 <% end %>
                 </td>
-                
-                <td class="px-6 py-4 align-top truncate">
-                    <%= medium.city %>
-                </td>
-
-                <td class="px-6 py-4 align-top truncate">
+               
+                <td class="px-6 py-4 align-top text-wrap break-words">
                     <%= medium.country %>
                 </td>
 
-                <td class="px-6 py-4 align-top truncate">
-                    <%= medium.action_taken %>
+                <td class="px-6 py-4 align-top text-wrap break-words">
+                  <% if medium.user_id? %><%= medium.user.full_name %><% end %>
                 </td>
 
-                
-                <td class="px-6 py-4 align-top truncate">
+                <td class="px-6 py-4 align-top text-wrap break-words">
                   <%= (link_to medium.media_announcement_link, medium.media_announcement_link, target: '_blank', class: link_class) unless (medium.media_announcement_link.to_s.empty?)%>
                 </td>
+
+                <td class="px-6 py-4 align-top text-wrap break-words">
+                <%= medium.notes %>
+            </td>
             </tr>
             <% end %>
         </tbody>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_26_092827) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_08_083923) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -249,6 +249,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_26_092827) do
     t.datetime "updated_at", null: false
     t.text "action_taken"
     t.string "region_other"
+    t.string "company_website"
+    t.string "socials"
+    t.text "notes"
+    t.integer "user_id"
+    t.integer "old_user_id"
   end
 
   create_table "member_key_roles", force: :cascade do |t|

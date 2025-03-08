@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :media
+  resources :media do
+    collection do
+      get :my_media
+    end
+  end
   resources :programs
 
   namespace :admin do
