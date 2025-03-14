@@ -5,6 +5,10 @@ class Ability
 
   def initialize(user)
     user ||= User.new
+
+    if user.present?
+      can :read, User # Allow the user to read User objects
+    end
     # start by defining rules for all users, also not logged ones
     can :read, Transfer, public: true  # everyone can see transfer records tselect their name
     can :update, Transfer, public: true  # everyone can update their record NEEDS WORK

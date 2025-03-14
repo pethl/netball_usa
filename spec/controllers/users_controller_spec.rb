@@ -1,4 +1,6 @@
 require 'spec_helper'
+require_relative '../../app/controllers/users_controller'  # Add this if necessary
+
 RSpec.describe UsersController, type: :controller do
     # If you have a user factory set up, you can create a user to sign in for tests
     let(:user) { create(:user) }

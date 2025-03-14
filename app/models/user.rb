@@ -26,19 +26,17 @@ class User < ApplicationRecord
   )
   
   #enum role: [:admin, :office, :teamlead]
-  enum role: {
-    admin: 0,
-    teams_grants: 1,
-    teamlead: 2,
-    grants: 3,
-    educators: 4,
-    teams_admin: 5,
-    sponsors_events: 6,
-    us_open: 7,
-    educators_events: 8,
-    sponsors_media_events: 9,
-    educators_events_medium: 10
-  }
+  enum :role, {:admin=>0, 
+  :teams_grants=>1, 
+  :teamlead=>2, 
+  :grants=>3, 
+  :educators=>4, 
+  :teams_admin=>5, 
+  :sponsors_events=>6, 
+  :us_open=>7,
+  :educators_events=>8, 
+  :sponsors_media_events=>9, 
+  :educators_events_medium=>10}
 
   # User::Roles
   # The available roles

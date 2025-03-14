@@ -21,7 +21,7 @@
 </thead>
 <tbody>
  <% @opportunities.each do |opportunity| %>
-<tr class="align-top <%= 'bg-gray-100' if opportunity.status == 'Completed' %>">
+<tr class="align-top border-b <%= 'bg-gray-100' if opportunity.status == 'Completed' %>">
     <td class="align-top border-l border-gray-200 px-4 py-2 whitespace-nowrap"> <% if opportunity.sponsor_id? %><%= link_to Sponsor.find(opportunity.sponsor_id).company_name, sponsor_path(opportunity.sponsor_id), class:link_class %><% end %></td>
     <td class="align-top border-l border-gray-200 px-4 py-2"> <%=  opportunity.opportunity_type %></td>
     <td class="align-top border-l border-gray-200 px-4 py-2 whitespace-nowrap"> <%= opportunity.area %></td>

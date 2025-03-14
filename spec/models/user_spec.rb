@@ -1,44 +1,31 @@
-require 'rails_helper'
+  require 'rails_helper'
 
   RSpec.describe User, :type => :model do
-    subject {
-      described_class.new(first_name: "Meg  ",
-                          last_name: "Ryan",
-                          email: "meg@ryan.com",
-                          password: "foobar",
-                          password_confirmation: "foobar"
-                          )
-    }
-
-
-    it "is valid with valid attributes" do
-      expect(subject).to be_valid
+    it 'is valid with valid attributes' do
+      user = FactoryBot.create(:user)
+      expect(user).to be_valid
+    end
+   
+    it 'is invalid without an email' do
+      user = FactoryBot.build(:user, email: nil)
+      expect(user).to_not be_valid
     end
   
-    it "is not valid without a first name" do
-      subject.first_name = nil
-      expect(subject).to_not be_valid
+    it 'is invalid without a password' do
+      user = FactoryBot.build(:user, password: nil)
+      expect(user).to_not be_valid
     end
 
-    it "is not valid without a last_name" do
-      subject.last_name = nil
-      expect(subject).to_not be_valid
-    end
-    
-    it "is not valid without a email" do
-      subject.email = nil
-      expect(subject).to_not be_valid
+    it 'is invalid without first_name' do
+      user = FactoryBot.build(:user, first_name: nil)
+      expect(user).to_not be_valid
     end
 
-    it "is not valid without a password" do
-      subject.password = nil
-      expect(subject).to_not be_valid
+    it 'is invalid without last_name' do
+      user = FactoryBot.build(:user, last_name: nil)
+      expect(user).to_not be_valid
     end
 
-    # it "is not valid without a password_confirmation" do
-    #   subject.password_confirmation = nil
-    #   expect(subject).to_not be_valid
-    # end
 
   end
   
