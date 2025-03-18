@@ -8,125 +8,112 @@
     <li>
       <%= link_to "My Media", my_media_media_path, class: "inline-block py-2 px-4 text-gray-700 border-b-2 border-transparent hover:border-gray-300" %>
     </li>
+    <li class="pt-2">
+       <%= link_to "New Media", new_medium_path, class: form_button_class %>  </li>
   </ul>
 </div>
 
-<div class="my-4">
-    <%= link_to "New Media", new_medium_path, class: form_button_class %>
-    <br>
-   </div>
+<div class="bg-gray-100 p-2 rounded-lg border border-gray-200">
+  <p class="text-sm mb-2">SEARCH OR FILTER BY ANY OF THESE PARAMETERS</p>
+  <%= form_with(url: media_path, method: :get, local: true, class: "flex flex-wrap items-end gap-2") do %>
 
-   <div class="bg-gray-100 p-2 rounded-lg border border-gray-200">
-<p class="text-sm">SEARCH OR FILTER BY ANY OF THESE PARAMETERS</p>
-  <%= form_with(url: media_path, method: :get, local: true, class: "flex flex-wrap items-center space-x-2") do %>
-   
-    <!-- Media Type -->
-    <div class="flex flex-col">
-      <%= label_tag :media_type, "Media Type", class: "text-sm font-medium text-gray-700" %>
-      <%= select_tag :media_type, options_for_select(media_type, params[:media_type]),
-        include_blank: "Select",
-        class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
-    </div>
-   
-    <!-- Company Name Search -->
-    <div class="flex flex-col">
-      <%= label_tag :company_name, "Company Name", class: "text-sm font-medium text-gray-700" %>
-      <%= text_field_tag :company_name, params[:company_name], class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+    <div class="flex flex-col flex-1 min-w-[100px]">
+      <%= label_tag :media_type, "Media Type", class: "text-xs font-medium text-gray-700" %>
+      <%= select_tag :media_type, options_for_select(media_type, params[:media_type]), include_blank: "Select",
+        class: "rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm" %>
     </div>
 
-    <!-- City Filter -->
-    <div class="flex flex-col">
-      <%= label_tag :city, "City", class: "text-sm font-medium text-gray-700" %>
-      <%= text_field_tag :city, params[:city], class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+    <div class="flex flex-col flex-1 min-w-[100px]">
+      <%= label_tag :company_name, "Company Name", class: "text-xs font-medium text-gray-700" %>
+      <%= text_field_tag :company_name, params[:company_name], class: "rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm" %>
     </div>
 
-    <!-- State Filter -->
-    <div class="flex flex-col">
-      <%= label_tag :state, "State", class: "text-sm font-medium text-gray-700" %>
-      <%= select_tag :state, options_for_select(american_states, params[:state]),
-        include_blank: "Select",
-        class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+    <div class="flex flex-col flex-1 min-w-[100px]">
+      <%= label_tag :city, "City", class: "text-xs font-medium text-gray-700" %>
+      <%= text_field_tag :city, params[:city], class: "rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm" %>
     </div>
 
-    <!-- Other Region Filter -->
-    <div class="flex flex-col">
-      <%= label_tag :region_other, "Other Region", class: "text-sm font-medium text-gray-700" %>
-      <%= text_field_tag :region_other, params[:region_other], class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+    <div class="flex flex-col flex-1 min-w-[100px]">
+      <%= label_tag :state, "State", class: "text-xs font-medium text-gray-700" %>
+      <%= select_tag :state, options_for_select(american_states, params[:state]), include_blank: "Select",
+        class: "rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm" %>
     </div>
 
-    <!-- Country Filter -->
-    <div class="flex flex-col">
-      <%= label_tag :country, "Country", class: "text-sm font-medium text-gray-700" %>
-      <%= text_field_tag :country, params[:country], class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+    <div class="flex flex-col flex-1 min-w-[100px]">
+      <%= label_tag :region_other, "Other Region", class: "text-xs font-medium text-gray-700" %>
+      <%= text_field_tag :region_other, params[:region_other], class: "rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm" %>
     </div>
 
-
-    <!-- Submit Button -->
-    <div class="mt-4">
-      <%= submit_tag "Filter", class: "block text-left px-2 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-800 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+    <div class="flex flex-col flex-1 min-w-[100px]">
+      <%= label_tag :country, "Country", class: "text-xs font-medium text-gray-700" %>
+      <%= text_field_tag :country, params[:country], class: "rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm" %>
     </div>
 
-    <!-- Clear Filter Button -->
-    <div class="mt-4">
-      <%= link_to "Clear", media_path, 
-        class: "block text-left px-2 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
-    </div>
+    <%= submit_tag "Filter", class: "px-3 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-blue-800 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+
+    <%= link_to "Clear", media_path,
+      class: "px-3 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+
   <% end %>
 </div>
 
-<br>
+
 
 <% if @media.any? %>
 <div id="media">
-<div class="relative overflow-x-auto">
+<div class="relative overflow-x-auto mt-2">
     <table class="w-full table-fixed text-left rtl:text-right">
         <thead class="bg-white border-b text-gray-800 font-light text-xs ">
             <tr>
-                <th scope="col" class="px-6 py-3 w-20">
+                <th scope="col" class="px-4 py-2 w-20">
                   State
                 </th>
 
-                <th scope="col" class="px-6 py-3 w-40">
+                <th scope="col" class="px-4 py-2 w-40">
                   City
                 </th>
 
-                <th scope="col" class="px-6 py-3 w-64">
+                <th scope="col" class="px-4 py-2 w-64">
                   Company / Type
                 </th>
 
-                <th scope="col" class="px-6 py-3 text-wrap w-80">
+                <th scope="col" class="px-4 py-2 text-wrap w-80">
                   Action Taken
                 </th>
 
-                <th scope="col" class="px-6 py-3 text-wrap w-80">
+                <th scope="col" class="px-4 py-2 text-wrap w-80">
                   Pitch
                 </th>
                 
-                <th scope="col" class="px-6 py-3 w-48">
+                <th scope="col" class="px-4 py-2 w-48">
                   Name / Role
                 </th>
 
-                <th scope="col" class=" px-6 py-3 w-80">
+                <th scope="col" class=" px-4 py-2 w-80">
                   Contact Details
                 </th>
                
-                <th scope="col" class="px-6 py-3 w-40">
+                <th scope="col" class="px-4 py-2 w-40">
                   Country
                 </th>
 
-                <th scope="col" class="px-6 py-3 w-40">
+                <th scope="col" class="px-4 py-2 w-40">
                   Allocated To
                 </th>
 
-                <th scope="col" class="px-6 py-3 w-48">
+                <th scope="col" class="px-4 py-2 w-48">
                   Media Link
                  </th>
 
-                 <th scope="col" class="px-6 py-3 w-48">
+                 <th scope="col" class="px-4 py-2 w-48">
+                 Calendar Link
+                </th>
+
+                 <th scope="col" class="px-4 py-2 w-48">
                   Website
                  </th>
 
-                <th scope="col" class="px-6 py-3 w-80">
+                <th scope="col" class="px-4 py-2 w-80">
                   Notes
                 </th>
 
@@ -136,37 +123,48 @@
         <% @media.each do |medium| %>
             <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
                 
-                <td scope="row" class="align-top px-6 py-4 font-medium text-gray-800 ">
+                <td scope="row" class="align-top px-4 py-4 font-medium text-gray-800 ">
                   <% if medium.state.present? %> <%= medium.state %><% else %> <%= medium.region_other %><% end %>
                 </td>
 
-                <td class="px-6 py-4 align-top truncate">
+                <td class="px-4 py-4 align-top truncate">
                   <%= medium.city %>
                 </td>
                
-                <td scope="row" class="align-top px-6 py-4 font-medium text-gray-800 text-wrap break-words">
+                <td scope="row" class="align-top px-4 py-4 font-medium text-gray-800 text-wrap break-words">
                     <%= link_to medium.company_name, edit_medium_path(medium), class: link_class %><br>
                      <%= medium.media_type %>
                 </td>
 
-                <td class="px-6 py-4 align-top text-wrap break-words">
+                <td class="px-4 py-4 align-top text-wrap break-words">
                     <%= medium.action_taken %>
                 </td>
 
-                <td class="px-6 py-4 align-top text-wrap break-words">
+                <td class="px-4 py-4 align-top text-wrap break-words">
                     <%= medium.pitch %>
                 </td>
 
-                <td class="px-6 py-4 align-top text-wrap break-words">
-                <strong><%= medium.contact_name %></strong>
-                    <% if medium.contact_name.present? %>
+                <td class="px-4 py-4 align-top text-wrap break-words">
+                <% if medium.contact_name.present? %>
+                    <strong><%= medium.contact_name %></strong>
+                    <% if medium.contact_position.present? %>
                         <br><%= medium.contact_position %>
-                    <% else %>
-                        <%= medium.contact_position %>
                     <% end %>
-                </td>
+                    <% if medium.contact_email.present? %>
+                        <br><%= medium.contact_email %>
+                    <% end %>
+                <% elsif medium.contact_position.present? %>
+                    <%= medium.contact_position %>
+                    <% if medium.contact_email.present? %>
+                        <br><%= medium.contact_email %>
+                    <% end %>
+                <% elsif medium.contact_email.present? %>
+                    <%= medium.contact_email %>
+                <% end %>
+            </td>
+            
 
-                <td class="px-6 py-4 align-top text-wrap">
+                <td class="px-4 py-4 align-top text-wrap">
                   <%= medium.email %>
                   <% if medium.email.present? %>
                     <br>
@@ -176,23 +174,27 @@
                 <% end %>
                 </td>
                
-                <td class="px-6 py-4 align-top text-wrap break-words">
+                <td class="px-4 py-4 align-top text-wrap break-words">
                     <%= medium.country %>
                 </td>
 
-                <td class="px-6 py-4 align-top text-wrap break-words">
+                <td class="px-4 py-4 align-top text-wrap break-words">
                   <% if medium.user_id? %><%= medium.user.full_name %><% end %>
                 </td>
 
-                <td class="px-6 py-4 align-top text-wrap break-words">
+                <td class="px-4 py-4 align-top text-wrap break-words">
                   <%= (link_to medium.media_announcement_link, medium.media_announcement_link, target: '_blank', class: link_class) unless (medium.media_announcement_link.to_s.empty?)%>
                 </td>
 
-                <td class="px-6 py-4 align-top text-wrap break-words">
+                <td class="px-4 py-4 align-top text-wrap break-words">
+                  <%= (link_to medium.event_calender_link, medium.event_calender_link, target: '_blank', class: link_class) unless (medium.event_calender_link.to_s.empty?)%>
+                </td>
+
+                <td class="px-4 py-4 align-top text-wrap break-words">
                   <%= (link_to medium.company_website, medium.company_website, target: '_blank', class: link_class) unless (medium.company_website.to_s.empty?)%>
                 </td>
 
-                <td class="px-6 py-4 align-top text-wrap break-words">
+                <td class="px-4 py-4 align-top text-wrap break-words">
                   <%= medium.notes %>
                 </td>
             </tr>
@@ -203,7 +205,7 @@
  </div>
 
 <% else %>
-<p class="px-6 py-4">
+<p class="px-4 py-4">
 No records to view</p>
 <% end %>
 <br>

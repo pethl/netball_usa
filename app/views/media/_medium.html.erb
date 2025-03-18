@@ -5,11 +5,18 @@
 <%[
   ["Media Type", medium.media_type],
   ["Company Name", medium.company_name],
+  ["Company Website", medium.company_website],
   ["Contact Name", medium.contact_name],
   ["Contact Position", medium.contact_position],
-  ["Socials", medium.socials],
-  ["Email", medium.email],
+  ["Contact Email", medium.contact_email],
+  ["General Email", medium.email],
   ["Phone", medium.phone],
+  ["Other Socials", medium.socials],
+  ["Facebook", medium.facebook],
+  ["X", medium.twitter],
+  ["Instagram", medium.instagram],
+  ["Event Calendar Link", medium.event_calender_link],
+  ["Calendar login details", medium.calendar_login_details],
   ["City", medium.city],
   ["State/Region", [medium.state, medium.region_other].compact.join(' ')],
   ["Country", medium.country],
@@ -33,7 +40,7 @@
 <%# Special case for company website (if present) %>
 <% if medium.company_website? %>
   <div class="w-1/3 p-2">
-    <strong>Company Website:</strong>
+    <strong>QUICK LINK: Company Website:</strong>
   </div>
   <div class="w-2/3 p-2">
     <span class="<%= link_class %>">

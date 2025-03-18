@@ -25,40 +25,64 @@
     </div>
 
     <div>
-      <%= form.label :company_webiste, class: label_class %>
+      <%= form.label :company_website, class: label_class %>
       <%= form.text_field :company_website, class: tight_form_input_class %>
     </div>
 
     <div>
       <%= form.label :contact_name,  class: label_class %>
-      <%= form.text_field :contact_name, class: tight_form_input_class  %>
+      <%= form.text_area :contact_name, rows: 2, class: tight_form_input_class  %>
     </div>
 
     <div>
       <%= form.label :contact_position,  class: label_class %>
-      <%= form.text_field :contact_position, class: tight_form_input_class  %>
+      <%= form.text_area :contact_position, rows: 2, class: tight_form_input_class  %>
     </div>
 
     <div>
-      <%= form.label :socials,  class: label_class %>
-      <%= form.text_field :socials, class: tight_form_input_class  %>
+      <%= form.label :contact_email,  class: label_class %>
+      <%= form.text_area :contact_email, rows: 2, class: tight_form_input_class  %>
     </div>
 
     <div>
-      <%= form.label :email,  class: label_class %>
-      <%= form.text_field :email, class: tight_form_input_class  %>
+      <%= form.label :email, "General Email", class: label_class %>
+      <%= form.text_area :email, rows: 2, class: tight_form_input_class  %>
     </div>
 
     <div>
       <%= form.label :phone,  class: label_class %>
-      <%= form.text_field :phone, class: tight_form_input_class  %>
+      <%= form.text_area :phone, rows: 2, class: tight_form_input_class  %>
     </div>
 
     <div>
-      <%= form.label :country,  class: label_class %>
-      <%= form.text_field :country, class: tight_form_input_class  %>
+      <%= form.label :socials,  "Other Socials", class: label_class %>
+      <%= form.text_area :socials, rows: 2, class: tight_form_input_class  %>
     </div>
 
+    <div>
+      <%= form.label :facebook,  class: label_class %>
+      <%= form.text_field :facebook, class: tight_form_input_class  %>
+    </div>
+
+    <div>
+      <%= form.label :twitter, "X", class: label_class %>
+      <%= form.text_field :twitter, class: tight_form_input_class  %>
+    </div>
+
+    <div>
+      <%= form.label :instagram,  class: label_class %>
+      <%= form.text_field :instagram, class: tight_form_input_class  %>
+    </div>
+
+    <div class="col-span-2">
+      <%= form.label :event_calender_link, "Event Calendar Link", class: label_class %>
+      <%= form.text_field :event_calender_link, class: tight_form_input_class %>
+    </div>
+
+    <div>
+      <%= form.label :calendar_login_details,  class: label_class %>
+      <%= form.text_field :calendar_login_details, class: tight_form_input_class %>
+    </div>
 
     <div>
       <%= form.label :city,  class: label_class %>
@@ -71,16 +95,19 @@
     </div>
 
     <div>
-      <%= form.label :region_other,  "Region if NOT USA State", class: label_class %>
-      <%= form.text_field :region_other, class: tight_form_input_class  %>
+      <%= form.label :country,  class: label_class %>
+      <%= form.text_field :country, class: tight_form_input_class  %>
     </div>
 
     <div class="col-span-2">
-    <%= form.label :notes,  class: label_class %>
-    <%= form.text_area :notes, rows: 3, class: tight_form_input_class  %>
-  </div>
+      <%= form.label :notes,  class: label_class %>
+      <%= form.text_area :notes, rows: 5, class: tight_form_input_class  %>
+    </div>
 
-    <div class="">
+    <div>
+      <%= form.label :region_other,  "Region if NOT USA State", class: label_class %>
+     <%= form.text_field :region_other, class: "#{tight_form_input_class} mb-4" %>
+   
       <%= form.label :allocated_to, class: label_class%>
       <div class="mt-1">
       <%= form.collection_select(:user_id, @users, :id, :full_name,{:prompt=>true}, {:class=>"bg-gray-100 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 hover:border-blue-900 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"}) %>

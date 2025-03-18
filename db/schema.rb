@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_08_083923) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_18_082617) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -254,6 +254,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_08_083923) do
     t.text "notes"
     t.integer "user_id"
     t.integer "old_user_id"
+    t.string "contact_email"
+    t.string "facebook"
+    t.string "twitter"
+    t.string "instagram"
+    t.string "event_calender_link"
+    t.string "calendar_login_details"
   end
 
   create_table "member_key_roles", force: :cascade do |t|
