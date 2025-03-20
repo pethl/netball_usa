@@ -38,7 +38,20 @@
     <%= form.text_field :website, class: tight_form_input_class %>
   </div>
 
-  <div class="col-span-3">
+  <div class="col-span-1">
+    <%= form.label :reference_ids, "Categories", class: label_class %>
+     <% Reference.where(group: "vendor_category").order(:value).each do |ref| %>
+      <div class="flex items-center mb-1">
+        <%= check_box_tag "vendor[reference_ids][]", ref.id, vendor.reference_ids.include?(ref.id), id: "reference_#{ref.id}", class: "mr-2" %>
+        <%= label_tag "reference_#{ref.id}", ref.value, class: "text-gray-800" %>
+      </div>
+    <% end %>
+
+    <!-- Hidden field so unselected checkboxes are handled correctly -->
+    <%= hidden_field_tag "vendor[reference_ids][]", "" %>
+  </div>
+
+  <div class="col-span-2">
     <%= form.label :notes, class: label_class %>
     <%= form.text_area :notes, rows:8, class: tight_form_input_class %>
   </div>

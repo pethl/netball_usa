@@ -14,8 +14,11 @@
     <div class="font-semibold text-gray-700">Phone:</div>
     <div class="text-gray-900"><%= vendor.phone %></div>
 
-     <div class="font-semibold text-gray-700">Website:</div>
+    <div class="font-semibold text-gray-700">Website:</div>
     <div class="text-gray-900"><%= vendor.website %></div>
+
+    <div class="font-semibold text-gray-700">Categories:</div>
+    <div class="text-gray-900"> <%= vendor.references.where(group: "vendor_category").pluck(:value).join(", ") %></div>
 
     <div class="font-semibold text-gray-700">Notes:</div>
     <div class="text-gray-900"><%= vendor.notes %></div>
