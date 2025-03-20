@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_18_082617) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_20_085716) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -688,6 +688,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_18_082617) do
     t.index ["approved"], name: "index_users_on_approved"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "vendors", force: :cascade do |t|
+    t.string "company_name"
+    t.string "contact_name"
+    t.string "email"
+    t.string "phone"
+    t.string "website"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "venues", force: :cascade do |t|

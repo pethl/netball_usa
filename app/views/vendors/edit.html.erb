@@ -1,0 +1,10 @@
+<% content_for(:page_title, "Edit: #{@vendor.company_name}") %>
+
+<%= render "form", vendor: @vendor %>
+
+<br>
+
+<div>
+  <%= link_to "Show this vendor", @vendor %> |
+  <%= link_to "Back to vendors", vendors_path %>
+</div>

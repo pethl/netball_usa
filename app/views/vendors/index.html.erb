@@ -1,0 +1,80 @@
+<% content_for(:page_title, "Vendors")%> 
+
+<% if @vendors.any? %>
+<div id="vendors">
+<div class="relative table-auto">
+    <table class="w-full text-left rtl:text-right">
+        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Company 
+                </th>
+                
+                <th scope="col" class="px-6 py-3">
+                    Categories
+                </th>
+                
+                <th scope="col" class="px-6 py-3 truncate">
+                    Contact
+                </th>
+                
+                <th scope="col" class="px-6 py-3 truncate">
+                    Contact Details
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Website
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Notes
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @vendors.each do |vendor| %>
+            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+                
+                <td scope="row" class="align-top px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                    <%= link_to vendor.company_name, edit_vendor_path(vendor), class: link_class %>
+                </td>
+
+                <td class="px-6 py-4 align-top text-wrap">
+                   categories
+                </td>
+               
+                <td class="px-6 py-4 align-top text-wrap">
+                   <%= vendor.contact_name %>
+                </td>
+               
+                <td class="px-6 py-4 align-top truncate">
+                   <%= vendor.email %><br>
+                   <%= vendor.phone %>
+                </td> 
+                <td class="px-6 py-4 align-top truncate">
+                    <%= (link_to vendor.website, vendor.website, target: '_blank', class: link_class) unless (vendor.website.to_s.empty?)%>
+                </td>
+                <td class="px-6 py-4 align-top truncate">
+                <%= vendor.notes %>
+             </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+ </div>
+
+<% else %>
+<p class="px-6 py-4">
+No records to view</p>
+<% end %>
+<br>
+<div class="m-2">
+    <%= link_to "Add New Vendor", new_vendor_path, class: form_button_class %>
+    <br>
+   </div>
+
+
+ 
+   
+
+
+

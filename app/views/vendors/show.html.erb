@@ -1,0 +1,13 @@
+<% content_for(:page_title, "Vendor: #{@vendor.company_name}") %>
+
+<%= render @vendor %>
+
+<div>
+  <%= link_to "Edit this vendor", edit_vendor_path(@vendor) %> |
+  <%= link_to "Back to vendors", vendors_path %>
+  <% if current_user.admin? %>
+  <%= button_to "Delete this vendor", @vendor, method: :delete,
+  form: { data: { turbo_confirm: "Are you sure?" } }  %>
+<% end %>
+  
+</div>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :vendors
   resources :media do
     collection do
       get :my_media
