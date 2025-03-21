@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
  
-  <head>
-    
-    <title>Netball » America®</title>
+<title>Netball America</title>
 
-    <!-- Favicon -->
-    <%= favicon_link_tag 'favicon.ico'%>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.turbo.min.js"></script>
-    <script src="https://kit.fontawesome.com/d868e3ba9e.js" crossorigin="anonymous"></script>
-    </head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+  <!-- ✅ This is the critical line -->
+  <%= javascript_include_tag "application", type: "module", "data-turbo-track": "reload" %>
+
+  <!-- Optional scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.turbo.min.js"></script>
+  <script src="https://kit.fontawesome.com/d868e3ba9e.js" crossorigin="anonymous"></script>
+</head>
 
   <body class="bg-blue-900 max-h-xl">
 
