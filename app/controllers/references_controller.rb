@@ -15,6 +15,8 @@ class ReferencesController < ApplicationController
   # GET /references/new
   def new
     @reference = Reference.new
+    @reference.group = params[:group] if params[:group].present?
+    @reference.active = true
   end
 
   # GET /references/1/edit

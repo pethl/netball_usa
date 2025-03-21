@@ -13,6 +13,9 @@
           <%= label_tag nil, ref.value, class: "text-sm" %>
         </div>
       <% end %>
+      <%= link_to "Add New Category", new_reference_path(group: "vendor_category"),
+    class: "inline-block text-sm text-blue-600 hover:underline ml-2" %>
+
     </div>
   </div>
 
