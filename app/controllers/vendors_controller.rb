@@ -1,5 +1,6 @@
 class VendorsController < ApplicationController
   before_action :set_vendor, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
 
   # GET /vendors
   def index
