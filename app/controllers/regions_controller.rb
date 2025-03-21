@@ -16,8 +16,9 @@ class RegionsController < ApplicationController
   # GET /regions/new
   def new
     @region = Region.new
+    @region.region = params[:region] if params[:region].present?
   end
-
+  
   # GET /regions/1/edit
   def edit
   end

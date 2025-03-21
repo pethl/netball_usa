@@ -15,17 +15,22 @@
     </div>
   <% end %>
 
-  <div class="mb-6">
-   <%= form.label :state, class: label_class%>
-    <div class="mt-1">
-      <%= form.text_field :state, class: input_class  %>
-  </div> </div>
   
   <div class="mb-6">
    <%= form.label :region, class: label_class%>
     <div class="mt-1">
     <%= form.select :region, options_for_select(regions, :selected => @region.region),{}, class: input_class %>
   </div> </div>
+
+  <div class="mb-6">
+    <%= form.label :state, class: label_class %>
+    <div class="mt-1">
+      <%= form.select :state,
+            Reference.where(group: "us_states").order(:value).map { |r| [r.value, r.key] },
+            { prompt: "Select a state..." },
+            class: input_class %>
+    </div>
+  </div>
   
   <div>
     <%= form.submit "Save Record", class: form_button_class %>
