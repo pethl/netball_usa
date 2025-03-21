@@ -1,104 +1,73 @@
 <% content_for(:page_title, "Vendors")%> 
   
-<div data-controller="vendor-filter" class="mb-6 p-4">
-  <p class="font-semibold mb-2">Filter by Category:</p>
-  <div class="flex flex-wrap gap-4 mb-8" data-filter-target="checkboxes">
-    <% Reference.where(group: "vendor_category").order(:value).each do |ref| %>
-      <div class="flex items-center">
-        <%= check_box_tag "category_filter[]", ref.value.parameterize, false,
-              class: "mr-2", data: { action: "filter#filter", filter_target: "checkbox" } %>
-        <%= label_tag nil, ref.value %>
-      </div>
-    <% end %>
+<div data-controller="vendor-filter">
+  <!-- FILTER UI -->
+  <div class="mb-6 p-4 bg-gray-100 rounded-lg shadow">
+    <p class="font-semibold mb-2">Filter by Category:</p>
+    <div class="flex flex-wrap gap-y-2 gap-x-4">
+      <% Reference.where(group: "vendor_category").order(:value).each do |ref| %>
+        <div class="flex items-center space-x-1">
+          <%= check_box_tag "category_filter[]", ref.value.parameterize, false,
+              data: { action: "vendor-filter#filter", "vendor-filter-target": "checkbox" },
+              class: "mr-1" %>
+          <%= label_tag nil, ref.value, class: "text-sm" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
+  <!-- VENDOR TABLE -->
   <% if @vendors.any? %>
-    <div id="vendors">
-      <div class="relative table-auto">
-        <table class="w-full text-left rtl:text-right">
-          <thead class="bg-gray-200 border-b text-gray-600 font-light text-xs ">
-            <tr>
-              <th scope="col" class="px-4 py-2">
-                  Company 
-              </th>
-              <th scope="col" class="px-4 py-2">
-                  Categories
-              </th>
-              <th scope="col" class="px-4 py-2 truncate">
-                  Contact
-              </th>
-              <th scope="col" class="px-4 py-2 truncate">
-                  Contact Details
-              </th>
-              <th scope="col" class="px-4 py-2">
-                  Website
-              </th>
-              <th scope="col" class="px-4 py-2">
-                  Notes
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @vendors.each do |vendor| %>
-              <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap"
-                  data-filter-target="vendor"
-                  data-categories="<%= vendor.references.where(group: 'vendor_category').map { |r| r.value.parameterize }.join(',') %>">
-          
-                <td scope="row" class="align-top px-4 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
-                  <%= link_to vendor.company_name, edit_vendor_path(vendor), class: link_class %>
-                </td>
-          
-               <td class="px-4 py-4 align-top break-words whitespace-normal max-w-xs text-sm leading-tight">
-                  <% categories = vendor.references.where(group: "vendor_category").pluck(:value) %>
-                  <% categories.each_slice(2) do |pair| %>
-                    <% pair.each do |category| %>
-                      <span class="inline-block bg-gray-200 text-gray-700 text-xs font-medium rounded px-2 py-1 mr-1 mb-1">
-                        <%= category %>
-                      </span>
-                    <% end %>
-                    <br>
-                  <% end %>
-                </td>
-          
-                <td class="px-4 py-4 align-top text-wrap">
-                  <%= vendor.contact_name %>
-                </td>
-          
-                <td class="px-4 py-4 align-top truncate">
-                  <%= vendor.email %><br>
-                  <%= vendor.phone %>
-                </td>
-          
-                <td class="px-4 py-4 align-top truncate">
-                  <%= link_to vendor.website, vendor.website, target: '_blank', class: link_class unless vendor.website.to_s.empty? %>
-                </td>
-          
-                <td class="px-4 py-4 align-top truncate">
-                  <%= vendor.notes %>
-                </td>
-              </tr>
+  <table class="w-full text-left border rounded shadow bg-white">
+    <thead class="bg-gray-100 text-xs text-gray-700 uppercase">
+      <tr>
+        <th class="px-4 py-2">Company</th>
+        <th class="px-4 py-2">Categories</th>
+        <th class="px-4 py-2">Contact</th>
+        <th class="px-4 py-2">Details</th>
+        <th class="px-4 py-2">Website</th>
+        <th class="px-4 py-2">Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @vendors.each do |vendor| %>
+        <tr data-vendor-filter-target="vendor"
+            data-categories="<%= vendor.references.where(group: 'vendor_category').map { |r| r.value.parameterize }.join(',') %>"
+            class="border-t text-sm hover:bg-gray-50">
+          <td class="px-4 py-2 font-medium text-gray-800">
+            <%= link_to vendor.company_name, edit_vendor_path(vendor), class: "text-blue-700 underline" %>
+          </td>
+          <td class="px-4 py-2">
+            <% categories = vendor.references.where(group: "vendor_category").pluck(:value) %>
+            <% categories.each_slice(2) do |pair| %>
+              <% pair.each do |category| %>
+                <span class="inline-block bg-gray-200 text-gray-700 text-xs font-medium rounded px-2 py-1 mr-1 mb-1">
+                  <%= category %>
+                </span>
+              <% end %>
+              <br>
             <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
+          </td>
+          <td class="px-4 py-2"><%= vendor.contact_name %></td>
+          <td class="px-4 py-2"><%= vendor.email %><br><%= vendor.phone %></td>
+          <td class="px-4 py-2">
+            <%= link_to vendor.website, vendor.website, target: "_blank", class: "text-blue-600 underline" unless vendor.website.blank? %>
+          </td>
+          <td class="px-4 py-2"><%= vendor.notes %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
   <% else %>
-    <p class="px-4 py-4">
-      No records to view
-    </p>
-  <% end %>
+  <div class="text-sm text-gray-600 px-4 py-6 border border-gray-200 bg-white rounded shadow-sm">
+    No vendors found.
+  </div>
+<% end %>
 </div>
+
 
 
 <div class="m-4">
     <%= link_to "Add New Vendor", new_vendor_path, class: form_button_class %>
     <br>
 </div>
-
-
- 
-   
-
-
-
