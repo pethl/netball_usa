@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :open_invites
   resources :vendors
   resources :media do
     collection do

@@ -1,0 +1,4 @@
+<!-- app/views/open_invites/update.turbo_stream.erb -->
+<%= turbo_stream.replace dom_id(@open_invite) do %>
+  <%= render partial: "open_invite_row", locals: { open_invite: @open_invite } %>
+<% end %>

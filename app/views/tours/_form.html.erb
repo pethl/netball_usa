@@ -1,17 +1,8 @@
 
 <%= form_with(model: tour) do |form| %>
-  <% if tour.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(tour.errors.count, "error") %> prohibited this tour from being saved:</h2>
 
-      <ul>
-        <% tour.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+  <%= form_errors_for(tour) %>
+  
 <div class="flex flex-row gap-4">
 
   <div class="basis-3/5 grid grid-cols-1 md:grid-cols-3 gap-2 border border-blue-900 rounded-lg p-2 ">

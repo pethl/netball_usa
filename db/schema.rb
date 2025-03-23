@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_20_093059) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_22_113816) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -350,6 +350,23 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_20_093059) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["club_id"], name: "index_notes_on_club_id"
+  end
+
+  create_table "open_invites", force: :cascade do |t|
+    t.string "status"
+    t.boolean "invite_sent"
+    t.date "invite_sent_date"
+    t.boolean "rspv"
+    t.boolean "whova"
+    t.boolean "flight_booked"
+    t.boolean "sent_save_the_date"
+    t.boolean "response_to_save_the_date"
+    t.boolean "send_official_invite"
+    t.text "comments"
+    t.bigint "person_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_open_invites_on_person_id"
   end
 
   create_table "opportunities", force: :cascade do |t|
@@ -762,6 +779,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_20_093059) do
   add_foreign_key "members", "clubs"
   add_foreign_key "members", "teams"
   add_foreign_key "notes", "clubs"
+  add_foreign_key "open_invites", "people"
   add_foreign_key "opportunities", "sponsors"
   add_foreign_key "opportunities", "users"
   add_foreign_key "payments", "clubs"

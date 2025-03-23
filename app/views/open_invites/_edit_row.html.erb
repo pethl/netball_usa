@@ -1,0 +1,57 @@
+<turbo-frame id="<%= dom_id(open_invite) %>">
+  <%= form_with model: open_invite, local: false, data: { turbo_frame: dom_id(open_invite) }, class: "grid grid-cols-12 items-center border-b px-2 py-2 gap-2 text-sm bg-blue-50 ring-1 ring-blue-600" do |f| %>
+     <div class="flex justify-center items-center">
+      <%= open_invite.person&.full_name || "-" %>
+    </div>
+
+    <div class="flex justify-center items-center">
+     <%= f.select :status, us_open_invite_status, {}, class: "w-full border rounded px-2 py-1 text-sm" %>
+    </div>
+
+    <div class="flex justify-center items-center">
+      <%= f.check_box :invite_sent %>
+    </div>
+
+    <div class="flex justify-center items-center">
+      <%= f.date_field :invite_sent_date, class: "w-full border rounded px-2 py-1 text-sm" %>
+    </div>
+
+    <div class="flex justify-center items-center">
+      <%= f.check_box :rspv %>
+    </div>
+
+    <div class="flex justify-center items-center">
+      <%= f.check_box :whova %>
+    </div>
+
+    <div class="flex justify-center items-center">
+      <%= f.check_box :flight_booked %>
+    </div>
+
+    <div class="flex justify-center items-center">
+      <%= f.check_box :sent_save_the_date %>
+    </div>
+
+    <div class="flex justify-center items-center">
+      <%= f.check_box :response_to_save_the_date %>
+    </div>
+
+    <div class="flex justify-center items-center">
+      <%= f.check_box :send_official_invite %>
+    </div>
+
+    <div class="flex justify-center items-center">
+      <%= f.text_area :comments, class: "w-full border rounded px-2 py-1 text-sm", rows: 1 %>
+    </div>
+
+    <div class="flex justify-center items-center space-x-1">
+      <%= f.submit "Save", class: "bg-blue-600 text-white px-2 py-1 rounded text-xs hover:bg-blue-700" %><br>
+      <%= link_to "Cancel", open_invite_path(open_invite), data: { turbo_frame: dom_id(open_invite) }, class: "bg-gray-300 text-black px-2 py-1 rounded text-xs hover:bg-gray-400" %> 
+    </div>
+
+  <% end %>
+</turbo-frame>
+
+
+
+

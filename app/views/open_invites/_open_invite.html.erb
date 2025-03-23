@@ -1,0 +1,36 @@
+<div id="<%= dom_id open_invite %>" class="grid grid-cols-12 gap-2 text-sm px-4 py-4 border rounded bg-white shadow">
+  <div class="col-span-2 font-semibold text-center">Person:</div>
+  <div class="col-span-10"><%= open_invite.person&.full_name %></div>
+
+  <div class="col-span-2 font-semibold text-left">Status:</div>
+  <div class="col-span-10"><%= open_invite.status %></div>
+
+  <div class="col-span-2 font-semibold text-center">Invite Sent:</div>
+  <div class="col-span-10"><%= open_invite.invite_sent %></div>
+
+  <div class="col-span-2 font-semibold text-center">Invite Sent Date:</div>
+  <div class="col-span-10"><%= open_invite.invite_sent_date %></div>
+
+  <div class="col-span-2 font-semibold text-center">RSPV:</div>
+  <div class="col-span-10"><%= open_invite.rspv %></div>
+
+  <div class="col-span-2 font-semibold text-center">Whova:</div>
+  <div class="col-span-10"><%= open_invite.whova %></div>
+
+  <div class="col-span-2 font-semibold text-center">Flight Booked:</div>
+  <div class="col-span-10"><%= open_invite.flight_booked %></div>
+
+  <div class="col-span-2 font-semibold text-center">Sent Save the Date:</div>
+  <div class="col-span-10"><%= open_invite.sent_save_the_date %></div>
+
+  <div class="col-span-2 font-semibold text-center">Response to Save the Date:</div>
+  <div class="col-span-10"><%= open_invite.response_to_save_the_date %></div>
+
+  <div class="col-span-2 font-semibold text-left">Send Official Invite:</div>
+  <div class="col-span-10"><%= open_invite.send_official_invite %></div>
+
+  <div class="col-span-2 font-semibold text-left">Comments:</div>
+  <div class="col-span-10"><%= open_invite.comments %></div>
+
+
+</div>

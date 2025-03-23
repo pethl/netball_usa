@@ -1,0 +1,79 @@
+<%= form_with(model: open_invite, class: "space-y-4 max-w-3xl mx-auto") do |form| %>
+
+  <% if open_invite.errors.any? %>
+    <div class="bg-red-100 border border-red-400 text-red-700 rounded p-4">
+      <h2 class="font-semibold text-sm mb-2">
+        <%= pluralize(open_invite.errors.count, "error") %> prohibited this record from being saved:
+      </h2>
+      <ul class="list-disc pl-5 text-sm">
+        <% open_invite.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+
+  <div>
+    <%= form.label :person_id, class: "block font-medium text-sm mb-1" %>
+    <%= form.collection_select(:person_id, @people, :id, :full_name, { prompt: true }, { class: "w-full border rounded px-3 py-2 text-sm" }) %>
+    <%= field_error_for(open_invite, :person_id) %>
+  </div>
+
+  <div>
+    <%= form.label :status, class: "block font-medium text-sm mb-1" %>
+    <%= form.select :status, us_open_invite_status, { prompt: "Please select" }, class: "w-full border rounded px-3 py-2 text-sm" %>
+  </div>
+
+  <div class="flex items-center space-x-2">
+    <%= form.check_box :invite_sent, class: "h-4 w-4" %>
+    <%= form.label :invite_sent, class: "text-sm" %>
+  </div>
+
+  <div>
+    <%= form.label :invite_sent_date, class: "block font-medium text-sm mb-1" %>
+    <%= form.date_field :invite_sent_date, class: "w-full border rounded px-3 py-2 text-sm" %>
+  </div>
+
+  <div class="flex items-center space-x-2">
+    <%= form.check_box :rspv, class: "h-4 w-4" %>
+    <%= form.label :rspv, "RSPV", class: "text-sm" %>
+  </div>
+
+  <div class="flex items-center space-x-2">
+    <%= form.check_box :whova, class: "h-4 w-4" %>
+    <%= form.label :whova, class: "text-sm" %>
+  </div>
+
+  <div class="flex items-center space-x-2">
+    <%= form.check_box :flight_booked, class: "h-4 w-4" %>
+    <%= form.label :flight_booked, class: "text-sm" %>
+  </div>
+
+  <div class="flex items-center space-x-2">
+    <%= form.check_box :sent_save_the_date, class: "h-4 w-4" %>
+    <%= form.label :sent_save_the_date, class: "text-sm" %>
+  </div>
+
+  <div class="flex items-center space-x-2">
+    <%= form.check_box :response_to_save_the_date, class: "h-4 w-4" %>
+    <%= form.label :response_to_save_the_date, class: "text-sm" %>
+  </div>
+
+  <div class="flex items-center space-x-2">
+    <%= form.check_box :send_official_invite, class: "h-4 w-4" %>
+    <%= form.label :send_official_invite, class: "text-sm" %>
+  </div>
+
+  <div>
+    <%= form.label :comments, class: "block font-medium text-sm mb-1" %>
+    <%= form.text_area :comments, class: "w-full border rounded px-3 py-2 text-sm", rows: 3 %>
+  </div>
+
+ 
+  <div>
+    <%= form.submit "Save", class: "bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700" %>
+  </div>
+
+<% end %>
+

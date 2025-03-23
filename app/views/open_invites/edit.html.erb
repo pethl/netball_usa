@@ -1,0 +1,12 @@
+<% content_for :title, "Editing open invite" %>
+
+<h1>Editing open invite</h1>
+
+<%= render "form", open_invite: @open_invite %>
+
+<br>
+
+<div>
+  <%= link_to "Show this open invite", @open_invite %> |
+  <%= link_to "Back to open invites", open_invites_path %>
+</div>

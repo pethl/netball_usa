@@ -1,0 +1,14 @@
+<% content_for :page_title, "New Open Invite" %>
+
+<div class="w-full md:w-1/2 text-left p-4">
+
+<%= render "form", open_invite: @open_invite %>
+
+<br>
+</div>
+
+<div>
+  <%= link_to "<< Back to open invites", open_invites_path %>
+</div>
+
+

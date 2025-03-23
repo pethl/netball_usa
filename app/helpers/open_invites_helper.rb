@@ -1,0 +1,2 @@
+module OpenInvitesHelper
+end

@@ -1,4 +1,5 @@
 class Tour < ApplicationRecord
+    validates :company, presence: true
 
 
 

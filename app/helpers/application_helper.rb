@@ -1,5 +1,23 @@
 module ApplicationHelper
-  def label_class
+    def form_errors_for(record)
+      return unless record.errors.any?
+    
+      content_tag :div, class: "bg-red-100 border border-red-400 text-red-700 rounded p-4 mb-4" do
+        concat content_tag(:h2, "#{pluralize(record.errors.count, 'error')} prohibited this record from being saved:", class: "font-semibold text-sm mb-2")
+    
+        concat content_tag(:ul, class: "list-disc pl-5 text-sm") {
+          record.errors.full_messages.map { |msg| content_tag(:li, msg) }.join.html_safe
+        }
+      end
+    end
+
+    def field_error_for(record, field)
+      return unless record.errors[field].any?
+    
+      content_tag(:p, record.errors[field].first, class: "text-sm text-red-600 mt-1")
+    end
+    
+   def label_class
      "block text-sm font-medium text-gray-700"
    end
 
@@ -366,6 +384,18 @@ module ApplicationHelper
      def us_open_events
       Event.where(event_type: "US Open").pluck(:name)
      end
+
+     def us_open_invite_status
+      Reference.where(active: true, group: 'us_open_invite_status').order(value: :desc).pluck(:value)    
+     end
+
+     def yes_no_badge(value)
+      if value
+        content_tag(:span, "Yes", class: "inline-block px-2 py-1 text-xs font-semibold text-green-800 bg-green-100 rounded-full")
+      else
+        content_tag(:span, "No", class: "inline-block px-2 py-0.5 text-xs font-medium text-gray-600 bg-gray-100 rounded-full")
+      end
+    end
 
      # american states only used for filtering
      def american_states
