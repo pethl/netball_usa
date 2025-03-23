@@ -1,16 +1,7 @@
 
 <%= form_with(model: sponsor) do |form| %>
-  <% if sponsor.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(sponsor.errors.count, "error") %> prohibited this sponsor from being saved:</h2>
-
-      <ul>
-        <% sponsor.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+ 
+    <%= form_errors_for(sponsor) %>
 
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
 
@@ -19,6 +10,7 @@
         <div class="mt-1">
           <%= form.text_field :company_name, class: form_input_class  %>
         </div>
+           <%= field_error_for(sponsor, :company_name) %>
     </div>
     
     <div class="mb-2">
@@ -26,6 +18,7 @@
         <div class="mt-1">
          <%= form.select :industry, options_for_select(sponsor_industry, :selected => sponsor.industry),{:prompt=>true}, class: form_input_class %>  
         </div> 
+         <%= field_error_for(sponsor, :industry) %>
     </div>
    
     <div class="mb-2">
@@ -33,6 +26,8 @@
        <div class="mt-1">
          <%= form.select :sponsor_category, options_for_select(sponsor_category, :selected => sponsor.sponsor_category),{:prompt=>true}, class: form_input_class %>
        </div> 
+       <%= field_error_for(sponsor, :sponsor_category) %>
+
     </div>
 
       <div class="mb-2 ">

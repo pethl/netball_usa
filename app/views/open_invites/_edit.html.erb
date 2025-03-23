@@ -1,0 +1,20 @@
+<tr>
+  <%= form_with model: open_invite, local: false, data: { turbo_frame: dom_id(open_invite) } do |f| %>
+    <td><%= f.text_field :status, class: "small_input_class" %></td>
+    <td><%= f.check_box :invite_sent %></td>
+    <td><%= f.date_field :invite_sent_date, class: "small_input_class" %></td>
+    <td><%= f.check_box :rspv %></td>
+    <td><%= f.check_box :whova %></td>
+    <td><%= f.check_box :flight_booked %></td>
+    <td><%= f.check_box :sent_save_the_date %></td>
+    <td><%= f.check_box :response_to_save_the_date %></td>
+    <td><%= f.check_box :send_official_invite %></td>
+    <td><%= f.text_area :comments, class: "small_input_class", rows: 1 %></td>
+    <td><%= f.select :person_id, options_from_collection_for_select(people, :id, :full_name, open_invite.person_id), {}, class: "small_input_class" %></td>
+    <td>
+      <%= f.submit "Save", class: "btn btn-sm" %>
+      <%= link_to "Cancel", open_invite_path(open_invite), data: { turbo_frame: dom_id(open_invite) }, class: "btn btn-sm" %>
+    </td>
+  <% end %>
+</tr>
+

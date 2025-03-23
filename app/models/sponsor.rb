@@ -3,9 +3,9 @@ class Sponsor < ApplicationRecord
   has_many :opportunities, dependent: :destroy
   has_many :contacts
   
-  validates :sponsor_category, presence: true
+  validates :company_name, presence: true
   validates :industry, presence: true
-  validates :company_name, presence: true, length: { maximum: 40 }
+  validates :sponsor_category, presence: true
   
   scope :ordered, -> { order(company_name: :asc) }
 

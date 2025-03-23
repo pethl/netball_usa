@@ -1,27 +1,19 @@
-
 <%= form_with(model: medium) do |form| %>
-  <% if medium.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(medium.errors.count, "error") %> prohibited this medium from being saved:</h2>
 
-      <ul>
-        <% medium.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= form_errors_for(medium) %>
 
-  <div class="grid grid-cols-3 gap-4 mt-4 mx-8">
+  <div class="grid grid-cols-3 gap-4 mt-4 mx-4">
   
     <div>
       <%= form.label :media_type, class: label_class %>
       <%= form.select :media_type, options_for_select(media_type, :selected => medium.media_type),{:prompt=>true}, class: tight_form_input_class %>
+      <%= field_error_for(medium, :media_type) %>
     </div>
 
     <div>
       <%= form.label :company_name, class: label_class %>
       <%= form.text_field :company_name, class: tight_form_input_class %>
+      <%= field_error_for(medium, :company_name) %>
     </div>
 
     <div>
@@ -57,7 +49,7 @@
     <div>
       <%= form.label :socials,  "Other Socials", class: label_class %>
       <%= form.text_area :socials, rows: 2, class: tight_form_input_class  %>
-    </div>
+    </div> 
 
     <div>
       <%= form.label :facebook,  class: label_class %>

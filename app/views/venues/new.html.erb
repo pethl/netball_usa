@@ -1,6 +1,10 @@
 <% content_for(:page_title, "Venues: Add new record")%>
 
-<div class="m-8">
+<div class="m-4">
     <%= render "form", venue: @venue %>
+</div>
+
+<div>
+  <%= link_to "<< Back to venues", venues_path %>
 </div>
 

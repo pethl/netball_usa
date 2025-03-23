@@ -57,6 +57,7 @@ class MediaController < ApplicationController
       send_allocation_email(@medium)
       redirect_to @medium, notice: "Medium was successfully created."
     else
+      @users = helpers.active_admin_users # 💥 Fix the nil @users problem
       render :new, status: :unprocessable_entity
     end
   end

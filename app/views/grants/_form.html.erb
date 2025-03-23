@@ -2,23 +2,16 @@
   <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
 
 <%= form_with(model: grant) do |form| %>
-  <% if grant.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(grant.errors.count, "error") %> prohibited this grant from being saved:</h2>
 
-      <ul>
-        <% grant.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= form_errors_for(grant) %>
 
   <div class="mb-6">
    <%= form.label :name, class: label_class%>
     <div class="mt-1">
-   <%= form.text_field :name, class: input_class  %>
-  </div> </div>
+     <%= form.text_field :name, class: input_class  %>
+    </div>
+    <%= field_error_for(grant, :name) %>
+  </div>
 
    <div class="flex items-center mb-6">
        <%= form.check_box :apply, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      

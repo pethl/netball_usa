@@ -2,30 +2,24 @@
   <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
 
 <%= form_with(model: event) do |form| %>
-  <% if event.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
 
-      <ul>
-        <% event.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= form_errors_for(event) %>
 
   <div class="mb-4">
     <%= form.label :event_type, class: label_class  %>
     <div class="mt-1">
      <%= form.select :event_type, options_for_select(event_type, :selected => event.event_type),{:prompt=>true}, class: input_class %>
     </div>
+      <%= field_error_for(event, :event_type) %>
   </div>
   
   <div class="mb-4">
    <%= form.label :name, class: label_class%>
     <div class="mt-1">
-   <%= form.text_field :name, class: input_class  %>
-  </div> </div>
+     <%= form.text_field :name, class: input_class  %>
+     </div> 
+     <%= field_error_for(event, :name) %>
+  </div>
 
   <div class="mb-4">
    <%= form.label :date, "Start Date", class: label_class%>

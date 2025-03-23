@@ -1,11 +1,10 @@
 <% content_for(:page_title, "Events") %>
 
-<div class="m-4">
+<div class="my-4">
   <%= link_to "Add New Event", new_event_path, class: form_button_class %>
-  <br>
 </div>
 
-<div class="ml-6 mr-4 bg-gray-100 p-2 rounded-lg border border-gray-200">
+<div class="ml-2 mr-4 bg-gray-100 p-2 rounded-lg border border-gray-200">
   <p class="text-sm text-right">SEARCH OR FILTER BY ANY OF THESE PARAMETERS</p>
   <%= form_with(url: events_path, method: :get, local: true, class: "flex flex-wrap items-center space-x-4") do %>
     <!-- Company Name Search -->

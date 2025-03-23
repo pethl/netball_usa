@@ -2,6 +2,9 @@ class Partner < ApplicationRecord
     has_many :contacts
     has_one :person
 
+    validates :company, presence: { message: ": Please enter name before attempting to save" }
+
+
     def contact_two_blank
         if (first_name_secondary.to_s +
             last_name_secondary.to_s +

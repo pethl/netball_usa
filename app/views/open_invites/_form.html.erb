@@ -1,17 +1,17 @@
 <%= form_with(model: open_invite, class: "space-y-4 max-w-3xl mx-auto") do |form| %>
 
-  <% if open_invite.errors.any? %>
-    <div class="bg-red-100 border border-red-400 text-red-700 rounded p-4">
-      <h2 class="font-semibold text-sm mb-2">
-        <%= pluralize(open_invite.errors.count, "error") %> prohibited this record from being saved:
-      </h2>
-      <ul class="list-disc pl-5 text-sm">
-        <% open_invite.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <% if open_invite.errors.any? %>
+      <div class="bg-red-100 border border-red-400 text-red-700 rounded p-4">
+        <h2 class="font-semibold text-sm mb-2">
+          <%= pluralize(open_invite.errors.count, "error") %> prohibited this record from being saved:
+        </h2>
+        <ul class="list-disc pl-5 text-sm">
+          <% open_invite.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
  
 
   <div>

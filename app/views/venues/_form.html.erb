@@ -1,17 +1,8 @@
-<div class="m-4 lg:m-8">
+<div class="lg:m-8">
 
 <%= form_with(model: venue) do |form| %> 
-  <% if venue.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(venue.errors.count, "error") %> prohibited this venue from being saved:</h2>
 
-      <ul>
-        <% venue.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+   <%= form_errors_for(venue) %>
 
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
 
@@ -20,6 +11,7 @@
         <div class="mt-1">
          <%= form.select :facility_type, options_for_select(facility_type, :selected => venue.facility_type),{:prompt=>true}, class: form_input_class %>  
         </div> 
+         <%= field_error_for(venue, :facility_type) %>
     </div>
   
   <div class="mb-2 md:col-span-2 sm:mt-4 md:mt-0">

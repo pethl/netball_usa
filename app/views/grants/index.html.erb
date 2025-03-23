@@ -1,15 +1,14 @@
 <% content_for(:page_title, "Grants")%>
 
-<div class="mt-2">
-<%= link_to "Add New Grant", new_grant_path, class: form_button_class %>
-<br><br>
+<div class="my-2">
+    <%= link_to "Add New Grant", new_grant_path, class: form_button_class %>
 </div>
 
 <% if @grants.any? %>
 <div id="grants">
 <div class="relative overflow-x-auto">
     <table class="table-auto w-full text-left rtl:text-right">
-        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+        <thead class="bg-white border-b text-gray-400 font-light text-xs ">
              <tr>
                 <th scope="col" class="px-6 py-3 w-52">
                     Grant Name

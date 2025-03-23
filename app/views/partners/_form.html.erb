@@ -1,16 +1,7 @@
 
 <%= form_with(model: partner) do |form| %>
-  <% if partner.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(partner.errors.count, "error") %> prohibited this partner from being saved:</h2>
 
-      <ul>
-        <% partner.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <%= form_errors_for(partner) %>
 
 <div class="flex flex-row gap-4">
 

@@ -286,9 +286,7 @@
                 <li class="mt-2">
                    <a href="/transfers/" class="text-gray-100 hover:font-bol">US OPEN</a>
                </li>
-               <li class="mt-2 ml-2">
-                  <a href="/open_invites" class="text-gray-100 hover:font-bold">- Invites</a>
-              </li>
+              
                <li class="mt-2 ml-2">
                    <a href="/transfers/new" class="text-gray-100 hover:font-bold">- Add New Attendee</a>
                </li>
@@ -503,21 +501,21 @@
         
         <!--Main Bucket  starts -->
        
-            <div class="max-w-7xl mx-auto  text-sm my-2 text-gray-700">
+              <div class="w-screen w-4/5 min-h-3/4 border-2 border-blue-900 overflow-scroll">
              
                <!--Content Bucket  starts -->
               
                 <div class="m-2 mr-2 bg-white py-2 px-2 text-sm">
                 
                 <!-- Notices -->
-                     <div class="text-center text-blue-700 text-lg">
-                      <p class="notice"><%= notice %></p>
-                      <p class="alert"><%= alert %></p>
-                     </div>  
+                  <div class="text-center text-blue-700 text-lg">
+                    <p class="notice"><%= notice %></p>
+                    <p class="alert"><%= alert %></p>
+                  </div>  
 
                      <!-- Scrollable main content area -->
-                    <main class="flex-grow overflow-x-auto overflow-y-auto">
-                      <div class="max-w-7xl mx-auto px-4 py-4">
+                     <main>
+                      <div class="overflow-x-auto overflow-y-auto overflow-scroll">
                         <%= yield %>
                       </div>
                     </main>

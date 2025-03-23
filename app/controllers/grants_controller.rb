@@ -43,6 +43,7 @@ class GrantsController < ApplicationController
        send_allocation_email(@grant)
       redirect_to @grant, notice: "Grant was successfully created."
     else
+      @users = helpers.active_admin_users
       render :new, status: :unprocessable_entity
     end
   end
