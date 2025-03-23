@@ -1,36 +1,37 @@
 <turbo-frame id="<%= dom_id(open_invite) %>">
- <div class="grid grid-cols-12 items-center border-b px-2 py-2 text-sm hover:bg-gray-50 transition">
+  <div class="grid grid-cols-12 min-w-[1200px] items-center border-b px-2 py-2 text-sm hover:bg-gray-50 transition">
+    <div class="px-2"><%= open_invite.person&.full_name %></div>
+    <div class="px-2"><%= open_invite.status %></div>
+    <div class="text-center"><%= yes_no_badge(open_invite.invite_sent) %></div>
+    <div class="text-center whitespace-nowrap"><%= open_invite.invite_sent_date&.to_formatted_s(:d_usa) %></div>
+    <div class="text-center"><%= yes_no_badge(open_invite.rspv) %></div>
+    <div class="text-center"><%= yes_no_badge(open_invite.whova) %></div>
+    <div class="text-center"><%= yes_no_badge(open_invite.flight_booked) %></div>
+    <div class="text-center"><%= yes_no_badge(open_invite.sent_save_the_date) %></div>
+    <div class="text-center"><%= yes_no_badge(open_invite.response_to_save_the_date) %></div>
+    <div class="text-center"><%= yes_no_badge(open_invite.send_official_invite) %></div>
 
-  <div class="px-2 text-left"><%= open_invite.person&.full_name %></div>
-  <div class="px-2 text-left"><%= open_invite.status %></div>
-  <div class="text-center"><%= yes_no_badge(open_invite.invite_sent) %></div>
-  <div class="px-2 text-left whitespace-nowrap"><%= open_invite.invite_sent_date&.to_formatted_s(:d_usa) %></div>
-  <div class="text-center"><%= yes_no_badge(open_invite.rspv) %></div>
-  <div class="text-center"><%= yes_no_badge(open_invite.whova) %></div>
-  <div class="text-center"><%= yes_no_badge(open_invite.flight_booked) %></div>
-  <div class="text-center"><%= yes_no_badge(open_invite.sent_save_the_date) %></div>
-  <div class="text-center"><%= yes_no_badge(open_invite.response_to_save_the_date) %></div>
-  <div class="text-center"><%= yes_no_badge(open_invite.send_official_invite) %></div>
-  
+    <!-- Comments with Tooltip -->
     <div class="relative group px-2 max-w-xs">
       <div class="truncate text-sm text-gray-700">
-        <%= truncate(open_invite.comments, length: 60) %>
+        <%= truncate(open_invite.comments.to_s, length: 60) %>
       </div>
-
       <div class="absolute z-10 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-2 py-1 top-full mt-1 w-max max-w-sm whitespace-pre-line">
         <%= open_invite.comments %>
       </div>
     </div>
 
-  <div class="text-center">
-    <button data-controller="inline-edit"
-            data-inline-edit-url-value="<%= edit_open_invite_path(open_invite) %>"
-            data-action="click->inline-edit#load"
-            class="bg-gray-200 px-2 py-1 rounded text-xs hover:bg-gray-300">
-      ✏️ Edit
-    </button>
+    <!-- Edit Button -->
+    <div class="text-center">
+      <button data-controller="inline-edit"
+              data-inline-edit-url-value="<%= edit_open_invite_path(open_invite) %>"
+              data-action="click->inline-edit#load"
+              class="bg-gray-200 px-2 py-1 rounded text-xs hover:bg-gray-300">
+        ✏️ Edit
+      </button>
+    </div>
+    
   </div>
-</div>
+
+  
 </turbo-frame>
-
-
