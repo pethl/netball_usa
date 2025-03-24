@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
   after_create :send_admin_mail
   after_create :send_sonya_mail
+
   
   has_many(
     :na_teams,
@@ -47,7 +48,15 @@ class User < ApplicationRecord
     self.role || :teamlead
   end
 
-  
+  def send_reset_password_instructions
+    if account_active?
+      super
+    else
+      # Simulate Devise behavior: return a dummy user object with errors
+      self.errors.add(:base, "Your account is inactive. Contact support.")
+      self
+    end
+  end
   
   def full_name
     "#{self.first_name} #{self.last_name}"
