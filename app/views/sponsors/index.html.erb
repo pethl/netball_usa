@@ -53,60 +53,65 @@
 <% if @sponsors.any? %>
 <div id="sponsors">
 <div class="relative overflow-x-auto">
-    <table class="table-fixed text-left rtl:text-right">
-        <thead class="bg-white border-b text-gray-400 font-light text-xs ">
+  <table class="w-full table-fixed text-left rtl:text-right">
+        <thead class="top-0 bg-gray-200 z-10 border-b text-gray-600 font-light text-xs ">
+      
             <tr>
-                <th scope="col" class="px-4 py-2 w-40">
+                <th scope="col" class="px-2 py-2 w-48">
                     Company 
                 </th>
 
-                <th scope="col" class="px-4 py-2 w-40">
+                <th scope="col" class="px-2 py-2 w-40">
                     ExPat Country
                 </th>
 
-                <th scope="col" class="px-4 py-2 w-48">
+                <th scope="col" class="px-2 py-2 w-48">
                     Ind:Cat
                 </th>
 
-                <th scope="col" class="px-4 py-2 w-48">
+                <th scope="col" class="px-2 py-2 w-64">
                     Locations
                 </th>
                 
-                <th scope="col" class="px-4 py-2 w-64">
+                <th scope="col" class="px-2 py-2 w-64">
                     Opp Details - Assigned To
                 </th>
 
-                <th scope="col" class="px-4 py-2 w-64">
+                <th scope="col" class="px-2 py-2 w-64">
                     Contact Details
                 </th>
 
-                <th scope="col" class="px-4 py-2 w-64">
+                <th scope="col" class="px-2 py-2 w-64">
+                    Social Media
+                </th>
+
+                <th scope="col" class="px-2 py-2 w-64">
                     Company Website
                 </th>
 
-                <th scope="col" class="px-4 py-2 w-64">
+                <th scope="col" class="px-2 py-2 w-64">
                     Link to Apply
                 </th>
 
-                <th scope="col" class="px-4 py-2 w-64">
+                <th scope="col" class="px-2 py-2 w-64">
                     Notes
                 </th>
             </tr>
         </thead>
         <tbody>
         <% @sponsors.each do |sponsor| %>
-            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
-                <td scope="row" class="align-top px-4 py-3 font-medium text-gray-800 break-normal whitespace-wrap dark:text-white">
+            <tr class="bg-white border-b hover:bg-gray-100 align-top">
+                <td scope="row" class="border-l border-gray-200 px-2 py-3 font-medium text-gray-800 break-words whitespace-normal">
                     <%= link_to sponsor.company_name, sponsor_path(sponsor), class: link_class %>
                 </td>
-                <td class="px-4 py-3 align-top">
+                <td class="border-l border-gray-200 px-2 py-3 align-top">
                    <%= sponsor.expat_co %>
                 </td>
-                <td class="px-4 py-3 align-top">
+                <td class="border-l border-gray-200 px-2 py-3 align-top">
                   <%= sponsor.sponsor_category %>  <br>
                    <%= sponsor.industry %>
                 </td>
-                <td class="px-4 py-3 align-top">
+                <td class="border-l border-gray-200 px-2 py-3 align-top break-all whitespace-normal">
                    <%= sponsor.city_state %>
                    <% if sponsor.city_state %>
                    <br><%= sponsor.other_locations %>
@@ -115,30 +120,38 @@
                     <% end %>
                 </td>
                 
-                <td class="px-4 py-3 text-left align-top">
+                <td class="border-l border-gray-200 px-2 py-3 text-left align-top">
                 <% sponsor.opportunities.each do |opportunity| %>
                     <%= opportunity.opportunity_type %> - <%= opportunity.status %> - <%= opportunity.user.initials %><br>
                 <% end %>
                 </td>
-                <td class="px-4 py-3 text-left align-top">
+                
+                <td class="border-l border-gray-200 px-2 py-3 text-left align-top">
                 <% sponsor.contacts.each do |contact| %>
                     <%= contact.full_name %> - <%= contact.phone %><br>
                 <% end %>
                 </td>
 
-                <td class="px-4 py-3 align-top w-64 truncate">
+                <!-- Developer Note: This field was renamed to social media on request from sonya 25 mar 25 -->
+                <td class="border-l border-gray-200 px-2 py-3 text-left align-top">
+                    <%= sponsor.location %> 
+                </td>
+
+                <td class="border-l border-gray-200 px-2 py-3 align-top w-64 truncate">
                   <div class="w-40 overflow-hidden text-ellipsis whitespace-nowrap">
                     <%= (link_to sponsor.website, sponsor.website, target: '_blank', class: link_class) unless sponsor.website.to_s.empty? %>
                   </div>
                 </td>
 
-                <td class="px-4 py-3 align-top w-64 truncate">
+               
+
+                <td class="border-l border-gray-200 px-2 py-3 align-top w-64 truncate">
                     <div class="w-40 overflow-hidden text-ellipsis whitespace-nowrap">
                     <%= (link_to sponsor.other_link, sponsor.other_link, target: '_blank', class: link_class) unless sponsor.other_link.to_s.empty? %>
                     </div>
                 </td>
 
-                <td class="px-4 py-3 align-top w-96 truncate">
+                <td class="border-l border-gray-200 px-2 py-3 align-top w-96 truncate">
                     <div class="w-40 overflow-hidden text-ellipsis whitespace-nowrap">
                     <%= sponsor.notes %>
                     </div>
@@ -151,7 +164,7 @@
  </div>
 
 <% else %>
-<p class="px-4 py-3">
+<p class="px-2 py-3">
 No records to view</p>
 <% end %>
 <br>
