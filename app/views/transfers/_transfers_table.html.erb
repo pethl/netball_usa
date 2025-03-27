@@ -1,0 +1,65 @@
+<% @transfers_by_date.each do |date, transfers| %>
+  <div class="text-2xl text-center text-blue-900 mt-8 bg-gray-100">
+    <%= transfers.first.send(time_field)&.strftime("%A") %> <%= date %>
+  </div>
+
+  <% transfers_by_group = transfers.group_by { |t| t.pick_up_grouping.presence || "Ungrouped" } %>
+
+  <% transfers_by_group.each do |group, grouped_transfers| %>
+    <div class="ml-6 mt-4 text-lg text-gray-800 font-semibold flex items-center gap-2">
+      Group <%= group %>
+      <% if grouped_transfers.first.respond_to?(:grouping_pickup_time) && grouped_transfers.first.grouping_pickup_time.present? %>
+       
+          — <%= grouped_transfers.first.grouping_pickup_time.strftime("%H:%M") %> 
+         ( <%= grouped_transfers.first.grouping_pickup_time.strftime("%I:%M %p") %> )
+       
+      <% end %>
+    </div>
+
+    <% transfers_by_flight = grouped_transfers
+                              .sort_by { |t| [t.arrival_flight.to_s, t.person_full_name.to_s] }
+                              .group_by(&:arrival_flight) %>
+
+    <% transfers_by_flight.each do |flight, flight_transfers| %>
+      <div class="text-sm text-gray-500 ml-8 mt-1 mb-1">
+        Flight: <%= flight.presence || "—" %>
+        @ <%= flight_transfers.first.send(time_field)&.strftime("%H:%M") %>
+      </div>
+
+      <div class="relative overflow-x-auto mt-1">
+        <table class="table-fixed w-full text-left rtl:text-right">
+          <thead class="bg-white border-b text-gray-300 font-light text-xs">
+            <tr>
+              <% headers.each do |header| %>
+                <th scope="col" class="px-4 py-1"><%= header %></th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% flight_transfers.each do |transfer| %>
+              <tr class="bg-white border-b hover:bg-gray-100">
+                <% row_fields.each do |field| %>
+                  <td class="px-4 py-2 whitespace-nowrap">
+                    <% value = transfer.send(field) %>
+
+                    <% case field.to_s %>
+                    <% when "arrival_time", "departure_time" %>
+                      <% if value.present? %>
+                        <%= value.strftime("%H:%M") %><br>
+                        <span class="text-xs text-gray-500"><%= value.strftime("%I:%M %p") %></span>
+                      <% end %>
+                    <% when "arrival_date_only", "departure_date_only" %>
+                      <%= value.presence || "" %>
+                    <% else %>
+                      <%= value %>
+                    <% end %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

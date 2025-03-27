@@ -12,6 +12,9 @@ include ImageUploader::Attachment(:resume)   # ImageUploader will attach and man
   accepts_nested_attributes_for :frequent_flyer_numbers, allow_destroy: true
 
   scope :ordered, -> { order(first_name: :asc) }
+  scope :active, -> { where(status: "Active") }
+  scope :inactive, -> { where(status: "Inactive") }
+
   
   validates :role, presence: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

@@ -1,4 +1,7 @@
   <% if user_signed_in? %> 
+  <div class="mt-1 mb-4">
+   <%= link_to "<< Back to Event Attendees", transfers_path, class:link_class %>
+   </div>
    
     <%= render @transfer %>
     <% content_for(:page_title, "Hotel and Airport: Edit")%>

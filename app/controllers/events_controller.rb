@@ -1,44 +1,19 @@
 class EventsController < ApplicationController
+  include EventsHelper
+
   before_action :set_event_collections, only: %i[ new show edit update ]
   before_action :set_event, only: %i[ show edit update destroy ]
   load_and_authorize_resource
 
   # GET /events
   def index
-    
-   # @events = Event.all.ordered
-    @events = Event.where('date >= ?', Date.today.beginning_of_month).ordered
-
-    # Filter by city
-    @events = @events.where('city ILIKE ?', "%#{params[:city]}%").ordered if params[:city].present?
-
-    # Filter by state
-    @events = @events.where(state: params[:state]).ordered if params[:state].present?
-  
-    # Filter by event_type
-    @events = @events.where(event_type: params[:event_type]).ordered if params[:event_type].present?
- 
-    #@events_by_year = @events.group_by { |t| t.event_date_year } 
+    @events = filtered_events(upcoming: true).order(:date)
   end
 
-   # GET /events
-   def index_past
-    #exact dup of index supporting past events view except for first filter
-    
-    # All past Events
-     @events = Event.where('date <= ?', Date.today.beginning_of_month).ordered
- 
-     # Filter by city
-     @events = @events.where('city ILIKE ?', "%#{params[:city]}%").ordered if params[:city].present?
- 
-     # Filter by state
-     @events = @events.where(state: params[:state]).ordered if params[:state].present?
-   
-     # Filter by event_type
-     @events = @events.where(event_type: params[:event_type]).ordered if params[:event_type].present?
-  
-     #@events_by_year = @events.group_by { |t| t.event_date_year } 
-   end
+  def index_past
+    @events = filtered_events(upcoming: false).order(date: :desc)
+    render :index
+  end
   
   # GET /events
   def calendar
@@ -105,5 +80,19 @@ class EventsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def event_params
       params.require(:event).permit(:event_type, :name, :date, :end_date, :attend, :website, :key_contact, :city, :state, :location, :details, :booth, :cost_notes, :status, :outcome, person_ids: [])
+    end
+
+    def filtered_events(upcoming:)
+      scope = if upcoming
+        Event.where('date >= ?', Date.today.beginning_of_month)
+      else
+        Event.where('date <= ?', Date.today.beginning_of_month)
+      end
+  
+      scope = scope.where('city ILIKE ?', "%#{params[:city]}%") if params[:city].present?
+      scope = scope.where(state: params[:state]) if params[:state].present?
+      scope = scope.where(event_type: params[:event_type]) if params[:event_type].present?
+  
+      scope
     end
 end

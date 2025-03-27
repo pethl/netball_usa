@@ -12,7 +12,6 @@ application.register("accordion", AccordionController)
 application.register("filter", FilterController)  
 application.register("inline-edit", InlineEditController)  
 
-
 console.log("✅ Stimulus + ESBuild initialized")
 
 

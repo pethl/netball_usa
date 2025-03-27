@@ -1,320 +1,216 @@
-<div id="<%= dom_id transfer %>">
-
-<div class="max-w-full">
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4 ml-4">
-
-   <div class="mt-2">
-    <p class="text-sm text-gray-500 ">
-        Name:
-    </p>
-    <p class="text-sm font-medium text-gray-900 ">
-      <%= link_to transfer.person.full_name, edit_person_path(transfer.person), class: link_class %>
-  
-    </p>
-    </div> 
-    <div>
+<div class="w-full">
+  <!-- ===============================
+       🔗 Event & Person Details
+       =============================== -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="mb-6">
+      <p class="text-sm text-gray-500 ml-4">Event</p>
+      <p class="text-base font-medium text-gray-900 ml-4"><%= @transfer.event&.name %></p>
     </div>
-
-     <div class="mt-2">
-      <p class="text-sm text-gray-500 ">
-          Role:
-      </p>
-      <p class="text-sm font-medium text-gray-900 ">
-      <%= transfer.role %> 
-      </p>
-    </div> 
-
-    <div class="mt-2">
-      <p class="text-sm text-gray-500 ">
-          Position:
-      </p>
-      <p class="text-sm font-medium text-gray-900 ">
-      <%= transfer.event_title %> 
-      </p>
-    </div> 
-
-   
-    <div class="mt-2">
-        <p class="text-sm text-gray-500">
-            Registration form completed?:
-        </p>
-        <p class="text-sm font-medium text-gray-900 ">
-        <%= transfer.registration_form_completed? ? 'Yes' : 'No' %>
-        </p>
+    <div class="mb-6">
+      <p class="text-sm text-gray-500 ml-4">Person</p>
+      <p class="text-base font-medium text-gray-900 ml-4"><%= @transfer.person&.full_name %></p>
     </div>
-
-    <div class="mt-2">
-        <p class="text-sm text-gray-500 ">
-            Waiver form completed?:
-        </p>
-        <p class="text-sm font-medium text-gray-900 ">
-        <%= transfer.waiver_form_completed? ? 'Yes' : 'No' %>
-        </p>
+    <div class="mb-6">
+      <p class="text-sm text-gray-500 ml-4">Role</p>
+      <p class="text-base font-medium text-gray-900 ml-4"><%= @transfer.role %></p>
     </div>
-
-    <div class="mt-2">
-        <p class="text-sm text-gray-500 ">
-            T&Cs completed?:
-        </p>
-        <p class="text-sm font-medium text-gray-900 ">
-        <%= transfer.read_and_agreed_tcs? ? 'Yes' : 'No' %>
-        </p>
+    <div class="mb-6">
+      <p class="text-sm text-gray-500 ml-4">Event Title</p>
+      <p class="text-base font-medium text-gray-900 ml-4"><%= @transfer.event_title %></p>
     </div>
-    </div> 
-    <br>
+  </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
-    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
-      <div class="font-xl">
-        PICK UP DETAILS
-      </div>
-
-     <div class="mt-2">
-        <p class="text-sm text-gray-500 ">
-            Pick Up Grouping #:
-        </p>
-        <p class="text-sm font-medium text-gray-900 ">
-        <%= transfer.pick_up_grouping %> 
-        </p>
-      </div> 
-
-      <div class="mt-2">
-        <p class="text-sm text-gray-500 ">
-            Pick Up Type #:
-        </p>
-        <p class="text-sm font-medium text-gray-900 ">
-        <%= transfer.pickup_type %> 
-        </p>
-      </div> 
-
-      <div class="mt-2">
-      <p class="text-sm text-gray-500 ">
-          Pick Up Location #:
-      </p>
-      <p class="text-sm font-medium text-gray-900 ">
-      <%= transfer.pickup_location %> 
-      </p>
-    </div> 
-
-      <div class="mt-2">
-        <p class="text-sm text-gray-500 ">
-            Pick Up Note :
-        </p>
-        <p class="text-sm font-medium text-gray-900 ">
-        <%= transfer.pickup_note %> 
-        </p>
-      </div>      
-    </div> 
-
-    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
-    <div class: "font-xl">
-          DEPARTURE DETAILS 
-          </div>
-
-    <div class="mt-2">
-        <p class="text-sm text-gray-500 ">
-            Departure Grouping # :
-        </p>
-        <p class="text-sm font-medium text-gray-900 ">
-        <%= transfer.departure_grouping %> 
-        </p>
-      </div>   
-
-      <div class="mt-2">
-        <p class="text-sm text-gray-500 ">
-            Departure Type
-        </p>
-        <p class="text-sm font-medium text-gray-900 ">
-        <%= transfer.departure_type %> 
-        </p>
-      </div>   
-
-      <div class="mt-2">
-        <p class="text-sm text-gray-500 ">
-            Departure Note
-        </p>
-        <p class="text-sm font-medium text-gray-900 ">
-        <%= transfer.departure_note %> 
-        </p>
-      </div>   
-    </div> 
-
-    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
-    <div class="font-xl">
-    HOTEL DETAILS 
+  <!-- ===============================
+       ✅ Form Completion Checkboxes
+       =============================== -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="mb-2">
+      <p class="text-sm text-gray-500 ml-4">Registration Form Completed</p>
+      <p class="text-base font-medium text-gray-900 ml-4"><%= @transfer.registration_form_completed ? "Yes" : "No" %></p>
     </div>
-
-    <div class="mt-2">
-        <p class="text-sm text-gray-500 ">
-           Hotel Reservation #
-        </p>
-        <p class="text-sm font-medium text-gray-900 ">
-        <%= transfer.hotel_reservation %> 
-        </p>
-      </div>   
-
-      <div class="mt-2">
-      <p class="text-sm text-gray-500 ">
-         Hotel Name
-      </p>
-      <p class="text-sm font-medium text-gray-900 ">
-      <%= transfer.hotel_name %> 
-      </p>
-    </div>  
-  </div>  
-
-
-<div class="block p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
-  <div class="mt-2">
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Visa type (if applicable):
-      </p>
-      <p class="text-sm font-medium text-gray-900 dark:text-white">
-      <%= transfer.visa_type %>
-      </p>
+    <div class="mb-2">
+      <p class="text-sm text-gray-500 ml-4">Waiver Form Completed</p>
+      <p class="text-base font-medium text-gray-900 ml-4"><%= @transfer.waiver_form_completed ? "Yes" : "No" %></p>
     </div>
+    <div class="mb-2">
+      <p class="text-sm text-gray-500 ml-4">Headshot Obtained</p>
+      <p class="text-base font-medium text-gray-900 ml-4"><%= @transfer.obtain_headshot ? "Yes" : "No" %></p>
     </div>
-
-  </div>  
+    <div class="mb-2">
+      <p class="text-sm text-gray-500 ml-4">Data Consent</p>
+      <p class="text-base font-medium text-gray-900 ml-4"><%= @transfer.consent ? "Yes" : "No" %></p>
+    </div>
+  </div>
+  <hr>
   <br>
 
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
-  <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
+  <!-- ===============================
+       🚐 Pickup Section
+       =============================== -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 ">
 
-     <div class="mt-2">
-     <p class="text-sm text-gray-500">
-         Check In:
-     </p>
-     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-     <%= transfer.check_in.to_formatted_s(:usa) unless (transfer.check_in.to_s.empty?) %>
-     </p>
-    </div>
-      
-    <div class="mt-2">
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          Check Out:
-      </p>
-      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= transfer.check_out.to_formatted_s(:usa) unless (transfer.check_out.to_s.empty?) %> 
-      </p>
-    </div>
+    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow">
+      <div class="text-lg font-semibold text-blue-900 mb-4">Pickup Details</div>
 
-    <div class="mt-2">
-        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-            Room type:
-        </p>
-        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-        <%= transfer.room_type %>  
-        </p> 
+      <p class="text-sm text-gray-500">Airport Transport Request</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.airport_transport_request %></p>
+
+      <p class="text-sm text-gray-500">Phone</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.phone %></p>
+
+      <p class="text-sm text-gray-500">Pickup Grouping</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.pick_up_grouping %></p>
+
+      <p class="text-sm text-gray-500">Pickup Grouping Time</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.grouping_pickup_time&.strftime("%-l:%M %p") %></p>
+
+      <p class="text-sm text-gray-500">Pickup Type</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.pickup_type %></p>
+
+      <p class="text-sm text-gray-500">Pickup Location</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.pickup_location %></p>
+
+      <p class="text-sm text-gray-500">Pickup Notes</p>
+      <p class="text-base font-medium text-gray-900"><%= simple_format(@transfer.pickup_note) %></p>
     </div>
-      
-    <div class="mt-2">
-       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-           Hotel Reservation #:
-       </p>
-       <p class="text-sm font-medium text-gray-900 dark:text-white">
-       <%= transfer.hotel_reservation %> 
-       </p>
-    </div>
-   
-    <div class="mt-2">
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          Room Share - Volunteer Name:
-      </p>
-      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= transfer.share_volunteer %> 
-      </p>
-     </div>
-    </div>
+  
+
+    <!-- ===============================
+         🛫 Departure Section
+         =============================== -->
+    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow">
+      <div class="text-lg font-semibold text-blue-900 mb-4">Departure Details</div>
     
-    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
-    <div class="mt-2">
-        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-            Pickup Required?:
-        </p>
-        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-        <%= transfer.no_pick_up? ? 'Yes' : 'No' %>
-        </p>
-    </div>
+      <p class="text-sm text-gray-500">Departure Grouping</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.departure_grouping %></p>
 
-    <div class="mt-2">
-        <p class="text-sm text-gray-500 ">
-        Contact Phone
-        </p>
-        <p class="text-sm font-medium text-gray-900 ">
-        <%= transfer.phone %> 
-        </p>
-   </div>  
-   </div>  
+      <p class="text-sm text-gray-500">Departure Grouping Time</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.grouping_departure_time&.strftime("%-l:%M %p") %></p>
 
-   <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
-   <div class: "font-xl">
-     Arrival Details
-     </div>
+      <p class="text-sm text-gray-500">Departure Type</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.departure_type %></p>
 
-     <p class="text-sm font-medium text-gray-500 truncate dark:text-white">
-     <br><%= transfer.arrival_airline %>  <br><br>
-      <%= transfer.arrival_flight %>  <br><br>
-      <span class="text-sm font-medium text-gray-900">Terminal: </span><%= transfer.arrival_terminal %>  <br><br>
-      <%= transfer.arrival_time.to_formatted_s(:usa_dt) unless (transfer.arrival_time.to_s.empty?)  %> 
-     </p>
-    </div>
-   
-      
-    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
-    <div class: "font-xl">
-         Departures Info:
-      </p>
-      <p class="text-sm font-medium text-gray-500 dark:text-white">
-      <br><%= transfer.departure_airline %>  <br><br>
-       <%= transfer.departure_flight %>  <br><br>
-       <span class="text-sm font-medium text-gray-900">Terminal: </span><%= transfer.departure_terminal %>  <br><br>
-       <%= transfer.departure_time.to_formatted_s(:usa_dt) unless (transfer.departure_time.to_s.empty?)  %> 
-      </p>
-    </div>
-    </div>
-       
-    <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
-    
-        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Headshot:
-        </p>
-        <p class="text-sm font-medium text-gray-900 dark:text-white">
-        <% if transfer.headshot_url.to_s.empty? %>
-            <span class="ml-4"> Headshot not uploaded</span>
-        <% else %>
-            <%= image_tag transfer.headshot_url, :class => "h-15 w-auto"  %>
-            </p>
-        <% end %>
-        
-     </div>
+       <p class="text-sm text-gray-500">Departure Meetup  Location</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.departure_meetup_location %></p>
 
-      <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
-    
-        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-           Certification Proof:
-        </p>
-   
-            <p class="text-sm font-medium text-gray-900 dark:text-white">
-            <% if transfer.certification_url.to_s.empty? %>
-            <span class="ml-4"> Certification Proof not uploaded</span>
-                <% else %>
-                    <%= image_tag transfer.certification_url, :class => "h-15 w-auto" %>
-            </p>
-            <% end %>
-        
-            </p>
      
+      <p class="text-sm text-gray-500">Departure Notes</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.departure_note %></p>
+    </div>
+  
+
+  <!-- ===============================
+       🏨 Hotel Request 
+       =============================== -->
+
+    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow">
+      <div class="text-lg font-semibold text-blue-900 mb-4">Hotel Request</div>
+      
+      <p class="text-sm text-gray-500">Hotel Arrival</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.hotel_arrival %></p>
+
+      <p class="text-sm text-gray-500">Hotel Departure</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.hotel_departure %></p>
+
+      <p class="text-sm text-gray-500">Room Type</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.room_type %></p>
+
+      <p class="text-sm text-gray-500">Room Share</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.share_volunteer %></p>
+
+      <p class="text-sm text-gray-500">Personal Hotel Confirmation #</p>
+      <p class="text-base font-medium text-gray-900 m-4"><%= @transfer.hotel_confirmation_personal %></p>
+
+      <div class="mb-4">
+        <%= link_to "» Click HERE to book your event hotel (personal stay, not covered by NA)",
+                  "https://www.marriott.com/event-reservations/reservation-link.mi?id=1732664035228&key=GRP&guestreslink2=true&app=resvlink",
+                  target: "_blank",
+                  rel: "noopener",
+                  class: "inline-block px-4 py-2 bg-gray-200 hover:bg-gray-400 text-black font-semibold rounded shadow-lg transition duration-200" %>
+      </div>
     </div>
 
-    <div class="block row-span-2 max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
-       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-           Notes:
-       </p>
-       <p class="text-sm font-medium text-gray-900 dark:text-white">
-      <%= transfer.notes %>
-       </p>
+     
+      <div class="p-4 bg-white border border-gray-200 rounded-lg shadow">
+      <div class="text-lg font-semibold text-blue-900 mb-4">Hotel Booking Confirmation</div>
+
+      <p class="text-sm text-gray-500">Reservation #</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.hotel_reservation %></p>
+
+      <p class="text-sm text-gray-500">Hotel Name</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.hotel_name %></p>
+
+      <p class="text-sm text-gray-500">Check-In</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.check_in %></p>
+
+      <p class="text-sm text-gray-500">Check-Out</p>
+      <p class="text-base font-medium text-gray-900"><%= @transfer.check_out %></p>
+    </div>
+  </div>
+
+  <!-- ===============================
+       ✈️ Flight Info & Misc
+       =============================== -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+
+      <div class="p-4 bg-white border border-gray-200 rounded-lg shadow">
+        <div class= "font-xl font-bold text-blue-600 mb-2">
+          Only provide if requesting NA pickup: 
+        </div>
+      <div class="text-lg font-semibold text-blue-900 mb-4">Arrival Details</div>
+
+      <p class="text-sm text-gray-500">Arrival Airline</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.arrival_airline %></p>
+
+      <p class="text-sm text-gray-500">Arrival Flight</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.arrival_flight %></p>
+
+      <p class="text-sm text-gray-500">U.S. Open City Arrival Terminal</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.arrival_terminal %></p>
+
+      <p class="text-sm text-gray-500">U.S. Open City Arrival Date & Time</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.arrival_time&.strftime("%a, %d %y, %-I:%M %p") %></p>
     </div>
 
-</div></div>
+    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow">
+      <div class= "font-xl font-bold text-blue-600 mb-2">
+        Only provide if requesting NA pickup: 
+      </div>
+      <div class="text-lg font-semibold text-blue-900 mb-4">Departure Details</div>
 
+      <p class="text-sm text-gray-500">Departure Airline</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.departure_airline %></p>
+
+      <p class="text-sm text-gray-500">Departure Flight</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.departure_flight %></p>
+
+      <p class="text-sm text-gray-500">U.S. Open City Departure Terminal</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.departure_terminal %></p>
+
+      <p class="text-sm text-gray-500">U.S. Open City Departure Date & Time</p>
+      <p class="text-base font-medium text-gray-900"><%= @transfer.departure_time&.strftime("%a, %d %y, %-I:%M %p") %></p>
+    </div>
+
+    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow">
+      <div class="text-lg font-semibold text-blue-900 mb-4">Miscellaneous</div>
+
+      <p class="text-sm text-gray-500">Visa Type</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.visa_type %></p>
+
+      <p class="text-sm text-gray-500">Dietary Requirements / Allergies</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.dietary_requirements_allergies %></p>
+
+      <p class="text-sm text-gray-500">T-Shirt Size</p>
+      <p class="text-base font-medium text-gray-900"><%= @transfer.person&.tshirt_size %></p>
+    </div>
+
+
+  <!-- ===============================
+       📝 Notes
+       =============================== -->
+  <div class="p-4 bg-white border border-gray-200 rounded-lg shadow">
+    <div class="text-lg font-semibold text-blue-900 mb-4">Additional Notes</div>
+    <p class="text-base font-medium text-gray-900 whitespace-pre-wrap"><%= @transfer.notes %></p>
+  </div>
+</div>

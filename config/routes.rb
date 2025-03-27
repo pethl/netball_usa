@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get :my_media
     end
   end
+
   resources :programs
 
   namespace :admin do
@@ -32,7 +33,8 @@ Rails.application.routes.draw do
   collection do
     get 'list'
   end 
-end
+  end
+  
   resources :individual_members
   resources :contacts
   
@@ -40,6 +42,7 @@ end
   resources :na_teams do
     resources :members, except: [:index, :show]
   end
+  
   resources :na_teams do
     resources :member_key_roles, except: [:index, :show]
   end
@@ -50,12 +53,6 @@ end
   resources :budgets
   resources :taems
   
-  get '/download_transfers_in_sheet_pdf' => "transfers#download_transfers_in_sheet_pdf" 
-  get '/download_transfers_out_sheet_pdf' => "transfers#download_transfers_out_sheet_pdf" 
- 
-  get 'transfers/index_inbound_pickup' => 'transfers#index_inbound_pickup', :as => :index_inbound_pickup
-  get 'transfers/index_outbound_pickup' => 'transfers#index_outbound_pickup', :as => :index_outbound_pickup
- 
   get 'events/calendar' => 'events#calendar', :as => :calendar
 
   get 'people/index_trainers_and_ambassadors' => 'people#index_trainers_and_ambassadors', :as => :index_trainers_and_ambassadors
@@ -68,11 +65,26 @@ end
   resources :people
   resources :events do
     collection do
-      get 'past', to: 'events#index_past', as: :past
+      get 'past', to: 'events#index_past', as: 'past'
     end
   end
 
-  resources :transfers
+  # ========== Transfers ==========
+  get 'transfers/inbound_sheet', to: 'transfers#download_transfers_in_sheet_pdf', as: :download_transfers_in_sheet_pdf
+  get 'transfers/outbound_sheet', to: 'transfers#download_transfers_out_sheet_pdf', as: :download_transfers_out_sheet_pdf
+
+  resources :transfers do
+    collection do
+      get :inbound_pickups
+      get :outbound_pickups
+    end
+  
+    member do
+      get :external_edit
+    end
+  end
+  
+  
   resources :references
   resources :grants
  
@@ -100,6 +112,7 @@ end
   resources :sponsors  do
     resources :contacts, except: [:index, :show]
   end
+
   resources :educators
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -111,7 +124,6 @@ end
   get "pages/teams_membership_fees"
   get "pages/membership_landing"
   match '/users',   to: 'users#index',   via: 'get'
- 
-  
+
   
 end

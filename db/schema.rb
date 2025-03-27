@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_22_113816) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_26_135654) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -481,6 +481,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_22_113816) do
     t.text "certification_data"
     t.string "level_submitted"
     t.text "resume_data"
+    t.string "status", default: "Active", null: false
   end
 
   create_table "programs", force: :cascade do |t|
@@ -658,6 +659,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_22_113816) do
     t.string "arrival_terminal"
     t.string "departure_terminal"
     t.string "pickup_location"
+    t.boolean "obtain_headshot"
+    t.string "airport_transport_request"
+    t.datetime "grouping_pickup_time"
+    t.datetime "grouping_departure_time"
+    t.string "departure_meetup_location"
+    t.string "hotel_confirmation_personal"
+    t.string "dietary_requirements_allergies"
     t.index ["event_id"], name: "index_transfers_on_event_id"
     t.index ["person_id"], name: "index_transfers_on_person_id"
   end

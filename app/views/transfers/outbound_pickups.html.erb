@@ -1,0 +1,25 @@
+<% content_for(:page_title, "US Open - Departures Transfers") %>
+
+<%= render partial: "transfers/transfer_nav_tabs", locals: {
+  pdf_label: "Departures Transfer Sheet PDF",
+  pdf_path: download_transfers_out_sheet_pdf_path(format: :pdf, value: Date.today.beginning_of_year)
+} %>
+
+<% @transfers_by_date.each do |departure_date_only, transfers| %>
+  <%= render partial: "transfers/transfers_table",
+             locals: {
+               date: departure_date_only,
+               transfers: transfers,
+               time_field: :departure_time,
+               headers: [
+                 "Name", "Phone", "Dep. Date", "Dep. Time", "Flight #",
+                 "Airline", "Terminal", "Pick Up", "Hotel", "Notes"
+               ],
+               row_fields: [
+                 :person_full_name, :phone,
+                 :departure_date_only, :departure_time, :departure_flight,
+                 :departure_airline, :departure_terminal, :departure_type,
+                 :hotel_name, :departure_note
+               ]
+             } %>
+<% end %>

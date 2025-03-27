@@ -16,9 +16,7 @@ class Transfer < ApplicationRecord
   
   scope :ordered, -> { order(id: :asc) }
  
-  def full_name
-    "#{self.first_name} #{self.last_name}"
-  end
+  delegate :full_name, to: :person, prefix: true, allow_nil: true
 
   def arrival_airline_and_terminal
     "#{self.arrival_airline} #{self.arrival_terminal}"

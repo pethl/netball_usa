@@ -192,25 +192,29 @@ module ApplicationHelper
     end
     
     def people_level
-      people_level = Reference.where(active: "TRUE", group: 'people_level')
-      people_level = people_level.pluck(:value)       
+      Reference.where(active: true, group: 'people_level').pluck(:value)   
+    end
+
+    def people_status
+      Reference.where(active: true, group: 'people_status').pluck(:value)
     end
     
     def gender
       gender = Reference.where(active: "TRUE", group: 'gender')
       gender = gender.order(value: :asc)    
       gender = gender.pluck(:value) 
-        
     end
     
     def tshirt_size
-      tshirt_size = Reference.where(active: "TRUE", group: 'tshirt_size')
-      tshirt_size = tshirt_size.pluck(:value)       
+      Reference.where(active: true, group: 'tshirt_size').pluck(:value)   
     end
     
     def us_open_role
-      us_open_role = Reference.where(active: "TRUE", group: 'us_open_role')
-      us_open_role = us_open_role.pluck(:value)       
+      Reference.where(active: true, group: 'us_open_role').pluck(:value)        
+    end
+
+    def airport_transport_request_options
+      Reference.where(active: true, group: 'airport_transport_request_options').pluck(:value)        
     end
     
     def transfer_room_type

@@ -35,8 +35,17 @@
         </div>
       </div>
 
-      <!-- Empty Space (Possible Spacer) -->
-      <div></div>
+      <!-- Status -->
+      <div class="mb-0">
+        <%= form.label :status, "Status*", class: label_class %>
+        <div class="mt-1">
+          <%= form.select :status,
+                options_for_select(people_status, form.object.status),
+                { include_blank: "Select status" },
+                class: input_class %>
+        </div>
+      </div>
+
 
       <!-- Role -->
       <div class="mb-0">

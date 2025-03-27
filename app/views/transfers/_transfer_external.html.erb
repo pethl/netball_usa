@@ -64,6 +64,20 @@
      </div>
 
      <div class="mt-2">
+     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            Airport Transport Request*
+     </p>
+     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+
+       <%= form.select :airport_transport_request,
+             options_for_select(airport_transport_request_options, form.object.airport_transport_request),
+             { prompt: "Select transport option" },
+             class: input_class %>
+     </div>
+   </div>
+
+
+     <div class="mt-2">
        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
            Is Airport Pick-up Required?:
        </p>

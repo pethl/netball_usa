@@ -8,10 +8,9 @@
   <% content_for(:page_title, "Airport : Hotel : Qualifications : Visas ")%>
 <% end %>
 
-<br>
 
 <% if user_signed_in? %> 
-<div>
+<div class="ml-4 mb-4">
     <%= link_to "Show this record", @transfer, class:link_class %> <br>
     <%= link_to "Event Attendees", transfers_path, class:link_class %><br>
     <a href="/transfers/index_inbound_pickup/" class="text-md font-medium text-blue-900 italic">Arrivals Transfers</a> | 

@@ -1,4 +1,3 @@
-<div class="max-w-2xl">
 
 <div class="max-w-2xl">
 
@@ -57,20 +56,20 @@
             </div>
           </div>
       <% end %><% end %>
-      <div class="mb-4 text-blue-800">
-        <span class="text-sm tracking-tight">NOTE: Hotel dates covered by Netball America only.<span>
+      <div class="mb-4 font-xl font-bold text-blue-600">
+        <span class="text-sm tracking-tight">Hotel dates covered by Netball America only.<span>
       </div>
       <div class="flex flex-row gap-4">
       
-      <div class="mb-4 basis-1/2">
-        <%= form.label :hotel_arrival, class: label_class %>
+      <div class="mb-4 w-full">
+        <%= form.label :hotel_arrival, "Hotel Arrival   (covered by NA only)", class: label_class %>
           <div class="mt-1">
             <%= form.select :hotel_arrival, options_for_select(transfer_hotel_arrival, :selected => transfer.hotel_arrival),{prompt: true}, class: input_class %>
           </div> 
       </div>
 
-      <div class="mb-4 basis-1/2">
-        <%= form.label :hotel_departure, class: label_class %>
+      <div class="mb-4 w-full">
+        <%= form.label :hotel_departure, "Hotel Departure (covered by NA only)", class: label_class %>
           <div class="mt-1">
             <%= form.select :hotel_departure, options_for_select(transfer_hotel_departure, :selected => transfer.hotel_departure),{}, class: input_class %>
           </div> 
@@ -90,16 +89,37 @@
             <%= form.text_field :share_volunteer, placeholder: "preferred room share volunteer - if applicable", class: input_class  %>
           </div> 
       </div>
+
+      <div class="mb-4">
+        <%= form.label :hotel_confirmation_personal, "Hotel confirmation for personal stay (allows us to link to your NA stay) / If applicable", class: label_class%>
+          <div class="mt-1">
+            <%= form.text_field :hotel_confirmation_personal, class: input_class  %>
+          </div> 
+      </div>
+
+      <div class="mb-6">
+      <%= link_to "» Click HERE to book your event hotel (personal stay, not covered by NA)",
+                  "https://www.marriott.com/event-reservations/reservation-link.mi?id=1732664035228&key=GRP&guestreslink2=true&app=resvlink",
+                  target: "_blank",
+                  rel: "noopener",
+                  class: "inline-block px-4 py-2 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold rounded shadow-lg transition duration-200" %>
+    </div>
+    
+      
+  
     </div>
 
-    <div class="flex items-center mb-2 mt-2">
-    <%= form.check_box :no_pick_up, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
-    <%= form.label :no_pick_up, "Is Airport Pickup Required?",class: "ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"%>
-</div>
-<div class="text-xs mb-6">
-  Tick Box for YES. Leave blank for NO.
-</div>
+    <div class="mb-4 mt-2">
+    <%= form.label :airport_transport_request, "Airport Transport Request*", class: label_class %>
+    <div class="mt-1">
+      <%= form.select :airport_transport_request,
+            options_for_select(airport_transport_request_options, form.object.airport_transport_request),
+            { prompt: "Select transport option" },
+            class: input_class %>
+    </div>
+  </div>
 
+  
 <div class="mb-4">
   <%= form.label :phone, "Phone (Required if requesting airport pick up)", class: label_class%>
     <div class="mt-1">
@@ -107,11 +127,11 @@
     </div> 
 </div>
 
-<div class="mb-4 text-blue-800">
-  <span class="text-sm tracking-tight">NOTE: Only enter Arrival / Departure flight details if you want airport pick-up.<span>
-</div>
 
 <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-gray-700 ">
+  <div class= "font-xl font-bold text-blue-600 mb-2">
+    Only provide if requesting NA pickup: 
+  </div>
   <div class="font-xl mb-4 text-center text-gray-800 font-medium border-b-2 border-gray-200">
     Flight Arrival Details
   </div>
@@ -130,7 +150,7 @@
   </div>
 
   <div class="mb-4">
-    <%= form.label :arrival_time, "Arrival Date & Flight Landing Time", class: label_class%><div class="font-light text-sm">(Please DO NOT enter your take-off time)</div>
+    <%= form.label :arrival_time, "U.S. Open City Arrival Date & Time: ", class: label_class%><div class="font-light text-sm">(Please DO NOT enter your take-off time)</div>
       <div class="mt-1">
         <%= form.datetime_field :arrival_time, class: input_class  %>
       </div> 
@@ -139,6 +159,9 @@
 <br>
 
     <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-gray-700 ">
+      <div class= "font-xl font-bold text-blue-600 mb-2">
+        Only provide if requesting NA transport: 
+      </div>  
       <div class="font-xl mb-4 text-center text-gray-800 font-medium border-b-2 border-gray-200">
         Flight Departure Details
       </div>
@@ -158,7 +181,7 @@
       </div>
     
       <div class="mb-4">
-        <%= form.label :departure_time, "Date & Time", class: label_class%>
+        <%= form.label :departure_time, "U.S. Open City Departure Date & Time", class: label_class%>
           <div class="mt-1">
             <%= form.datetime_field :departure_time, class: input_class  %>
           </div> 
@@ -244,6 +267,13 @@
     <% end %>
           <% end %>
         </div>
+
+        <div class="mb-6 mt-4">
+        <%= form.label :dietary_requirements_allergies, "Dietary requirements / Allergies", class: label_class%>
+          <div class="mt-1">
+            <%= form.text_area :dietary_requirements_allergies,  class: input_class  %>
+          </div> 
+      </div>
 
     
         <div class="mb-6 mt-4">
