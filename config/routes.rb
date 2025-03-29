@@ -6,11 +6,15 @@ Rails.application.routes.draw do
   
   resources :open_invites
   resources :vendors
-  resources :media do
-    collection do
-      get :my_media
-    end
+
+# ========== Media ==========
+ resources :media do
+  collection do
+    get :my_media
+    get :published
   end
+end
+
 
   resources :programs
 

@@ -11,7 +11,7 @@ class Ability
     end
     # start by defining rules for all users, also not logged ones
     #can :read, Transfer, public: true  # everyone can see transfer records tselect their name
-    can :update, Transfer, public: true  # everyone can update their record NEEDS WORK
+    #can :update, Transfer, public: true  # everyone can update their record NEEDS WORK
     can :create, NetballEducator, public: true # public can create a educator record
     can :show, NetballEducator, public: true
     #return unless user.present?

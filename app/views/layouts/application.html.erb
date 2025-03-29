@@ -248,8 +248,12 @@
                     <a href="/tours/" class="text-gray-100 hover:font-bold">TOURS</a>
                 </li>
                 <li class="mt-2">
-                <a href="/media/" class="text-gray-100 hover:font-bold">MEDIA</a>
-            </li>
+                    <a href="/media/" class="text-gray-100 hover:font-bold">MEDIA</a>
+                </li>
+                <li class="mt-2 ml-2">
+                  <%= link_to "- Published", published_media_path, class: "text-gray-100 hover:font-bold"%>
+              </li>
+
             <li class="mt-2">
               <%= link_to "NA PEOPLE", people_path, class: "mt-8 text-gray-100 hover:font-bold" %>
             </li>

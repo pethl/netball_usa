@@ -3,6 +3,10 @@ class MediaController < ApplicationController
   #before_action :set_medium, except: [:index, :my_media, :new]
 
 
+  def published
+    @published_media = Medium.where.not(media_announcement_link: [nil, ""]).where.not(release_date: nil).order(release_date: :desc)
+  end
+
   # GET /media
   def index
     @media = Medium.all.ordered
@@ -86,7 +90,7 @@ class MediaController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def medium_params
-      params.require(:medium).permit(:media_type, :company_name, :company_website, :contact_name, :contact_email, :action_taken, :socials, :facebook, :twitter, :instagram, :region_other, :contact_position, :email, :phone, :city, :state, :country, :pitch, :notes, :user_id, :old_user_id, :event_calender_link, :calendar_login_details, :media_announcement_link)
+      params.require(:medium).permit(:media_type, :company_name, :company_website, :contact_name, :contact_email, :action_taken, :socials, :facebook, :twitter, :instagram, :region_other, :contact_position, :email, :phone, :city, :state, :country, :pitch, :notes, :user_id, :old_user_id, :event_calender_link, :calendar_login_details, :media_announcement_link, :release_date)
     end
  
     def send_allocation_email(medium)

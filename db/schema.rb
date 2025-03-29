@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_26_135654) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_29_123740) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -260,6 +260,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_26_135654) do
     t.string "instagram"
     t.string "event_calender_link"
     t.string "calendar_login_details"
+    t.date "release_date"
   end
 
   create_table "member_key_roles", force: :cascade do |t|

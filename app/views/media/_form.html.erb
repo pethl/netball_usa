@@ -121,6 +121,12 @@
       <%= form.text_field :media_announcement_link, class: tight_form_input_class  %>
     </div>
 
+    <div class="">
+      <%= form.label :release_date, class: label_class %>
+      <%= form.date_field :release_date, class: tight_form_input_class %>
+    </div>
+  
+
      <%= form.hidden_field :old_user_id, value: medium.user_id%>
       
     <div class=mt-3>
