@@ -1,20 +1,16 @@
 
+<% if current_user.role == "na_people" %>
 
-<% if user_signed_in? %> 
-  <%= render "form", transfer: @transfer %>
-  <% content_for(:page_title, "Hotel and Airport: Edit")%>
+  <%= render "form_attendee", transfer: @transfer %>
+  <% content_for(:page_title, "US Open - Attendee Information") %>
 <% else %>
-  <%= render "form_external", transfer: @transfer %>
-  <% content_for(:page_title, "Airport : Hotel : Qualifications : Visas ")%>
-<% end %>
+  <%= render "form", transfer: @transfer %>
+  <% content_for(:page_title, "Hotel and Airport: Edit") %>
 
-
-<% if user_signed_in? %> 
-<div class="ml-4 mb-4">
-    <%= link_to "Show this record", @transfer, class:link_class %> <br>
-    <%= link_to "Event Attendees", transfers_path, class:link_class %><br>
-    <a href="/transfers/index_inbound_pickup/" class="text-md font-medium text-blue-900 italic">Arrivals Transfers</a> | 
+  <div class="ml-4 mb-4">
+    <%= link_to "Show this record", @transfer, class: link_class %> <br>
+    <%= link_to "Event Attendees", transfers_path, class: link_class %> <br>
+    <a href="/transfers/index_inbound_pickup/" class="text-md font-medium text-blue-900 italic">Arrivals Transfers</a> |
     <a href="/transfers/index_outbound_pickup/" class="text-md font-medium text-blue-900 italic">Departures Transfers</a>
-  
-</div>
+  </div>
 <% end %>

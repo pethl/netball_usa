@@ -37,7 +37,9 @@ class User < ApplicationRecord
   :us_open=>7,
   :educators_events=>8, 
   :sponsors_media_events=>9, 
-  :educators_events_medium=>10}
+  :educators_events_medium=>10,
+  :spare=>11,
+  :na_people=>12}
 
   # User::Roles
   # The available roles
@@ -107,6 +109,11 @@ class User < ApplicationRecord
   def educators_events_medium?
      self.role == 'educators_events_medium'
   end
+
+  def na_people?
+    self.role == 'na_people'
+ end
+  
  
 #  def active_for_authentication? 
 #    super && approved?

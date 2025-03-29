@@ -48,6 +48,8 @@ class TransfersController < ApplicationController
   def edit
     @events = Event.where(event_type: "US Open").where("date >= ?", Date.today.beginning_of_month).ordered
     @people = Person.active.ordered
+    @sonya_message = SampleWord.find_by(category: "US Open 2025 Austin")&.desc
+
   end
 
    def external_edit #added to show Sonya the view

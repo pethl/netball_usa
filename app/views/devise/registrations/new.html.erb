@@ -46,6 +46,8 @@
       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: input_class %>
     </div>
   </div>
+ 
+  <%= hidden_field_tag :role, params[:role] %>
 
   <div>
     <%= f.submit "Sign up", class: form_button_class %>

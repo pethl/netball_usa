@@ -10,7 +10,7 @@ class Ability
       can :read, User # Allow the user to read User objects
     end
     # start by defining rules for all users, also not logged ones
-    can :read, Transfer, public: true  # everyone can see transfer records tselect their name
+    #can :read, Transfer, public: true  # everyone can see transfer records tselect their name
     can :update, Transfer, public: true  # everyone can update their record NEEDS WORK
     can :create, NetballEducator, public: true # public can create a educator record
     can :show, NetballEducator, public: true
@@ -98,6 +98,23 @@ class Ability
       can :manage, Event
       can :manage, Medium
     end
+
+     #role 12 na_people
+     if user.na_people?
+      # Can only read and update their own person record
+      can [:read, :update], Person, email: user.email
+    
+      # But block index (list) access
+      cannot :index, Person
+    
+      # Transfer access scoped to their own person_id
+      if (person = Person.find_by(email: user.email))
+        can [:read, :create, :update], Transfer, person_id: person.id
+        cannot :index, Transfer # Optional: lock list views of transfers too
+      end
+    end
+    
+    
    
     if user.admin?
     can :manage, :all # finally we give all remaining permissions only to the admins

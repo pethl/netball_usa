@@ -1,48 +1,7 @@
-
-<% if current_user.role=="admin" %>
-  <% content_for(:page_title, "Management Summary")%>
-    <%= render "admin_home" %>
-
-  <% elsif current_user.role=="teams_grants" %>
-    <% content_for(:page_title, "Dashboard")%>
-      <%= render "office_home" %>
-
-    <% elsif current_user.role=="us_open" %>
-    <% content_for(:page_title, "Dashboard")%>
-    <%= render "us_open_home" %> 
-
-  <% elsif current_user.role=="grants" %>
-    <% content_for(:page_title, "Dashboard")%>
-    <%= render "office_home" %>
-  
-  <% elsif current_user.role=="educators" %>
-    <% content_for(:page_title, "Dashboard")%> 
-    <%= render "office_home" %>
-
-  <% elsif current_user.role=="sponsors_events" %>
-    <% content_for(:page_title, "Dashboard")%>
-    <%= render "office_home" %> 
-    
-  <% elsif current_user.role=="educators_events" %>
-    <% content_for(:page_title, "Dashboard")%>
-    <%= render "office_home" %>  
-    
-  <% elsif current_user.role=="teams_admin" %>
-    <% content_for(:page_title, "Dashboard")%>
-    <%= render "office_home" %>  
-    
-  <% elsif current_user.role=="sponsors_media" %>
-    <% content_for(:page_title, "Dashboard")%>
-    <%= render "office_home" %>  
-
-   <% elsif current_user.role=="educators_events_medium" %>
-    <% content_for(:page_title, "Dashboard")%>
-    <%= render "office_home" %>  
-
-    
-
+<% if role_config %>
+  <% content_for(:page_title, role_config[:title]) %>
+  <%= render role_config[:partial] %>
 <% else %>
-  <% content_for(:page_title, "Welcome to Netball America Members Zone")%>
-    <%= render "teamlead_home" %>
-
+  <% content_for(:page_title, "Welcome to Netball America Members Zone") %>
+  <%= render "teamlead_home" %>
 <% end %>

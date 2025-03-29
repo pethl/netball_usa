@@ -1,54 +1,53 @@
-<h2><strong>Edit <%= resource_name.to_s.humanize %></h2></strong><br>
+  <% content_for(:page_title, "Edit: #{resource_name.to_s.humanize }")%>
+<div class="max-w-md mx-auto p-6 bg-white border border-gray-300 rounded-xl shadow-lg">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name),data: {turbo: false}, html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }, html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="mb-6">
-   <%= f.label :first_name, class: label_class %>
-    <div class="mt-1">
-   <%= f.text_field :first_name, autofocus: true, class: input_class  %>
- </div>
- <br>
- <div class="mb-6">
-  <%= f.label :last_name, class: label_class %>
-   <div class="mt-1">
-  <%= f.text_field :last_name, class: input_class  %>
-</div>
-<br>
-   <div class="mb-6">
-    <%= f.label :email, class: label_class %>
-     <div class="mt-1">
-    <%= f.email_field :email, autocomplete: "email", class: input_class  %>
-  </div>
+    <div class="mb-4">
+      <%= f.label :first_name, class: label_class %>
+      <%= f.text_field :first_name, autofocus: true, class: input_class %>
+    </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <div class="mb-4">
+      <%= f.label :last_name, class: label_class %>
+      <%= f.text_field :last_name, class: input_class %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :email, class: label_class %>
+      <%= f.email_field :email, autocomplete: "email", class: input_class %>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div class="mb-4 text-sm text-yellow-600 font-medium">
+        Currently waiting confirmation for: <%= resource.unconfirmed_email %>
+      </div>
+    <% end %>
+
+    <div class="mb-4">
+      <%= f.label :password, class: label_class %>
+      <p class="text-sm text-gray-500 italic">(leave blank if you don't want to change it)</p>
+      <%= f.password_field :password, autocomplete: "new-password", class: input_class %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :password_confirmation, class: label_class %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: input_class %>
+    </div>
+
+    <div class="mb-6">
+      <%= f.label :current_password, class: label_class %>
+      <p class="text-sm text-gray-500 italic">(current password required to confirm changes)</p>
+      <%= f.password_field :current_password, autocomplete: "current-password", class: input_class %>
+    </div>
+
+    <div class="text-center">
+      <%= f.submit "Update", class: form_button_class %>
+    </div>
   <% end %>
-<br>
- <div class="mb-6">
-    <%= f.label :password, class: label_class %> <p class="italic text-sm">(leave blank if you don't want to change it)</p>
-     <div class="mt-1">
-    <%= f.password_field :password, autocomplete: "new-password", class: input_class  %>
-  </div>
-  <br>
 
- <div class="mb-6">
-    <%= f.label :password_confirmation, class: label_class %>
-     <div class="mt-1">
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: input_class  %>
+  <div class="mt-4 text-center">
+    <%= link_to "← Back", root_path, class: "text-blue-900 font-semibold hover:underline" %>
   </div>
-<br>
- <div class="mb-6">
-    <%= f.label :current_password, class: label_class %> <p class="italic text-sm">(current password required to confirm changes)</p>
-     <div class="mt-1">
-    <%= f.password_field :current_password, autocomplete: "current-password", class: input_class  %>
-  </div>
-<br>
-  <div class="actions">
-    <%= f.submit "Update", class: form_button_class %>
-  </div>
-<% end %>
-
-<br>
-  <%= link_to sanitize("&larr; Back "), :back %>
-
+</div>

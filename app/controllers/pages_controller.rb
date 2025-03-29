@@ -57,6 +57,10 @@ class PagesController < ApplicationController
     @member_type = get_membership_type
     @individual_member =  IndividualMember.where(email: current_user.email)
   end
+
+  def na_people
+    @person = Person.find_by(email: current_user.email)
+  end
   
   private
 

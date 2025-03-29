@@ -406,6 +406,14 @@ module ApplicationHelper
       end
     end
 
+    def current_us_open_event
+      @current_us_open_event ||= Event
+        .where(event_type: "US Open")
+        .where("extract(year from date) = ?", Time.zone.now.year)
+        .order(date: :desc)
+        .first
+    end
+
      # american states only used for filtering
      def american_states
       [

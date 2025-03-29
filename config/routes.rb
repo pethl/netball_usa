@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
+  
   resources :open_invites
   resources :vendors
   resources :media do
@@ -111,9 +116,7 @@ Rails.application.routes.draw do
   end
 
   resources :educators
-  devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
+  
   # Defines the root path route ("/")
   root "pages#home"
   
