@@ -1,118 +1,12 @@
-<% content_for(:page_title, "People - US & Canada Umpires")%>
+<%# app/views/people/index.html.erb %>
 
-<div class="">
-   <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
-      <li class="me-2">
-            <a href="/people/" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Umpires:<br>US & Canada</a>
-        </li>
-        <li class="me-2">
-            <a href="/people/index_int" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Umpires:<br>International</a>
-        </li>
-         <li class="me-2">
-            <a href="/people/index_scorers/" class="inline-block p-4 pb-8 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Scorers:</a>
-        </li>
-        <li class="me-2">
-           <a href="/people/index_trainers_and_ambassadors/" class="inline-block p-4 pb-8 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Trainers & <br>Ambassadors</a>
-       </li>
-       <li class="me-2">
-           <a href="/people/index_coaches/" class="inline-block p-4 pb-8 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Coaches</a>
-       </li>
-       <li class="me-2">
-           <a href="/people/index_operations/" class="inline-block p-4 pb-8 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Operations</a>
-       </li>
-       <li class="me-2">
-          <a href="/people/people_search/" class="inline-block p-4 pb-8 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Search</a>
-      </li>
-      
-      </ul>
+<%# Title %>
+<% content_for :page_title, "People – #{@role.pluralize}" %>
+
+<%= turbo_frame_tag "people_filters_nav" do %>
+  <%= render "people/people_filters_nav" %>
+<% end %>
+
+<div class="my-4">
+  <%= link_to "Add New Person", new_person_path, class: form_button_class %>
 </div>
-
-<div class="mt-2 mb-2">
-<%= link_to "Add New Person", new_person_path, class: form_button_class %>
-</div>
-
-
-<div id="persons">
-<div class="relative overflow-x-auto">
-    <table class="table-fixed w-full text-left rtl:text-right shadow-md">
-        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
-             <tr>
-               <th scope="col" class="px-6 py-3 w-52">
-                   Details
-               </th>
-               
-                <th scope="col" class="px-6 py-3 w-52">
-                    Name 
-                </th>
-                <th scope="col" class="px-6 py-3 w-52">
-                    Location
-                </th>
-                <th scope="col" class="px-6 py-3 w-52">
-                    Level
-                </th>
-                <th scope="col" colspan="2" class="px-6 py-3 w-52">
-                    Email
-                </th>
-                <th scope="col" class="px-6 py-3 w-52 text-center">
-                    Headshot?
-                </th>
-               
-                <th scope="col" class="px-6 py-3 w-40">
-                    Associated?
-                </th>
-                <th scope="col" class="px-6 py-3 w-52">
-                   Gender
-                </th>
-                <th scope="col" class="px-6 py-3 w-60 truncate">
-                    Notes
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-        <% if @people.count >0 %>
-         <% @people.each do |person| %>
-            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
-                <td class="px-6 py-4">
-                  <%= link_to image_tag("view.png", :class=>"mx-2 h-6 w-auto"), person  %>
-                 
-                  </td>
-                  
-                <td class="px-6 py-4">
-                   <%= link_to person.full_name, edit_person_path(person), class: link_class %>
-                </td>
-               
-                <td class="px-6 py-4">
-                   <%= person.location %>
-                </td>
-                
-                <td class="px-6 py-4">
-                  <%= person.level %><br>
-                 </td>
-                
-                <td colspan="2" class="px-6 py-4">
-                  <%= person.email %><br>
-                   <%= person.phone %>
-                </td>
-                
-                <td class="px-6 py-4 text-center">
-                   <%= person.headshot_present? ? 'Yes' : 'No'  %>
-                </td>
-                
-                <td class="px-6 py-4">
-                   <%= person.associated  %>
-                </td>
-                
-                <td class="px-6 py-4">
-                   <%= person.gender  %>
-                </td>
-
-                 <td class="px-6 py-4">
-                  <p class="text-wrap truncate"> <%= person.notes %></p>
-                </td>
-            </tr>
-            <% end %>
-             <% end %>
-        </tbody>
-    </table>
-</div>
- </div>

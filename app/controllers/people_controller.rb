@@ -23,40 +23,49 @@ class PeopleController < ApplicationController
     end
   end
  
-
-  # GET /umpires
   def index
-   # authorize! :read, @people
-    authorize! :manage, Person
-     @people = Person.where(role: "Umpire", region: "US & Canada")
-     @people =  @people.order(first_name: :asc)
-  end
+    @searching = params[:search].present?
   
-  def index_int
-      @people = Person.where(role: "Umpire", region: "International")
-      @people =  @people.order(first_name: :asc)
-  end 
+    @role = params[:role].presence || "Umpire"
   
-  def index_scorers
-      @people = Person.where(role: "Scorer")
-      @people =  @people.order(first_name: :asc)
-  end 
-  
-  def index_trainers_and_ambassadors
-      @people = Person.where(role: "Trainer").or(Person.where(role: "Ambassador"))
-      @people =  @people.order(first_name: :asc)
-   end
-
-   def index_coaches
-     @people = Person.where(role: "Coach")
-     @people =  @people.order(first_name: :asc)
-   end
- 
-    def index_operations
-      @people = Person.where(role: "Operations")
-      @people =  @people.order(first_name: :asc)
-    end
-   
+    def index
+      @role = params[:role].presence || "Umpire"
+      @region =
+        if params[:region].present?
+          params[:region]
+        elsif params[:role].blank? || params[:role] == "Umpire"
+          "US & Canada"
+        else
+          nil
+        end
+    
+      @searching = params[:search].present?
+    
+      if @searching
+        q = params[:search].downcase
+        @people = Person.where("LOWER(first_name) LIKE :q OR LOWER(last_name) LIKE :q OR LOWER(email) LIKE :q", q: "%#{q}%")
+      else
+        @people = Person.where(role: @role)
+        @people = @people.where(region: @region) if @region.present?
+      end
+    
+      @people = @people.ordered
+    
+      respond_to do |format|
+        format.html
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace("people_list", partial: "people/people_table", locals: {
+              people: @people,
+              searching: @searching,
+              search_term: params[:search]
+            }),
+            turbo_stream.replace("people_filters_nav", partial: "people/people_filters_nav")
+          ]
+        end
+      end
+    end  
+  end  
   
  
   # GET /people/1
@@ -132,4 +141,11 @@ class PeopleController < ApplicationController
     def get_future_events
       @events = Event.where("date > ?", Time.now - 1.month).order(date: :asc)
     end
+
+    def region_for(role, param_region)
+      return param_region if role == "Umpire" && param_region.present?
+      return "US & Canada" if role == "Umpire"
+      nil
+    end
+    
 end

@@ -1,0 +1,61 @@
+<%# app/views/people/_people_filters_nav.html.erb %>
+<%= turbo_frame_tag "people_filters_nav" do %>
+<div
+  data-controller="page-title"
+  data-page-title-prefix-value="People"
+>
+  <div class="md:flex md:items-center md:justify-between mb-4 space-y-2 md:space-y-0">
+    <!-- Tabs -->
+    <ul class="flex flex-wrap text-sm font-medium text-left text-gray-600">
+      <% if @searching %>
+        <li class="me-2">
+          <span class="inline-block px-4 py-2 text-blue-900 font-semibold border-b-2 border-blue-900">Search Results</span>
+        </li>
+      <% end %>
+
+      <% [
+        ["Umpires (US)", ["Umpire", "US & Canada"]],
+        ["Umpires (Int)", ["Umpire", "International"]],
+        ["Coaches", ["Coach", nil]],
+        ["Scorers", ["Scorer", nil]],
+        ["Trainers & Ambassadors", ["Trainer", nil]],
+        ["Operations", ["Operations", nil]]
+      ].each do |label, (role, region)| %>
+        <li class="me-2">
+          <% is_active = !@searching && (@role == role) %>
+          <% is_active &&= (@region.presence || "") == (region.presence || "") if role == "Umpire" %>
+
+          <%= link_to label,
+              people_path({ role: role }.tap { |h| h[:region] = region if region.present? }),
+              data: { action: "page-title#update", label: label },
+              class: tab_class(is_active) %>
+        </li>
+      <% end %>
+    </ul>
+
+    <!-- Search box -->
+    <div class="md:ml-auto flex items-center gap-2">
+      <input type="text"
+             placeholder="🔍 Search by name..."
+             class="p-2 border rounded w-64 shadow-sm shadow-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-900"
+             data-controller="search"
+             data-search-url-value="<%= people_path %>"
+             data-search-delay-value="300"
+             data-search-target="input"
+             data-action="input->search#search"
+             autocomplete="off" />
+
+     <%= link_to "Clear",
+        people_path(role: "Umpire", region: "US & Canada"),
+        class: "text-sm text-blue-900 underline hover:font-semibold whitespace-nowrap" %>
+    </div>
+  </div>
+
+  <div data-search-target="results">
+    <%= turbo_frame_tag "people_list" do %>
+      <%= render partial: "people/people_table", locals: { people: @people, searching: @searching, search_term: params[:search] } %>
+    <% end %>
+  </div>
+</div>
+
+<% end %>

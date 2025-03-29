@@ -1,32 +1,37 @@
 class Person < ApplicationRecord
-include ImageUploader::Attachment(:image) 
-include ImageUploader::Attachment(:headshot)   # ImageUploader will attach and manage `headshot`
-include ImageUploader::Attachment(:certification)   # ImageUploader will attach and manage `certification`
-include ImageUploader::Attachment(:resume)   # ImageUploader will attach and manage `resume`
+  # ========== Uploaders ==========
+  include ImageUploader::Attachment(:image)
+  include ImageUploader::Attachment(:headshot)
+  include ImageUploader::Attachment(:certification)
+  include ImageUploader::Attachment(:resume)
 
-  #has_many :transfers 
+  # ========== Associations ==========
   has_many :event_participants, dependent: :destroy
   has_many :events, through: :event_participants
-  #has_many :programs
+
   has_many :frequent_flyer_numbers, dependent: :destroy
   accepts_nested_attributes_for :frequent_flyer_numbers, allow_destroy: true
 
+  # ========== Scopes ==========
   scope :ordered, -> { order(first_name: :asc) }
-  scope :active, -> { where(status: "Active") }
+  scope :active,   -> { where(status: "Active") }
   scope :inactive, -> { where(status: "Inactive") }
 
-  
+  # ========== Validations ==========
   validates :role, presence: true
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, format:     { with: VALID_EMAIL_REGEX },
-                    uniqueness: { case_sensitive: false },
-                    allow_blank: true
-  
+
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
+  validates :email,
+            format:     { with: VALID_EMAIL_REGEX },
+            uniqueness: { case_sensitive: false },
+            allow_blank: true
+
+  # ========== Instance Methods ==========
   def full_name
-    "#{self.first_name} #{self.last_name}"
+    "#{first_name} #{last_name}"
   end
-  
+
   def role_full_name
-    "#{self.role} - #{self.last_name}, #{self.first_name}"
+    "#{role} - #{last_name}, #{first_name}"
   end
 end

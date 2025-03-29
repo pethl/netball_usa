@@ -16,6 +16,11 @@ module ApplicationHelper
     
       content_tag(:p, record.errors[field].first, class: "text-sm text-red-600 mt-1")
     end
+
+    def tab_class(active)
+      base = "inline-block py-2 px-4 rounded-t-md hover:bg-gray-300"
+      active ? "#{base} text-blue-900 bg-gray-300 font-semibold" : "#{base} text-gray-500"
+    end
     
    def label_class
      "block text-sm font-medium text-gray-700"
