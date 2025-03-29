@@ -53,12 +53,13 @@ Rails.application.routes.draw do
   resources :budgets
   resources :taems
   
-  get 'events/calendar' => 'events#calendar', :as => :calendar
 
-  get 'people/people_search' => 'people#people_search', :as => :people_search
   
+    # ========== People ==========
   resources :people
   
+    # ========== Events ==========
+  get 'events/calendar' => 'events#calendar', :as => :calendar
   resources :events do
     collection do
       get 'past', to: 'events#index_past', as: 'past'
