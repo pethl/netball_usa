@@ -7,13 +7,13 @@ Rails.application.routes.draw do
   resources :open_invites
   resources :vendors
 
-# ========== Media ==========
- resources :media do
-  collection do
-    get :my_media
-    get :published
+  # ========== Media ==========
+  resources :media do
+    collection do
+      get :my_media
+      get :published
+    end
   end
-end
 
 
   resources :programs
@@ -61,7 +61,6 @@ end
   resources :sample_words
   resources :budgets
   resources :taems
-  
 
   
     # ========== People ==========
@@ -110,8 +109,13 @@ end
       get :my_index  # This will be /opportunities/my_index route
     end
   end
-  
+
+  # ========== Partners ==========
   resources :partners do
+    collection do
+      get :my_partners
+    end
+  
     resources :contacts, except: [:index, :show]
   end
 
@@ -121,9 +125,9 @@ end
 
   resources :educators
   
+  # ========== Pages ==========
   # Defines the root path route ("/")
   root "pages#home"
-  
   get "pages/educator_sign_up"
   get "pages/teams_membership_fees"
   get "pages/membership_landing"

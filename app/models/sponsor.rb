@@ -12,7 +12,7 @@ class Sponsor < ApplicationRecord
   scope :filter_by_city_and_state, ->(city, state) {
     where('city = ? state = ?', city, state)
   }
-
+ 
   def city_state
     self.city + " " + self.state
   end

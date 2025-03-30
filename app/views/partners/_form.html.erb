@@ -88,7 +88,7 @@
     <div class="mb-0 md:col-span-2 md:row-span-2 sm:mt-4 md:mt-0">
       <%= form.label :partnership_agreement, class: label_class%>
         <div class="mt-1">
-          <%= form.text_area :partnership_agreement, size: "30x5", class: tight_form_input_class  %>
+          <%= form.text_area :partnership_agreement, rows: 8, class: tight_form_input_class  %>
         </div>
     </div>
   
@@ -106,6 +106,26 @@
     </div>
 
    <div class="basis-2/5">
+
+   <div class="grid grid-cols-2 gap-2 border border-blue-900 rounded-lg p-4 items-center">
+      <div class="flex flex-col">
+        <%= form.label :allocated_to, class: "mb-1 font-medium text-sm text-gray-700" %>
+      </div>
+      <div>
+      <%= form.collection_select(
+          :user_id,
+          @users,
+          :id,
+          :full_name,
+          { prompt: true },
+          {
+            class: "bg-gray-100 w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 hover:border-blue-900 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
+          }
+        ) %>
+      </div>
+    </div>
+    <br>
+
      <div class="grid grid-cols-2 gap-2 border border-blue-900 rounded-lg p-2">
      <span class="font-semibold text-sm ">Primary Contact</span><br>
      <div>    
@@ -249,6 +269,8 @@
   </div>  
   </div>
 <br>
+
+
 
       <div>
           <%= form.submit "Save Partner", class: form_button_class %>

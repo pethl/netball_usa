@@ -89,10 +89,7 @@ Rails.application.routes.draw do
     end
   end
 
-  # ========== Partners ==========
-  resources :partners do
-    resources :contacts, except: [:index, :show]
-  end
+
 
   # ========== Netball Educators ==========
   get 'netball_educators/pe_directors' => 'netball_educators#pe_directors', as: :pe_directors

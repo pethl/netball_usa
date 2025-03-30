@@ -1,0 +1,31 @@
+<div class="flex flex-wrap items-center justify-between mb-4 gap-4">
+  <!-- Tabs -->
+  <ul class="flex border-b flex-shrink-0">
+    <li class="mr-1">
+      <%= link_to "All Partners", partners_path,
+            class: "border-blue-200 inline-block py-2 px-4 text-gray-700 border-b-2 border-transparent hover:border-gray-300 #{'border-b-blue-900 font-semibold' if current_page?(partners_path)}" %>
+    </li>
+    <li>
+      <%= link_to "My Partners", my_partners_partners_path,
+            class: "inline-block py-2 px-4 text-gray-700 border-b-2 border-transparent hover:border-gray-300 #{'border-b-blue-900 font-semibold' if current_page?(my_partners_partners_path)}" %>
+    </li>
+  </ul>
+
+  <!-- Search box -->
+  <div class="flex items-center gap-2">
+    <input type="text"
+           placeholder="🔍 Search by company..."
+           class="p-2 border rounded w-64 shadow-sm shadow-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-900"
+           data-controller="search"
+           data-search-url-value="<%= request.path %>"
+           data-search-delay-value="300"
+           data-search-target="input"
+           data-action="input->search#search"
+           autocomplete="off"
+           value="<%= params[:query] %>" />
+
+    <%= link_to "Clear",
+        request.path,
+        class: "text-sm text-blue-900 underline hover:font-semibold whitespace-nowrap" %>
+  </div>
+</div>

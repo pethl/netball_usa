@@ -1,5 +1,7 @@
 <% content_for(:page_title, "Partners")%> 
 
+<%= render "filter_nav" %>
+
 <div class="my-4">
   <%= link_to "Add New Partner", new_partner_path, class: form_button_class %>
 </div> 
@@ -7,8 +9,8 @@
 <% if @partners.any? %>
 <div id="partners">
 <div class="relative overflow-x-auto">
-    <table class="w-full table-fixed text-left rtl:text-right">
-        <thead class="bg-white border-b text-gray-400 font-light text-xs ">
+    <table class="w-full table-fixed ml-2 text-left rtl:text-right">
+        <thead class="bg-gray-200 border-b text-gray-800 font-light text-xs ">
             <tr>
                 <th scope="col" class="px-4 py-2 w-64">
                     Company
@@ -18,13 +20,18 @@
                     Location
                 </th>
                 
-                <th scope="col" class="px-4 py-2 truncate">
+                <th scope="col" class="px-4 py-2 w-64 truncate">
                     Website
                 </th>
                 
                 <th scope="col" class="px-4 py-2 w-40">
                     Date of Initial Connect
                 </th>
+
+                <th scope="col" class="px-4 py-2 w-40">
+                   Assigned To
+                </th>
+               
                 <th scope="col" class="px-4 py-2">
                     Description
                 </th>
@@ -48,7 +55,10 @@
                 <%= partner.date_initially_connected.to_formatted_s(:usa) unless  partner.date_initially_connected.to_s.empty? %>
             </td> 
             <td class="px-4 py-4 align-top truncate">
-            <%= partner.description %>
+             <%= partner.user.full_name %>
+            </td>
+            <td class="px-4 py-4 align-top truncate">
+             <%= partner.description %>
             </td>
         </tr>
         <% end %>

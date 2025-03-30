@@ -1,9 +1,10 @@
 class Partner < ApplicationRecord
     has_many :contacts
     has_one :person
+    belongs_to :user
 
     validates :company, presence: { message: ": Please enter name before attempting to save" }
-
+    scope :ordered, -> { order(company: :asc) }
 
     def contact_two_blank
         if (first_name_secondary.to_s +
