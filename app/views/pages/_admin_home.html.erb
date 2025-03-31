@@ -1,190 +1,29 @@
 <!-- Statistics Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-4 gap-4">
-          <div class="bg-blue-900 shadow-lg rounded-md flex items-start justify-between p-3 border-b-4 border-gray-300 dark:border-gray-600 text-white font-medium group">
-            <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-              <i class="fa-solid fa-chalkboard-user text-xl text-blue-800 dark:text-white hover:underline"></i>
-            </div>
-            <div class="text-right">
-              <p class="text-2xl"><%= link_to NetballEducator.all.count, netball_educators_path %></p>
-              <p class="text-2xl"><%= link_to "Educators", netball_educators_path %></p>
-              <br>
-              <p class="text-blue-200">Created Last 7 Days: <%= @created_last_7_days %></p>
-              <p class="text-blue-200">Created Last 30 Days: <%= @created_last_30_days %></p>
-              <p class="text-blue-200">Created This Year: <%= @created_this_year %></p>
-              
-            </div>
-          </div>
-       
-          <div class="bg-blue-900 shadow-lg rounded-md flex items-start justify-between p-3 border-b-4 border-gray-300 dark:border-gray-600 text-white font-medium group">
-            <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-              <i class="fa-solid fa-clipboard text-xl text-blue-800 dark:text-white hover:underline"></i>
-            </div>
-            <div class="text-right">
-              <p class="text-2xl"><%= link_to FollowUp.all.count, follow_ups_path %></p>
-              <p class="text-xl"><%= link_to "Educator Follow-Up ", follow_ups_path %></p>
-            </div>
-          </div>
-          
-          <div class="bg-blue-900 shadow-lg rounded-md flex items-start justify-between p-3 border-b-4 border-gray-300 dark:border-gray-600 text-white font-medium group">
-            <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-            <i class="fa-solid fa-bag-shopping text-xl text-blue-800 dark:text-white hover:underline"></i>
-          </div>
-            <div class="text-right">
-              <p class="text-2xl"><%= link_to Sponsor.all.count, sponsors_path %></p>
-              <p class="text-2xl"><%= link_to "Sponsors", sponsors_path %></p>
-              <br>
-              <p class="text-blue-200">Sponsor Opportunities: <%=  Opportunity.all.count %></p>
-               <% @opportunities_by_status.each do |status, opportunities| %>
-                <p class="text-gray-300 font-light">
-                  <%= status %>: <%= opportunities.count %>
-                </p>
-               <% end %>
-             
-            </div>
-          </div>
-          
-          <div class="bg-blue-900 shadow-lg rounded-md flex items-start justify-between p-3 border-b-4 border-gray-300 dark:border-gray-600 text-white font-medium group">
-            <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-            <i class="fa-solid fa-dollar-sign text-xl text-blue-800 dark:text-white hover:underline"></i>
-          </div>
-            <div class="text-right">
-              <p class="text-2xl"><%= link_to Grant.all.count, grants_path %></p>
-             <p class="text-2xl"><%= link_to "Grants", grants_path %></p>
-             <br>
-             <p class="text-blue-200">Applying for : <%= @grants_applying_for.count %></p>
-             
-              <p class="text-blue-200">of which - </p>
-              <% @grants_by_status.each do |status, grants| %>
-                <p class="text-gray-300 font-light">
-                  <%= status %>: <%= grants.count %>
-                </p>
-               <% end %>
-            </div>
-          </div>
-          
-          <div class="bg-blue-900 shadow-lg rounded-md flex items-start justify-between p-3 border-b-4 border-gray-300 dark:border-gray-600 text-white font-medium group">
-            <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-            <i class="fa-solid fa-people-group text-xl text-blue-800 dark:text-white hover:underline"></i>
-          </div>
-            <div class="text-right">
-              <p class="text-2xl"><%= link_to Person.all.count, people_path %></p>
-             <p class="text-2xl"><%= link_to "People", people_path %></p>
-              <br>
-              <p class="text-blue-200">US Umpires: <%= @us_umpires %></p>
-              <p class="text-blue-200">Int Umpires: <%= @int_umpires %></p>
-              <p class="text-blue-200">Scorers: <%= @scorers %></p>
-              <p class="text-blue-200">Trainers: <%= @trainers %></p>
-              <p class="text-blue-200">Coaches: <%= @coaches %></p>
-              <p class="text-blue-200">Operations: <%= @operations %></p>
-              
-            </div>
-          </div>
-          
-          <div class="bg-blue-900 shadow-lg rounded-md flex items-start justify-between p-3 border-b-4 border-gray-300 dark:border-gray-600 text-white font-medium group">
-            <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-              <i class="fa-solid fa-calendar-days text-xl text-blue-800 dark:text-white hover:underline"></i>
-            </div>
-            <div class="text-right">
-              <p class="text-2xl"><%= link_to Event.all.count, events_path %></p>
-              <p class="text-2xl"><%= link_to "Events", events_path %></p>
-              <br>
-              <p class="text-blue-200">This Year (<%= Date.current.year %>): <%= @events_this_year.count %></p>
-              <% @events_this_year_by_status.each do |status, events| %>
-                <p class="text-gray-300 font-light">
-                  <%= status %>: <%= events.count %>
-                </p>
-               <% end %>
-              <p class="text-blue-200">Next Year (<%= Date.current.year+1 %>): <%= @events_next_year.count %></p>
-              <% @events_next_year_by_status.each do |status, events| %>
-                <p class="text-gray-300 font-light">
-                  <%= status %>: <%= events.count %>
-                </p>
-               <% end %>
-              </div>
-          </div>
-          
-          <div class="bg-blue-900 shadow-lg rounded-md flex items-start justify-between p-3 border-b-4 border-gray-300 dark:border-gray-600 text-white font-medium group">
-            <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-              <i class="fa-solid fa-basketball text-xl text-blue-800 dark:text-white hover:underline"></i>
-            </div>
-            <div class="text-right">
-              <p class="text-2xl"><%= link_to Equipment.all.count, equipment_index_path %></p>
-             <p class="text-2xl"><%= link_to "Equipment", equipment_index_path %></p>
-            </div>
-          </div>
-         
-          <div class="bg-blue-900 shadow-lg rounded-md flex items-start justify-between p-3 border-b-4 border-gray-300 dark:border-gray-600 text-white font-medium group">
-            <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-              <i class="fa-solid fa-handshake text-xl text-blue-800 dark:text-white hover:underline"></i>
-            </div>
-            <div class="text-right">
-              <p class="text-2xl"><%= link_to Partner.all.count, partners_path %></p>
-             <p class="text-2xl"><%= link_to "Partners", partners_path %></p>
-            </div>
-          </div>
-         
-          
-          <div class="bg-blue-900 shadow-lg rounded-md flex items-start justify-between p-3 border-b-4 border-gray-300 dark:border-gray-600 text-white font-medium group">
-            <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-              <i class="fa-solid fa-users-rectangle text-xl text-blue-800 dark:text-white hover:underline"></i>
-            </div>
-            <div class="text-right">
-              <p class="text-2xl"><%= link_to User.where(account_active: true).count, users_path %></p>
-             <p class="text-2xl"><%= link_to "Users", users_path %></p>
-             <br>
-             <p class="text-blue-200">Admins: <%= @admins %></p>
-             <p class="text-blue-200">Grant/Teams Admin: <%= @teams_grants %></p>
-             <p class="text-blue-200">Team Leads: <%= @teamleads %></p>
-             <p class="text-blue-200">Grant Admin: <%= @grants %></p>
-             <p class="text-blue-200">Educators Admin: <%= @teams_admin %></p>
-             <p class="text-blue-200">Teams Admin: <%= @educators %></p>
-             <p class="text-blue-200">Sponsors Admin: <%= @sponsors %></p>
-              <p class="text-blue-200">US Open Admin: <%= @us_open %></p>
-            </div>
-          </div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-4 gap-4">
 
-        <div class="bg-blue-900 shadow-lg rounded-md flex items-start justify-between p-3 border-b-4 border-gray-300 dark:border-gray-600 text-white font-medium group">
-          <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-            <i class="fa-solid fa-users text-xl text-blue-800 dark:text-white hover:underline"></i>
-          </div>
-          <div class="text-right">
-          <p class="text-2xl"><%= @total_members %></p>
-           <p class="text-2xl"><%= link_to "Membership", index_admin_path %></p>
-           <br>
-           <p class="text-blue-200"> <%= link_to "Clubs: #{Club.all.count}", index_admin_path %></p>
-           <p class="text-blue-200"><%= link_to ("Members: #{Member.all.count}"), members_path %></p>
-           <p class="text-blue-200"><%= link_to "Individual Members: #{IndividualMember.all.count}", individual_members_path %></p>
-           <br>
-           <p class="text-blue-200 border-t-2 border-white">TOTAL MEMBERS: <%= @total_members %></p>
-           
-          </div>
-        </div>
+  <%= render partial: "dashboard/cards/educators" %>
 
-        <div class="bg-blue-900 shadow-lg rounded-md flex items-start justify-between p-3 border-b-4 border-gray-300 dark:border-gray-600 text-white font-medium group">
-          <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-            <i class="fa-solid fa-flag-usa text-xl text-blue-800 dark:text-white hover:underline"></i>
-          </div>
-          <div class="text-right">
-            <p class="text-2xl"><%= link_to Transfer.joins(:event, :person).where(events: { name: 'US Open 2025 - Austin' }).count, transfers_path %></p>
-           <p class="text-2xl"><%= link_to "US Open", transfers_path %></p>
-           <br>
-           <p class="text-blue-200">Operations: <%= @operations %></p>
-             <p class="text-blue-200">Umpires: <%= @umpires %></p>
-             <p class="text-blue-200">Int Umpires: <%= @int_umpires %></p>
-             <p class="text-blue-200">Scorers: <%= @scorers %></p>
-             <p class="text-blue-200">Medics: <%= @medics %></p>
-          </div>
-        </div>
+   <%= render partial: "dashboard/cards/follow_ups" %>
 
-        <div class="bg-blue-900 shadow-lg rounded-md flex items-start justify-between p-3 border-b-4 border-gray-300 dark:border-gray-600 text-white font-medium group">
-        <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-          <i class="fa-solid fa-earth-americas text-xl text-blue-800 dark:text-white hover:underline"></i>
-        </div>
-        <div class="text-right">
-          <p class="text-2xl"><%= link_to Tour.all.count, partners_path %></p>
-         <p class="text-2xl"><%= link_to "Tours", tours_path %></p>
-        </div>
-      </div>
+  <%= render partial: "dashboard/cards/sponsors" %>
+
+  <%= render partial: "dashboard/cards/grants" %>
+
+  <%= render partial: "dashboard/cards/people" %>
+
+  <%= render partial: "dashboard/cards/events" %>
           
-          </div>
-        <!-- ./Statistics Cards -->
+  <%= render partial: "dashboard/cards/equipment" %>
+
+  <%= render partial: "dashboard/cards/partners" %>
+
+  <%= render partial: "dashboard/cards/users" %>
+
+  <%= render partial: "dashboard/cards/membership" %>
+
+  <%= render partial: "dashboard/cards/us_open" %>
+  
+  <%= render partial: "dashboard/cards/tours" %>
+
+</div>
+<!-- ./Statistics Cards -->

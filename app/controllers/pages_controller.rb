@@ -14,13 +14,9 @@ class PagesController < ApplicationController
     @operations = Person.where(role: "Operations").count
     
     @admins = User.where(role: 0, account_active: true).count
-    @teams_grants = User.where(role: 1, account_active: true).count
+    @support_staff = User.where.not(role: [0, 2, 12]).where(account_active: true).count
     @teamleads = User.where(role: 2, account_active: true).count
-    @grants = User.where(role: 3, account_active: true).count
-    @educators = User.where(role: 4, account_active: true).count
-    @teams_admin = User.where(role: 5, account_active: true).count
-    @sponsors = User.where(role: 6, account_active: true).count
-    @us_open = User.where(role: 7, account_active: true).count
+    @na_people = User.where(role: 12, account_active: true).count
 
     @events_this_year = Event.where('date > ?', Time.now.beginning_of_year)
     @events_this_year_by_status = @events_this_year.group_by { |t| t.status }
