@@ -8,6 +8,7 @@ import FilterController from "./controllers/filter_controller"
 import InlineEditController from "./controllers/inline_edit_controller"
 import PageTitleController from "./controllers/page_title_controller"
 import SearchController from "./controllers/search_controller"
+import PressReleasesController from "./controllers/press_releases_controller"
 
 const application = Application.start()
 application.register("vendor-filter", VendorFilterController)
@@ -16,6 +17,7 @@ application.register("filter", FilterController)
 application.register("inline-edit", InlineEditController)  
 application.register("page-title", PageTitleController)  
 application.register("search", SearchController)
+application.register("press-releases", PressReleasesController)
 
 
 window.Stimulus = application

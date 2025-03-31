@@ -1,5 +1,8 @@
 class Medium < ApplicationRecord
   belongs_to :user
+  has_many :press_releases, dependent: :destroy
+  accepts_nested_attributes_for :press_releases, allow_destroy: true
+
 
   validates :media_type, presence: true
   validates :company_name, presence: true

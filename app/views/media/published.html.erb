@@ -1,8 +1,10 @@
 <% content_for(:page_title, "Media: Published") %>
 
+<%= render "tabs_nav" %>
+
 <div class="min-h-screen bg-white">
-  <div class="max-w-5xl mx-auto p-6 border ">
-    <% if @published_media.any? %>
+  <div class="max-w-5xl mx-auto p-6 border">
+    <% if @press_releases.any? %>
       <table class="min-w-full table-auto divide-y divide-gray-200">
         <thead class="bg-gray-300 text-gray-800">
           <tr>
@@ -12,19 +14,23 @@
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-100">
-          <% @published_media.each do |media| %>
+          <% @press_releases.each do |pr| %>
             <tr class="hover:bg-gray-50">
-              <td class="px-4 py-2 text-sm text-gray-800"><%= media.company_name %></td>
-              <td class="px-4 py-2 text-sm text-gray-600"><%= media.release_date.strftime("%B %d, %Y") %></td>
+              <td class="px-4 py-2 text-sm text-gray-800">
+                <%= pr.medium&.company_name || "Unknown Company" %>
+              </td>
+              <td class="px-4 py-2 text-sm text-gray-600">
+                <%= pr.release_date.strftime("%B %d, %Y") %>
+              </td>
               <td class="px-4 py-2">
-                <%= link_to "View", media.media_announcement_link, target: "_blank", rel: "noopener", class: "text-blue-700 hover:underline text-sm" %>
+                <%= link_to "View", pr.media_announcement_link, target: "_blank", rel: "noopener", class: "text-blue-700 hover:underline text-sm" %>
               </td>
             </tr>
           <% end %>
         </tbody>
       </table>
     <% else %>
-      <p class="text-gray-600 italic">No published media links yet.</p>
+      <p class="text-gray-600 italic">No published press releases yet.</p>
     <% end %>
   </div>
 </div>

@@ -1,20 +1,84 @@
-<% content_for(:page_title, "Media: #{@medium.company_name}")%>
+<% content_for(:page_title, "Media: #{@medium.company_name}") %>
 
-<div class="m-4 border border-gray-200 p-4 rounded-md">
+<div class="m-4 border border-gray-200 p-6 rounded-md bg-white">
 
-<%= render @medium %>
+  <p class="text-base font-semibold mb-6 text-blue-900">Media Company Details</p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+    <%# Reusable helper-style list %>
+    <% {
+      "Media Type" => @medium.media_type,
+      "Company Name" => @medium.company_name,
+      "Company Website" => @medium.company_website,
+      "Contact Name" => @medium.contact_name,
+      "Contact Position" => @medium.contact_position,
+      "Contact Email" => @medium.contact_email,
+      "General Email" => @medium.email,
+      "Phone" => @medium.phone,
+      "Other Socials" => @medium.socials,
+      "Facebook" => @medium.facebook,
+      "X" => @medium.twitter,
+      "Instagram" => @medium.instagram,
+      "Event Calendar Link" => @medium.event_calender_link,
+      "Calendar Login Details" => @medium.calendar_login_details,
+      "City" => @medium.city,
+      "State/Region" => [@medium.state, @medium.region_other].compact.join(' '),
+      "Country" => @medium.country,
+      "Allocated To" => @medium.user&.full_name,
+      "Notes" => @medium.notes,
+      "Pitch" => @medium.pitch,
+      "Action Taken" => @medium.action_taken,
+      "Media Announcement Link" => @medium.media_announcement_link,
+      "Release Date" => @medium.release_date
+    }.each do |label, value| %>
+      <% next if value.blank? %>
+      <div>
+        <p class="text-sm text-gray-500"><%= label %></p>
+        <p class="font-medium text-gray-800"><%= value %></p>
+      </div>
+    <% end %>
+
+  </div>
+
+  <% if @medium.company_website.present? %>
+    <div class="mt-6">
+      <p class="text-sm text-gray-500">Quick Link: Company Website</p>
+      <%= link_to @medium.company_website, @medium.company_website, target: "_blank", rel: "noopener noreferrer", class: "text-blue-900 hover:underline" %>
+    </div>
+  <% end %>
+
+  <% if @medium.press_releases.any? %>
+  <div class="mt-8">
+    <p class="text-base font-semibold text-blue-900 mb-2">Press Releases</p>
+
+    <div class="space-y-2">
+      <% @medium.press_releases.each do |pr| %>
+        <div class="p-3 border rounded bg-white shadow-sm">
+          <% if pr.media_announcement_link.present? %>
+            <p class="text-blue-800 font-medium">
+              <%= link_to pr.media_announcement_link, pr.media_announcement_link, target: "_blank", rel: "noopener" %>
+            </p>
+          <% end %>
+          <% if pr.release_date.present? %>
+            <p class="text-sm text-gray-600">
+              Release Date: <%= pr.release_date.strftime("%B %d, %Y") %>
+            </p>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
 
 
-
-<div class="my-4">
-  <%= link_to "Edit this medium", edit_medium_path(@medium), class: form_button_class %> 
-</div>
-<div class="ml-2 my-2">
-  <%= button_to "Destroy this media company record", @medium, method: :delete, class: clear_button_class %>
-</div>
-  <%= link_to "<< Back to all media", media_path %>
-
-  
-</div>
-
+  <div class="flex items-center gap-4 mt-8">
+    <%= link_to "Edit this media", edit_medium_path(@medium), class: form_button_class %>
+    <%= button_to "Destroy this media company record",
+                  @medium,
+                  method: :delete,
+                  class: clear_button_class,
+                  data: { confirm: "Are you sure you want to delete this media record?" } %>
+   <br> <%= link_to "<< Back to all media", media_path, class: "text-sm text-blue-900 hover:underline" %>
+  </div>
 </div>

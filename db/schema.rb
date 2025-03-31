@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_29_154320) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_31_090328) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -488,6 +488,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_29_154320) do
     t.string "status", default: "Active", null: false
   end
 
+  create_table "press_releases", force: :cascade do |t|
+    t.string "media_announcement_link"
+    t.date "release_date"
+    t.string "title"
+    t.text "content"
+    t.bigint "medium_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["medium_id"], name: "index_press_releases_on_medium_id"
+  end
+
   create_table "programs", force: :cascade do |t|
     t.string "program_stage"
     t.string "program_name"
@@ -799,6 +810,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_29_154320) do
   add_foreign_key "payments", "individual_members"
   add_foreign_key "payments", "na_teams"
   add_foreign_key "payments", "users", column: "payment_recorded_by_id"
+  add_foreign_key "press_releases", "media"
   add_foreign_key "programs", "people", column: "people_id"
   add_foreign_key "reference_vendors", "references"
   add_foreign_key "reference_vendors", "vendors"
