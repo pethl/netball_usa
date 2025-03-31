@@ -1,18 +1,25 @@
 class OpportunitiesController < ApplicationController
   before_action :set_opportunity, only: %i[ show edit update destroy ]
   #before_action :set_sponsor, only: %i[ new create show edit update destroy ]
-  before_action :set_sponsor, except: [:index, :my_index]
+  before_action :set_sponsor, except: [:index, :closed, :my_index]
 
   # GET /opportunities
   def index
-    @opportunities = Opportunity.joins(:sponsor)
+    @opportunities = Opportunity.joins(:sponsor).where.not(status: "Completed")
                                 .order("sponsors.company_name ASC") 
+  end
+
+  def closed
+    @opportunities = Opportunity.joins(:sponsor)
+                                 .where(status: "Completed")
+                                 .order("sponsors.company_name ASC")
+    render :index
   end
 
   # Custom action to show opportunities belonging to the current user
   def my_index
-    @opportunities = Opportunity.where(user_id: current_user.id).includes(:sponsor).order('sponsors.company_name')
-    #render :index # Reuse the same index view to avoid code duplication
+    @opportunities = Opportunity.where(user_id: current_user.id).where.not(status: "Completed").includes(:sponsor).order('sponsors.company_name')
+    render :index # Reuse the same index view to avoid code duplication
   end
 
   # GET /opportunities/1

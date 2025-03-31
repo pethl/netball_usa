@@ -5,7 +5,6 @@ class SponsorsController < ApplicationController
  
   # GET /sponsors
   def index
-
     @sponsors = Sponsor.all.ordered
 
     # Filter by city

@@ -1,12 +1,20 @@
 <%# app/views/people/index.html.erb %>
 
+<div class="my-4">
+  <%= link_to "Add New Person", new_person_path, class: form_button_class %>
+  <%= link_to "🖨️ US Umpires - Print Details (PDF)", print_details_pdf_people_path, class: clear_button_class, target: "_blank" %>
+</div>
+
+
+
 <%# Title %>
 <% content_for :page_title, "People – #{@role.pluralize}" %>
+
+<div class="ml-2">
 
 <%= turbo_frame_tag "people_filters_nav" do %>
   <%= render "people/people_filters_nav" %>
 <% end %>
 
-<div class="my-4">
-  <%= link_to "Add New Person", new_person_path, class: form_button_class %>
 </div>
+

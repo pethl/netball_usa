@@ -82,14 +82,6 @@ Rails.application.routes.draw do
     resources :contacts, except: [:index, :show]
   end
 
-  # ========== Opportunities ==========
-  resources :opportunities, only: [:index] do
-    collection do
-      get :my_index
-    end
-  end
-
-
 
   # ========== Netball Educators ==========
   get 'netball_educators/pe_directors' => 'netball_educators#pe_directors', as: :pe_directors

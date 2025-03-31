@@ -63,8 +63,13 @@ Rails.application.routes.draw do
   resources :taems
 
   
-    # ========== People ==========
-  resources :people
+  # ========== People ==========
+  resources :people do
+    collection do
+      get :print_details_pdf
+    end
+  end
+  
   
     # ========== Events ==========
   get 'events/calendar' => 'events#calendar', :as => :calendar
@@ -104,12 +109,14 @@ Rails.application.routes.draw do
     resources :opportunities, except: [:index, :show]
   end
 
+  # ========== Opportunities ==========
   resources :opportunities, only: [:index] do
     collection do
-      get :my_index  # This will be /opportunities/my_index route
+      get :my_index       # /opportunities/my_index
+      get :closed         # /opportunities/closed
     end
   end
-
+  
   # ========== Partners ==========
   resources :partners do
     collection do

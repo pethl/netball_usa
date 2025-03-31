@@ -2,13 +2,19 @@ class PeopleController < ApplicationController
   before_action :set_person, only: %i[ show edit update destroy ]
   load_and_authorize_resource
 
+  def print_details_pdf
+    people = Person.where(role: "Umpire")
+    .where("region ILIKE ?", "%US & Canada%")
+    .order(:last_name)    
+    pdf = PeoplePdfService.new(people).generate
+  
+    send_data pdf.render,
+              filename: "people_details.pdf",
+              type: "application/pdf",
+              disposition: "inline"
+  end
  
   def index
-    @searching = params[:search].present?
-  
-    @role = params[:role].presence || "Umpire"
-  
-    def index
       @role = params[:role].presence || "Umpire"
       @region =
         if params[:region].present?
@@ -44,8 +50,8 @@ class PeopleController < ApplicationController
           ]
         end
       end
-    end  
   end  
+  
   
  
   # GET /people/1
