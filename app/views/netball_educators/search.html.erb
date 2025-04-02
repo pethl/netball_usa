@@ -1,25 +1,7 @@
 <% content_for(:page_title, "Educators: Search")%>
 
-  <div class="">
-     <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
-        <li class="me-2">
-              <a href="/netball_educators/" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Created Date</a>
-          </li>
-          <li class="me-2">
-              <a href="/netball_educators/index_state" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By State</a>
-          </li>
-           <li class="me-2">
-              <a href="/netball_educators/index_user" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Allocation</a>
-          </li>
-          <li class="me-2">
-             <a href="/netball_educators/index_level" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Level</a>
-         </li>
-         <li class="me-2">
-               <a href="/netball_educators/search" class="inline-block p-2 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Search</a>
-           </li>
-        </ul>
-  </div>
-<br>
+   <%= render 'nav_tabs' %>
+
   <form class="max-w-md mx-auto">   
       <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
       <div class="relative">

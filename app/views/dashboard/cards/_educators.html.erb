@@ -9,9 +9,11 @@
       </div>
     </div>
     <div class="mt-4 space-y-1 text-blue-200 text-sm">
-      <p>Last 7 Days: <%= @created_last_7_days %></p>
-      <p>Last 30 Days: <%= @created_last_30_days %></p>
-      <p>This Year: <%= @created_this_year %></p>
+      <p>PE Directors: <%= NetballEducator.where(level: "School/District Lead").count %></p>
+      <p>Educators: <%= NetballEducator.where.not(level: "School/District Lead").count %></p>
+      <p class="text-gray-300 font-light">Last 7 Days: <%= @created_last_7_days %></p>
+      <p class="text-gray-300 font-light">Last 30 Days: <%= @created_last_30_days %></p>
+      <p class="text-gray-300 font-light">This Year: <%= @created_this_year %></p>
     </div>
   <% end %>
   

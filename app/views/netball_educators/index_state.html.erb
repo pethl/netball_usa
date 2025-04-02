@@ -1,33 +1,13 @@
 <% content_for(:page_title, "Educators - By State")%>
 
 <% if current_user.admin?  %>
-<div class="p-2">
-<%= link_to "Export educators as spreadsheet", netball_educators_path(format: "xlsx"), class: clear_button_class %>
-</div> 
+    <div class="p-2">
+        <%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
+        <%= link_to "Export educators as spreadsheet", netball_educators_path(format: "xlsx"), class: clear_button_class %>
+    </div> 
 <% end %>
 
-<div class="m-4">
-   <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
-      <li class="me-2">
-            <a href="/netball_educators/" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Date Added</a>
-        </li>
-        <li class="me-2">
-            <a href="/netball_educators/index_state" class="inline-block p-2 text-blue-900 bg-gray-100 rounded-t-lg active " aria-current="page">By State</a>
-        </li>
-        <li class="me-2">
-            <a href="/netball_educators/index_user" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Allocation</a>
-        </li>
-        <li class="me-2">
-           <a href="/netball_educators/index_level" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Level</a>
-       </li>
-       <li class="me-2">
-          <a href="/netball_educators/search" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Search</a>
-      </li>
-      </ul>
-</div>
-<div class="mt-4 mb-2">
-<%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
-</div>
+ <%= render 'nav_tabs' %>
 
 <% if @netball_educators.any? %>
 <div class="m-4">

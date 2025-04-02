@@ -43,7 +43,9 @@ class User < ApplicationRecord
 
   # User::Roles
   # The available roles
-  Roles = [ :admin , :teams_grants, :grants, :teamlead, :educators  ]
+  Roles = [:admin, :teams_grants, :teamlead, :grants, :educators, :teams_admin, 
+           :sponsors_events, :us_open, :educators_events, :sponsors_media_events, 
+           :educators_events_medium, :spare, :na_people]
   after_initialize :set_default_role, :if => :new_record?
   
   def set_default_role

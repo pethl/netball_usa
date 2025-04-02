@@ -1,120 +1,101 @@
-<% content_for(:page_title, "Educators")%>
+<% content_for(:page_title, "All Educators")%>
 
 <% if current_user.admin?  %>
-<div class="p-2">
-<%= link_to "Export educators as spreadsheet", netball_educators_path(format: "xlsx"), class: clear_button_class %>
-</div> 
-<% end %>
+    <div class="p-2">
+        <%= link_to "Export educators as spreadsheet", netball_educators_path(format: "xlsx"), class: clear_button_class %> 
+        <%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
+    </div> 
+<% end %> 
 
-
-<div class="m-4">
-   <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
-      <li class="me-2">
-            <a href="/netball_educators/" class="inline-block p-2 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">By Date Added</a>
-        </li>
-        <li class="me-2">
-            <a href="/netball_educators/index_state" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By State</a>
-        </li>
-         <li class="me-2">
-            <a href="/netball_educators/index_user" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Allocation</a>
-        </li>
-        <li class="me-2">
-           <a href="/netball_educators/index_level" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Level</a>
-       </li>
-       <li class="me-2">
-          <a href="/netball_educators/search" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Search</a>
-      </li>
-      </ul>
-</div>
-<div class="mt-4 mb-2">
-<%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
-</div>
+ <%= render 'nav_tabs' %>
 
 <% if @netball_educators.any? %>
   
 <div id="educators">
 <div class="relative overflow-x-auto">
     <table class="table-fixed w-full text-left rtl:text-right">
-        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+        <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs ">
              <tr>
                 
-                <th scope="col" class="px-6 py-3 w-32">
-                    Date Created 
-                </th>
-                <th scope="col" class="px-6 py-3 w-24">
+               
+                <th scope="col" class="px-3 py-2 w-24">
                     State
                 </th>
-                <th scope="col" class="px-6 py-3 w-40">
+                <th scope="col" class="px-3 py-2 w-40">
                     City
                 </th>
-                <th scope="col" class="px-6 py-3 w-64">
-                School/District
+                <th scope="col" class="px-3 py-2 w-64">
+                     School/District
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
+                <th scope="col" class="px-3 py-2 w-52">
                     Name
                 </th>
-                <th scope="col" class="px-6 py-3 w-40">
+                <th scope="col" class="px-3 py-2 w-40">
                     Level
                 </th>
-                <th scope="col" class="px-6 py-3 w-64">
+                <th scope="col" class="px-3 py-2 w-64">
                     Contact
-                </th>
-                
-                <th scope="col" class="px-6 py-3 w-52">
+                </th>               
+                <th scope="col" class="px-3 py-2 w-52">
                     Allocated To
                 </th>
-                <th scope="col" class="px-6 py-3 w-96 truncate">
+                <th scope="col" class="px-3 py-2 w-96 truncate">
                     Notes
+                </th>
+                <th scope="col" class="px-3 py-2 w-32">
+                 Date Created 
                 </th>
             </tr>
         </thead>
         <tbody>
         <% @netball_educators.each do |educator| %>
             <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
-                <td scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
-                <%= educator.created_at.to_formatted_s(:usa) unless (educator.created_at.to_s.empty?) %>
-                </td>
-
-                <td class="px-6 py-4">
+               
+                <td class="px-3 py-2">
                     <%= educator.state %>
                 </td>
 
-                <td class="px-6 py-4">
+                <td class="px-3 py-2">
                     <%= educator.city %>
                 </td>
                 
-                <td class="px-6 py-4 text-wrap truncate">
+                <td class="px-3 py-2 text-wrap truncate">
                   <%= educator.school_name %><br>
                   <%= (link_to educator.website, educator.website, target: '_blank', class: link_class) unless (educator.website.to_s.empty?)%>
                 </td>
                 
-                <td class="px-6 py-4">
+                <td class="px-3 py-2">
                    <%= link_to educator.full_name, edit_netball_educator_path(educator), class: link_class %>
                 </td>
                 
-                <td class="px-6 py-4">
+                <td class="px-3 py-2">
                    <%= educator.level %>
                 </td>
 
-                <td class="px-6 py-4 truncate">
+                <td class="px-3 py-2 truncate">
                    <%= educator.formatted_phone %><br><%= educator.email %>
                 </td>
                 
                 
                 
-                <td class="px-6 py-4">
+                <td class="px-3 py-2">
                    <%= educator.user.full_name unless (educator.user_id.to_s.empty?)  %>
                 </td>
 
-                 <td class="px-6 py-4">
+                 <td class="px-3 py-2">
                   <p class="text-wrap truncate"> <%= educator.mgmt_notes %></p>
                 </td>
+
+                <td scope="row" class="px-3 py-2 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                     <%= educator.created_at.to_formatted_s(:usa) unless (educator.created_at.to_s.empty?) %>
+                </td>
+
             </tr>
             <% end %>
         </tbody>
     </table>
     <% else %>
-    <p class="px-6 py-4">
+    <p class="px-3 py-2">
     No records to view</p>
     <% end %>
  

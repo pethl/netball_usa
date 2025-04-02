@@ -6,18 +6,17 @@ class Ability
   def initialize(user)
     user ||= User.new
 
-    if user.present?
-      can :read, User # Allow the user to read User objects
-    end
     # start by defining rules for all users, also not logged ones
-    #can :read, Transfer, public: true  # everyone can see transfer records tselect their name
-    #can :update, Transfer, public: true  # everyone can update their record NEEDS WORK
     can :create, NetballEducator, public: true # public can create a educator record
     can :show, NetballEducator, public: true
-    #return unless user.present?
+
+    # Allow users to manage their own profile
+    if user.present?
+      can [:read, :update], User, id: user.id
+    end
 
     unless  user.role.to_s.empty?
-    can :manage, User, user_id: user.id
+      can :manage, User, user_id: user.id
     end
 
     #role 1 teams_grants
@@ -97,6 +96,12 @@ class Ability
       can :manage, FollowUp
       can :manage, Event
       can :manage, Medium
+    end
+
+    #role 11 spare
+    if user.spare?
+      # Currently no specific permissions assigned
+      # Add permissions as needed
     end
 
      #role 12 na_people

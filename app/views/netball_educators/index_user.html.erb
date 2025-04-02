@@ -1,102 +1,88 @@
 <% content_for(:page_title, "Educators - By User Allocation")%>
 
-  <div class="m-4">
-     <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
-        <li class="me-2">
-              <a href="/netball_educators/" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Date Added</a>
-          </li>
-          <li class="me-2">
-              <a href="/netball_educators/index_state" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By State</a>
-          </li>
-          <li class="me-2">
-              <a href="/netball_educators/index_user" class="inline-block p-2 text-blue-900 bg-gray-100 rounded-t-lg active " aria-current="page">By Allocation</a>
-          </li>
-          <li class="me-2">
-             <a href="/netball_educators/index_level" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Level</a>
-         </li>
-         <li class="me-2">
-            <a href="/netball_educators/search" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Search</a>
-        </li>
-        </ul>
-  </div>
-
-<div class="mt-4 mb-2">
-<%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
+<div class="p-2">
+    <%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
 </div>
+
+<%= render 'nav_tabs' %>
 
     <% if @netball_educators.any? %>
     <div class="m-4">
-    <% @netball_educators_by_user.each do |user, educators| %>
-    <div class="text-xl text-blue-900 bg-blue-100">
-        Allocated to <%= User.find(user).first_name unless user.nil? %>  <%= User.find(user).last_name unless user.nil? %>
-        <% if user.nil? %> Not Allocated <% end %>
-    </div>
+   
 
 <div id="educators">
 <div class="relative overflow-x-auto overflow-y-auto">
     <table class="table-fixed w-full text-left rtl:text-right">
-        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+        <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs ">
             <tr>
-            <th scope="col" class="px-6 py-3 w-24">
+            <th scope="col" class="px-4 py-3 w-24">
                 State
             </th>
-            <th scope="col" class="px-6 py-3 w-40">
+            <th scope="col" class="px-4 py-3 w-40">
                 City
             </th>    
             
-            <th scope="col" class="px-6 py-3 w-64 truncate">
+            <th scope="col" class="px-4 py-3 w-64 truncate">
                 School/District
             </th>
         
-            <th scope="col" class="px-6 py-3 w-52">
-                Name
+            <th scope="col" class="px-4 py-3 w-52">
+                Level
             </th>
 
-            <th scope="col" class="px-6 py-3 w-64 truncate">
-                Contact
+            <th scope="col" class="px-4 py-3 w-64 truncate">
+                Name
             </th>
-            <th scope="col" class="px-6 py-3 w-52">
-                Date Created 
+            <th scope="col" class="px-4 py-3 w-52">
+                Contact 
             </th>
             
-            <th scope="col" class="px-6 py-3 w-52">
+            <th scope="col" class="px-4 py-3 w-52">
                 Allocated To
+            </th>
+
+            <th scope="col" class="px-4 py-3 w-52">
+                Date Created
             </th>
            
         </tr>
         </thead>
         <tbody>
-        <% educators.each do |educator| %>
+        <% @netball_educators.each do |educator| %>
             <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
-                <td class="px-6 py-4">
+                <td class="px-4 py-2">
                    <%= educator.state %>
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-4 py-2">
                     <%= educator.city %>
                 </td>
 
-                <td class="px-6 py-4 truncate">
+                <td class="px-4 py-2 truncate">
                   <%= educator.school_name %><br>
                   <%= (link_to educator.website, educator.website, target: '_blank', class: link_class) unless (educator.website.to_s.empty?)%>
                 </td>
 
-                <td class="px-6 py-4">
+                <td class="px-4 py-2">
                    <%= educator.level %>
                 </td>
 
-                <td class="px-6 py-4">
+                <td class="px-4 py-2">
                    <%= link_to educator.full_name, edit_netball_educator_path(educator), class: link_class %>
                 </td>
 
-                <td class="px-6 py-4">
+                <td class="px-6 py-2 truncate">
+                <%= educator.formatted_phone %><br><%= educator.email %>
+             </td>
+
+                <td class="px-4 py-2">
                    <%= educator.user.full_name unless (educator.user_id.to_s.empty?)  %>
                 </td>
                 
-                <td class="px-6 py-4 truncate">
+                <td class="px-4 py-2 truncate">
                    <%= educator.formatted_phone %><br><%= educator.email %>
                 </td>
 
-                <td scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                <td scope="row" class="px-4 py-2 font-medium text-gray-800 whitespace-nowrap dark:text-white">
                     <%= educator.created_at.to_formatted_s(:usa) unless (educator.created_at.to_s.empty?) %>
                 </td>
                 
@@ -106,9 +92,9 @@
         </tbody>
     </table>
 <br>
-    <% end %>
+
     <% else %>
-    <p class="px-6 py-4">
+    <p class="px-4 py-2">
     No records to view</p>
     <% end %>
     

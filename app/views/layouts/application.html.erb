@@ -206,29 +206,9 @@
            <% if current_user.admin?  %>
              
                <li class="mt-2">
-                   <a href="/netball_educators/pe_directors" class="mt-8 text-gray-100 hover:font-bold">PE DIRECTORS</a>
+                   <a href="/netball_educators/pe_directors" class="text-gray-100 hover:font-bold">EDUCATORS</a>
                </li>
-               <li class="mt-2">
-                   <a href="/netball_educators/index_state" class="text-gray-100 hover:font-bold">EDUCATORS</a>
-               </li>
-               <li class="mt-2 ml-2">
-                   <a href="/equipment/" class="text-gray-100 hover:font-bold">- Equipment Purchased</a>
-               </li>
-               <li class="mt-2 ml-2">
-                   <a href="/netball_educators/index_level/" class="text-gray-100 hover:font-bold">- By Level</a>
-               </li>
-                 <li class="mt-2 ml-2">
-                   <a href="/netball_educators/" class="text-gray-100 hover:font-bold">- By Date Added</a>
-               </li>
-               <li class="mt-2 ml-2">
-                   <a href="/netball_educators/index_user" class="text-gray-100 hover:font-bold">- By Allocation</a>
-               </li>
-               <li class="mt-2 ml-2">
-                   <a href="/netball_educators/search" class="text-gray-100 hover:font-bold">- Search</a>
-               </li>
-                <li class="mt-2">
-                   <a href="/follow_ups/" class="text-gray-100 hover:font-bold">ED. FOLLOW UPs</a>
-               </li>
+               
                 <li class="mt-2">
                    <a href="/sponsors" class="text-gray-100 hover:font-bold">SPONSORS</a>
                </li>
@@ -254,39 +234,9 @@
                   <%= link_to "- Published", published_media_path, class: "text-gray-100 hover:font-bold"%>
               </li>
 
-            <li class="mt-2">
-              <%= link_to "NA PEOPLE", people_path, class: "mt-8 text-gray-100 hover:font-bold" %>
-            </li>
-            
-            <li class="mt-2 ml-2">
-              <%= link_to "- US Umpires", people_path(role: "Umpire", region: "US & Canada"), class: "text-gray-100 hover:font-bold" %>
-            </li>
-            
-            <li class="mt-2 ml-2">
-              <%= link_to "- Int Umpires", people_path(role: "Umpire", region: "International"), class: "text-gray-100 hover:font-bold" %>
-            </li>
-
-            <li class="mt-2 ml-2">
-            <%= link_to "- Coaches", people_path(role: "Coach"), class: "text-gray-100 hover:font-bold" %>
-          </li>
-            
-            <li class="mt-2 ml-2">
-              <%= link_to "- Scorers", people_path(role: "Scorer"), class: "text-gray-100 hover:font-bold" %>
-            </li>
-            
-            <li class="mt-2 ml-2 mr-1 whitespace-nowrap">
-              <%= link_to "- Trainers/Ambassadors", people_path(role: "Trainer"), class: "text-gray-100 hover:font-bold" %>
-            </li>
-            
-           
-            
-            <li class="mt-2 ml-2">
-              <%= link_to "- Operations", people_path(role: "Operations"), class: "text-gray-100 hover:font-bold" %>
-            </li>
-            
-            <li class="mt-2 ml-2">
-              <%= link_to "- Add New Person", new_person_path, data: { turbo: false }, class: "text-gray-100 hover:font-bold" %>
-            </li>
+                <li class="mt-2">
+                  <%= link_to "NA PEOPLE", people_path, class: "mt-8 text-gray-100 hover:font-bold" %>
+                </li>
                 <li class="mt-2">
                    <a href="/events/" class="text-gray-100 hover:font-bol">EVENTS</a>
                </li>

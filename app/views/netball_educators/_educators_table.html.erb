@@ -1,0 +1,101 @@
+<% if @netball_educators.any? %>
+  
+<div class="m-4">
+  <% @netball_educators_by_level.each do |level, educators| %>
+ 
+    <% if educators.count> 0 %>
+      <div class="text-xl text-blue-900 mt-8 bg-blue-100">
+        <th scope="row" colspan="9" class="px-6 py-4 ml-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+          <% if level.nil? %> Level Unknown <% else %> <%= level %><% end %>
+        </th>
+       </div>
+  
+
+<div id="educators">
+<div class="relative overflow-auto">
+    <table class="table-fixed w-full text-left rtl:text-right">
+        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+            <tr>
+                <th scope="col" class="px-6 py-3 w-24">
+                    State
+                </th>
+                <th scope="col" class="px-6 py-3 w-40">
+                    City
+                </th>    
+                
+                <th scope="col" class="px-6 py-3 w-64 truncate">
+                    School/District
+                </th>
+            
+                <th scope="col" class="px-6 py-3 w-52">
+                    Name
+                </th>
+                <th scope="col" class="px-6 py-3 w-64 truncate">
+                    Contact
+                </th>
+               
+                <th scope="col" class="px-6 py-3 w-52">
+                    Allocated To
+                </th>
+                <th scope="col" class="px-6 py-3 w-60 truncate">
+                    Notes
+                </th>
+                <th scope="col" class="px-6 py-3 w-52">
+                    Date Created 
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        
+        <% educators.each do |educator| %>
+            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+                <td class="px-6 py-2 max-width-6">
+                    <%= educator.state %>
+                </td>      
+                
+                <td class="px-6 py-2">
+                    <%= educator.city %>
+                </td>
+                    
+                <td class="px-6 py-2 truncate">
+                  <%= educator.school_name %><br>
+                  <%= (link_to educator.website, educator.website, target: '_blank', class: link_class) unless (educator.website.to_s.empty?)%>
+                </td>
+                
+                <td class="px-6 py-2">
+                   <%= link_to educator.full_name, edit_netball_educator_path(educator), class: link_class %>
+                </td>
+                
+                <td class="px-6 py-2 truncate">
+                   <%= educator.formatted_phone %><br><%= educator.email %>
+                </td>
+                
+                
+                
+                <td class="px-6 py-2">
+                   <%= educator.user.full_name unless (educator.user_id.to_s.empty?)  %>
+                </td>
+
+                 <td class="px-6 py-2">
+                  <p class="text-wrap truncate"> <%= educator.mgmt_notes %></p>
+                </td>
+
+                <th scope="row" class="px-6 py-2 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                    <%= educator.created_at.to_formatted_s(:usa) unless (educator.created_at.to_s.empty?) %>
+                </th>
+            </tr>
+            <% end %>
+              <% end %>
+        </tbody>
+        </table>
+    <% end %>
+    
+<br><br>
+      <% else %>
+        <p class="px-6 py-4">
+        No records to view</p>
+      <% end %>
+    </div>
+ </div>
+</div>
+<br>
