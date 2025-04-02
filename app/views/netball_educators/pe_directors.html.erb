@@ -1,124 +1,20 @@
-<% content_for(:page_title, "P.E. Directors")%>
+<% content_for(:page_title, "School/District Leads")%>
 
-<div class="p-2">
-    <%= link_to "Add New Educator", new_netball_educator_path, class: small_button_class %>
+<%= render 'nav_tabs' %>
+
+<div class="p-4">
+  <% if current_user.admin? %>
+    <%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
+  <% end %>
 </div>
-
- <%= render 'nav_tabs' %>
 
 <% if @netball_educators.any? %>
-  
-<div id="educators">
-<div class="relative overflow-x-auto">
-    <table class="table-fixed w-full text-left rtl:text-right">
-        <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs ">
-             <tr>
-                 <th scope="col" class="px-4 py-3 w-32">
-                     See Details
-                 </th>
-              
-                <th scope="col" class="px-4 py-3 w-52">
-                    Name 
-                </th>
-                <th scope="col" class="px-4 py-3 w-80">
-                    Title
-                </th>
-                <th scope="col" class="px-4 py-3 w-20">
-                    State
-                </th>
-                <th scope="col" class="px-4 py-3 w-52">
-                    City
-                </th>
-                <th scope="col" class="px-4 py-3 w-52">
-                    Contact
-                </th>
-                <th  colspan="2" class="px-4 py-3 w-52">
-                    School/District
-                </th>
-                
-                <th scope="col" class="px-4 py-3 w-40 text-right">
-                    Equip. Sale?
-                </th>
-                <th scope="col" class="px-4 py-3 w-40 text-right">
-                    Follow Up?
-                </th>
-                <th scope="col" class="px-4 py-3 w-52">
-                    Allocated To
-                </th>
-                <th scope="col" class="px-4 py-3 w-60 truncate">
-                    Notes
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-        <% @netball_educators.each do |educator| %>
-            <tr class="bg-white border-b hover:bg-gray-100">
-                <td class="px-4 py-2">
-                  <%= link_to image_tag("view.png", :class=>"mx-2 h-6 w-auto"), educator  %>
-                </td>
-
-               
-                <td class="px-4 py-2 whitespace-nowrap">
-                   <%= link_to educator.full_name, edit_netball_educator_path(educator), class: link_class %>
-                </td>
-
-                <td class="px-4 py-2">
-                   <%= educator.title %>
-                </td>
-                
-                <td class="px-4 py-2">
-                   <%= educator.state %>
-                </td>
-
-                <td class="px-4 py-2">
-                    <%= educator.city %>
-                </td>
-                 
-                <td class="px-4 py-2">
-                   <%= educator.formatted_phone %><br><%= educator.email %>
-                </td>
-                
-                <td colspan="2" class="px-4 py-2 whitespace-wrap">
-                  <%= educator.school_name %><br>
-                  <%= (link_to educator.website, educator.website, target: '_blank', class: link_class) unless (educator.website.to_s.empty?)%>
-                </td>
-               
-                <td class="px-4 py-2 text-right">
-                <% if  educator.equipment.count == 1%>
-                   <%= link_to educator.equipment.count, equipment_path(educator.equipment.first.id), class: link_class %>
-                  <% else %>
-                    <%= educator.equipment.count %>
-               <% end %>
-                </td>
-                
-                <td class="px-4 py-2 text-right">
-                <% if  educator.follow_up.count == 1%>
-                   <%= link_to educator.follow_up.count, follow_up_path(educator.follow_up.first.id), class: link_class %>
-                  <% else %>
-                    <%= educator.follow_up.count %>
-               <% end %>
-                </td>
-                
-                <td class="px-4 py-2">
-                   <%= educator.user.full_name unless (educator.user_id.to_s.empty?)  %>
-                </td>
-
-                 <td class="px-4 py-2">
-                  <p class=" whitespace-nowrap truncate"> 
-                  <%= educator.mgmt_notes %></p>
-                </td>
-            </tr>
-            <% end %>
-        </tbody>
-    </table>
-    <% else %>
-    <p class="px-4 py-2">
-    No records to view</p>
-    <% end %>
-    
-</div>
-
-<br>
+  <div id="educators">
+    <%= render 'educators_table', educators: @netball_educators, hide_level: true %>
+  </div>
+<% else %>
+  <p class="px-4 py-2">No records to view</p>
+<% end %>
 
 
     

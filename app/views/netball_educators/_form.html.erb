@@ -15,15 +15,6 @@
         </div>
       <% end %>
 
-      <% if is_admin? %>
-      <div class="mb-6">
-      <%= form.label :is_pe_director, 'P.E. Director?', style: "display: block", class: label_class  %>
-      <div class="mt-1">
-      <%= form.check_box :is_pe_director, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
-     </div>
-    </div>
-      <% end %>
-
       <div class="mb-6">
         <%= form.label :first_name, "First Name*", autofocus: true, autocomplete: "name", class: "required block text-sm font-medium text-gray-700 invalid:border-red-500 required"%>
          <div class="mt-1">

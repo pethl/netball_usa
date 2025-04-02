@@ -1,0 +1,57 @@
+<div id="educators">
+  <div class="relative overflow-x-auto">
+    <table class="table-fixed w-full text-left rtl:text-right">
+      <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs">
+        <tr>
+          <th scope="col" class="px-3 py-2 w-12">View</th>
+          <th scope="col" class="px-3 py-2 w-24">State</th>
+          <th scope="col" class="px-3 py-2 w-40">City</th>
+          <th scope="col" class="px-3 py-2 w-64">School/District</th>
+          <th scope="col" class="px-3 py-2 w-52">Name</th>
+          <% unless local_assigns[:hide_level] %>
+            <th scope="col" class="px-3 py-2 w-40">Level</th>
+          <% end %>
+          <th scope="col" class="px-3 py-2 w-64">Contact</th>
+          <th scope="col" class="px-3 py-2 w-52">Allocated To</th>
+          <th scope="col" class="px-3 py-2 w-96 truncate">Notes</th>
+          <th scope="col" class="px-3 py-2 w-32">Date Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% local_assigns[:educators].each do |educator| %>
+          <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+            <td class="px-3 py-2">
+              <%= link_to netball_educator_path(educator), data: { turbo: false }, class: "mx-2 text-blue-900 hover:text-blue-600" do %>
+                <i class="fa-solid fa-eye"></i>
+              <% end %>
+            </td>
+            <td class="px-3 py-2"><%= educator.state %></td>
+            <td class="px-3 py-2"><%= educator.city %></td>
+            <td class="px-3 py-2 text-wrap truncate">
+              <%= educator.school_name %><br>
+              <%= (link_to educator.website, educator.website, target: '_blank', class: link_class) unless (educator.website.to_s.empty?)%>
+            </td>
+            <td class="px-3 py-2">
+              <%= link_to educator.full_name, edit_netball_educator_path(educator), class: link_class %>
+            </td>
+            <% unless local_assigns[:hide_level] %>
+              <td class="px-3 py-2"><%= educator.level %></td>
+            <% end %>
+            <td class="px-3 py-2 truncate">
+              <%= educator.formatted_phone %><br><%= educator.email %>
+            </td>
+            <td class="px-3 py-2">
+              <%= educator.user.full_name unless (educator.user_id.to_s.empty?) %>
+            </td>
+            <td class="px-3 py-2">
+              <p class="text-wrap truncate"><%= educator.mgmt_notes %></p>
+            </td>
+            <td class="px-3 py-2 font-medium text-gray-800 whitespace-nowrap">
+              <%= educator.created_at.to_formatted_s(:usa) unless (educator.created_at.to_s.empty?) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div> 

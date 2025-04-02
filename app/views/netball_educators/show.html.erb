@@ -15,8 +15,7 @@
 <% if user_signed_in? %>
   <div>
   <%= link_to "Edit this educator", edit_netball_educator_path(@netball_educator), class: block_link_class %> 
-  <%= link_to "Back to PE Directors", pe_directors_path, class: block_link_class %>
-  <%= link_to "Back to Educators", netball_educators_path, class: block_link_class %>
+  <%= link_to "Back to netball educators", netball_educators_path, class: block_link_class %>
 
  
   <%= button_to "Delete this record", @netball_educator, method: :delete,
@@ -30,3 +29,8 @@
   </div>
 </div>
 <% end %>
+
+<div class="mt-6">
+  <%= link_to "Edit this netball educator", edit_netball_educator_path(@netball_educator), class: block_link_class %> |
+  <%= link_to "Back to netball educators", netball_educators_path, class: block_link_class %>
+</div>

@@ -1,29 +1,21 @@
-<div class="my-4 ml-2">
-   <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
-        <li class="me-2">
-         <a href="/netball_educators/pe_directors" class="inline-block p-2 rounded-t-lg active" >P.E. Directors</a>
-        </li>
-         <li class="me-2">
-            <a href="/netball_educators/" class="inline-block p-2 rounded-t-lg active" aria-current="page">All Educators</a>
-        </li>
-        <li class="me-2">
-            <a href="/netball_educators/index_state" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By State</a>
-        </li>
-        <li class="me-2">
-            <a href="/netball_educators/index_level" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">By Level</a>
-        </li>
-         <li class="me-2">
-            <a href="/netball_educators/index_user" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">My Educators</a>
-        </li>
-       
-       <li class="me-2">
-          <a href="/netball_educators/search" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Search</a>
+<div class="border-b border-gray-200">
+  <nav class="flex space-x-4 border-b border-gray-200" aria-label="Tabs">
+    <ul class="flex space-x-4 list-none">
+      <li>
+        <%= link_to "All Educators", netball_educators_path, class: tab_class(current_page?(netball_educators_path)) %>
       </li>
-      <li class="me-2">
-            <a href="/equipment" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Equipment Purchased</a>
-        </li>
-        <li class="me-2">
-        <a href="/follow_ups" class="inline-block p-2 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Follow Ups</a>
-    </li>
-  </ul>
+      <li>
+        <%= link_to "My Educators", my_educators_path, class: tab_class(current_page?(my_educators_path)) %>
+      </li>
+      <li>
+        <%= link_to "PE Directors", pe_directors_netball_educators_path, class: tab_class(current_page?(pe_directors_netball_educators_path)) %>
+      </li>
+      <li>
+        <%= link_to "Equipment", equipment_index_path, class: tab_class(current_page?(equipment_index_path)) %>
+      </li>
+      <li>
+        <%= link_to "Follow-ups", follow_ups_path, class: tab_class(current_page?(follow_ups_path)) %>
+      </li>
+    </ul>
+  </nav>
 </div>
