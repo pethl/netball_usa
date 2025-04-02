@@ -7,8 +7,11 @@ class PeoplePdfService
   
     def generate
       Prawn::Document.new do |pdf|
-        pdf.text "People Details", size: 20, style: :bold, align: :center
-        pdf.move_down 20
+        pdf.image "#{Rails.root}/app/assets/images/Netball_America_Logo.png", at: [462, 737], width: 80
+        pdf.text "Print Date: #{Date.today.strftime('%b %d, %Y')}\n", size: 6, align: :left
+      
+        pdf.text "US & Canada Umpire Details", size: 20, style: :bold, align: :center
+         pdf.move_down 20
   
         table_data = [["Last Name", "First Name", "Location", "Email", "Phone"]]
   
