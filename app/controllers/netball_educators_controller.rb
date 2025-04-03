@@ -39,9 +39,11 @@ class NetballEducatorsController < ApplicationController
 
   def new
     @netball_educator = NetballEducator.new
+    @users = User.all
   end
 
   def edit
+    @users = User.all
   end
 
   def create
