@@ -18,28 +18,26 @@
   <script src="https://kit.fontawesome.com/d868e3ba9e.js" crossorigin="anonymous"></script>
 </head>
 
-  <body class="bg-blue-900 max-h-xl">
+  <body class="bg-blue-900">
 
    <% if current_user %> 
      
   <!-- Header bar sticky starts -->
-  <header class="bg-blue-900 text-blue-900 sticky top-0 z-10 w-screen">
+  <header class="bg-blue-900 text-blue-900 sticky top-0 z-10">
   
-   <div class="flex flex-row bg-white w-screen">
+   <div class="flex flex-row bg-white">
       
       <div class="flex w-4/5 mt-2 ml-4 mb-2">
-          <a href="https://netball-america.com" class="flex align-content-end items-center space-x-3 rtl:space-x-reverse">
-              <%= link_to image_tag("Netball_America_Logo.png", :class=>"h-12 w-auto"), root_path %>
-           </a>
-      </div>
+          <%= link_to image_tag("Netball_America_Logo.png", class: "h-12 w-auto"), root_path %>
+       </div>
      
      <div class="flex w-1/5 items-center justify-between m-2">
         
         <div class="p-2">
-         <%= link_to root_path do %>
-            <i data-tooltip-target="tooltip-home" class="fa-solid fa-house text-blue-800"> </i>
+         <%= link_to root_path, class: "p-2", data: { tooltip_target: "tooltip-home" } do %>
+            <i class="fa-solid fa-house text-blue-800"></i>
           <% end %>
-          <div id="tooltip-home" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+          <div id="tooltip-home" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip">
               Home Page
               <div class="tooltip-arrow" data-popper-arrow></div>
           </div>
@@ -47,20 +45,20 @@
         
         
          <div class="p-2">
-           <%= link_to edit_user_registration_path do %>
-             <i data-tooltip-target="tooltip-edit" class="fa-solid fa-user text-blue-800"> </i>
+           <%= link_to edit_user_registration_path, class: "p-2", data: { tooltip_target: "tooltip-edit" } do %>
+             <i class="fa-solid fa-user text-blue-800"></i>
            <% end %>
-           <div id="tooltip-edit" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+           <div id="tooltip-edit" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip">
                Edit Profile
                <div class="tooltip-arrow" data-popper-arrow></div>
            </div>
            </div>
            
          <div class="p-2">
-           <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
-             <i data-tooltip-target="tooltip-logout" class="fa-solid fa-arrow-right-from-bracket text-blue-800"> </i>
+           <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "p-2", data: { tooltip_target: "tooltip-logout" } do %>
+             <i class="fa-solid fa-arrow-right-from-bracket text-blue-800"></i>
            <% end %>
-           <div id="tooltip-logout" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+           <div id="tooltip-logout" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip">
                Logout
                <div class="tooltip-arrow" data-popper-arrow></div>
            </div>
@@ -68,10 +66,10 @@
          
            <% unless current_user.teamlead? %>
            <div class="p-2 text-lg">
-             <%= link_to asset_path("NA_System_User_Guide_V1_1.pdf", skip_pipeline: true) do %>
-               <i data-tooltip-target="tooltip-help" class="fa-solid fa-circle-info text-blue-800"> </i>
+             <%= link_to asset_path("NA_System_User_Guide_V1_1.pdf", skip_pipeline: true), class: "p-2 text-lg", data: { tooltip_target: "tooltip-help" } do %>
+               <i class="fa-solid fa-circle-info text-blue-800"></i>
              <% end %>
-             <div id="tooltip-help" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+             <div id="tooltip-help" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip">
               Help
                  <div class="tooltip-arrow" data-popper-arrow></div>
              </div>
@@ -112,86 +110,8 @@
   
    
      <% if current_user.role =="admin" %> 
-    <div class="md:hidden sm:w-fit sm:justify-items bg-blue-900 text-white">
-         
-      <table class="m-1 w-full text-center">
-      <br>
-        <tr>
-          <td>
-            <a href="/netball_educators/pe_directors" class="mt-8 hover:font-bold">PE DIRECTORS</a>
-          </td>
-          <td>
-            <a href="/netball_educators/" class="hover:font-bold">EDUCATORS</a>
-          </td>
-          <td>
-             <a href="/follow_ups/" class="hover:font-bold">ED. FOLLOW UPs</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a href="/sponsors" class="hover:font-bold">SPONSORS</a>
-          </td>
-          <td>
-            <a href="/opportunities" class="hover:font-bold ml-4">- Opportunities</a>
-          </td>
-          <td>
-            <a href="/grants" class="hover:font-bold">GRANTS</a>
-          </td>
-          <td>
-             <a href="/events" class="hover:font-bold">EVENTS</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a href="/programs" class="hover:font-bold">BAI PROGRAMS</a>
-          </td>
-          <td>
-            <a href="/people" class="hover:font-bold">PEOPLE</a>
-          </td>
-          <td>
-             <a href="/transfers" class="hover:font-bold">US OPEN</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a href="/clubs/index_admin" class="hover:font-bold">MEMBERSHIP</a>
-          </td>
-          <td>
-             <a href="#" class="hover:font-bold"></a>
-          </td>
-          <td>
-              <a href="#" class="hover:font-bold"></a>
-          </td>
-        </tr>
-      <% if is_admin? %>  
-        <tr>
-          <td>
-            <a href="/budgets" class="text-blue-300 hover:font-bold">BUDGETS</a>
-          </td>
-          <td>
-            <a href="/references" class="text-blue-300 hover:font-bold">REF DATA</a>
-          </td>
-          <td>
-             <a href="/sample_words" class="text-blue-300 hover:font-bold">WORDING</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a href="/users" class="text-blue-300 hover:font-bold">USERS</a>
-          </td>
-          <td>
-            <a href="#" class="hover:font-bold"></a>
-          </td>
-          <td>
-             <a href="#" class="hover:font-bold"></a>
-          </td>
-        </tr>
-        <% end %>
-      </table>
-      <br>
-     
-       <% end %>
-     </div>
+    <%= render 'layouts/mobile_menu' %>
+    <% end %>
   </header>
 <!-- Headerbar Sticky end -->
      
@@ -202,264 +122,7 @@
     
        <div class="hidden md:flex flex-col w-1/5 h-screen bg-blue-900 border-0 relative">
       
-         <ul class="ml-6 text-xs xl:text-xs ">
-           <% if current_user.admin?  %>
-             
-               <li class="mt-2">
-                   <a href="/netball_educators/pe_directors" class="text-gray-100 hover:font-bold">EDUCATORS</a>
-               </li>
-               
-                <li class="mt-2">
-                   <a href="/sponsors" class="text-gray-100 hover:font-bold">SPONSORS</a>
-               </li>
-               <li class="mt-2 ml-2">
-                  <a href="/opportunities" class="text-gray-100">- Opportunities</a>
-                </li>
-                <li class="mt-2">
-                   <a href="/grants/" class="text-gray-100 hover:font-bold">GRANTS</a>
-               </li>
-               <li class="mt-2">
-                   <a href="/partners/" class="text-gray-100 hover:font-bold">PARTNERS</a>
-               </li>
-               <li class="mt-2">
-                   <a href="/vendors/" class="text-gray-100 hover:font-bold">VENDORS</a>
-               </li>
-               <li class="mt-2">
-                    <a href="/tours/" class="text-gray-100 hover:font-bold">TOURS</a>
-                </li>
-                <li class="mt-2">
-                    <a href="/media/" class="text-gray-100 hover:font-bold">MEDIA</a>
-                </li>
-                <li class="mt-2 ml-2">
-                  <%= link_to "- Published", published_media_path, class: "text-gray-100 hover:font-bold"%>
-              </li>
-
-                <li class="mt-2">
-                  <%= link_to "NA PEOPLE", people_path, class: "mt-8 text-gray-100 hover:font-bold" %>
-                </li>
-                <li class="mt-2">
-                   <a href="/events/" class="text-gray-100 hover:font-bol">EVENTS</a>
-               </li>
-                <li class="mt-2">
-                   <a href="/programs" class="text-gray-100 hover:font-bol">BAI PROGRAMS</a>
-               </li>
-               <li class="mt-2">
-                   <a href="/venues" class="text-gray-100 hover:font-bol">VENUES</a>
-               </li>
-                <li class="mt-2">
-                   <a href="/transfers/" class="text-gray-100 hover:font-bol">US OPEN</a>
-               </li>
-              
-               <li class="mt-2 ml-2">
-                   <a href="/transfers/new" class="text-gray-100 hover:font-bold">- Add New Attendee</a>
-               </li>
-               <li class="mt-2 ml-2">
-                   <a href="/transfers/" class="text-gray-100 hover:font-bold">- Event Attendees</a>
-               </li>
-                 <li class="mt-2 ml-2">
-                   <a href="/transfers/inbound_pickups_transfers_path" class="text-gray-100 hover:font-bold">- Arrivals Transfers</a>
-               </li>
-               <li class="mt-2 ml-2">
-                   <a href="/transfers/outbound_pickups_transfers_path" class="text-gray-100 hover:font-bold">- Departure Transfers</a>
-               </li>
-               
-               <li class="mt-2">
-                   <a href="/clubs/index_admin" class="text-gray-100 hover:font-bold">MEMBERSHIP</a>
-               </li>
-               <li class="mt-2 ml-2">
-                   <a href="/clubs/index_admin" class="text-gray-100 hover:font-bold">- All Clubs</a>
-               </li>
-               <li class="mt-2 ml-2">
-                <a href="/members" class="text-gray-100 hover:font-bold">- All Members</a>
-              </li>
-               <li class="mt-2 ml-2">
-                   <a href="/clubs" class="text-gray-100 hover:font-bold">- Admin Managed Clubs</a>
-               </li>
-               <li class="mt-2 ml-2">
-                  <a href="/individual_members/" class="text-gray-100 hover:font-bold">- Individual Members</a>
-               </li>
-               <li class="mt-2 ml-2">
-                      <a href="/clubs/teams_list_index" class="text-gray-100 hover:font-bold">- Clubs by Region</a>
-                 </li>
-                <li class="mt-2 ml-2">
-                 <a href="/payments/" class="text-gray-100 hover:font-bold">- Payments</a>
-              </li>
-               <% elsif current_user.teamlead? %>
-               <!-- commenting out link for now
-                   <li class="mt-8">
-                       <a href="/clubs/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
-                   </li>
-                   <li class="mt-2">
-                       <a href="/clubs/" class="text-gray-100 hover:font-bold">My Club</a>
-                   </li>
-                   //-->
-                <% elsif current_user.teams_grants? %>
-                    <li class="mt-8">
-                       <a href="/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
-                    </li>
-                    <li class="mt-2">
-                      <a href="/clubs/index_admin" class="text-gray-100 hover:font-bold">All Clubs</a>
-                    </li>
-                    <li class="mt-2">
-                      <a href="/clubs/teams_list_index" class="text-gray-100 hover:font-bold">Clubs by Region</a>
-                    </li>
-                    <li class="mt-2">
-                      <a href="/clubs" class="text-gray-100 hover:font-bold">Admin Managed Clubs</a>
-                    </li>
-                    <li class="mt-2">
-                      <a href="/members" class="text-gray-100 hover:font-bold">All Members</a>
-                    </li>
-                    <li class="mt-2">
-                      <a href="/individual_members/" class="text-gray-100 hover:font-bold">Individual Members</a>
-                    </li>
-                    <li class="mt-2">
-                        <a href="/grants/" class="text-gray-100 hover:font-bold">Grants</a>
-                    </li>
-                    <li class="mt-2">
-                        <a href="/people/" class="text-gray-100 hover:font-bold">NA People</a>
-                    </li>
-                    <li class="mt-2">
-                      <a href="/programs/" class="text-gray-100 hover:font-bold">BAI Programs</a>
-                    </li>
-                    <li class="mt-2">
-                      <a href="/events/" class="text-gray-100 hover:font-bold">Events</a>
-                    </li>
-                    <li class="mt-2">
-                      <a href="/venues/" class="text-gray-100 hover:font-bold">Venues</a>
-                    </li>
-                    <li class="mt-2">
-                      <a href="/tours/" class="text-gray-100 hover:font-bold">Tours</a>
-                    </li>
-                    <li class="mt-2">
-                      <a href="/partners/" class="text-gray-100 hover:font-bold">Partners</a>
-                    </li>
-
-                <% elsif current_user.grants? %>
-                    <li class="mt-8">
-                       <a href="/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
-                   </li>
-                   <li class="mt-2">
-                       <a href="/grants/" class="text-gray-100 hover:font-bold">Grants</a>
-                   </li>
-                <% elsif current_user.educators? %>
-                   <li class="mt-8">
-                       <a href="/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
-                   </li>
-                   <li class="mt-2">
-                       <a href="/netball_educators/" class="text-gray-100 hover:font-bold">Educators</a>
-                   </li>
-                   <li class="mt-2">
-                   <a href="/follow_ups/" class="text-gray-100 hover:font-bold">Follow Ups</a>
-               </li>
-                <% elsif current_user.teams_admin? %>
-                   <li class="mt-8">
-                       <a href="/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
-                   </li>
-                   <li class="mt-2">
-                       <a href="/clubs/index_admin" class="text-gray-100 hover:font-bold">All Clubs</a>
-                   </li>
-                   <li class="mt-2">
-                       <a href="/clubs/teams_list_index" class="text-gray-100 hover:font-bold">Clubs by Region</a>
-                   </li>
-                   <li class="mt-2">
-                       <a href="/clubs/" class="text-gray-100 hover:font-bold">Set Up Club</a>
-                   </li>
-                   <li class="mt-2">
-                      <a href="/individual_members/" class="text-gray-100 hover:font-bold">Individual Members</a>
-                    </li>
-                    <li class="mt-2">
-                      <a href="/payments/" class="text-gray-100 hover:font-bold">Payments</a>
-                    </li>
-                   <% elsif current_user.sponsors_events? %>
-                    <li class="mt-8">
-                        <a href="/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
-                    </li>
-                    <li class="mt-2">
-                        <a href="/sponsors" class="text-gray-100 hover:font-bold">Sponsors</a>
-                    </li>
-                    <li class="mt-2 ml-2">
-                    <a href="/opportunities" class="text-gray-100 hover:font-bold">- Opportunities</a>
-                </li>
-                    <li class="mt-2">
-                      <a href="/events" class="text-gray-100 hover:font-bold">Events</a>
-                    </li>
-                    <% elsif current_user.educators_events? %>
-                      <li class="mt-8">
-                          <a href="/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
-                      </li>
-                      <li class="mt-2">
-                      <a href="/netball_educators/pe_directors" class="mt-8 text-gray-100 hover:font-bold">PE Directors</a>
-                      </li>
-                      <li class="mt-2">
-                          <a href="/netball_educators" class="text-gray-100 hover:font-bold">Educators</a>
-                      </li>
-                      <li class="mt-2">
-                          <a href="/follow_ups" class="text-gray-100 hover:font-bold">Follow Ups</a>
-                      </li>
-                      <li class="mt-2">
-                        <a href="/events" class="text-gray-100 hover:font-bold">Events</a>
-                      </li>
-                  <% elsif current_user.sponsors_media_events? %>
-                    <li class="mt-8">
-                        <a href="/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
-                    </li>
-                    <li class="mt-2">
-                        <a href="/sponsors" class="text-gray-100 hover:font-bold">Sponsors</a>
-                    </li>
-                    <li class="mt-2 ml-2">
-                        <a href="/opportunities" class="text-gray-100 hover:font-bold">- Opportunities</a>
-                    </li>
-                    <li class="mt-2">
-                        <a href="/media" class="text-gray-100 hover:font-bold">Media</a>
-                    </li>
-                    <li class="mt-2">
-                      <a href="/events" class="text-gray-100 hover:font-bold">Events</a>
-                    </li>
-                <% elsif current_user.educators_events_medium? %>
-                <li class="mt-8">
-                    <a href="/" class="text-gray-100 underline underline-offset-2 ">Navigation Links</a>
-                </li>
-                <li class="mt-2">
-                  <a href="/netball_educators/pe_directors" class="mt-8 text-gray-100 hover:font-bold">PE Directors</a>
-                </li>
-                <li class="mt-2">
-                  <a href="/netball_educators" class="text-gray-100 hover:font-bold">Educators</a>
-                </li>
-                <li class="mt-2">
-                  <a href="/follow_ups" class="text-gray-100 hover:font-bold">Follow Ups</a>
-                </li>
-                <li class="mt-2">
-                  <a href="/events" class="text-gray-100 hover:font-bold">Events</a>
-                </li>
-                <li class="mt-2">
-                <a href="/media" class="text-gray-100 hover:font-bold">Media</a>
-              </li>
-          <% end %>
-              
-            <% if current_user.admin? %>  
-                    <li class="mt-2 text-blue-300 font-semibold">
-                    Admin Only
-                    </li>
-                    <li class="mt-2 ml-2">
-                      <a href="/clubs/teams_list_index" class="text-blue-300 hover:font-bold">Clubs Report</a>
-                    </li>
-                   <li class="mt-2 ml-2">
-                       <a href="/budgets" class="text-blue-300 hover:font-bold">Budgets</a>
-                   </li>
-                   <li class="mt-2 ml-2">
-                       <a href="/references/" class="text-blue-300 hover:font-bold">Ref Data</a>
-                   </li>
-                   
-                    <li class="mt-2 ml-2">
-                       <a href="/sample_words" class="text-blue-300  hover:font-bold">Sample Wording</a>
-                   </li>
-                   <li class="mt-2 ml-2">
-                      <a href="/users" class="text-blue-300 hoover:font-bold">Users</a><br>
-                  </li>
-                   <br><br>
-               <% end %>
-           </ul>
-           <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+         <%= render 'layouts/main_menu' %>
           </div>
         <!--Sidebar nav end -->
         
@@ -523,5 +186,6 @@
        </main>
     <% end %>
   
+    <%= render 'layouts/mobile_menu' %>
   </body>
   </html>

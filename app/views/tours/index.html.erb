@@ -1,10 +1,14 @@
 <% content_for(:page_title, "Tours")%> 
 
+<div class="my-4">
+    <%= link_to "Add New Tour", new_tour_path, class: form_button_class %>
+</div>
+
 <% if @tours.any? %>
 <div id="tours">
-<div class="relative overflow-x-auto">
+<div class="relative overflow-x-auto ml-2">
     <table class="w-full text-left rtl:text-right">
-        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+        <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs ">
             <tr>
                 <th scope="col" class="px-6 py-3">
                     Company 
@@ -58,10 +62,7 @@
 No records to view</p>
 <% end %>
 <br>
-<div class="m-2">
-    <%= link_to "Add New Tour", new_tour_path, class: form_button_class %>
-    <br>
-   </div>
+
 
 
  

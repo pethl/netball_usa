@@ -1,0 +1,68 @@
+<% if current_user && current_user.role == "admin" %>
+  <div class="md:hidden bg-blue-900 text-white p-2">
+    <div class="grid grid-cols-3 gap-2 text-center">
+      <div>
+        <a href="/netball_educators/pe_directors" class="block py-1 hover:font-bold">PE DIRECTORS</a>
+      </div>
+      <div>
+        <a href="/netball_educators/" class="block py-1 hover:font-bold">EDUCATORS</a>
+      </div>
+      <div>
+        <a href="/follow_ups/" class="block py-1 hover:font-bold">ED. FOLLOW UPs</a>
+      </div>
+      <div>
+        <a href="/sponsors" class="block py-1 hover:font-bold">SPONSORS</a>
+      </div>
+      <div>
+        <a href="/opportunities" class="block py-1 hover:font-bold">OPPORTUNITIES</a>
+      </div>
+      <div>
+        <a href="/grants" class="block py-1 hover:font-bold">GRANTS</a>
+      </div>
+      <div>
+        <a href="/events" class="block py-1 hover:font-bold">EVENTS</a>
+      </div>
+      <div>
+        <a href="/programs" class="block py-1 hover:font-bold">BAI PROGRAMS</a>
+      </div>
+      <div>
+        <a href="/people" class="block py-1 hover:font-bold">PEOPLE</a>
+      </div>
+      <div>
+        <a href="/transfers" class="block py-1 hover:font-bold">US OPEN</a>
+      </div>
+      <div>
+        <a href="/clubs/index_admin" class="block py-1 hover:font-bold">MEMBERSHIP</a>
+      </div>
+      <div>
+        <a href="/partners" class="block py-1 hover:font-bold">PARTNERS</a>
+      </div>
+      <div>
+        <a href="/vendors" class="block py-1 hover:font-bold">VENDORS</a>
+      </div>
+      <div>
+        <a href="/media" class="block py-1 hover:font-bold">MEDIA</a>
+      </div>
+      <div>
+        <a href="/tours" class="block py-1 hover:font-bold">TOURS</a>
+      </div>
+      <div>
+        <a href="/venues" class="block py-1 hover:font-bold">VENUES</a>
+      </div>
+      <% if is_admin? %>
+        <div>
+          <a href="/budgets" class="block py-1 text-blue-300 hover:font-bold">BUDGETS</a>
+        </div>
+        <div>
+          <a href="/references" class="block py-1 text-blue-300 hover:font-bold">REF DATA</a>
+        </div>
+        <div>
+          <a href="/sample_words" class="block py-1 text-blue-300 hover:font-bold">WORDING</a>
+        </div>
+        <div>
+          <a href="/users" class="block py-1 text-blue-300 hover:font-bold">USERS</a>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %> 

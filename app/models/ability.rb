@@ -95,6 +95,7 @@ class Ability
       can :manage, NetballEducator
       can :manage, FollowUp
       can :manage, Event
+      #can :manage, Equipment
       can :manage, Medium
     end
 

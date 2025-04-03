@@ -184,7 +184,7 @@
     
           <div class="actions">
             <%= ffn_form.check_box :_destroy %>
-            <%= ffn_form.label :_destroy, "Remove this FFN" %>
+            <%= ffn_form.label :_destroy, "Remove this FFN", class: "italic text-blue-900" %>
           </div>
         </div>
       <% end %>
@@ -212,13 +212,15 @@
         </div>
       </div>
 
-      <!-- Invite Back -->
-      <div class="mb-6 mt-4">
-        <%= form.label :invite_back, class: label_class %>
-        <div class="mt-1">
-          <%= form.select :invite_back, options_for_select(people_invite_back, :selected => person.invite_back), {prompt: true}, class: input_class %>
+      <!-- Invite Back - Admin Only -->
+      <% if current_user&.admin? %>
+        <div class="mb-6 mt-4">
+          <%= form.label :invite_back, "Invite Back (admin only)", class: label_class %>
+          <div class="mt-1">
+            <%= form.select :invite_back, options_for_select(people_invite_back, :selected => person.invite_back), {prompt: true}, class: input_class %>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
 
     <!-- Trainers/Ambassadors Section -->

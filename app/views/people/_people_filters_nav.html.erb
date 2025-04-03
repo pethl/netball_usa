@@ -19,14 +19,16 @@
         ["Coaches", ["Coach", nil]],
         ["Scorers", ["Scorer", nil]],
         ["Trainers & Ambassadors", ["Trainer", nil]],
-        ["Operations", ["Operations", nil]]
-      ].each do |label, (role, region)| %>
+        ["Operations", ["Operations", nil]],
+        ["Inactive", [nil, nil, "Inactive"]]
+      ].each do |label, (role, region, status)| %>
         <li class="me-2">
           <% is_active = !@searching && (@role == role) %>
           <% is_active &&= (@region.presence || "") == (region.presence || "") if role == "Umpire" %>
+          <% is_active &&= (@status == status) if status.present? %>
 
           <%= link_to label,
-              people_path({ role: role }.tap { |h| h[:region] = region if region.present? }),
+              people_path({ role: role, status: status }.tap { |h| h[:region] = region if region.present? }),
               data: { action: "page-title#update", label: label },
               class: tab_class(is_active) %>
         </li>

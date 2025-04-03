@@ -25,14 +25,25 @@ class PeopleController < ApplicationController
           nil
         end
     
+      @status = params[:status]
       @searching = params[:search].present?
     
       if @searching
         q = params[:search].downcase
         @people = Person.where("LOWER(first_name) LIKE :q OR LOWER(last_name) LIKE :q OR LOWER(email) LIKE :q", q: "%#{q}%")
       else
-        @people = Person.where(role: @role)
-        @people = @people.where(region: @region) if @region.present?
+        @people = Person.all
+        
+        # If status is present (for Inactive tab), filter by status
+        if @status.present?
+          @people = @people.where(status: @status)
+        else
+          # For all other tabs, only show Active people
+          @people = @people.where(status: "Active")
+          # Then filter by role and region
+          @people = @people.where(role: @role)
+          @people = @people.where(region: @region) if @region.present?
+        end
       end
     
       @people = @people.ordered
@@ -114,8 +125,11 @@ class PeopleController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def person_params
-      person_params= params.require(:person).permit(:first_name, :last_name, :status, :role, :region, :location, :email, :level, :level_note, :level_submitted, :phone, :address, :associated, :gender, :tshirt_size, :uniform_size, :headshot, :headshot_path, :description, :image, :invite_back, :accept_notes, :notes, :in_person_trained, :virtually_trained, :booth_trained, :headshot_present, :certification, :certification_date, :resume, event_ids: [], frequent_flyer_numbers_attributes: [:id, :airline, :number, :_destroy])
+      person_params= params.require(:person).permit(:first_name, :last_name, :status, :role, :region, :location, :email, :level, :level_note, :level_submitted, :phone, :address, :associated, :gender, :tshirt_size, :uniform_size, :headshot, :headshot_path, :description, :image, :accept_notes, :notes, :in_person_trained, :virtually_trained, :booth_trained, :headshot_present, :certification, :certification_date, :resume, event_ids: [], frequent_flyer_numbers_attributes: [:id, :airline, :number, :_destroy])
      
+      # Add invite_back only for admin users
+      person_params[:invite_back] = params.dig(:person, :invite_back) if current_user&.admin?
+    
       # Ensure we're checking each ffn correctly
       person_params[:frequent_flyer_numbers_attributes].reject! do |index, ffn|
         ffn[:airline].blank? && ffn[:number].blank?

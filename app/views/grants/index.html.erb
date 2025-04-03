@@ -1,53 +1,53 @@
 <% content_for(:page_title, "Grants")%>
 
-<div class="my-2">
+<div class="my-4">
     <%= link_to "Add New Grant", new_grant_path, class: form_button_class %>
 </div>
 
 <% if @grants.any? %>
 <div id="grants">
-<div class="relative overflow-x-auto">
+<div class="relative overflow-x-auto ml-2">
     <table class="table-auto w-full text-left rtl:text-right">
-        <thead class="bg-white border-b text-gray-400 font-light text-xs ">
+        <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs ">
              <tr>
-                <th scope="col" class="px-6 py-3 w-52">
+                <th scope="col" class="px-6 px-1 w-52">
                     Grant Name
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
+                <th scope="col" class="px-6 px-1 w-52">
                     Apply?
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
+                <th scope="col" class="px-6 px-1 w-52">
                     Amount
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
+                <th scope="col" class="px-6 px-1 w-52">
                     Location
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
+                <th scope="col" class="px-6 px-1 w-52">
                     Due Date
                 </th>
-                <th scope="col" class="px-6 py-3 w-60 truncate">
+                <th scope="col" class="px-6 px-1 w-60 truncate">
                     Status
                 </th>
-                <th scope="col" class="px-6 py-3 w-60 truncate">
+                <th scope="col" class="px-6 px-1 w-60 truncate">
                     Allocated To
                 </th>
-                <th scope="col" class="px-6 py-3 w-60 truncate">
+                <th scope="col" class="px-6 px-1 w-60 truncate">
                     Action by
                 </th>
-                <th scope="col" class="px-6 py-3 w-60 truncate">
+                <th scope="col" class="px-6 px-1 w-60 truncate">
                     Date Submitted
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
+                <th scope="col" class="px-6 px-1 w-52">
                     Notification Date
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
+                <th scope="col" class="px-6 px-1 w-52">
                     Purpose
                 </th>
                 
-                <th scope="col" class="px-6 py-3 w-40">
+                <th scope="col" class="px-6 px-1 w-40">
                     Grant Link
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
+                <th scope="col" class="px-6 px-1 w-52">
                    Notes
                 </th>
              </tr>

@@ -1,47 +1,49 @@
 <% content_for(:page_title, "Budgets")%>
 
+<div class="my-4">
+    <%= link_to "Add New Budget", new_budget_path, class: form_button_class %>
+</div>
+
 <div id="budgets">
-<div class="relative overflow-x-auto">
+<div class="relative overflow-x-auto ml-2">
     <table class="table-auto w-full text-right rtl:text-right">
-        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+        <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs ">
              <tr>
-                 <th scope="col" class="px-6 py-3">
-                     Details
-                 </th>
-                <th colspan="2" scope="col" class="px-6 py-3 w-52 text-left">
+                
+                <th colspan="2" scope="col" class="px-6 py-1 w-64 text-left">
                     Event Name
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
+                <th scope="col" class="px-6 py-1 w-40">
                     Event Date
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
+                <th scope="col" class="px-6 py-1 w-52">
                     Flight
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
+                <th scope="col" class="px-6 py-1 w-52">
                     Hotel
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
+                <th scope="col" class="px-6 py-1 w-52">
                     Transport
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
+                <th scope="col" class="px-6 py-1 w-52">
                     Shipping
                 </th>
-                <th scope="col" class="px-6 py-3 w-40">
+                <th scope="col" class="px-6 py-1 w-40">
                     Booth
                 </th>
-                <th scope="col" class="px-6 py-3 w-52">
+                <th scope="col" class="px-6 py-1 w-52">
                    Carpet
                 </th>
-                <th scope="col" class="px-6 py-3 w-60 truncate">
+                <th scope="col" class="px-6 py-1 w-60 truncate">
                     Banners
                 </th>
-                <th scope="col" class="px-6 py-3 w-60 truncate">
+                <th scope="col" class="px-6 py-1 w-60 truncate">
                     Giveaways
                 </th>
-                <th scope="col" class="px-6 py-3 w-60 truncate">
+                <th scope="col" class="px-6 py-1 w-60 truncate">
                     Per Diems
                 </th>
-                <th scope="col" class="px-6 py-3 w-60 truncate">
+                <th scope="col" class="px-6 py-1 w-60 truncate">
                     Total
                 </th>
                 
@@ -51,15 +53,11 @@
         <% @budgets.each do |budget| %>
             <tr class="bg-white border-b hover:bg-gray-100">
                 
-                <td scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
-                    <%= link_to image_tag("view.png", :class=>"mx-2 h-6 w-auto"), budget %>
-                </td>
-                
                 <td colspan="2" class="px-6 py-4 text-left truncate">
                     <%= (link_to budget.budget_event_name, edit_budget_path(budget), class: link_class) unless (budget.event_id.to_s.empty?) %>
                    </td>
                 
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 whitespace-nowrap">
                    <%= budget.budget_event_date unless (budget.event_id.to_s.empty?) %> <br> 
                    
                 </td>
@@ -112,10 +110,6 @@
 
 <br>
 
-<div class="mt-1">
-<%= link_to "Add New Budget", new_budget_path, class: form_button_class %>
-<br><br>
-</div>
 
 
 
