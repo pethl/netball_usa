@@ -1,0 +1,22 @@
+<% content_for(:page_title, "My Educators (assigned to me)") %>
+
+<%= render 'nav_tabs' %>
+
+<div class="p-4 flex justify-between items-center">
+  <% if current_user.admin?  %>
+    <div>
+      <%= link_to "Export educators as spreadsheet", netball_educators_path(format: "xlsx"), class: clear_button_class %> 
+      <%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
+    </div> 
+  <% end %>
+</div>
+
+<div class="p-4">
+  <% if @netball_educators.any? %>
+    <div id="educators">
+      <%= render 'educators_table', educators: @netball_educators %>
+    </div>
+  <% else %>
+    <p class="px-4 py-2">No records to view</p>
+  <% end %>
+</div> 

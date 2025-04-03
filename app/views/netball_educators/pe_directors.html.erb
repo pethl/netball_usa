@@ -1,4 +1,4 @@
-<% content_for(:page_title, "School/District Leads")%>
+<% content_for(:page_title, "P.E. Directors")%>
 
 <%= render 'nav_tabs' %>
 
@@ -8,13 +8,15 @@
   <% end %>
 </div>
 
-<% if @netball_educators.any? %>
-  <div id="educators">
-    <%= render 'educators_table', educators: @netball_educators, hide_level: true %>
-  </div>
-<% else %>
-  <p class="px-4 py-2">No records to view</p>
-<% end %>
+<div class="p-4">
+  <% if @netball_educators.any? %>
+    <div id="educators">
+      <%= render 'educators_table', educators: @netball_educators %>
+    </div>
+  <% else %>
+    <p class="px-4 py-2">No records to view</p>
+  <% end %>
+</div>
 
 
     

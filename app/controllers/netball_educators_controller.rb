@@ -31,7 +31,6 @@ class NetballEducatorsController < ApplicationController
   def my_educators
     @netball_educators = NetballEducator.where(user_id: current_user.id)
     @netball_educators = @netball_educators.order("created_at DESC, state ASC, city ASC")
-    render :index
   end
 
   def show
