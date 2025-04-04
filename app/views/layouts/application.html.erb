@@ -55,10 +55,10 @@
            </div>
            
          <div class="p-2">
-           <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "p-2", data: { tooltip_target: "tooltip-logout" } do %>
-             <i class="fa-solid fa-arrow-right-from-bracket text-blue-800"></i>
+         <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
+             <i data-tooltip-target="tooltip-logout" class="fa-solid fa-arrow-right-from-bracket text-blue-800"> </i>
            <% end %>
-           <div id="tooltip-logout" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip">
+           <div id="tooltip-logout" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                Logout
                <div class="tooltip-arrow" data-popper-arrow></div>
            </div>
