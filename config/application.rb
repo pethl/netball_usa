@@ -1,7 +1,8 @@
 require "bundler/setup" # Set up gems listed in the Gemfile.
+require_relative "boot"
 require "logger" # Fix concurrent-ruby removing logger dependency which Rails itself does not have
 #require "bootsnap/setup" # Speed up boot time by caching expensive operations.
-require_relative "boot"
+
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems

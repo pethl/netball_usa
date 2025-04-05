@@ -4,11 +4,11 @@
     factory :user do
       first_name { "Handy" }
       last_name { "Man" }
-      email { "test@example.com" }
+      sequence(:email) { |n| "user#{n}@example.com" }
       password { "password123" }
       password_confirmation { "password123" }
-      role { "admin" }
-      admin { true }
+      role { "teamlead" } # Default role if you don't specify one
+      admin { false }
       # Add other necessary attributes for your User model
     end
   end

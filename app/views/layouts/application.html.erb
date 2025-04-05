@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
  
-<title>Netball America</title>
+
+ <title><%= content_for?(:page_title) ? yield(:page_title) : "Netball America" %></title>
 
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
@@ -54,15 +55,16 @@
            </div>
            </div>
            
-         <div class="p-2">
-         <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
-             <i data-tooltip-target="tooltip-logout" class="fa-solid fa-arrow-right-from-bracket text-blue-800"> </i>
-           <% end %>
-           <div id="tooltip-logout" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-               Logout
-               <div class="tooltip-arrow" data-popper-arrow></div>
-           </div>
-           </div>
+     <div class="p-2">
+        <%= link_to destroy_user_session_path, data: { turbo_method: :delete} do %>
+          <i data-tooltip-target="tooltip-logout" class="fa-solid fa-arrow-right-from-bracket text-blue-800"></i>
+        <% end %>
+
+        <div id="tooltip-logout" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+          Logout
+          <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+      </div>
          
            <% unless current_user.teamlead? %>
            <div class="p-2 text-lg">
@@ -164,7 +166,7 @@
      <div class="mt-8 max-w-lg sm:mx-auto sm:w-full ">
       <div class="bg-white py-6 px-2 shadow rounded-lg sm:px-10 overflow-x-auto">
        <%= image_tag 'Netball_America_Logo.png', :class => "mx-auto h-11 w-auto" %>
-       
+       <%= yield :auth_header if content_for?(:auth_header) %>
        <% if content_for(:page_title)%>
          <header class="bg-white shadow">
            <div class="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">

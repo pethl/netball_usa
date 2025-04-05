@@ -2,8 +2,8 @@
 module PagesHelper
     ROLE_HOME_VIEWS = {
       admin: { partial: "admin_home", title: "Management Summary" },
+      
       teams_grants: { partial: "office_home", title: "Dashboard" },
-      teamlead: { partial: "teamlead_home", title: "Dashboard" },
       grants: { partial: "office_home", title: "Dashboard" },
       educators: { partial: "office_home", title: "Dashboard" },
       teams_admin: { partial: "office_home", title: "Dashboard" },
@@ -13,7 +13,9 @@ module PagesHelper
       sponsors_media_events: { partial: "office_home", title: "Dashboard" },
       educators_events_medium: { partial: "office_home", title: "Dashboard" },
       spare: { partial: "office_home", title: "Dashboard" },
-      na_people: { partial: "na_people", title: "Dashboard" }
+
+      teamlead: { partial: "teamlead_home", title: "" },
+      na_people: { partial: "na_people", title: "" }
     }.freeze
   
     def role_config

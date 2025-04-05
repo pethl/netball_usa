@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
+  skip_before_action :authenticate_user!, if: :devise_controller?  # Add this line
   #include AbstractController::Rendering
   helper_method :is_admin?
  
@@ -19,6 +20,10 @@ class ApplicationController < ActionController::Base
 
     def is_admin?
       user_signed_in? ? current_user.admin : false
+    end
+
+    def after_sign_out_path_for(resource_or_scope)
+      goodbye_path # 👈 you control this!
     end
 
     # rescue_from StandardError,

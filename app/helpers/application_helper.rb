@@ -392,8 +392,10 @@ module ApplicationHelper
      def active_admin_users # a method to get all active users  but not TeamLead role uers, typically used to assign work.
       User.where(account_active: true)
       .where.not(role: [2, 12])
+      .where.not(last_name: "Pethick") # ⬅️ exclude that person
       .order(:first_name)
       end
+      
 
      def us_open_events
       Event.where(event_type: "US Open").pluck(:name)

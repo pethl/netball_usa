@@ -8,6 +8,10 @@ class User < ApplicationRecord
   after_create :send_admin_mail
   after_create :send_sonya_mail
 
+  # app/models/user.rb
+  scope :active_admins, -> { where(account_active: true).where.not(role: [2, 12]).where.not(last_name: 'Pethick').order(:first_name) }
+
+
   
   has_many(
     :na_teams,

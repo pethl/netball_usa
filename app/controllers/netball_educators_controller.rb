@@ -1,23 +1,32 @@
 class NetballEducatorsController < ApplicationController
+
   before_action :set_netball_educator, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :admin_user, only: [:destroy, :new, :create, :edit, :update]
+  before_action :set_users, only: [:new, :create, :edit, :update]
 
   def index
-    if (is_admin? || current_user.role=="educators" || current_user.email=="drmarlene@netballamerica.com")
+    # 👇 FORCE HTML if Turbo tries to be clever
+    if request.format.turbo_stream?
+      request.format = :html
+    end
+  
+    if (is_admin? || current_user.role == "educators" || current_user.email == "drmarlene@netballamerica.com")
       @netball_educators = NetballEducator.all
     else
       @netball_educators = NetballEducator.where(user_id: current_user.id)
     end
+  
     @netball_educators = @netball_educators.where(state: params[:state]) if params[:state].present?
     @netball_educators = @netball_educators.where(level: params[:level]) if params[:level].present?
     @netball_educators = @netball_educators.order("created_at DESC, state ASC, city ASC")
-
+  
     respond_to do |format|
-      format.html
+      format.html { render :index }
       format.xlsx
     end
   end
+  
 
   def pe_directors
     if (is_admin? || current_user.role=="educators" || current_user.email=="drmarlene@netballamerica.com")
@@ -38,11 +47,9 @@ class NetballEducatorsController < ApplicationController
 
   def new
     @netball_educator = NetballEducator.new
-    @users = User.all
   end
 
   def edit
-    @users = User.all
   end
 
   def create
@@ -75,7 +82,25 @@ class NetballEducatorsController < ApplicationController
   end
 
   def netball_educator_params
-    params.require(:netball_educator).permit(:first_name, :last_name, :email, :phone, :city, :state, :level, :notes, :headshot)
+    params.require(:netball_educator).permit(
+      :first_name, 
+      :last_name, 
+      :email, 
+      :phone, 
+      :title,
+      :school_name,
+      :address,
+      :zip,
+      :website,
+      :level,
+      :educator_notes,
+      :feedback,
+      :authorize,
+      :user_id,
+      :mgmt_notes,
+      :city,
+      :state
+    )
   end
 
   def admin_user
@@ -88,6 +113,10 @@ class NetballEducatorsController < ApplicationController
     else
       NetballEducator.where(user_id: current_user.id)
     end
+  end
+
+  def set_users
+    @users = User.active_admins
   end
 end
  

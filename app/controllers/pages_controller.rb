@@ -1,6 +1,12 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only:[:educator_sign_up]
+  skip_before_action :authenticate_user!, only:[:educator_sign_up, :goodbye]
   
+
+  def goodbye
+    # renders app/views/pages/goodbye.html.erb    
+    flash.clear # <- Use clear not discard
+  end
+
   def home
     @created_last_7_days = NetballEducator.where("created_at > ?", Time.now-7.days).count
     @created_last_30_days = NetballEducator.where("created_at > ?", Time.now-30.days).count
