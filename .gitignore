@@ -26,17 +26,25 @@
 !/tmp/storage/
 !/tmp/storage/.keep
 
+# Ignore compiled assets and uploads.
 /public/assets
 /public/uploads
+
+# Ignore vendor cache (gem files)
 /vendor/cache
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+# Ignore built JS/CSS assets
 /app/assets/builds/*
 !/app/assets/builds/.keep
 
+# Ignore node modules
 /node_modules
-sendgrid.env
-sendgrid.env
-latest.dump
+
+# Ignore env files (secrets)
+/sendgrid.env
+
+# Ignore database dumps
+/latest.dump
