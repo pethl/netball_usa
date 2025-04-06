@@ -14,6 +14,18 @@ class EventsController < ApplicationController
     @events = filtered_events(upcoming: false).order(date: :desc)
     render :index
   end
+
+ # GET /events/educational
+def educational
+  @events = filtered_educational_events(upcoming: true).order(:date)
+  render :educational
+end
+
+# GET /events/educational_past
+def educational_past
+  @events = filtered_educational_events(upcoming: false).order(date: :desc)
+  render :educational
+end
   
   # GET /events
   def calendar
@@ -95,4 +107,19 @@ class EventsController < ApplicationController
   
       scope
     end
+
+    def filtered_educational_events(upcoming:)
+      scope = if upcoming
+        Event.educational.where('date >= ?', Date.today.beginning_of_month)
+      else
+        Event.educational.where('date <= ?', Date.today.beginning_of_month)
+      end
+    
+      scope = scope.where('city ILIKE ?', "%#{params[:city]}%") if params[:city].present?
+      scope = scope.where(state: params[:state]) if params[:state].present?
+      scope = scope.where(event_type: params[:event_type]) if params[:event_type].present?
+    
+      scope
+    end
+    
 end

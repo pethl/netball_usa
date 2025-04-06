@@ -42,6 +42,16 @@ class NetballEducatorsController < ApplicationController
     @netball_educators = @netball_educators.order("created_at DESC, state ASC, city ASC")
   end
 
+  def search
+    if params[:search].present?
+      query = params[:search]
+      @netball_educators = NetballEducator.where("first_name ILIKE ? OR last_name ILIKE ?", "%#{query}%", "%#{query}%").order(:first_name)
+    else
+      @netball_educators = []
+    end
+  end
+  
+
   def show
   end
 
@@ -118,5 +128,5 @@ class NetballEducatorsController < ApplicationController
   def set_users
     @users = User.active_admins
   end
-end
+end 
  

@@ -13,7 +13,8 @@ RSpec.feature "PageSmoke", type: :feature, js: true do
       { path: netball_educators_path, title: "All Educators" },
       { path: pe_directors_netball_educators_path, title: "P.E. Directors" },
        #{ path: equipment_path, title: "Equipment" },
-      { path: events_path, title: "Events" },
+       { path: educational_events_path, title: "Educational Events" },
+
       { path: follow_ups_path, title: "Educator Follow Up" },
      
       { path: sponsors_path, title: "Sponsors" },
@@ -31,6 +32,8 @@ RSpec.feature "PageSmoke", type: :feature, js: true do
       { path: published_media_path, title: "Media: Published" },
 
       { path: people_path, title: "People" },
+
+      { path: events_path, title: "All Events" },
 
       { path: programs_path, title: "BAI Programs" },
 

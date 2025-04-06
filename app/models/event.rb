@@ -12,6 +12,12 @@ class Event < ApplicationRecord
 
   scope :ordered, -> { order(date: :asc) }
 
+ # New scope for educational events
+ scope :educational, -> {
+  educational_types = Reference.where(group: 'event_type', key: 'Educational').pluck(:value)
+  where(event_type: educational_types)
+}  
+
 
   def budget
     Budget.where(event_id: self.id).first

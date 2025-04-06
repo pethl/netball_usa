@@ -7,10 +7,10 @@
     <li class="mt-2 ml-2">
       <a href="/equipment" class="text-gray-100">- Equipment</a>
     </li>
-    <li class="mt-2 ml-2">
-      <a href="/events" class="text-gray-100">- Events</a>
+   <li class="mt-2 ml-2">
+    <a href="<%= educational_events_path %>" class="text-gray-100">- Educational Events</a>
     </li>
-    
+
     <li class="mt-2">
       <a href="/sponsors" class="text-gray-100 hover:font-bold">SPONSORS</a>
     </li>
@@ -32,15 +32,14 @@
     <li class="mt-2">
       <a href="/media/" class="text-gray-100 hover:font-bold">MEDIA</a>
     </li>
-    <li class="mt-2 ml-2">
-      <%= link_to "- Published", published_media_path, class: "text-gray-100 hover:font-bold"%>
-    </li>
+     <li><a href="<%= published_media_path %>" class="text-gray-100">Published Media</a></li>
+
 
     <li class="mt-2">
       <%= link_to "NA PEOPLE", people_path, class: "mt-8 text-gray-100 hover:font-bold" %>
     </li>
     <li class="mt-2">
-      <a href="/events/" class="text-gray-100 hover:font-bol">EVENTS</a>
+      <a href="/events/" class="text-gray-100 hover:font-bol">ALL EVENTS</a>
     </li>
     <li class="mt-2">
       <a href="/programs" class="text-gray-100 hover:font-bol">BAI PROGRAMS</a>
@@ -59,12 +58,12 @@
       <a href="/transfers/" class="text-gray-100 hover:font-bold">- Event Attendees</a>
     </li>
     <li class="mt-2 ml-2">
-      <a href="/transfers/inbound_pickups_transfers_path" class="text-gray-100 hover:font-bold">- Arrivals Transfers</a>
+      <a href="<%= inbound_pickups_transfers_path %>" class="text-gray-100 hover:font-bold">- Arrivals Transfers</a>
     </li>
     <li class="mt-2 ml-2">
-      <a href="/transfers/outbound_pickups_transfers_path" class="text-gray-100 hover:font-bold">- Departure Transfers</a>
+      <a href="<%= outbound_pickups_transfers_path %>" class="text-gray-100 hover:font-bold">- Departure Transfers</a>
     </li>
-   
+  
     <li class="mt-2">
       <a href="/clubs/index_admin" class="text-gray-100 hover:font-bold">MEMBERSHIP</a>
     </li>

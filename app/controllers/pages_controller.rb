@@ -48,6 +48,19 @@ class PagesController < ApplicationController
    # @grants_sub = Grant.all.order(status: :asc)
     @grants_by_status = @grants_applying_for.group_by { |t| t.status }
   
+    #special stats for follow_ups card
+    @follow_up_stats = FollowUp.group(:lead_type).count
+
+    #Special Stats for Equipment card - Sonya 4/25
+    @equipment_stats = Equipment
+    .where(sale_date: 3.years.ago.beginning_of_year..Time.current.end_of_year)
+    .group("EXTRACT(YEAR FROM sale_date)")
+    .select(
+      "EXTRACT(YEAR FROM sale_date) AS year",
+      "COUNT(*) AS sales_count",
+      "COALESCE(SUM(purchase_amount), 0) AS total_purchase"
+    )
+    .order("year DESC")
   
   end
   

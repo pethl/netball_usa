@@ -71,12 +71,13 @@ Rails.application.routes.draw do
     end
   end
   
-  
     # ========== Events ==========
-  get 'events/calendar' => 'events#calendar', :as => :calendar
+  get 'events/calendar' => 'events#calendar', as: :calendar
   resources :events do
     collection do
       get 'past', to: 'events#index_past', as: 'past'
+      get 'educational', to: 'events#educational', as: 'educational'
+      get 'educational_past', to: 'events#educational_past', as: 'educational_past'
     end
   end
 
@@ -107,8 +108,11 @@ Rails.application.routes.draw do
   resources :netball_educators do
     collection do
       get 'pe_directors'
+      get 'search'
     end
   end
+  
+
   resources :sponsors do
     resources :opportunities, except: [:index, :show]
   end

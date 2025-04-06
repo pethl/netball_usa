@@ -5,7 +5,7 @@
         <%= link_to "All Educators", netball_educators_path, class: tab_class(current_page?(netball_educators_path)) %>
       </li>
       <li>
-        <%= link_to "My Educators", my_educators_path, class: tab_class(current_page?(my_educators_path)) %>
+        <%= link_to "My Educators (Allocated)", my_educators_path, class: tab_class(current_page?(my_educators_path)) %>
       </li>
       <li>
         <%= link_to "PE Directors", pe_directors_netball_educators_path, class: tab_class(current_page?(pe_directors_netball_educators_path)) %>
@@ -15,6 +15,12 @@
       </li>
       <li>
         <%= link_to "Follow-ups", follow_ups_path, class: tab_class(current_page?(follow_ups_path)) %>
+      </li>
+       <li>
+        <%= link_to "Educational Events", educational_events_path, class: tab_class(current_page?(educational_events_path)) %>
+      </li>
+      <li>
+        <%= link_to "Search Educators", search_netball_educators_path, class: tab_class(current_page?(search_netball_educators_path)) %>
       </li>
     </ul>
   </nav>

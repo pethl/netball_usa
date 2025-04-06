@@ -13,75 +13,46 @@
 <% if @equipment.any? %>
 <div id="equipment">
 
-<div class="relative overflow-x-auto">
-    <table class="w-full text-left rtl:text-right table-fixed">
-        <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs">
-            <tr>
-                 <th scope="col" class="px-3 py-2 w-24 text-left">
-                    State
-                </th>
-                <th scope="col" class="px-3 py-2 w-40">
-                    City
-                </th>
-                <th scope="col" class="px-3 py-2 w-40">
-                    Sale To:
-                </th>
-                <th scope="col" class="px-3 py-2 w-24">
-                    Date of Sale
-                </th>
-                <th scope="col" class="px-3 py-2 w-40 text-right">
-                    Purchase<br>Amount
-                </th>
-                <th scope="col" class="px-3 py-2 w-64">
-                    Items Purchased 
-                </th>
-               
-                <th scope="col" class="px-3 py-2 w-64">
-                    School
-                </th>
-                <th scope="col" class="px-3 py-2 w-96">
-                    Contact Details
-                </th>
-               </tr>
-        </thead>
-        <tbody>
-        <% @equipment.each do |netball_educator| %>
-            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
-                  <td class="px-3 py-4">
-                      <%= netball_educator.state %>
-                  </td>  
-                  <td class="px-3 py-4">
-                      <%= netball_educator.city %>
-                  </td> 
-                  <td class="px-3 py-4 truncate">
-                     <%= netball_educator.full_name %>
-                 </td>   
-                  
-                  <td class="px-3 py-4 ">
-                  <%= (link_to netball_educator.equipment.first.sale_date.to_formatted_s(:usa), edit_equipment_path(netball_educator.equipment.first.id), class: link_class) unless ( netball_educator.equipment.first.sale_date.to_s.empty?)  %>
-                  </td>
-                  <td class="px-3 py-4 text-right">
-                      <%= number_to_currency(netball_educator.equipment.first.purchase_amount, precision: 2) unless netball_educator.equipment.first.purchase_amount.to_s.empty? %>
-                  </td>
-                  <td class="px-3 py-4 text-wrap break-words">
-                      <%= netball_educator.equipment.first.items_purchased %>
-                  </td>
-                  
-                  <td class="px-3 py-4">
-                      <%= netball_educator.school_name %>
-                  </td>
-                  <td class="px-3 py-4">
-                      <%= netball_educator.formatted_phone %><br>
-                      <%= netball_educator.email %>
-                  </td>
-            </tr>
-            <% end %>
-        </tbody>
-    </table>
+<div class="relative overflow-x-auto rounded-lg shadow-md">
+  <table class="w-full text-sm text-left rtl:text-right text-gray-700">
+    <thead class="text-xs text-gray-500 uppercase bg-gray-200 border-b">
+      <tr>
+        <th scope="col" class="px-3 py-3">State</th>
+        <th scope="col" class="px-3 py-3">City</th>
+        <th scope="col" class="px-3 py-3">Sale To</th>
+        <th scope="col" class="px-3 py-3">Date of Sale</th>
+        <th scope="col" class="px-3 py-3 text-right">Purchase Amount</th>
+        <th scope="col" class="px-6 py-3">Items Purchased</th>
+        <th scope="col" class="px-3 py-3">School</th>
+        <th scope="col" class="px-3 py-3">Contact Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @equipment.each do |equipment| %>
+        <tr class="bg-white border-b hover:bg-gray-50 whitespace-nowrap">
+          <td class="px-3 py-2"><%= equipment.netball_educator&.state || "N/A" %></td>
+          <td class="px-3 py-2"><%= equipment.netball_educator&.city || "N/A" %></td>
+          <td class="px-3 py-2"><%= equipment.netball_educator&.full_name || "N/A" %></td>
+          <td class="px-3 py-2">
+            <%= link_to equipment.sale_date.to_formatted_s(:usa), edit_equipment_path(equipment), class: link_class if equipment.sale_date.present? %>
+          </td>
+          <td class="px-3 py-2 text-right truncate">
+            <%= number_to_currency(equipment.purchase_amount, precision: 2) if equipment.purchase_amount.present? %>
+          </td>
+          <td class="px-6 py-2 break-words"><%= equipment.items_purchased %></td>
+          <td class="px-3 py-2"><%= equipment.netball_educator&.school_name || "N/A" %></td>
+          <td class="px-3 py-2">
+            <%= equipment.netball_educator&.formatted_phone %><br>
+            <%= equipment.netball_educator&.email %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
-  </div>
+
 <% else %>
- <p class="px-3 py-4">
+ <p class="px-3 py-2">
  No records to view</p>
 <% end %>
 <br>
