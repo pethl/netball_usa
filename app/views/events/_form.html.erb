@@ -1,145 +1,161 @@
-<div class=" sm:mx-auto sm:w-full sm:max-w-md max-w-md">
-  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+<div class="sm:mx-auto sm:w-full sm:max-w-4xl px-4">
+  <div class="bg-white py-6 px-4 shadow sm:rounded-lg sm:px-10">
 
-<%= form_with(model: event) do |form| %>
+    <%= form_with(model: event) do |form| %>
+      <%= form_errors_for(event) %>
 
-  <%= form_errors_for(event) %>
+   <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
 
-  <div class="mb-4">
-    <%= form.label :event_type, class: label_class  %>
-    <div class="mt-1">
-     <%= form.select :event_type, options_for_select(event_type, :selected => event.event_type),{:prompt=>true}, class: input_class %>
-    </div>
-      <%= field_error_for(event, :event_type) %>
-  </div>
-  
-  <div class="mb-4">
-   <%= form.label :name, class: label_class%>
-    <div class="mt-1">
-     <%= form.text_field :name, class: input_class  %>
-     </div> 
-     <%= field_error_for(event, :name) %>
-  </div>
+        
+        <!-- Normal Fields -->
+        <div>
+          <%= form.label :event_type, class: label_class %>
+          <div class="mt-1">
+            <%= form.select :event_type, options_for_select(event_type, selected: event.event_type), { prompt: true }, class: input_class %>
+          </div>
+          <%= field_error_for(event, :event_type) %>
+        </div>
 
-  <div class="mb-4">
-   <%= form.label :date, "Start Date", class: label_class%>
-    <div class="mt-1">
-   <%= form.date_field :date, class: input_class  %>
-  </div> </div>
-  
-  <div class="mb-4">
-   <%= form.label :end_date, "End Date", class: label_class%>
-    <div class="mt-1">
-   <%= form.date_field :end_date, class: input_class  %>
-  </div> </div>
-    
-  <div class="mb-4">
-    <%= form.label :status, class: label_class  %>
-    <div class="mt-1">
-     <%= form.select :status, options_for_select(event_status, :selected => event.status),{}, class: input_class %>
-    </div>
-  </div>
+        <div>
+          <%= form.label :name, class: label_class %>
+          <div class="mt-1">
+            <%= form.text_field :name, class: input_class %>
+          </div>
+          <%= field_error_for(event, :name) %>
+        </div>
 
-  <div class="mb-4">
-    <%= form.label :attend, "Attend?", class: label_class  %>
-    <div class="mt-1">
-      <%= form.select :attend, 
-      options_for_select(attendance, selected: event.attend), 
-      { include_blank: "Please Select" }, 
-      class: input_class %>
-    </div>
-  </div>
+        <div>
+          <%= form.label :date, "Start Date", class: label_class %>
+          <div class="mt-1">
+            <%= form.date_field :date, class: input_class %>
+          </div>
+        </div>
 
-   <div class="mb-4">
-    <%= form.label :website, class: label_class%>
-     <div class="mt-1">
-    <%= form.text_field :website, placeholder: "Enter with prefix Http:// or https://", class: input_class  %>
-   </div> </div>
+        <div>
+          <%= form.label :end_date, "End Date", class: label_class %>
+          <div class="mt-1">
+            <%= form.date_field :end_date, class: input_class %>
+          </div>
+        </div>
 
-   <div class="mb-4">
-    <%= form.label :key_contact, class: label_class%>
-     <div class="mt-1">
-    <%= form.text_area :key_contact, class: input_class  %>
-   </div> </div>
+        <div>
+          <%= form.label :status, class: label_class %>
+          <div class="mt-1">
+            <%= form.select :status, options_for_select(event_status, selected: event.status), {}, class: input_class %>
+          </div>
+        </div>
 
-    <div class="mb-4">
-     <%= form.label :city, class: label_class%>
-      <div class="mt-1">
-     <%= form.text_field :city, class: input_class  %>
-    </div> </div>
-   
-    <div class="mb-4">
-      <%= form.label :state, class: label_class  %>
-      <div class="mt-1">
-       <%= form.select :state, options_for_select(us_states, :selected => event.state),{}, class: input_class %>
-      </div>
-    </div>
-  
-    <div class="mb-4">
-     <%= form.label :location, class: label_class%>
-      <div class="mt-1">
-     <%= form.text_field :location, placeholder: "event street address", class: input_class  %>
-    </div> </div>
-   
-  <div class="mb-4">
-     <%= form.label :details, style: "display: block", class: label_class  %>
-     <div class="mt-1">
-     <%= form.text_area :details, class: input_class %>
-    </div>
-   </div>
-   
-   <div class="mb-4">
-    <%= form.label :booth,"Booth #", class: label_class%>
-     <div class="mt-1">
-    <%= form.text_field :booth, class: input_class  %>
-   </div> </div>
-  
-   <div class="mb-4">
-      <%= form.label :cost_notes, "Costs", style: "display: block", class: label_class  %>
-      <div class="mt-1">
-      <%= form.text_area :cost_notes, class: input_class %>
-     </div>
-    </div>
-    
-    <div class="mb-4">
-       <%= form.label :outcome, style: "display: block", class: label_class  %>
-       <div class="mt-1">
-       <%= form.text_area :outcome, class: input_class %>
-      </div>
-     </div>
-     
-     <div class="mb-4">
-     <p class="block text-sm font-medium text-gray-700" %>Personnel (check box to assign)</p>
-     <div class="mt-1">
-        <%= form.collection_check_boxes :person_ids, @people, :id, :role_full_name, not_checked: Person.all.map(&:id) do |b| %>
-          <span class="indent-3">
-            <%= b.check_box %>
-            <%= b.label %><br>
-          </span>
+        <div>
+          <%= form.label :attend, "Attend?", class: label_class %>
+          <div class="mt-1">
+            <%= form.select :attend, options_for_select(attendance, selected: event.attend), { include_blank: "Please Select" }, class: input_class %>
+          </div>
+        </div>
+
+        <div>
+          <%= form.label :website, class: label_class %>
+          <div class="mt-1">
+            <%= form.text_field :website, placeholder: "Enter with prefix http:// or https://", class: input_class %>
+          </div>
+        </div>
+
+        <div>
+          <%= form.label :city, class: label_class %>
+          <div class="mt-1">
+            <%= form.text_field :city, class: input_class %>
+          </div>
+        </div>
+
+        <div>
+          <%= form.label :state, class: label_class %>
+          <div class="mt-1">
+            <%= form.select :state, options_for_select(us_states, selected: event.state), {}, class: input_class %>
+          </div>
+        </div>
+
+        <div>
+          <%= form.label :location, class: label_class %>
+          <div class="mt-1">
+            <%= form.text_field :location, placeholder: "Event street address", class: input_class %>
+          </div>
+        </div>
+
+        <div>
+          <%= form.label :booth, "Booth #", class: label_class %>
+          <div class="mt-1">
+            <%= form.text_field :booth, class: input_class %>
+          </div>
+        </div>
+
+        <!-- Big Text Areas (Full Width) -->
+        <div class="md:col-span-2">
+          <%= form.label :key_contact, class: label_class %>
+          <div class="mt-1">
+            <%= form.text_area :key_contact, class: input_class %>
+          </div>
+        </div>
+
+        <div class="md:col-span-2">
+          <%= form.label :details, class: label_class %>
+          <div class="mt-1">
+            <%= form.text_area :details, class: input_class %>
+          </div>
+        </div>
+
+        <div class="md:col-span-2">
+          <%= form.label :cost_notes, "Costs", class: label_class %>
+          <div class="mt-1">
+            <%= form.text_area :cost_notes, class: input_class %>
+          </div>
+        </div>
+
+        <div class="md:col-span-2">
+          <%= form.label :outcome, class: label_class %>
+          <div class="mt-1">
+            <%= form.text_area :outcome, class: input_class %>
+          </div>
+        </div>
+
+        <!-- Personnel Section -->
+        <div class="md:col-span-2">
+          <p class="block text-sm font-medium text-gray-700 mb-1">Personnel (check box to assign)</p>
+          <div class="mt-1 flex flex-wrap gap-x-4 gap-y-2">
+            <%= form.collection_check_boxes :person_ids, @people, :id, :role_full_name, not_checked: Person.all.map(&:id) do |b| %>
+              <div class="flex items-center space-x-1">
+                <%= b.check_box %>
+                <%= b.label %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+
+        <!-- Budget Section (Admins Only) -->
+        <% if is_admin? %>
+        <div class="md:col-span-2 mt-4">
+          <p class="block text-sm font-medium text-gray-700 mb-1">Budget</p>
+          <% if event.budget_count == 0 %>
+            <%= link_to "Add New Budget", new_budget_path, class: routing_link_class %><br>
+          <% end %>
+
+          <% if event.budget.present? %>
+            <p class="text-sm font-medium text-gray-900">
+              <%= number_to_currency(event.budget.budget_total, precision: 2) %><br>
+              <%= link_to "View Budget Details ➔", event.budget, class: link_class %> |
+              <%= link_to "Edit Budget ➔", edit_budget_path(event.budget), class: link_class %>
+            </p>
+          <% end %>
+        </div>
       <% end %>
-     <div>
-     <br>
-     
-      <% if is_admin? %>  
-     <div class="mb-4">
-     <p class="block text-sm font-medium text-gray-700" %>Budget</p>
-     <div class="mt-1">
-     <% if event.budget_count==0 %>
-       <%= link_to "Add New budget >>", new_budget_path, class: routing_link_class %>
-       <br>
-       <% end %>
-         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-          <%= number_to_currency(event.budget.budget_total, precision: 2) unless event.budget.to_s.empty? %> <br>
-          <br>
-              <%=  link_to "View budget details =>", event.budget, class: link_class unless event.budget.to_s.empty? %>
-         <br> <%=  link_to "Edit budget details =>", edit_budget_path(event.budget), class: link_class unless event.budget.to_s.empty? %>
-      </p> 
-     <div>
-      <% end %>  
-     <br>
-  
-   <div>
-     <%= form.submit "Save Record", class: form_button_class %>
-   </div>
- <% end %>
 
+      </div> <!-- End grid -->
+
+      <!-- Save Button -->
+      <div class="mt-2 flex justify-end">
+        <%= form.submit "Save Record", class: form_button_class %>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>

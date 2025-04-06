@@ -3,6 +3,8 @@
 <%= render "form", event: @event %>
 
 <div>
-  <%= link_to "Show this event", @event, class: link_class %> |
-  <%= link_to "Back to events", events_path, class: link_class %>
+  <span class="ml-6"><%= link_to "Edit this Event", edit_event_path(@event), class: link_class %> <br>
+  <%= link_to "<< Back to Events", events_path, class: link_class %>
+
+  <%= button_to "Delete this record",  @event, method: :delete, class:"ml-6"%>
 </div>
