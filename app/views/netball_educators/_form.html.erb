@@ -1,161 +1,173 @@
 <div class="sm:mx-auto sm:w-full sm:max-w-md">
   <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+    
+    <%= form_with(model: netball_educator, data: { turbo: false }) do |form| %>
 
+      <%= form_errors_for(netball_educator) %>
 
-    <%= form_with(model: netball_educator) do |form| %>
-      <% if netball_educator.errors.any? %>
-        <div style="color: red">
-          <h2><%= pluralize(netball_educator.errors.count, "error") %> prohibited this netball_educator from being saved:</h2>
+      <!-- Your normal educator fields -->
 
-          <ul>
-            <% netball_educator.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
+      <div class="mb-6">
+        <%= form.label :first_name, "First Name*", class: label_class %>
+        <div class="mt-1">
+          <%= form.text_field :first_name, class: input_class %>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :last_name, "Last Name*", class: label_class %>
+        <div class="mt-1">
+          <%= form.text_field :last_name, class: input_class %>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :email, "Email*", class: label_class %>
+        <div class="mt-1">
+          <%= form.text_field :email, class: input_class %>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :phone, "Phone (include area code)", class: label_class %>
+        <div class="mt-1">
+          <%= form.text_field :phone, class: input_class %>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :title, "Title", class: label_class %>
+        <div class="mt-1">
+          <%= form.text_field :title, class: input_class %>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :school_name, "School Name*", class: label_class %>
+        <div class="mt-1">
+          <%= form.text_field :school_name, class: input_class %>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :address, "School Address", class: label_class %>
+        <div class="mt-1">
+          <%= form.text_field :address, class: input_class %>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :city, "City*", class: label_class %>
+        <div class="mt-1">
+          <%= form.text_field :city, class: input_class %>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :state, "State*", class: label_class %>
+        <div class="mt-1">
+          <%= form.select :state, options_for_select(us_states, selected: netball_educator.state), { prompt: true }, class: input_class %>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :zip, "Zip Code", class: label_class %>
+        <div class="mt-1">
+          <%= form.text_field :zip, class: input_class %>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :website, "School Website", class: label_class %>
+        <div class="mt-1">
+          <%= form.text_field :website, class: input_class %>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :level, "Level*", class: label_class %>
+        <div class="mt-1">
+          <%= form.select :level, options_for_select(educator_level, selected: netball_educator.level), { prompt: true }, class: input_class %>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :educator_notes, "What would you like more information on?", class: label_class %>
+        <div class="mt-1">
+          <%= form.text_area :educator_notes, class: input_class %>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :feedback, "Quote/Feedback on your session", class: label_class %>
+        <div class="mt-1">
+          <%= form.text_area :feedback, class: input_class %>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :authorize, "Do you authorize us to use feedback on social media?", class: label_class %>
+        <div class="mt-1">
+          <%= form.check_box :authorize, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-2" %>
+        </div>
+      </div>
+
+      <% unless current_user.nil? %>
+        <div class="mb-6">
+          <%= form.label :user_id, "Allocated To", class: label_class %>
+          <div class="mt-1">
+            <%= form.collection_select(:user_id, @users, :id, :full_name, { prompt: true }, { class: input_class }) %>
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <%= form.label :mgmt_notes, "Management Notes", class: label_class %>
+          <div class="mt-1">
+            <%= form.text_area :mgmt_notes, class: input_class, size: "10x10" %>
+          </div>
         </div>
       <% end %>
 
-      <div class="mb-6">
-        <%= form.label :first_name, "First Name*", autofocus: true, autocomplete: "name", class: "required block text-sm font-medium text-gray-700 invalid:border-red-500 required"%>
-         <div class="mt-1">
-        <%= form.text_field :first_name, class: input_class %>
-       </div>
+      <!-- Submit button for Educator -->
+      <div class="mt-6">
+        <%= form.submit "Save Educator", class: form_button_class %>
       </div>
 
-     <div class="mb-6">
-        <%= form.label :last_name, "Last Name*", autofocus: true, autocomplete: "name", class: label_class %>
-        <div class="mt-1">
-        <%= form.text_field :last_name, class: input_class %>
-      </div>
-     </div>
+      <!-- ✅ Now Equipment Section starts -->
 
-     <div class="mb-6">
-        <%= form.label :email, "Email*", autofocus: true, autocomplete: "email", class: label_class  %>
-        <div class="mt-1">
-        <%= form.text_field :email, class: input_class, autocomplete: "email" %>
-       </div>
-      </div>
+      <% if netball_educator.persisted? %>
+        <hr class="my-6 border-gray-300">
 
-       <div class="mb-6">
-        <%= form.label :phone, "Phone (include area code)", autofocus: true, autocomplete: "phone", class: label_class  %>
-        <div class="mt-1">
-        <%= form.text_field :phone, class: input_class %>
-       </div>
-      </div>
+        <h2 class="text-lg font-semibold text-gray-700 mb-2">Equipment Sales</h2>
 
-      <div class="mb-6">
-      <%= form.label :title, "Title", class: label_class  %>
-      <div class="mt-1">
-      <%= form.text_field :title, class: input_class %>
-     </div>
-    </div>
-
-      <div class="mb-6">
-        <%= form.label :school_name, "School Name*", class: label_class  %>
-        <div class="mt-1">
-        <%= form.text_field :school_name, class: input_class %>
-       </div>
-      </div>
-
-      <div class="mb-6">
-        <%= form.label :address, "School Address", class: label_class  %>
-        <div class="mt-1">
-        <%= form.text_field :address, class: input_class %>
-       </div>
-      </div>
-
-       <div class="mb-6">
-        <%= form.label :city, "City*", class: label_class  %>
-        <div class="mt-1">
-        <%= form.text_field :city, class: input_class %>
-       </div>
-      </div>
-  
-     <div class="mb-6">
-        <%= form.label :state, "State*", class: label_class  %>
-        <div class="mt-1">
-         <%= form.select :state, options_for_select(us_states, :selected => netball_educator.state),{:prompt=>true}, class: input_class %>
-        </div>
-      </div>
-
-      <div class="mb-6">
-          <%= form.label :zip, "Zip Code", class: label_class  %>
-          <div class="mt-1">
-        <%= form.text_field :zip, class: input_class %>  </div>
-      </div>
-
-      <div class="mb-6">
-        <%= form.label :website, "School Website", class: label_class  %>
-        <div class="mt-1">
-         <%= form.text_field :website, class: input_class %>
-        </div>
-      </div>
-
-      <div class="mb-6">
-        <%= form.label :level, "Level*", class: label_class  %>
-        <div class="mt-1">
-         <%= form.select :level, options_for_select(educator_level, :selected => netball_educator.level),{:prompt=>true}, class: input_class %>
-        </div>
-      </div>
-
-     <div class="mb-6">
-        <%= form.label :educator_notes, 'What would you like more information on?', style: "display: block", class: label_class  %>
-        <div class="mt-1">
-        <%= form.text_area :educator_notes, class: input_class %>
-       </div>
-      </div>
-  
-      <div class="mb-6">
-         <%= form.label :feedback, 'Quote/Feedback on your session', style: "display: block", class: label_class  %>
-         <div class="mt-1">
-         <%= form.text_area :feedback, class: input_class %>
-        </div>
-       </div>
-   
-       <div class="mb-6">
-          <%= form.label :authorize, 'Do you authorize us to use feedback on social media?', style: "display: block", class: label_class  %>
-          <div class="mt-1">
-          <%= form.check_box :authorize, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
-         </div>
-        </div>
-
-    <% unless current_user.nil? %>
-      <div class="mb-6">
-       <%= form.label :user_id, 'Allocated To', class: label_class%>
-        <div class="mt-1">
-        <%= form.collection_select(:user_id, @users, :id, :full_name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
-       }) %>
-     </div> </div>
-
-
-      <div class="mb-6">
-        <%= form.label :mgmt_notes, style: "display: block", class: label_class  %>
-        <div class="mt-1">
-        <%= form.text_area :mgmt_notes, size: "10x10", class: input_class %>
-       </div>
-      </div>
-      
-      <div class="mb-6">
-        <%= form.label :equipment, style: "display: block", class: label_class  %>
-        <div class="mt-1">
-        <p class="text-sm font-medium text-gray-900 dark:text-white">
         <% if netball_educator.equipment.any? %>
-          <% netball_educator.equipment.each do |equipment| %>
-           <ul class="list-disc ms-6">
-            <li><%= equipment.sale_date.to_formatted_s(:usa) unless (equipment.sale_date.to_s.empty?) %>  <%= equipment.items_purchased %>   <%= number_to_currency(equipment.purchase_amount, precision: 2) %><br>
-            </li>
+          <ul class="space-y-2 mb-4">
+            <% netball_educator.equipment.each do |equipment| %>
+              <li class="flex justify-between items-center p-2 border rounded bg-gray-50">
+                <div>
+                  <strong><%= equipment.sale_date.to_formatted_s(:usa) if equipment.sale_date %></strong> – 
+                  <%= equipment.items_purchased %> – 
+                  <%= number_to_currency(equipment.purchase_amount) %>
+                </div>
+                <div class="flex gap-2">
+                  <%= link_to "Edit", edit_equipment_path(equipment), class: "text-blue-600 hover:underline text-sm" %>
+                  <%= link_to "Delete", equipment_path(equipment), method: :delete, data: { confirm: "Are you sure?" }, class: "text-red-600 hover:underline text-sm" %>
+                </div>
+              </li>
+            <% end %>
           </ul>
-           <% end %>
-          <% end %>
-        </p>
-        <%= link_to "Add New Equipment Sale>>", equipment_index_path, class: "text-sm text-blue-900"  %>
-       </div>
-      </div>
+        <% else %>
+          <p class="text-gray-500 text-sm mb-4">No equipment sales recorded yet.</p>
+        <% end %>
+
+        <%= link_to "➕ Add New Equipment Sale", new_equipment_path(netball_educator_id: netball_educator.id), class: "inline-block text-sm text-blue-800 hover:underline" %>
+
+      <% else %>
+        <div class="mt-6">
+          <p class="text-sm text-gray-500">Save the educator first to add equipment sales.</p>
+        </div>
+      <% end %>
+
     <% end %>
-
-
-      <div>
-        <%= form.submit "Submit", class: form_button_class %>
-      </div>
-    <% end %>
-
+  </div>
+</div>

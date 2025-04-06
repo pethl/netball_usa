@@ -1,12 +1,11 @@
 class EquipmentController < ApplicationController
   before_action :set_equipment, only: %i[ show edit update destroy ]
-  
+  load_and_authorize_resource
   # GET /equipment
   def index
-  authorize! :read, Equipment
   @equipment = Equipment.left_joins(:netball_educator)
                         .order(sale_date: :desc)
-   
+ 
   end
 
   # GET /equipment/1
@@ -16,9 +15,14 @@ class EquipmentController < ApplicationController
   # GET /equipment/new
   def new
     @equipment = Equipment.new
-    @netball_educators = NetballEducator.all
-    @netball_educators = @netball_educators.order(last_name: :asc)
+  
+    # Preassign Netball Educator if coming from a link
+    @equipment.netball_educator_id = params[:netball_educator_id] if params[:netball_educator_id].present?
+  
+    # Load all educators for the dropdown, ordered nicely
+    @netball_educators = NetballEducator.order(:last_name)
   end
+  
 
   # GET /equipment/1/edit
   def edit

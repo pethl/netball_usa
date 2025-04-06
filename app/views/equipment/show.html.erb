@@ -9,8 +9,10 @@
 
 <div>
   <%= link_to "Edit this equipment sale", edit_equipment_path(@equipment), class: link_class  %> |
-  <%= link_to "Back to equipment", equipment_index_path, class: link_class  %>
+  <%= link_to "<< Back to all equipment sales", equipment_index_path, class: link_class  %><br>
+   <%= link_to "Edit this educator", edit_netball_educator_path(@equipment.netball_educator), class: link_class  %> |
+  <%= link_to "<< Back to all educators", netball_educators_path, class: link_class  %>
 
-  <%= button_to "Destroy this equipment", @equipment, method: :delete %>
+  <%= button_to "Destroy this equipment record", @equipment, method: :delete %>
 </div>
 
