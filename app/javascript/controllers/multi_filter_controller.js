@@ -1,42 +1,44 @@
-console.log("Loading multi_filter_controller.js")
-
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["select"]
+  static targets = ["field"]
   static values = {
     url: String
   }
 
   connect() {
     console.log("MultiFilter connected")
-    // Initialize with current values if present in URL
+    this.timeout = null
+
     const urlParams = new URLSearchParams(window.location.search)
-    this.selectTargets.forEach(select => {
-      const currentValue = urlParams.get(select.name)
+    this.fieldTargets.forEach(field => {
+      const currentValue = urlParams.get(field.name)
       if (currentValue) {
-        select.value = currentValue
+        field.value = currentValue
       }
     })
   }
 
   filter() {
     console.log("Filter triggered")
-    const url = new URL(this.urlValue, window.location.href)
-    
-    // Clear all existing filter params
-    this.selectTargets.forEach(select => {
-      url.searchParams.delete(select.name)
-    })
 
-    // Add only the non-empty filter values
-    this.selectTargets.forEach(select => {
-      if (select.value) {
-        url.searchParams.set(select.name, select.value)
-      }
-    })
+    clearTimeout(this.timeout)
 
-    console.log("Navigating to:", url.toString())
-    window.location.href = url.toString()
+    this.timeout = setTimeout(() => {
+      const url = new URL(this.urlValue, window.location.href)
+
+      this.fieldTargets.forEach(field => {
+        url.searchParams.delete(field.name)
+      })
+
+      this.fieldTargets.forEach(field => {
+        if (field.value.trim() !== "") {
+          url.searchParams.set(field.name, field.value.trim())
+        }
+      })
+
+      console.log("Navigating to:", url.toString())
+      window.location.href = url.toString()
+    }, 300)
   }
-} 
+}

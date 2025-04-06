@@ -6,27 +6,33 @@ class NetballEducatorsController < ApplicationController
   before_action :set_users, only: [:new, :create, :edit, :update]
 
   def index
-    # 👇 FORCE HTML if Turbo tries to be clever
-    if request.format.turbo_stream?
-      request.format = :html
-    end
+    # Force HTML if Turbo tries to send Turbo Stream requests
+    request.format = :html if request.format.turbo_stream?
   
-    if (is_admin? || current_user.role == "educators" || current_user.email == "drmarlene@netballamerica.com")
-      @netball_educators = NetballEducator.all
+    # 🔥 Educator Access Control
+    @netball_educators = if is_admin? || current_user.role == "educators" || current_user.email == "drmarlene@netballamerica.com"
+      NetballEducator.all
     else
-      @netball_educators = NetballEducator.where(user_id: current_user.id)
+      NetballEducator.where(user_id: current_user.id)
     end
   
-    @netball_educators = @netball_educators.where(state: params[:state]) if params[:state].present?
-    @netball_educators = @netball_educators.where(level: params[:level]) if params[:level].present?
-    @netball_educators = @netball_educators.order("created_at DESC, state ASC, city ASC")
+    # 🔥 Filters
+    if params[:state].present?
+      @netball_educators = @netball_educators.where(state: params[:state])
+    end
+  
+    if params[:city].present?
+      @netball_educators = @netball_educators.where("city ILIKE ?", "%#{params[:city]}%")
+    end
+  
+    # 🔥 Ordering
+    @netball_educators = @netball_educators.order(:state, :city, created_at: :desc)
   
     respond_to do |format|
-      format.html { render :index }
+      format.html
       format.xlsx
     end
-  end
-  
+  end  
 
   def pe_directors
     if (is_admin? || current_user.role=="educators" || current_user.email=="drmarlene@netballamerica.com")
