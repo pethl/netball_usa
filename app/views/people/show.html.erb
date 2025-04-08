@@ -6,12 +6,11 @@
 
   
 <div class="m-4">
-  <%= link_to "Edit this person", edit_person_path(@person), class: link_class  %> |
-  <%= link_to "Back to people", people_path, class: link_class  %> | 
+  <%= link_to "Edit this person", edit_person_path(@person), class: link_class  %> <br>
+  <%= link_to "<< Back to people", people_path, class: link_class  %> <br>
+  <%= link_to "<< Back to Educators - people", trainers_etc_path, class: link_class  %> <br>
   <%= link_to "Add new person", new_person_path, class: link_class  %>
   
-  <%= button_to "Delete this record", @person, method: :delete,
-  form: { data: { turbo_confirm: "Are you sure?" } }, class: link_class %>
-
+ 
 </div>
 

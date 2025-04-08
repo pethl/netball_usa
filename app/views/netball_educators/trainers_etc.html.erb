@@ -1,13 +1,30 @@
 <%# /netball_educators/trainers_etc.html.erb %>
 
 <% content_for(:page_title, "Trainers & Ambassadors") %>
-<div class=" py-4">
+<div class="py-4">
   <%= render 'nav_tabs' %>
 </div>
 
-<% @trainers.group_by(&:educator_role).each do |role, people| %>
-  <h2 class="text-2xl font-semibold mt-8 mb-4"><%= role.presence || "Other" %></h2>
+<div class="my-2">
+  <%= link_to "Add New Person", new_person_path, class: form_button_class %>
+</div>
 
-  <%= render 'people/people_table', people: people, searching: false, search_term: nil %>
-<% end %>
+
+<div class="mx-2">
+
+    <%# --- ACTIVE TRAINERS grouped by educator_role --- %>
+    <% @active_trainers.group_by(&:educator_role).each do |role, people| %>
+      <h2 class="text-2xl font-semibold mt-4 mb-4"><%= role.presence || "Other" %></h2>
+
+      <%= render 'people/people_table', people: people, searching: false, search_term: nil %>
+    <% end %>
+
+    <%# --- INACTIVE TRAINERS grouped together --- %>
+    <% if @inactive_trainers.any? %>
+      <h2 class="text-2xl font-semibold mt-12 mb-4 text-gray-600">Inactive Trainers</h2>
+
+      <%= render 'people/people_table', people: @inactive_trainers, searching: false, search_term: nil %>
+    <% end %>
+</div>
+
 

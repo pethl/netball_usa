@@ -58,9 +58,14 @@ class NetballEducatorsController < ApplicationController
   end
 
   def trainers_etc
-    @trainers = Person.where(role: "Trainer").order(:educator_role, :last_name)
-  end
+    @active_trainers = Person
+      .where(role: "Trainer", status: "Active")
+      .order(:educator_role, :last_name)
   
+    @inactive_trainers = Person
+      .where(role: "Trainer", status: "Inactive")
+      .order(:educator_role, :last_name)
+  end
 
   def show
   end
