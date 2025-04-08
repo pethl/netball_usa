@@ -15,81 +15,67 @@ class EventsController < ApplicationController
     render :index
   end
 
- # GET /events/educational
-def educational
-  @events = filtered_educational_events(upcoming: true).order(:date)
-  render :educational
-end
+  def educational
+    @events = filtered_educational_events(upcoming: true).order(:date)
+    render :educational
+  end
 
-# GET /events/educational_past
-def educational_past
-  @events = filtered_educational_events(upcoming: false).order(date: :desc)
-  render :educational
-end
-  
-  # GET /events
+  def educational_past
+    @events = filtered_educational_events(upcoming: false).order(date: :desc)
+    render :educational
+  end
+
   def calendar
     @events = Event.all
   end
 
-  # GET /events/1
   def show
   end
 
-  # GET /events/new
   def new
     @event = Event.new
-    @people = Person.where(role: "Trainer").or(Person.where(role: "Ambassador"))
-    @people = @people.order(last_name: :asc)
+    @people = Person.active_trainers_and_ambassadors
   end
 
-  # GET /events/1/edit
   def edit
-    @people = Person.where(role: "Trainer").or(Person.where(role: "Ambassador"))
-    @people = @people.order(role: :asc).order(last_name: :asc)
+    @people = Person.active_trainers_and_ambassadors
   end
 
-  # POST /events
   def create
     @event = Event.new(event_params)
 
     if @event.save
       redirect_to @event, notice: "Event was successfully created."
     else
-      @people = Person.all
-      @people = @people.order(last_name: :asc)
+      @people = Person.active_trainers_and_ambassadors
       render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /events/1
   def update
     if @event.update(event_params)
       redirect_to @event, notice: "Event was successfully updated.", status: :see_other
     else
+      @people = Person.active_trainers_and_ambassadors
       render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /events/1
   def destroy
     @event.destroy
     redirect_to events_url, notice: "Event was successfully destroyed.", status: :see_other
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_event
       @event = Event.find(params[:id])
     end
     
-    # Get event list for drop down.
     def set_event_collections
-      @people= Person.all
-      @people = @people.order(last_name: :asc)
+      @people = Person.active_trainers_and_ambassadors
     end
 
-    # Only allow a list of trusted parameters through.
     def event_params
       params.require(:event).permit(:event_type, :name, :date, :end_date, :attend, :website, :key_contact, :city, :state, :location, :details, :booth, :cost_notes, :status, :outcome, person_ids: [])
     end
@@ -121,5 +107,4 @@ end
     
       scope
     end
-    
 end

@@ -147,7 +147,7 @@
     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
       <% if event.people.any? %>
         <% event.people.each do |person| %>
-            <%= person.full_name %> <br>
+            <%= person.role_full_name_city_state %> <br>
         <% end %>
       <% end %>
     </p> 

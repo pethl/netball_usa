@@ -16,6 +16,9 @@ class Person < ApplicationRecord
   scope :ordered, -> { order(first_name: :asc) }
   scope :active,   -> { where(status: "Active") }
   scope :inactive, -> { where(status: "Inactive") }
+  scope :active_trainers_and_ambassadors, -> {
+    where(role: ["Trainer", "Ambassador"], status: "Active").order(:educator_role, :last_name)
+  }
 
   # ========== Validations ==========
   validates :role, presence: true
@@ -33,5 +36,14 @@ class Person < ApplicationRecord
 
   def role_full_name
     "#{role} - #{last_name}, #{first_name}"
+  end
+
+  def role_full_name_city_state
+    [
+      educator_role.presence || role,
+      full_name,
+      self.location.presence,
+      #self.state.presence
+    ].compact.join(" – ")
   end
 end
