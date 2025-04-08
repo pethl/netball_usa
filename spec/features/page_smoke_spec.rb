@@ -11,11 +11,12 @@ RSpec.feature "PageSmoke", type: :feature, js: true do
     pages = [
       { path: root_path, title: "Management Summary" },
       { path: netball_educators_path, title: "All Educators" },
+     # { path: my_educators_path, title: "My Educators (allocated to me)" }, SKIP AS ISSUE WITH PAGE TITLE
       { path: pe_directors_netball_educators_path, title: "P.E. Directors" },
-       #{ path: equipment_path, title: "Equipment" },
-       { path: educational_events_path, title: "Educational Events" },
-
+      { path: equipment_index_path, title: "Equipment Purchased" },
       { path: follow_ups_path, title: "Educator Follow Up" },
+      { path: educational_events_path, title: "Educational Events" },
+      { path: "netball_educators/search", title: "Educators: Search" },
      
       { path: sponsors_path, title: "Sponsors" },
       { path: opportunities_path, title: "Opportunities" },
@@ -41,15 +42,18 @@ RSpec.feature "PageSmoke", type: :feature, js: true do
 
       { path: open_invites_path, title: "US Open Invites" },
       { path: transfers_path, title: "US Open" },
-      # missing pages here
+      { path: inbound_pickups_transfers_path, title: "US Open - Arrivals Transfers" },
+      { path: outbound_pickups_transfers_path, title: "US Open - Departures Transfers" },
 
+      { path: "/clubs/index_admin", title: "Clubs" },
       { path: members_path, title: "Members" },
+      #{ path: clubs_path, title: "Clubs Managed by NA Administrators" }, SKIP AS DATA RELATED ISSUES
       { path: individual_members_path, title: "Individual Members" },
       { path: "/clubs/teams_list_index", title: "Teams Year End Report" },
       { path: payments_path, title: "Payments" },
 
      # ADMIN PATHS
-      { path: "/clubs/index_admin", title: "Clubs" },
+ 
       { path: budgets_path, title: "Budgets" },
       { path: references_path, title: "Reference Data" },
       { path: sample_words_path, title: "Sample Words" },

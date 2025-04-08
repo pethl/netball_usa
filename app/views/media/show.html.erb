@@ -74,11 +74,14 @@
 
   <div class="flex items-center gap-4 mt-8">
     <%= link_to "Edit this media", edit_medium_path(@medium), class: form_button_class %>
-    <%= button_to "Destroy this media company record",
-                  @medium,
-                  method: :delete,
-                  class: clear_button_class,
-                  data: { confirm: "Are you sure you want to delete this media record?" } %>
+
+    <% if is_admin? %>
+      <%= button_to "Destroy this media company record",
+                    @medium,
+                    method: :delete,
+                    class: clear_button_class,
+                    data: { confirm: "Are you sure you want to delete this media record?" } %>
+    <% end %>
    <br> <%= link_to "<< Back to all media", media_path, class: "text-sm text-blue-900 hover:underline" %>
   </div>
 </div>

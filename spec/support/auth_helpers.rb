@@ -14,12 +14,17 @@ module AuthHelpers
     end
   
     def login_user(user)
-      user.confirm unless user.confirmed? # <-- ensure user is confirmed
+      if user.respond_to?(:confirmed?) && !user.confirmed?
+        user.confirm
+        user.save! # 👈 ADD THIS so the DB has the confirmed user
+      end
+    
       visit new_user_session_path
       fill_in "Email", with: user.email
-      fill_in "Password", with: "password123" # Or whatever password you use
+      fill_in "Password", with: "password123"
       click_button "Log in"
     end
+    
   
     def logout_user
       find("i.fa-arrow-right-from-bracket").click

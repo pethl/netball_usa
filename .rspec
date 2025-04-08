@@ -1,1 +1,12 @@
---require spec_helper
+--require rails_helper
+--format documentation
+--color
+--fail-fast
+--default-path spec
+--profile
+--backtrace
+--tag ~skip
+--tag ~wip
+
+
+

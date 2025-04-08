@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_31_090328) do
+ActiveRecord::Schema[7.1].define(version: 2025_04_07_211308) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -486,6 +486,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_31_090328) do
     t.string "level_submitted"
     t.text "resume_data"
     t.string "status", default: "Active", null: false
+    t.string "educator_role"
   end
 
   create_table "press_releases", force: :cascade do |t|

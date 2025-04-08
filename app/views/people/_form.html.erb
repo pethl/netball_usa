@@ -5,16 +5,7 @@
   <%= form_with(model: person) do |form| %>
 
     <!-- Error Display -->
-    <% if person.errors.any? %>
-      <div style="color: red">
-        <h2><%= pluralize(person.errors.count, "error") %> prohibited this person from being saved:</h2>
-        <ul>
-          <% person.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <%= form_errors_for(person) %>
 
     <!-- Personal Info Section -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 m-4">
@@ -55,6 +46,22 @@
         </div>
       </div>
 
+      <!-- Role -->
+      <div class="mb-0">
+        <%= form.label :educator_role,"Educator Role (Trainers only)*", class: label_class %>
+        <div class="mt-1">
+          <%= form.select :educator_role, options_for_select(people_educator_role, :selected => person.educator_role),{}, :required => true, class: input_class %>
+        </div>
+      </div>
+
+       <!-- Gender -->
+      <div class="mb-0">
+        <%= form.label :gender, class: label_class %>
+        <div class="mt-1">
+          <%= form.select :gender, options_for_select(gender, :selected => person.gender),{:prompt=>true}, class: input_class %>
+        </div>
+      </div>
+
       <!-- Region -->
       <div class="mb-0">
         <%= form.label :region,"Region*", class: label_class %>
@@ -71,6 +78,14 @@
         </div>
       </div>
 
+       <!-- Address -->
+      <div class="mb-0">
+        <%= form.label :address, class: label_class %>
+        <div class="mt-1">
+          <%= form.text_field :address, class: input_class %>
+        </div>
+      </div>
+
       <!-- Associated or Independent -->
       <div class="mb-0">
         <%= form.label :associated, "Associated or Independent?", class: label_class %>
@@ -79,19 +94,10 @@
         </div>
       </div>
 
-      <!-- Gender -->
-      <div class="mb-0">
-        <%= form.label :gender, class: label_class %>
-        <div class="mt-1">
-          <%= form.select :gender, options_for_select(gender, :selected => person.gender),{:prompt=>true}, class: input_class %>
-        </div>
-      </div>
-
-      <!-- Empty Space (Possible Spacer) -->
-      <div></div>
+     
 
       <!-- Email -->
-      <div class="mb-2">
+      <div class="mb-0">
         <%= form.label :email, "Email*", class: label_class %>
         <div class="mt-1">
           <%= form.text_field :email, class: input_class %>
@@ -99,20 +105,14 @@
       </div>
 
       <!-- Phone -->
-      <div class="mb-2">
+      <div class="mb-0">
         <%= form.label :phone, class: label_class %>
         <div class="mt-1">
           <%= form.text_field :phone, class: input_class %>
         </div>
       </div>
 
-      <!-- Address -->
-      <div class="mb-2">
-        <%= form.label :address, class: label_class %>
-        <div class="mt-1">
-          <%= form.text_field :address, class: input_class %>
-        </div>
-      </div>
+     
     </div>
    
     

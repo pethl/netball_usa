@@ -51,6 +51,9 @@ class PagesController < ApplicationController
     #special stats for follow_ups card
     @follow_up_stats = FollowUp.group(:lead_type).count
 
+    #special stats for media card
+    @media_stats = Medium.group(:media_type).count
+
     #Special Stats for Equipment card - Sonya 4/25
     @equipment_stats = Equipment
     .where(sale_date: 3.years.ago.beginning_of_year..Time.current.end_of_year)

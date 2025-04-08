@@ -1,5 +1,8 @@
 class FollowUpsController < ApplicationController
   before_action :set_follow_up, only: %i[ show edit update destroy ]
+  before_action :set_users, only: [:new, :create, :edit, :update]  
+  before_action :set_events, only: [:new, :create, :edit, :update]  
+  before_action :authenticate_user! # Ensure user is authenticated (Devise)
   load_and_authorize_resource
 
   # GET /follow_ups
@@ -23,28 +26,26 @@ class FollowUpsController < ApplicationController
     @follow_up = FollowUp.new
     @netball_educators = NetballEducator.all
     @netball_educators = @netball_educators.order(last_name: :asc)
-    @events = Event.all
-    @events = @events.order(date: :asc)
   end
 
   # GET /follow_ups/1/edit
   def edit
     @netball_educators = NetballEducator.all
     @netball_educators = @netball_educators.order(last_name: :asc)
-    @events = Event.all
-    @events = @events.order(date: :asc)
+   
   end
 
   # POST /follow_ups
   def create
     @follow_up = FollowUp.new(follow_up_params)
-    @events = Event.all
     @netball_educators = NetballEducator.all
+
+    # If user_id is not provided, assign current_user.id
+    @follow_up.user_id ||= current_user.id
     if @follow_up.save
       redirect_to @follow_up, notice: "Follow up was successfully created."
     else
-      @events = Event.all
-      @events = @events.order(date: :asc)
+     
       render :new, status: :unprocessable_entity
     end
   end
@@ -73,5 +74,13 @@ class FollowUpsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def follow_up_params
       params.require(:follow_up).permit(:lead_type, :status, :action_items, :sale_amount, :add_to_mailing_list, :event_id, :netball_educator_id, :user_id)
+    end
+
+    def set_users
+      @users = User.active_admins
+    end
+
+    def set_events
+      @events = Event.upcoming
     end
 end

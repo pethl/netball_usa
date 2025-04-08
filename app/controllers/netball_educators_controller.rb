@@ -56,6 +56,10 @@ class NetballEducatorsController < ApplicationController
       @netball_educators = []
     end
   end
+
+  def trainers_etc
+    @trainers = Person.where(role: "Trainer").order(:educator_role, :last_name)
+  end
   
 
   def show
@@ -72,7 +76,7 @@ class NetballEducatorsController < ApplicationController
     @netball_educator = NetballEducator.new(netball_educator_params)
 
     if @netball_educator.save
-      redirect_to @netball_educator, notice: 'Netball educator was successfully created.'
+      redirect_to @netball_educator, notice: 'Educator was successfully created.'
     else
       render :new
     end
@@ -80,7 +84,7 @@ class NetballEducatorsController < ApplicationController
 
   def update
     if @netball_educator.update(netball_educator_params)
-      redirect_to @netball_educator, notice: 'Netball educator was successfully updated.'
+      redirect_to @netball_educator, notice: 'Educator was successfully updated.'
     else
       render :edit
     end
@@ -88,7 +92,7 @@ class NetballEducatorsController < ApplicationController
 
   def destroy
     @netball_educator.destroy
-    redirect_to netball_educators_url, notice: 'Netball educator was successfully deleted.'
+    redirect_to netball_educators_url, notice: 'Educator was successfully deleted.'
   end
 
   private

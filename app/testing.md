@@ -1,9 +1,28 @@
 TESTING.md 
 # 🧪 Testing Documentation
 
+Your Test → rails_helper.rb → spec_helper.rb → RSpec Core Settings
+                ↓
+         Rails Environment
+         (models, db, config)
+                ↓
+         Load Capybara, Devise, etc.
+                ↓
+      Ready to Run Feature + Model Specs
+
 This file keeps track of key tests across the project. Update this file as your test coverage improves.
 
 ---
+Checklist for Future Rails Test Setups
+
+Save this somewhere easy, like Notion, Apple Notes, etc.
+ .rspec has --require rails_helper
+ rails_helper.rb requires spec_helper.rb
+ rails_helper.rb loads Rails env and support files
+ spec/support/database_cleaner.rb is set up correctly
+ Database configured for test environment
+ Never touch production! (Rails.env.production? safeguard!)=
+ --------
 
 ## 🏃‍♂️ Core User Flows (Feature Specs)
 - [x] User signs up successfully
@@ -22,10 +41,40 @@ This file keeps track of key tests across the project. Update this file as your 
 ---
 
 ## 🛠️ CRUD Operations (Feature + System Specs)
-- [ ] Create Equipment
+
+NETBALL_EDUCATORS
+- [x] Create Educator
+- [x] See Validation Errors
+- [ ] Read (View) Educator
+- [x] Update Educator
+- [ ] Delete Educator
+
+------
+
+EQUIPMENT
+- [x] Create Equipment
+- [x] See Validation Errors
 - [ ] Read (View) Equipment
-- [ ] Update Equipment
+- [x] Update Equipment
 - [ ] Delete Equipment
+
+---
+
+MEDIA
+- [x] Create Media
+- [x] See Validation Errors
+- [ ] Read (View) Media
+- [x] Update Media
+- [ ] Delete Media
+
+---
+
+FOLLOW_UPS
+- [x] Create Follow_up
+- [x] See Validation Errors
+- [ ] Read (View) Follow_up
+- [x] Update Follow_up
+- [ ] Delete Follow_up
 
 ---
 

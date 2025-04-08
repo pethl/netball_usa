@@ -11,10 +11,11 @@
   </div>
 
   <!-- STATS at the bottom properly -->
-  <div class="mt-4 grid grid-cols-2 gap-1 text-blue-200 text-sm text-left">
-    <% @follow_up_stats.sort_by { |lead_type, _| lead_type.to_s.downcase }.each do |lead_type, count| %>
-      <div><%= lead_type.presence || "Unknown" %></div>
-      <div class="text-right"><%= count %> leads</div>
-    <% end %>
-  </div>
+<div class="mt-4 grid grid-cols-2 gap-1 text-blue-200 text-sm text-left">
+  <% @follow_up_stats.sort_by { |lead_type, _| lead_type.to_s.downcase }.each do |lead_type, count| %>
+    <div class="whitespace-nowrap"><%= lead_type.presence || "Unknown" %></div>
+    <div class="text-right"><%= count %> leads</div>
+  <% end %>
+</div>
+
 <% end %>

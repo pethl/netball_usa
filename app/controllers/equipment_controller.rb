@@ -33,7 +33,8 @@ class EquipmentController < ApplicationController
 
   # POST /equipment
   def create
-    @equipment = Equipment.new(equipment_params)
+    @equipment = Equipment.new(equipment_params) # Load all educators for the dropdown, ordered nicely
+    @netball_educators = NetballEducator.order(:last_name)
 
     if @equipment.save
       redirect_to @equipment, notice: "Equipment was successfully created."
@@ -45,6 +46,8 @@ class EquipmentController < ApplicationController
   # PATCH/PUT /equipment/1
   def update
     if @equipment.update(equipment_params)
+       # Load all educators for the dropdown, ordered nicely
+      @netball_educators = NetballEducator.order(:last_name)
       redirect_to @equipment, notice: "Equipment was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity

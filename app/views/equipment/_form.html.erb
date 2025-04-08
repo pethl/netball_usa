@@ -2,18 +2,7 @@
   <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
 
 <%= form_with(model: equipment) do |form| %>
-  <% if equipment.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(equipment.errors.count, "error") %> prohibited this equipment from being saved:</h2>
-
-      <ul>
-        <% equipment.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+   <%= form_errors_for(equipment) %>
   <div class="mb-6">
    <%= form.label :sale_date,"Date of Sale", class: label_class%>
     <div class="mt-1">
@@ -43,7 +32,7 @@
   </div>
   
    <div>
-     <%= form.submit "Save Record", class: form_button_class %>
+     <%= form.submit "Save Equipment", class: form_button_class %>
    </div>
  <% end %>
 

@@ -104,6 +104,8 @@ Rails.application.routes.draw do
   get 'netball_educators/search' => 'netball_educators#search', :as => :search
   get 'netball_educators/index_user' => 'netball_educators#index_user', :as => :index_user
   get 'netball_educators/my_educators' => 'netball_educators#my_educators', :as => :my_educators
+  get 'netball_educators/trainers_etc' => 'netball_educators#trainers_etc', as: :trainers_etc
+
  
   resources :netball_educators do
     collection do

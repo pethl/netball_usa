@@ -17,8 +17,8 @@ module ApplicationHelper
       content_tag(:p, record.errors[field].first, class: "text-sm text-red-600 mt-1")
     end
 
-    def tab_class(current_page)
-      if current_page
+    def tab_class(path)
+      if path && request.path.start_with?(path.to_s)
         "inline-block py-2 px-4 text-blue-900 border-b-2 border-blue-900 hover:border-blue-700 hover:text-blue-700"
       else
         "inline-block py-2 px-4 text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700"
@@ -205,6 +205,10 @@ module ApplicationHelper
 
     def people_status
       Reference.where(active: true, group: 'people_status').pluck(:value)
+    end
+
+    def people_educator_role
+      Reference.where(active: true, group: 'people_educator_role').pluck(:value)
     end
     
     def gender

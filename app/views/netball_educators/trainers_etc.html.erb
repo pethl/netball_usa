@@ -1,0 +1,13 @@
+<%# /netball_educators/trainers_etc.html.erb %>
+
+<% content_for(:page_title, "Trainers & Ambassadors") %>
+<div class=" py-4">
+  <%= render 'nav_tabs' %>
+</div>
+
+<% @trainers.group_by(&:educator_role).each do |role, people| %>
+  <h2 class="text-2xl font-semibold mt-8 mb-4"><%= role.presence || "Other" %></h2>
+
+  <%= render 'people/people_table', people: people, searching: false, search_term: nil %>
+<% end %>
+

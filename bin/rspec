@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+
+# Force Rails to use test environment
+export RAILS_ENV=test
+
+# Run rspec with whatever args you pass
+exec bundle exec rspec "$@"

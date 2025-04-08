@@ -7,6 +7,7 @@
       sequence(:email) { |n| "user#{n}@example.com" }
       password { "password123" }
       password_confirmation { "password123" }
+      confirmed_at { Time.current } # ✅ Confirmed by default
       role { "teamlead" } # Default role if you don't specify one
       admin { false }
       # Add other necessary attributes for your User model

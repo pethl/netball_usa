@@ -50,7 +50,7 @@ validates :email, presence:   true,
     end
     
     def reverse_name_school_state
-      "#{self.last_name}, #{self.first_name} : #{self.school_name}, #{self.state} "
+      "#{self.last_name}, #{self.first_name} : #{self.school_name}, #{self.state}"
     end
     
     def reverse_name
