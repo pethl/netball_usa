@@ -46,13 +46,13 @@
         </div>
       </div>
 
-      <!-- Role -->
-      <div class="mb-0">
-        <%= form.label :educator_role,"Educator Role (Trainers only)*", class: label_class %>
-        <div class="mt-1">
-          <%= form.select :educator_role, options_for_select(people_educator_role, :selected => person.educator_role),{}, :required => true, class: input_class %>
-        </div>
+     <!-- Role -->
+    <div class="mb-0">
+      <%= form.label :educator_role, "Educator Role (Trainers only)", class: label_class %>
+      <div class="mt-1">
+      <%= form.select :educator_role, options_for_select(people_educator_role, person.educator_role), { include_blank: "Please select" }, class: input_class %>
       </div>
+    </div>
 
        <!-- Gender -->
       <div class="mb-0">

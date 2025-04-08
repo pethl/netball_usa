@@ -3,7 +3,7 @@
 <% content_for(:page_title, "Trainers & Ambassadors") %>
 
 <div class="text-blue-900 text-xs font-light text-center">
-    NOTE: Only NA People of Role:Trainer are shown here.
+    NOTE: Only NA People of Role:Trainer or Ambassadorare shown here.
     </div>
 <div class="py-2">
   
@@ -17,9 +17,9 @@
 
 <div class="mx-2">
 
-    <%# --- ACTIVE TRAINERS grouped by educator_role --- %>
-    <% @active_trainers.group_by(&:educator_role).each do |role, people| %>
-      <h2 class="text-2xl font-semibold mt-4 mb-4"><%= role.presence || "Other" %></h2>
+   <%# --- ACTIVE TRAINERS grouped by educator_role --- %>
+    <% @active_trainers.group_by { |p| p.educator_role.presence || "Other" }.each do |role, people| %>
+      <h2 class="text-2xl font-semibold mt-4 mb-4"><%= role %></h2>
 
       <%= render 'people/people_table', people: people, searching: false, search_term: nil %>
     <% end %>
