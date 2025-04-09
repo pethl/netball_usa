@@ -86,15 +86,18 @@
         <% end %>
       </div>
 
-      <div class="text-green-500 justify-start-end text-bold mb-1 self-center">
-        <% if @clubs.any? %>
-          <% if @clubs.first.has_paid == "Payment Due" %>
-            <i class="fa-regular fa-square text-gray-400 text-2xl hover:scale-110 transition-transform duration-300"></i> <!-- ⬜️ No payment -->
-          <% else %>
-            <i class="fa-solid fa-check text-green-500 text-2xl hover:scale-110 transition-transform duration-300"></i> <!-- ✅ Paid -->
-          <% end %>
+    <div class="text-green-500 justify-start-end text-bold mb-1 self-center">
+      <% if @club.present? %>
+        <% if @club.has_paid == "Payment Due" %>
+          <i class="fa-regular fa-square text-gray-400 text-2xl hover:scale-110 transition-transform duration-300"></i> <!-- ⬜️ Payment Due -->
+        <% else %>
+          <i class="fa-solid fa-check text-green-500 text-2xl hover:scale-110 transition-transform duration-300"></i> <!-- ✅ Paid -->
+          <span class="text-black text-green-500 text-base ml-2">TOTAL: <%= @club.has_paid %></span> <!-- Display "$300 paid" -->
         <% end %>
-      </div>
+      <% else %>
+        <i class="fa-regular fa-square text-gray-400 text-2xl hover:scale-110 transition-transform duration-300"></i> <!-- ⬜️ No club -->
+      <% end %>
+    </div>
 
       <div class="text-green-500 justify-start-end text-bold mb-1 self-center">
         <% if @club.present? && @club.team_president_phone.present? %>

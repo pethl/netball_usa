@@ -71,12 +71,24 @@ class PagesController < ApplicationController
   end
 
   def membership_landing
-    @member_type = detect_membership_type
-    @individual_member = IndividualMember.find_by('LOWER(email) = ?', current_user.email.downcase)
-    @club = Club.find_by(user_id: current_user.id)
-    @needs_renewal = @club.present? ? renewal_required?(@club) : false
-  end
+    @member_type, @membership_record = detect_membership_type
   
+    case @member_type
+    when "Club"
+      @club = @membership_record
+      @needs_renewal = renewal_required?(@club)
+      @renewal_response = @club&.renewal_response
+  
+    when "Individual"
+      @individual_member = @membership_record
+      @needs_renewal = renewal_required_individual?(@individual_member)
+      @renewal_response = @individual_member&.renewal_response
+  
+    else
+      @needs_renewal = false
+      @renewal_response = nil
+    end
+  end
 
   def na_people
     @person = Person.find_by(email: current_user.email)
@@ -94,17 +106,14 @@ class PagesController < ApplicationController
     end
     
     def detect_membership_type
-        @individual_membership = IndividualMember.where(user_id: current_user.id)
-        @team_membership = Club.where(user_id: current_user.id)
-        
-        if @individual_membership.any?
-          return "Individual"
-        elsif @team_membership.any?
-          return "Club"
-        else
-          return "None"    
+      if (individual = IndividualMember.find_by(user_id: current_user.id))
+        return ["Individual", individual]
+      elsif (club = Club.find_by(user_id: current_user.id))
+        return ["Club", club]
+      else
+        return ["None", nil]
       end
-    end 
+    end
     
     def renewal_required?(club)
       today = Date.today
@@ -114,5 +123,10 @@ class PagesController < ApplicationController
       !(club.renewal_years || "").split(",").map(&:to_i).include?(today.year)
     end
     
+    def renewal_required_individual?(individual)
+      current_year = Date.today.year
+      renewed_years = (individual.renewal_years || "").split(",").map(&:to_i)
+      !renewed_years.include?(current_year)
+    end
 end
     

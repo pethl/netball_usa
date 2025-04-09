@@ -37,11 +37,11 @@
       <tbody>
         <% @clubs.each do |club| %>
           <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
-            <td class="px-4 py-4 truncate">
+            <td class="px-4 py-4 truncate border-x border-gray-200">
               <%= link_to club.name, club_path(club), class: link_class %>
             </td>
-            <td class="px-4 py-4"><%= club.city %></td>
-            <td class="px-4 py-4"><%= club.us_state %></td>
+            <td class="px-4 py-4 border-x border-gray-200"><%= club.city %></td>
+            <td class="px-4 py-4 border-x border-gray-200"><%= club.us_state %></td>
 
             <!-- New current year paid column -->
             <td class="px-4 py-4 text-right border-x border-gray-200">
@@ -61,31 +61,31 @@
               <% end %>
             </td>
 
-            <td class="px-4 py-4 text-center"><%= club.membership_category %></td>
+            <td class="px-4 py-4 text-center border-x border-gray-200"><%= club.membership_category %></td>
 
-            <td class="px-4 py-4 text-center">
+            <td class="px-4 py-4 text-center border-x border-gray-200">
              
-              [<span class="text-blue-600"><%= club.estimate_total_active_members %></span> / 
+              [<span class="text-blue-600 "><%= club.estimate_total_active_members %></span> / 
               <span class="text-gray-600"><%= club.estimate_total_part_time_members %></span>]
               <span class="font-semibold"> <%= club.estimate_total_number_of_club_members %></span>
             </td>
 
-            <td class="px-4 py-4 text-right">
+            <td class="px-4 py-4 text-right border-x border-gray-200">
              
               [<span class="text-blue-600"><%= club.club_total_active_members %></span> /
               <span class="text-gray-600"><%= club.club_total_parttime_members %></span>]
               <span class="font-semibold"><%= club.club_total_members %></span>
             </td>
 
-            <td class="px-4 py-4 text-center">
+            <td class="px-4 py-4 text-center border-x border-gray-200">
               <%= club.has_youth? ? 'Yes' : 'No' %>
             </td>
 
-            <td class="px-4 py-4 text-left">
+            <td class="px-4 py-4 text-left border-x border-gray-200">
               <%= club.creator.full_name %>
             </td>
 
-            <td class="px-4 py-4 text-left">
+            <td class="px-4 py-4 text-left border-x border-gray-200">
               <% if club.team_president == "Please nominate" %>
                 <span class="text-sm text-gray-400 italic"><%= club.team_president %><br></span>
               <% else %>
@@ -99,16 +99,16 @@
               <% end %>
             </td>
 
-            <td class="px-4 py-4 truncate">
+            <td class="px-4 py-4 truncate border-x border-gray-200">
               <%= link_to(club.website, club.website, target: '_blank', class: link_class) unless club.website.blank? %>
             </td>
 
-            <td class="px-4 py-4">
+            <td class="px-4 py-4 border-x border-gray-200">
               <%= club.created_at.to_formatted_s(:usa) unless club.created_at.blank? %>
             </td>
 
             <% if is_admin? %>
-              <td class="px-4 py-4">
+              <td class="px-4 py-4 border-x border-gray-200 ">
                 <% if club.notes.any? %>
                   <ul>
                     <% club.notes.each do |note| %>

@@ -1,5 +1,9 @@
 <ul class="ml-6 text-xs xl:text-xs ">
-  <% if current_user.admin? %>
+
+  <% if current_user.teamlead? %>
+  <!-- HARD BLOCK: If Teamlead, show nothing -->
+  <%# You can show a message if you want, or just leave empty %>
+  <% elsif current_user.admin? %>
     <!-- Admin menu items -->
     <li class="mt-2">
       <a href="/netball_educators" class="text-gray-100 hover:font-bold">EDUCATORS</a>
@@ -88,14 +92,7 @@
     <li class="mt-2 ml-2">
       <a href="/payments/" class="text-gray-100 hover:font-bold">- Payments</a>
     </li>
-  <% elsif current_user.teamlead? %>
-    <!-- Special case for teamlead role -->
-    <li class="mt-8">
-      <a href="/clubs/" class="text-gray-100 underline underline-offset-2">Navigation Links</a>
-    </li>
-    <li class="mt-2">
-      <a href="/clubs/" class="text-gray-100 hover:font-bold">My Club</a>
-    </li>
+
   <% else %>
     <!-- Dynamic menu based on user permissions -->
     <% if can? :manage, NetballEducator %>

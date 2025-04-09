@@ -1,21 +1,28 @@
-<div class="container mx-auto mb-32">
-  <div class="h-14 bg-transparent"></div>
+<% if @needs_renewal %>
+  <!-- Renewal needed: show banner -->
+  <%= render "pages/renewal_banner" %>
 
-  <% if @needs_renewal %>
-    <!-- Show only the renewal banner -->
-    <%= render "pages/renewal_banner", club: @club %> 
+<% else %>
+  <% if @renewal_response == "no" %>
+    <!-- User said no: show 'no renewal' landing -->
+    <% if @member_type == "Club" %>
+      <%= render "pages/landing_teams_no_renewal", club: @club %>
+    <% elsif @member_type == "Individual" %>
+      <%= render "pages/landing_individual_no_renewal", individual: @individual_member %>
+    <% end %>
+
   <% else %>
+    <!-- Normal landing -->
     <% if @member_type == "None" %>
-      <!-- New user, show both options -->
       <%= render "pages/landing_new", disable_buttons: false %>
     <% elsif @member_type == "Club" %>
-      <!-- Returning club member, show customized club landing -->
       <%= render "pages/landing_teams", disable_buttons: false, club: @club %>
     <% elsif @member_type == "Individual" %>
-      <!-- Returning individual member, show customized individual landing -->
       <%= render "pages/landing_individual", disable_buttons: false, individual: @individual_member %>
     <% end %>
   <% end %>
-</div>
+<% end %>
+
+
 
 

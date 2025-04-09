@@ -12,6 +12,37 @@ class IndividualMembersController < ApplicationController
    end
   end
 
+  def renew_individual_membership
+    individual = IndividualMember.find_by('LOWER(email) = ?', current_user.email.downcase)
+    response = params[:response]
+  
+    if individual.nil?
+      flash[:alert] = "Individual membership not found."
+      redirect_to pages_membership_landing_path and return
+    end
+  
+    if response.in?(%w[yes no])
+      renewed_years = (individual.renewal_years || "").split(",").map(&:to_i)
+      renewed_years << Date.today.year unless renewed_years.include?(Date.today.year)
+  
+      individual.update(
+        renewal_response: response,
+        renewal_years: renewed_years.join(",")
+      )
+  
+      if response == "yes"
+        flash[:notice] = "🎉 Thanks for saying YES! Welcome to a brand new season with Netball America!"
+      else
+        flash[:alert] = "Thanks for letting us know. Hope to see you back in the future!"
+      end
+  
+      redirect_to pages_membership_landing_path
+    else
+      flash[:alert] = "Invalid choice."
+      redirect_to pages_membership_landing_path
+    end
+  end
+
   # GET /individual_members/1
   def show
   end 

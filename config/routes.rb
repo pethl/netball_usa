@@ -44,8 +44,11 @@ Rails.application.routes.draw do
     get 'list'
   end 
   end
-  
+
+    # ========== General Resources ==========
+  post 'renew_individual_membership', to: 'individual_members#renew_individual_membership'
   resources :individual_members
+  
   resources :contacts
   
   resources :regions
