@@ -1,0 +1,49 @@
+<div class="container mx-auto mb-32">
+  <div class="h-14 bg-transparent"></div>
+
+  <!-- Welcome message -->
+  <div class="text-center p-6">
+  <h1 class="text-3xl font-bold text-blue-900">
+    Hello <%= current_user.first_name %>!
+  </h1>
+  <% if @club.present? %>
+    <p class="mt-2 text-gray-700 text-lg">
+      Is <span class="font-semibold"><%= @club.name %></span> ready for a new season? 🌟
+    </p>
+  <% else %>
+    <p class="mt-2 text-gray-700 text-lg">
+      Ready to start your new netball season? 🌟
+    </p>
+  <% end %>
+</div>
+ <!-- CLOSE container -->
+
+<!-- OUTSIDE container: full width banner -->
+<% if @needs_renewal %>
+ <div class="w-full bg-blue-100 border-l-8 border-blue-500 text-blue-700 p-6 mb-8 shadow-lg mt-8">
+  <div class="max-w-6xl mx-auto text-center">
+    <h2 class="text-xl font-bold mb-2 text-blue-700"> <!-- smaller, softer -->
+      Membership Renewal
+    </h2>
+    <p class="text-gray-700 mb-4">
+      Do you wish to renew your annual membership for the new season?
+    </p>
+
+      <div class="flex justify-center gap-6 mt-6">
+        <%= button_to "Yes, Renew!", renew_club_membership_path(@club, response: "yes"), method: :post, class: "bg-blue-700 hover:bg-blue-800 text-white font-semibold text-lg py-3 px-6 rounded shadow-md transition-transform transform hover:scale-105" %>
+        <%= button_to "No, Not Now", renew_club_membership_path(@club, response: "no"), method: :post, class: "bg-gray-400 hover:bg-gray-500 text-white font-semibold text-lg py-3 px-6 rounded shadow-md transition-transform transform hover:scale-105" %>
+      </div>
+
+       <!-- Logo -->
+      <div class="mt-4 md:mt-0">
+        <%= image_tag "Netball-America-Logo-Transparent-Background.png", alt: "Netball America Logo", class: "h-20 w-auto" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+
+
+
+

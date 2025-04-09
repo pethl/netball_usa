@@ -1,13 +1,9 @@
-<%# app/views/people/_people_filters_nav.html.erb %>
-<%= turbo_frame_tag "people_filters_nav" do %>
-<div
-  data-controller="page-title"
-  data-page-title-prefix-value="People"
->
+<div data-controller="page-title" data-page-title-prefix-value="People">
   <div class="md:flex md:items-center md:justify-between mb-4 space-y-2 md:space-y-0">
+    
     <!-- Tabs -->
     <ul class="flex flex-wrap text-sm font-medium text-left text-gray-600">
-      <% if @searching %>
+      <% if params[:search].present? %>
         <li class="me-2">
           <span class="inline-block px-4 py-2 text-blue-900 font-semibold border-b-2 border-blue-900">Search Results</span>
         </li>
@@ -20,17 +16,23 @@
         ["Scorers", ["Scorer", nil]],
         ["Trainers & Ambassadors", ["Trainer", nil]],
         ["Operations", ["Operations", nil]],
+        ["Volunteers", ["Volunteer", nil]],
         ["Inactive", [nil, nil, "Inactive"]]
       ].each do |label, (role, region, status)| %>
-        <li class="me-2">
-          <% is_active = !@searching && (@role == role) %>
-          <% is_active &&= (@region.presence || "") == (region.presence || "") if role == "Umpire" %>
-          <% is_active &&= (@status == status) if status.present? %>
+        <li class="me-1">
+         <% is_active = params[:role] == role %>
 
+<% if role == "Umpire" %>
+  <% is_active &&= (params[:region].presence || "") == (region.presence || "") %>
+<% end %>
+
+<% if status.present? %>
+  <% is_active &&= (params[:status].presence || "") == (status.presence || "") %>
+<% end %>
           <%= link_to label,
               people_path({ role: role, status: status }.tap { |h| h[:region] = region if region.present? }),
-              data: { action: "page-title#update", label: label },
-              class: tab_class(is_active) %>
+               data: { turbo: false },  
+              class: people_tab_class(is_active) %>
         </li>
       <% end %>
     </ul>
@@ -47,17 +49,16 @@
              data-action="input->search#search"
              autocomplete="off" />
 
-     <%= link_to "Clear",
-        people_path(role: "Umpire", region: "US & Canada"),
-        class: "text-sm text-blue-900 underline hover:font-semibold whitespace-nowrap" %>
+      <%= link_to "Clear",
+          people_path,
+          class: "text-sm text-blue-900 underline hover:font-semibold whitespace-nowrap" %>
     </div>
   </div>
 
+  <!-- Results inside Turbo Frame -->
   <div data-search-target="results">
     <%= turbo_frame_tag "people_list" do %>
-      <%= render partial: "people/people_table", locals: { people: @people, searching: @searching, search_term: params[:search] } %>
+      <%= render partial: "people/people_table", locals: { people: @people, searching: params[:search].present?, search_term: params[:search] } %>
     <% end %>
   </div>
 </div>
-
-<% end %>

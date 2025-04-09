@@ -1,155 +1,134 @@
 <div id="clubs">
-<div class="relative overflow-x-auto">
+  <div class="relative overflow-x-auto">
     <table class="table-auto w-full text-left rtl:text-right">
-        <thead class="bg-white border-b text-gray-400 font-light text-xs ">
-             <tr>
-                <th scope="col" class="px-4 py-3 w-52">
-                    Club Name
-                </th>
+      <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs">
+        <tr>
+          <th scope="col" class="px-4 px-2 w-52">Club Name</th>
+          <th scope="col" class="px-4 px-2">City</th>
+          <th scope="col" class="px-4 px-2">State</th>
 
-                <th scope="col" class="px-4 py-3">
-                    City
-                </th>
+          <!-- New dynamic year headers with vertical border -->
+          <th scope="col" class="px-4 px-2 border-x border-gray-200 text-right whitespace-nowrap">
+            Paid (<%= current_membership_year %>)
+          </th>
+          <th scope="col" class="px-4 px-2 border-x border-gray-200 text-right whitespace-nowrap">
+            Paid (<%= current_membership_year - 1 %>)
+          </th>
 
-                <th scope="col" class="px-4 py-3">
-                    State
-                </th>
-                
-                <th scope="col" class="px-4 py-3 text-right">
-                    Paid?
-                 </th>
+          <th scope="col" class="px-4 px-2 w-52 text-center">Members Category</th>
+          <th scope="col" class="px-4 px-2 w-52 text-center whitespace-nowrap">
+            Members Estimate<br>[Active/P-T]
+          </th>
+          <th scope="col" class="px-4 px-2 w-52 text-right whitespace-nowrap">
+            Members Total <br>[Active/P-T]
+          </th>
+          <th scope="col" class="px-4 px-2 w-52 text-center">Has Youth?</th>
+          <th scope="col" class="px-4 px-2 w-60 text-left">Administered By</th>
+          <th scope="col" class="px-4 px-2 w-60 truncate">Team President</th>
+          <th scope="col" class="px-4 px-2 w-60 truncate">Website</th>
+          <th scope="col" class="px-4 px-2 w-60">Date Created</th>
 
-                 <th scope="col" class="px-4 py-3 w-52 text-center">
-                    Members Category
-                </th>
+          <% if is_admin? %>
+            <th scope="col" class="px-4 py-3">Notes</th>
+          <% end %>
+        </tr>
+      </thead>
 
-                <th scope="col" class="px-4 py-3 w-52 text-center whitespace-nowrap">
-                    Members Estimate<br>
-                    Total: <br>
-                    [Active/P-T]
-                </th>
-
-                <th scope="col" class="px-4 py-3 w-52 text-right">
-                    Members Updated<br>
-                    Total: <br>
-                    [Active/P-T]
-                </th>
-               
-                <th scope="col" class="px-4 py-3 w-52 text-center">
-                    Has Youth?
-                </th>
-                
-                <th scope="col" class="px-4 py-3 w-60 text-left">
-                    Administered By
-                </th>
-
-                <th scope="col" class="px-4 py-3 w-60 truncate">
-                    Team President
-                </th>
-
-                <th scope="col" class="px-4 py-3 w-60 truncate">
-                    Website
-                </th>
-               
-                <th scope="col" class="px-4 py-3 w-60 ">
-                    Date Created
-                </th>
-
-                <% if is_admin?%>
-                    <th scope="col" class="px-4 py-3">
-                        Notes
-                    </th>
-                <% end %>
-              
-               
-            </tr>
-        </thead>
-        <tbody>
+      <tbody>
         <% @clubs.each do |club| %>
-            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
-               
-                <td class="px-4 py-4 truncate">
-                   <%= link_to club.name, club_path(club), class: link_class %>
-                </td>
-                
-                <td class="px-4 py-4">
-                   <%= club.city  %>
-                </td>
-                
-                <td class="px-4 py-4">
-                   <%= club.us_state %>
-                </td>
+          <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+            <td class="px-4 py-4 truncate">
+              <%= link_to club.name, club_path(club), class: link_class %>
+            </td>
+            <td class="px-4 py-4"><%= club.city %></td>
+            <td class="px-4 py-4"><%= club.us_state %></td>
 
-                <td class="px-4 py-4 text-right">
-                    <% if club.club_payments_total>0 %>
-                        <%=  number_to_currency(club.club_payments_total, precision: 2)   %>
-                    <% else %>
-                        <span class="text-red-500">Payment Due</span>
-                    <% end %>
-                </td>
-                           
-                <td class="px-4 py-4 text-center">
-                  <%= club.membership_category %>
-                </td>   
-                
-                <td class="px-4 py-4 text-center">
-                  <%= club.estimate_total_number_of_club_members %>
-                  [<span class="text-blue-600"><%= club.estimate_total_active_members %></span> / 
-                  <span class="text-gray-600"><%= club.estimate_total_part_time_members %>]</span> 
-                </td>   
-
-                <td class="px-4 py-4 text-right">
-                  <%= club.club_total_members%> 
-                  [<span class="text-blue-600"><%= club.club_total_active_members %></span> / 
-                  <span class="text-gray-600"><%= club.club_total_parttime_members %>]</span> 
-                </td>
-                
-                <td class="px-4 py-4 text-center">
-                   <%= club.has_youth? ? 'Yes' : 'No'  %>
-                </td>
-                
-                <td class="px-4 py-4 text-left">
-                  <%=  club.creator.full_name %>
-                </td>
-
-                <td class="px-4 py-4 text-left">
-                  <% if  club.team_president== "Please nominate" %>
-                    <span class="text-sm text-gray-400 italic"><%=  club.team_president %><br> </span>
-                    <% else %>
-                    <%=  club.team_president %><br>
-                    <% end %>
-                 <% unless  club.team_president_phone.to_s.empty? %>
-                    <span class="text-sm text-gray-500"><i class="fa-solid fa-phone"></i></span>
-                    <%=  club.team_president_phone %>
-                  <% end %>
-                </td>
-
-                <td class="px-4 py-4 truncate">
-                <%= (link_to club.website, club.website, target: '_blank', class: link_class) unless ( club.website .to_s.empty?)%>
-                </td>
-
-                <td class="px-4 py-4">
-                <%= club.created_at.to_formatted_s(:usa) unless (club.created_at.to_s.empty?)  %>
-                </td>
-
-                <% if is_admin? %>
-                  <td class="px-4 py-4">
-                    <% if club.notes.any? %>
-                      <ul>
-                      <% club.notes.each do |note| %>
-                        <li class="hover:underline">
-                          <span class="font-semibold"><%= link_to note.status,  edit_club_note_path(club, note) %></span>: <%= link_to note.body,  edit_club_note_path(club, note) %>
-                        </li>
-                      <% end %>
-                      </ul>
-                    <% end %>
-                  <p class="italic text-blue-600"><%= link_to 'Add Note', new_club_note_path(club) %></p>         
-              </td>
+            <!-- New current year paid column -->
+            <td class="px-4 py-4 text-right border-x border-gray-200">
+              <% if club.club_payments_total > 0 %>
+                <%= number_to_currency(club.club_payments_total, precision: 2) %>
+              <% else %>
+                <span class="text-red-500 font-semibold">Payment Due</span>
               <% end %>
-              
-            </tr>
+            </td>
+
+            <!-- New last year paid column -->
+            <td class="px-4 py-4 text-right border-x border-gray-200 text-gray-400">
+              <% if club.club_payments_total_last_year > 0 %>
+                <%= number_to_currency(club.club_payments_total_last_year, precision: 2) %>
+              <% else %>
+                $0.00
+              <% end %>
+            </td>
+
+            <td class="px-4 py-4 text-center"><%= club.membership_category %></td>
+
+            <td class="px-4 py-4 text-center">
+             
+              [<span class="text-blue-600"><%= club.estimate_total_active_members %></span> / 
+              <span class="text-gray-600"><%= club.estimate_total_part_time_members %></span>]
+              <span class="font-semibold"> <%= club.estimate_total_number_of_club_members %></span>
+            </td>
+
+            <td class="px-4 py-4 text-right">
+             
+              [<span class="text-blue-600"><%= club.club_total_active_members %></span> /
+              <span class="text-gray-600"><%= club.club_total_parttime_members %></span>]
+              <span class="font-semibold"><%= club.club_total_members %></span>
+            </td>
+
+            <td class="px-4 py-4 text-center">
+              <%= club.has_youth? ? 'Yes' : 'No' %>
+            </td>
+
+            <td class="px-4 py-4 text-left">
+              <%= club.creator.full_name %>
+            </td>
+
+            <td class="px-4 py-4 text-left">
+              <% if club.team_president == "Please nominate" %>
+                <span class="text-sm text-gray-400 italic"><%= club.team_president %><br></span>
+              <% else %>
+                <%= club.team_president %><br>
+              <% end %>
+
+              <% unless club.team_president_phone.to_s.empty? %>
+                <span class="text-sm text-gray-500">
+                  <i class="fa-solid fa-phone"></i> <%= club.team_president_phone %>
+                </span>
+              <% end %>
+            </td>
+
+            <td class="px-4 py-4 truncate">
+              <%= link_to(club.website, club.website, target: '_blank', class: link_class) unless club.website.blank? %>
+            </td>
+
+            <td class="px-4 py-4">
+              <%= club.created_at.to_formatted_s(:usa) unless club.created_at.blank? %>
+            </td>
+
+            <% if is_admin? %>
+              <td class="px-4 py-4">
+                <% if club.notes.any? %>
+                  <ul>
+                    <% club.notes.each do |note| %>
+                      <li class="hover:underline">
+                        <span class="font-semibold"><%= link_to note.status, edit_club_note_path(club, note) %></span>: 
+                        <%= link_to note.body, edit_club_note_path(club, note) %>
+                      </li>
+                    <% end %>
+                  </ul>
+                <% end %>
+
+                <p class="italic text-blue-600">
+                  <%= link_to 'Add Note', new_club_note_path(club) %>
+                </p>
+              </td>
+            <% end %>
+
+          </tr>
         <% end %>
-        </tbody>
+      </tbody>
     </table>
-</div>
+  </div>
 </div>

@@ -17,13 +17,33 @@ module ApplicationHelper
       content_tag(:p, record.errors[field].first, class: "text-sm text-red-600 mt-1")
     end
 
-    def tab_class(path)
+    def tab_class(path) #netball educators
       if path && request.path.start_with?(path.to_s)
         "inline-block py-2 px-4 text-blue-900 border-b-2 border-blue-900 hover:border-blue-700 hover:text-blue-700"
       else
         "inline-block py-2 px-4 text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700"
       end
     end
+    # app/helpers/people_helper.rb (or wherever you want it)
+    def people_tab_class(is_active)
+      if is_active
+        "inline-block py-2 px-4 text-blue-900 border-b-2 border-blue-900 hover:border-blue-700 hover:text-blue-700"
+      else
+        "inline-block py-2 px-4 text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700"
+      end
+    end
+
+    def current_membership_year
+      today = Date.today
+      feb_first = Date.new(today.year, 2, 1)
+
+      if today < feb_first
+        today.year - 1 # Still old year
+      else
+        today.year # New membership year
+      end
+    end
+
     
    def label_class
      "block text-sm font-medium text-gray-700"
@@ -393,12 +413,22 @@ module ApplicationHelper
       members_belonging_to_administrator = members_belonging_to_administrator.pluck(:first_name)
      end
 
+     #REPLICATED IN USER MODEL AS SCOPE 
      def active_admin_users # a method to get all active users  but not TeamLead role uers, typically used to assign work.
       User.where(account_active: true)
       .where.not(role: [2, 12])
       .where.not(last_name: "Pethick") # ⬅️ exclude that person
       .order(:first_name)
       end
+
+      #REPLICATED IN USER MODEL AS SCOPE 
+      def active_educator_users # a method to get all active users  but not TeamLead role uers, typically used to assign work.
+        User.where(account_active: true)
+        .where.(role: [4, 8, 10])# ⬅️ include educator roles
+        .where.not(last_name: "Pethick") # ⬅️ exclude that person
+        .where.(last_name: "Ottoway") # ⬅️ exclude that person
+        .order(:first_name)
+        end
       
 
      def us_open_events

@@ -2,7 +2,7 @@
 
 <div id="payments">
 
-<div class="">
+<div class="ml-2">
    <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
       <li class="me-2">
             <a href="/payments/" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">Team Payments</a>
@@ -14,11 +14,11 @@
       </ul>
 </div>
 
-<div class="m-4">
+<div class="my-4">
   <%= link_to "New payment", new_payment_path, class: form_button_class %>
 </div>
 
-<div class="mx-auto mt-4">
+<div class="ml-2 mr-2 mt-4">
 <%= render "payments", payments: @payments %>
 </div>
 

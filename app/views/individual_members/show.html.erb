@@ -9,28 +9,26 @@
   <%= render @individual_member %>
   <br>
   
-  <div class="text-xl font-semibold text-blue-900 my-4">
-    Membership Fees
-    <hr>
-  </div>
+  <div class="ml-2 mb-4">
+  <% if @individual_member.has_paid == "Payment Due" %>
+    <div class="text-blue-800 text-lg font-semibold">
+      Payment Due for <%= current_membership_year %>
+    </div>
 
-  <% if  @individual_member.has_paid =="Payment Due" %>
-  <div class="ml-2 mb-4 text-blue-800 text-lg font-semibold"><%=  @individual_member.has_paid  %></div>
+    <div class="text-base font-normal text-gray-600 my-2">
+      Please pay your annual membership via your chosen method from the list below.<br> 
+      Once payment is submitted your account will be updated within 5 business days.
+    </div>
 
-  <div class="text-base font-normal text-gray-600 my-2 ml-2">
-    Please pay your annual membership via your chosen method from the list below.<br> 
-    Once payment is submitted your account will be updated within 5 business days.
-  
-  </div>
-  <div class="my-2">
-    <%= render "membership_fees" %>
-  </div>
+    <div class="my-2">
+      <%= render "membership_fees" %>
+    </div>
 
   <% else %>
-  <div class="ml-2 mb-4 text-green-600 text-lg">Paid: <%=  @individual_member.has_paid  %></div>
-
+    <div class="text-green-600 text-lg font-semibold">
+      Paid for <%= current_membership_year %>: <%= @individual_member.has_paid %>
+    </div>
   <% end %>
-
-  </div>
+</div>
 
 

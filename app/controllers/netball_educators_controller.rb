@@ -141,7 +141,8 @@ class NetballEducatorsController < ApplicationController
   end
 
   def set_users
-    @users = User.active_admins
+    #special group defined in helpers
+    @users = User.active_educator_users
   end
 end 
  

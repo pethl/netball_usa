@@ -1,7 +1,7 @@
 
 <div class="relative overflow-x-auto">
     <table class="table-auto w-full text-left rtl:text-right">
-        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+        <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs ">
         
              <tr>
                 <th scope="col" class="px-6 py-3 w-52 whitespace-nowrap">
@@ -36,19 +36,19 @@
         <% @payments.each do |payment| %>
             <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
                
-                <td class="px-6 py-4 truncate">
+                <td class="px-6 py-3 truncate">
                    <%= link_to payment.payment_year, payment_path(payment), class: link_class %>
                 </td>
                 
-                <td class="px-6 py-4">
+                <td class="px-6 py-3">
                    <%= payment.payment_type  %>
                 </td>
                 
-                <td class="px-6 py-4 text-right">
+                <td class="px-6 py-3 text-right">
                    <%= number_to_currency(payment.amount, precision: 0) %>
                 </td>
                 
-                <td class="px-6 py-4">
+                <td class="px-6 py-3">
                
                   <% if payment.club_id? %>
                   <%= link_to Club.find(payment.club_id).name, club_path(payment.club_id), class: link_class %>
@@ -56,17 +56,17 @@
                   
                 </td>
                
-                <td class="px-6 py-4">
+                <td class="px-6 py-3">
                    <%= payment.payment_received_date.to_formatted_s(:usa) unless (payment.payment_received_date.to_s.empty?) %>
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-6 py-3">
                   <%= User.find(payment.payment_recorded_by_id).full_name %>
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-6 py-3">
                  <%= payment.payment_transaction_reference %>
                </td>
                
-                 <td class="px-6 py-4 truncate">
+                 <td class="px-6 py-3 truncate">
                  <%= payment.payment_notes %>
                 </td>
             </tr>

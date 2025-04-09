@@ -64,7 +64,6 @@ class PagesController < ApplicationController
       "COALESCE(SUM(purchase_amount), 0) AS total_purchase"
     )
     .order("year DESC")
-  
   end
   
   def educator_sign_up
@@ -72,9 +71,12 @@ class PagesController < ApplicationController
   end
 
   def membership_landing
-    @member_type = get_membership_type
-    @individual_member =  IndividualMember.where(email: current_user.email)
+    @member_type = detect_membership_type
+    @individual_member = IndividualMember.find_by('LOWER(email) = ?', current_user.email.downcase)
+    @club = Club.find_by(user_id: current_user.id)
+    @needs_renewal = @club.present? ? renewal_required?(@club) : false
   end
+  
 
   def na_people
     @person = Person.find_by(email: current_user.email)
@@ -91,17 +93,26 @@ class PagesController < ApplicationController
       params.require(:educator).permit(:first_name, :last_name, :email, :phone, :school_name, :city, :state, :educator_notes, :mgmt_notes, :user_id)
     end
     
-    def get_membership_type
-      @individual_membership = IndividualMember.where(user_id: current_user.id)
-      @team_membership = Club.where(user_id: current_user.id)
-      
-      if @individual_membership.any?
-        return "Individual"
-      elsif @team_membership.any?
-        return "Club"
-      else
-        return "None"
-      end 
-  end
+    def detect_membership_type
+        @individual_membership = IndividualMember.where(user_id: current_user.id)
+        @team_membership = Club.where(user_id: current_user.id)
+        
+        if @individual_membership.any?
+          return "Individual"
+        elsif @team_membership.any?
+          return "Club"
+        else
+          return "None"    
+      end
+    end 
+    
+    def renewal_required?(club)
+      today = Date.today
+      renewal_start = Date.new(today.year, 2, 1)
+    
+      today >= renewal_start &&
+      !(club.renewal_years || "").split(",").map(&:to_i).include?(today.year)
+    end
     
 end
+    

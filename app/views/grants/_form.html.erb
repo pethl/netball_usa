@@ -1,130 +1,153 @@
-<div class=" sm:mx-auto sm:w-full sm:max-w-md max-w-md">
+<div class="sm:mx-auto sm:w-full sm:max-w-4xl">
   <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+    <%= form_with(model: grant) do |form| %>
 
-<%= form_with(model: grant) do |form| %>
+      <%= form_errors_for(grant) %>
 
-  <%= form_errors_for(grant) %>
+      <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        
+        <div class="mb-2">
+          <%= form.label :name, class: label_class %>
+          <div class="mt-1">
+            <%= form.text_field :name, class: input_class %>
+          </div>
+          <%= field_error_for(grant, :name) %>
+        </div>
 
-  <div class="mb-6">
-   <%= form.label :name, class: label_class%>
-    <div class="mt-1">
-     <%= form.text_field :name, class: input_class  %>
-    </div>
-    <%= field_error_for(grant, :name) %>
+        <div class="mb-4 flex items-end justify-between w-full">
+  <!-- Apply (checkbox) -->
+          <div class="flex flex-col">
+            <%= form.label :apply, "Apply for grant?", class: "text-sm font-medium text-gray-700 mb-1" %>
+            <%= form.check_box :apply, class: "w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-2 focus:ring-blue-500" %>
+          </div>
+
+          <!-- Amount (small width) -->
+          <div class="flex flex-col">
+            <%= form.label :amount, "Amount", class: "text-sm font-medium text-gray-700 mb-1" %>
+            <%= form.number_field :amount, class: "w-28 rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" %>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <%= form.label :location, class: label_class %>
+          <div class="mt-1">
+            <%= form.text_field :location, class: input_class %>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <%= form.label :state, "State (if applicable)", class: label_class %>
+          <div class="mt-1">
+            <%= form.select :state, options_for_select(us_states, grant.state), { prompt: true }, class: input_class %>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <%= form.label :due_date, class: label_class %>
+          <div class="mt-1">
+            <%= form.datetime_field :due_date, class: input_class %>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <%= form.label :timezone, "Due Date Time Zone", class: label_class %>
+          <div class="mt-1">
+            <%= form.select :timezone, options_for_select(timezones, grant.timezone), { prompt: true }, class: input_class %>
+          </div>
+        </div>
+
+        <!-- PURPOSE - full width -->
+        <div class="mb-2 sm:col-span-2">
+          <%= form.label :purpose, class: label_class %>
+          <div class="mt-1">
+            <%= form.text_area :purpose, class: input_class, rows: 4 %>
+          </div>
+        </div>
+
+        <div class="mb-2 sm:col-span-2">
+          <%= form.label :grant_link, class: label_class %>
+          <div class="mt-1">
+            <%= form.text_field :grant_link, placeholder: "Enter with prefix http:// or https://", class: input_class %>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <%= form.label :status, class: label_class %>
+          <div class="mt-1">
+            <%= form.select :status, options_for_select(grant_status, grant.status), {}, class: input_class %>
+          </div>
+        </div>
+
+        <% unless current_user.nil? %>
+          <div class="mb-2">
+            <%= form.label :user_id, 'Allocated to', class: label_class %>
+            <div class="mt-1">
+              <%= form.collection_select(:user_id, @users, :id, :full_name, { prompt: true }, { class: input_class }) %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="mb-2">
+          <%= form.label :action_by, class: label_class %>
+          <div class="mt-1">
+            <%= form.date_field :action_by, class: input_class %>
+          </div>
+        </div>
+
+        <% if is_admin? %> 
+          <div class="mb-2">
+            <%= form.label :date_submitted, class: label_class %>
+            <div class="mt-1">
+              <%= form.date_field :date_submitted, class: input_class %>
+            </div>
+          </div>
+
+          <!-- PROGRAM - full width -->
+          <div class="mb-2 sm:col-span-2">
+            <%= form.label :program, class: label_class %>
+            <div class="mt-1">
+              <%= form.text_area :program, class: input_class, rows: 4 %>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <%= form.label :application_link, class: label_class %>
+            <div class="mt-1">
+              <%= form.text_field :application_link, placeholder: "Enter with prefix http:// or https://", class: input_class %>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <%= form.label :login, class: label_class %>
+            <div class="mt-1">
+              <%= form.text_field :login, class: input_class %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="mb-2">
+          <%= form.label :notification_date, class: label_class %>
+          <div class="mt-1">
+            <%= form.date_field :notification_date, class: input_class %>
+          </div>
+        </div>
+
+        <!-- NOTES - full width -->
+        <div class="mb-2 sm:col-span-2">
+          <%= form.label :notes, class: label_class %>
+          <div class="mt-1">
+            <%= form.text_area :notes, class: input_class, rows: 8 %>
+          </div>
+        </div>
+
+      </div> <!-- end of grid -->
+
+      <%= form.hidden_field :old_user_id, value: grant.user_id %>
+
+      <div class="mt-8">
+        <%= form.submit "Save Record", class: form_button_class %>
+      </div>
+
+    <% end %>
   </div>
-
-   <div class="flex items-center mb-6">
-       <%= form.check_box :apply, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
-       <%= form.label :apply, "Apply for grant?",class: "ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"  %>
-   </div>
-
-   <div class="mb-6">
-    <%= form.label :amount, class: label_class%>
-     <div class="mt-1">
-    <%= form.number_field :amount, class: input_class  %>
-   </div> </div>
-
-   <div class="mb-6">
-    <%= form.label :location, class: label_class%>
-     <div class="mt-1">
-    <%= form.text_field :location, class: input_class  %>
-   </div> </div>
-   
-   <div class="mb-4 ">
-      <%= form.label :state, "State (if applicable)", class: label_class  %>
-      <div class="mt-1">
-       <%= form.select :state, options_for_select(us_states, :selected => grant.state),{:prompt=>true}, class: input_class %>
-      </div>
-    </div>
-
-   <div class="mb-6">
-    <%= form.label :due_date, class: label_class%>
-     <div class="mt-1">
-    <%= form.datetime_field :due_date, class: input_class  %>
-   </div> </div>
-   
-   <div class="mb-6">
-    <%= form.label :timezone, "Due Date Time Zone", class: label_class%>
-     <div class="mt-1">
-     <%= form.select :timezone, options_for_select(timezones, :selected => grant.timezone),{:prompt=>true}, class: input_class %>
-     </div> </div>
-
-   <div class="mb-6">
-      <%= form.label :purpose, style: "display: block", class: label_class  %>
-      <div class="mt-1">
-      <%= form.text_area :purpose, class: input_class,  size: "20x4"  %>
-     </div>
-    </div>
-
-    <div class="mb-6">
-     <%= form.label :grant_link, class: label_class%>
-      <div class="mt-1">
-     <%= form.text_field :grant_link, placeholder: "Enter with prefix Http:// or https://", class: input_class  %>
-    </div> </div>
- 
-   <div class="mb-6">
-     <%= form.label :status, class: label_class  %>
-     <div class="mt-1">
-      <%= form.select :status, options_for_select(grant_status, :selected => grant.status),{}, class: input_class %>
-     </div>
-   </div>
-   
-   <% unless current_user.nil? %>
-     <div class="mb-6">
-      <%= form.label :user_id, 'Allocated to', class: label_class%>
-       <div class="mt-1">
-       <%= form.collection_select(:user_id, @users, :id, :full_name,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 hover:bg-gray-100 sm:text-sm"
-      }) %>
-    </div> </div>
-    <% end %>
-    
-    <div class="mb-6">
-     <%= form.label :action_by, class: label_class%>
-      <div class="mt-1">
-     <%= form.date_field :action_by, class: input_class  %>
-    </div> </div>
-
-
-    <% if is_admin? %> 
-      <div class="mb-6">
-    <%= form.label :date_submitted, class: label_class%>
-     <div class="mt-1">
-    <%= form.date_field :date_submitted, class: input_class  %>
-   </div> </div>
-     
-   <div class="mb-6">
-    <%= form.label :program, class: label_class%>
-     <div class="mt-1">
-    <%= form.text_area :program, class: input_class  %>
-   </div> </div>
- 
-   <div class="mb-6">
-    <%= form.label :application_link, class: label_class%>
-     <div class="mt-1">
-    <%= form.text_field :application_link, placeholder: "Enter with prefix Http:// or https://", class: input_class  %>
-   </div> </div>
-   
-   <div class="mb-6">
-    <%= form.label :login, class: label_class%>
-     <div class="mt-1">
-    <%= form.text_field :login, class: input_class  %>
-   </div> </div>
-    <% end %>
-
-    <div class="mb-6">
-    <%= form.label :notification_date, class: label_class%>
-     <div class="mt-1">
-    <%= form.date_field :notification_date, class: input_class  %>
-   </div> </div>
-
-    <div class="mb-6">
-       <%= form.label :notes, style: "display: block", class: label_class  %>
-       <div class="mt-1">
-       <%= form.text_area :notes, class: input_class,  size: "20x8"  %>
-      </div>
-     </div>
-     <%= form.hidden_field :old_user_id, value: grant.user_id%>
-   <div>
-     <%= form.submit "Save Record", class: form_button_class %>
-   </div>
- <% end %> 
+</div>

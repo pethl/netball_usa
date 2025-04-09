@@ -145,6 +145,8 @@ Rails.application.routes.draw do
   # ========== Pages ==========
   # Defines the root path route ("/")
   root "pages#home"
+  post "clubs/:id/renew_membership", to: "clubs#renew_membership", as: :renew_club_membership
+
   get "pages/educator_sign_up"
   get "pages/teams_membership_fees"
   get "pages/membership_landing"

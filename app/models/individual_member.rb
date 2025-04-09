@@ -1,4 +1,5 @@
 class IndividualMember < ApplicationRecord
+  before_save :downcase_email
   belongs_to :user
   belongs_to :team, optional: true
   belongs_to :club, optional: true
@@ -24,15 +25,15 @@ class IndividualMember < ApplicationRecord
   end
   
   def has_paid
-    year = Date.today.year 
-    payments_for_year = Payment.where(payment_year: year, individual_member_id: self)
-
-    if self.discount_code =="AT25NET"
-      return "Discounted Member"
+    year = ApplicationController.helpers.current_membership_year
+    payments_for_year = Payment.where(payment_year: year, individual_member_id: id)
+  
+    if discount_code == "AT25NET"
+      "Discounted Member"
     elsif payments_for_year.any?
-      return payments_for_year.sum(:amount)
+      "$#{payments_for_year.sum(:amount)} "
     else
-      return "Payment Due"
+      "Payment Due"
     end
   end
 
@@ -42,6 +43,10 @@ class IndividualMember < ApplicationRecord
     if state.blank? && country.blank?
       errors.add(:base, "Either state or country must be provided")
     end
+  end
+
+  def downcase_email
+    self.email = email.downcase if email.present?
   end
 
 end

@@ -18,8 +18,6 @@ class ClubsController < ApplicationController
     end
   end
 
- 
-
   def teams_list_index
     @clubs_for_report = Club.all
     @clubs_for_report = @clubs_for_report.order(us_state: :asc)
@@ -27,6 +25,32 @@ class ClubsController < ApplicationController
     @regions = Region.all.order(region: :asc)
     @regions_by_region = @regions.group_by { |t| t.region }
  end
+
+ def renew_membership
+  club = Club.find(params[:id])
+  response = params[:response]
+
+  if response.in?(%w[yes no])
+    renewed_years = (club.renewal_years || "").split(",").map(&:to_i)
+    renewed_years << Date.today.year unless renewed_years.include?(Date.today.year)
+
+    club.update(
+      renewal_response: response,
+      renewal_years: renewed_years.join(",")
+    )
+
+    if response == "yes"
+      flash[:notice] = "🎉 Thanks for saying YES! Welcome to a brand new season with Netball America!"
+    else
+      flash[:alert] = "Thanks for letting us know. Hope to see you back in the future!"
+    end
+
+    redirect_to pages_membership_landing_path
+  else
+    flash[:alert] = "Invalid choice."
+    redirect_to pages_membership_landing_path
+  end
+end
 
   # GET /clubs/1
   def show

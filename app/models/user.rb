@@ -9,8 +9,18 @@ class User < ApplicationRecord
   after_create :send_sonya_mail
 
   # app/models/user.rb
-  scope :active_admins, -> { where(account_active: true).where.not(role: [2, 12]).where.not(last_name: 'Pethick').order(:first_name) }
+  scope :active_admins, -> { where(account_active: true)
+  .where.not(role: [2, 12])
+  .where.not(last_name: 'Pethick')
+  .order(:first_name) }
 
+  #special group for educators  - sonya
+  scope :active_educator_users, -> {
+    where(account_active: true)
+      .where.not(last_name: "Pethick")
+      .where("(role IN (?) OR last_name = ?)", [4, 8, 10], "Ottaway")
+      .order(:first_name)
+  }
 
   
   has_many(
