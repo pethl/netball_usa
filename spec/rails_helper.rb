@@ -35,13 +35,23 @@ RSpec.configure do |config|
     Warden.test_reset!
   end
 
-  # ✅ Transactional fixtures will wrap each test in a database transaction
+  # ✅ Wrap each test in a transaction
   config.use_transactional_fixtures = true
 
   config.infer_spec_type_from_file_location!
-  config.filter_rails_from_backtrace!
 
-  # Shoulda Matchers
+  # === Clean Backtrace Settings ===
+  config.filter_rails_from_backtrace!
+  
+
+  # === Formatting ===
+  config.default_formatter = 'doc'                     # Prettier output when running tests
+  config.verbose_retry = false if config.respond_to?(:verbose_retry=)
+
+  # === Deprecation Warnings Handling ===
+  config.raise_errors_for_deprecations!                # Make deprecations into hard errors
+
+  # === Shoulda Matchers Setup ===
   Shoulda::Matchers.configure do |shoulda_config|
     shoulda_config.integrate do |with|
       with.test_framework :rspec
@@ -58,9 +68,12 @@ Capybara.register_driver :selenium_firefox do |app|
 end
 Capybara.javascript_driver = :selenium_firefox
 
+# === Limit Massive Outputs (Capybara page snapshots etc.) ===
+RSpec::Support::ObjectFormatter.default_instance.max_formatted_output_length = 200
+
 # === Check for pending migrations ===
 begin
-  ActiveRecord::Migration.check_all_pending! # Only check, don't purge/reset
+  ActiveRecord::Migration.check_all_pending!
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end

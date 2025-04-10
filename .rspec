@@ -4,9 +4,9 @@
 --fail-fast
 --default-path spec
 --profile
---backtrace
 --tag ~skip
 --tag ~wip
+--exclude-pattern "gems/*"
 
 
 

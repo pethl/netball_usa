@@ -124,9 +124,16 @@ class PagesController < ApplicationController
     end
     
     def renewal_required_individual?(individual)
+      return false if individual.nil?
+    
+      # 🛡️ NEW users created this year should NOT need to renew
+      return false if individual.created_at.year == Date.today.year
+    
       current_year = Date.today.year
       renewed_years = (individual.renewal_years || "").split(",").map(&:to_i)
+    
       !renewed_years.include?(current_year)
     end
+    
 end
     

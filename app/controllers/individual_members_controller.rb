@@ -21,6 +21,11 @@ class IndividualMembersController < ApplicationController
       redirect_to pages_membership_landing_path and return
     end
   
+    if individual.new_member_this_year?
+      flash[:notice] = "Welcome! You are a new member — no renewal needed."
+      redirect_to pages_membership_landing_path and return
+    end
+  
     if response.in?(%w[yes no])
       renewed_years = (individual.renewal_years || "").split(",").map(&:to_i)
       renewed_years << Date.today.year unless renewed_years.include?(Date.today.year)
@@ -42,6 +47,7 @@ class IndividualMembersController < ApplicationController
       redirect_to pages_membership_landing_path
     end
   end
+  
 
   # GET /individual_members/1
   def show

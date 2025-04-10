@@ -1,2 +1,5 @@
 <%= turbo_stream.prepend "clubs", @club %>
 <%= turbo_stream.update Club.new, "" %>
+<%= turbo_stream.replace "club_checkmark" do %>
+  <%= render partial: "clubs/club_checkmark", locals: { club: @club } %>
+  <% end %>

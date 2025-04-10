@@ -62,13 +62,15 @@
         </div>
 
         <!-- column 3 - checkmarks -->
-        <div class="text-green-500 justify-start-end text-bold mb-1 self-center">
-        <% if @club.present? %>
-          <i class="fa-solid fa-check text-green-500 text-2xl hover:scale-110 transition-transform duration-300"></i> <!-- ✅ Completed, bigger -->
-        <% else %>
-          <i class="fa-regular fa-square text-gray-400 text-2xl hover:scale-110 transition-transform duration-300"></i> <!-- ⬜️ Incomplete, bigger -->
-        <% end %>
-      </div>
+       <turbo-frame id="club_checkmark">
+          <div class="text-green-500 justify-start-end text-bold mb-1 self-center">
+            <% if @club.present? %>
+              <i class="fa-solid fa-check text-green-500 text-2xl hover:scale-110 transition-transform duration-300"></i> 
+            <% else %>
+              <i class="fa-regular fa-square text-gray-400 text-2xl hover:scale-110 transition-transform duration-300"></i> 
+            <% end %>
+          </div>
+        </turbo-frame>
 
       <div class="text-green-500 justify-start-end text-bold mb-1 self-center">
         <% if @club.present? && @club.members.any? %>

@@ -6,6 +6,7 @@ class IndividualMember < ApplicationRecord
   has_many :payments
     
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :membership_type, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence:   true,
@@ -16,7 +17,7 @@ class IndividualMember < ApplicationRecord
   validates :gender, presence: true
   validates :age_status, presence: true
   validates :engagement_status, presence: true
-  validates :membership_type, presence: true
+
   
   scope :ordered, -> { order(first_name: :asc) }
   
@@ -35,6 +36,10 @@ class IndividualMember < ApplicationRecord
     else
       "Payment Due"
     end
+  end
+
+  def new_member_this_year?
+    created_at.year == Date.today.year
   end
 
   private

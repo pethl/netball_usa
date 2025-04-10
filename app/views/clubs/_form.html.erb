@@ -79,21 +79,21 @@
   <div class="flex flex-wrap gap-2">
   
       <div class="mt-4">
-        <%= form.label :estimate_total_number_of_club_members, " Total # of Club Members",  class: label_class%>
+        <%= form.label :estimate_total_number_of_club_members, " Total # of Club Members*",  class: label_class%>
         <div class="mt-1">
           <%= form.number_field :estimate_total_number_of_club_members, class: input_class %>
           </div> 
       </div> 
 
      <div class="mt-4">
-      <%= form.label :estimate_total_active_members, " ACTIVE Members",  class: label_class%>
+      <%= form.label :estimate_total_active_members, " ACTIVE Members*",  class: label_class%>
       <div class="mt-1">
         <%= form.number_field :estimate_total_active_members, class: input_class %>
         </div> 
      </div> 
 
     <div class="mt-4">
-      <%= form.label :estimate_total_part_time_members, "PART TIME Members",  class: label_class%>
+      <%= form.label :estimate_total_part_time_members, "PART TIME Members*",  class: label_class%>
       <div class="mt-1">
         <%= form.number_field :estimate_total_part_time_members, class: input_class %>
         </div> 
@@ -101,7 +101,7 @@
       </div> 
       
     <div class="mt-2 mb-4">
-      <%= form.label :membership_category, "Membership Category",  class: label_class%>
+      <%= form.label :membership_category, "Membership Category*",  class: label_class%>
        <div class="mt-1">
          <%= form.select :membership_category, options_for_select(club_membership_category, :selected => club.membership_category),{:prompt=>true}, style: "width:150px", class: "text-sm rounded-md border-gray-300 focus:ring-blue-900 hover:bg-gray-100" %>
         </div> 
