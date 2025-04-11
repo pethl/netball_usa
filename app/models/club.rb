@@ -23,7 +23,7 @@ class Club < ApplicationRecord
   validates :membership_category, presence: true, on: :create
   validates :estimate_total_number_of_club_members, presence: true, on: :create
   validates :estimate_total_active_members, presence: true, on: :create
-  validates :estimate_total_part_time_members, presence: true, on: :create
+ # validates :estimate_total_part_time_members, presence: true, on: :create - not needed a defaulted
 
   scope :ordered, -> { order(name: :asc) }
 

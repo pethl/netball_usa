@@ -1,16 +1,6 @@
 <div class="m-4">
 <%= form_with(model: payment) do |form| %>
-  <% if payment.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
-
-      <ul>
-        <% payment.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+   <%= form_errors_for(payment) %>
 
   <div class="w-2/3">
     <div class="border border-white rounded m-2">
@@ -46,7 +36,7 @@
 
 
         <div class="mb-4">
-          <%= form.label :payment_type, "Type", class: label_class%>
+          <%= form.label :payment_type, "Type*", class: label_class%>
           <div class="mt-1">
           <%= form.select :payment_type, options_for_select(payment_type, :selected => payment.payment_type),{:prompt=>true}, style: "width:206px", class: input_class %>
           </div>
@@ -88,7 +78,7 @@
       </div>
   
       <div>
-        <%= form.submit "Record Payment", class: form_button_class  %>
+        <%= form.submit "Save Payment", class: form_button_class  %>
       </div>
 <% end %>
 

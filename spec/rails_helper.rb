@@ -1,4 +1,15 @@
-ENV['RAILS_ENV'] ||= 'test'
+  ENV['RAILS_ENV'] ||= 'test'
+
+# Start SimpleCov BEFORE loading the application
+require 'simplecov'
+SimpleCov.start 'rails' do
+  add_filter '/bin/'
+  add_filter '/db/'
+  add_filter '/spec/' # Don't track spec files
+  enable_coverage :branch # Optional: also track branch coverage (for conditionals)
+end
+
+puts "SimpleCov started..."
 
 require File.expand_path('../config/environment', __dir__)
 

@@ -52,19 +52,13 @@ Rails.application.routes.draw do
   resources :contacts
   
   resources :regions
-  resources :na_teams do
-    resources :members, except: [:index, :show]
-  end
-  
-  resources :na_teams do
-    resources :member_key_roles, except: [:index, :show]
-  end
+
   
   resources :follow_ups
   resources :equipment
   resources :sample_words
   resources :budgets
-  resources :taems
+
 
   
   # ========== People ==========

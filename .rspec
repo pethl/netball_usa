@@ -1,8 +1,7 @@
 --require rails_helper
 --format documentation
 --color
---fail-fast
---default-path spec
+##--fail-fast
 --profile
 --tag ~skip
 --tag ~wip

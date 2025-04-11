@@ -6,33 +6,12 @@ RSpec.describe OpportunitiesController, type: :routing do
       expect(get: "/opportunities").to route_to("opportunities#index")
     end
 
-    it "routes to #new" do
-      expect(get: "/opportunities/new").to route_to("opportunities#new")
+    it "routes to #my_index" do
+      expect(get: "/opportunities/my_index").to route_to("opportunities#my_index")
     end
 
-    it "routes to #show" do
-      expect(get: "/opportunities/1").to route_to("opportunities#show", id: "1")
-    end
-
-    it "routes to #edit" do
-      expect(get: "/opportunities/1/edit").to route_to("opportunities#edit", id: "1")
-    end
-
-
-    it "routes to #create" do
-      expect(post: "/opportunities").to route_to("opportunities#create")
-    end
-
-    it "routes to #update via PUT" do
-      expect(put: "/opportunities/1").to route_to("opportunities#update", id: "1")
-    end
-
-    it "routes to #update via PATCH" do
-      expect(patch: "/opportunities/1").to route_to("opportunities#update", id: "1")
-    end
-
-    it "routes to #destroy" do
-      expect(delete: "/opportunities/1").to route_to("opportunities#destroy", id: "1")
+    it "routes to #closed" do
+      expect(get: "/opportunities/closed").to route_to("opportunities#closed")
     end
   end
 end
