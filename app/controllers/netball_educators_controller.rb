@@ -5,34 +5,38 @@ class NetballEducatorsController < ApplicationController
   before_action :admin_user, only: [:destroy, :new, :create, :edit, :update]
   before_action :set_users, only: [:new, :create, :edit, :update]
 
-  def index
-    # Force HTML if Turbo tries to send Turbo Stream requests
-    request.format = :html if request.format.turbo_stream?
+        def index
+          # 🔥 Educator Access Control
+          @netball_educators = if is_admin? || current_user.role == "educators" || current_user.email == "drmarlene@netballamerica.com"
+                                 NetballEducator.all
+                               else
+                                 NetballEducator.where(user_id: current_user.id)
+                               end
+      
+          # 🔥 Filters
+          if params[:state].present?
+            @netball_educators = @netball_educators.where(state: params[:state])
+          end
+      
+          if params[:city].present?
+            @netball_educators = @netball_educators.where("city ILIKE ?", "%#{params[:city]}%")
+          end
+      
+         # Filter by created_at if a date is selected
+         if params[:created_at].present?
+          selected_date = Date.parse(params[:created_at]) # Parse the date from the form
+          @netball_educators = @netball_educators.where("created_at >= ?", selected_date.beginning_of_day)
+        end
+      
+          # 🔥 Ordering
+          @netball_educators = @netball_educators.order(created_at: :desc)
+      
+          respond_to do |format|
+            format.html
+            format.xlsx
+          end
+        end
   
-    # 🔥 Educator Access Control
-    @netball_educators = if is_admin? || current_user.role == "educators" || current_user.email == "drmarlene@netballamerica.com"
-      NetballEducator.all
-    else
-      NetballEducator.where(user_id: current_user.id)
-    end
-  
-    # 🔥 Filters
-    if params[:state].present?
-      @netball_educators = @netball_educators.where(state: params[:state])
-    end
-  
-    if params[:city].present?
-      @netball_educators = @netball_educators.where("city ILIKE ?", "%#{params[:city]}%")
-    end
-  
-    # 🔥 Ordering
-    @netball_educators = @netball_educators.order(:state, :city, created_at: :desc)
-  
-    respond_to do |format|
-      format.html
-      format.xlsx
-    end
-  end  
 
   def pe_directors
     if (is_admin? || current_user.role=="educators" || current_user.email=="drmarlene@netballamerica.com")

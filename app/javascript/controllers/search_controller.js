@@ -23,4 +23,6 @@ export default class extends Controller {
       Turbo.visit(url.toString())
     }, this.delayValue || 300)
   }
+
 }
+

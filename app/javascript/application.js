@@ -10,6 +10,7 @@ import PageTitleController from "./controllers/page_title_controller"
 import SearchController from "./controllers/search_controller"
 import PressReleasesController from "./controllers/press_releases_controller"
 import MultiFilterController from "./controllers/multi_filter_controller"
+import DateFilterController from "./controllers/date_filter_controller"
 
 const application = Application.start()
 
@@ -22,7 +23,7 @@ application.register("page-title", PageTitleController)
 application.register("search", SearchController)
 application.register("press-releases", PressReleasesController)
 application.register("multi-filter", MultiFilterController)
-
+application.register("date-filter", DateFilterController)
 // Make Stimulus available globally
 window.Stimulus = application
 console.log("✅ Stimulus + ESBuild initialized")

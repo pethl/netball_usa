@@ -6,7 +6,7 @@
           <th scope="col" class="px-3 py-2 w-48">Date</th>
           <th scope="col" class="px-3 py-2 w-20">Details</th>
           <th scope="col" class="px-3 py-2 w-48">Type</th>
-          <th scope="col" class="px-3 py-2 w-64">Name</th>
+          <th scope="col" class="px-3 py-2 w-80">Name</th>
           <th scope="col" class="px-3 py-2 text-left">Status</th>
           <th scope="col" class="px-3 py-2">City</th>
           <th scope="col" class="px-3 py-2 text-center">State</th>
@@ -23,7 +23,9 @@
               <% if !event.end_date.blank? %>..<%= event.end_date.to_formatted_s(:usa) %><% end %>
             </td>
             <th scope="row" class="px-2 py-4 font-medium text-gray-800 whitespace-nowrap text-right">
-              <%= link_to image_tag("view.png", class: "mx-2 h-6 w-auto"), event %>
+              <%= link_to event, data: { turbo: false }, class: "mx-2 text-blue-900 hover:text-blue-600" do %>
+                  <i class="fa-solid fa-eye"></i>
+                <% end %>
             </th>
             <th scope="row" class="px-2 py-4 font-medium text-gray-800 whitespace-nowrap">
               <%= event.event_type %><br>

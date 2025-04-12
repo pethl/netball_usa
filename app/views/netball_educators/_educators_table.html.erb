@@ -6,7 +6,7 @@
           <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs">
             <tr>
               <th scope="col" class="px-3 py-2 w-12">View</th>
-              <th scope="col" class="px-3 py-2 w-24">State</th>
+              <th scope="col" class="px-3 py-2 w-20">State</th>
               <th scope="col" class="px-3 py-2 w-40">City</th>
               <th scope="col" class="px-3 py-2 w-64">School/District</th>
               <th scope="col" class="px-3 py-2 w-52">Name</th>
@@ -40,7 +40,13 @@
                   <td class="px-3 py-2"><%= educator.level %></td>
                 <% end %>
                 <td class="px-3 py-2 truncate">
-                  <%= educator.formatted_phone %><br><%= educator.email %>
+                 <%= educator.formatted_phone %>
+                  <% if educator.formatted_phone.present? %>
+                    <br>
+                    <%= educator.email %>
+                  <% else %>
+                    <%= educator.email %>
+                  <% end %>
                 </td>
                 <td class="px-3 py-2">
                   <%= educator.user.full_name unless (educator.user_id.to_s.empty?) %>
