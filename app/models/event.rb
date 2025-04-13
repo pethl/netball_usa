@@ -12,11 +12,8 @@ class Event < ApplicationRecord
 
   scope :ordered, -> { order(date: :asc) }
 
- # New scope for educational events
- scope :educational, -> {
-  educational_types = Reference.where(group: 'event_type', key: 'Educational').pluck(:value)
-  where(event_type: educational_types)
-}  
+  # New scope for educational events
+  scope :educational, -> { where(is_educational: 'Yes') } 
 
   scope :upcoming, -> { where('date >= ?', Date.today.beginning_of_month).order(date: :asc) }
   scope :past,     -> { where('date < ?', Date.today.beginning_of_month).order(date: :desc) }

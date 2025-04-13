@@ -3,13 +3,27 @@
 <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
  
-  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-    Type:
-  </p>
-
-  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-    <%= event.event_type %> 
-  </p>
+  <!-- Top row with Type and Is Educational -->
+  <div class="flex justify-between items-center">
+    <div class="flex-1">
+      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Type:
+      </p>
+      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+        <%= event.event_type %>
+      </p>
+    </div>
+    
+    <div class="flex-1">
+      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+        Is Educational:
+      </p>
+      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+        <%= event.is_educational == "Yes" ? "Yes" : "No" %>
+      </p>
+    </div>
+  </div>
+    
 
   <div class="mt-2">
     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -32,25 +46,28 @@
     </p>
   </div>
   
-  <div class="mt-2">
-   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-       Status:
-   </p>
-  
-   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-     <%= event.status %> 
-   </p> 
-  </div>
+ <!-- New shared row with Status and Attend -->
+    <div class="flex justify-between items-center mt-2">
+      <!-- Status -->
+      <div class="flex-1">
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+          Status:
+        </p>
+        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+          <%= event.status %>
+        </p>
+      </div>
 
-  <div class="mt-2">
-   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-       Attend?:
-   </p>
-  
-   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-     <%= event.attend %> 
-   </p> 
-  </div>
+      <!-- Attend -->
+      <div class="flex-1">
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+          Attend?:
+        </p>
+        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+          <%= event.attend %>
+        </p>
+      </div>
+    </div>
   
   <div class="mt-2">
     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -71,25 +88,28 @@
     </p> 
    </div>
 
-   <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-      City:
-    </p>
-   
-    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= event.city %> 
-    </p> 
-   </div>
- 
-   <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-      State:
-    </p>
-    
-    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= event.state %> 
-    </p> 
-   </div>
+  <!-- New shared row with City and State -->
+    <div class="flex justify-between items-center mt-2">
+      <!-- City -->
+      <div class="flex-1">
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+          City:
+        </p>
+        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+          <%= event.city %>
+        </p>
+      </div>
+
+      <!-- State -->
+      <div class="flex-1">
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+          State:
+        </p>
+        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+          <%= event.state %>
+        </p>
+      </div>
+    </div>
   
    <div class="mt-2">
     <p class="text-sm text-gray-500 truncate dark:text-gray-400">

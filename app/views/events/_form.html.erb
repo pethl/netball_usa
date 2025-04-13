@@ -14,7 +14,15 @@
             <%= form.select :event_type, options_for_select(event_type, selected: event.event_type), { prompt: true }, class: input_class %>
           </div>
           <%= field_error_for(event, :event_type) %>
-        </div>
+        </div> 
+
+         <div>
+          <%= form.label :is_educational, class: label_class %>
+          <div class="mt-1">
+            <%= form.select :is_educational, [["Yes", "Yes"], ["No", "No"]], {}, class: input_class %>
+          </div>
+          <%= field_error_for(event, :is_educational) %>
+        </div> 
 
         <div>
           <%= form.label :name, class: label_class %>
@@ -23,6 +31,14 @@
           </div>
           <%= field_error_for(event, :name) %>
         </div>
+
+        <div>
+          <%= form.label :status, class: label_class %>
+          <div class="mt-1">
+            <%= form.select :status, options_for_select(event_status, selected: event.status), {}, class: input_class %>
+          </div>
+        </div>
+
 
         <div>
           <%= form.label :date, "Start Date", class: label_class %>
@@ -38,13 +54,7 @@
           </div>
         </div>
 
-        <div>
-          <%= form.label :status, class: label_class %>
-          <div class="mt-1">
-            <%= form.select :status, options_for_select(event_status, selected: event.status), {}, class: input_class %>
-          </div>
-        </div>
-
+        
         <div>
           <%= form.label :attend, "Attend?", class: label_class %>
           <div class="mt-1">
@@ -152,7 +162,7 @@
 
       <!-- Save Button -->
       <div class="mt-2 flex justify-end">
-        <%= form.submit "Save Record", class: form_button_class %>
+        <%= form.submit "Save Event", class: form_button_class %>
       </div>
 
     <% end %>

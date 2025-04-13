@@ -1,18 +1,16 @@
-<% content_for(:page_title, "Event")%>
+<% content_for(:page_title, "#{@event.name}")%>
 
+<div class="flex justify-center items-center min-h-screen">
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md md:max-w-lg">
- 
-<%= render @event %>
-
+    <%= render @event %>
+  </div>
 </div>
 
 <br>
 
 <div>
-  <span class="ml-6"><%= link_to "Edit this Event", edit_event_path(@event), class: link_class %> <br>
-  <%= link_to "<< Back to Events", events_path, class: link_class %>
-
-  <% if is_admin? %>
-    <%= button_to "Delete this record",  @event, method: :delete %>
-  <% end %>
+  <span class="ml-6"><%= link_to "Edit this Event", edit_event_path(@event), class: link_class %></span> <br>
+  <span class="ml-6"><%= link_to "New Event", new_event_path, class: link_class %></span> <br>
+  <%= link_to "<< Back to Events", events_path, class: link_class %><br>
+  <%= link_to "<< Back to Educational Events", educational_events_path, class: link_class %>
 </div>
