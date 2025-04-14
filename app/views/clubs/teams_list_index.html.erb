@@ -36,7 +36,7 @@
                  Administered By
              </th>
              <th scope="col" class="px-6 py-3 w-60 truncate">
-                 Team President
+                 Club President
              </th>
              <th scope="col" class="px-6 py-3 w-60 truncate">
                  Website
@@ -107,14 +107,14 @@
                         </td>
         
                         <td class="px-6 py-4 text-left">
-                        <% if  club.team_president== "Please nominate" %>
-                            <span class="text-sm text-gray-400 italic"><%=  club.team_president %><br> </span>
+                        <% if  club.club_president== "Please nominate" %>
+                            <span class="text-sm text-gray-400 italic"><%=  club.club_president %><br> </span>
                             <% else %>
-                            <%=  club.team_president %><br>
+                            <%=  club.club_president %><br>
                             <% end %>
-                        <% unless  club.team_president_phone.to_s.empty? %>
+                        <% unless  club.club_president_phone.to_s.empty? %>
                             <span class="text-sm text-gray-500"><i class="fa-solid fa-phone"></i></span>
-                            <%=  club.team_president_phone %>
+                            <%=  club.club_president_phone %>
                             <% end %>
                         </td>
         

@@ -357,8 +357,7 @@ module ApplicationHelper
     end
     
     def member_positions
-      member_positions = Reference.where(active: "TRUE", group: 'member_positions')
-      member_positions = member_positions.pluck(:value)     
+      Reference.where(active: true, group: 'member_positions').pluck(:value).sort
     end
 
     def member_engagement_status

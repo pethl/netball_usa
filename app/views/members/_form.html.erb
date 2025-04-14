@@ -33,7 +33,7 @@
         </div>
 
         <div>
-          <%= form.label :email,  "Phone (Required for Club Pres.)", class: label_class%>
+          <%= form.label :email,  "Phone (*Required for Club President and Club Key Contact)", class: label_class%>
           <%= form.text_field :phone, class: input_class  %>
         </div>
 
@@ -63,7 +63,7 @@
         </div>
 
         <div>
-          <%= form.label :age_status, "Youth(under 18) or Adult*", class: label_class %>
+          <%= form.label :age_status, "Youth(under 21) or Adult*", class: label_class %>
           <%= form.select :age_status, options_for_select(member_age_status, :selected => member.age_status),{:prompt=>true}, style: "width:206px", class: input_class %>
        </div>
 
@@ -90,8 +90,13 @@
         </div>
 
          <div class="mt-4">
-          <%= form.label :interested_in_usa_team, class: label_class%>
+          <%= form.label :interested_in_usa_team, "Interested in USA Team", class: label_class%>
           <%= form.check_box :interested_in_usa_team, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+        </div>
+
+         <div class="mt-4">
+          <%= form.label :join_a_committee, "Join a Committee", class: label_class%>
+          <%= form.check_box :join_a_committee, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
         </div>
         <div>
         </div>

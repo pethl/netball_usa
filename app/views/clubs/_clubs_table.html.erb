@@ -24,7 +24,7 @@
           </th>
           <th scope="col" class="px-4 px-2 w-52 text-center">Has Youth?</th>
           <th scope="col" class="px-4 px-2 w-60 text-left">Administered By</th>
-          <th scope="col" class="px-4 px-2 w-60 truncate">Team President</th>
+          <th scope="col" class="px-4 px-2 w-60 truncate">Club President</th>
           <th scope="col" class="px-4 px-2 w-60 truncate">Website</th>
           <th scope="col" class="px-4 px-2 w-60">Date Created</th>
 
@@ -86,15 +86,15 @@
             </td>
 
             <td class="px-4 py-4 text-left border-x border-gray-200">
-              <% if club.team_president == "Please nominate" %>
-                <span class="text-sm text-gray-400 italic"><%= club.team_president %><br></span>
+              <% if club.club_president == "Please nominate" %>
+                <span class="text-sm text-gray-400 italic"><%= club.club_president %><br></span>
               <% else %>
-                <%= club.team_president %><br>
+                <%= club.club_president %><br>
               <% end %>
 
-              <% unless club.team_president_phone.to_s.empty? %>
+              <% unless club.club_president_phone.to_s.empty? %>
                 <span class="text-sm text-gray-500">
-                  <i class="fa-solid fa-phone"></i> <%= club.team_president_phone %>
+                  <i class="fa-solid fa-phone"></i> <%= club.club_president_phone %>
                 </span>
               <% end %>
             </td>

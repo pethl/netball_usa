@@ -27,6 +27,14 @@
             <% if club.website? %>
               <span class="text-gray-500"><i class="fa-solid fa-globe"></i> <%= link_to club.website, "#(club.website)", class: link_class %> </span><% end %>
           </div> 
+          <div>
+            <% if club.email? %>
+              <span class="text-gray-500">
+                <i class="fa-solid fa-envelope"></i> 
+                <%= mail_to club.email, club.email, class: link_class %>
+              </span>
+            <% end %>
+          </div>
           
           <div>
              <% if club.facebook? %>

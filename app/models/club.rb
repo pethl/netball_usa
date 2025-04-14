@@ -31,6 +31,14 @@ class Club < ApplicationRecord
     (renewal_years || "").split(",").map(&:to_i).include?(year)
   end
 
+  def key_roles_filled_count
+    member_key_roles.distinct.count(:key_role)
+  end
+
+  def key_roles_status
+    "#{key_roles_filled_count}/4"
+  end
+
   def has_youth?
     Member.where(club_id: self.id, age_status: "Youth").any?
   end
@@ -47,8 +55,8 @@ class Club < ApplicationRecord
     end
   end
 
-  def team_president
-    @member_key_role = MemberKeyRole.where(club_id: self.id, key_role: "Team President").first
+  def club_president
+    @member_key_role = MemberKeyRole.where(club_id: self.id, key_role: "Club President").first
     if @member_key_role.blank?
       "Please nominate"
     else
@@ -57,8 +65,8 @@ class Club < ApplicationRecord
     end
   end
 
-  def team_president_phone
-    @member_key_role = MemberKeyRole.where(club_id: self.id, key_role: "Team President").first
+  def club_president_phone
+    @member_key_role = MemberKeyRole.where(club_id: self.id, key_role: "Club President").first
     if @member_key_role.blank?
       ""
     else
@@ -79,6 +87,16 @@ class Club < ApplicationRecord
 
   def head_umpire
     @member_key_role = MemberKeyRole.where(club_id: self.id, key_role: "Head Umpire").first
+    if @member_key_role.blank?
+      "Please nominate"
+    else
+      @member = Member.find(@member_key_role.member_id)
+      @member.full_name
+    end
+  end
+
+  def club_key_contact
+    @member_key_role = MemberKeyRole.where(club_id: self.id, key_role: "Club Key Contact").first
     if @member_key_role.blank?
       "Please nominate"
     else

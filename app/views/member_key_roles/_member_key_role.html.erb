@@ -5,10 +5,10 @@
   <div class="ml-4">
    <span class="text-base text-gray-500">  <%= member_key_role.key_role  %></span>
    : <span class= "ml-2 text-base"><%= Member.find(member_key_role.member_id).full_name  %></span><br>
-   <% if member_key_role.key_role=="Team President"%>
-   Phone:  <%= Member.find(member_key_role.member_id).phone %><br>
-   <span class="text-sm text-gray-400">Phone mandatory for Team President</span>
-   <% end %>
+  <% if member_key_role.key_role == "Club President" || member_key_role.key_role == "Club Key Contact" %>
+  Phone: <%= Member.find(member_key_role.member_id).phone %><br>
+  <span class="text-sm text-gray-400">Phone mandatory for Club President or Club Key Contact</span>
+<% end %>
   </div>
   
   <div class="justify-between flex content-end w-28">

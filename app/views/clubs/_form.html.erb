@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <div class="flex flex-wrap gap-2">
+  <div class="flex flex-wrap gap-4">
      <div class="mt-2">
         <%= form.label :name, "Club Name*", class: label_class%>
        <div class="mt-3">
@@ -34,15 +34,22 @@
      </div>
 
      <div class="mt-2">
-       <%= form.label :website, "Team Website",  class: label_class%>
+       <%= form.label :website, "Club Website",  class: label_class%>
         <div class="mt-3">
           <%= form.text_field :website, placeholder: "Club Website", class: input_class  %>
+        </div> 
+      </div> 
+
+       <div class="mt-2">
+       <%= form.label :email, "Club Email",  class: label_class%>
+        <div class="mt-3">
+          <%= form.text_field :email, placeholder: "Club Email", class: input_class  %>
         </div> 
       </div> 
     </div>
 
     
-  <div class="flex flex-wrap gap-2">
+  <div class="flex flex-wrap gap-4">
       <div class="mt-2">
       <span class="text-lg"><i class="fa-brands fa-facebook"></i></span>
         <div class="mt-1">
@@ -76,7 +83,7 @@
     <p>Please provide the following estimates for club size:</p>
    </div>
  
-  <div class="flex flex-wrap gap-2">
+  <div class="flex flex-wrap gap-4">
   
       <div class="mt-4">
         <%= form.label :estimate_total_number_of_club_members, " Total # of Club Members*",  class: label_class%>

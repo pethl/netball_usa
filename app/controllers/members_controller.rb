@@ -70,6 +70,6 @@ class MembersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def member_params
-      params.require(:member).permit(:na_team_id, :club_id, :team_id, :membership_type, :first_name, :last_name, :email, :phone,  :address, :city, :state, :zip,  :gender, :interested_in_coaching, :interested_in_umpiring, :interested_in_usa_team, :dob, :age_status, :engagement_status, :place_of_birth, :notes)
+      params.require(:member).permit(:na_team_id, :club_id, :team_id, :membership_type, :first_name, :last_name, :email, :phone,  :address, :city, :state, :zip,  :gender, :join_a_committee, :interested_in_coaching, :interested_in_umpiring, :interested_in_usa_team, :dob, :age_status, :engagement_status, :place_of_birth, :notes)
     end
 end

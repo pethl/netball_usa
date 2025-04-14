@@ -40,7 +40,7 @@ class ClubsController < ApplicationController
     )
 
     if response == "yes"
-      flash[:notice] = "🎉 Thanks for saying YES! Welcome to a brand new season with Netball America!"
+      flash[:notice] = "🎉 Thanks for saying YES! Welcome to a brand new season with Netball America®!"
     else
       flash[:alert] = "Thanks for letting us know. Hope to see you back in the future!"
     end
@@ -103,7 +103,7 @@ end
 
     # Only allow a list of trusted parameters through.
     def club_params
-      params.require(:club).permit(:name, :city, :us_state, :membership_category, :website, :facebook, :twitter, :instagram, :other_sm, :estimate_total_number_of_club_members, :estimate_total_active_members, :estimate_total_part_time_members)
+      params.require(:club).permit(:name, :city, :us_state, :membership_category, :email, :website, :facebook, :twitter, :instagram, :other_sm, :estimate_total_number_of_club_members, :estimate_total_active_members, :estimate_total_part_time_members)
     end
 
     def active_admin_users

@@ -27,7 +27,7 @@
 
     <!-- 1.1 BODY -->
     <div class="container max-w-screen-md">
-      <div class="grid grid-rows-8 grid-flow-col gap-1 max-w-2/3">
+      <div class="grid grid-rows-9 grid-flow-col gap-1 max-w-2/3">
 
          <!-- column 1 - bubble numbers -->
         <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-1"></i></div>
@@ -35,16 +35,18 @@
         <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-3"></i></div>
         <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-4"></i></div>
         <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-5"></i></div>
+        <div class="flex-none h-8 w-8 border text-center justify-self-end pt-1 rounded-full border-slate-400"><i class="fa-solid fa-6"></i></div>
         <div></div>
         <div></div>
         <div></div>
 
           <!-- column 2 - text -->
-        <div class="text-base w-60 self-center mb-2 ml-2">Create Your Club</div>
-        <div class="text-base w-60 self-center mb-2 ml-2">Add Active Members</div>
-        <div class="text-base w-60 self-center mb-2 ml-2">Assign Key Roles</div>
-        <div class="text-base w-60 self-center mb-2 ml-2">Pay Membership</div>
-        <div class="text-base w-60 self-center mb-2 ml-2">Add Team President phone</div>
+        <div class="text-base w-90 self-center mb-2 ml-2">Create Your Club</div>
+        <div class="text-base w-90 self-center mb-2 ml-2">Add Active and Part-Time Members</div>
+        <div class="text-base w-90 self-center mb-2 ml-2">Assign Key Roles: (<%= @club.key_roles_status %>)</div>
+        <div class="text-base w-90 self-center mb-2 ml-2  ">Add Club Email and Socials</div>
+        <div class="text-base w-90 self-center mb-2 ml-2  ">Add Club President phone number</div>
+        <div class="text-base w-90 self-center mb-2 ml-2  ">Pay Membership</div>
 
         <div class="text-sm w-70 self-center ml-2">
           <i class="fa-solid fa-book"></i>
@@ -88,6 +90,24 @@
         <% end %>
       </div>
 
+
+      <div class="text-green-500 justify-start-end text-bold mb-1 self-center">
+       
+<% if @club.present? && @club.email.present? && (@club.facebook.present? || @club.twitter.present? || @club.instagram.present? || @club.other_sm.present? ) %>
+          <i class="fa-solid fa-check text-green-500 text-2xl hover:scale-110 transition-transform duration-300"></i> 
+        <% else %>
+          <i class="fa-regular fa-square text-gray-400 text-2xl hover:scale-110 transition-transform duration-300"></i>
+        <% end %>
+      </div>
+
+       <div class="text-green-500 justify-start-end text-bold mb-1 self-center">
+        <% if @club.present? && @club.club_president_phone.present? %>
+          <i class="fa-solid fa-check text-green-500 text-2xl hover:scale-110 transition-transform duration-300"></i> <!-- ✅ Completed, bigger -->
+        <% else %>
+          <i class="fa-regular fa-square text-gray-400 text-2xl hover:scale-110 transition-transform duration-300"></i> <!-- ⬜️ Incomplete, bigger -->
+        <% end %>
+      </div>
+
     <div class="text-green-500 justify-start-end text-bold mb-1 self-center">
       <% if @club.present? %>
         <% if @club.has_paid == "Payment Due" %>
@@ -101,15 +121,9 @@
       <% end %>
     </div>
 
-      <div class="text-green-500 justify-start-end text-bold mb-1 self-center">
-        <% if @club.present? && @club.team_president_phone.present? %>
-          <i class="fa-solid fa-check text-green-500 text-2xl hover:scale-110 transition-transform duration-300"></i> <!-- ✅ Completed, bigger -->
-        <% else %>
-          <i class="fa-regular fa-square text-gray-400 text-2xl hover:scale-110 transition-transform duration-300"></i> <!-- ⬜️ Incomplete, bigger -->
-        <% end %>
-      </div>
-
-
+    <div></div>
+    <div></div>
+    <div></div>
       </div>
     </div>
 
@@ -160,8 +174,11 @@
 
                 <div class="ml-6 mb-2 font-semibold">
                   <div class="flex justify-between mx-8">
+                     <div>
+                      Club Key Contact:<br><span class="text-xl text-blue-900"><%= @club.club_key_contact %></span>
+                    </div>
                     <div>
-                      Team President:<br><span class="text-xl text-blue-900"><%= @club.team_president %></span>
+                      Club President:<br><span class="text-xl text-blue-900"><%= @club.club_president %></span>
                     </div>
                     <div>
                       Head Coach:<br><span class="text-xl text-blue-900"><%= @club.head_coach %></span>
