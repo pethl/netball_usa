@@ -43,7 +43,11 @@
           <!-- column 2 - text -->
         <div class="text-base w-90 self-center mb-2 ml-2">Create Your Club</div>
         <div class="text-base w-90 self-center mb-2 ml-2">Add Active and Part-Time Members</div>
-        <div class="text-base w-90 self-center mb-2 ml-2">Assign Key Roles: (<%= @club.key_roles_status %>)</div>
+        <div class="text-base w-90 self-center mb-2 ml-2"><% if @club.present? %>
+              Assign Key Roles: (<%= @club.key_roles_status %>)
+            <% else %>
+              Assign Key Roles:
+            <% end %></div>
         <div class="text-base w-90 self-center mb-2 ml-2  ">Add Club Email and Socials</div>
         <div class="text-base w-90 self-center mb-2 ml-2  ">Add Club President phone number</div>
         <div class="text-base w-90 self-center mb-2 ml-2  ">Pay Membership</div>

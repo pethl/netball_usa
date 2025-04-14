@@ -5,7 +5,7 @@
   <div class="text-center p-6">
   <% if @member_type == "Club" && @club.present? %>
   <p class="mt-2 text-gray-700 text-lg">
-    Is <span class="font-semibold"><%= @club.name %></span> ready for a new season? 🌟
+    Are <span class="font-semibold"><%= @club.name %></span> ready for a new season? 🌟
   </p>
 <% elsif @member_type == "Individual" && @individual_member.present? %>
   <p class="mt-2 text-gray-700 text-lg">
