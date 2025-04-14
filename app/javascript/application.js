@@ -11,7 +11,7 @@ import SearchController from "./controllers/search_controller"
 import PressReleasesController from "./controllers/press_releases_controller"
 import MultiFilterController from "./controllers/multi_filter_controller"
 import DateFilterController from "./controllers/date_filter_controller"
-
+import EducatorsWizardController from "./controllers/educators_wizard_controller"
 const application = Application.start()
 
 // Register all controllers
@@ -24,6 +24,7 @@ application.register("search", SearchController)
 application.register("press-releases", PressReleasesController)
 application.register("multi-filter", MultiFilterController)
 application.register("date-filter", DateFilterController)
+application.register("educators-wizard", EducatorsWizardController)
 // Make Stimulus available globally
 window.Stimulus = application
 console.log("✅ Stimulus + ESBuild initialized")

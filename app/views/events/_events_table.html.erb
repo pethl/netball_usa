@@ -4,12 +4,13 @@
       <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs">
         <tr>
           <th scope="col" class="px-3 py-2 w-48">Date</th>
-          <th scope="col" class="px-3 py-2 w-20">Details</th>
+          <th scope="col" class="px-3 py-2 w-20 text-center">Details</th>
           <th scope="col" class="px-3 py-2 w-48">Type</th>
           <th scope="col" class="px-3 py-2 w-80">Name</th>
           <th scope="col" class="px-3 py-2 text-left">Status</th>
           <th scope="col" class="px-3 py-2">City</th>
           <th scope="col" class="px-3 py-2 text-center">State</th>
+          <th scope="col" class="px-3 py-2 text-center">Educators #</th>
           <% if is_admin? %>
             <th scope="col" class="px-3 py-2 text-right">Budget Total</th>
           <% end %>
@@ -22,14 +23,14 @@
               <%= event.date.to_formatted_s(:usa) unless event.date.to_s.empty? %>
               <% if !event.end_date.blank? %>..<%= event.end_date.to_formatted_s(:usa) %><% end %>
             </td>
-            <th scope="row" class="px-2 py-4 font-medium text-gray-800 whitespace-nowrap text-right">
+            <td scope="row" class="px-2 py-4 font-medium text-gray-800 whitespace-nowrap text-center">
               <%= link_to event, data: { turbo: false }, class: "mx-2 text-blue-900 hover:text-blue-600" do %>
                   <i class="fa-solid fa-eye"></i>
                 <% end %>
-            </th>
-            <th scope="row" class="px-2 py-4 font-medium text-gray-800 whitespace-nowrap">
+            </td>
+            <td scope="row" class="px-2 py-4 font-medium text-gray-800 whitespace-nowrap">
               <%= event.event_type %><br>
-            </th>
+            </td>
             <td class="px-2 py-4 truncate">
               <%= link_to event.name, edit_event_path(event), class: link_class %>
             </td>
@@ -41,6 +42,9 @@
             </td>
             <td class="px-2 py-4 text-center">
               <%= event.state %>
+            </td>
+            <td class="px-2 py-4 text-center">
+              <%= event.netball_educators.count %>
             </td>
             <% if is_admin? %>
               <td class="px-2 py-4 text-right">

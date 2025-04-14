@@ -1,4 +1,4 @@
-class CreatePressReleases < ActiveRecord::Migration[7.2]
+class CreatePressReleases < ActiveRecord::Migration[7.1]
   def change
     create_table :press_releases do |t|
       t.string :media_announcement_link

@@ -1,4 +1,4 @@
-class AddFieldsToMedia < ActiveRecord::Migration[7.2]
+class AddFieldsToMedia < ActiveRecord::Migration[7.1]
   def change
     add_column :media, :company_website, :string
     add_column :media, :socials, :string

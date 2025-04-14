@@ -5,7 +5,7 @@
 <div class="p-4 flex justify-between items-center">
   <% if current_user.admin? %>
     <div>
-      <%= link_to "Export to Excel", 
+      <%= link_to "To Excel >", 
         netball_educators_path(format: "xlsx", state: params[:state], city: params[:city], created_at: params[:created_at]),
         class: clear_button_class %>      
       <%= link_to "Add New ", new_netball_educator_path, class: form_button_class %>
@@ -19,7 +19,7 @@
       <label for="state_filter" class="text-sm font-medium text-gray-700">State:</label>
       <select id="state_filter"
               name="state"
-              class="rounded-md border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900 sm:text-sm"
+              class="rounded-md border-gray-300 max-w-40 shadow-sm focus:border-blue-900 focus:ring-blue-900 sm:text-sm"
               data-multi-filter-target="field"
               data-action="change->multi-filter#filter">
         <option value="">All States</option>
@@ -37,7 +37,7 @@
             name="city"
             value="<%= params[:city] %>"
             placeholder="Enter city"
-            class="rounded-md border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900 sm:text-sm"
+            class="rounded-md border-gray-300 shadow-sm max-w-40 focus:border-blue-900 focus:ring-blue-900 sm:text-sm"
             data-multi-filter-target="field"
             data-action="blur->multi-filter#filter keyup.enter->multi-filter#filter">
     </div>
@@ -64,9 +64,61 @@
          data-action="change->date-filter#filterByDate"> <!-- New date-filter controller -->
 </div>
 
+
  <%= link_to "Clear",
           netball_educators_path,
           class: "text-sm text-blue-900 underline hover:font-semibold whitespace-nowrap mr-2" %>
+
+</div>
+
+<!-- Accordion Section for Educators Wizard -->
+<div data-controller="accordion" class="border border-gray-300 rounded-md shadow-sm mx-4">
+  
+  <!-- Accordion Header -->
+  <button 
+    data-action="click->accordion#toggle" 
+    class="w-full flex justify-between items-center px-4 py-3 bg-blue-900 text-white font-semibold text-left rounded-t-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+    Expand here to Assign Educators to Event > > 
+    <span>+</span>
+  </button>
+
+  <!-- Accordion Body (Initially hidden) -->
+  <div data-accordion-target="body" class="hidden mx-4 p-4 bg-gray-50">
+    
+    <ol class="list-decimal list-inside mb-4 text-gray-700">
+      <li>Filter educators (if required)and tick checkboxes for educators you wish to assign.</li>
+      <li>Select an event from the list</li>
+      <li>Click the "Associate" button to lin keducators to event.</li>
+    </ol>
+
+    <!-- Stimulus wizard controller inside accordion -->
+    <div data-controller="educators-wizard" class="flex flex-col gap-4">
+      
+      <!-- Event Dropdown -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Select Event</label>
+        <select 
+          data-educators-wizard-target="eventSelect" 
+          class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-900 focus:border-blue-900 sm:text-sm">
+          <% @events.each do |event| %>
+            <option value="<%= event.id %>"><%= event.name %></option>
+          <% end %>
+        </select>
+      </div>
+
+      <!-- Associate Button -->
+      <button 
+        data-action="click->educators-wizard#associate"
+        class="inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-700 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-600 transition">
+        Associate Selected Educators
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+
 
 </div>
 

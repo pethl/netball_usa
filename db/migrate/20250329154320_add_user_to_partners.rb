@@ -1,4 +1,4 @@
-class AddUserToPartners < ActiveRecord::Migration[7.2]
+class AddUserToPartners < ActiveRecord::Migration[7.1]
 
 
   def change

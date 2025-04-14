@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   has_many :event_participants, dependent: :destroy
   has_many :people, through: :event_participants
+  has_many :netball_educators, through: :event_participants
   has_many :event_assignments, dependent: :destroy
  # has_many :transfers, through: :event_assignments
   has_many :transfers
@@ -14,7 +15,6 @@ class Event < ApplicationRecord
 
   # New scope for educational events
   scope :educational, -> { where(is_educational: 'Yes') } 
-
   scope :upcoming, -> { where('date >= ?', Date.today.beginning_of_month).order(date: :asc) }
   scope :past,     -> { where('date < ?', Date.today.beginning_of_month).order(date: :desc) }
 

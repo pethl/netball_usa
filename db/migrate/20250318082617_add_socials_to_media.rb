@@ -1,4 +1,4 @@
-class AddSocialsToMedia < ActiveRecord::Migration[7.2]
+class AddSocialsToMedia < ActiveRecord::Migration[7.1]
   def change
     add_column :media, :contact_email, :string
     add_column :media, :facebook, :string

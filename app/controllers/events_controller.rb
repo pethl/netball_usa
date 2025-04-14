@@ -25,6 +25,37 @@ class EventsController < ApplicationController
     render :educational
   end
 
+  def assign_educators
+    @event = Event.find(params[:id])
+  
+    if request.get?
+      @educators = NetballEducator.all
+      render :assign_educators
+    else
+      educator_ids = Array.wrap(params[:educator_ids])
+  
+      educator_ids.each do |educator_id|
+        educator = NetballEducator.find_by(id: educator_id)
+  
+        if educator.present?
+          EventParticipant.find_or_create_by!(
+            event: @event,
+            netball_educator: educator
+          )
+        else
+          Rails.logger.warn "Educator with ID #{educator_id} not found"
+        end
+      end
+  
+      respond_to do |format|
+        format.json { render json: { success: true } }
+        format.html { redirect_to @event, notice: 'Educators assigned successfully.' }
+      end
+    end
+  end
+  
+  
+
   def calendar
     @events = Event.all
   end
@@ -77,34 +108,23 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:event_type, :is_educational,:name, :date, :end_date, :attend, :website, :key_contact, :city, :state, :location, :details, :booth, :cost_notes, :status, :outcome, person_ids: [])
+      params.require(:event).permit(:event_type, :is_educational,:name, :date, :end_date, :attend, :website, :key_contact, :city, :state, :location, :details, :booth, :cost_notes, :status, :outcome, person_ids: [], netball_educator_ids: [])
     end
 
     def filtered_events(upcoming:)
-      scope = if upcoming
-        Event.where('date >= ?', Date.today.beginning_of_month)
-      else
-        Event.where('date <= ?', Date.today.beginning_of_month)
-      end
-  
-      scope = scope.where('city ILIKE ?', "%#{params[:city]}%") if params[:city].present?
-      scope = scope.where(state: params[:state]) if params[:state].present?
-      scope = scope.where(event_type: params[:event_type]) if params[:event_type].present?
-  
-      scope
+      base_scope = upcoming ? Event.upcoming : Event.past
+      apply_event_filters(base_scope)
+    end
+    
+    def filtered_educational_events(upcoming:)
+      base_scope = upcoming ? Event.educational.upcoming : Event.educational.past
+      apply_event_filters(base_scope)
     end
 
-    def filtered_educational_events(upcoming:)
-      scope = if upcoming
-        Event.educational.where('date >= ?', Date.today.beginning_of_month)
-      else
-        Event.educational.where('date <= ?', Date.today.beginning_of_month)
-      end
-    
+    def apply_event_filters(scope)
       scope = scope.where('city ILIKE ?', "%#{params[:city]}%") if params[:city].present?
       scope = scope.where(state: params[:state]) if params[:state].present?
       scope = scope.where(event_type: params[:event_type]) if params[:event_type].present?
-    
       scope
     end
 end

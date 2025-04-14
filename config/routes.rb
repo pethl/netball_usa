@@ -16,7 +16,6 @@ Rails.application.routes.draw do
     end
   end
 
-
   resources :programs
 
   namespace :admin do
@@ -36,13 +35,14 @@ Rails.application.routes.draw do
   end
  
   resources :tours
+
   resources :venues
 
   get 'payments/index_indiv' => 'payments#index_indiv', :as => :payments_index_indiv
-  resources :payments do
-  collection do
-    get 'list'
-  end 
+    resources :payments do
+    collection do
+      get 'list'
+    end 
   end
 
     # ========== General Resources ==========
@@ -53,13 +53,10 @@ Rails.application.routes.draw do
   
   resources :regions
 
-  
   resources :follow_ups
   resources :equipment
   resources :sample_words
   resources :budgets
-
-
   
   # ========== People ==========
   resources :people do
@@ -68,13 +65,19 @@ Rails.application.routes.draw do
     end
   end
   
-    # ========== Events ==========
+  # ========== Events ==========
   get 'events/calendar' => 'events#calendar', as: :calendar
+
   resources :events do
     collection do
       get 'past', to: 'events#index_past', as: 'past'
       get 'educational', to: 'events#educational', as: 'educational'
       get 'educational_past', to: 'events#educational_past', as: 'educational_past'
+    end
+
+    member do
+      get :assign_educators     # GET /events/:id/assign_educators → show educators to assign
+      post :assign_educators    # POST /events/:id/assign_educators → handle assignment
     end
   end
 

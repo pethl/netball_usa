@@ -2,6 +2,8 @@ class NetballEducator < ApplicationRecord
   belongs_to :user, optional: true
   has_many :equipment
   has_many :follow_ups
+  has_many :event_participants
+  has_many :events, through: :event_participants
  
   
   before_save { email.downcase! }

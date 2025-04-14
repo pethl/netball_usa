@@ -18,11 +18,17 @@
 <div class="m-4">
   <% if @events.any? %>
 
-   <header class="ml-2 mt-4 mb-2 flex space-x-6">
-    <a href="<%= educational_events_path %>" class="text-lg hover:text-blue-600 <%= current_tab_class %>">Current Educational Events</a>
-    <a href="<%= educational_past_events_path %>" class="text-lg hover:text-blue-600 <%= past_tab_class %>">Past Educational Events</a>
-  </header>
 
+   <header class="ml-2 mt-4 mb-2 flex space-x-6">
+    <ul class="flex space-x-4 list-none">
+      <li>
+        <%= link_to "Current Educational Events", educational_events_path, class: events_tab_class("/events/educational") %>
+      </li>
+      <li>
+        <%= link_to "Past Educational Events", educational_past_events_path, class: events_tab_class("/events/educational_past") %>
+      </li>
+    </ul>
+  </header>
 
     <%= render "events_table" %>
   <% else %>

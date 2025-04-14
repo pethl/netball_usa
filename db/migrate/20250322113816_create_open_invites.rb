@@ -1,4 +1,4 @@
-class CreateOpenInvites < ActiveRecord::Migration[7.2]
+class CreateOpenInvites < ActiveRecord::Migration[7.1]
   def change
     create_table :open_invites do |t|
       t.string :status

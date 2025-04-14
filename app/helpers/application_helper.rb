@@ -33,6 +33,26 @@ module ApplicationHelper
       end
     end
 
+    # app/helpers/application_helper.rb
+    def events_tab_class(path)
+      if URI.parse(request.path).path == URI.parse(path).path
+        "inline-block py-2 px-4 text-blue-900 border-b-2 border-blue-900 hover:border-blue-700 hover:text-blue-700"
+      else
+        "inline-block py-2 px-4 text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700"
+      end
+    end
+
+    def educators_tab_class(match_path)
+      if request.path == URI(match_path).path
+        "inline-block py-2 px-4 text-blue-900 border-b-2 border-blue-900 hover:border-blue-700 hover:text-blue-700"
+      else
+        "inline-block py-2 px-4 text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700"
+      end
+    end
+    
+    
+
+
     def current_membership_year
       today = Date.today
       feb_first = Date.new(today.year, 2, 1)
@@ -82,11 +102,11 @@ module ApplicationHelper
   end
 
   def form_button_class
-     "m-2 bg-blue-900 hover:bg-blue-700 text-white font-light py-2 px-4 rounded"
+     "m-2 bg-blue-900 hover:bg-blue-700 text-white font-light py-2 px-3 rounded"
   end
 
   def clear_button_class
-    "m-2 bg-white hover:bg-blue-300 text-blue-900 border border-blue-900 font-normal py-2 px-4 rounded"
+    "m-2 bg-white hover:bg-blue-300 text-blue-900 border border-blue-900 font-normal py-2 px-3 rounded"
  end
 
   def small_button_class

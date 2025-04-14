@@ -1,4 +1,4 @@
-class AddEditsToTransfers < ActiveRecord::Migration[7.2]
+class AddEditsToTransfers < ActiveRecord::Migration[7.1]
   def change
     add_column :transfers, :obtain_headshot, :boolean
     add_column :transfers, :airport_transport_request, :string
