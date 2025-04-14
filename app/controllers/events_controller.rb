@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   include EventsHelper
+  helper EventsHelper
 
   before_action :set_event_collections, only: %i[ new show edit update ]
   before_action :set_event, only: %i[ show edit update destroy ]
@@ -47,17 +48,18 @@ class EventsController < ApplicationController
         end
       end
   
+      #SWAPPED FROM JSON BLOCK TO FORCE PAGE REFRESH TO SHOW USRE UPDATED CHECKBOXES
       respond_to do |format|
-        format.json { render json: { success: true } }
-        format.html { redirect_to @event, notice: 'Educators assigned successfully.' }
+       format.json { render json: { success: true, reload: true  } }
+       format.html { redirect_to @event, notice: 'Educators assigned successfully.' }
       end
+  
     end
   end
-  
-  
 
   def calendar
-    @events = Event.all
+    @year = params[:year]&.to_i || Date.current.year
+    @events = Event.all  # or scope this if needed
   end
 
   def show

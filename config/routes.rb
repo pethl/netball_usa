@@ -66,18 +66,17 @@ Rails.application.routes.draw do
   end
   
   # ========== Events ==========
-  get 'events/calendar' => 'events#calendar', as: :calendar
-
   resources :events do
     collection do
+      get :calendar            # 👈 MOVE calendar here!
       get 'past', to: 'events#index_past', as: 'past'
       get 'educational', to: 'events#educational', as: 'educational'
       get 'educational_past', to: 'events#educational_past', as: 'educational_past'
     end
-
+  
     member do
-      get :assign_educators     # GET /events/:id/assign_educators → show educators to assign
-      post :assign_educators    # POST /events/:id/assign_educators → handle assignment
+      get :assign_educators
+      post :assign_educators
     end
   end
 

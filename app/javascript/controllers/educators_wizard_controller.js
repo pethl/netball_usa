@@ -4,7 +4,7 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="educators-wizard"
 export default class extends Controller {
-  static targets = ["modal", "eventSelect"];
+  static targets = ["modal", "eventSelect", "errorMessage"];
 
   connect() {
     console.log("✅ EducatorsWizardController connected!");
@@ -37,7 +37,15 @@ export default class extends Controller {
     console.log("Selected Event ID:", eventId);
     console.log("Selected Educator IDs:", educatorIds);
   
-    fetch(`/events/${eventId}/assign_educators`, { // ← NO locale
+    // 🚨 Add this check before submitting
+    if (educatorIds.length === 0) {
+      this.showError('No Educators selected.');
+      return;
+    } else {
+      this.hideError(); // If there were previous errors, hide them
+    }
+  
+    fetch(`/events/${eventId}/assign_educators`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -53,6 +61,7 @@ export default class extends Controller {
         console.log("✅ Educators associated successfully!");
         alert('Educators associated successfully!');
         this.close();
+        window.location.reload();
       } else {
         console.error("❌ Association failed:", data);
         alert('Association failed.');
@@ -62,6 +71,21 @@ export default class extends Controller {
       console.error("❌ Network error:", error);
       alert('An error occurred.');
     });
+  }
+  
+  // Helper to show error message
+  showError(message) {
+    if (this.hasErrorMessageTarget) {
+      this.errorMessageTarget.innerText = message;
+      this.errorMessageTarget.style.display = 'block';
+    }
+  }
+  
+  // Helper to hide error message
+  hideError() {
+    if (this.hasErrorMessageTarget) {
+      this.errorMessageTarget.style.display = 'none';
+    }
   }
 }
 

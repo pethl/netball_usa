@@ -17,6 +17,7 @@ class Event < ApplicationRecord
   scope :educational, -> { where(is_educational: 'Yes') } 
   scope :upcoming, -> { where('date >= ?', Date.today.beginning_of_month).order(date: :asc) }
   scope :past,     -> { where('date < ?', Date.today.beginning_of_month).order(date: :desc) }
+  scope :gone,     -> { where('date < ?', Date.today).order(date: :desc) }
 
 
   def budget

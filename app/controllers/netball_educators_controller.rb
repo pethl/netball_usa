@@ -7,7 +7,7 @@ class NetballEducatorsController < ApplicationController
 
   def index
     # used for the modal
-    @events = Event.educational.past# or  filtered events 
+    @events = Event.educational.gone# or  filtered events 
 
     # 🔥 Educator Access Control
     @netball_educators = if is_admin? || current_user.role == "educators" || current_user.email == "drmarlene@netballamerica.com"
