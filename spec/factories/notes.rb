@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :note do
-    body { "MyText" }
-    club { nil }
-    status { "MyString" }
+    body { "Based in Westport/Stamford/Westchester.  Zip code 06880" }
+    status { "Not Started" }
+    association :club
   end
 end

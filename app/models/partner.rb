@@ -1,6 +1,6 @@
 class Partner < ApplicationRecord
     has_many :contacts
-    has_one :person
+   # has_one :person - not sure what this was doe
     belongs_to :user
 
     validates :company, presence: { message: ": Please enter name before attempting to save" }

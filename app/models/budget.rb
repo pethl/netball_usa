@@ -1,11 +1,8 @@
 class Budget < ApplicationRecord
-  has_one :event
+  belongs_to :event
   
   validates :event, presence: true
   
-  def event
-     Event.find(self.event_id)
-  end
 
   def per_diem_total
     self.per_diem.to_f * self.number_of_people.to_f * self.number_of_days.to_f

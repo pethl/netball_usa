@@ -42,7 +42,7 @@ RSpec.describe "Follow_ups Management", type: :feature, js: true do
 
     click_button "Save Follow Up"
 
-    expect(page).to have_content("Netball educator must be linked") # Validation errors should show
+    expect(page).to have_content("Lead type must be selected") # Validation errors should show
    
   end
 

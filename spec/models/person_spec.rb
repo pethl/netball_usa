@@ -1,14 +1,16 @@
+require "rails_helper"
+
 RSpec.describe Person, type: :model do
   let(:person) { create(:person) }
-  
-  # 1. Test editing fields
+
+  # === 1. Editing fields ===
   describe "editing fields" do
     it "can update first_name" do
       new_name = "New First Name"
       person.update(first_name: new_name)
       expect(person.reload.first_name).to eq(new_name)
     end
-    
+
     it "can update last_name" do
       new_name = "New Last Name"
       person.update(last_name: new_name)
@@ -27,62 +29,63 @@ RSpec.describe Person, type: :model do
       expect(person.reload.role).to eq(new_role)
     end
   end
-  
-  # 2. Test managing associated records (e.g., frequent flyer numbers)
+
+  # === 2. Managing associated records ===
   describe "managing associated records" do
     it "can add and update frequent flyer numbers" do
-      person.frequent_flyer_numbers.create(number: "12345", airline: "delta")
+      person.frequent_flyer_numbers.create(number: "12345", airline: "Delta")
       expect(person.frequent_flyer_numbers.count).to eq(1)
-      # Now update the first frequent flyer number
+
       person.frequent_flyer_numbers.first.update(number: "67890")
       expect(person.frequent_flyer_numbers.first.number).to eq("67890")
     end
   end
 
-  # 3. Test deleting associated records (e.g., image, headshot, certification)
+  # === 3. Deleting fields and associated records ===
   describe "deleting fields and associated records" do
-    it "can delete image" do
-      person.image = File.open(Rails.root.join("spec/fixtures/files/test_image.png"))
-      person.save
-      expect { person.image.destroy }.to change { person.reload.image.present? }.from(true).to(false)
-    end
-  end
-    
-    it "can delete headshot" do
-      person.headshot = File.open(Rails.root.join("spec/fixtures/files/test_image.png"))
-      person.save
-      expect { person.headshot.destroy }.to change { person.reload.headshot.present? }.from(true).to(false)
+    it "can delete resume" do
+      person.resume = uploaded_test_file("test_resume.pdf", "application/pdf")
+      person.save!
+      expect {
+        person.update!(resume: nil)
+      }.to change { person.reload.resume }.from(be_present).to(nil)
     end
 
     it "can delete certification" do
-      person.certification = File.open(Rails.root.join("spec/fixtures/files/test_certification.pdf"))
-      person.save
-      expect { person.certification.destroy }.to change { person.reload.certification.present? }.from(true).to(false)
+      person.certification = uploaded_test_file("test_certification.pdf", "application/pdf")
+      person.save!
+      expect {
+        person.update!(certification: nil)
+      }.to change { person.reload.certification }.from(be_present).to(nil)
     end
-    
-    it "can delete resume" do
-      person.resume = File.open(Rails.root.join("spec/fixtures/files/test_resume.pdf"))
-      person.save
-      expect { person.resume.destroy }.to change { person.reload.resume.present? }.from(true).to(false)
+
+    it "can delete headshot" do
+      person.headshot = uploaded_test_file("test_image.png", "image/png")
+      person.save!
+      expect {
+        person.update!(headshot: nil)
+      }.to change { person.reload.headshot }.from(be_present).to(nil)
     end
-  
-  # 4. Ensure the role field is required and doesn't allow null values
+
+    it "can delete image" do
+      person.image = uploaded_test_file("test_image.png", "image/png")
+      person.save!
+      expect {
+        person.update!(image: nil)
+      }.to change { person.reload.image }.from(be_present).to(nil)
+    end
+  end
+
+  # === 4. Validations ===
   it "is not valid without a role" do
     person.role = nil
     expect(person).not_to be_valid
   end
-  
-  # 5. Test for created_at field (optional)
-    it "sets created_at automatically" do
-      person = create(:person)
-      expect(person.created_at).not_to be_nil
-    end
 
-
-    # 5. Test for created_at field (optional)
-    it "sets created_at automatically" do
-      person = create(:person)
-      expect(person.created_at).not_to be_nil
-    end
-
+  # === 5. created_at ===
+  it "sets created_at automatically" do
+    new_person = create(:person)
+    expect(new_person.created_at).not_to be_nil
+  end
 end
+

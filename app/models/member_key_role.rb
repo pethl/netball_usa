@@ -1,5 +1,6 @@
 class MemberKeyRole < ApplicationRecord
   belongs_to :club
+  belongs_to :member 
 
    validates :key_role, presence: true
    validates :member_id, presence: true

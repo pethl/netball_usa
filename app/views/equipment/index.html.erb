@@ -6,22 +6,22 @@
   Please ensure educator details exist before creating equipment sale record. Go to <span class="font-light border m-2 border-blue-900"> <%= link_to "Educator Search >>", search_path %></span>
 </div>
  
-<div class="p-4">
+<div class="py-4">
     <%= link_to "Add New Equipment Sale", new_equipment_path, class: form_button_class %>
 </div>
 
 <% if @equipment.any? %>
 <div id="equipment">
 
-<div class="relative overflow-x-auto rounded-lg shadow-md">
+<div class="relative overflow-x-auto rounded-lg shadow-md ml-2">
   <table class="w-full text-sm text-left rtl:text-right text-gray-700">
-    <thead class="text-xs text-gray-500 uppercase bg-gray-200 border-b">
+    <thead class="text-xs text-gray-500 bg-gray-200 border-b">
       <tr>
         <th scope="col" class="px-3 py-3">State</th>
         <th scope="col" class="px-3 py-3">City</th>
         <th scope="col" class="px-3 py-3">Sale To</th>
         <th scope="col" class="px-3 py-3">Date of Sale</th>
-        <th scope="col" class="px-3 py-3 text-right">Purchase Amount</th>
+        <th scope="col" class="px-3 py-3 text-right whitespace-nowrap">Purchase $</th>
         <th scope="col" class="px-6 py-3">Items Purchased</th>
         <th scope="col" class="px-3 py-3">School</th>
         <th scope="col" class="px-3 py-3">Contact Details</th>

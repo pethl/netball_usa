@@ -1,0 +1,14 @@
+<%# /netball_educators/heat_map.html.erb %>
+<% content_for(:page_title, "Educators - Heat Map") %>
+<div class="py-2">
+  <%= render 'nav_tabs' %>
+</div>
+
+<h2 class="text-base md:text-lg font-semibold text-blue-900 text-center my-4">
+ Count of Educators by State
+</h2>
+
+<%= tag.div data: {
+      controller: "plotly-map",
+      plotly_map_data_value: @educator_state_counts.to_json
+    }, class: "w-full h-[700px]" %>

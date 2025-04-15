@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :club do
     name { "Texas Longhorns" }
     city { "Austin" }
-    us_state { "Texas" }
+    us_state { "TX" }
     membership_category { "1 Team - 8-13 Active Members" }
     website { "https://example.com" }
     facebook { "https://facebook.com/exampleclub" }

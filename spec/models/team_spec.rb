@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Team, type: :model do
-  subject { Team.new(name: "Seattle Scorcers", city: "Seattle", state:"OR", user_id: 10 )}
+  subject { Team.new(name: "Seattle Scorcers", user_id: 10 )}
     it "is valid with valid attributes" do
       expect(subject).to be_valid
     end
@@ -9,16 +9,20 @@ RSpec.describe Team, type: :model do
       subject.name=nil
       expect(subject).to_not be_valid
     end
-    it "is not valid without a city" do
-      subject.city=nil
-      expect(subject).to_not be_valid
+
+    describe "associations" do
+      it { should belong_to(:club).optional }
+      it { should have_many(:members) }
+      it { should have_many(:individual_members) }
     end
-    it "is not valid without a state" do
-      subject.state=nil
-      expect(subject).to_not be_valid
+
+    it "can have many members" do
+      team = create(:team)
+      member1 = create(:member, team: team)
+      member2 = create(:member, team: team)
+    
+      expect(team.members).to include(member1, member2)
+      expect(team.members.count).to eq(2)
     end
-    it "is not valid without a state" do
-      subject.state=nil
-      expect(subject).to_not be_valid
-    end
+   
 end

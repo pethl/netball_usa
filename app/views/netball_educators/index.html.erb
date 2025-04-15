@@ -5,9 +5,16 @@
 <div class="p-4 flex justify-between items-center">
   <% if current_user.admin? %>
     <div>
+    <div class="relative group inline-block">
       <%= link_to "To Excel >", 
         netball_educators_path(format: "xlsx", state: params[:state], city: params[:city], created_at: params[:created_at]),
-        class: clear_button_class %>      
+        class: clear_button_class %>
+      
+      <div class="absolute bottom-full mb-2 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
+        Click to export records on screen; if filtered, will export filtered records only
+      </div>
+    </div>
+    
       <%= link_to "Add New ", new_netball_educator_path, class: form_button_class %>
     </div> 
   <% end %>

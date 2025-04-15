@@ -34,6 +34,10 @@ class NetballEducatorsController < ApplicationController
     # 🔥 Ordering
     @netball_educators = @netball_educators.order(created_at: :desc)
 
+     # ✅ Preload event participants as a set of educator IDs (for fast lookup in view)
+    @educator_ids_with_participants = EventParticipant.where(netball_educator_id: @netball_educators.pluck(:id)).distinct.pluck(:netball_educator_id).to_set
+
+
     respond_to do |format|
       format.html
       format.xlsx
@@ -48,6 +52,10 @@ class NetballEducatorsController < ApplicationController
     else
       @netball_educators = []
     end
+     # ✅ Preload event participants as a set of educator IDs (for fast lookup in view)
+     @educator_ids_with_participants = EventParticipant.where(netball_educator_id: @netball_educators.pluck(:id)).distinct.pluck(:netball_educator_id).to_set
+
+
   end
 
   def my_educators
@@ -73,6 +81,33 @@ class NetballEducatorsController < ApplicationController
       .where(role: ["Trainer", "Ambassador"], status: "Inactive")
       .order(:educator_role, :last_name)
   end
+
+  def heat_map
+    authorize! :heat_map, NetballEducator
+  
+    raw_counts = NetballEducator.group(:state).count
+    # Rails.logger.info "RAW STATE COUNTS: #{raw_counts.inspect}"
+  
+    @educator_state_counts = raw_counts.each_with_object({}) do |(state, count), hash|
+      next if state.blank?
+  
+      normalized =
+        if US_STATE_ABBREVIATIONS.key?(state)
+          US_STATE_ABBREVIATIONS[state]
+        else
+          state.to_s.strip.upcase
+        end
+  
+      # Only include valid USPS codes
+      next unless normalized.length == 2 && US_STATE_ABBREVIATIONS.value?(normalized)
+  
+      hash[normalized] ||= 0
+      hash[normalized] += count
+    end
+  
+    # Rails.logger.info "FILTERED EDUCATOR STATE COUNTS: #{@educator_state_counts.inspect}"
+  end
+  
 
   def show
   end

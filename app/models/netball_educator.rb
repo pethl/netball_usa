@@ -12,14 +12,14 @@ class NetballEducator < ApplicationRecord
   validates :first_name, presence: true, length: { maximum: 30 }
   validates :last_name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-validates :email, presence:   true,
+  validates :email, presence:   true,
                     format:     { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   
 #  validates :phone, phone: true, allow_blank: true
   validates :school_name, presence: true, length: { maximum: 100 }
   validates :city, presence: true, length: { maximum: 50 }
-  validates :state, presence: true, length: { maximum: 30 }
+  validates :state, presence: true
   validates :level, presence: true
                      
     

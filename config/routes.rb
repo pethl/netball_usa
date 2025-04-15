@@ -104,6 +104,7 @@ Rails.application.routes.draw do
   get 'netball_educators/index_user' => 'netball_educators#index_user', :as => :index_user
   get 'netball_educators/my_educators' => 'netball_educators#my_educators', :as => :my_educators
   get 'netball_educators/trainers_etc' => 'netball_educators#trainers_etc', as: :trainers_etc
+  get 'netball_educators/heat_map' => 'netball_educators#heat_map', as: :heat_map
 
  
   resources :netball_educators do

@@ -6,7 +6,7 @@ class Event < ApplicationRecord
  # has_many :transfers, through: :event_assignments
   has_many :transfers
 
-  belongs_to :budget, optional: true 
+  has_one :budget #, dependent: :destroy
    
   validates :event_type, presence: true
   validates :name, presence: true
@@ -19,18 +19,9 @@ class Event < ApplicationRecord
   scope :past,     -> { where('date < ?', Date.today.beginning_of_month).order(date: :desc) }
   scope :gone,     -> { where('date < ?', Date.today).order(date: :desc) }
 
-
-  def budget
-    Budget.where(event_id: self.id).first
-  end
   
   def budget_count
-      a = Budget.where(event_id: self.id)
-      if a.empty?()
-        return 0
-      else
-        return a
-      end
+    budget.present? ? [budget] : 0
   end
   
   def event_date_name

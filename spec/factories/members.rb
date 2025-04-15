@@ -2,19 +2,18 @@ FactoryBot.define do
   factory :member do
     first_name { "Brie" }
     last_name { "Larson" }
-    email { "brie.larson@example.com" }
+    sequence(:email) { |n| "brie.larson#{n}@example.com" }
     city { "Austin" }
-    state { "Texas" }
+    state { "TX" }
     gender { "Female" }
+    age_status { "Adult" }
+    engagement_status { "Active" }
     interested_in_coaching { false }
     interested_in_umpiring { false }
     interested_in_usa_team { true }
     dob { 30.years.ago }
     place_of_birth { "Austin, TX" }
     notes { "Friend of Sonya, wife of John." }
-    age_status { "Adult" } # or "Youth" depending on test needs
-    engagement_status { "Active" } # or "Part-Time"
-   # membership_type { "Player" } field not needed
     phone { "123-456-7890" }
     address { "123 Sample Street" }
     zip { "12345" }
@@ -24,6 +23,18 @@ FactoryBot.define do
     # Optional association if needed later: team
     # association :team
 
-    # na_team_id left nil unless you really need it for a test
+
+    trait :youth do
+      age_status { "Youth" }
+    end
+    
+    trait :part_time do
+      engagement_status { "Part-Time" }
+    end
+    
+    trait :with_team do
+      association :team
+    end
+    
   end
 end

@@ -13,6 +13,7 @@ import MultiFilterController from "./controllers/multi_filter_controller"
 import DateFilterController from "./controllers/date_filter_controller"
 import EducatorsWizardController from "./controllers/educators_wizard_controller"
 import PopoverController from "./controllers/popover_controller"
+import PlotlyMapController from "./controllers/plotly_map_controller"
 
 const application = Application.start()
 
@@ -28,6 +29,7 @@ application.register("multi-filter", MultiFilterController)
 application.register("date-filter", DateFilterController)
 application.register("educators-wizard", EducatorsWizardController)
 application.register("popover", PopoverController)
+application.register("plotly-map", PlotlyMapController)
 // Make Stimulus available globally
 window.Stimulus = application
 console.log("✅ Stimulus + ESBuild initialized")

@@ -1,7 +1,11 @@
 <% content_for(:page_title, "Sample Words")%>
 
 <div id="sample_words">
-<br>
+
+ <div class="my-4">
+        <%= link_to "Add New Sample Words", new_sample_word_path, class: form_button_class %>
+        <br>
+     </div>
  
 <% if @sample_words.any? %>
 
@@ -47,13 +51,6 @@
         No records to view
       </p>
        <% end %>   
-  
-   
-    <div class="m-2">
-        <%= link_to "Add New Sample Words", new_sample_word_path, class: form_button_class %>
-        <br>
-     </div>
-          
-</div>
-         
+  </div>
+
 

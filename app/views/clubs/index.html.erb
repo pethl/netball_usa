@@ -19,6 +19,17 @@
 <% else %> <!-- 1.0 ALL NON ADMIN CONTINUES HERE -->
   <% content_for(:page_title, "Membership Administration Hub") %>
 
+  <!-- special renewal message -->
+  <% if @club.renewal_response.to_s.downcase == "yes" && @club.renewal_years.to_s.split(",").map(&:strip).include?(Date.today.year.to_s) %>
+  <div class="bg-teal-100 border-l-4 border-teal-500 text-blue-900 p-4 mb-4 rounded shadow-sm">
+   <p class="text-sm md:text-base font-medium">
+  <strong><%= Date.today.year %>:</strong> 
+  <em>📋 Please review your club membership and add / update all Netball personnel, marking each as active or part-time.</em>
+</p>
+  </div>
+<% end %>
+
+
   <div class="container m-4">
     <!-- 1.1 HEADER -->
     <div class="text-gray-700 text-lg font-semibold mb-4">

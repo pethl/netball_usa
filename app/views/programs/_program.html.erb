@@ -67,8 +67,12 @@
     </p>
     
     <p>
-    <strong>Coach Assigned:</strong><br>
-    <%= Person.where(id: program.people_id).first.full_name unless program.people_id.to_s.empty?  %>
+      <% if program.person.present? %>
+      <p>
+        <strong>Coach Assigned:</strong><br>
+        <%= program.person.full_name %>
+      </p>
+    <% end %>
   </p>
    
     <p>

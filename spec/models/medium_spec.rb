@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Medium, type: :model do
   # Associations
-  it { should belong_to(:user).optional } # Assuming media can have a user but it's not required
+  it { should belong_to(:user) } # Assuming media can have a user but it's not required
 
   # Validations
   it { should validate_presence_of(:media_type) }

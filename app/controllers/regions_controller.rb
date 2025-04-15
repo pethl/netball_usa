@@ -59,4 +59,4 @@ class RegionsController < ApplicationController
     def region_params
       params.require(:region).permit(:state, :region)
     end
-end
+end 

@@ -1,5 +1,8 @@
 require 'rails_helper'
 
+
 RSpec.describe Equipment, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
+  describe "associations" do
+    it { should belong_to(:netball_educator) }
+  end
+end 

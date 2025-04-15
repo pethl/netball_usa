@@ -2,13 +2,13 @@
 
 <%= render 'nav_tabs' %>
 
-<div class="p-4">
+<div class="py-4 ml-2">
   <% if current_user.admin? %>
     <%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
   <% end %>
 </div>
 
-<div class="p-4">
+<div class="">
   <% if @netball_educators.any? %>
     <div id="educators">
       <%= render 'educators_table', educators: @netball_educators %>

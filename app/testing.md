@@ -36,7 +36,17 @@ Save this somewhere easy, like Notion, Apple Notes, etc.
 ---
 
 ## 📄 Page Smoke Tests (System Specs)
-- [ ] Every main model page loads
+- [x] Every main model page loads
+
+---
+
+## 📄 Routes specs
+- [x] Every defined route loads
+
+---
+
+## 📄 Model specs
+- [ ] Every defined model rule runs clean
 
 ---
 

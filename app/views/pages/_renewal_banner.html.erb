@@ -1,6 +1,5 @@
-<div class="container mx-auto mb-32">
-  <div class="h-14 bg-transparent"></div>
-
+<div class="container mx-auto mb-24">
+ 
   <!-- Welcome message -->
   <div class="text-center p-6">
   <% if @member_type == "Club" && @club.present? %>
@@ -22,32 +21,46 @@
 
 <!-- OUTSIDE container: full width banner -->
 <% if @needs_renewal %>
- <div class="w-full bg-blue-100 border-l-8 border-blue-500 text-blue-700 p-6 mb-8 shadow-lg mt-8">
-  <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-xl font-bold mb-2 text-blue-700"> <!-- smaller, softer -->
-      Membership Renewal
-    </h2>
-    <p class="text-gray-700 mb-4">
-      Do you wish to renew your annual membership for the new season?
-    </p>
+  <div class="w-full bg-gradient-to-r from-blue-200 via-blue-100 to-blue-200 border-l-[10px] border-blue-600 text-blue-700 px-4 py-6 mb-8 shadow-lg mt-8 rounded-md">
+    <div class="max-w-3xl mx-auto text-center flex flex-col items-center gap-4">
 
-    <div class="flex justify-center gap-6 mt-6">
-  <% if @member_type == "Club" %>
-    <%= button_to "Yes, Renew!", renew_club_membership_path(@club, response: "yes"), method: :post, class: "bg-blue-700 hover:bg-blue-800 text-white font-semibold text-lg py-3 px-6 rounded shadow-md transition-transform transform hover:scale-105" %>
-    <%= button_to "No, Not Now", renew_club_membership_path(@club, response: "no"), method: :post, class: "bg-gray-400 hover:bg-gray-500 text-white font-semibold text-lg py-3 px-6 rounded shadow-md transition-transform transform hover:scale-105" %>
-  <% elsif @member_type == "Individual" %>
-    <%= button_to "Yes, Renew!", renew_individual_membership_path(response: "yes"), method: :post, class: "bg-blue-700 hover:bg-blue-800 text-white font-semibold text-lg py-3 px-6 rounded shadow-md transition-transform transform hover:scale-105" %>
-    <%= button_to "No, Not Now", renew_individual_membership_path(response: "no"), method: :post, class: "bg-gray-400 hover:bg-gray-500 text-white font-semibold text-lg py-3 px-6 rounded shadow-md transition-transform transform hover:scale-105" %>
-  <% end %>
-</div>
+      <!-- Text -->
+      <div>
+        <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-1">
+          Membership Renewal
+        </h2>
+        <p class="text-gray-700 mb-4 text-sm md:text-base">
+          Do you wish to renew your annual membership for the new season?
+        </p>
 
-       <!-- Logo -->
-      <div class="mt-4 md:mt-0">
-        <%= image_tag "Netball-America-Logo-Transparent-Background.png", alt: "Netball America® Logo", class: "h-20 w-auto" %>
+        <div class="flex flex-wrap justify-center gap-4">
+          <% if @member_type == "Club" %>
+            <%= button_to "Yes, Renew!", renew_club_membership_path(@club, response: "yes"), method: :post, class: "bg-blue-700 hover:bg-blue-800 text-white font-semibold text-sm md:text-base py-2 px-5 rounded shadow-md transition-transform transform hover:scale-105" %>
+            <%= button_to "No, Not Now", renew_club_membership_path(@club, response: "no"), method: :post, class: "bg-gray-400 hover:bg-gray-500 text-white font-semibold text-sm md:text-base py-2 px-5 rounded shadow-md transition-transform transform hover:scale-105" %>
+          <% elsif @member_type == "Individual" %>
+            <%= button_to "Yes, Renew!", renew_individual_membership_path(response: "yes"), method: :post, class: "bg-blue-700 hover:bg-blue-800 text-white font-semibold text-sm md:text-base py-2 px-5 rounded shadow-md transition-transform transform hover:scale-105" %>
+            <%= button_to "No, Not Now", renew_individual_membership_path(response: "no"), method: :post, class: "bg-gray-400 hover:bg-gray-500 text-white font-semibold text-sm md:text-base py-2 px-5 rounded shadow-md transition-transform transform hover:scale-105" %>
+          <% end %>
+        </div>
       </div>
+
+      <!-- Logo -->
+      <div class="mt-2">
+        <%= image_tag "Netball-America-Logo-Transparent-Background.png", alt: "Netball America® Logo", class: "h-16 w-auto" %>
+      </div>
+
     </div>
   </div>
 <% end %>
+
+<div class="my-4">
+    <%= render "pages/why_membership" %>
+</div>
+
+
+
+
+
 
 
 

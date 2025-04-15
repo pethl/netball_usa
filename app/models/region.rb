@@ -10,8 +10,8 @@ class Region < ApplicationRecord
     Region.where(region: self.region).pluck(:state)
   end
 
-  # Returns all teams that belong to states in this region
-  def teams_in_region
-    Team.where(state: states_in_region)
+  # Returns all clubs that belong to states in this region
+  def clubs_in_region
+    Club.where(us_state: states_in_region)
   end
-end
+end 

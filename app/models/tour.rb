@@ -1,8 +1,6 @@
 class Tour < ApplicationRecord
     validates :company, presence: true
 
-
-
     #SEE DUPLICATED CODE TO PARTNER
     def contact_two_blank
         if (first_name_secondary.to_s +

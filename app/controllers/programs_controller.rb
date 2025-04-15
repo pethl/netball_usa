@@ -60,6 +60,6 @@ class ProgramsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def program_params
-      params.require(:program).permit(:program_stage, :program_name, :na_program_contact_email, :na_program_contact_phone, :location_name, :location_contact_phone, :location_contact_email, :address, :city, :state, :zip, :country, :people_id, :program_event_datetime, :timezone, :funded_by, :notes)
+      params.require(:program).permit(:program_stage, :program_name, :na_program_contact_email, :na_program_contact_phone, :location_name, :location_contact_phone, :location_contact_email, :address, :city, :state, :zip, :country, :person_id, :program_event_datetime, :timezone, :funded_by, :notes)
     end
 end

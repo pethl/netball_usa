@@ -114,8 +114,8 @@
                     <%= program.country %>
                 </th>
                 
-                 <td class="px-6 py-4 truncate">
-                    <%= Person.where(id: program.people_id).first.full_name  unless  program.people_id.to_s.empty? %>
+                <td class="px-6 py-4 truncate">
+                  <%= program.person&.full_name || "—" %>
                 </td>
                 
                 <td class="px-6 py-4 truncate">

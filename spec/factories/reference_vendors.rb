@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :reference_vendor do
-    vendor { nil }
-    reference { nil }
+    association :vendor
+    association :reference
   end
 end
+
