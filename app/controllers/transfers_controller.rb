@@ -1,8 +1,10 @@
 class TransfersController < ApplicationController
-  before_action :set_transfer, only: %i[ show edit update destroy ]
-  skip_before_action :authenticate_user!, only:[:show, :edit, :update, :index]
+  before_action :authenticate_user!
+  load_and_authorize_resource
+  before_action :set_transfer, only: %i[show edit update destroy external_edit]
   require 'prawn'
   require 'prawn/table'
+  #authorize_resource
 
   # GET /transfers
   def index

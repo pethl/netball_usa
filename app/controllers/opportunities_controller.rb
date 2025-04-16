@@ -2,6 +2,7 @@ class OpportunitiesController < ApplicationController
   before_action :set_opportunity, only: %i[ show edit update destroy ]
   #before_action :set_sponsor, only: %i[ new create show edit update destroy ]
   before_action :set_sponsor, except: [:index, :closed, :my_index]
+  load_and_authorize_resource
 
   # GET /opportunities
   def index

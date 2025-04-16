@@ -90,8 +90,10 @@
       <p><%= transfer.notes %></p>
     </div>
 
+<% if user_signed_in? && current_user.role == "na_people" %>
     <div class="mt-6 text-center">
     <%= link_to "« Back to Home Page", root_path, class: "text-blue-900 font-semibold hover:underline" %>
   </div>
+<% end %>
   </div>
 </div>

@@ -4,127 +4,132 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-   
-
+    # 🔒 Public user (not logged in)
     if user.nil?
-     #  puts "🔥 PUBLIC USER DETECTED – adding public NetballEducator rules"
-      can :create, NetballEducator  # let public users create
-      can :show, NetballEducator    # optionally allow them to view any educator
+      can :create, NetballEducator
+      can :show, NetballEducator
+      return
     end
 
-    # Allow users to manage their own profile
-    if user.present?
-      if user.role.present?
-        can :manage, User, id: user.id
-      else
-        can [:read, :update], User, id: user.id
-      end
-    end
+    # 🧍 Logged-in user: always allow basic profile access
+    cannot :index, User
+    can [:read, :update], User, id: user.id
 
-    # role 1 teams_grants
-    if user.teams_grants?
-      can :manage, Grant 
+    case user.role
+    
+      # 1 : teams_grants (teams and grants, events, programs, venues, tours)
+    when "teams_grants"
+      can :manage, Grant
       can :manage, Person
       can :manage, Member
       can :manage, Program
       can :manage, Event
+      cannot :destroy, Event
       can :manage, Venue
       can :manage, Tour
       can :manage, Partner
-      can :manage, Club 
+      can :manage, Club
       can :manage, Payment
-      can :manage, IndividualMember 
-    end
-
-    # role 2 Club Managers / was team leads
-    if user.teamlead?
-      can :manage, Club, user_id: user.id
-      can :manage, Member 
       can :manage, IndividualMember
-    end 
 
-    # role 3 grants
-    if user.grants?
+    # 2 : teamlead (teams only)
+    when "teamlead"
+      # Only manage their own club
+      can :manage, Club, user_id: user.id
+
+      # Only manage members in their club
+      can :manage, Member, club: { user_id: user.id }
+
+      # Only manage individual members linked to their club
+      can :manage, IndividualMember, club: { user_id: user.id }
+
+      # Only manage payments linked to their club
+      can :read, Payment, club: { user_id: user.id }
+
+    # 3 : grants only
+    when "grants"
       can :manage, Grant
-    end
 
-    # role 4 educators
-    if user.educators?
+     # 4 : no_access
+    when "no_access"
+       # No specific permissions assigned yet
+
+    # 5 : teams admin level
+    when "teams_admin"
+      can :manage, Club
+      can :manage, Member
+      can :manage, IndividualMember
+      can :manage, Payment
+      can :teams_list_index, Club
+      
+
+    # 6 : sponsors_events
+    when "sponsors_events"
+      can :manage, Sponsor
+      can :manage, Contact
+      can :manage, Opportunity, user_id: user.id
+      can :manage, Event
+      cannot :destroy, Event
+      can :calendar, Event
+
+    # 7 : us_open (US Open and people)
+    when "us_open"
+      can :manage, Transfer
+      can :manage, Person
+       # 🔍 Read-only access to Event
+    can [:read, :index, :show], Event
+
+    # 8 : educators_events (educators, followups and events)
+    when "educators_events"
       can :manage, NetballEducator
       can :manage, FollowUp
       can :manage, Equipment
       can :manage, Event
+      cannot :destroy, Event
       can :heat_map, NetballEducator
-    end
 
-    # role 5 all clubs admin - membership
-    if user.teams_admin?
-      can :manage, Club
-      can :manage, IndividualMember 
-    end
-
-    # role 6 sponsors_events
-    if user.sponsors_events?
+    # 9 : sponsors_media_events
+    when "sponsors_media_events"
       can :manage, Sponsor
       can :manage, Contact
       can :manage, Opportunity, user_id: user.id
       can :manage, Event
-    end
+      cannot :destroy, Event
+      can :calendar, Event
+      can :manage, Medium
+      
 
-    # role 7 us_open
-    if user.us_open?
-      can :manage, Transfer
-      can :manage, Person
-    end
-
-    # role 8 educators_events
-    if user.educators_events?
+    # 10 : educators_events_medium
+    when "educators_events_medium"
       can :manage, NetballEducator
       can :manage, FollowUp
+      can :manage, Equipment
       can :manage, Event
+      cannot :destroy, Event
       can :heat_map, NetballEducator
-    end
-
-    # role 9 sponsors_media_events
-    if user.sponsors_media_events?
-      can :manage, Sponsor
-      can :manage, Contact
-      can :manage, Opportunity, user_id: user.id
       can :manage, Medium
-      can :manage, Event
-    end
 
-    # role 10 educators_events_medium
-    if user.educators_events_medium?
-      can :manage, NetballEducator
-      can :manage, FollowUp
-      can :manage, Event
-      can :manage, Medium
-    end
+    # 11 : spare (no specific permissions)
+    when "spare"
+      # No specific permissions assigned yet
 
-    # role 11 spare
-    if user.spare?
-      # Currently no specific permissions assigned
-      # Add permissions as needed
-    end
-
-    # role 12 na_people
-    if user.na_people?
-      # Can only read and update their own person record
+    # 12 : na_people (person and US Open access)  
+    when "na_people"
       can [:read, :update], Person, email: user.email
       cannot :index, Person
 
-      # Transfer access scoped to their own person_id
       if (person = Person.find_by(email: user.email))
         can [:read, :create, :update], Transfer, person_id: person.id
         cannot :index, Transfer
       end
-    end
 
-    # Final fallback: admin
-    if user.admin?
+      # 0 : admin (everything) 
+    when "admin"
       can :manage, :all
+    else
+      # default fallback for unknown/missing role
+      cannot :manage, :all
+      cannot :index, User
     end
   end
 end
-

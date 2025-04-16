@@ -10,11 +10,8 @@ class NetballEducatorsController < ApplicationController
     @events = Event.educational.gone# or  filtered events 
 
     # 🔥 Educator Access Control
-    @netball_educators = if is_admin? || current_user.role == "educators" || current_user.email == "drmarlene@netballamerica.com"
-                            NetballEducator.all
-                          else
-                            NetballEducator.where(user_id: current_user.id)
-                          end
+    @netball_educators = NetballEducator.all
+
 
     # 🔥 Filters
     if params[:state].present?
@@ -46,12 +43,8 @@ class NetballEducatorsController < ApplicationController
 
 
   def pe_directors
-    if (is_admin? || current_user.role=="educators" || current_user.email=="drmarlene@netballamerica.com")
       @netball_educators = NetballEducator.all.where(level: "School/District Lead")
       @netball_educators = @netball_educators.order("created_at DESC, state ASC, city ASC")
-    else
-      @netball_educators = []
-    end
      # ✅ Preload event participants as a set of educator IDs (for fast lookup in view)
      @educator_ids_with_participants = EventParticipant.where(netball_educator_id: @netball_educators.pluck(:id)).distinct.pluck(:netball_educator_id).to_set
 

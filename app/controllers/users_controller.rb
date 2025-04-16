@@ -1,11 +1,33 @@
 class UsersController < ApplicationController
+  load_and_authorize_resource
   def index
-   
-    @users = User.where.not(confirmed_at: nil).where.not(role: 2).order(:role)
-    authorize! :read, @users
-    
-    @users_awaiting_confirmation = User.where(confirmed_at: nil)
-    @users_awaiting_confirmation= @users_awaiting_confirmation.order(created_at: :asc)
-    @team_leads = User.where.not(confirmed_at: nil).where(role: 2).order(:role)
+    authorize! :index, User
+    # 🔹 Confirmed + Active System Users (excluding role 2 = team lead)
+    @users = User
+      .accessible_by(current_ability)
+      .where.not(confirmed_at: nil)
+      .where.not(role: 2)
+      .where(account_active: true)
+      .order(:role, :last_name)
+  
+    # 🔹 Team Leads (confirmed, role == 2)
+    @team_leads = User
+    .accessible_by(current_ability)
+      .where.not(confirmed_at: nil)
+      .where(role: 2)
+      .order(:last_name)
+  
+    # 🔹 Locked Accounts
+    @users_locked = User
+    .accessible_by(current_ability)
+      .where(account_active: false)
+      .order(:last_name)
+  
+    # 🔹 Awaiting Email Confirmation
+    @users_awaiting_confirmation = User
+    .accessible_by(current_ability)
+      .where(confirmed_at: nil)
+      .order(:created_at)
   end
+  
 end

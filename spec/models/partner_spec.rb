@@ -80,6 +80,21 @@ RSpec.describe Partner, type: :model do
       subject.location = nil
       expect(subject.address_condensed).to include(subject.city)
     end
+
+    it "returns state + country when location and city are blank" do
+      subject.assign_attributes(location: nil, city: nil, us_state: "TX", country: "USA")
+      expect(subject.address_condensed).to eq("TX USA")
+    end
+    
+    it "returns city + country when location and state are blank" do
+      subject.assign_attributes(location: nil, us_state: nil, city: "Austin", country: "USA")
+      expect(subject.address_condensed).to eq("Austin USA")
+    end
+    
+    it "returns location + country when city and state are blank" do
+      subject.assign_attributes(city: nil, us_state: nil, location: "123 Main", country: "USA")
+      expect(subject.address_condensed).to eq("123 Main USA")
+    end
   end
 end
 

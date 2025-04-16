@@ -97,21 +97,47 @@
     </li>
 
   <% else %>
-    <!-- Dynamic menu based on user permissions -->
-    <% if can? :manage, NetballEducator %>
-      <li class="mt-2">
-        <a href="/netball_educators/pe_directors" class="text-gray-100 hover:font-bold">PE DIRECTORS</a>
-      </li>
-      <li class="mt-2">
-        <a href="/netball_educators" class="text-gray-100 hover:font-bold">EDUCATORS</a>
-      </li>
-    <% end %>
 
-    <% if can? :manage, FollowUp %>
-      <li class="mt-2">
-        <a href="/follow_ups" class="text-gray-100 hover:font-bold">FOLLOW UPS</a>
-      </li>
+ <% if can? :manage, NetballEducator %>
+        <li class="mt-2">
+          <a href="/netball_educators" class="text-gray-100 hover:font-bold">EDUCATORS</a>
+        </li>
+
+         <% if can? :manage, Equipment %>
+          <li class="mt-2 ml-2">
+            <a href="/equipment" class="text-gray-100">- Equipment</a>
+          </li>  
+         <% end %> 
+
+          <% if can? :manage, FollowUp %>
+          <li class="mt-2 ml-2">
+            <a href="/follow_ups" class="text-gray-100 hover:font-bold">- Follow Ups</a>
+          </li>
+        <% end %>
+
+         <% if can? :manage, Event %>
+          <li class="mt-2 ml-2">
+            <a href="<%= educational_events_path %>" class="text-gray-100">- Educational Events</a>
+          </li>
+        <% end %>
+
+       
+
+        <li class="mt-2 ml-2">
+          <a href="/netball_educators/trainers_etc" class="text-gray-100 hover:font-bold">- Trainers & Ambassadors</a>
+        </li>
+
+         <li class="mt-2 ml-2">
+          <a href="/netball_educators/search" class="text-gray-100 hover:font-bold">- Search </a>
+        </li>
+
+         <li class="mt-2 ml-2">
+          <a href="/netball_educators/heat_map" class="text-gray-100 hover:font-bold">- Heat Map </a>
+        </li>
+
     <% end %>
+    <!-- Dynamic menu based on user permissions -->
+   
 
     <% if can? :manage, Sponsor %>
       <li class="mt-2">
@@ -136,9 +162,12 @@
       </li>
     <% end %>
 
-    <% if can? :manage, Event %>
+  <% if can?(:manage, Event) || can?(:read, Event) %>
       <li class="mt-2">
         <a href="/events" class="text-gray-100 hover:font-bold">EVENTS</a>
+      </li>
+      <li class="mt-2 ml-2">
+        <a href="/events/calendar" class="text-gray-100 hover:font-bold">- Calendar</a>
       </li>
     <% end %>
 
@@ -202,11 +231,7 @@
       </li>
     <% end %>
 
-    <% if can? :manage, Equipment %>
-      <li class="mt-2">
-        <a href="/equipment" class="text-gray-100 hover:font-bold">EQUIPMENT</a>
-      </li>
-    <% end %>
+   
 
     <% if can? :manage, Transfer %>
       <li class="mt-2">

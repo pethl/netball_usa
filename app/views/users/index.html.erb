@@ -1,138 +1,58 @@
 <% content_for(:page_title, "System Users")%>
 
-<div class="m-4 lg:m-8">
+<div class="m-2 lg:m-4">
 <div id="users">
 
-  <div class="text-xl text-blue-900 mt-8">
-    Confirmed System Users
-  </div>
-  
-  <table class="table-auto h_scrolling_list_table">
-    <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs ">
-        <tr>
-        <th scope="col" class="text-left p-3 w-52">First Name</th>
-        <th scope="col" class="text-left p-2 w-52">Last Name</th>
-        <th scope="col" class="text-left p-2 py-3 w-52">Email</th>
-        <th scope="col" class="text-left p-2 py-3 w-52">Account Created</th>
-        <th scope="col" class="text-left p-2 py-3 w-52 whitespace-nowrap">Last Sign In</th>
-        <th scope="col" class="text-left p-2 py-3 w-52">Role</th>
-        <th scope="col" class="text-left p-2 py-3 w-52">Is_admin?</th>
-        <th scope="col" class="text-left p-2 py-3 w-52">Is_active?</th>
-        <th scope="col" class="text-left p-2 py-3 w-52">[:Id]</th>
-        </tr>
-      </thead>
-    
-    <tbody>
-    <% @users.each do |user| %>
-      <% if user.account_active == false %>
-      <tr class=" bg-gray-300">
-      <% else %>
-      <tr class=" hover:bg-gray-100">
-      <% end %>
-        <td class="p-2 border-b text-left"><%= user.first_name %></td>
-        <td class="p-2 border-b text-left"><%= user.last_name %></td>
-        <td class="p-2 border-b text-left"><%= user.email %></td>
-        <td class="p-2 border-b text-left"><%= user.created_at.to_formatted_s(:usa) %></td>
-        <td class="p-2 border-b text-left"><%= user.last_sign_in_at.to_formatted_s(:usa_dt) unless (user.last_sign_in_at.to_s.empty?)%></td>
-        <td class="p-2 border-b text-left"><%= user.role %></td>
-        <td class="p-2 border-b text-left"><%= user.admin? ? 'Yes' : 'No'   %></td>
-            <% if user.account_active== false %>
-            <td class="p-2 border-b text-left font-semibold italic"><%= user.account_active? ? 'Active' : 'Locked'   %></td>
-            <% else %>
-            <td class="p-2 border-b text-left"><%= user.account_active? ? 'Active' : 'Locked'   %></td>
-            <% end %>
-        <td class="p-2 border-b text-left"><%= user.id %></td>
-      </tr>
-    <% end %>
-  </tbody>
-  </table>
 
-  <div class="text-xl text-blue-900 mt-8">
-    Confirmed Team Administrators
-  </div>
-  
-  <table class="table-auto h_scrolling_list_table">
-    <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs ">
-        <tr>
-        <th scope="col" class="text-left p-3 w-52">First Name</th>
-        <th scope="col" class="text-left p-2 w-52">Last Name</th>
-        <th scope="col" class="text-left p-2 py-3 w-52">Email</th>
-        <th scope="col" class="text-left p-2 py-3 w-52">Account Created</th>
-        <th scope="col" class="text-left p-2 py-3 w-52 whitespace-nowrap">Last Sign In</th>
-        <th scope="col" class="text-left p-2 py-3 w-52">Role</th>
-        <th scope="col" class="text-left p-2 py-3 w-52">Is_admin?</th>
-        <th scope="col" class="text-left p-2 py-3 w-52">Is_active?</th>
-        <th scope="col" class="text-left p-2 py-3 w-52">[:Id]</th>
-        </tr>
-      </thead>
-    
-    <tbody>
-    <% @team_leads.each do |user| %>
-      <% if user.account_active == false %>
-      <tr class=" bg-gray-300">
-      <% else %>
-      <tr class=" hover:bg-gray-100">
-      <% end %>
-        <td class="p-2 border-b text-left"><%= user.first_name %></td>
-        <td class="p-2 border-b text-left"><%= user.last_name %></td>
-        <td class="p-2 border-b text-left"><%= user.email %></td>
-        <td class="p-2 border-b text-left"><%= user.created_at.to_formatted_s(:usa) %></td>
-        <td class="p-2 border-b text-left"><%= user.last_sign_in_at.to_formatted_s(:usa_dt) unless (user.last_sign_in_at.to_s.empty?)%></td>
-        <td class="p-2 border-b text-left"><%= user.role %></td>
-        <td class="p-2 border-b text-left"><%= user.admin? ? 'Yes' : 'No'   %></td>
-            <% if user.account_active== false %>
-            <td class="p-2 border-b text-left font-semibold italic"><%= user.account_active? ? 'Active' : 'Locked'   %></td>
-            <% else %>
-            <td class="p-2 border-b text-left"><%= user.account_active? ? 'Active' : 'Locked'   %></td>
-            <% end %>
-        <td class="p-2 border-b text-left"><%= user.id %></td>
-      </tr>
-    <% end %>
-  </tbody>
-  </table>
+<% headers = ["First Name", "Last Name", "Email", "Created", "Last Sign In", "Role", "Is_admin?", "Is_active?", "[:Id]"] %>
 
-  <div class="text-xl text-blue-900 mt-12">
-    Users Awaiting Email Confirmation
-  </div>
-  <table class="table-auto h_scrolling_list_table">
-    <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs ">
-        <tr>
-        <th scope="col" class="text-left p-3 w-52">First Name</th>
-        <th scope="col" class="text-left p-2 w-52">Last Name</th>
-        <th scope="col" class="text-left p-2 py-3 w-52">Email</th>
-        <th scope="col" class="text-left p-2 py-3 w-52">Confirmation Sent At?</th>
-          <th scope="col" class="text-left p-2 py-3 w-52">SYS:Row</th>
-        <th scope="col" class="text-left p-2 py-3 w-52">Role</th>
-        <th scope="col" class="text-left p-2 py-3 w-52">Is_admin?</th>
-        </tr>
-      </thead>
-    
-    <tbody>
-    <% @users_awaiting_confirmation.each do |user| %>
-      <tr class=" hover:bg-gray-100">
-      <td class="p-2 border-b text-left"><%= user.first_name %></td>
-        <td class="p-2 border-b text-left"><%= user.last_name %></td>
-        <td class="p-2 border-b text-left"><%= user.email %></td>
-        <td class="p-2 border-b text-left"><%= user.confirmation_sent_at&.to_formatted_s(:usa) %></td>
-        <td class="p-2 border-b text-left"><%= user.id %></td>
-        <td class="p-2 border-b text-left"><%= user.role %></td>
-        <td class="p-2 border-b text-left"><%= user.admin? ? 'Yes' : 'No'   %></td>
-        </tr>
-    <% end %>
-  </tbody>
-  </table>
+<div class="m-4 lg:m-8" id="users">
 
-<br><br>
-<hr>
-  <div class="m-4">
-    [OFFICE USE ONLY]
-    User Role Definitions:<br><br>
-    <ul>
-    <li>0 : admin (everything)</li>
+  <%= render partial: "user_table",
+      locals: {
+        title: "Confirmed System Users",
+        users: @users,
+        headers: headers,
+        include_confirmation: false,
+        include_active?: true
+      } %>
+
+  <%= render partial: "user_table",
+      locals: {
+        title: "Team Administrators",
+        users: @team_leads,
+        headers: headers,
+        include_confirmation: false,
+        include_active?: true
+      } %>
+
+  <%= render partial: "user_table",
+      locals: {
+        title: "Locked Accounts",
+        users: @users_locked,
+        headers: headers,
+        include_confirmation: false,
+        include_active?: true
+      } %>
+
+  <%= render partial: "user_table",
+      locals: {
+        title: "Users Awaiting Email Confirmation",
+        users: @users_awaiting_confirmation,
+        headers: headers,
+        include_confirmation: true,
+        include_active?: false
+      } %>
+
+  <hr class="my-4">
+  <div class="m-4 text-sm text-gray-700">
+    <strong>[OFFICE USE ONLY]</strong> User Role Definitions:
+    <ul class="mt-2 list-disc ml-6 space-y-1">
+     <li>0 : admin (everything)</li>
     <li>1 : teams_grants (teams and grants, events, programs, venues, tours)</li>
     <li>2 : teamlead (teams only)</li>
     <li>3 : grants only </li>
-    <li>4 : educators only</li>
+    <li>4 : no_access</li>
     <li>5 : teams admin level</li>
     <li>6 : sponsors_events</li>
     <li>7 : us_open (US Open and people)</li>
@@ -141,10 +61,9 @@
     <li>10: educators_events_medium</li>
     <li>11: spare (no specific permissions)</li>
     <li>12: na_people (person and US Open access)</li>
-    
-    <li>All access to create Educator</li>
     </ul>
+    <p class="mt-2">All roles have access to create Educator</p>
   </div>
- </div>
- </div>
+</div>
+
  
