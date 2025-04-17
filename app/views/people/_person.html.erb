@@ -125,11 +125,12 @@
         <div> <span class="text-gray-500 font-light">Inferno Uniform Size: </span><br>
           <%= person.uniform_size %> 
         </div>
-
+        <% if is_admin? %>
         <div class="mb-2 font-medium text-gray-900 ">
-          <span class="text-gray-500 font-light">Invite Back?: </span><br>
+          <span class="text-gray-500 font-light">Invite Back?: [ADMIN ONLY]</span><br>
             <%= person.invite_back %> 
         </div> 
+        <% end %>
      </div>
    </div>
    <!-- End of 2nd Row -->
@@ -138,6 +139,7 @@
    <div class="flex gap-2">
 
    <!-- Trainers Section -->
+   <% if is_admin? %>
       <div class="basis-1/3 grow-0 shrink-0 p-4 border border-blue-900 rounded-md mt-2">
        <div class="text-sm text-center text-gray-600 mb-2">Trainers/Ambassadors Only</div>
       
@@ -162,6 +164,7 @@
           </p>
         </div>
       </div>
+      <% end %>
 
     <!-- Headshot Section -->
     <div class="basis-1/3 grow-0 shrink-0 p-4 border border-blue-900 rounded-md mt-2">
@@ -174,12 +177,7 @@
             <%= person.headshot_present? ? 'Yes' : 'No' %>
             </p>
             <br >
-            <p class="text-sm text-gray-500 truncate ">
-            Headshot old file path:
-            </p>
-          <p class="text-sm font-medium text-gray-900 break-all">
-            <%= (link_to person.headshot_path, person.headshot_path, target: '_blank', class: link_class) unless (person.headshot_path.to_s.empty?)%>
-          </p>
+            
           <br>
           <% unless person.headshot_url.to_s.empty? %>
           <%= image_tag person.headshot_url, :class => "h-20 w-auto" %>
@@ -187,6 +185,7 @@
           <% end %>
       </div>
 
+      <% if is_admin? %>
       <!-- Resume Section -->
       <div class="basis-1/3 grow-0 shrink-0 p-4 border border-blue-900 rounded-md mt-2 pr-4 mr-4">
         <div class="text-sm text-center text-gray-600 mb-2">Resume</div>
@@ -211,7 +210,9 @@
           <%= person.notes %>
         </p>
       </div>
+      <% end %>
    
+   <% if current_user&.role != "na_people" %>
       <div class="p-4 border border-blue-900 rounded-md mt-2">
         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
           Events:
@@ -224,6 +225,8 @@
           <% end %>
           </p>
       </div>
+      <% end %>
+
     </div>
        
     

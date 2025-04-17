@@ -9,8 +9,8 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
- 
-ActiveRecord::Schema[7.1].define(version: 2025_04_14_161420) do
+
+ActiveRecord::Schema[7.1].define(version: 2025_04_16_145751) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -497,6 +497,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_14_161420) do
     t.text "resume_data"
     t.string "status", default: "Active", null: false
     t.string "educator_role"
+    t.string "inferno_bottom_skirt_size"
+    t.string "inferno_bottom_shorts_size"
+    t.string "inferno_top_polo_size"
+    t.string "inferno_top_vneck_size"
   end
 
   create_table "press_releases", force: :cascade do |t|
@@ -523,14 +527,14 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_14_161420) do
     t.string "state"
     t.string "zip"
     t.string "country"
-    t.bigint "people_id"
+    t.bigint "person_id"
     t.datetime "program_event_datetime"
     t.string "timezone"
     t.string "funded_by"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["people_id"], name: "index_programs_on_people_id"
+    t.index ["person_id"], name: "index_programs_on_person_id"
   end
 
   create_table "reference_vendors", force: :cascade do |t|
@@ -659,7 +663,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_14_161420) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "phone"
+    t.string "arrival_phone"
     t.string "hotel_name"
     t.integer "pick_up_grouping"
     t.string "pickup_type"
@@ -686,12 +690,14 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_14_161420) do
     t.string "departure_terminal"
     t.string "pickup_location"
     t.boolean "obtain_headshot"
-    t.string "airport_transport_request"
+    t.string "arrival_airport_transport_request"
     t.datetime "grouping_pickup_time"
     t.datetime "grouping_departure_time"
     t.string "departure_meetup_location"
     t.string "hotel_confirmation_personal"
     t.string "dietary_requirements_allergies"
+    t.string "departure_airport_transport_request"
+    t.string "departure_phone"
     t.index ["event_id"], name: "index_transfers_on_event_id"
     t.index ["person_id"], name: "index_transfers_on_person_id"
   end
@@ -822,7 +828,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_14_161420) do
   add_foreign_key "payments", "na_teams"
   add_foreign_key "payments", "users", column: "payment_recorded_by_id"
   add_foreign_key "press_releases", "media"
-  add_foreign_key "programs", "people", column: "people_id"
+  add_foreign_key "programs", "people"
   add_foreign_key "reference_vendors", "references"
   add_foreign_key "reference_vendors", "vendors"
   add_foreign_key "teams", "users"

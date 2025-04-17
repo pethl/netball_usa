@@ -165,10 +165,9 @@
 
  <div class="p-2 border-double border-2 border-blue-900 rounded-md mt-2">
    <div class="text-sm text-center text-gray-500 m-2">
-   Frequent Flyer Numbers
+   Frequent Flyer Numbers (if relevent)
    </div>
 
-  
     <div class="nested-fields p-2 ">
       <% # Always render 3 FFN fields %>
       <%= form.fields_for :frequent_flyer_numbers do |ffn_form| %>
@@ -224,6 +223,7 @@
     </div>
 
     <!-- Trainers/Ambassadors Section -->
+    <% if is_admin? %>
     <div class="p-2 border-double border-2 border-blue-900 rounded-md mt-2">
       <div class="text-sm text-center text-gray-500 m-2">Trainers/Ambassadors Only</div>
 
@@ -245,7 +245,8 @@
         <%= form.label :booth_trained, "Booth Trained?", class: "ms-2 text-sm font-medium" %>
       </div>
     </div>
-    
+    <% end %>
+
     <!-- Headshot Section -->
     <div class="p-2 border-double border-2 border-blue-900 rounded-md mt-2">
       <div class="text-sm text-center text-gray-500 m-2">Headshot</div>
@@ -255,13 +256,6 @@
         <%= form.label :headshot_present, "Have Headshot?",class: "ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"  %>
       </div>
           
-      <div class="mb-6">
-        <%= form.label :headshot_path, "Headshot Old Drive", class: label_class %>
-          <div class="mt-1">
-            <%= form.text_field :headshot_path, placeholder: "Enter link to OneDrive Headshots folder", class: input_class %>
-          </div> 
-      </div>
-
       <div class="mb-4 mt-4">
         <%= form.label :image, "Headshot file upload", class: label_class %>
           <div class="mt-1">
@@ -280,11 +274,11 @@
     
 
   <div>
+      <% if is_admin? %>
+      <!-- Resume Section -->
     <div class="p-2 border-double border-2 border-blue-900 rounded-md mt-2">
     <div class="text-sm text-center text-gray-500 m-2">Resume</div>
         
-       
-
         <div class="mb-4 mt-4">
           <%= form.label :image, "Resume file upload", class: label_class %>
             <div class="mt-1">
@@ -301,10 +295,11 @@
         </div>
       
       </div>
-      
     </div>
+          <% end %>
   </div>
 
+<% if is_admin? %>
 <div class="m-4 p-2 border-double border-2 border-blue-900 rounded-md mt-2">
   <div class="text-sm text-left text-gray-500 m-2">Notes</div>
     <div class="mb-2 mt-4">
@@ -314,12 +309,14 @@
       </div>
     </div>
   </div>
+<% end %>
 
+<% if current_user&.role != "na_people" %>
   <div class="m-4 p-2 border-double border-2 border-blue-900 rounded-md mt-2">
-  <div class="text-sm text-left text-gray-500 m-2">Events</div>
+    <div class="text-sm text-left text-gray-500 m-2">Events</div>
      
      <p class="text-sm font-medium text-gray-900 dark:text-white">
-     <% if person.events.any? %>
+      <% if person.events.any? %>
        <% person.events.each do |event| %>
        <ul class="list-disc ms-6">
          <li class="text-sm"><%= event.date.to_formatted_s(:usa) unless (event.date.to_s.empty?) %> - <%= event.name %> <br>
@@ -341,8 +338,8 @@
       <% end %>
      </div>
      <br>
-    </div>
-    </div>
+  </div>
+  <% end %>
 
 
     <div class="text-right">

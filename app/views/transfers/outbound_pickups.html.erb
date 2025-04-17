@@ -1,25 +1,65 @@
 <% content_for(:page_title, "US Open - Departures Transfers") %>
 
-<%= render partial: "transfers/transfer_nav_tabs", locals: {
-  pdf_label: "Departures Transfer Sheet PDF",
-  pdf_path: download_transfers_out_sheet_pdf_path(format: :pdf, value: Date.today.beginning_of_year)
-} %>
+<%= render partial: "transfers/transfer_nav_tabs" %>
 
-<% @transfers_by_date.each do |departure_date_only, transfers| %>
-  <%= render partial: "transfers/transfers_table",
-             locals: {
-               date: departure_date_only,
-               transfers: transfers,
-               time_field: :departure_time,
-               headers: [
-                 "Name", "Phone", "Dep. Date", "Dep. Time", "Flight #",
-                 "Airline", "Terminal", "Pick Up", "Hotel", "Notes"
-               ],
-               row_fields: [
-                 :person_full_name, :phone,
-                 :departure_date_only, :departure_time, :departure_flight,
-                 :departure_airline, :departure_terminal, :departure_type,
-                 :hotel_name, :departure_note
-               ]
-             } %>
+<% @transfers_by_date.each do |date, transfers| %>
+  <div class="text-xl text-blue-800 mt-8 border-b pb-2"><%= date %></div>
+
+  <% transfers_by_group = transfers.group_by { |t| t.departure_grouping.presence || "Ungrouped" } %>
+
+  <% transfers_by_group.each do |group, grouped_transfers| %>
+    <div class="ml-4 mt-4 text-lg text-gray-700 font-semibold">
+      Group: <%= group %> (<%= grouped_transfers.size %>)
+      <% if (time = grouped_transfers.first.grouping_departure_time).present? %>
+        — <%= time.strftime("%H:%M") %> (<%= time.strftime("%I:%M %p") %>)
+      <% end %>
+    </div>
+
+    <% transfers_by_flight = grouped_transfers
+                              .sort_by { |t| [t.departure_flight.to_s, t.person_full_name.to_s] }
+                              .group_by(&:departure_flight) %>
+
+    <% transfers_by_flight.each do |flight, flight_transfers| %>
+      <div class="text-sm text-gray-600 ml-6 mt-2">
+        ✈️ Flight: <%= flight.presence || "—" %> — <%= flight_transfers.size %> passengers
+        @ <%= flight_transfers.first.departure_time&.strftime("%H:%M") %>
+      </div>
+
+      <div class="relative overflow-x-auto mt-1 ml-8 mb-12">
+        <table class="table-fixed w-full text-sm border-collapse border border-gray-200">
+          <thead class="bg-gray-100 text-xs text-gray-700 font-semibold">
+            <tr>
+              <th class="border px-2 py-1">Name</th>
+              <th class="border px-2 py-1">Phone</th>
+              <th class="border px-2 py-1">Dep. Time</th>
+              <th class="border px-2 py-1">Airline</th>
+              <th class="border px-2 py-1">Terminal</th>
+              <th class="border px-2 py-1">Pick Up</th>
+              <th class="border px-2 py-1">Hotel</th>
+              <th class="border px-2 py-1">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% flight_transfers.each do |t| %>
+              <tr class="bg-white border-t hover:bg-gray-50">
+                <td class="px-2 py-1"><%= t.person&.full_name || "—" %></td>
+                <td class="px-2 py-1"><%= t.departure_phone.presence || "—" %></td>
+                <td class="px-2 py-1">
+                  <% if t.departure_time.present? %>
+                    <%= t.departure_time.strftime("%H:%M") %><br>
+                    <span class="text-xs text-gray-500"><%= t.departure_time.strftime("%I:%M %p") %></span>
+                  <% end %>
+                </td>
+                <td class="px-2 py-1"><%= t.departure_airline.presence || "—" %></td>
+                <td class="px-2 py-1"><%= t.departure_terminal.presence || "—" %></td>
+                <td class="px-2 py-1"><%= t.departure_type.presence || "—" %></td>
+                <td class="px-2 py-1"><%= t.hotel_name.presence || "—" %></td>
+                <td class="px-2 py-1"><%= t.departure_note.presence || "—" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  <% end %>
 <% end %>

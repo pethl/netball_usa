@@ -20,20 +20,31 @@ class TransfersController < ApplicationController
   end
 
   def inbound_pickups
-    @no_transfers = Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(airport_transport_request: "No - Have own transport")
-    @transfers = Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(airport_transport_request: "Yes - Requesting transport")
-   
-    @transfers = @transfers.order(arrival_time: :asc).order(arrival_airline: :asc)
-    @transfers_by_date = @transfers.group_by { |t| t.arrival_date_only }
+    @event_name = 'US Open 2025 - Austin'
+    event_id = Event.find_by(name: @event_name)&.id
+  
+    @transfers = Transfer
+                   .includes(:person)
+                   .where(event_id: event_id)
+                   .where(arrival_airport_transport_request: "Yes - Requesting transport")
+                   .order(:arrival_time)
+  
+    @transfers_by_date = @transfers.group_by(&:arrival_date_only)
   end
   
   def outbound_pickups
-    @no_transfers = Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(airport_transport_request: "No - Have own transport")
-    @transfers = Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(airport_transport_request: "Yes - Requesting transport")
-    
-    @transfers = @transfers.order(departure_time: :asc).order(departure_airline: :asc)
-    @transfers_by_date = @transfers.group_by { |t| t.departure_date_only }
+    @event_name = 'US Open 2025 - Austin'
+    event_id = Event.find_by(name: @event_name)&.id
+  
+    @transfers = Transfer
+                   .includes(:person)
+                   .where(event_id: event_id)
+                   .where(departure_airport_transport_request: "Yes - Requesting transport")
+                   .order(:departure_time)
+  
+    @transfers_by_date = @transfers.group_by(&:departure_date_only)
   end
+  
   
   # GET /transfers/1
   def show
@@ -102,13 +113,11 @@ class TransfersController < ApplicationController
         rescue => e
           Rails.logger.error("PDF generation failed: #{e.message}")
           flash[:error] = "There was an error generating the PDF. Please alert tech support at techsupport@netballamerica.com."
-          redirect_to transfers_url
+          redirect_to inbound_pickups_transfers_path
         end
       end
     end
   end
-  
-  
   
   def download_transfers_out_sheet_pdf
     respond_to do |format|
@@ -119,7 +128,22 @@ class TransfersController < ApplicationController
         rescue => e
           Rails.logger.error("PDF generation failed: #{e.message}")
           flash[:error] = "There was an error generating the PDF. Please alert tech support at techsupport@netballamerica.com."
-          redirect_to transfers_url
+          redirect_to outbound_pickups_transfers_path
+        end
+      end
+    end
+  end
+
+  def download_uniforms_pdf
+    respond_to do |format|
+      format.pdf do
+        begin
+          pdf_data = UniformPdfGenerator.new.generate
+          send_data pdf_data, filename: 'uniforms_and_tshirts.pdf', type: 'application/pdf', disposition: 'inline'
+        rescue => e
+          Rails.logger.error("PDF generation failed: #{e.message}")
+          flash[:error] = "There was an error generating the Uniform PDF. Please alert tech support."
+          redirect_to transfers_path
         end
       end
     end
@@ -134,8 +158,14 @@ class TransfersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transfer_params
-      params.require(:transfer).permit(:id, :person_id, :event_id, :consent, :role, :obtain_headshot, :airport_transport_request, :grouping_pickup_time, :grouping_departure_time, :departure_meetup_location, :hotel_confirmation_personal, :dietary_requirements_allergies,
-      :hotel_arrival, :hotel_departure, :check_in, :check_out, :room_type, :hotel_reservation, :share_volunteer, :arrival_airline, :arrival_flight, :arrival_terminal, :arrival_time, :departure_airline, :departure_flight, :departure_terminal, :departure_time, :no_pick_up, :notes, :phone, :hotel_name, :pick_up_grouping, :pickup_type, :pickup_location, :pickup_note, :departure_grouping, :departure_type, :departure_note, :t_shirt_size, :visa_type, :umpire_badge_level, :certification_date,  :headshot, :certification, :event_title, :registration_form_completed, :waiver_form_completed, :read_and_agreed_tcs, 
+      params.require(:transfer).permit(:id, :person_id, :event_id, :consent, :role, :obtain_headshot, 
+      :arrival_airport_transport_request, :departure_airport_transport_request, :arrival_phone, :departure_phone, 
+      :grouping_pickup_time, :grouping_departure_time, :departure_meetup_location, :hotel_confirmation_personal, :dietary_requirements_allergies,
+      :hotel_arrival, :hotel_departure, :check_in, :check_out, :room_type, :hotel_reservation, :share_volunteer, 
+      :arrival_airline, :arrival_flight, :arrival_terminal, :arrival_time, 
+      :departure_airline, :departure_flight, :departure_terminal, :departure_time, 
+      :notes, :hotel_name, :pick_up_grouping, :pickup_type, :pickup_location, :pickup_note, :departure_grouping, :departure_type, :departure_note, 
+      :t_shirt_size, :visa_type, :umpire_badge_level, :certification_date,  :headshot, :certification, :event_title, :registration_form_completed, :waiver_form_completed, :read_and_agreed_tcs, 
       person_attributes: [ :id, :level_submitted, :associated, :gender, :tshirt_size, :uniform_size, :certification, :certification_date, :headshot ] )
     end
 end

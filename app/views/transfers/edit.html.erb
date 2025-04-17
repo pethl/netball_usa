@@ -10,7 +10,7 @@
   <div class="ml-4 mb-4">
     <%= link_to "Show this record", @transfer, class: link_class %> <br>
     <%= link_to "Event Attendees", transfers_path, class: link_class %> <br>
-    <a href="/transfers/index_inbound_pickup/" class="text-md font-medium text-blue-900 italic">Arrivals Transfers</a> |
-    <a href="/transfers/index_outbound_pickup/" class="text-md font-medium text-blue-900 italic">Departures Transfers</a>
+    <%= link_to "Arrivals Transfers", inbound_pickups_transfers_path, class: link_class %> |
+    <%= link_to "Departure Transfers", outbound_pickups_transfers_path, class: link_class %>
   </div>
 <% end %>

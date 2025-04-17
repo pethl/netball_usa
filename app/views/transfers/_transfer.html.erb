@@ -51,13 +51,13 @@
   <div class="grid grid-cols-2 md:grid-cols-4 gap-4 ">
 
     <div class="p-4 bg-white border border-gray-200 rounded-lg shadow">
-      <div class="text-lg font-semibold text-blue-900 mb-4">Pickup Details</div>
+      <div class="text-lg font-semibold text-blue-900 mb-4">ARRIVALS Pickup Details</div>
 
-      <p class="text-sm text-gray-500">Airport Transport Request</p>
-      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.airport_transport_request %></p>
+      <p class="text-sm text-gray-500">Arrivals Airport Transport Request</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.arrival_airport_transport_request %></p>
 
       <p class="text-sm text-gray-500">Phone</p>
-      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.phone %></p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.arrival_phone %></p>
 
       <p class="text-sm text-gray-500">Pickup Grouping</p>
       <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.pick_up_grouping %></p>
@@ -80,8 +80,14 @@
          🛫 Departure Section
          =============================== -->
     <div class="p-4 bg-white border border-gray-200 rounded-lg shadow">
-      <div class="text-lg font-semibold text-blue-900 mb-4">Departure Details</div>
+      <div class="text-lg font-semibold text-blue-900 mb-4">DEPARTURES Pickup Details</div>
     
+      <p class="text-sm text-gray-500">Departure Airport Transport Request</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.departure_airport_transport_request %></p>
+
+      <p class="text-sm text-gray-500">Departure Phone</p>
+      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.departure_phone %></p>
+
       <p class="text-sm text-gray-500">Departure Grouping</p>
       <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.departure_grouping %></p>
 

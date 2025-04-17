@@ -21,7 +21,7 @@
   
       <% if transfer.present? %>
         <div>
-          <%= link_to "🏆 Edit US Open Information",
+          <%= link_to "🏆 Edit U.S. Open Netball Championships® Information",
               edit_transfer_path(transfer),
               class: "inline-block w-full bg-green-600 text-white py-4 px-6 rounded-2xl text-lg font-bold shadow hover:bg-green-500 transition" %>
         </div>
@@ -30,14 +30,15 @@
           <p class="text-yellow-900 font-semibold">
             You are not currently registered for <%= current_us_open_event.name %>.
           </p>
-          <p>Please contact Sonya at <a href="mailto:info@netballamerica.com" class="underline">info@netballamerica.com</a> for assistance.</p>
+          <p>Please contact Lanika at <a href="mailto:lanika@netballamerica.com" class="underline">lanika@netballamerica.com</a> for assistance.</p>
         </div>
       <% end %>
     <% end %>
   <% else %>
     <div>
-      <h2 class="text-xl font-semibold mb-4">We couldn’t find your profile</h2>
-      <p class="mb-6 text-gray-700">To get started, create your profile so we can link you to US Open information and more.</p>
+      <h2 class="text-xl font-semibold mb-4">Sorry, we couldn’t find your profile. </h2>
+      <p class="mb-6 text-gray-700">Perhaps you used a different email to the one we hold on file?<br>
+      To get started, create your profile so we can link you to US Open information and more.</p>
   
       <%= link_to "➕ Create your profile",
           new_person_path(email: current_user.email),

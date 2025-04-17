@@ -14,7 +14,7 @@ class TransferPdfGenerator
     def fetch_transfers
       @transfers = Transfer.joins(:event)
                            .where(events: { name: 'US Open 2025 - Austin' })
-                           .where(airport_transport_request: "Yes - Requesting transport")
+                           .where(arrival_airport_transport_request: "Yes - Requesting transport")
                            .where.not(arrival_time: nil)
                            .order(arrival_time: :asc, arrival_airline: :asc)
   
@@ -45,7 +45,7 @@ class TransferPdfGenerator
               transfer_table_data << [
                 t.pick_up_grouping,
                 t.person.full_name,
-                t.phone,
+                t.arrival_phone,
                 t.arrival_time.strftime('%H:%M'),
                 t.arrival_flight,
                 t.arrival_airline_and_terminal,

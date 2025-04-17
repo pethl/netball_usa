@@ -83,6 +83,7 @@ Rails.application.routes.draw do
   # ========== Transfers ==========
   get 'transfers/inbound_sheet', to: 'transfers#download_transfers_in_sheet_pdf', as: :download_transfers_in_sheet_pdf
   get 'transfers/outbound_sheet', to: 'transfers#download_transfers_out_sheet_pdf', as: :download_transfers_out_sheet_pdf
+  get 'transfers/uniforms_pdf', to: 'transfers#download_uniforms_pdf', as: :download_uniforms_pdf
 
   resources :transfers do
     collection do

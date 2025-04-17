@@ -337,14 +337,12 @@ module ApplicationHelper
     end
 
     def transfer_hotel_arrival
-      transfer_hotel_arrival = Reference.where(active: "TRUE", group: 'transfer_hotel_arrival')
-      transfer_hotel_arrival = transfer_hotel_arrival.pluck(:value)       
+      Reference.where(active: true, group: 'transfer_hotel_arrival').order(:desc).pluck(:value)
     end
 
     def transfer_hotel_departure
-      transfer_hotel_departure = Reference.where(active: "TRUE", group: 'transfer_hotel_departure')
-      transfer_hotel_departure = transfer_hotel_departure.pluck(:value)       
-    end
+      Reference.where(active: "TRUE", group: 'transfer_hotel_departure').order(:desc).pluck(:value)
+     end
     
     def timezones
       timezones = Reference.where(active: "TRUE", group: 'timezones')

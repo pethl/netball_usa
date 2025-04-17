@@ -1,13 +1,10 @@
 <div class="max-w-2xl mx-auto p-6 border-4 border-blue-900 bg-white rounded-2xl shadow-xl">
   <div class="space-y-6">
     <div class="p-4 bg-blue-100 border-l-8 border-blue-900 text-blue-900 rounded">
-      <h2 class="text-xl font-bold">📋 US Open Volunteer Information</h2>
+      <h2 class="text-xl font-bold">U.S. Open Netball Championships® Volunteer Information</h2>
     </div>
 
-    <div class="p-4 bg-gray-100 border border-gray-200 rounded">
-      <p class="font-semibold">Consent Given:</p>
-      <p><%= transfer.consent? ? '✅ Given' : '❌ Not Given' %></p>
-    </div>
+    
 
     <div class="p-4 bg-gray-100 border border-gray-200 rounded">
       <p class="font-semibold">Name:</p>
@@ -31,30 +28,45 @@
       <p><%= transfer.share_volunteer %></p>
     </div>
 
-    <div class="p-4 bg-gray-100 border border-gray-200 rounded">
-      <p class="font-semibold">Airport Transport Request:</p>
-      <p><%= transfer.airport_transport_request.presence || "Not provided" %></p>
-
-      <p class="font-semibold mt-4">Airport Pick-up Required:</p>
-      <p><%= transfer.no_pick_up? ? 'Yes' : 'No' %></p>
-
-      <p class="font-semibold mt-4">Phone:</p>
-      <p><%= transfer.phone %></p>
+     <div class="mb-6">
+        <%= link_to "» Click HERE to book any additional nights needed for your personal stay (not covered by the above nights requested).".html_safe,
+        "https://www.marriott.com/event-reservations/reservation-link.mi?id=1732664035228&key=GRP&guestreslink2=true&app=resvlink",
+        target: "_blank",
+        rel: "noopener",
+        class: "block w-full px-4 py-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold rounded shadow-lg transition duration-200 text-center text-lg" %>
     </div>
 
     <div class="p-4 bg-gray-100 border border-gray-200 rounded">
+      <p class="font-semibold">Arrivals Airport Transport Request:</p>
+      <p><%= transfer.arrival_airport_transport_request.presence || "Not provided" %></p>
+
+      <% unless transfer.arrival_airport_transport_request == "No - Have own transport" %>
+      <p class="font-semibold mt-4">Arrivals Phone:</p>
+      <p><%= transfer.arrival_phone %></p>
+      <br>
       <p class="font-semibold">Arrival Info:</p>
       <p><%= transfer.arrival_airline %> <%= transfer.arrival_flight %><br>
-         <%= transfer.arrival_time.to_formatted_s(:usa_dt) unless transfer.arrival_time.to_s.empty? %></p>
-
-      <p class="font-semibold mt-4">Departure Info:</p>
-      <p><%= transfer.departure_airline %> <%= transfer.departure_flight %><br>
-         <%= transfer.departure_time.to_formatted_s(:usa_dt) unless transfer.departure_time.to_s.empty? %></p>
+         <%= transfer.arrival_time.to_formatted_s(:usa_day_dt) unless transfer.arrival_time.to_s.empty? %></p>
+      <% end %>
     </div>
 
     <div class="p-4 bg-gray-100 border border-gray-200 rounded">
-      <p class="font-semibold">Visa Type:</p>
-      <p><%= transfer.visa_type %></p>
+      <p class="font-semibold">Departure Airport Transport Request:</p>
+      <p><%= transfer.departure_airport_transport_request.presence || "Not provided" %></p>
+
+      <% unless transfer.departure_airport_transport_request == "No - Have own transport" %>
+      <p class="font-semibold mt-4">Departure Phone:</p>
+      <p><%= transfer.departure_phone %></p>
+      <br>
+      <p class="font-semibold">Departure Info:</p>
+      <p><%= transfer.departure_airline %> <%= transfer.departure_flight %><br>
+         <%= transfer.departure_time.to_formatted_s(:usa_day_dt) unless transfer.departure_time.to_s.empty? %></p>
+      <% end %>
+    </div>
+
+
+    <div class="p-4 bg-gray-100 border border-gray-200 rounded">
+     
 
       <p class="font-semibold mt-4">Umpire Badge Level:</p>
       <p><%= transfer.person.level_submitted %></p>
@@ -92,6 +104,8 @@
 
 <% if user_signed_in? && current_user.role == "na_people" %>
     <div class="mt-6 text-center">
+       <%= link_to "Edit Page",   edit_transfer_path(transfer), class: "text-blue-900 font-semibold hover:underline" %>
+    <br>
     <%= link_to "« Back to Home Page", root_path, class: "text-blue-900 font-semibold hover:underline" %>
   </div>
 <% end %>

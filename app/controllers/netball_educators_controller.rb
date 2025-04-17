@@ -2,7 +2,6 @@ class NetballEducatorsController < ApplicationController
 
   before_action :set_netball_educator, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  before_action :admin_user, only: [:destroy, :new, :create, :edit, :update]
   before_action :set_users, only: [:new, :create, :edit, :update]
 
   def index
@@ -54,6 +53,9 @@ class NetballEducatorsController < ApplicationController
   def my_educators
     @netball_educators = NetballEducator.where(user_id: current_user.id)
     @netball_educators = @netball_educators.order("created_at DESC, state ASC, city ASC")
+      # ✅ Preload event participants as a set of educator IDs (for fast lookup in view)
+      @educator_ids_with_participants = EventParticipant.where(netball_educator_id: @netball_educators.pluck(:id)).distinct.pluck(:netball_educator_id).to_set
+
   end
 
   def search

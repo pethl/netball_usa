@@ -70,42 +70,42 @@
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 ">
       <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
         <div class= "font-xl font-semibold ">
-          PICK UP DETAILS 
+          ARRIVALS PICK-UP  
         </div>
 
         <div class="mb-4 mt-2">
-        <%= form.label :airport_transport_request, "Airport Transport Request*", class: label_class %>
-        <div class="mt-1">
-          <%= form.select :airport_transport_request,
-                options_for_select(airport_transport_request_options, form.object.airport_transport_request),
-                { prompt: "Select transport option" },
-                class: input_class %>
-        </div>
-      </div>
+        <%= form.label :arrival_airport_transport_request, "Arrivals Airport Transport Request*", class: label_class %>
+          <div class="mt-1">
+            <%= form.select :arrival_airport_transport_request,
+                  options_for_select(airport_transport_request_options, form.object.arrival_airport_transport_request),
+                  { prompt: "Select transport option" },
+                  class: input_class %>
+          </div>
+       </div>
         
         <div class="mb-4">
-          <%= form.label :phone, "Phone (Required if requesting pick up)", class: label_class%>
+          <%= form.label :arrival_phone, "Phone (Required for arrival pick-up)", class: label_class%>
             <div class="mt-1">
-              <%= form.text_field :phone, placeholder: "please include country code and area code", class: input_class  %>
+              <%= form.text_field :arrival_phone, placeholder: "please include country code and area code", class: input_class  %>
             </div> 
         </div>
   
         <div class="mb-4 mt-2">
-          <%= form.label :pick_up_grouping, "Grouping", class: label_class%>
+          <%= form.label :pick_up_grouping, "Arrivals Grouping", class: label_class%>
             <div class="mt-1">
              <%= form.number_field :pick_up_grouping, placeholder: "#", class: input_class  %>
             </div>
         </div>
        
         <div class="mb-4 mt-2">
-          <%= form.label :grouping_pickup_time, "Pickup Grouping Time", class: label_class %>
+          <%= form.label :grouping_pickup_time, "Arrivals Grouping Time", class: label_class %>
           <div class="mt-1">
             <%= form.time_field :grouping_pickup_time, class: input_class %>
           </div>
         </div>
 
         <div class="mb-4">
-          <%= form.label :pickup_type, class: label_class %>
+          <%= form.label :pickup_type, "Arrivals Pick-up Type", class: label_class %>
 
           <div class="mt-1">
             <%= form.select :transfer_departure_type,
@@ -119,14 +119,14 @@
         </div>
 
         <div class="mb-4">
-        <%= form.label :pickup_location, "Pick-up Location", class: label_class%>
+        <%= form.label :pickup_location, "Arrivals Pick-up Location", class: label_class%>
           <div class="mt-1">
             <%= form.text_field :pickup_location, class: input_class  %>
           </div> 
         </div>
     
         <div class="mb-2">
-          <%= form.label :pickup_note, "Pick-up Notes", class: label_class%>
+          <%= form.label :pickup_note, "Arrivals Pick-up Notes", class: label_class%>
             <div class="mt-1">
               <%= form.text_area :pickup_note, class: input_class  %>
             </div> 
@@ -138,11 +138,28 @@
       =============================== -->
       <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
         <div class= "font-xl font-semibold">
-          DEPARTURE DETAILS 
+          DEPARTURE PICK-UP  
+        </div>
+
+        <div class="mb-4 mt-2">
+        <%= form.label :departure_airport_transport_request, "Departure Airport Transport Request*", class: label_class %>
+          <div class="mt-1">
+            <%= form.select :departure_airport_transport_request,
+                  options_for_select(airport_transport_request_options, form.object.departure_airport_transport_request),
+                  { prompt: "Select transport option" },
+                  class: input_class %>
+          </div>
+       </div>
+
+        <div class="mb-4">
+          <%= form.label :departure_phone, "Phone (Required for departure pick-up)", class: label_class%>
+            <div class="mt-1">
+              <%= form.text_field :departure_phone, placeholder: "please include country code and area code", class: input_class  %>
+            </div> 
         </div>
   
         <div class="mb-4 mt-2">
-          <%= form.label :departure_grouping, "Grouping", class: label_class%>
+          <%= form.label :departure_grouping, "Departure Grouping", class: label_class%>
             <div class="mt-1">
               <%= form.number_field :departure_grouping, placeholder: "#", class: input_class  %>
             </div> 
@@ -156,7 +173,7 @@
       </div>
 
         <div class="mb-4">
-          <%= form.label :departure_type, class: label_class%>
+          <%= form.label :departure_type, "Departure Pick-up Type", class: label_class%>
              <div class="mt-1">
             <%= form.select :departure_type,
                   Reference.where(group: 'transfer_departure_type', active: true).map { |r|
@@ -168,15 +185,15 @@
           </div>
         </div>
 
-        <div class="mb-2">
-          <%= form.label :departure_meetup_location, class: label_class%>
+        <div class="mb-4">
+          <%= form.label :departure_meetup_location, "Departure Meet-up Location", class: label_class%>
             <div class="mt-1">
               <%= form.text_field :departure_meetup_location,  class: input_class  %>
             </div> 
         </div>
     
         <div class="mb-2">
-          <%= form.label :departure_note, "Departure Notes", class: label_class%>
+          <%= form.label :departure_note, "Departure Pick-up Notes", class: label_class%>
             <div class="mt-1">
               <%= form.text_area :departure_note, rows:2, class: input_class  %>
             </div> 
@@ -213,7 +230,7 @@
       </div>
           
       <div class="mb-4">
-        <%= form.label :share_volunteer, "Room Share - Volunteer Name", class: label_class%>
+        <%= form.label :share_volunteer, "Room Share", class: label_class%>
           <div class="mt-1">
             <%= form.text_field :share_volunteer, placeholder: "name of preferred room share volunteer", class: input_class  %>
           </div> 
@@ -227,7 +244,7 @@
       </div>
 
       <div class="mb-4">
-      <%= link_to "» Click HERE to book your event hotel (personal stay, not covered by NA)",
+      <%= link_to ">> Click HERE to book any additional nights needed for your personal stay (not covered by the above nights requested)",
                   "https://www.marriott.com/event-reservations/reservation-link.mi?id=1732664035228&key=GRP&guestreslink2=true&app=resvlink",
                   target: "_blank",
                   rel: "noopener",
@@ -358,13 +375,6 @@
       <div class="  p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
         <div class= "font-xl font-semibold">
           MISC 
-        </div>
-
-        <div class="mb-4 mt-2">
-          <%= form.label :visa_type, class: label_class%>
-            <div class="mt-1">
-              <%= form.text_area :visa_type, rows:4, class: input_class  %>
-            </div> 
         </div>
 
         <div class="mb-4 mt-2">

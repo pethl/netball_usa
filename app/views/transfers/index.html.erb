@@ -1,16 +1,12 @@
 <% content_for(:page_title, "US Open ")%>
 <% if user_signed_in? %>
   <!-- Top Row: Tabs + Filter -->
-  <div class="flex flex-wrap justify-between items-center space-y-0 mb-2 mt-4">
+  <div class="flex flex-wrap justify-between items-center space-y-0 mb-2">
     <!-- Tabs -->
-    <%= render partial: "transfers/transfer_nav_tabs",
-    locals: {
-      pdf_label: nil, # or "Download All Transfers PDF" if needed
-      pdf_path: nil   # or download_all_transfers_pdf_path
-    } %>
+    <%= render partial: "transfers/transfer_nav_tabs" %>
 
     <!-- Filter Form Box -->
-    <div class="relative bg-gray-100  rounded-md p-3 max-w-md w-full sm:w-auto">
+    <div class="relative bg-gray-100  rounded-md p-2 max-w-sm w-full sm:w-auto">
       <!-- Badge -->
       <div class="absolute -top-3 right-4 bg-gray-100 rounded px-2 text-xs text-gray-600 font-semibold tracking-wide uppercase shadow-sm">
         Filter Events
@@ -20,7 +16,7 @@
         <%= select_tag :event_name,
             options_for_select(us_open_events, params[:event_name]),
             include_blank: "Select",
-            class: "w-40 #{input_class}" %>
+            class: "w-32 #{input_class}" %>
 
         <%= submit_tag "Filter", class: form_button_class %>
         <%= link_to "Clear", transfers_path, class:"bg-white #{clear_button_class}" %>
@@ -29,18 +25,16 @@
   </div>
 
   <!-- Add New Button -->
-  <div class="my-2">
+  <div class="my-4">
     <%= link_to "Add New Record", new_transfer_path, class: form_button_class %>
   </div>
 
   <div id="transfers">
-  <div class="relative overflow-x-auto">
+  <div class="relative overflow-x-auto ml-2">
       <table class="table-auto w-full text-left rtl:text-right">
-          <thead class="bg-white border-b text-gray-400 font-light text-xs ">
+          <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs ">
                <tr>
-                  <th scope="col" class="px-4 py-3 w-24">
-                     Ex View 
-                  </th>
+                  
                   <th scope="col" class="px-4 py-3 w-24">
                      Year 
                   </th>
@@ -64,15 +58,19 @@
                   </th>
                   
                   <th scope="col" class="px-4 py-3 w-64 text-center">
-                      Pick Up Required
+                      Arriv. Pick Up?
                   </th>
                   
                   <th scope="col" class="px-4 py-3 w-64 text-left">
-                      Visa
+                      Arrv Flight
                   </th>
 
+                   <th scope="col" class="px-4 py-3 w-64 text-center">
+                      Depart. Pick Up?
+                  </th>
+                  
                   <th scope="col" class="px-4 py-3 w-64 text-left">
-                      Arrv Flight
+                      Dept Flight
                   </th>
 
                   <th scope="col" class="px-4 py-3 w-64 truncate text-left">
@@ -84,9 +82,7 @@
            <% if @transfers.count >0 %>
            <% @transfers.each do |transfer| %>
               <tr class="bg-white border-b hover:bg-gray-100">
-                  <td class="px-4 py-4 whitespace-nowrap">
-                    <%= link_to "Ex View", external_edit_transfer_path(transfer), class: link_class %>
-                  </td>
+                  
 
                   <td class="px-4 py-4 whitespace-nowrap">
                     <%= transfer.event.date.strftime('%Y') if transfer.event.date.present? %>
@@ -117,15 +113,19 @@
                   </td>
                 
                   <td class="px-4 py-4 text-center whitespace-nowrap">
-                    <%= transfer.airport_transport_request  %>
+                    <%= transfer.arrival_airport_transport_request  %>
                   </td>
                 
                   <td class="px-4 py-4 whitespace-nowrap">
-                    <%= transfer.visa_type  %>
+                    <%= transfer.arrival_time.to_formatted_s(:usa) unless (transfer.arrival_time.to_s.empty?)  %>
                   </td>
 
+                  <td class="px-4 py-4 text-center whitespace-nowrap">
+                    <%= transfer.departure_airport_transport_request  %>
+                  </td>
+                
                   <td class="px-4 py-4 whitespace-nowrap">
-                    <%= transfer.arrival_time.to_formatted_s(:usa) unless (transfer.arrival_time.to_s.empty?)  %>
+                    <%= transfer.departure_time.to_formatted_s(:usa) unless (transfer.departure_time.to_s.empty?)  %>
                   </td>
 
                    <td class="px-4 py-4">
