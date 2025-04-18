@@ -1,6 +1,10 @@
+<!-- layouts/_mobile_menu.html.erb -->
 <% if current_user && current_user.role == "admin" %>
-  <div class="md:hidden bg-blue-900 text-white p-2">
+  <div data-controller="mobile-menu">
+<div data-mobile-menu-target="menu" class="hidden md:hidden bg-blue-900 text-white p-2">
+
     <div class="grid grid-cols-3 gap-2 text-center">
+
       <div>
         <a href="/netball_educators/pe_directors" class="block py-1 hover:font-bold">PE DIRECTORS</a>
       </div>
@@ -65,4 +69,5 @@
       <% end %>
     </div>
   </div>
+</div>
 <% end %> 

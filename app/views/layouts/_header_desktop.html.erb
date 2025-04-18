@@ -1,0 +1,52 @@
+<!-- Desktop header wrapper -->
+<div class="hidden md:block bg-white w-full">
+  <div class="flex flex-row justify-between items-center px-4 py-2">
+    <div class="w-4/5 mt-2 ml-4 mb-2">
+      <%= link_to image_tag("Netball_America_Logo.png", class: "h-12 w-auto"), root_path %>
+    </div>
+
+    <div class="w-1/5 flex items-center justify-between m-2">
+      <div class="p-2">
+        <%= link_to root_path, class: "p-2", data: { tooltip_target: "tooltip-home" } do %>
+          <i class="fa-solid fa-house text-blue-800"></i>
+        <% end %>
+        <div id="tooltip-home" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip">
+          Home Page
+          <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+      </div>
+
+      <div class="p-2">
+        <%= link_to edit_user_registration_path, class: "p-2", data: { tooltip_target: "tooltip-edit" } do %>
+          <i class="fa-solid fa-user text-blue-800"></i>
+        <% end %>
+        <div id="tooltip-edit" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip">
+          Edit Profile
+          <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+      </div>
+
+      <div class="p-2">
+        <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
+          <i data-tooltip-target="tooltip-logout" class="fa-solid fa-arrow-right-from-bracket text-blue-800"></i>
+        <% end %>
+        <div id="tooltip-logout" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+          Logout
+          <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+      </div>
+
+      <% unless current_user.teamlead? %>
+        <div class="p-2 text-lg">
+          <%= link_to asset_path("NA_System_User_Guide_V1_1.pdf", skip_pipeline: true), class: "p-2 text-lg", data: { tooltip_target: "tooltip-help" } do %>
+            <i class="fa-solid fa-circle-info text-blue-800"></i>
+          <% end %>
+          <div id="tooltip-help" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip">
+            Help
+            <div class="tooltip-arrow" data-popper-arrow></div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

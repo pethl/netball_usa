@@ -25,97 +25,36 @@
      
   <!-- Header bar sticky starts -->
   <header class="bg-blue-900 text-blue-900 sticky top-0 z-10">
-  
-   <div class="flex flex-row bg-white">
-      
-      <div class="flex w-4/5 mt-2 ml-4 mb-2">
-          <%= link_to image_tag("Netball_America_Logo.png", class: "h-12 w-auto"), root_path %>
-       </div>
-     
-     <div class="flex w-1/5 items-center justify-between m-2">
+      <%= render "layouts/header_desktop" %>
+      <%= render "layouts/header_mobile" %>  
         
-        <div class="p-2">
-         <%= link_to root_path, class: "p-2", data: { tooltip_target: "tooltip-home" } do %>
-            <i class="fa-solid fa-house text-blue-800"></i>
-          <% end %>
-          <div id="tooltip-home" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip">
-              Home Page
-              <div class="tooltip-arrow" data-popper-arrow></div>
-          </div>
-          </div>
-        
-        
-         <div class="p-2">
-           <%= link_to edit_user_registration_path, class: "p-2", data: { tooltip_target: "tooltip-edit" } do %>
-             <i class="fa-solid fa-user text-blue-800"></i>
-           <% end %>
-           <div id="tooltip-edit" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip">
-               Edit Profile
-               <div class="tooltip-arrow" data-popper-arrow></div>
-           </div>
-           </div>
-           
-     <div class="p-2">
-        <%= link_to destroy_user_session_path, data: { turbo_method: :delete} do %>
-          <i data-tooltip-target="tooltip-logout" class="fa-solid fa-arrow-right-from-bracket text-blue-800"></i>
-        <% end %>
-
-        <div id="tooltip-logout" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-          Logout
-          <div class="tooltip-arrow" data-popper-arrow></div>
-        </div>
-      </div>
-         
-           <% unless current_user.teamlead? %>
-           <div class="p-2 text-lg">
-             <%= link_to asset_path("NA_System_User_Guide_V1_1.pdf", skip_pipeline: true), class: "p-2 text-lg", data: { tooltip_target: "tooltip-help" } do %>
-               <i class="fa-solid fa-circle-info text-blue-800"></i>
-             <% end %>
-             <div id="tooltip-help" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-blue-300 rounded-lg shadow-sm opacity-0 tooltip">
-              Help
-                 <div class="tooltip-arrow" data-popper-arrow></div>
-             </div>
-             </div>
-          <% end %>
-     
-      </div>
-      </div>    
-      
-        
-      <div class="container">
-          <div class="block border-0 w-screen bg-blue-900 text-center text-white">
-           <div class="flex flex-row">
-              <div class="w-64 max-h-xl ">
-                <div class="pb-2 pt-2 font-mono text-md font-2xl text-white text-left justify-middle text-sm ml-4">
-                    Hello <%= current_user.first_name %><br>
-                   <% if current_user.admin? %> <%= current_user.role %><% end %>
-                </div>
-              </div>
-              <div class="w-4/5 self-center">
-                <% if content_for(:page_title)%>
-                    <p class="pt-2 text-xl font-2xl text-left font-semibold text-white">
-                    <% if flash[:error] %>
-                    <div class="alert alert-danger">
-                      <%= flash[:error] %>
-                    </div>
-                  <% end %>
-                  <p data-page-title-target="text" class="pt-2 text-xl font-2xl text-left font-semibold text-white">
-                  
-                      <%= yield(:page_title) || "People – Umpires" %>
-                      
-                    </p>
-
-                  <% end %>
-              </div>    
-            </div>
-          </div>    
-        </div>
+     <!-- Second row of the header: hello (left) and page title (right), both aligned with main content -->
+<div class="bg-blue-900 text-white w-full py-2 flex items-start">
+  <!-- Spacer to match sidebar width -->
+  <div class="w-1/5">
+     <div class="font-mono text-sm md:text-md text-white text-left">
+      Hello <%= current_user.first_name %><br>
+      <% if current_user.admin? %> <%= current_user.role %><% end %>
     </div>
+  </div>
+
+  <!-- Content area aligned with main -->
   
-   
-     <% if current_user.role =="admin" %> 
-    <%= render 'layouts/mobile_menu' %>
+    <% if content_for(:page_title)%>
+      <div class="text-right self-center">
+        <% if flash[:error] %>
+          <div class="alert alert-danger">
+            <%= flash[:error] %>
+          </div>
+        <% end %>
+        <p data-page-title-target="text" class="text-base md:text-2xl text-center md:text-leftfont-semibold text-white">
+          <%= yield(:page_title) || "People – Umpires" %>
+        </p>
+      </div>
     <% end %>
+  </div>
+</div>
+     
   </header>
 <!-- Headerbar Sticky end -->
      

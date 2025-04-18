@@ -2,6 +2,15 @@
 namespace :db do
   desc "Backup Heroku DB, download, restore to local dev and test, and clean up"
   task refresh: :environment do
+    puts "🧹 Checking for existing latest.dump..."
+      if File.exist?("latest.dump")
+        puts "⚠️ Found existing latest.dump, deleting..."
+        File.delete("latest.dump")
+        puts "✅ Old latest.dump deleted."
+      else
+        puts "✅ No existing latest.dump found. Good to go."
+      end
+
     puts "🚀 Starting backup from Heroku..."
 
     system("heroku pg:backups:capture --app netball-america") || abort("❌ Failed to capture backup.")
