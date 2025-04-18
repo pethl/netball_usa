@@ -25,6 +25,7 @@
           <th scope="col" class="px-4 px-2 w-52 text-center">Has Youth?</th>
           <th scope="col" class="px-4 px-2 w-60 text-left">Administered By</th>
           <th scope="col" class="px-4 px-2 w-60 truncate">Club President</th>
+          <th scope="col" class="px-4 px-2 w-60 truncate">Club Key Contact</th>
           <th scope="col" class="px-4 px-2 w-60 truncate">Website</th>
           <th scope="col" class="px-4 px-2 w-60">Date Created</th>
 
@@ -38,7 +39,12 @@
         <% @clubs.each do |club| %>
           <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
             <td class="px-4 py-4 truncate border-x border-gray-200">
-              <%= link_to club.name, club_path(club), class: link_class %>
+             <span class="text-lg font-semibold"> <%= link_to club.name, club_path(club), class: link_class %></span><br>
+              <% if club&.email.present? %>
+                <span class="text-sm text-gray-500">
+                  <i class="fa-solid fa-envelope"></i> <%= link_to club.email, "mailto:#{club.email}" %>
+                </span>
+              <% end %>
             </td>
             <td class="px-4 py-4 border-x border-gray-200"><%= club.city %></td>
             <td class="px-4 py-4 border-x border-gray-200"><%= club.us_state %></td>
@@ -95,6 +101,20 @@
               <% unless club.club_president_phone.to_s.empty? %>
                 <span class="text-sm text-gray-500">
                   <i class="fa-solid fa-phone"></i> <%= club.club_president_phone %>
+                </span>
+              <% end %>
+            </td>
+
+            <td class="px-4 py-4 text-left border-x border-gray-200">
+              <% if club.club_key_contact == "Please nominate" %>
+                <span class="text-sm text-gray-400 italic"><%= club.club_key_contact %><br></span>
+              <% else %>
+                <%= club.club_key_contact %><br>
+              <% end %>
+
+              <% unless club.club_key_contact_phone.to_s.empty? %>
+                <span class="text-sm text-gray-500">
+                  <i class="fa-solid fa-phone"></i> <%= club.club_key_contact_phone %>
                 </span>
               <% end %>
             </td>

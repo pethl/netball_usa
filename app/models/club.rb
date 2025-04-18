@@ -105,6 +105,16 @@ class Club < ApplicationRecord
     end
   end
 
+  def club_key_contact_phone
+    @member_key_role = MemberKeyRole.where(club_id: self.id, key_role: "Club Key Contact").first
+    if @member_key_role.blank?
+      ""
+    else
+      @member = Member.find(@member_key_role.member_id)
+      @member.phone
+    end
+  end
+
   def club_payments_total
     year = ApplicationController.helpers.current_membership_year
     payments_for_year = payments.where(payment_year: year)
