@@ -25,10 +25,12 @@
     <%= link_to "Arrivals Transfers", inbound_pickups_transfers_path, class: link_class %> |
     <%= link_to "Departure Transfers", outbound_pickups_transfers_path, class: link_class %>
 
-
-    <%= button_to "Destroy this transfer",
+<% if is_admin? %>
+    <%= button_to "Destroy this transfer [Admin only]",
                     @transfer,
                     class: link_class,
                     data: { confirm: "Are you sure you want to delete this transfer record?" } %>
   </div>
+    <% end %>
 <% end %>
+<br>

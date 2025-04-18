@@ -32,7 +32,7 @@
 <div class="bg-blue-900 text-white w-full py-2 flex items-start">
   <!-- Spacer to match sidebar width -->
   <div class="w-1/5">
-     <div class="font-mono text-sm md:text-md text-white text-left">
+    <div class="hidden md:block font-mono text-sm md:text-md text-white text-left">
       Hello <%= current_user.first_name %><br>
       <% if current_user.admin? %> <%= current_user.role %><% end %>
     </div>
@@ -40,14 +40,14 @@
 
   <!-- Content area aligned with main -->
   
-    <% if content_for(:page_title)%>
-      <div class="text-right self-center">
+   <% if content_for(:page_title)%>
+      <div class="w-full text-center md:text-left self-center">
         <% if flash[:error] %>
           <div class="alert alert-danger">
             <%= flash[:error] %>
           </div>
         <% end %>
-        <p data-page-title-target="text" class="text-base md:text-2xl text-center md:text-leftfont-semibold text-white">
+        <p data-page-title-target="text" class="text-base md:text-2xl font-semibold text-white">
           <%= yield(:page_title) || "People – Umpires" %>
         </p>
       </div>
@@ -58,51 +58,32 @@
   </header>
 <!-- Headerbar Sticky end -->
      
-  <!--Sidebar nav starts -->
-  <div class="container">
-     <div class="relative md:flex flex-row h-2xl w-screen">
-      
-    
-       <div class="hidden md:flex flex-col w-1/5 h-screen bg-blue-900 border-0 relative">
-      
-         <%= render 'layouts/main_menu' %>
-          </div>
-        <!--Sidebar nav end -->
-        
-        <!--Main Bucket  starts -->
-       
-              <div class="w-screen w-4/5 min-h-3/4 border-2 border-blue-900 overflow-scroll">
-             
-               <!--Content Bucket  starts -->
-              
-                <div class="m-2 mr-2 bg-white py-2 px-2 text-sm">
-                
-                <!-- Notices -->
-                  <div class="text-center text-blue-700 text-lg">
-                    <p class="notice"><%= notice %></p>
-                    <p class="alert"><%= alert %></p>
-                  </div>  
+ <!-- Layout wrapper -->
+    <div class="flex w-full h-[calc(100vh-100px)]"> <!-- Adjust height if your header is taller/shorter -->
 
-                     <!-- Scrollable main content area -->
-                     <main>
-                      <div class="overflow-x-auto overflow-y-auto overflow-scroll">
-                        <%= yield %>
-                      </div>
-                    </main>
-                  </div>
-                </div>
-               <!--Content bucket end -->  
-              
-              </div>
-            </div>
+      <!-- Sidebar: fixed on left -->
+      <aside class="hidden md:block w-[17%] h-full bg-blue-900 overflow-y-auto sticky top-[100px]">
+        <%= render 'layouts/main_menu' %>
+      </aside>
+
+      <!-- Main content -->
+      <section class="w-full md:w-4/5 h-full overflow-y-auto border-l-2 border-blue-900 bg-white">
+        <div class="p-4 text-sm">
+          
+          <!-- Notices -->
+          <div class="text-center text-blue-700 text-lg mb-2">
+            <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p>
           </div>
-            <!--Main bucket end -->
-         
+
+          <!-- Main content -->
+          <main class="overflow-auto">
+            <%= yield %>
+          </main>
         </div>
-      </div>
-        <!--Main  end -->
+      </section>
+    </div>
    
-     
     <% else %>
      <div class="mt-8 max-w-lg sm:mx-auto sm:w-full ">
       <div class="bg-white py-6 px-2 shadow rounded-lg sm:px-10 overflow-x-auto">
@@ -129,6 +110,6 @@
        </main>
     <% end %>
   
-    <%= render 'layouts/mobile_menu' %>
+
   </body>
   </html>

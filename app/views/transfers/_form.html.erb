@@ -389,7 +389,40 @@
             <%= person_subform.label :tshirt_size, "T Shirt Size (All volunteers)", class: label_class %>
             <%= person_subform.select :tshirt_size, options_for_select(tshirt_size, :selected => transfer.person.tshirt_size),{prompt: true}, class: input_class %>
           </div>
-        <% end %>
+       
+
+        <!-- 🔥 Inferno Uniform Block -->
+        <div class="my-4">
+          <p class="font-semibold text-sm text-blue-900 mb-2">Inferno Uniform</p>
+
+          <!-- 🔼 Top Section -->
+          <p class="text-xs text-gray-500 mb-1">Top</p>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <%= person_subform.label :inferno_top_polo_size, "Polo Top", class: label_class %>
+              <%= person_subform.text_field :inferno_top_polo_size, class: "#{input_class} text-sm" %>
+            </div>
+            <div>
+              <%= person_subform.label :inferno_top_vneck_size, "V Neck", class: label_class %>
+              <%= person_subform.text_field :inferno_top_vneck_size, class: "#{input_class} text-sm" %>
+            </div>
+          </div>
+
+          <!-- 🔽 Bottom Section -->
+          <p class="text-xs text-gray-500 mt-4 mb-1">Bottom</p>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <%= person_subform.label :inferno_bottom_skirt_size, "Skirt", class: label_class %>
+              <%= person_subform.text_field :inferno_bottom_skirt_size, class: "#{input_class} text-sm" %>
+            </div>
+            <div>
+              <%= person_subform.label :inferno_bottom_shorts_size, "Shorts", class: label_class %>
+              <%= person_subform.text_field :inferno_bottom_shorts_size, class: "#{input_class} text-sm" %>
+            </div>
+          </div>
+
+        </div>
+         <% end %>
          </div> 
               
          <div class="  p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">

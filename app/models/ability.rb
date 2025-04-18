@@ -36,6 +36,7 @@ class Ability
     when "teamlead"
       # Only manage their own club
       can :manage, Club, user_id: user.id
+      cannot :index_admin, Club
 
       # Only manage members in their club
       can :manage, Member, club: { user_id: user.id }

@@ -5,7 +5,7 @@ require "cancan/matchers"
 RSpec.describe Ability, type: :model do
   subject(:ability) { Ability.new(user) }
 
-  #--------------------------------
+  #--------------------------------PUBLIC ACCESS--------------------------------
   
     context "public access (user is nil)" do
       let(:user) { nil }
@@ -39,7 +39,7 @@ RSpec.describe Ability, type: :model do
       end
     end
 
-    #--------------------------------
+  #--------------------------------AUTHENTICATED USER WITH NO ROLE--------------------------------
 
     context "authenticated user with no role" do
       let(:user) { build_stubbed(:user, id: 1, role: nil) }
@@ -72,7 +72,7 @@ RSpec.describe Ability, type: :model do
       end
     end
     
-    #--------------------------------
+  #--------------------------------TEAM_GRANTS ROLE--------------------------------
 
     context "teams_grants role" do
       let(:user) { build(:user, role: "teams_grants") }
@@ -90,6 +90,13 @@ RSpec.describe Ability, type: :model do
         expect(ability).to be_able_to(:manage, Payment)
         expect(ability).to be_able_to(:manage, IndividualMember)
       end
+
+      it "can access Grants show and edit pages" do
+        grant = build_stubbed(:grant)
+      
+        expect(ability).to be_able_to(:show, grant)
+        expect(ability).to be_able_to(:edit, grant)
+      end
     
       it "cannot manage users or admin-only models" do
         expect(ability).not_to be_able_to(:manage, User)
@@ -101,7 +108,7 @@ RSpec.describe Ability, type: :model do
       end
     end
 
-    #--------------------------------
+    #--------------------------------TEAMLEAD ROLE--------------------------------
     
 
     context "teamlead role" do
@@ -146,9 +153,14 @@ RSpec.describe Ability, type: :model do
         expect(ability).not_to be_able_to(:manage, Event)
         expect(ability).not_to be_able_to(:manage, NetballEducator)
       end
+
+      it "cannot access admin-level club actions" do
+        expect(ability).not_to be_able_to(:index_admin, own_club)
+        expect(ability).not_to be_able_to(:index_admin, other_club)
+      end      
     end
 
-    #--------------------------------
+    #--------------------------------GRANTS ROLE--------------------------------
 
     context "grants role" do
       let(:user) { build(:user, role: "grants") }
@@ -159,9 +171,16 @@ RSpec.describe Ability, type: :model do
         expect(ability).not_to be_able_to(:manage, User)
         expect(ability).not_to be_able_to(:manage, Club)
       end
+
+      it "can access Grants show and edit pages" do
+        grant = build_stubbed(:grant)
+      
+        expect(ability).to be_able_to(:show, grant)
+        expect(ability).to be_able_to(:edit, grant)
+      end
     end
 
-    #--------------------------------
+    #--------------------------------NO ACCESS ROLE--------------------------------
 
     context "no_access role" do
       let(:user) { build(:user, role: "no_access") }
@@ -180,7 +199,7 @@ RSpec.describe Ability, type: :model do
       end
     end
 
-    #--------------------------------
+    #-------------------------------- 
 
     context "teams_admin role" do
       let(:user) { build(:user, role: "teams_admin") }
@@ -205,7 +224,7 @@ RSpec.describe Ability, type: :model do
       end
     end
 
-    #--------------------------------
+    #-----------------------------    ---
 
     context "sponsors_events role" do
       let(:user) { build(:user, role: "sponsors_events", id: 101) }
@@ -235,9 +254,23 @@ RSpec.describe Ability, type: :model do
         expect(ability).not_to be_able_to(:manage, Grant)
         expect(ability).not_to be_able_to(:manage, NetballEducator)
       end
+
+      it "can access Sponsors show and edit pages" do
+        sponsor = build_stubbed(:sponsor)
+      
+        expect(ability).to be_able_to(:show, sponsor)
+        expect(ability).to be_able_to(:edit, sponsor)
+      end
+
+      it "can access Events show and edit pages" do
+        event = build_stubbed(:event)
+      
+        expect(ability).to be_able_to(:show, event)
+        expect(ability).to be_able_to(:edit, event)
+      end
     end
 
-    #--------------------------------
+    #--------------------------------US OPEN ROLE--------------------------------
 
     context "us_open role" do
       let(:user) { build(:user, role: "us_open") }
@@ -245,6 +278,20 @@ RSpec.describe Ability, type: :model do
       it "can manage transfers and people" do
         expect(ability).to be_able_to(:manage, Transfer)
         expect(ability).to be_able_to(:manage, Person)
+      end
+
+      it "can access People show and edit pages" do
+        person = build_stubbed(:person)
+      
+        expect(ability).to be_able_to(:show, person)
+        expect(ability).to be_able_to(:edit, person)
+      end
+
+      it "can access Transfers show and edit pages" do
+        transfer = build_stubbed(:transfer)
+      
+        expect(ability).to be_able_to(:show, transfer)
+        expect(ability).to be_able_to(:edit, transfer)
       end
     
       it "can read events" do
@@ -261,7 +308,7 @@ RSpec.describe Ability, type: :model do
       end
     end
 
-    #--------------------------------
+    #------------------------- EDUCATORS EVENTS ROLE--------------------------------
 
     context "educators_events role" do
       let(:user) { build(:user, role: "educators_events") }
@@ -280,6 +327,13 @@ RSpec.describe Ability, type: :model do
         expect(ability).to be_able_to(:read, Equipment)
         expect(ability).to be_able_to(:read, Event)
       end
+
+      it "can access NetballEducator show and edit pages" do
+        educator = build_stubbed(:netball_educator)
+      
+        expect(ability).to be_able_to(:show, educator)
+        expect(ability).to be_able_to(:edit, educator)
+      end
     
       it "cannot manage unrelated models" do
         expect(ability).not_to be_able_to(:manage, Club)
@@ -288,7 +342,7 @@ RSpec.describe Ability, type: :model do
       end
     end
 
-    #--------------------------------
+    #-----------------------  ---------
 
     context "sponsors_media_events role" do
       let(:user) { build(:user, role: "sponsors_media_events", id: 6) }
@@ -312,7 +366,16 @@ RSpec.describe Ability, type: :model do
         expect(ability).not_to be_able_to(:manage, User)
         expect(ability).not_to be_able_to(:manage, Grant)
       end
+
+      it "can access Media  show and edit pages" do
+        media = build_stubbed(:medium)
+      
+        expect(ability).to be_able_to(:show, media)
+        expect(ability).to be_able_to(:edit, media)
+      end
     end
+
+    
 
     context "educators_events_medium role" do
       let(:user) { build(:user, role: "educators_events_medium") }
@@ -333,7 +396,7 @@ RSpec.describe Ability, type: :model do
     end
     
 
-    #--------------------------------
+    #------------------------ NA PEPOLE --------
 
     context "na_people role" do
       let(:user) { build(:user, role: "na_people", email: "user@example.com") }
@@ -377,7 +440,7 @@ RSpec.describe Ability, type: :model do
     end
     
 
-   #--------------------------------
+   #------------------------- -------
 
   context "admin role" do
     let(:user) { build(:user, role: "admin") }

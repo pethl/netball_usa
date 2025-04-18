@@ -208,14 +208,42 @@
       <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.dietary_requirements_allergies %></p>
 
       <p class="text-sm text-gray-500">T-Shirt Size</p>
-      <p class="text-base font-medium text-gray-900"><%= @transfer.person&.tshirt_size %></p>
+      <p class="text-base font-medium text-gray-900"><%= @transfer.person&.tshirt_size %></p> 
+
+      <div class="text-lg font-semibold text-blue-900 mt-4 mb-2">Inferno Uniform</div>
+          <!-- 🔼 Top Section -->
+          <p class="text-xs text-gray-500 mt-1 mb-1">Top</p>
+          <div class="grid grid-cols-2 gap-4 text-base font-medium">
+            <div>
+              <span class="text-gray-500 font-light text-sm">Polo Top:</span><br>
+              <%= @transfer.person&.inferno_top_polo_size.presence || "—" %>
+            </div>
+            <div>
+              <span class="text-gray-500 font-light text-sm">V Neck:</span><br>
+              <%= @transfer.person&.inferno_top_vneck_size.presence || "—" %>
+            </div>
+          </div>
+
+          <!-- 🔽 Bottom Section -->
+          <p class="text-xs text-gray-500 mt-4 mb-1">Bottom</p>
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <span class="text-gray-500 font-light text-sm">Skirt:</span><br>
+              <%= @transfer.person&.inferno_bottom_skirt_size.presence || "—" %>
+            </div>
+            <div>
+              <span class="text-gray-500 font-light text-sm">Shorts:</span><br>
+              <%= @transfer.person&.inferno_bottom_shorts_size.presence || "—" %>
+            </div>
+          </div>
+        </div>
     </div>
 
 
   <!-- ===============================
        📝 Notes
        =============================== -->
-  <div class="p-4 bg-white border border-gray-200 rounded-lg shadow">
+  <div class="p-4 bg-white border border-gray-200 rounded-lg shadow mt-4">
     <div class="text-lg font-semibold text-blue-900 mb-4">Additional Notes</div>
     <p class="text-base font-medium text-gray-900 whitespace-pre-wrap"><%= @transfer.notes %></p>
   </div>

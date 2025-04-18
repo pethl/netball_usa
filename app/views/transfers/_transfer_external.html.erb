@@ -68,7 +68,7 @@
     <div class="p-4 bg-gray-100 border border-gray-200 rounded">
      
 
-      <p class="font-semibold mt-4">Umpire Badge Level:</p>
+      <p class="font-semibold">Umpire Badge Level:</p>
       <p><%= transfer.person.level_submitted %></p>
 
       <p class="font-semibold mt-4">Certification Date:</p>
@@ -86,28 +86,55 @@
       <p class="font-semibold">T-Shirt Size:</p>
       <p><%= transfer.person.tshirt_size %></p>
 
-      <p class="font-semibold mt-4">Uniform Size (Umpires Only):</p>
-      <p><%= transfer.person.uniform_size %></p>
+      <p class="font-semibold mt-4">Inferno Uniform Size (Umpires Only):</p>
+        <!-- 🔼 Top Section -->
+          <p class="text-xs text-gray-500 mt-1 mb-1">Top</p>
+          <div class="grid grid-cols-2 gap-4 text-base font-medium">
+            <div>
+              <span class="text-gray-500 font-light text-sm">Polo Top:</span><br>
+              <%= @transfer.person&.inferno_top_polo_size.presence || "—" %>
+            </div>
+            <div>
+              <span class="text-gray-500 font-light text-sm">V Neck:</span><br>
+              <%= @transfer.person&.inferno_top_vneck_size.presence || "—" %>
+            </div>
+          </div>
 
-      <p class="font-semibold mt-4">Headshot:</p>
-      <% if transfer.person.headshot_url.to_s.empty? %>
-        <p class="italic text-gray-500">Not uploaded</p>
-      <% else %>
-        <%= image_tag transfer.person.headshot_url, class: "h-20 w-auto rounded shadow" %>
-      <% end %>
-    </div>
+          <!-- 🔽 Bottom Section -->
+          <p class="text-xs text-gray-500 mt-4 mb-1">Bottom</p>
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <span class="text-gray-500 font-light text-sm">Skirt:</span><br>
+              <%= @transfer.person&.inferno_bottom_skirt_size.presence || "—" %>
+            </div>
+            <div>
+              <span class="text-gray-500 font-light text-sm">Shorts:</span><br>
+              <%= @transfer.person&.inferno_bottom_shorts_size.presence || "—" %>
+            </div>
+          </div>
+        </div>
 
-    <div class="p-4 bg-gray-100 border border-gray-200 rounded">
-      <p class="font-semibold">Notes:</p>
-      <p><%= transfer.notes %></p>
-    </div>
+         <div class="p-4 bg-gray-100 border border-gray-200 rounded">
 
-<% if user_signed_in? && current_user.role == "na_people" %>
-    <div class="mt-6 text-center">
-       <%= link_to "Edit Page",   edit_transfer_path(transfer), class: "text-blue-900 font-semibold hover:underline" %>
-    <br>
-    <%= link_to "« Back to Home Page", root_path, class: "text-blue-900 font-semibold hover:underline" %>
-  </div>
-<% end %>
-  </div>
+          <p class="font-semibold">Headshot:</p>
+          <% if transfer.person.headshot_url.to_s.empty? %>
+            <p class="italic text-gray-500">Not uploaded</p>
+          <% else %>
+            <%= image_tag transfer.person.headshot_url, class: "h-20 w-auto rounded shadow" %>
+          <% end %>
+        </div>
+
+        <div class="p-4 bg-gray-100 border border-gray-200 rounded">
+          <p class="font-semibold">Notes:</p>
+          <p><%= transfer.notes %></p>
+        </div>
+
+    <% if user_signed_in? && current_user.role == "na_people" %>
+        <div class="mt-6 text-center">
+          <%= link_to "Edit Page",   edit_transfer_path(transfer), class: "text-blue-900 font-semibold hover:underline" %>
+        <br>
+        <%= link_to "« Back to Home Page", root_path, class: "text-blue-900 font-semibold hover:underline" %>
+      </div>
+    <% end %>
+      </div>
 </div>

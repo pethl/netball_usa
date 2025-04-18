@@ -123,19 +123,29 @@
 
         <!-- Umpire Badge Level -->
         <div class="mb-6">
-          <%= form.label :level, "Umpire Badge Level", class: label_class %>
+          <%= form.label :level, "NA Umpire Level [Admin Only]", class: label_class %>
           <div class="mt-1">
             <%= form.select :level, options_for_select(people_level, :selected => person.level),{prompt: true}, class: input_class %>
           </div>
         </div>
 
+         <!-- Level Submittedb y User -->
+        <div class="mb-6">
+          <%= form.label :level_submitted, "Umpire Badge Level", class: label_class %>
+          <div class="mt-1">
+          <%= form.text_field :level_submitted, placeholder: "Country and level of award", class: input_class  %>
+
+          </div>
+        </div>
+
+      
         <!-- Certification Date -->
         <div class="mb-6">
           <%= form.label :certification_date, class: label_class %>
           <div class="mt-1">
             <%= form.date_field :certification_date, class: input_class %>
           </div>
-        </div>
+        </div> 
 
         <!-- Level Notes -->
         <div class="mb-4">
@@ -144,6 +154,7 @@
             <%= form.text_area :level_note, class: input_class %>
           </div>
         </div>
+
 
         <!-- Certification File Upload -->
         <div class="mb-4 mt-4">
@@ -203,13 +214,36 @@
         </div>
       </div>
 
-      <!-- Inferno Uniform Size -->
-      <div class="mb-6">
-        <%= form.label :uniform_size, "Inferno Uniform Size", class: label_class %>
-        <div class="mt-1">
-          <%= form.text_area :uniform_size, class: input_class %>
+      <!-- 🔥 Inferno Uniform Block -->
+        <div class="mb-6">
+          <p class="font-semibold text-sm text-blue-900 mb-2">Inferno Uniform</p>
+
+          <!-- 🔼 Top Section -->
+          <p class="text-xs text-gray-500 mb-1">Top</p>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <%= form.label :inferno_top_polo_size, "Polo Top", class: label_class %>
+              <%= form.text_field :inferno_top_polo_size, class: "#{input_class} text-sm" %>
+            </div>
+            <div>
+              <%= form.label :inferno_top_vneck_size, "V Neck", class: label_class %>
+              <%= form.text_field :inferno_top_vneck_size, class: "#{input_class} text-sm" %>
+            </div>
+          </div>
+
+          <!-- 🔽 Bottom Section -->
+          <p class="text-xs text-gray-500 mt-4 mb-1">Bottom</p>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <%= form.label :inferno_bottom_skirt_size, "Skirt", class: label_class %>
+              <%= form.text_field :inferno_bottom_skirt_size, class: "#{input_class} text-sm" %>
+            </div>
+            <div>
+              <%= form.label :inferno_bottom_shorts_size, "Shorts", class: label_class %>
+              <%= form.text_field :inferno_bottom_shorts_size, class: "#{input_class} text-sm" %>
+            </div>
+          </div>
         </div>
-      </div>
 
       <!-- Invite Back - Admin Only -->
       <% if current_user&.admin? %>

@@ -125,7 +125,7 @@ class PeopleController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def person_params
-      person_params= params.require(:person).permit(:first_name, :last_name, :status, :role, :educator_role, :region, :location, :email, :level, :level_note, :level_submitted, :phone, :address, :associated, :gender, :tshirt_size, :uniform_size, :headshot, :headshot_path, :description, :image, :accept_notes, :notes, :in_person_trained, :virtually_trained, :booth_trained, :headshot_present, :certification, :certification_date, :resume, event_ids: [], frequent_flyer_numbers_attributes: [:id, :airline, :number, :_destroy])
+      person_params= params.require(:person).permit(:first_name, :last_name, :status, :role, :educator_role, :region, :location, :email, :level, :level_note, :level_submitted, :phone, :address, :associated, :gender, :tshirt_size, :uniform_size,  :inferno_top_polo_size, :inferno_top_vneck_size, :inferno_bottom_skirt_size, :inferno_bottom_shorts_size, :invite_back,:headshot, :headshot_path, :description, :image, :accept_notes, :notes, :in_person_trained, :virtually_trained, :booth_trained, :headshot_present, :certification, :certification_date, :resume, event_ids: [], frequent_flyer_numbers_attributes: [:id, :airline, :number, :_destroy])
      
       # Add invite_back only for admin users
       person_params[:invite_back] = params.dig(:person, :invite_back) if current_user&.admin?

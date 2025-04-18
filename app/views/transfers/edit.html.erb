@@ -2,8 +2,10 @@
 <% if current_user.role == "na_people" %>
 
   <%= render "form_attendee", transfer: @transfer %>
-  <% content_for(:page_title, "US Open - Attendee Information") %>
+  <% content_for(:page_title, "U.S. Open Netball Championships® Volunteer Information") %>
+
 <% else %>
+
   <%= render "form", transfer: @transfer %>
   <% content_for(:page_title, "Hotel and Airport: Edit") %>
 
@@ -13,4 +15,5 @@
     <%= link_to "Arrivals Transfers", inbound_pickups_transfers_path, class: link_class %> |
     <%= link_to "Departure Transfers", outbound_pickups_transfers_path, class: link_class %>
   </div>
+  
 <% end %>
