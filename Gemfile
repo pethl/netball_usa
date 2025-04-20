@@ -8,8 +8,7 @@ ruby '3.2.3'
 gem 'rails', '7.1.5'
 gem 'concurrent-ruby', '1.3.4'
 
-gem 'paper_trail'
-
+gem 'paper_trail' #audit
 
 # setting to get around upgrade error 337
 #gem 'activesupport', '7.0.8'
@@ -124,3 +123,6 @@ gem 'rubyzip', '>= 2.3.0'
 gem 'caxlsx'
 gem 'caxlsx_rails'
 gem "capybara-email", "~> 3.0", group: :test
+
+gem 'pagy', '~> 9.3'
+

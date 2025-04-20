@@ -238,6 +238,7 @@ GEM
     nokogiri (1.18.7-x86_64-linux-musl)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pagy (9.3.4)
     paper_trail (16.0.0)
       activerecord (>= 6.1)
       request_store (~> 1.4)
@@ -417,6 +418,7 @@ DEPENDENCIES
   letter_opener_web
   mail (~> 2.7)
   mutex_m (~> 0.2.0)
+  pagy (~> 9.3)
   paper_trail
   pg (~> 1.1)
   phonelib

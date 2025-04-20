@@ -1,4 +1,5 @@
 class NetballEducatorsController < ApplicationController
+  include Pagy::Backend
 
   before_action :set_netball_educator, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
@@ -10,7 +11,6 @@ class NetballEducatorsController < ApplicationController
 
     # 🔥 Educator Access Control
     @netball_educators = NetballEducator.all
-
 
     # 🔥 Filters
     if params[:state].present?
@@ -28,15 +28,22 @@ class NetballEducatorsController < ApplicationController
   end
 
     # 🔥 Ordering
-    @netball_educators = @netball_educators.order(created_at: :desc)
+   # @netball_educators = @netball_educators.order(created_at: :desc)
+   @netball_educators = @netball_educators.order(created_at: :desc)
+
 
      # ✅ Preload event participants as a set of educator IDs (for fast lookup in view)
     @educator_ids_with_participants = EventParticipant.where(netball_educator_id: @netball_educators.pluck(:id)).distinct.pluck(:netball_educator_id).to_set
 
 
     respond_to do |format|
-      format.html
-      format.xlsx
+      format.html do
+        @pagy, @netball_educators = pagy(@netball_educators)
+      end
+  
+      format.xlsx do
+        # No pagination — use full filtered list
+      end
     end
   end
 

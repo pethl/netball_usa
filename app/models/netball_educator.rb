@@ -22,8 +22,6 @@ class NetballEducator < ApplicationRecord
   validates :state, presence: true
   validates :level, presence: true, on: :create
                      
-    
- 
  
   def follow_up
     FollowUp.where(netball_educator_id: self.id)

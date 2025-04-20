@@ -144,6 +144,10 @@
 </div>
 
 <!-- Educators Table -->
+<div class="px-2 pb-2 ml-6">
+  <%= pagy_tailwind_nav(@pagy) %>
+</div>
+
 <% if @netball_educators.any? %>
   <div id="educators">
     <%= render 'educators_table', educators: @netball_educators %>
