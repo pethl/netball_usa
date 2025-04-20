@@ -8,6 +8,8 @@ ruby '3.2.3'
 gem 'rails', '7.1.5'
 gem 'concurrent-ruby', '1.3.4'
 
+gem 'paper_trail'
+
 
 # setting to get around upgrade error 337
 #gem 'activesupport', '7.0.8'

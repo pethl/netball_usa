@@ -1,4 +1,7 @@
 module ApplicationHelper
+  require 'yaml'
+
+
     def form_errors_for(record)
       return unless record.errors.any?
     
@@ -50,8 +53,88 @@ module ApplicationHelper
       end
     end
     
+    #for paper trail
+    def audit_user_label(whodunnit)
+      user = User.find_by(id: whodunnit)
+      user ? "#{user.first_name} #{user.last_name}" : "Unknown User"
+    end
+
+    #ALSO for paper trail 
+    def display_changes_from_object(v)
+      raw = v.object_changes
+      return "No changes" if raw.blank?
+    
+      begin
+        changes_hash = Psych.unsafe_load(raw)
+      rescue => e
+        return "Could not parse changes: #{e.class} - #{e.message}"
+      end
+    
+      return "No changes" unless changes_hash.is_a?(Hash)
+    
+      skip_fields = %w[
+        instagram other_sm facebook twitter phone address website updated_at notes
+      ]
+    
+      rows = changes_hash.map do |attr, values|
+        next if skip_fields.include?(attr.to_s.downcase)
+    
+        old_val, new_val = values
+        old = normalize_blank(format_value(old_val))
+        new = normalize_blank(format_value(new_val))
+        
+        # Skip if both are effectively empty
+        next if old.blank? && new.blank?
+        
+        # Skip noise like nil → false or false → nil
+        next if new == "false" && old.blank?
+    
+        "<tr><td class='px-2 py-1 font-medium'>#{attr.to_s.titleize}</td><td class='px-2 py-1'>#{old}</td><td class='px-2 py-1'>#{new}</td></tr>"
+      end.compact.join
+    
+      return "No meaningful changes" if rows.blank?
+    
+      <<~HTML.html_safe
+        <table class="text-xs ">
+          #{rows}
+        </table>
+      HTML
+    end
+
+        #PAPERTRAIL
+    def normalize_blank(value)
+      value = value.to_s.strip
+      value.downcase == "nil" ? "" : value
+    end    
     
 
+    #PAPERTRAIL
+    def audit_event_badge(event)
+      case event
+      when "create"
+        content_tag(:span, "➕ Create", class: "text-green-700 font-semibold")
+      when "update"
+        content_tag(:span, "🔄 Update", class: "text-blue-700 font-semibold")
+      when "destroy"
+        content_tag(:span, "❌ Delete", class: "text-red-700 font-semibold")
+      else
+        content_tag(:span, event.titleize, class: "text-gray-600")
+      end
+    end
+    
+    
+    def format_value(value)
+      case value
+      when ActiveSupport::TimeWithZone, Time, DateTime
+        value.strftime("%Y-%m-%d %H:%M")
+      when TrueClass then "true"
+      when FalseClass then "false"
+      when NilClass then "nil"
+      else
+        value.to_s
+      end
+    end
+    
 
     def current_membership_year
       today = Date.today

@@ -1,0 +1,37 @@
+
+<% content_for(:page_title, "Audit Trail - Raw")%>
+
+<%= render "filter_tabs" %>
+
+<table class="w-full text-sm text-left rtl:text-right text-gray-700 border border-collapse border-gray-300">
+  <thead>
+    <tr class="bg-gray-200 text-gray-500">
+       <th class="border px-2 py-2">When</th>
+      <th class="border px-2 py-2">Model</th>
+      <th class="border px-2 py-2">ID</th>
+      <th class="border px-2 py-2">Event</th>
+      <th class="border px-2 py-2">User</th>
+      <th class="border px-2 py-2">Changes</th>
+     
+    </tr>
+  </thead>
+  <tbody>
+    <% @versions.each do |v| %>
+      <tr>
+         <td class="border px-2 py-2 align-top"><%= v.created_at.strftime("%b %d, %Y %H:%M") %></td>
+        <td class="border px-2 py-2 align-top"><%= v.item_type %></td>
+        <td class="border px-2 py-2 align-top"><%= v.item_id %></td>
+        <td class="border px-2 py-2 align-top"><%= v.event %></td>
+        <td class="border px-2 py-2 align-top"><%= audit_user_label(v.whodunnit) %></td>
+        <td class="border px-2 py-2">
+          <% if v.object_changes.present? %>
+            <%= display_changes_from_object(v) %>
+          <% else %>
+            N/A
+          <% end %>
+        </td>
+       
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -40,7 +40,7 @@ Time::DATE_FORMATS[:usa_dt] = "%b %d, %Y %H:%M"
 # => "Aug 09, 2024 14:45" — With time
 
 Time::DATE_FORMATS[:usa_dt_no_time] = "%b %d, %Y"
-# => "Aug 09, 2024" — With time
+# => "Aug 09, 2024" — Without time
 
 Time::DATE_FORMATS[:usa_day_dt] = "%A %b %d, %Y  %H:%M"
 # => "Monday Aug 09, 2024  14:45  " — With time

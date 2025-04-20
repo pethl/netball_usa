@@ -1,9 +1,12 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
+  before_action :set_paper_trail_whodunnit #For papertrail
   skip_before_action :authenticate_user!, if: :devise_controller?  # Add this line
   #include AbstractController::Rendering
   helper_method :is_admin?
+
+
  
   def after_sign_in_path_for(resource)
     if current_user.teamlead?

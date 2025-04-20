@@ -1,4 +1,7 @@
 class Club < ApplicationRecord
+  has_paper_trail save_changes: true
+  
+  
   has_many :members, dependent: :destroy
   has_many :member_key_roles, dependent: :destroy
   has_many :individual_members

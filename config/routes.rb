@@ -142,6 +142,15 @@ Rails.application.routes.draw do
   end
 
   resources :educators
+
+    # ========== Papertrail ==========
+    resources :audits, only: [:index] do
+      collection do
+        get :raw
+        get :grouped
+      end
+    end
+  
   
   # ========== Pages ==========
   # Defines the root path route ("/")

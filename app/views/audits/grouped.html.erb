@@ -1,0 +1,81 @@
+<% content_for(:page_title, "Audit: Club and Member Changes") %>
+
+<div data-controller="filter">
+<%= render "filter_tabs" %>
+
+<!-- Wrap clubs in Stimulus filter controller -->
+
+  <% @all_club_ids.each do |club_id| %>
+    <% club = Club.find_by(id: club_id) %>
+    <% club_name = club&.name || "Unknown Club (ID: #{club_id})" %>
+
+    <div
+      data-filter-target="item"
+      data-filter-value="<%= club_name.downcase %>"
+      class="mb-6 border border-gray-100 rounded-lg p-4 shadow-sm bg-white"
+    >
+      <p class="text-xl font-semibold text-blue-900">Club: <%= club_name %></p>
+
+      <% club_versions = @club_changes[club_id] || [] %>
+      <% if club_versions.any? %>
+        <table class="w-full text-sm text-left text-gray-700 border border-collapse border-gray-300 my-2">
+          <thead>
+            <tr class="bg-gray-200 text-gray-500">
+              <th class="border px-2 py-2">When</th>
+              <th class="border px-2 py-2">Event</th>
+              <th class="border px-2 py-2">User</th>
+              <th class="border px-2 py-2">Changes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% club_versions.each do |v| %>
+              <tr>
+                <td class="border px-2 py-2 align-top"><%= v.created_at.strftime("%b %d, %Y %H:%M") %></td>
+                <td class="border px-2 py-2 align-top"><%= audit_event_badge(v.event) %></td>
+                <td class="border px-2 py-2 align-top"><%= audit_user_label(v.whodunnit) %></td>
+                <td class="border px-2 py-2 align-top"><%= display_changes_from_object(v) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p class="text-sm italic text-gray-600">No club-level changes for this club.</p>
+      <% end %>
+
+      <% member_versions = @member_changes[club_id] || [] %>
+      <% if member_versions.any? %>
+        <p class="text-xl font-semibold text-blue-900 mt-6">Member Changes for Club: <%= club_name %></p>
+
+        <table class="w-full text-sm text-left text-gray-700 border border-collapse border-gray-300 my-2">
+          <thead>
+            <tr class="bg-gray-200 text-gray-500">
+              <th class="border px-2 py-2">When</th>
+              <th class="border px-2 py-2">Member Name</th>
+              <th class="border px-2 py-2">Event</th>
+              <th class="border px-2 py-2">User</th>
+              <th class="border px-2 py-2">Changes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% member_versions.each do |v| %>
+              <% member = Member.find_by(id: v.item_id) %>
+              <tr>
+                <td class="border px-2 py-2 align-top"><%= v.created_at.strftime("%b %d, %Y %H:%M") %></td>
+                <td class="border px-2 py-2 align-top">
+                  <%= member ? "#{member.first_name} #{member.last_name}" : "Unknown Member (ID: #{v.item_id})" %>
+                </td>
+                <td class="border px-2 py-2 align-top"><%= audit_event_badge(v.event) %></td>
+                <td class="border px-2 py-2 align-top"><%= audit_user_label(v.whodunnit) %></td>
+                <td class="border px-2 py-2 align-top"><%= display_changes_from_object(v) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p class="text-sm italic text-gray-600">No member changes for this club.</p>
+      <% end %>
+
+      <hr class="my-6 border-gray-300">
+    </div>
+  <% end %>
+</div>

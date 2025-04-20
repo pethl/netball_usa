@@ -1,0 +1,58 @@
+<div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+  <!-- Tabs -->
+  <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500 border-b border-gray-300">
+    <li class="me-2">
+      <a href="/audits/raw" class="<%= tab_class('/audits/raw') %>">Raw</a>
+    </li>
+    <li class="me-2">
+      <a href="/audits/grouped" class="<%= tab_class('/audits/grouped') %>">Clubs and Members</a>
+    </li>
+  </ul>
+
+  <!-- Date and Club Filters -->
+  <div class="flex flex-wrap items-center gap-4">
+    <!-- Date filter -->
+    <div data-controller="date-filter" data-date-filter-url-value="<%= request.path %>" class="flex items-center gap-2">
+      <label for="created_at" class="text-sm font-medium whitespace-nowrap">Show changes from:</label>
+      <input
+        type="date"
+        id="created_at"
+        name="created_at"
+        value="<%= params[:created_at] %>"
+        class="border rounded px-2 py-1 text-sm"
+        data-action="change->date-filter#filterByDate"
+      />
+    </div>
+
+    <% if request.path == "/audits/grouped" %>
+      <!-- Club dropdown -->
+      <div class="flex items-center gap-2">
+        <label for="clubFilter" class="text-sm font-medium whitespace-nowrap">Filter by club:</label>
+        <select
+          id="clubFilter"
+          class="border rounded px-2 py-1 text-sm"
+          data-filter-target="input"
+          data-action="change->filter#filter"
+        >
+          <option value="">All clubs</option>
+          <% Club.order(:name).pluck(:name).each do |name| %>
+            <option value="<%= name.downcase %>"><%= name %></option>
+          <% end %>
+        </select>
+      </div>
+    <% end %>
+
+    <!-- Clear all button -->
+    <button
+      type="button"
+      class="text-sm text-blue-700 hover:underline"
+      onclick="
+        document.getElementById('created_at').value = '';
+        document.getElementById('clubFilter')?.value = '';
+        Turbo.visit('<%= request.path %>')
+      "
+    >
+      Clear all filters
+    </button>
+  </div>
+</div>
