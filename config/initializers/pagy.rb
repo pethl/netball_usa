@@ -1,5 +1,5 @@
 require "pagy"
-require 'pagy/extras/tailwind'
+require Rails.root.join('lib/pagy/extras/tailwind.rb')
 
 module Pagy::Frontend
   def pagy_link_proc(pagy)
