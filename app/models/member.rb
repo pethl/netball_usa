@@ -2,6 +2,7 @@ class Member < ApplicationRecord
   belongs_to :club
   belongs_to :team, optional: true
   has_paper_trail save_changes: true
+  attr_accessor :skip_validation #needed to allow phone to be updated via key role
   
    
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

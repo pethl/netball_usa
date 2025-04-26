@@ -14,6 +14,7 @@ class MemberKeyRolesController < ApplicationController
     @members_belonging_to_administrator = Member.where(club_id: teams_owned_by_user)
     @members_belonging_to_administrator = @members_belonging_to_administrator.order(first_name: :asc)
     @member_key_role = @club.member_key_roles.build
+    @member_key_role.build_member unless @member_key_role.member
   end
 
   # GET /member_key_roles/1/edit
@@ -22,6 +23,7 @@ class MemberKeyRolesController < ApplicationController
     teams_owned_by_user = teams_owned_by_user.pluck(:id) 
     @members_belonging_to_administrator = Member.where(club_id: teams_owned_by_user)
     @members_belonging_to_administrator = @members_belonging_to_administrator.order(first_name: :asc)
+    @member_key_role.build_member unless @member_key_role.member
   end
 
   # POST /member_key_roles
@@ -31,6 +33,16 @@ class MemberKeyRolesController < ApplicationController
     @members_belonging_to_administrator = Member.where(club_id: teams_owned_by_user)
     @members_belonging_to_administrator = @members_belonging_to_administrator.order(first_name: :asc)
     @member_key_role = @club.member_key_roles.build(member_key_role_params)
+
+    #all to save a phone number
+    @member_key_role.member = Member.find(@member_key_role.member_id) if @member_key_role.member_id.present?
+    if @member_key_role.member_id.present?
+      @member_key_role.member = Member.find(@member_key_role.member_id)
+      if params[:member_key_role][:member_attributes].present?
+        @member_key_role.member.assign_attributes(params[:member_key_role][:member_attributes].permit(:phone))
+      end
+    end
+  
     
 
     if @member_key_role.save
@@ -80,7 +92,7 @@ class MemberKeyRolesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def member_key_role_params
-      params.require(:member_key_role).permit(:na_team_id, :member_id, :key_role)
+      params.require(:member_key_role).permit(:na_team_id, :member_id, :key_role, member_attributes: [:id, :phone])
     end
 
     # def members_belonging_to_administrator
