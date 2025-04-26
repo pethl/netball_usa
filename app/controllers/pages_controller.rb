@@ -12,8 +12,9 @@ class PagesController < ApplicationController
     @created_last_30_days = NetballEducator.where("created_at > ?", Time.now-30.days).count
     @created_this_year = NetballEducator.where("created_at > ?", Time.now.beginning_of_year).count
 
-    @us_umpires = Person.where(role: "Umpire", region: "US & Canada").count
-    @int_umpires = Person.where(role: "Umpire", region: "International").count
+    @usa_umpires = Person.where(role: "Umpire", region: "US & Canada").count
+    @international_umpires = Person.where(role: "Umpire", region: "International").count
+   
     @scorers = Person.where(role: "Scorer").count
     @trainers = Person.where(role: "Trainer").count
     @coaches = Person.where(role: "Coach").count
