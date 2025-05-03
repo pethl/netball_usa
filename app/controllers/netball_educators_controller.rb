@@ -2,7 +2,7 @@ class NetballEducatorsController < ApplicationController
   include Pagy::Backend
 
   before_action :set_netball_educator, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  ##before_action :authenticate_user!
   before_action :set_users, only: [:new, :create, :edit, :update]
 
   def index
