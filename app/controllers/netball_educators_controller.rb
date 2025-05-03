@@ -3,6 +3,8 @@ class NetballEducatorsController < ApplicationController
 
   before_action :set_netball_educator, only: [:show, :edit, :update, :destroy]
   ##before_action :authenticate_user!
+  #load_and_authorize_resource
+  skip_before_action :authenticate_user!, only: [:show, :create]
   before_action :set_users, only: [:new, :create, :edit, :update]
 
   def index
