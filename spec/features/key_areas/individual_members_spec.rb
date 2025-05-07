@@ -55,7 +55,7 @@ RSpec.describe "Individual Members User ", type: :feature, js: true do
 
     click_button "Save Record"
 
-    expect(page).to have_content("10 errors prohibited this record from being saved:") # Validation errors should show
+    expect(page).to have_content("6 errors prohibited this record from being saved:") # Validation errors should show
    
   end
 

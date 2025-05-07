@@ -41,8 +41,15 @@ class Ability
       # Only manage members in their club
       can :manage, Member, club: { user_id: user.id }
 
-      # Only manage individual members linked to their club
-      can :manage, IndividualMember, club: { user_id: user.id }
+      # Allow creating a new IndividualMember *if the user doesn't already have one*
+      can [:new, :create], IndividualMember do
+        IndividualMember.find_by(user_id: user.id).nil?
+      end
+
+      # FIX: Add this broader condition for individual members
+      can :manage, IndividualMember do |member|
+        member.user_id == user.id || member.club&.user_id == user.id
+      end
 
       # Only manage payments linked to their club
       can :read, Payment, club: { user_id: user.id }

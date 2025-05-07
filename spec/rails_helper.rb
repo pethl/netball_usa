@@ -46,6 +46,11 @@ RSpec.configure do |config|
     Warden.test_reset!
   end
 
+   # Close browser tabs/windows after each feature spec
+   config.after(:each, type: :feature) do
+    Capybara.reset_sessions!
+  end
+
   # ✅ Wrap each test in a transaction
   config.use_transactional_fixtures = true
 

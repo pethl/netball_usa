@@ -1,8 +1,9 @@
 <% content_for(:page_title, "Edit: #{@event.name}")%>
 
+
 <%= render "form", event: @event %>
 
 <div>
-  <span class="ml-6"><%= link_to "Edit this Event", edit_event_path(@event), class: link_class %> <br>
-  <%= link_to "<< Back to Events", events_path, class: link_class %>
+  <%= link_to "<< Back to All Events", events_path, class: link_class %><br>
+   <%= link_to "<< Back to Educational Events", educational_events_path, class: link_class %>
 </div>

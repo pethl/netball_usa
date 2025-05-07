@@ -1,187 +1,124 @@
-<div id="<%= dom_id event %>">
+<div class="sm:mx-auto sm:w-full sm:max-w-4xl px-4">
+  <div class="bg-white py-6 px-4 shadow sm:rounded-lg sm:px-10 border border-gray-100">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
 
-<div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+      <div>
+        <p class="text-sm text-gray-500">Type:</p>
+        <p class="text-sm font-medium text-gray-900 border border-gray-300 rounded px-2 py-1 bg-white"><%= event.event_type %></p>
+      </div>
 
- 
-  <!-- Top row with Type and Is Educational -->
-  <div class="flex justify-between items-center">
-    <div class="flex-1">
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Type:
-      </p>
-      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-        <%= event.event_type %>
-      </p>
-    </div>
-    
-    <div class="flex-1">
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Is Educational:
-      </p>
-      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-        <%= event.is_educational == "Yes" ? "Yes" : "No" %>
-      </p>
-    </div>
-  </div>
-    
+      <div>
+        <p class="text-sm text-gray-500">Is Educational:</p>
+        <p class="text-sm font-medium text-gray-900 border border-gray-300 rounded px-2 py-1 bg-white"><%= event.is_educational %></p>
+      </div>
 
-  <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Name:
-    </p>
+      <div>
+        <p class="text-sm text-gray-500">Name:</p>
+        <p class="text-sm font-medium text-gray-900 border border-gray-300 rounded px-2 py-1 bg-white"><%= event.name %></p>
+      </div>
 
-    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-        <%= event.name %> 
-    </p> 
-  </div>
+      <div>
+        <p class="text-sm text-gray-500">Status:</p>
+        <p class="text-sm font-medium text-gray-900 border border-gray-300 rounded px-2 py-1 bg-white"><%= event.status %></p>
+      </div>
 
-  <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-      Date(s):
-    </p>
-  
-    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= event.date.to_formatted_s(:usa) unless (event.date.to_s.empty?) %> 
-        <% if !event.end_date.blank? %> - <%= event.end_date.to_formatted_s(:usa)  %><% end %>
-    </p>
-  </div>
-  
- <!-- New shared row with Status and Attend -->
-    <div class="flex justify-between items-center mt-2">
-      <!-- Status -->
-      <div class="flex-1">
-        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          Status:
-        </p>
-        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-          <%= event.status %>
+      <div>
+        <p class="text-sm text-gray-500">Attend?</p>
+        <p class="text-sm font-medium text-gray-900 border border-gray-300 rounded px-2 py-1 bg-white"><%= event.attend %></p>
+      </div>
+
+      <div>
+        <p class="text-sm text-gray-500">Start Date:</p>
+        <p class="text-sm font-medium text-gray-900 border border-gray-300 rounded px-2 py-1 bg-white"><%= event.date&.strftime("%m/%d/%Y") %></p>
+      </div>
+
+      <div>
+        <p class="text-sm text-gray-500">End Date:</p>
+        <p class="text-sm font-medium text-gray-900 border border-gray-300 rounded px-2 py-1 bg-white"><%= event.end_date&.strftime("%m/%d/%Y") %></p>
+      </div>
+
+      <div>
+        <p class="text-sm text-gray-500">Proposal Submission Due:</p>
+        <p class="text-sm font-medium text-gray-900 border border-gray-300 rounded px-2 py-1 bg-white"><%= event.proposal_submission_due&.strftime("%m/%d/%Y") %></p>
+      </div>
+
+      <div>
+        <p class="text-sm text-gray-500">Booth Registration Due:</p>
+        <p class="text-sm font-medium text-gray-900 border border-gray-300 rounded px-2 py-1 bg-white"><%= event.booth_registration_due&.strftime("%m/%d/%Y") %></p>
+      </div>
+
+      <div>
+        <p class="text-sm text-gray-500">Website:</p>
+        <p class="text-sm font-medium text-gray-900 border border-gray-300 rounded px-2 py-1 bg-white"><%= event.website %></p>
+      </div>
+
+      <div>
+        <p class="text-sm text-gray-500">City:</p>
+        <p class="text-sm font-medium text-gray-900 border border-gray-300 rounded px-2 py-1 bg-white"><%= event.city %></p>
+      </div>
+
+      <div>
+        <p class="text-sm text-gray-500">State:</p>
+        <p class="text-sm font-medium text-gray-900 border border-gray-300 rounded px-2 py-1 bg-white"><%= event.state %></p>
+      </div>
+
+      <div>
+        <p class="text-sm text-gray-500">Location:</p>
+        <p class="text-sm font-medium text-gray-900 border border-gray-300 rounded px-2 py-1 bg-white"><%= event.location %></p>
+      </div>
+
+      <div>
+        <p class="text-sm text-gray-500">Booth #:</p>
+        <p class="text-sm font-medium text-gray-900 border border-gray-300 rounded px-2 py-1 bg-white"><%= event.booth %></p>
+      </div>
+
+      <div class="md:col-span-2">
+        <p class="text-sm text-gray-500">Key Contact:</p>
+        <p class="text-sm font-medium text-gray-900 whitespace-pre-line border border-gray-300 rounded px-2 py-1 bg-white"><%= event.key_contact %></p>
+      </div>
+
+      <div class="md:col-span-2">
+        <p class="text-sm text-gray-500">Details:</p>
+        <p class="text-sm font-medium text-gray-900 whitespace-pre-line border border-gray-300 rounded px-2 py-1 bg-white"><%= event.details %></p>
+      </div>
+
+      <div class="md:col-span-2">
+        <p class="text-sm text-gray-500">Costs:</p>
+        <p class="text-sm font-medium text-gray-900 whitespace-pre-line border border-gray-300 rounded px-2 py-1 bg-white"><%= event.cost_notes %></p>
+      </div>
+
+      <div class="md:col-span-2">
+        <p class="text-sm text-gray-500">Outcome:</p>
+        <p class="text-sm font-medium text-gray-900 whitespace-pre-line border border-gray-300 rounded px-2 py-1 bg-white"><%= event.outcome %></p>
+      </div>
+
+      <div class="md:col-span-2">
+        <p class="text-sm text-gray-500">Personnel:</p>
+        <p class="text-sm font-medium text-gray-900 whitespace-pre-line border border-gray-300 rounded px-2 py-1 bg-white">
+          <% if event.people.any? %>
+            <% event.people.each do |person| %>
+              <%= person.role_full_name_city_state %><br>
+            <% end %>
+          <% else %>
+            None assigned
+          <% end %>
         </p>
       </div>
 
-      <!-- Attend -->
-      <div class="flex-1">
-        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          Attend?:
-        </p>
-        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-          <%= event.attend %>
-        </p>
-      </div>
-    </div>
-  
-  <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-      Website:
-    </p>
-    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= event.website %> 
-    </p> 
-   </div>
-   
-   <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Key Contact:
-    </p>
-   
-    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-    <%= event.key_contact %> 
-    </p> 
-   </div>
-
-  <!-- New shared row with City and State -->
-    <div class="flex justify-between items-center mt-2">
-      <!-- City -->
-      <div class="flex-1">
-        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          City:
-        </p>
-        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-          <%= event.city %>
-        </p>
-      </div>
-
-      <!-- State -->
-      <div class="flex-1">
-        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          State:
-        </p>
-        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-          <%= event.state %>
-        </p>
-      </div>
-    </div>
-  
-   <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-      Location:
-    </p>
-   
-    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= event.location %> 
-    </p> 
-   </div>
-   
-   <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-      Details:
-    </p>
-    
-    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= event.details %> 
-    </p> 
-   </div>
-
-   <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-      Booth #:
-    </p>
-   
-    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= event.booth %> 
-    </p> 
-   </div>
-
-   <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-      Costs:
-    </p>
-    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= event.cost_notes %> 
-    </p> 
-   </div>
-   
-   <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-      Outcome:
-    </p>
-    
-    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= event.outcome %> 
-    </p> 
-   </div>
-   
-   <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-      Personnel:
-    </p>
-    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <% if event.people.any? %>
-        <% event.people.each do |person| %>
-            <%= person.role_full_name_city_state %> <br>
-        <% end %>
+      <% if is_admin? && event.budget.present? %>
+        <div class="md:col-span-2">
+          <p class="text-sm text-gray-500">Budget Total:</p>
+          <p class="text-sm font-medium text-gray-900 border border-gray-300 rounded px-2 py-1 bg-white">
+            <%= number_to_currency(event.budget.budget_total, precision: 2) %><br>
+            <%= link_to "View Budget Details ➔", event.budget, class: link_class %> |
+            <%= link_to "Edit Budget ➔", edit_budget_path(event.budget), class: link_class %>
+          </p>
+        </div>
       <% end %>
-    </p> 
-   </div>
-  
-   <% if is_admin? %>  
-   <div class="mt-2">
-    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-        Budget Total:
-    </p>
-    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= number_to_currency(event.budget.budget_total, precision: 2) unless event.budget.to_s.empty? %> <br>
-        <%=  link_to "View budget details =>", event.budget, class: link_class unless event.budget.to_s.empty? %>
-        <br> <%=  link_to "Edit budget details =>", edit_budget_path(event.budget), class: link_class unless event.budget.to_s.empty? %>
-    </p> 
-   </div>
-   <% end %>
+
+    </div>
+  </div>
+</div>
+
+
+

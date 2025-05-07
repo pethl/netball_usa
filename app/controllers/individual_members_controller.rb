@@ -56,6 +56,11 @@ class IndividualMembersController < ApplicationController
   # GET /individual_members/new
   def new
     @individual_member = IndividualMember.new
+    if current_user.role == "teamlead"
+      @individual_member.first_name = current_user.first_name
+      @individual_member.last_name  = current_user.last_name
+      @individual_member.email      = current_user.email
+    end
   end
 
   # GET /individual_members/1/edit

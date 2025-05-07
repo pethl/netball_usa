@@ -16,7 +16,7 @@ RSpec.feature "RoleSignIn", type: :feature, js: true do
         if role_name == "admin"
           expect(page).to have_content("Management Summary")
         elsif role_name == "teamlead"
-          expect(page).to have_content("Welcome to Netball America Membership")
+          expect(page).to have_content("Welcome to Netball America® Membership")
         elsif role_name == "na_people"
           expect(page).to have_content(/Welcome|We couldn’t find your profile/i)
         else

@@ -199,7 +199,7 @@ RSpec.describe Ability, type: :model do
       end
     end
 
-    #-------------------------------- 
+    #-------------------------------- TEAMS ADMIN
 
     context "teams_admin role" do
       let(:user) { build(:user, role: "teams_admin") }
@@ -224,7 +224,7 @@ RSpec.describe Ability, type: :model do
       end
     end
 
-    #-----------------------------    ---
+    #----------------------------- SPONSORS EVENTS   ---
 
     context "sponsors_events role" do
       let(:user) { build(:user, role: "sponsors_events", id: 101) }
@@ -312,6 +312,11 @@ RSpec.describe Ability, type: :model do
 
     context "educators_events role" do
       let(:user) { build(:user, role: "educators_events") }
+
+      it "can create NetballEducator" do
+        educator = build_stubbed(:netball_educator)
+        expect(ability).to be_able_to(:create, educator)
+      end
     
       it "can manage educators-related models and actions" do
         expect(ability).to be_able_to(:manage, NetballEducator)
@@ -342,7 +347,7 @@ RSpec.describe Ability, type: :model do
       end
     end
 
-    #-----------------------  ---------
+    #----------------------- SPONSORS MEDIA EVENTS ---------
 
     context "sponsors_media_events role" do
       let(:user) { build(:user, role: "sponsors_media_events", id: 6) }
@@ -375,10 +380,15 @@ RSpec.describe Ability, type: :model do
       end
     end
 
-    
+    #------------------------EDUCATOR EVENTS MEDIA-------
 
     context "educators_events_medium role" do
       let(:user) { build(:user, role: "educators_events_medium") }
+
+      it "can create NetballEducator" do
+        educator = build_stubbed(:netball_educator)
+        expect(ability).to be_able_to(:create, educator)
+      end
     
       it "can manage educators, follow ups, equipment, events, and media" do
         expect(ability).to be_able_to(:manage, NetballEducator)

@@ -1,5 +1,5 @@
 <div class="sm:mx-auto sm:w-full sm:max-w-md">
-  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+  <div class="bg-white py-2 px-2 shadow sm:rounded-lg sm:px-6">
     
     <%= form_with(model: netball_educator, data: { turbo: false }) do |form| %>
 
@@ -130,43 +130,45 @@
 
       <!-- Submit button for Educator -->
       <div class="mt-6">
-        <%= form.submit "Save Educator", class: form_button_class %>
+        <%= form.submit "Save Details", class: form_button_class %>
       </div>
 
       <!-- ✅ Now Equipment Section starts -->
+<% if current_user.present? %>
+  <% if netball_educator.persisted? %>
+    <hr class="my-6 border-gray-300">
 
-      <% if netball_educator.persisted? %>
-        <hr class="my-6 border-gray-300">
+    <h2 class="text-lg font-semibold text-gray-700 mb-2">Equipment Sales</h2>
 
-        <h2 class="text-lg font-semibold text-gray-700 mb-2">Equipment Sales</h2>
-
-        <% if netball_educator.equipment.any? %>
-          <ul class="space-y-2 mb-4">
-            <% netball_educator.equipment.each do |equipment| %>
-              <li class="flex justify-between items-center p-2 border rounded bg-gray-50">
-                <div>
-                  <strong><%= equipment.sale_date.to_formatted_s(:usa) if equipment.sale_date %></strong> – 
-                  <%= equipment.items_purchased %> – 
-                  <%= number_to_currency(equipment.purchase_amount) %>
-                </div>
-                <div class="flex gap-2">
-                  <%= link_to "Edit", edit_equipment_path(equipment), class: "text-blue-600 hover:underline text-sm" %>
-                  <%= link_to "Delete", equipment_path(equipment), method: :delete, data: { confirm: "Are you sure?" }, class: "text-red-600 hover:underline text-sm" %>
-                </div>
-              </li>
-            <% end %>
-          </ul>
-        <% else %>
-          <p class="text-gray-500 text-sm mb-4">No equipment sales recorded yet.</p>
+    <% if netball_educator.equipment.any? %>
+      <ul class="space-y-2 mb-4">
+        <% netball_educator.equipment.each do |equipment| %>
+          <li class="flex justify-between items-center p-2 border rounded bg-gray-50">
+            <div>
+              <strong><%= equipment.sale_date.to_formatted_s(:usa) if equipment.sale_date %></strong> –
+              <%= equipment.items_purchased %> –
+              <%= number_to_currency(equipment.purchase_amount) %>
+            </div>
+            <div class="flex gap-2">
+              <%= link_to "Edit", edit_equipment_path(equipment), class: "text-blue-600 hover:underline text-sm" %>
+              <%= link_to "Delete", equipment_path(equipment), method: :delete, data: { confirm: "Are you sure?" }, class: "text-red-600 hover:underline text-sm" %>
+            </div>
+          </li>
         <% end %>
+      </ul>
+    <% else %>
+      <p class="text-gray-500 text-sm mb-4">No equipment sales recorded yet.</p>
+    <% end %>
 
-        <%= link_to "➕ Add New Equipment Sale", new_equipment_path(netball_educator_id: netball_educator.id), class: "inline-block text-sm text-blue-800 hover:underline" %>
+    <%= link_to "➕ Add New Equipment Sale", new_equipment_path(netball_educator_id: netball_educator.id), class: "inline-block text-sm text-blue-800 hover:underline" %>
 
-      <% else %>
-        <div class="mt-6">
-          <p class="text-sm text-gray-500">Save the educator first to add equipment sales.</p>
-        </div>
-      <% end %>
+  <% else %>
+    <div class="mt-6">
+      <p class="text-sm text-gray-500">Save the educator first to add equipment sales.</p>
+    </div>
+  <% end %>
+<% end %>
+
 
     <% end %>
   </div>

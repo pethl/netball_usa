@@ -9,7 +9,7 @@ Date::DATE_FORMATS[:d_usa] = "%b %d, %Y"
 Date::DATE_FORMATS[:short_usa_year] = "%b %d, %y"
 # => "Aug 09, 24" — Abbreviated month, 2-digit year (new!)
 
-Date::DATE_FORMATS[:default_date] = "%m/%d/%Y"
+Date::DATE_FORMATS[:default_date] = "%m/%d/%y"
 # => "08/09/2024" — Alternate default style
 
 

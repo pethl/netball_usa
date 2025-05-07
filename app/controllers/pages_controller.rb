@@ -68,7 +68,7 @@ class PagesController < ApplicationController
   end
   
   def educator_sign_up
-     @educator = NetballEducator.new
+    @netball_educator = NetballEducator.new
   end
 
   def membership_landing

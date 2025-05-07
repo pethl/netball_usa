@@ -1,10 +1,8 @@
 class NetballEducatorsController < ApplicationController
   include Pagy::Backend
 
-  before_action :set_netball_educator, only: [:show, :edit, :update, :destroy]
-  ##before_action :authenticate_user!
-  #load_and_authorize_resource
   skip_before_action :authenticate_user!, only: [:show, :create]
+  before_action :set_netball_educator, only: [:show, :edit, :update, :destroy]
   before_action :set_users, only: [:new, :create, :edit, :update]
 
   def index
@@ -125,6 +123,13 @@ class NetballEducatorsController < ApplicationController
 
   def create
     @netball_educator = NetballEducator.new(netball_educator_params)
+
+    # Safer and more parseable logging
+      Rails.logger.info({
+        tag: "NETBALL_EDUCATOR_SUBMISSION",
+        timestamp: Time.current.iso8601,
+        params: params[:netball_educator]
+      }.to_json)
 
     if @netball_educator.save
       redirect_to @netball_educator, notice: 'Educator was successfully created.'

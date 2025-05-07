@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   before_action :set_event_collections, only: %i[ new show edit update ]
   before_action :set_event, only: %i[ show edit update destroy ]
   load_and_authorize_resource
-
+ 
   # GET /events
   def index
     @events = filtered_events(upcoming: true).order(:date)
@@ -110,7 +110,7 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:event_type, :is_educational,:name, :date, :end_date, :attend, :website, :key_contact, :city, :state, :location, :details, :booth, :cost_notes, :status, :outcome, person_ids: [], netball_educator_ids: [])
+      params.require(:event).permit(:event_type, :is_educational,:name, :date, :end_date, :proposal_submission_due, :booth_registration_due, :attend, :website, :key_contact, :city, :state, :location, :details, :booth, :cost_notes, :status, :outcome, person_ids: [], netball_educator_ids: [])
     end
 
     def filtered_events(upcoming:)

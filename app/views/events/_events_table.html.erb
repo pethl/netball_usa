@@ -34,8 +34,26 @@
             <td class="px-2 py-4 truncate">
               <%= link_to event.name, edit_event_path(event), class: link_class %>
             </td>
-            <td class="px-2 py-4">
-              <%= event.status %>
+            <td class="px-2 py-4 align-top whitespace-nowrap">
+              <div>
+                <div><%= event.status %></div>
+
+                <% if event.status == "Consider" %>
+                  <div class="text-xs mt-1 leading-tight flex items-center space-x-1">
+                    <i class="fa-solid fa-file-pen text-gray-400 text-xs"></i>
+
+                    <% if event.proposal_submission_due.present? %>
+                      <% days_left = (event.proposal_submission_due - Date.current).to_i %>
+                      <% due_class = days_left <= 7 ? "text-red-500" : "text-yellow-500" %>
+                      <span class="<%= due_class %>">
+                        <%= event.proposal_submission_due.to_formatted_s(:default_date) %>
+                      </span>
+                    <% else %>
+                      <span class="text-gray-400 italic">TBD</span>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
             </td>
             <td class="px-2 py-4">
               <%= event.city %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_04_19_131017) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_07_092133) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -165,6 +165,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_19_131017) do
     t.datetime "end_date"
     t.string "attend"
     t.string "is_educational", default: "No"
+    t.date "proposal_submission_due"
+    t.date "booth_registration_due"
   end
 
   create_table "follow_ups", force: :cascade do |t|
