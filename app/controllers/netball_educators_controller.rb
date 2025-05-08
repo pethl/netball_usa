@@ -7,7 +7,8 @@ class NetballEducatorsController < ApplicationController
 
   def index
     # used for the modal
-    @events = Event.educational.gone# or  filtered events 
+    #@events = Event.educational.gone# or  filtered events 
+    @events = Event.educational.ordered_desc
 
     # 🔥 Educator Access Control
     @netball_educators = NetballEducator.all

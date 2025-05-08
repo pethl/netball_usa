@@ -12,6 +12,7 @@ class Event < ApplicationRecord
   validates :name, presence: true
 
   scope :ordered, -> { order(date: :asc) }
+  scope :ordered_desc, -> { order(date: :desc) }
 
   # New scope for educational events
   scope :educational, -> { where(is_educational: 'Yes') } 

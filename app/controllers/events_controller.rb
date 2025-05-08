@@ -8,7 +8,7 @@ class EventsController < ApplicationController
  
   # GET /events
   def index
-    @events = filtered_events(upcoming: true).order(:date)
+    @events = filtered_events(upcoming: true).order(:date) 
   end
 
   def index_past
