@@ -24,9 +24,17 @@ class NetballEducatorsController < ApplicationController
 
     # Filter by created_at if a date is selected
     if params[:created_at].present?
-    selected_date = Date.parse(params[:created_at]) # Parse the date from the form
-    @netball_educators = @netball_educators.where("created_at >= ?", selected_date.beginning_of_day)
-  end
+      selected_date = Date.parse(params[:created_at]) # Parse the date from the form
+     @netball_educators = @netball_educators.where("created_at >= ?", selected_date.beginning_of_day)
+    end
+
+    # 🔍 Name or Email Search
+    if params[:query].present?
+     query = "%#{params[:query]}%"
+     @netball_educators = @netball_educators.where(
+      "first_name ILIKE :q OR last_name ILIKE :q OR email ILIKE :q", q: query
+      )
+    end
 
     # 🔥 Ordering
    # @netball_educators = @netball_educators.order(created_at: :desc)

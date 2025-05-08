@@ -1,6 +1,6 @@
 <%= content_for(:page_title, "Netball Educators") %>
 
-<%= render 'nav_tabs' %>
+  <%= render 'nav_tabs' %>
 
 <div class="p-4 flex justify-between items-center">
   <% if current_user.admin? %>
@@ -47,6 +47,19 @@
             class="rounded-md border-gray-300 shadow-sm max-w-40 focus:border-blue-900 focus:ring-blue-900 sm:text-sm"
             data-multi-filter-target="field"
             data-action="blur->multi-filter#filter keyup.enter->multi-filter#filter">
+    </div>
+
+    <!-- Name or Email Search -->
+    <div class="flex items-center gap-2">
+      <label for="query_filter" class="text-sm font-medium text-gray-700">Name/Email:</label>
+     <input id="query_filter"
+       type="text"
+       name="query"
+       value="<%= params[:query] %>"
+       placeholder="Name or Email"
+       class="rounded-md border-gray-300 shadow-sm max-w-52 focus:border-blue-900 focus:ring-blue-900 sm:text-sm"
+       data-multi-filter-target="field"
+       data-action="input->multi-filter#filter">
     </div>
   </div>
 
@@ -138,9 +151,6 @@
 
   </div>
 </div>
-
-
-
 </div>
 
 <!-- Educators Table -->
