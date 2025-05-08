@@ -54,8 +54,6 @@ class NetballEducatorsController < ApplicationController
       @netball_educators = @netball_educators.order("created_at DESC, state ASC, city ASC")
      # ✅ Preload event participants as a set of educator IDs (for fast lookup in view)
      @educator_ids_with_participants = EventParticipant.where(netball_educator_id: @netball_educators.pluck(:id)).distinct.pluck(:netball_educator_id).to_set
-
-
   end
 
   def my_educators
@@ -63,7 +61,6 @@ class NetballEducatorsController < ApplicationController
     @netball_educators = @netball_educators.order("created_at DESC, state ASC, city ASC")
       # ✅ Preload event participants as a set of educator IDs (for fast lookup in view)
       @educator_ids_with_participants = EventParticipant.where(netball_educator_id: @netball_educators.pluck(:id)).distinct.pluck(:netball_educator_id).to_set
-
   end
 
   def search
@@ -73,6 +70,8 @@ class NetballEducatorsController < ApplicationController
     else
       @netball_educators = []
     end
+    @educator_ids_with_participants = EventParticipant.where(netball_educator_id: @netball_educators.pluck(:id)).distinct.pluck(:netball_educator_id).to_set
+
   end
 
   def trainers_etc
@@ -176,7 +175,8 @@ class NetballEducatorsController < ApplicationController
       :user_id,
       :mgmt_notes,
       :city,
-      :state
+      :state,
+      event_ids: []
     )
   end
 

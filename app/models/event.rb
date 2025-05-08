@@ -31,7 +31,11 @@ class Event < ApplicationRecord
 
   def event_date_type_name
     "#{self.event_date_formatted}, #{self.event_type}:  #{self.name} "
-   end
+  end
+
+  def event_date_state_type_name
+  "#{self.event_date_formatted} : #{self.state} : #{self.event_type} -  #{self.name} "
+  end
   
   def event_date_formatted
     self.date.to_formatted_s(:usa) 

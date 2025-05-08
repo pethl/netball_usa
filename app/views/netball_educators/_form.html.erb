@@ -112,13 +112,14 @@
         </div>
       </div>
 
+     <!-- FIELDS NOT TO BE SHOWN TO GENERAL PUBLIC IN FORM -->
       <% unless current_user.nil? %>
         <div class="mb-6">
           <%= form.label :user_id, "Allocated To", class: label_class %>
           <div class="mt-1">
             <%= form.collection_select(:user_id, @users, :id, :full_name, { prompt: true }, { class: input_class }) %>
           </div>
-        </div> 
+        </div>  
 
         <div class="mb-6">
           <%= form.label :mgmt_notes, "Management Notes", class: label_class %>
@@ -126,7 +127,13 @@
             <%= form.text_area :mgmt_notes, class: input_class, size: "10x10" %>
           </div>
         </div>
-      <% end %>
+
+        <div class="field">
+          <%= form.label :event_ids, "Registered at Event?" %><br>
+          <%= form.collection_select :event_ids, Event.all.ordered, :id, :event_date_state_type_name,
+                { prompt: "Please select" }, { multiple: true, class: input_class } %>
+        </div>
+      <% end %> 
 
       <!-- Submit button for Educator -->
       <div class="mt-6">
