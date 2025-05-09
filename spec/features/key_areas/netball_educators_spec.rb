@@ -117,4 +117,55 @@ RSpec.describe "NetballEducators Management", type: :feature, js: true do
       expect(page).to have_content("Olivia")
     end
   end
+
+  shared_examples "can manage educators" do |role|
+    let(:user) { create(:user, role: role) }
+
+    before do
+      login_as(user, scope: :user)
+    end
+
+    scenario "sees Add New button on index page" do
+      visit netball_educators_path
+
+      expect(page).to have_selector("#add-new-educator", wait: 5)
+    end
+
+    scenario "creates a new Netball Educator" do
+      visit new_netball_educator_path
+
+      fill_in "netball_educator_first_name", with: "Casey"
+      fill_in "netball_educator_last_name", with: "Taylor"
+      fill_in "netball_educator_email", with: "casey.taylor@example.com"
+      fill_in "netball_educator_school_name", with: "Sunset High"
+      fill_in "netball_educator_city", with: "Austin"
+      find("#netball_educator_state").find("option[value='TX']").select_option
+      find("#netball_educator_level").find("option[value='Middle']").select_option
+
+      click_button "Save Details"
+
+      expect(page).to have_content("Casey Taylor")
+      expect(NetballEducator.exists?(email: "casey.taylor@example.com")).to be true
+    end
+
+    scenario "edits an existing Netball Educator" do
+      educator = create(:netball_educator, first_name: "Jamie")
+
+      visit edit_netball_educator_path(educator)
+      fill_in "netball_educator_city", with: "Houston"
+      click_button "Save Details"
+
+      expect(page).to have_content("Educator was successfully updated.")
+      expect(educator.reload.city).to eq("Houston")
+    end
+  end
+
+  context "as an educators_events_medium user" do
+    include_examples "can manage educators", "educators_events_medium"
+  end
+
+  context "as an educators_events user" do
+    include_examples "can manage educators", "educators_events"
+  end
+
 end

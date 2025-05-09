@@ -2,7 +2,7 @@
 
 class Ability
   include CanCan::Ability
-
+ 
   def initialize(user)
     # 🔒 Public user (not logged in)
     if user.nil?

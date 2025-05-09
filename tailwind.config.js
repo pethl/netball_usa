@@ -9,22 +9,32 @@ module.exports = {
   ],
 
   safelist: [
+    // core layout/padding from your button helpers
+    'bg-blue-900',
+    'hover:bg-blue-700',
+    'text-white',
+    'font-light',
+    'text-sm',
+    'px-3',
+    'py-1.5',
+    'rounded',
+  
+    // outline button
+    'border',
+    'border-blue-900',
+    'text-blue-900',
+    'hover:bg-blue-100',
+  
+    // clear link
+    'underline',
+    'hover:font-semibold',
+    'whitespace-nowrap',
+    'text-xs',
+  
+    // if you use state-based classes in helpers:
     {
       pattern: /bg-(red|green|blue|yellow)-(100|200|300|400|500|600|700|800|900)/,
-    },
-    // 👇 Add explicit utility classes used in Ruby helpers or ERB
-    'min-h-[40px]',
-    'min-h-[48px]',
-    'whitespace-pre-line',
-    'text-sm',
-    'font-medium',
-    'text-gray-900',
-    'border',
-    'border-gray-300',
-    'rounded',
-    'px-2',
-    'py-1',
-    'bg-white'
+    }
   ],
   theme: {
     extend: {

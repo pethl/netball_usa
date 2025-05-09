@@ -6,8 +6,8 @@
 <div class="p-4 flex justify-between items-center">
   <% if current_user.admin?  %>
     <div>
-      <%= link_to "Export educators as spreadsheet", netball_educators_path(format: "xlsx"), class: clear_button_class %> 
-      <%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
+      <%= link_to "To Excel >", netball_educators_path(format: "xlsx"), class: clear_button_class %> 
+      <%= link_to "Add New", new_netball_educator_path, class: form_button_class %>
     </div> 
   <% end %>
 </div>

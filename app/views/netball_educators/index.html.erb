@@ -1,95 +1,84 @@
 <%= content_for(:page_title, "Netball Educators") %>
 
   <%= render 'nav_tabs' %>
+  
+<div class="px-4 py-2 flex flex-wrap md:flex-nowrap justify-between items-end gap-2 md:gap-4">
 
-<div class="p-4 flex justify-between items-center">
-  <% if current_user.admin? %>
-    <div>
-    <div class="relative group inline-block">
-      <%= link_to "To Excel >", 
-        netball_educators_path(format: "xlsx", state: params[:state], city: params[:city], created_at: params[:created_at]),
-        class: clear_button_class %>
-      
-      <div class="absolute bottom-full mb-2 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
-        Click to export records on screen; if filtered, will export filtered records only
+  <!-- Button Group -->
+  <div class="flex gap-2 shrink-0 items-end">
+    <% if current_user.admin? %>
+      <div class="flex flex-col space-y-0.5">
+        <label class="text-xs invisible h-[20px] leading-none">Export</label>
+        <%= link_to "To Excel >", 
+            netball_educators_path(format: "xlsx", state: params[:state], city: params[:city], created_at: params[:created_at]),
+            class: "border border-blue-900 text-blue-900 text-sm px-3 py-2 rounded hover:bg-blue-100" %>
       </div>
-    </div>
-    
-      <%= link_to "Add New ", new_netball_educator_path, class: form_button_class %>
-    </div> 
-  <% end %>
+    <% end %>
 
-  <!-- Multi Filter for State and City -->
-  <div class="flex items-center gap-4" data-controller="multi-filter" data-multi-filter-url-value="<%= netball_educators_path %>">
-    <!-- State Filter -->
-    <div class="flex items-center gap-2">
-      <label for="state_filter" class="text-sm font-medium text-gray-700">State:</label>
-      <select id="state_filter"
-              name="state"
-              class="rounded-md border-gray-300 max-w-40 shadow-sm focus:border-blue-900 focus:ring-blue-900 sm:text-sm"
-              data-multi-filter-target="field"
-              data-action="change->multi-filter#filter">
-        <option value="">All States</option>
-        <% us_states.each do |state| %>
-          <option value="<%= state[1] %>" <%= 'selected' if params[:state] == state[1] %>><%= state[0] %></option>
-        <% end %>
-      </select>
+    <div class="flex flex-col space-y-0.5">
+      <label class="text-xs invisible h-[20px] leading-none">Add</label>
+      <%= link_to "Add New", new_netball_educator_path,
+      id: "add-new-educator",
+          class: "bg-blue-900 hover:bg-blue-700 text-white font-light text-sm px-3 py-2 rounded border border-blue-900" %>
     </div>
+  </div>
 
-    <!-- City Filter -->
-    <div class="flex items-center gap-2">
-      <label for="city_filter" class="text-sm font-medium text-gray-700">City:</label>
-      <input id="city_filter"
-            type="text"
-            name="city"
-            value="<%= params[:city] %>"
-            placeholder="Enter city"
-            class="rounded-md border-gray-300 shadow-sm max-w-40 focus:border-blue-900 focus:ring-blue-900 sm:text-sm"
+  <!-- Right-Aligned Filters -->
+<div class="ml-auto flex flex-wrap gap-2 min-w-0 items-end" data-controller="multi-filter" data-multi-filter-url-value="<%= netball_educators_path %>">
+
+  <!-- State -->
+  <div class="flex flex-col space-y-0.5 w-28">
+    <label for="state_filter" class="text-xs text-gray-600 h-[20px] leading-none">State</label>
+    <select id="state_filter" name="state"
+            class="rounded-md border border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900 text-sm"
             data-multi-filter-target="field"
-            data-action="blur->multi-filter#filter keyup.enter->multi-filter#filter">
-    </div>
-
-    <!-- Name or Email Search -->
-    <div class="flex items-center gap-2">
-      <label for="query_filter" class="text-sm font-medium text-gray-700">Name/Email:</label>
-     <input id="query_filter"
-       type="text"
-       name="query"
-       value="<%= params[:query] %>"
-       placeholder="Name or Email"
-       class="rounded-md border-gray-300 shadow-sm max-w-52 focus:border-blue-900 focus:ring-blue-900 sm:text-sm"
-       data-multi-filter-target="field"
-       data-action="input->multi-filter#filter">
-    </div>
+            data-action="change->multi-filter#filter">
+      <option value="">All</option>
+      <% us_states.each do |state| %>
+        <option value="<%= state[1] %>" <%= 'selected' if params[:state] == state[1] %>><%= state[0] %></option>
+      <% end %>
+    </select>
   </div>
 
+  <!-- City -->
+  <div class="flex flex-col space-y-0.5 w-28">
+    <label for="city_filter" class="text-xs text-gray-600 h-[20px] leading-none">City</label>
+    <input id="city_filter" type="text" name="city" value="<%= params[:city] %>" placeholder="City"
+           class="rounded-md border border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900 text-sm"
+           data-multi-filter-target="field"
+           data-action="blur->multi-filter#filter keyup.enter->multi-filter#filter">
+  </div>
 
-  <!-- Date Filter (Created At) with Tooltip -->
-<div class="flex items-center gap-2" data-controller="date-filter" data-date-filter-url-value="<%= netball_educators_path %>">
-  <!-- Label with Tooltip -->
-  <div class="relative group">
-    <label for="created_at_filter" class="text-sm font-medium text-gray-700">Created Since:</label>
-    <!-- Tooltip text that shows on hover -->
-    <span class="absolute left-0 -top-6 text-xs text-white bg-gray-600 rounded p-2 opacity-0 group-hover:opacity-100 transition-opacity">
-      See created date column far right >>
+  <!-- Name/Email -->
+  <div class="flex flex-col space-y-0.5 w-32">
+    <label for="query_filter" class="text-xs text-gray-600 h-[20px] leading-none">Name/Email</label>
+    <input id="query_filter" type="text" name="query" value="<%= params[:query] %>" placeholder="Name or Email"
+           class="rounded-md border border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900 text-sm"
+           data-multi-filter-target="field"
+           data-action="input->multi-filter#filter">
+  </div>
+
+  <!-- Created (with Tooltip) -->
+  <div class="flex flex-col space-y-0.5 w-32 relative group" data-controller="date-filter" data-date-filter-url-value="<%= netball_educators_path %>">
+    <label for="created_at_filter" class="text-xs text-gray-600 h-[20px] leading-none">Created</label>
+    
+    <!-- Tooltip -->
+    <span class="absolute left-0 -top-6 text-xs text-white bg-gray-600 rounded p-2 opacity-0 group-hover:opacity-100 transition-opacity z-10 whitespace-nowrap">
+      See created column >>
     </span>
+
+    <input id="created_at_filter" type="date" name="created_at" value="<%= params[:created_at] %>"
+           class="rounded-md border border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900 text-sm"
+           data-action="change->date-filter#filterByDate">
   </div>
 
-  <!-- Date Input Field -->
-  <input id="created_at_filter"
-         type="date"
-         name="created_at"
-         value="<%= params[:created_at] %>"
-         class="rounded-md border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900 sm:text-sm mr-4"
-         data-action="change->date-filter#filterByDate"> <!-- New date-filter controller -->
+  <!-- Clear -->
+  <div class="flex flex-col justify-end">
+    <%= link_to "Clear Filters", netball_educators_path, class: "text-xs text-blue-900 underline hover:font-semibold whitespace-nowrap" %>
+  </div>
+</div>
 </div>
 
-
- <%= link_to "Clear",
-          netball_educators_path,
-          class: "text-sm text-blue-900 underline hover:font-semibold whitespace-nowrap mr-2" %>
-
-</div>
 
 <!-- Accordion Section for Educators Wizard -->
 <div data-controller="accordion" class="border border-gray-300 rounded-md shadow-sm mx-4">
