@@ -133,6 +133,10 @@ class NetballEducatorsController < ApplicationController
   def create
     @netball_educator = NetballEducator.new(netball_educator_params)
 
+    # Manually assign associated events (via event_participants)
+    assign_events_to_educator(@netball_educator)
+
+
     # Safer and more parseable logging
       Rails.logger.info({
         tag: "NETBALL_EDUCATOR_SUBMISSION",
@@ -143,12 +147,19 @@ class NetballEducatorsController < ApplicationController
     if @netball_educator.save
       redirect_to @netball_educator, notice: 'Educator was successfully created.'
     else
+      Rails.logger.error("[EducatorCreateError] Validation failed: #{@netball_educator.errors.full_messages.to_sentence}")
+
       render :new
     end
   end
 
   def update
-    if @netball_educator.update(netball_educator_params)
+    @netball_educator.assign_attributes(netball_educator_params.except(:event_ids))
+  
+    # Re-assign selected events
+    assign_events_to_educator(@netball_educator)
+  
+    if @netball_educator.save
       redirect_to @netball_educator, notice: 'Educator was successfully updated.'
     else
       render :edit
@@ -187,6 +198,11 @@ class NetballEducatorsController < ApplicationController
       :state,
       event_ids: []
     )
+  end
+
+  def assign_events_to_educator(educator)
+    event_ids = Array(params[:netball_educator][:event_ids]).reject(&:blank?)
+    educator.events = Event.where(id: event_ids)
   end
 
   def admin_user

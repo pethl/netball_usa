@@ -8,13 +8,15 @@ class EventParticipant < ApplicationRecord
   #validates :person_id, presence: true, unless: :netball_educator_id
   #validates :netball_educator_id, presence: true, unless: :person_id
 
-  validate :only_one_participant_type_present
 
-  def only_one_participant_type_present
-    if person_id.blank? && netball_educator_id.blank?
-      errors.add(:base, "Either person or netball educator must be present")
-    elsif person_id.present? && netball_educator_id.present?
-      errors.add(:base, "Only one of person or netball educator can be present")
-    end
-  end
+  #REMOVED THIS DUE TO SITUATION CAN NEVER ARISE AND CAN CAUSE BUGS
+  #validate :only_one_participant_type_present
+
+  # def only_one_participant_type_present
+  #   if person_id.blank? && netball_educator_id.blank?
+  #     errors.add(:base, "Either person or netball educator must be present")
+  #   elsif person_id.present? && netball_educator_id.present?
+  #     errors.add(:base, "Only one of person or netball educator can be present")
+  #   end
+  # end
 end

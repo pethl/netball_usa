@@ -128,11 +128,17 @@
           </div>
         </div>
 
-        <div class="field">
-          <%= form.label :event_ids, "Registered at Event?" %><br>
-          <%= form.collection_select :event_ids, Event.all.ordered, :id, :event_date_state_type_name,
-                { prompt: "Please select" }, { multiple: true, class: input_class } %>
-        </div>
+       <% if @netball_educator.persisted? %>
+          <div class="field">
+            <%= form.label :event_ids, "Registered at Event?" %><br>
+            <%= form.collection_select :event_ids,
+                Event.all.ordered,
+                :id,
+                :event_date_state_type_name,
+                { prompt: "Please select" },
+                { multiple: true, class: input_class } %>
+          </div>
+        <% end %>
       <% end %> 
 
       <!-- Submit button for Educator -->
@@ -171,7 +177,7 @@
 
   <% else %>
     <div class="mt-6">
-      <p class="text-sm text-gray-500">Save the educator first to add equipment sales.</p>
+      <p class="text-sm text-gray-500">Save the educator record, then link to event or add equipment sales.</p>
     </div>
   <% end %>
 <% end %>
