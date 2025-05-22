@@ -53,9 +53,7 @@
                   <th scope="col" class="px-4 py-3 w-24 text-center">
                       Head Shot?
                   </th>
-                  <th scope="col" class="px-4 py-3 w-24 text-center">
-                      Consent
-                  </th>
+                 
                   
                   <th scope="col" class="px-4 py-3 w-64 text-center">
                       Arriv. Pick Up?
@@ -71,6 +69,10 @@
                   
                   <th scope="col" class="px-4 py-3 w-64 text-left">
                       Dept Flight
+                  </th>
+
+                   <th scope="col" class="px-4 py-3 w-64 text-left">
+                     Hotel Res #
                   </th>
 
                   <th scope="col" class="px-4 py-3 w-64 truncate text-left">
@@ -107,11 +109,7 @@
                   <td class="px-4 py-4 text-center">
                     <%= transfer.obtain_headshot? ? 'Yes' : 'No'  %>
                   </td>
-
-                  <td class="px-4 py-4 text-center">
-                    <%= transfer.consent? ? 'Yes' : 'No'  %>
-                  </td>
-                
+   
                   <td class="px-4 py-4 text-center whitespace-nowrap">
                     <%= transfer.arrival_airport_transport_request  %>
                   </td>
@@ -126,6 +124,10 @@
                 
                   <td class="px-4 py-4 whitespace-nowrap">
                     <%= transfer.departure_time.to_formatted_s(:usa) unless (transfer.departure_time.to_s.empty?)  %>
+                  </td>
+
+                   <td class="px-4 py-4 text-center whitespace-nowrap">
+                    <%= transfer.hotel_reservation  %>
                   </td>
 
                    <td class="px-4 py-4">

@@ -119,7 +119,7 @@ class UniformPdfGenerator
         row(0).background_color = "CCCCCC"
       end
     else
-      pdf.text " All attendees have submitted a t-shirt size!", size: , style: :italic
+      pdf.text " All attendees have submitted a t-shirt size!", size: 10, style: :italic
     end
 
     pdf.move_down 30

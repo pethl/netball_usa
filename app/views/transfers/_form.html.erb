@@ -55,10 +55,7 @@
         <%= form.check_box :obtain_headshot, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded hover:bg-gray-100 focus:ring-blue-500 focus:ring-2 " %>      
         <%= form.label :obtain_headshot, class: "ms-2 text-sm font-medium text-gray-700 hover:text-black hover:bg-gray-100"%>
       </div>
-      <div class="mb-2">
-      <%= form.check_box :consent, disabled: true, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded hover:bg-gray-100 focus:ring-blue-500 focus:ring-2 " %>      
-      <%= form.label :consent, "Data Consent (User update only)", class: "ms-2 text-sm font-medium text-gray-700 hover:text-black hover:bg-gray-100"%>
-    </div>
+      
       
     </div>
 
@@ -113,7 +110,7 @@
                     label = r.key.present? ? "#{r.value} (#{r.key})" : r.value
                     [label, label]
                   },
-                  { prompt: "Select a departure type" },
+                  { prompt: "Select option" },
                   class: input_class %>
           </div>
         </div>
@@ -180,7 +177,7 @@
                     label = r.key.present? ? "#{r.value} (#{r.key})" : r.value
                     [label, label]
                   },
-                  { prompt: "Select a departure type" },
+                  { prompt: "Select option" },
                   class: input_class %>
           </div>
         </div>
@@ -447,4 +444,5 @@
         </div>
       <% end %>
   </div>
+
 </div>
