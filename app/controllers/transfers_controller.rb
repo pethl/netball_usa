@@ -148,6 +148,23 @@ class TransfersController < ApplicationController
       end
     end
   end
+
+  def download_attendee_list_pdf
+    event_name = params[:event_name].presence || latest_event_name
+  
+    respond_to do |format|
+      format.pdf do
+        begin
+          pdf_data = AttendeeListPdfGenerator.new(event_name: event_name).generate
+          send_data pdf_data, filename: 'attendee_list_by_role.pdf', type: 'application/pdf', disposition: 'inline'
+        rescue => e
+          Rails.logger.error("Attendee List PDF generation failed: #{e.message}")
+          flash[:error] = "There was an error generating the attendee list PDF. Please contact support."
+          redirect_to transfers_path
+        end
+      end
+    end
+  end
   
 
   private
@@ -167,6 +184,10 @@ class TransfersController < ApplicationController
       :notes, :hotel_name, :pick_up_grouping, :pickup_type, :pickup_location, :pickup_note, :departure_grouping, :departure_type, :departure_note, 
       :t_shirt_size, :visa_type, :umpire_badge_level, :certification_date,  :headshot, :certification, :event_title, :registration_form_completed, :waiver_form_completed, :read_and_agreed_tcs, 
       person_attributes: [ :id, :level_submitted, :associated, :gender, :tshirt_size, :uniform_size, :certification, :certification_date, :headshot ] )
+    end
+
+    def latest_event_name
+      'US Open 2025 - Austin'
     end
 end
 

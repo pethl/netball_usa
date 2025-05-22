@@ -20,5 +20,9 @@
     <%= link_to "👕 Uniform & T-Shirt PDF", download_uniforms_pdf_path(format: :pdf, value: Date.today.beginning_of_year),
         class: "inline-block py-4 px-2 rounded-t-lg text-blue-600 hover:underline" %>
   </li>
+   <li class="me-2">
+    <%= link_to "📋 Attendee List PDF", transfers_attendee_list_pdf_path(format: :pdf, event_name: @event_name),
+        class: "inline-block py-4 px-2 rounded-t-lg text-blue-600 hover:underline", target: "_blank" %>
+  </li>
 </ul>
 
