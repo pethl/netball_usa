@@ -335,7 +335,7 @@
 
 <% if is_admin? %>
 <div class="m-4 p-2 border-double border-2 border-blue-900 rounded-md mt-2">
-  <div class="text-sm text-left text-gray-500 m-2">Notes</div>
+  <div class="text-sm text-left text-gray-500 m-2">Notes (Admin Only)</div>
     <div class="mb-2 mt-4">
      
       <div class="mt-1">
@@ -347,7 +347,7 @@
 
 <% if current_user&.role != "na_people" %>
   <div class="m-4 p-2 border-double border-2 border-blue-900 rounded-md mt-2">
-    <div class="text-sm text-left text-gray-500 m-2">Events</div>
+    <div class="text-sm text-left text-gray-500 m-2">Events (Admin/Event Admin Only)</div>
      
      <p class="text-sm font-medium text-gray-900 dark:text-white">
       <% if person.events.any? %>

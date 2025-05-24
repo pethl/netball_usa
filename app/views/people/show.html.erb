@@ -1,22 +1,27 @@
 <% content_for(:page_title, "#{@person.full_name} - #{@person.role} ")%>
 
-  <div class="max-w-4/5">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+
+   <div class="w-full mb-6">
     <%= render @person %>
   </div>
 
   
-<div class="m-4">
+ <div class="m-4 space-y-2">
   <%= link_to "Edit this person", edit_person_path(@person), class: link_class  %> <br>
+
   <% if user_signed_in? && current_user.role == "na_people" %>
     <div class="mt-6 text-center">
-    <%= link_to "« Back to Home Page", root_path, class: "text-blue-900 font-semibold hover:underline" %>
-  </div>
-<% end %>
+      <%= link_to "« Back to Home Page", root_path, class: "text-blue-900 font-semibold hover:underline" %>
+    </div>
+  <% end %>
+
   <% if can?(:manage, Person) %>
-  <%= link_to "<< Back to people", people_path, class: link_class  %> <br>
-  <%= link_to "<< Back to Educators - people", trainers_etc_path, class: link_class  %> <br>
-  <%= link_to "Add new person", new_person_path, class: link_class  %>
+    <%= link_to "<< Back to people", people_path, class: link_class  %> <br>
+    <%= link_to "<< Back to Educators - people", trainers_etc_path, class: link_class  %> <br>
+    <%= link_to "Add new person", new_person_path, class: link_class  %>
   <% end %>
  
+  </div>
 </div>
 
