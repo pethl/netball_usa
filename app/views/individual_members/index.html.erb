@@ -1,52 +1,51 @@
 <% content_for(:page_title, "Individual Members (Not linked to a Team)") %>
-<br>
-<div class="m-4">
+
+<div class="my-4">
     <%= link_to "Add Individual Member", new_individual_member_path, class: form_button_class %>
-     <br>
-   </div>
+</div>
 <% if @individual_members.any? %>
 
 <div class="relative overflow-x-auto">
     <table class="w-full text-left rtl:text-right">
-        <thead class="bg-white border-b text-gray-300 font-light text-xs ">
+        <thead class="bg-gray-200 border-b text-gray-600 font-light text-xs ">
             <tr>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-2">
                     Membership Type
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-2">
                     Team
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-2">
                     Full Name
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-2">
                     Email
                 </th>
-                <th scope="col" class="px-6 py-3 text-right">
+                <th scope="col" class="px-6 py-2 text-right">
                     Payments
                 </th>
-                 <th scope="col" class="px-6 py-3">
+                 <th scope="col" class="px-6 py-2">
                     City
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-2">
                     State
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-2">
                     Gender
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-2">
                     Age Status
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-2">
                     Engagement
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-2">
                     Coaching Interest?
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-2">
                     Umpiring Interest?
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-2">
                     Team USA Interest?
                 </th>
                </tr>
