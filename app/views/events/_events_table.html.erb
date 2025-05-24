@@ -1,47 +1,50 @@
 <div id="events">
   <div class="relative overflow-x-auto mb-4">
-    <table class="w-full text-left rtl:text-right table-fixed">
+    <table class="min-w-[900px] text-left rtl:text-right">
       <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs">
         <tr>
-          <th scope="col" class="px-3 py-3 w-48">Date</th>
-          <th scope="col" class="px-3 py-3 w-20 text-center">Details</th>
-          <th scope="col" class="px-3 py-3 w-48">Type</th>
-          <th scope="col" class="px-3 py-3 w-80">Name</th>
-          <th scope="col" class="px-3 py-3 text-left">Status</th>
-          <th scope="col" class="px-3 py-3">City</th>
-          <th scope="col" class="px-3 py-3 text-center">State</th>
-          <th scope="col" class="px-3 py-3 text-center">Educators #</th>
+          <th scope="col" class="px-3 py-3 w-48 align-top">Date</th>
+          <th scope="col" class="px-3 py-3 w-20 text-center align-top">Details</th>
+          <th scope="col" class="px-3 py-3 w-48 align-top">Type</th>
+          <th scope="col" class="px-3 py-3 w-80 align-top">Name</th>
+          <th scope="col" class="px-3 py-3 text-left align-top">Status</th>
+          <th scope="col" class="px-3 py-3 align-top">City</th>
+          <th scope="col" class="px-3 py-3 text-center align-top">State</th>
+          <th scope="col" class="px-3 py-3 text-center align-top">Educators #</th>
           <% if is_admin? %>
-            <th scope="col" class="px-3 py-3 text-right">Budget Total</th>
+            <th scope="col" class="px-3 py-3 text-right align-top">Budget Total</th>
           <% end %>
         </tr>
       </thead>
+
       <tbody>
         <% @events.each do |event| %>
-          <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
-            <td class="px-2 py-4">
-              <%= event.date.to_formatted_s(:usa) unless event.date.to_s.empty? %>
-              <% if !event.end_date.blank? %>..<%= event.end_date.to_formatted_s(:usa) %><% end %>
+          <tr class="bg-white border-b hover:bg-gray-100 ">
+            <td class="px-2 py-4 align-top">
+              <%= event.date.to_formatted_s(:short_usa_year) unless event.date.to_s.empty? %>
+              <% if event.end_date.present? %> .. <%= event.end_date.to_formatted_s(:short_usa_year) %><% end %>
             </td>
-            <td scope="row" class="px-2 py-4 font-medium text-gray-800 whitespace-nowrap text-center">
+
+            <td class="px-2 py-4 align-top text-center font-medium text-gray-800">
               <%= link_to event, data: { turbo: false }, class: "mx-2 text-blue-900 hover:text-blue-600" do %>
-                  <i class="fa-solid fa-eye"></i>
-                <% end %>
+                <i class="fa-solid fa-eye"></i>
+              <% end %>
             </td>
-            <td scope="row" class="px-2 py-4 font-medium text-gray-800 whitespace-nowrap">
-              <%= event.event_type %><br>
+
+            <td class="px-2 py-4 align-top font-medium text-gray-800 whitespace-normal break-words">
+              <%= event.event_type %>
             </td>
-            <td class="px-2 py-4 truncate">
+
+            <td class="px-2 py-4 align-top whitespace-normal break-words">
               <%= link_to event.name, edit_event_path(event), class: link_class %>
             </td>
+
             <td class="px-2 py-4 align-top whitespace-nowrap">
               <div>
                 <div><%= event.status %></div>
-
                 <% if event.status == "Consider" %>
                   <div class="text-xs mt-1 leading-tight flex items-center space-x-1">
                     <i class="fa-solid fa-file-pen text-gray-400 text-xs"></i>
-
                     <% if event.proposal_submission_due.present? %>
                       <% days_left = (event.proposal_submission_due - Date.current).to_i %>
                       <% due_class = days_left <= 7 ? "text-red-500" : "text-yellow-500" %>
@@ -55,23 +58,28 @@
                 <% end %>
               </div>
             </td>
-            <td class="px-2 py-4">
+
+            <td class="px-2 py-4 align-top">
               <%= event.city %>
             </td>
-            <td class="px-2 py-4 text-center">
+
+            <td class="px-2 py-4 align-top text-center">
               <%= event.state %>
             </td>
-            <td class="px-2 py-4 text-center">
+
+            <td class="px-2 py-4 align-top text-center">
               <%= event.netball_educators.count %>
             </td>
+
             <% if is_admin? %>
-              <td class="px-2 py-4 text-right">
+              <td class="px-2 py-4 align-top text-right">
                 <%= number_to_currency(event.budget.budget_total, precision: 2) unless event.budget.to_s.empty? %>
               </td>
             <% end %>
           </tr>
         <% end %>
       </tbody>
+
     </table>
   </div>
 </div>

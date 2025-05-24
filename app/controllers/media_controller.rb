@@ -12,14 +12,14 @@ class MediaController < ApplicationController
   
 
   def index
-    @media = Medium.all.ordered
-
+    @media = Medium.ordered
+  
     @media = @media.where(media_type: params[:media_type]) if params[:media_type].present?
     @media = @media.where("company_name ILIKE ?", "%#{params[:company_name]}%") if params[:company_name].present?
-    @media = @media.where(city: params[:city]) if params[:city].present?
-    @media = @media.where(state: params[:state]) if params[:state].present?
-    @media = @media.where(region_other: params[:region_other]) if params[:region_other].present?
-    @media = @media.where(country: params[:country]) if params[:country].present?
+    @media = @media.where("city ILIKE ?", "%#{params[:city]}%") if params[:city].present?
+    @media = @media.where("state ILIKE ?", "%#{params[:state]}%") if params[:state].present?
+    @media = @media.where("region_other ILIKE ?", "%#{params[:region_other]}%") if params[:region_other].present?
+    @media = @media.where("country ILIKE ?", "%#{params[:country]}%") if params[:country].present?
   end
 
   def my_media
