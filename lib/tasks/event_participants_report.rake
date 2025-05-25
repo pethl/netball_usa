@@ -5,9 +5,9 @@ namespace :reports do
 
     File.open(output_path, "w") do |file|
       Event.includes(event_participants: :netball_educator)
-           .order(:event_date).find_each do |event|
+           .order(:date).find_each do |event|
 
-        file.puts "📅 Event: #{event.name} - #{event.event_date.strftime('%Y-%m-%d')}"
+        file.puts "📅 Event: #{event.name} - #{event.date.strftime('%Y-%m-%d')}"
 
         educators = event.event_participants.map(&:netball_educator).compact
         educators.sort_by!(&:first_name)

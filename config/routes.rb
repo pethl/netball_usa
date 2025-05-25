@@ -72,6 +72,7 @@ Rails.application.routes.draw do
       get 'past', to: 'events#index_past', as: 'past'
       get 'educational', to: 'events#educational', as: 'educational'
       get 'educational_past', to: 'events#educational_past', as: 'educational_past'
+      get :show_educators
     end
   
     member do

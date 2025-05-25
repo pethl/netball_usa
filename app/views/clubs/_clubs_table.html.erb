@@ -54,7 +54,11 @@
               <% if club.club_payments_total > 0 %>
                 <%= number_to_currency(club.club_payments_total, precision: 2) %>
               <% else %>
-                <span class="text-red-500 font-semibold">Payment Due</span>
+                <% if Date.today >= Date.new(Date.today.year, 6, 30) %>
+                  <span class="text-red-500 font-semibold">Payment Due</span>
+                <% else %>
+                  <!-- Blank if before 30 June -->
+                <% end %>
               <% end %>
             </td>
 

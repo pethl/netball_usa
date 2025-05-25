@@ -67,8 +67,11 @@
               <%= event.state %>
             </td>
 
-            <td class="px-2 py-4 align-top text-center">
-              <%= event.netball_educators.count %>
+           <td class="px-2 py-4 align-top text-center">
+             <%= link_to event.netball_educators.count,
+                  show_educators_events_path(event_id: event.id),
+                  title: "View educators for this event",
+                  class: "text-blue-600 hover:underline" %>
             </td>
 
             <% if is_admin? %>

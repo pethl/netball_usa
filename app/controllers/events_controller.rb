@@ -65,6 +65,18 @@ class EventsController < ApplicationController
   def show
   end
 
+  def show_educators
+    @events = Event.ordered # for dropdown filter
+  
+    if params[:event_id].present?
+      @event = Event.find(params[:event_id])
+      @educators = @event.netball_educators.sort_by(&:full_name)
+    else
+      @event = nil
+      @educators = []
+    end
+  end
+
   def new
     @event = Event.new
     @people = Person.active_trainers_and_ambassadors

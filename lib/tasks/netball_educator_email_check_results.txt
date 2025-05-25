@@ -1,43 +1,55 @@
-✅ Existing Emails (35):
-Monicadouglas@yahoo.com
-Sberglund79@gmail.com
-arschindel@aurorak12.org
-bdrollinger@wps.org
-bmischlich@lewispalmer.org
-christal.monger@calhanschool.org
-cmiller@universityschools.com
-deborah.luithly@tsd.org
-destinydallen@yahoo.com
-emily.agone@weldre4.org
-gfair@hsd2.org
-gsibayan@wps.org
-heidi.tremaine@gmail.com
-hhuber@anacondaschools.org
-jessica_pomeroy@dpsk12.net
-john.steelepe@gmail.com
-karla.linenberger@la-schools.net
-kathleen_gappa@dpsk12.net
-lajohnson@hsd2.org
-lgaudreault@yahoo.com
-melissa.baatz@weldre4.org
-michele.whittingham@dcsdk12.org
-monica.larrabee@eagleschools.net
-mzeigler@pagosa.k12.co.us
-rodd.warren@mcsd.org
-rudd6345@outlook.com
-sara.dunkin@tsd.org
-sara.vernet@bvsd.org
-sbarnes@hsd2.org
-sec025744@adams12.org
-sluebbe@garfieldre2.net
-stevenlangford09@gmail.com
-tzick@lewispalmer.org
-wcregan1@dcsdk12.org
-xvue@cherrycreekschools.org
+✅ Existing Emails (47):
+Kristi.seybert@midlandisd.net
+Luvtheaggies@gmail.com
+a.guerra6@ljisd.com
+amacneish@pasadenaisd.org
+arturo.dehoyos@psjaisd.us
+audrahooker@yahoo.com
+barbarap0101@yahoo.com
+bponz1301@sbcglobal.net
+bturne3@neisd.net
+caitlin.bollier@nisd.net
+cjimenez001@rgccisd.org
+cynthia.glosup@nisd.net
+david.halbert@nisd.net
+janice.longino@rockwallisd.org
+jbotello@uisd.net
+jbriones@uisd.net
+jcarranza@wisd.us
+jeadams@episd.org
+jeremy.jordan@elpasoymca.org
+jessica.cardenas@southsideisd.org
+jirenehenderson@gmail.com
+jpedraza@wisd.us
+kellie.sellers@risd.org
+kim.taylor@fortbendisd.com
+krhernandez@aldineisd.org
+kstein1@neisd.net
+lacoach14@gmail.com
+larry.sanchez@ectorcountyisd.org
+lesa.master@birdvilleschools.net
+lguerrero9375@swisd.net
+lpittmanstephenson@garlandisd.net
+mcarri65@mcisd.org
+micaeli.smith@comalisd.org
+mshilling@nisdtx.org
+p.alaniz3@ljisd.com
+psilvius@seguin.k12.tx.us
+ralph.hoard@pfisd.net
+rorodriguez211@yahoo.com
+roxannea@uisd.net
+rrivera@donnaisd.net
+sandhernandez@swisd.net
+sarah.robinszdeb@nisd.net
+scott.albach@myhisd.net
+scravens@irvingisd.net
+stephanieg.19.sg@gmail.com
+urand@ymail.com
+whitney.self@hayscisd.net
 
 ❌ Missing Emails (0):
 
 📊 Summary:
-Total provided: 35
-Existing: 35 (100.0%)
+Total provided: 47
+Existing: 47 (100.0%)
 Missing: 0 (0.0%)
