@@ -355,6 +355,12 @@ module ApplicationHelper
     def people_educator_role
       Reference.where(active: true, group: 'people_educator_role').pluck(:value)
     end
+
+    def country
+      Reference.where(active: true, group: 'country')
+               .order(Arel.sql('CAST("desc" AS INTEGER) ASC'))
+               .pluck(:value)
+    end
     
     def gender
       gender = Reference.where(active: "TRUE", group: 'gender')

@@ -1,6 +1,8 @@
 class Tour < ApplicationRecord
     validates :company, presence: true
 
+    scope :ordered_by_company, -> { order("LOWER(company) ASC") }
+
     #SEE DUPLICATED CODE TO PARTNER
     def contact_two_blank
         if (first_name_secondary.to_s +
@@ -30,29 +32,8 @@ class Tour < ApplicationRecord
 
 #DUP TO SPONSOR PARTNET
     def address_condensed
-        if self.location.to_s.blank? && self.city.to_s.blank? && self.us_state.to_s.blank?
-            return ""
-        elsif self.location.to_s.blank? && self.city.to_s.blank?
-           return "#{self.us_state}"
-    
-        elsif self.location.to_s.blank? && self.us_state.to_s.blank?
-            "#{self.city}"
-        
-        elsif self.city.to_s.blank? && self.us_state.to_s.blank?
-            "#{self.location}"
-    
-        elsif self.location.to_s.blank? 
-            "#{self.city}, #{self.us_state}"
-        
-        elsif self.city.to_s.blank? 
-            "#{self.location}, #{self.us_state}"
-           
-        elsif self.us_state.to_s.blank? 
-            "#{self.location}, #{self.city}"
-        
-        else
-            "#{self.location}, #{self.city}, #{self.us_state}"
-        end
+        parts = [location, city, us_state, country].reject(&:blank?)
+        parts.join(", ")
     end
 
 end
