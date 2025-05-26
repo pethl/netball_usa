@@ -1,5 +1,6 @@
 
-<%= form_with(model: tour) do |form| %>
+
+<%= form_with model: @tour, local: true do |form| %>
 
   <%= form_errors_for(tour) %>
   
@@ -50,11 +51,14 @@
         </div>
     </div>
 
-     <div class="mb-0">
-      <%= form.label :country, "Country", class: label_class  %>
-        <div class="mt-1">
-        <%= form.select :country, options_for_select(country, :selected => tour.country),{:prompt=>true}, class: tight_form_input_class %>
-        </div>
+    <div class="mb-0">
+      <%= form.label :country, "Country", class: label_class %>
+      <div class="mt-1">
+        <%= form.select :country,
+            options_for_select(country_list, tour.country),
+            { prompt: true },
+            class: tight_form_input_class %>
+      </div>
     </div>
 
     <div class="mb-0 md:col-span-3 sm:mt-2 md:mt-0">
@@ -248,7 +252,7 @@
   </div>
   </div>  
   </div>
-<br>
+
 
       <div>
           <%= form.submit "Save Tour", class: form_button_class %>

@@ -356,8 +356,8 @@ module ApplicationHelper
       Reference.where(active: true, group: 'people_educator_role').pluck(:value)
     end
 
-    def country
-      Reference.where(active: true, group: 'country')
+    def country_list
+      Reference.where(active: true, group: 'country_list')
                .order(Arel.sql('CAST("desc" AS INTEGER) ASC'))
                .pluck(:value)
     end
