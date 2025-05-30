@@ -1,5 +1,14 @@
 <% content_for(:page_title, "All Members")%>
 
+<% if current_user.admin? %>
+  <div class="inline-block">
+    <label class="text-xs invisible h-[20px] leading-none">Export</label>
+    <%= link_to "Export Members To Excel >",
+        members_path(format: "xlsx", state: params[:state], city: params[:city], created_at: params[:created_at]),
+        class: "border border-blue-900 text-blue-900 text-sm px-3 py-2 rounded hover:bg-blue-100 inline-block whitespace-nowrap" %>
+  </div>
+<% end %>
+
 <div id="members">
   <br>
     <% if @members.any? %>

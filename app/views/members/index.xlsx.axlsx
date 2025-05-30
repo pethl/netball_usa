@@ -1,0 +1,29 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Members") do |sheet|
+  # Header row — matches your view table
+  sheet.add_row [
+    "First Name", "Last Name", "City", "State", "Club",
+    "Email", "Phone", "Address", "ZIP", "Gender",
+    "Place of Birth", "Age Status", "Engagement Status"
+  ]
+
+  # Data rows
+  @members.each do |member|
+    sheet.add_row [
+      member.first_name,
+      member.last_name,
+      member.city,
+      member.state,
+      member.club_name,
+      member.email,
+      member.phone,
+      member.address,
+      member.zip,
+      member.gender,
+      member.place_of_birth,
+      member.age_status,
+      member.engagement_status
+    ]
+  end
+end

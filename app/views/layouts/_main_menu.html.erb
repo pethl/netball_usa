@@ -180,7 +180,9 @@
       </li>
     <% end %>
 
-    <% if can? :manage, Club %>
+   
+    <% if can?(:manage, Club) || can?(:read, Club) %>
+    
       <li class="mt-2">
         <a href="/clubs/index_admin" class="text-gray-100 hover:font-bold">MEMBERSHIP</a>
       </li>
@@ -190,9 +192,11 @@
       <li class="mt-2 ml-2">
         <a href="/members" class="text-gray-100 hover:font-bold">- All Members</a>
       </li>
+       <% if can? :manage, Club %>
       <li class="mt-2 ml-2">
         <a href="/clubs" class="text-gray-100 hover:font-bold">- Admin Managed Clubs</a>
       </li>
+      <% end %>
       <li class="mt-2 ml-2">
         <a href="/individual_members/" class="text-gray-100 hover:font-bold">- Individual Members</a>
       </li>
@@ -216,6 +220,12 @@
     <% if can? :manage, Venue %>
       <li class="mt-2">
         <a href="/venues" class="text-gray-100 hover:font-bold">VENUES</a>
+      </li>
+    <% end %>
+
+     <% if can? :manage, Vendor %>
+      <li class="mt-2">
+        <a href="/vendors/" class="text-gray-100 hover:font-bold">VENDORS</a>
       </li>
     <% end %>
 

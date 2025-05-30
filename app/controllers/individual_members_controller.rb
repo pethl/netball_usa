@@ -5,7 +5,7 @@ class IndividualMembersController < ApplicationController
   # GET /individual_members
   def index
    
-    if is_admin? || current_user.role=="teams_grants" || current_user.role=="teams_admin"
+    if is_admin? || current_user.role=="teams_grants" || current_user.role=="teams_admin" || current_user.role=="teams_admin"|| current_user.role=="educators_events_medium"
       @individual_members = IndividualMember.all.order(:first_name)
    else
      @individual_members = IndividualMember.where(user_id: current_user.id)

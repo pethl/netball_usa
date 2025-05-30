@@ -2,12 +2,12 @@
 
 <%= render @vendor %>
 
+<hr class="my-2">
 <div>
-  <%= link_to "Edit this vendor", edit_vendor_path(@vendor) %> |
-  <%= link_to "Back to vendors", vendors_path %>
+  <%= link_to "Edit this vendor", edit_vendor_path(@vendor) %> <br>
+  <%= link_to "<< Back to vendors", vendors_path %>
   <% if current_user.admin? %>
-  <%= button_to "Delete this vendor", @vendor, method: :delete,
-  form: { data: { turbo_confirm: "Are you sure?" } }  %>
+ 
 <% end %>
   
 </div>

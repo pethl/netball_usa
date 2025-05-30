@@ -1,6 +1,8 @@
 class Venue < ApplicationRecord
     validates :facility_type, presence: true
 
+    scope :sorted_by_venue_name, -> { order(:venue_name) }
+
     
     #DUP-ISH TO SPONSOR PARTNER TOUR
     def address_condensed

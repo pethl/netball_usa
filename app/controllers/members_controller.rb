@@ -2,9 +2,17 @@ class MembersController < ApplicationController
   before_action :set_club, only: [:edit, :update, :destroy, :show, :new, :create]
   before_action :set_member, only: [:edit, :update, :destroy, :show]
   
-  # GET /members
+
   def index
     @members = Member.all.order(last_name: :asc)
+  
+    respond_to do |format|
+      format.html
+      format.xlsx do
+        # No pagination — export full list
+        # @members is already set above
+      end
+    end
   end
 
   # GET /members/1

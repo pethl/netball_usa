@@ -2,12 +2,12 @@
 <div class="m-4 lg:m-8">
 
   <%= render @venue %>
-
+<hr class="my-2">
   <div class="mt-4">
     <%= link_to "Edit this venue", edit_venue_path(@venue) %> |<br>
     <%= link_to "<< Back to venues", venues_path %>
 
-    <%= button_to "Destroy this record", @venue, method: :delete, class: form_button_class %>
+   
   </div>
 
 </div>

@@ -116,6 +116,19 @@ class Ability
       cannot :destroy, Event
       can :heat_map, NetballEducator
       can :manage, Medium
+      can :manage, Program
+      can :manage, Venue
+      can :manage, Person
+      can :manage, Vendor
+      can :manage, Partner
+      # 🔒 View-only access for Club and Member
+      can :read, Club
+      can :read, Member
+      can :read, IndividualMember
+
+      # ✅ Custom access to special view action
+      can :teams_list_index, Club
+      can :index_admin, Club
 
     # 11 : spare (no specific permissions)
     when "spare"
