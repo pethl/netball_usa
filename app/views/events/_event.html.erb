@@ -83,9 +83,14 @@
         <p class="text-sm font-medium text-gray-900"><%= event.booth %></p>
       </div>
 
-      <div class="md:col-span-2">
+     <div class="md:col-span-2">
         <p class="text-sm text-gray-500">Key Contact:</p>
-        <p class="text-sm font-medium text-gray-900 whitespace-pre-line"><%= event.key_contact %></p>
+        <p class="text-sm font-medium text-gray-900 ">
+          <% if event.key_pe_director.present? %>
+            <%= event.key_pe_director.full_name %><br>
+          <% end %>
+          <%= event.key_contact %>
+        </p>
       </div>
 
       <div class="md:col-span-2">

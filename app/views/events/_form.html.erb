@@ -4,7 +4,7 @@
     <%= form_with(model: event) do |form| %>
       <%= form_errors_for(event) %>
 
-   <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+   <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3">
         
         <!-- Normal Fields -->
         <div>
@@ -126,9 +126,36 @@
           </div>
         </div>
 
+        <div>
+          <%= form.label :key_pe_director_id, "Key Contact (PE Directors)", class: label_class %>
+          <div class="mt-1 relative">
+            <%= form.collection_select :key_pe_director_id,
+                                      NetballEducator.pe_directors_by_state,
+                                      :id,
+                                      ->(e) { "#{e.state} - #{e.last_name}, #{e.first_name}" },
+                                      { prompt: "Select a PE Director" },
+                                      { class: input_class } %>
+
+            <!-- Tooltip Text -->
+            <div class="text-xs text-gray-600 mt-1 flex items-center space-x-1">
+              <span>PE Director not showing in list?</span>
+              <div class="relative group cursor-pointer">
+                <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 9h2v5H9V9zM10 18a8 8 0 100-16 8 8 0 000 16zm0-14a6 6 0 110 12 6 6 0 010-12zM9 7h2V5H9v2z"/>
+                </svg>
+                <div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-56 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                  Only Educators with the PE Director flag ticked will show in this list.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="h-4"></div>
+
         <!-- Big Text Areas (Full Width) -->
         <div class="md:col-span-2">
-          <%= form.label :key_contact, class: label_class %>
+          <%= form.label :key_contact, "Key Contact Notes", class: label_class %>
           <div class="mt-1">
             <%= form.text_area :key_contact, rows: 4, class: input_class %>
           </div>

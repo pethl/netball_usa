@@ -128,7 +128,7 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:event_type, :is_educational, :assigned_user_id, :name, :date, :end_date, :proposal_submission_due, :booth_registration_due, :attend, :website, :key_contact, :city, :state, :location, :details, :booth, :cost_notes, :status, :outcome, person_ids: [], netball_educator_ids: [])
+      params.require(:event).permit(:event_type, :is_educational, :assigned_user_id, :name, :date, :end_date, :proposal_submission_due, :booth_registration_due, :attend, :website, :key_pe_director_id, :key_contact, :city, :state, :location, :details, :booth, :cost_notes, :status, :outcome, person_ids: [], netball_educator_ids: [])
     end
 
     def filtered_events(upcoming:)

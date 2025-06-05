@@ -2,10 +2,12 @@ class NetballEducator < ApplicationRecord
   belongs_to :user, optional: true
   has_many :equipment
   has_many :follow_ups
+  # 1. Events where this educator is *participating* (many-to-many via join)
   has_many :event_participants, dependent: :destroy 
   has_many :events, through: :event_participants
+   # 2. Events where this educator is the *key PE Director contact* (one-to-many direct)
+  has_many :key_events, class_name: "Event", foreign_key: :key_pe_director_id
  
-  
   before_save { email.downcase! }
   before_save :normalize_phone
   
@@ -21,6 +23,16 @@ class NetballEducator < ApplicationRecord
   validates :city, presence: true, length: { maximum: 50 }, on: :create
   validates :state, presence: true
   validates :level, presence: true, on: :create
+
+    # Scope: Only PE Directors, sorted by state, then last_name
+    scope :pe_directors_by_state, -> {
+      where(is_pe_director: true).order(:state, :last_name, :first_name)
+    }
+
+     # Method: Display format "STATE - Lastname, Firstname"
+  def state_name_display
+    "#{state} - #{last_name}, #{first_name}"
+  end
                      
  
   def follow_up

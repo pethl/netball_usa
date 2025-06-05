@@ -1,5 +1,6 @@
 class Event < ApplicationRecord
   belongs_to :assigned_user, class_name: "User", optional: true
+  belongs_to :key_pe_director, class_name: "NetballEducator", optional: true
   has_many :event_participants, dependent: :destroy
   has_many :people, through: :event_participants
   has_many :netball_educators, through: :event_participants
