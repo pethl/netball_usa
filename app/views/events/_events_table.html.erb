@@ -10,7 +10,9 @@
           <th scope="col" class="px-3 py-3 text-left align-top">Status</th>
           <th scope="col" class="px-3 py-3 align-top">City</th>
           <th scope="col" class="px-3 py-3 text-center align-top">State</th>
+          <th scope="col" class="px-3 py-3 text-left align-top">Assigned to</th>
           <th scope="col" class="px-3 py-3 text-center align-top">Educators #</th>
+           
           <% if is_admin? %>
             <th scope="col" class="px-3 py-3 text-right align-top">Budget Total</th>
           <% end %>
@@ -63,9 +65,13 @@
               <%= event.city %>
             </td>
 
-            <td class="px-2 py-4 align-top text-center">
+             <td class="px-2 py-4 align-top">
               <%= event.state %>
             </td>
+
+          <td class="px-2 py-4 align-top text-left">
+            <%= event.assigned_user&.full_name || "—" %>
+          </td>
 
            <td class="px-2 py-4 align-top text-center">
              <%= link_to event.netball_educators.count,
@@ -73,6 +79,7 @@
                   title: "View educators for this event",
                   class: "text-blue-600 hover:underline" %>
             </td>
+
 
             <% if is_admin? %>
               <td class="px-2 py-4 align-top text-right">

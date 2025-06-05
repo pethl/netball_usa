@@ -10,33 +10,28 @@
   </div>
 </div>
 
+<!-- ✅ Always show nav tabs -->
+<header class="ml-2 mt-4 mb-2 flex space-x-6">
+  <ul class="flex space-x-4 list-none">
+    <li>
+      <%= link_to "Current Events", events_path, class: events_tab_class(events_path) %>
+    </li>
+    <li>
+      <%= link_to "Past Events", past_events_path, class: events_tab_class(past_events_path) %>
+    </li>
+    <li>
+      <%= link_to "Calendar", calendar_events_path, class: events_tab_class(calendar_events_path) %>
+    </li>
+    <li>
+      <%= link_to "My Events", my_events_path, class: events_tab_class(my_events_path) %>
+    </li>
+  </ul>
+</header>
+
 <div class="m-2">
   <% if @events.any? %>
-   
-    <header class="ml-2 mt-4 mb-2 flex space-x-6">
-      <ul class="flex space-x-4 list-none">
-        <li>
-          <%= link_to "Current Events", events_path, class: events_tab_class(events_path) %>
-        </li>
-        <li>
-          <%= link_to "Past Events", past_events_path, class: events_tab_class(past_events_path) %>
-        </li>
-         <li>
-          <%= link_to "Calendar", calendar_events_path, class: events_tab_class(calendar_events_path) %>
-        </li>
-      </ul>
-    </header>
-
-      <%= render "events_table" %>
-
+    <%= render "events_table" %>
   <% else %>
-    <p class="px-6 py-4">
-      No records to view
-    </p>
+    <p class="px-6 py-4">No records to view</p>
   <% end %>
-  <br>
 </div>
-
- 
-   
-

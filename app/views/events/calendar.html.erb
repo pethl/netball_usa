@@ -1,4 +1,21 @@
 <% content_for(:page_title, "Events Calendar") %>
+<!-- ✅ Event navigation tabs -->
+<header class="ml-2 mt-4 mb-2 flex space-x-6">
+  <ul class="flex space-x-4 list-none">
+    <li>
+      <%= link_to "Current Events", events_path, class: events_tab_class(events_path) %>
+    </li>
+    <li>
+      <%= link_to "Past Events", past_events_path, class: events_tab_class(past_events_path) %>
+    </li>
+    <li>
+      <%= link_to "Calendar", calendar_events_path, class: events_tab_class(calendar_events_path) %>
+    </li>
+    <li>
+      <%= link_to "My Events", my_events_path, class: events_tab_class(my_events_path) %>
+    </li>
+  </ul>
+</header>
 
 <turbo-frame id="calendar" data-turbo="false">
   <!-- Page Heading with Year and Nav Buttons -->

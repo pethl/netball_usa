@@ -11,6 +11,11 @@ class EventsController < ApplicationController
     @events = filtered_events(upcoming: true).order(:date) 
   end
 
+  def my
+    @events = Event.where(assigned_user_id: current_user.id).ordered
+    render :index
+  end
+
   def index_past
     @events = filtered_events(upcoming: false).order(date: :desc)
     render :index
@@ -98,6 +103,7 @@ class EventsController < ApplicationController
   end
 
   def update
+    @event.assign_attributes(event_params)
     if @event.update(event_params)
       redirect_to @event, notice: "Event was successfully updated.", status: :see_other
     else
@@ -122,7 +128,7 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:event_type, :is_educational,:name, :date, :end_date, :proposal_submission_due, :booth_registration_due, :attend, :website, :key_contact, :city, :state, :location, :details, :booth, :cost_notes, :status, :outcome, person_ids: [], netball_educator_ids: [])
+      params.require(:event).permit(:event_type, :is_educational, :assigned_user_id, :name, :date, :end_date, :proposal_submission_due, :booth_registration_due, :attend, :website, :key_contact, :city, :state, :location, :details, :booth, :cost_notes, :status, :outcome, person_ids: [], netball_educator_ids: [])
     end
 
     def filtered_events(upcoming:)

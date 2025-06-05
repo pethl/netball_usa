@@ -68,11 +68,12 @@ Rails.application.routes.draw do
   # ========== Events ==========
   resources :events do
     collection do
-      get :calendar            # 👈 MOVE calendar here!
+      get :calendar
       get 'past', to: 'events#index_past', as: 'past'
       get 'educational', to: 'events#educational', as: 'educational'
       get 'educational_past', to: 'events#educational_past', as: 'educational_past'
       get :show_educators
+      get 'my', to: 'events#my', as: 'my'
     end
   
     member do

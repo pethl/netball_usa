@@ -33,6 +33,8 @@ class User < ApplicationRecord
   has_many :opportunities
   has_many :media
 
+  has_many :events, foreign_key: :assigned_user_id
+
   has_many(
     :clubs,
     class_name: 'Club',

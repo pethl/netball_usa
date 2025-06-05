@@ -34,6 +34,15 @@
         <p class="text-sm font-medium text-gray-900"><%= event.end_date&.strftime("%m/%d/%Y") %></p>
       </div>
 
+       <div>
+        <p class="text-sm text-gray-500">Assigned To:</p>
+        <p class="text-sm font-medium text-gray-900"> <%= event.assigned_user&.full_name || "—" %></p>
+      </div>
+
+      <div>
+      </div>
+
+
       <div>
         <p class="text-sm text-gray-500">Proposal Submission Due:</p>
         <p class="text-sm font-medium text-gray-900"><%= event.proposal_submission_due&.strftime("%m/%d/%Y") %></p>

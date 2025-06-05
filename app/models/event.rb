@@ -1,12 +1,18 @@
 class Event < ApplicationRecord
+  belongs_to :assigned_user, class_name: "User", optional: true
   has_many :event_participants, dependent: :destroy
   has_many :people, through: :event_participants
   has_many :netball_educators, through: :event_participants
   has_many :event_assignments, dependent: :destroy
  # has_many :transfers, through: :event_assignments
   has_many :transfers
-
   has_one :budget #, dependent: :destroy
+  
+  # for user assignment
+  before_save :track_old_assigned_user
+  after_save :send_allocation_email, if: :assigned_user_saved_change_and_not_self?
+  attr_accessor :old_assigned_user_id
+  # end 
    
   validates :event_type, presence: true
   validates :name, presence: true
@@ -48,4 +54,23 @@ class Event < ApplicationRecord
   def event_date_year
     date.present? ? date.year : "Dates TBD"
   end
+
+  private
+
+  def track_old_assigned_user
+    self.old_assigned_user_id = assigned_user_id_was
+  end
+
+  def assigned_user_saved_change_and_not_self?
+    saved_change_to_assigned_user_id? && assigned_user_id != Current.user&.id
+  end
+
+  def send_allocation_email
+    return if assigned_user.nil?
+  
+    Rails.logger.info "📬 Sending assignment email for Event ##{id} to #{assigned_user.email}"
+  
+    EventMailer.assignment_email(assigned_user, self).deliver_later
+  end
+
 end

@@ -14,7 +14,6 @@
 </div>
 
 
-
 <div class="m-4">
   <% if @events.any? %>
 
@@ -26,6 +25,12 @@
       </li>
       <li>
         <%= link_to "Past Educational Events", educational_past_events_path, class: events_tab_class("/events/educational_past") %>
+      </li>
+        <li>
+        <%= link_to "Calendar", calendar_events_path, class: events_tab_class(calendar_events_path) %>
+      </li>
+      <li>
+        <%= link_to "My Events", my_events_path, class: events_tab_class(my_events_path) %>
       </li>
     </ul>
   </header>

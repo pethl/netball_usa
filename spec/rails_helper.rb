@@ -68,6 +68,7 @@ RSpec.configure do |config|
   config.raise_errors_for_deprecations!                # Make deprecations into hard errors
 
   # === Shoulda Matchers Setup ===
+  require 'shoulda/matchers'
   Shoulda::Matchers.configure do |shoulda_config|
     shoulda_config.integrate do |with|
       with.test_framework :rspec

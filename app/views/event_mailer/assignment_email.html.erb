@@ -1,0 +1,14 @@
+<p>Hi <%= @user.full_name %>,</p>
+
+<p>You have been assigned the event: <strong><%= @event.name %></strong> to action.</p>
+
+<p><strong>Date:</strong> <%= @event.date.strftime('%m/%d/%Y') %></p>
+
+<p>Click this link to view the event:</p>
+<p><%= link_to @event.name, event_url(@event) %></p>
+
+<p>Regards,</p>
+
+<p>
+  <%= image_tag asset_url("Netball_America_Logo.png"), alt: "Netball America", style: "max-width: 200px;" %>
+</p>

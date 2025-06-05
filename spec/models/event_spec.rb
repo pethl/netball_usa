@@ -91,6 +91,49 @@ RSpec.describe Event, type: :model do
         expect(event.budget_count).to eq([budget])
       end
     end
+
+    describe "assignment and email" do
+      include ActiveJob::TestHelper
+    
+      let(:assigner) { create(:user, first_name: "Lisa") }
+      let(:assignee) { create(:user, first_name: "Nathalie") }
+      let!(:event) { create(:event, assigned_user: nil) }
+    
+      before do
+        Current.user = assigner
+        ActionMailer::Base.deliveries.clear
+      end
+    
+      after do
+        clear_enqueued_jobs
+        clear_performed_jobs
+        Current.user = nil
+      end
+    
+      it "assigns a user and sends an email" do
+        perform_enqueued_jobs do
+          event.update!(assigned_user: assignee)
+        end
+      
+        matching_emails = ActionMailer::Base.deliveries.select do |mail|
+          mail.to.include?(assignee.email) && mail.subject.match?(/assigned a new event/i)
+        end
+      
+        expect(matching_emails.size).to eq(1)
+        mail = matching_emails.first
+        expect(mail.body.encoded).to include(event.name)
+      end
+    
+      it "does not send email when assigned to self" do
+        expect {
+          perform_enqueued_jobs do
+            event.update!(assigned_user: assigner)
+          end
+        }.not_to change { ActionMailer::Base.deliveries.count }
+    
+        expect(event.reload.assigned_user).to eq(assigner)
+      end
+    end
   end
 end
 
