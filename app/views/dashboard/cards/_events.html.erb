@@ -3,7 +3,7 @@
 <% custom_statuses = all_statuses - ordered_statuses %>
 <% final_status_order = ordered_statuses + custom_statuses %>
 
-<%= link_to events_path, class: "bg-blue-900 shadow-lg rounded-md flex flex-col justify-between p-4 border-b-4 border-gray-300 text-white font-medium min-h-[200px] hover:shadow-xl hover:scale-[1.01] transition-all duration-200" do %>
+<%= link_to events_path, class: "w-full bg-blue-900 shadow-lg rounded-md flex flex-col justify-between p-4 border-b-4 border-gray-300 text-white font-medium min-h-[200px] hover:shadow-xl hover:scale-[1.01] transition-all duration-200" do %>
   <div class="flex justify-between items-start">
     <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform hover:rotate-12">
       <i class="fa-solid fa-calendar-days text-xl text-blue-800"></i>
@@ -20,7 +20,7 @@
     <% final_status_order.each do |status| %>
       <% events = @events_this_year_by_status[status] || [] %>
       <% if status == "Consider" %>
-        <div class="text-gray-300 font-light flex items-center space-x-2 flex-wrap">
+        <div class="text-gray-300 font-light flex items-center flex-wrap gap-1">
           <span><%= status %>:</span>
           <% events.each do |event| %>
             <% due_date = event.proposal_submission_due %>
@@ -28,23 +28,60 @@
             <% color = days_until_due && days_until_due <= 7 ? "bg-red-500" : "bg-yellow-400" %>
 
             <span class="relative group">
-              <span class="w-4 h-4 inline-block rounded-full border border-white <%= color %> mr-1"></span>
+              <span class="w-4 h-4 inline-block rounded-full border border-white <%= color %>"></span>
               <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block bg-white text-gray-800 text-xs rounded py-1 px-2 z-20 shadow-md whitespace-nowrap pointer-events-none">
                 <%= event.name %>
               </span>
             </span>
           <% end %>
         </div>
-      <% else %>
-        <p class="text-gray-300 font-light"><%= status %>: <%= events.count %></p>
       <% end %>
     <% end %>
 
-    <p>Next Year (<%= Date.current.year + 1 %>): <%= @events_next_year.count %></p>
-    <% @events_next_year_by_status.each do |status, events| %>
-      <p class="text-gray-300 font-light"><%= status %>: <%= events.count %></p>
-    <% end %>
+    <!-- Proposals / Booths Line -->
+    <div class="text-gray-300 font-light flex items-center flex-wrap gap-1">
+      <span>Proposals / Booths:</span>
+      <% @events_this_year.select { |e| e.proposal_submission_due || e.booth_registration_due }.each do |event| %>
+        <% proposal_due = event.proposal_submission_due %>
+        <% booth_due = event.booth_registration_due %>
+        <% days_until_proposal = proposal_due ? (proposal_due - Date.current).to_i : nil %>
+        <% days_until_booth = booth_due ? (booth_due - Date.current).to_i : nil %>
+        <% soonest = [days_until_proposal, days_until_booth].compact.min %>
+
+        <% color = if soonest && soonest <= 7
+                     "bg-red-500"
+                   elsif soonest && soonest <= 30
+                     "bg-yellow-400"
+                   else
+                     "bg-gray-400"
+                   end %>
+
+        <span class="relative group">
+          <span class="w-4 h-4 inline-block rounded-full border border-white <%= color %>"></span>
+          <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block bg-white text-gray-800 text-xs rounded py-1 px-2 z-20 shadow-md whitespace-nowrap pointer-events-none">
+            <%= event.name %><br>
+            <% if proposal_due %>Proposal Due: <%= proposal_due.strftime("%b %-d") %><br><% end %>
+            <% if booth_due %>Booth Due: <%= booth_due.strftime("%b %-d") %><% end %>
+          </span>
+        </span>
+      <% end %>
+    </div>
+
+    <!-- Inline Plan / Prep / Complete -->
+    <% inline_statuses = ["Plan", "Prep", "Complete"] %>
+    <p class="text-sm text-blue-200">
+      <%= inline_statuses.map { |status|
+            count = (@events_this_year_by_status[status] || []).count
+            "#{status} #{count}"
+          }.join(' · ')
+      %>
+    </p>
+
+    <!-- Next Year Summary -->
+    <% next_year = Date.current.year + 1 %>
+    <p class="text-sm text-blue-200">
+      Next Year (<%= next_year %>):
+      <%= @events_next_year_by_status.map { |status, events| "#{status} #{events.count}" }.join(' · ') %>
+    </p>
   </div>
 <% end %>
-
-
