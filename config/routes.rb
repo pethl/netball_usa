@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   
   get 'goodbye', to: 'pages#goodbye'
 
-  resources :netball_associations
+  get "netball_associations/index", to: "netball_associations#index"
+  resources :netball_associations 
   
   resources :open_invites
 

@@ -44,7 +44,7 @@ RSpec.feature "PageSmoke", type: :feature, js: true do
       { path: transfers_path, title: "US Open" },
       { path: inbound_pickups_transfers_path, title: "US Open - Arrivals Transfers" },
       { path: outbound_pickups_transfers_path, title: "US Open - Departures Transfers" },
-
+      { path: "/netball_associations/index", title: "All Associations" },
       { path: "/clubs/index_admin", title: "Clubs" },
       { path: members_path, title: "Members" },
       #{ path: clubs_path, title: "Clubs Managed by NA Administrators" }, SKIP AS DATA RELATED ISSUES
