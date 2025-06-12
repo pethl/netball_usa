@@ -1,10 +1,15 @@
 <main class="container">
- 
   <div class="header">
-    <h1>New club</h1>
+    <% content_for(:page_title, "New Club") %>
   </div>
 
-  <%= turbo_frame_tag @club do %>
+   <% context = params[:context] %>
+
+ <% if params[:context].blank? %>
+    <%= turbo_frame_tag dom_id(@club || Club.new) do %>
+      <%= render "form", club: @club %>
+    <% end %>
+  <% else %>
     <%= render "form", club: @club %>
   <% end %>
-</main> 
+</main>

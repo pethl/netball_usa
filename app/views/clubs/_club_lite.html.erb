@@ -1,0 +1,114 @@
+
+<div class="px-4 py-2 border border-blue-900 rounded-lg shadow-md shadow-blue-900 hover:shadow-lg mb-4 bg-white">
+  <!-- Header: name + location + admin + edit -->
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-y-1 sm:gap-x-4 mb-2">
+    <!-- Name + Location + Admin -->
+    <div class="text-lg font-semibold text-gray-800">
+      <%= club.name %>
+      <span class="text-sm font-normal text-gray-600">
+        – <%= [club.city, club.us_state].compact.join(", ") %>
+      </span>
+      <% if club.creator %>
+        <span class="text-sm font-normal text-blue-900">
+          — Administered by: <%= club.creator.full_name %> (<%= club.creator.email %>)
+        </span>
+      <% end %>
+    </div>
+
+    <!-- Edit Button -->
+      <div class="text-left sm:text-right">
+
+       <%= link_to "Add/Edit Members", club_path(club), 
+            class: "font-semibold text-blue-600 border border-blue-600 p-1 rounded-lg hover:bg-teal-100 inline-flex items-center gap-1", 
+            data: { turbo: false } %>
+            
+        <%= link_to "Edit Club", edit_club_path(club, context: "show"),
+       data: { turbo_frame: "club-details-#{club.id}",
+            turbo_preload: false
+          },
+        class: "font-semibold text-teal-600 border border-teal-600 p-1 rounded-lg hover:bg-teal-100 inline-flex items-center gap-1" %>
+    </div>
+  </div>
+
+  <!-- Responsive Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-1 gap-x-6 text-sm text-gray-800">
+    <div><strong>Created:</strong> <%= club.created_at.strftime('%Y') %></div>
+
+    <div>
+      <strong>Email:</strong>
+      <%= club.email.present? ? mail_to(club.email) : "" %>
+    </div>
+
+    <div>
+      <strong>Number of Members:</strong>
+      <%= club.estimate_total_number_of_club_members %>
+    </div>
+
+    <div>
+      <strong>Renewal:</strong>
+      <% if club.created_at.year == Date.today.year %>
+        New Club
+      <% elsif club.renewed_for_year?(current_membership_year) %>
+        Renewed for <%= current_membership_year %>
+      <% else %>
+        Not Yet Renewed
+      <% end %>
+    </div>
+
+    <div>
+      <strong>Website:</strong>
+      <%= club.website.present? ? link_to(club.website, club.website, class: link_class, target: "_blank") : "" %>
+    </div>
+
+    <div>
+      <strong>Socials:</strong>
+      <div class="flex gap-2 mt-1">
+        <% if club.facebook? %>
+          <div class="relative group">
+            <%= link_to "https://www.facebook.com/#{club.facebook}", target: "_blank", class: "text-blue-600" do %>
+              <i class="fa-brands fa-facebook"></i>
+            <% end %>
+            <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 whitespace-nowrap bg-gray-700 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition">
+              <%= club.facebook %>
+            </div>
+          </div>
+        <% end %>
+
+        <% if club.instagram? %>
+          <div class="relative group">
+            <%= link_to "https://www.instagram.com/#{club.instagram}", target: "_blank", class: "text-pink-600" do %>
+              <i class="fa-brands fa-instagram"></i>
+            <% end %>
+            <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 whitespace-nowrap bg-gray-700 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition">
+              <%= club.instagram %>
+            </div>
+          </div>
+        <% end %>
+
+        <% if club.twitter? %>
+          <div class="relative group">
+            <span class="text-gray-500">
+              <i class="fa-brands fa-x-twitter"></i>
+            </span>
+            <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 whitespace-nowrap bg-gray-700 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition">
+              <%= club.twitter %>
+            </div>
+          </div>
+        <% end %>
+
+        <% if club.other_sm? %>
+          <div class="relative group">
+            <span class="text-gray-500">
+              <i class="fa-regular fa-thumbs-up"></i>
+            </span>
+            <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 whitespace-nowrap bg-gray-700 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition">
+              <%= club.other_sm %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,100 @@
+<div class="px-4 py-2  border border-gray-400 rounded-md shadow-md shadow-blue-900 mb-4 bg-white">
+  <!-- Name + Location + Admin inline -->
+  <div class="text-lg font-semibold text-gray-800">
+    <%= club.name %>
+    <span class="text-sm font-normal text-gray-600">
+      – <%= [club.city, club.us_state].compact.join(", ") %>
+    </span>
+    <% if club.creator %>
+      <span class="text-sm font-normal text-blue-900">
+        — Administered by: <%= club.creator.full_name %> (<%= club.creator.email %>)
+      </span>
+    <% end %>
+  </div>
+
+  <!-- Responsive Details -->
+  <div class="mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-1 gap-x-6 text-sm text-gray-800">
+
+    <div><strong>Created:</strong> <%= club.created_at.strftime('%Y') %></div>
+
+    <div>
+      <strong>Email:</strong>
+      <%= club.email.present? ? mail_to(club.email) : "" %>
+    </div>
+
+    <div>
+      <strong>Number of Members:</strong>
+      <%= club.estimate_total_number_of_club_members %>
+    </div>
+
+    <div>
+      <strong>Renewal:</strong>
+      <% if club.created_at.year == Date.today.year %>
+        New Club
+      <% elsif club.renewed_for_year?(current_membership_year) %>
+        Renewed for <%= current_membership_year %>
+      <% else %>
+        Not Yet Renewed
+      <% end %>
+    </div>
+
+    <div>
+      <strong>Website:</strong>
+      <%= club.website.present? ? link_to(club.website, club.website, target: "_blank", rel: "noopener", class: link_class) : "" %>
+    </div>
+
+    <div>
+      <strong>Socials:</strong>
+      <div class="flex gap-2 mt-1">
+
+        <% if club.facebook? %>
+          <div class="relative group">
+            <%= link_to "https://www.facebook.com/#{club.facebook}", target: "_blank", class: "text-blue-600" do %>
+              <i class="fa-brands fa-facebook"></i>
+            <% end %>
+            <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 whitespace-nowrap bg-gray-700 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition">
+              <%= club.facebook %>
+            </div>
+          </div>
+        <% end %>
+
+        <% if club.instagram? %>
+          <div class="relative group">
+            <%= link_to "https://www.instagram.com/#{club.instagram}", target: "_blank", class: "text-pink-600" do %>
+              <i class="fa-brands fa-instagram"></i>
+            <% end %>
+            <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 whitespace-nowrap bg-gray-700 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition">
+              <%= club.instagram %>
+            </div>
+          </div>
+        <% end %>
+
+        <% if club.twitter? %>
+          <div class="relative group">
+            <span class="text-gray-500">
+              <i class="fa-brands fa-x-twitter"></i>
+            </span>
+            <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 whitespace-nowrap bg-gray-700 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition">
+              <%= club.twitter %>
+            </div>
+          </div>
+        <% end %>
+
+        <% if club.other_sm? %>
+          <div class="relative group">
+            <span class="text-gray-500">
+              <i class="fa-regular fa-thumbs-up"></i>
+            </span>
+            <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 whitespace-nowrap bg-gray-700 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition">
+              <%= club.other_sm %>
+            </div>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

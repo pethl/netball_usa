@@ -1,7 +1,6 @@
 class Club < ApplicationRecord
   has_paper_trail save_changes: true
-  
-  
+
   has_many :members, dependent: :destroy
   has_many :member_key_roles, dependent: :destroy
   has_many :individual_members
@@ -9,6 +8,7 @@ class Club < ApplicationRecord
   has_many :teams
   has_many :notes, dependent: :destroy
 
+  belongs_to :netball_association, optional: true
   belongs_to(
     :creator,
     class_name: 'User',

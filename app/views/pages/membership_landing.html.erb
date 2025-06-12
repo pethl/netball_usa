@@ -1,10 +1,10 @@
-<% if @needs_renewal && !(@club&.new_this_year?) %>
-  <!-- Renewal needed and NOT a brand new club: show banner -->
+<% if current_user&.netball_association.present? %>
+  <%= render "pages/association_landing" %>
+<% elsif @needs_renewal && !(@club&.new_this_year?) %>
   <%= render "pages/renewal_banner" %>
 
 <% else %>
   <% if @renewal_response == "no" %>
-    <!-- User said no: show 'no renewal' landing -->
     <% if @member_type == "Club" %>
       <%= render "pages/landing_teams_no_renewal", club: @club %>
     <% elsif @member_type == "Individual" %>
@@ -12,7 +12,6 @@
     <% end %>
 
   <% else %>
-    <!-- Normal landing -->
     <% if @member_type == "None" %>
       <%= render "pages/landing_new", disable_buttons: false %>
     <% elsif @member_type == "Club" %>

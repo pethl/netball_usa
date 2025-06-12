@@ -1,0 +1,82 @@
+<div id="clubs">
+  <div class="relative overflow-x-auto">
+    <div class="p-1 mb-2 mt-2 border border-blue-900 rounded-lg shadow-md shadow-blue-900 hover:shadow-2xl">
+   
+    <table class="table-auto w-full text-left rtl:text-right">
+      <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs">
+        <tr>
+          <th scope="col" class="px-4 px-2 w-52">Club Name</th>
+          <th scope="col" class="px-4 px-2">City</th>
+          <th scope="col" class="px-4 px-2 text-center">State</th>
+          <th scope="col" class="px-4 px-2 text-center">Year Registered</th>
+          <th scope="col" class="px-4 px-2 text-center whitespace-nowrap">
+            Renewal Status (<%= current_membership_year %>)
+          </th>
+          <th scope="col" class="px-4 px-2 border-x border-gray-200 text-right whitespace-nowrap">
+            Paid (<%= current_membership_year %>)
+          </th>
+          <th scope="col" class="px-4 px-2 w-52 text-center whitespace-nowrap">
+            Members Total
+          </th>
+          <th scope="col" class="px-4 px-2 w-60 text-left">Administered By</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @clubs.each do |club| %>
+          <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+            <td class="px-4 py-4 truncate border-x border-gray-200">
+               <% if club.user_id == current_user.id %>
+                  <span class="text-lg font-semibold">
+                    <%= link_to club.name, club_path(club), class: link_class %>
+                  </span>
+                <% else %>
+                  <span class="text-lg font-semibold text-gray-800"><%= club.name %></span>
+                <% end %>
+                <br>
+              <% if club&.email.present? %>
+                <span class="text-sm text-gray-500">
+                  <i class="fa-solid fa-envelope"></i>
+                  <%= mail_to club.email %>
+                </span>
+              <% end %>
+            </td>
+
+            <td class="px-4 py-4 border-x border-gray-200"><%= club.city %></td>
+            <td class="px-4 py-4 border-x border-gray-200 text-center"><%= club.us_state %></td>
+            <td class="px-4 py-4 border-x border-gray-200 text-center"><%= club.created_at.year %></td>
+            <td class="px-4 py-4 text-center border-x border-gray-200">
+             <% if club.created_at.present? && club.created_at.year == Date.current.year %>
+              <span class="text-green-600 font-semibold">New Club</span>
+            <% elsif club.renewed_for_year?(current_membership_year) %>
+              <span class="text-green-600 font-semibold">Renewed for <%= current_membership_year %></span>
+            <% else %>
+              <span class="text-red-600 font-semibold">Not Yet Renewed</span>
+            <% end %>
+            </td>
+
+            <td class="px-4 py-4 text-right border-x border-gray-200">
+              <% if club.club_payments_total > 0 %>
+                <%= number_to_currency(club.club_payments_total, precision: 2) %>
+              <% elsif Date.today >= Date.new(Date.today.year, 6, 30) %>
+                <span class="text-red-500 font-semibold">Payment Due</span>
+              <% end %>
+            </td>
+
+            <td class="px-4 py-4 text-center border-x border-gray-200">
+             
+              <span class="font-semibold "><%= club.club_total_members %></span>
+            </td>
+
+            <td class="px-4 py-4 text-left border-x border-gray-200">
+              <%= club.creator.full_name %><br>
+               <span class="text-small text-blue-600 ml-2"><%= club.creator.email %></span>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>
+

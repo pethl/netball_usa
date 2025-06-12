@@ -1,0 +1,66 @@
+<% content_for(:page_title, "All Associations") %>
+
+<div class="">
+  <ul class="flex flex-wrap text-xs font-medium text-left text-gray-500">
+    <li class="me-2">
+      <a href="/netball_associations" class="inline-block p-4 text-blue-900 bg-gray-100 rounded-t-lg active" aria-current="page">
+        All Associations
+      </a>
+    </li>
+    <li class="mt-4">
+      <%= link_to "Click Here to Add New Association", new_netball_association_path, class: link_class %>
+    </li>
+  </ul>
+</div>
+
+<div class="m-2"></div>
+
+<% if @netball_associations.any? %>
+  <div class="relative overflow-x-auto">
+    <table class="table-auto w-full text-left rtl:text-right">
+      <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs">
+        <tr>
+          <th class="px-4 py-2">Name</th>
+          <th class="px-4 py-2">City</th>
+          <th class="px-4 py-2">State</th>
+          <th class="px-4 py-2">Country</th>
+          <th class="px-4 py-2">Email</th>
+          <th class="px-4 py-2">Website</th>
+          <th class="px-4 py-2"># Clubs</th>
+          <th class="px-4 py-2">Notes</th>
+          <th class="px-4 py-2">Created</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @netball_associations.each do |assoc| %>
+          <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+            <td class="px-4 py-4 font-semibold">
+              <%= link_to assoc.name, netball_association_path(assoc), class: link_class %>
+            </td>
+            <td class="px-4 py-4"><%= assoc.city %></td>
+            <td class="px-4 py-4"><%= assoc.state %></td>
+            <td class="px-4 py-4"><%= assoc.country %></td>
+            <td class="px-4 py-4">
+              <% if assoc.email.present? %>
+                <%= mail_to assoc.email %>
+              <% end %>
+            </td>
+            <td class="px-4 py-4 truncate">
+              <%= link_to assoc.website, assoc.website, target: "_blank" if assoc.website.present? %>
+            </td>
+            <td class="px-4 py-4 text-center">
+              <%= assoc.clubs.count %>
+            </td>
+            <td class="px-4 py-4"><%= truncate(assoc.notes, length: 50) %></td>
+            <td class="px-4 py-4">
+              <%= assoc.created_at.to_formatted_s(:usa) rescue assoc.created_at.to_date %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p class="px-6 py-4">No associations found.</p>
+<% end %>

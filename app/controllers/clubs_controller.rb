@@ -58,22 +58,41 @@ end
 
   # GET /clubs/new
   def new
-    @club = Club.new
-  end
+      @club = Club.new
+      @club.netball_association_id = params[:netball_association_id] if params[:netball_association_id].present?
+    end
 
   # GET /clubs/1/edit
   def edit
+    if params[:context] == "show"
+      render turbo_stream: turbo_stream.replace(
+        "club-details-#{@club.id}",
+        partial: "clubs/form",
+        locals: { club: @club }
+      )
+    else
+      render :edit # default full-page edit for other pages
+    end
   end
 
   # POST /clubs
   def create
-    @club = Club.new(club_params)
-    @club.user_id = current_user.id
+    Rails.logger.debug "🎯 PARAMS CONTEXT: #{params[:context].inspect}"
+    Rails.logger.debug "🔍 Submitted netball_association_id: #{params[:netball_association_id]}"
 
+    @club = Club.new(club_params)
+    @club.creator = current_user
+    @club.netball_association_id ||= params[:netball_association_id]
+
+  
     if @club.save
-      respond_to do |format|
-        format.html { redirect_to clubs_path, notice: "Club was successfully created." }
-        format.turbo_stream
+      if params[:context] == "association"
+        redirect_to netball_association_path(@club.netball_association), notice: "Club created and linked to this association."
+      else
+        respond_to do |format|
+          format.html { redirect_to clubs_path, notice: "Club created." }
+          format.turbo_stream
+        end
       end
     else
       render :new, status: :unprocessable_entity
@@ -83,11 +102,24 @@ end
   # PATCH/PUT /clubs/1
   def update
     if @club.update(club_params)
-      redirect_to clubs_path, notice: "Club was successfully updated.", status: :see_other
+      if params[:context] == "show"
+        redirect_to netball_association_path(@club.netball_association), notice: "Club updated.", status: :see_other
+      else
+        redirect_to clubs_path, notice: "Club was successfully updated.", status: :see_other
+      end
     else
-      render :edit, status: :unprocessable_entity
+      if params[:context] == "show"
+        render turbo_stream: turbo_stream.replace(
+          "club-details-#{@club.id}",
+          partial: "clubs/form",
+          locals: { club: @club }
+        ), status: :unprocessable_entity
+      else
+        render :edit, status: :unprocessable_entity
+      end
     end
   end
+  
 
   # DELETE /clubs/1
   def destroy
@@ -103,7 +135,7 @@ end
 
     # Only allow a list of trusted parameters through.
     def club_params
-      params.require(:club).permit(:name, :city, :us_state, :membership_category, :email, :website, :facebook, :twitter, :instagram, :other_sm, :estimate_total_number_of_club_members, :estimate_total_active_members, :estimate_total_part_time_members)
+      params.require(:club).permit(:name, :city, :us_state, :membership_category, :email, :website, :facebook, :twitter, :instagram, :other_sm, :estimate_total_number_of_club_members, :estimate_total_active_members, :estimate_total_part_time_members, :netball_association_id)
     end
 
     def active_admin_users

@@ -34,6 +34,7 @@ class User < ApplicationRecord
   has_many :media
 
   has_many :events, foreign_key: :assigned_user_id
+  has_one :netball_association, class_name: "NetballAssociation"
 
   has_many(
     :clubs,

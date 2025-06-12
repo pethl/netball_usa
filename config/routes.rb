@@ -3,9 +3,13 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
+  
   get 'goodbye', to: 'pages#goodbye'
+
+  resources :netball_associations
   
   resources :open_invites
+
   resources :vendors
 
   # ========== Media ==========

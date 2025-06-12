@@ -54,6 +54,12 @@ class Ability
       # Only manage payments linked to their club
       can :read, Payment, club: { user_id: user.id }
 
+      # Allow teamlead to view and edit their own NetballAssociation
+      can [:read, :update], NetballAssociation, user_id: user.id
+
+      # Explicitly prevent access to index or others
+      cannot :index, NetballAssociation
+
     # 3 : grants only
     when "grants"
       can :manage, Grant

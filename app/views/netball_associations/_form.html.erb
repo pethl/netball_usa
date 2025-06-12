@@ -1,0 +1,108 @@
+<div class="px-4 sm:px-6 md:px-8 lg:px-10">
+<%= form_with(model: netball_association, local: true) do |form| %>
+  <%= form_errors_for(netball_association) %>
+
+  <!-- Grid container: 3 cols on md+, 1 col on small -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+    <!-- Name spans 2 columns -->
+    <div class="col-span-1 md:col-span-2">
+      <%= form.label :name, "Association Name*", class: label_class %>
+      <div class="mt-2">
+        <%= form.text_field :name, class: "#{required_input_class} w-full" %>
+      </div>
+    </div>
+
+    <!-- Empty div to keep alignment in 3-col grid -->
+    <div class="hidden md:block"></div>
+
+    <!-- City -->
+    <div>
+      <%= form.label :city, "City*", class: label_class %>
+      <div class="mt-2">
+        <%= form.text_field :city, class: "#{input_class} w-full" %>
+      </div>
+    </div>
+
+    <!-- State -->
+    <div>
+      <%= form.label :state, "State*", class: label_class %>
+      <div class="mt-2">
+             <%= form.select :state, options_for_select(us_states, netball_association.state), { prompt: "Select state" }, class: tight_form_input_class %>
+
+      </div>
+    </div>
+
+
+
+    <!-- Country -->
+    <div>
+      <%= form.label :country, "Country", class: label_class %>
+      <div class="mt-2">
+        <%= form.text_field :country, class: "#{input_class} w-full" %>
+      </div>
+    </div>
+
+    <!-- Website -->
+    <div>
+      <%= form.label :website, "Website", class: label_class %>
+      <div class="mt-2">
+        <%= form.url_field :website, placeholder: "https://", class: "#{input_class} w-full" %>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div>
+      <%= form.label :email, "Email", class: label_class %>
+      <div class="mt-2">
+        <%= form.email_field :email, placeholder: "contact@email.com", class: "#{input_class} w-full" %>
+      </div>
+    </div>
+
+    <!-- Socials filler to align -->
+    <div></div>
+
+    <!-- Facebook -->
+    <div>
+      <span class="text-lg"><i class="fa-brands fa-facebook"></i></span>
+      <%= form.text_field :facebook, placeholder: "Facebook URL", class: "#{input_class} w-full mt-1" %>
+    </div>
+
+    <!-- Instagram -->
+    <div>
+      <span class="text-lg"><i class="fa-brands fa-instagram"></i></span>
+      <%= form.text_field :instagram, placeholder: "Instagram URL", class: "#{input_class} w-full mt-1" %>
+    </div>
+
+    <!-- Twitter -->
+    <div>
+      <span class="text-lg"><i class="fa-brands fa-twitter"></i></span>
+      <%= form.text_field :twitter, placeholder: "Twitter/X URL", class: "#{input_class} w-full mt-1" %>
+    </div>
+
+     <!-- # of clubs -->
+    <div class="w-full sm:w-64 mt-4">
+      <%= form.label :number_of_clubs, "Number of Clubs", class: label_class %>
+      <div class="mt-1">
+        <%= form.number_field :number_of_clubs, class: input_class %>
+      </div>
+    </div>
+
+   
+
+    <!-- Notes spans all 3 columns -->
+    <div class="col-span-1 md:col-span-3 mt-2">
+      <%= form.label :notes, "Notes (optional)", class: label_class %>
+      <%= form.text_area :notes, rows: 4, class: "#{input_class} w-full mt-2" %>
+    </div>
+  </div>
+
+  <!-- Form buttons -->
+  <div class="mt-6">
+    <%= link_to "Cancel", netball_associations_path, class: clear_button_class %>
+    <%= form.submit "Save Association", class: form_button_class %>
+  </div>
+<% end %>  
+</div>
+
+
