@@ -6,6 +6,7 @@
           <th scope="col" class="px-4 px-2 w-52">Club Name</th>
           <th scope="col" class="px-4 px-2">City</th>
           <th scope="col" class="px-4 px-2">State</th>
+           <th scope="col" class="px-4 px-2">Renewed?</th> 
 
           <!-- New dynamic year headers with vertical border -->
           <th scope="col" class="px-4 px-2 border-x border-gray-200 text-right whitespace-nowrap">
@@ -48,6 +49,13 @@
             </td>
             <td class="px-4 py-4 border-x border-gray-200"><%= club.city %></td>
             <td class="px-4 py-4 border-x border-gray-200"><%= club.us_state %></td>
+            <td class="px-4 py-4 border-x border-gray-200 text-center">
+             <% if club.renewed_for_year?(2025) %>
+                <span style="color: green;">2025</span>
+              <% elsif club.renewal_response.to_s.downcase == 'no' %>
+                <span style="color: red;">2025</span>
+              <% end %>
+          </td>
 
             <!-- New current year paid column -->
             <td class="px-4 py-4 text-right border-x border-gray-200">
