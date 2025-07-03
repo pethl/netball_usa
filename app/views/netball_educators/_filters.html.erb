@@ -1,0 +1,55 @@
+ <!-- Right-Aligned Filters -->
+<div class="ml-auto flex flex-wrap gap-2 min-w-0 items-end" data-controller="multi-filter" data-multi-filter-url-value="<%= filter_url %>">
+
+  <!-- State -->
+  <div class="flex flex-col space-y-0.5 w-28">
+    <label for="state_filter" class="text-xs text-gray-600 h-[20px] leading-none">State</label>
+    <select id="state_filter" name="state"
+            class="rounded-md border border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900 text-sm"
+            data-multi-filter-target="field"
+            data-action="change->multi-filter#filter">
+      <option value="">All</option>
+      <% us_states.each do |state| %>
+        <option value="<%= state[1] %>" <%= 'selected' if params[:state] == state[1] %>><%= state[0] %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <!-- City -->
+  <div class="flex flex-col space-y-0.5 w-28">
+    <label for="city_filter" class="text-xs text-gray-600 h-[20px] leading-none">City</label>
+    <input id="city_filter" type="text" name="city" value="<%= params[:city] %>" placeholder="City"
+           class="rounded-md border border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900 text-sm"
+           data-multi-filter-target="field"
+           data-action="blur->multi-filter#filter keyup.enter->multi-filter#filter">
+  </div>
+
+  <!-- Name/Email -->
+  <div class="flex flex-col space-y-0.5 w-32">
+    <label for="query_filter" class="text-xs text-gray-600 h-[20px] leading-none">Name/Email</label>
+    <input id="query_filter" type="text" name="query" value="<%= params[:query] %>" placeholder="Name or Email"
+           class="rounded-md border border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900 text-sm"
+           data-multi-filter-target="field"
+           data-action="input->multi-filter#filter">
+  </div>
+
+  <!-- Created (with Tooltip) -->
+  <div class="flex flex-col space-y-0.5 w-32 relative group" data-controller="date-filter" data-date-filter-url-value="<%= netball_educators_path %>">
+    <label for="created_at_filter" class="text-xs text-gray-600 h-[20px] leading-none">Created</label>
+    
+    <!-- Tooltip -->
+    <span class="absolute left-0 -top-6 text-xs text-white bg-gray-600 rounded p-2 opacity-0 group-hover:opacity-100 transition-opacity z-10 whitespace-nowrap">
+      See created column >>
+    </span>
+
+    <input id="created_at_filter" type="date" name="created_at" value="<%= params[:created_at] %>"
+           class="rounded-md border border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900 text-sm"
+           data-action="change->date-filter#filterByDate">
+  </div>
+
+  <!-- Clear -->
+  <div class="flex flex-col justify-end">
+    <%= link_to "Clear Filters", netball_educators_path, class: "text-xs text-blue-900 underline hover:font-semibold whitespace-nowrap" %>
+  </div>
+</div>
+</div>

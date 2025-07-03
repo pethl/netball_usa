@@ -2,10 +2,17 @@
 
 <%= render 'nav_tabs' %>
 
-<div class="py-4 ml-2">
-  <% if current_user.admin? %>
-    <%= link_to "Add New", new_netball_educator_path, class: form_button_class %>
-  <% end %>
+<div class="flex justify-between items-end flex-wrap gap-4 px-4 py-4">
+  <!-- Left side: Add New button -->
+     <div>
+      <%= link_to "Add New", new_netball_educator_path, class: form_button_class %>
+    </div>
+ 
+  <!-- Right side: Filters -->
+  <div class="ml-auto">
+   <%= render 'netball_educators/filters', filter_url: pe_directors_path %>
+
+  </div>
 </div>
 
 <div class="">

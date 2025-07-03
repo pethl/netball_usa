@@ -114,6 +114,18 @@
 
      <!-- FIELDS NOT TO BE SHOWN TO GENERAL PUBLIC IN FORM -->
       <% unless current_user.nil? %>
+
+      <div class="mb-6 border border-blue-800 rounded-md p-4">
+      <h3 class="text-sm font-semibold text-center text-gray-700 mb-4">Admin Team Only</h3>
+
+
+      <div class="mb-6">
+        <%= form.label :is_pe_director, "PE Director?", class: label_class %>
+        <div class="mt-1">
+          <%= form.check_box :is_pe_director, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-2" %>
+        </div>
+      </div>
+
         <div class="mb-6">
           <%= form.label :user_id, "Allocated To", class: label_class %>
           <div class="mt-1">
@@ -139,6 +151,7 @@
                 { multiple: true, class: input_class } %>
           </div>
         <% end %>
+         </div>
       <% end %> 
 
       <!-- Submit button for Educator -->
