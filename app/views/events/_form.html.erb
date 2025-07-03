@@ -16,7 +16,7 @@
         </div> 
 
          <div>
-          <%= form.label :is_educational, class: label_class %>
+          <%= form.label :is_educational, "Is Educational?", class: label_class %>
           <div class="mt-1">
             <%= form.select :is_educational, [["Yes", "Yes"], ["No", "No"]], {}, class: input_class %>
           </div>
@@ -110,7 +110,7 @@
           <div class="mt-1">
             <%= form.select :state, options_for_select(us_states, selected: event.state), {}, class: input_class %>
           </div>
-        </div>
+        </div> 
 
         <div>
           <%= form.label :location, class: label_class %>

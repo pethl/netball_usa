@@ -284,10 +284,11 @@ module ApplicationHelper
    end
    
    def us_states
-     column_names = ['value','key']
-     us_states = Reference.where(active: "TRUE", group: 'us_states')
-     us_states = us_states.pluck(column_names.join(',')) 
-   end
+    Reference
+      .where(active: true, group: 'us_states')
+      .order(Arel.sql('CAST("desc" AS INTEGER) ASC')) # ✅ quoting reserved word
+      .pluck(:value, :key)
+  end
    
    def club_membership_category
     club_membership_category = Reference.where(active: "TRUE", group: 'club_membership_category').order(:id)
