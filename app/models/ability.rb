@@ -91,7 +91,8 @@ class Ability
       can :manage, Transfer
       can :manage, Person
        # 🔍 Read-only access to Event
-    can [:read, :index, :show], Event
+      can [:read, :index, :show], Event
+      can :calendar, Event
 
     # 8 : educators_events (educators, followups and events)
     when "educators_events"
