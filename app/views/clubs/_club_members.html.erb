@@ -1,52 +1,46 @@
-<div class"block font-light text-gray-400 text-sm">
-    <div class="font-light text-blue-900 mb-2"> 
-        <table class="w-full table-fixed">
-            <thead class="bg-white border-b text-gray-400 font-light text-xs text-left">
-                <tr>
-                    <th scope="col" class="">
-                        Name
-                    </th>
-                    <th scope="col" class="">
-                        Email
-                    </th>
-                    <th scope="col" class="text-right">
-                        Location
-                    </th>
-                    <th scope="col" class="text-center">
-                        Gender
-                    </th>
-                    <th scope="col" class="text-center">
-                        Active / PT?
-                    </th>
-                    <th scope="col" class="text-center">
-                        U18 / Adult
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <% club.members.ordered.each do |member| %>
-                    <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
-                        <td class="pr-2">
-                        <%= member.full_name  %>
-                        </td>
-                        <td class="pr-2 truncate">
-                        <%= member.email  %>
-                        </td>
-                        <td class="pr-2 text-right">
-                        <%= member.city  %> <%= member.state  %>
-                        </td>
-                        <td class="pr-2 text-center">
-                        <%= member.gender  %>
-                        </td>
-                        <td class="pr-2 text-center">
-                        <%= member.engagement_status  %>
-                        </td>
-                        <td class="pr-2 text-center">
-                        <%= member.age_status  %>
-                        </td>
-                     </tr>   
-                <% end %> 
-            </tbody>
-        </table> 
-    </div>
+<div class="block font-light text-gray-400 text-sm">
+  <div class="font-light text-blue-900 mb-2">
+    <table class="w-full table-fixed">
+      <thead class="bg-white border-b text-gray-400 font-light text-xs text-left">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col" class="text-right">Location</th>
+          <th scope="col" class="text-center">Gender</th>
+          <th scope="col" class="text-center">Active / PT?</th>
+          <th scope="col" class="text-center">U18 / Adult</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% members = club.members.ordered %>
+        <% active_members = members.select { |m| ['Active', 'Part-Time'].include?(m.engagement_status) } %>
+        <% inactive_members = members.select { |m| m.engagement_status == 'Inactive' } %>
+
+        <% active_members.each do |member| %>
+          <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+            <td class="pr-2"><%= member.full_name %></td>
+            <td class="pr-2 truncate"><%= member.email %></td>
+            <td class="pr-2 text-right"><%= member.city %> <%= member.state %></td>
+            <td class="pr-2 text-center"><%= member.gender %></td>
+            <td class="pr-2 text-center"><%= member.engagement_status %></td>
+            <td class="pr-2 text-center"><%= member.age_status %></td>
+          </tr>
+        <% end %>
+
+        <% if inactive_members.any? %>
+          <% inactive_members.each do |member| %>
+            <tr class="bg-gray-100 border-b whitespace-nowrap">
+              <td class="pr-2"><%= member.full_name %></td>
+              <td class="pr-2 truncate"><%= member.email %></td>
+              <td class="pr-2 text-right"><%= member.city %> <%= member.state %></td>
+              <td class="pr-2 text-center"><%= member.gender %></td>
+              <td class="pr-2 text-center"><%= member.engagement_status %></td>
+              <td class="pr-2 text-center"><%= member.age_status %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

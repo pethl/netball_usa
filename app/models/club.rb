@@ -131,9 +131,9 @@ class Club < ApplicationRecord
   end
 
   def club_total_members
-    members = Member.where(club_id: self.id).count
+    members = Member.where(club_id: self.id, engagement_status: ["Active", "Part-Time"]).count
     individuals = IndividualMember.where(club_id: self.id).count
-    members + individuals
+    members + individuals 
   end
 
   def club_total_active_members
