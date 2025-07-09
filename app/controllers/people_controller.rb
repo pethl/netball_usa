@@ -115,8 +115,18 @@ class PeopleController < ApplicationController
 
   # DELETE /people/1
   def destroy
-    @person.destroy
-    redirect_to people_url, notice: "Person was successfully destroyed.", status: :see_other
+    begin
+      @person.destroy
+      respond_to do |format|
+        format.html { redirect_to people_url, notice: "Person was successfully destroyed.", status: :see_other }
+        format.turbo_stream { redirect_to people_url, notice: "Person was successfully destroyed.", status: :see_other }
+      end
+    rescue ActiveRecord::InvalidForeignKey => e
+      respond_to do |format|
+        format.html { redirect_to @person, alert: "Cannot delete this person because they are linked to other records." }
+        format.turbo_stream { redirect_to @person, alert: "Cannot delete this person because they are linked to other records." }
+      end
+    end
   end
 
   private

@@ -2,11 +2,18 @@
 
 <%= render "form", person: @person %>
 
-
-
 <div>
-  <%= link_to "Show this person", @person, class: link_class %> 
+  <%= link_to "Show this Person", @person, class: link_class %> 
+  <br>
   <% if can?(:manage, Person) %>
-  | <%= link_to "Back to People", people_path, class: link_class %>
+   <%= link_to "Back to People", people_path, class: link_class %>
 <% end %>
+<br>
+<% if current_user&.id.in?([9, 10]) %>
+  <%= button_to "[ DELETE THIS PERSON ]", person_path(@person),
+      method: :delete,
+      data: { turbo_confirm: "Are you sure you want to delete this person?" },
+      class: "text-blue-900 text-sm tracking-wider font-semibold uppercase hover:underline bg-transparent border-0 p-0" %>
+<% end %>
+<br>
 </div>
