@@ -49,7 +49,7 @@ class Event < ApplicationRecord
     end
   
   def event_date_formatted
-    self.date.to_formatted_s(:usa) 
+    date.present? ? date.to_formatted_s(:usa) : ""
   end
   
   def event_date_year
