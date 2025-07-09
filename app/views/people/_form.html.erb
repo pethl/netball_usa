@@ -348,32 +348,41 @@
 <% if current_user&.role != "na_people" %>
   <div class="m-4 p-2 border-double border-2 border-blue-900 rounded-md mt-2">
     <div class="text-sm text-left text-gray-500 m-2">Events (Admin/Event Admin Only)</div>
-     
-     <p class="text-sm font-medium text-gray-900 dark:text-white">
+
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
       <% if person.events.any? %>
-       <% person.events.each do |event| %>
-       <ul class="list-disc ms-6">
-         <li class="text-sm"><%= event.date.to_formatted_s(:usa) unless (event.date.to_s.empty?) %> - <%= event.name %> <br>
-         </li>
-       </ul>
-        <% end %>
-       <% end %>
-     </p>
+        <ul class="list-disc ms-6">
+          <% person.events.each do |event| %>
+            <li class="text-sm">
+              <%= event.date.to_formatted_s(:usa) unless event.date.blank? %> - <%= event.name %><br>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <span class="text-sm text-gray-500 my-2">No events assigned yet.</span>
+      <% end %>
+    </p>
 
     <%= link_to "Assign to New Event? >>", events_path, class: routing_link_class %>
-    <div class="mb-6">
-     <p class="block text-sm font-medium text-gray-700" %>Personnel (check box to assign)</p>
-     <div class="mt-1">
-        <%= form.collection_check_boxes :event_ids, @events, :id, :event_date_type_name, not_checked: Event.all.map(&:id) do |b| %>
-          <span class="indent-3">
-            <%= b.check_box %>
-            <%= b.label %><br>
-          </span>
-      <% end %>
-     </div>
-     <br>
+
+    <% if @events.present? %>
+      <div class="mb-6">
+        <p class="block text-sm font-medium text-gray-700">Personnel (check box to assign to event)</p>
+        <div class="mt-1">
+          <%= form.collection_check_boxes :event_ids, @events, :id, :event_date_type_name do |b| %>
+            <span class="indent-3">
+              <%= b.check_box %>
+              <%= b.label %><br>
+            </span>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <p class="text-sm text-red-500 mt-2">There are no future events to assign.</p>
+    <% end %>
   </div>
-  <% end %>
+<% end %>
+
 
 
     <div class="text-right">

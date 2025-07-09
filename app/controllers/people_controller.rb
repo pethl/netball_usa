@@ -94,19 +94,21 @@ class PeopleController < ApplicationController
     if @person.save
       redirect_to @person, notice: "Person was successfully created."
     else
+      @events = get_future_events  # ← Ensures form doesn't break
       render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /people/1
   def update
-    @events = get_future_events
+   
     @person.frequent_flyer_numbers = @person.frequent_flyer_numbers.reject { |ffn| ffn.airline.blank? && ffn.number.blank? }
 
     if @person.update(person_params)
 
       redirect_to @person, notice: "Person was successfully updated.", status: :see_other
     else
+      @events = get_future_events
       render :edit, status: :unprocessable_entity
     end
   end
@@ -139,7 +141,7 @@ class PeopleController < ApplicationController
     end
 
     def get_future_events
-      @events = Event.where("date > ?", Time.now - 1.month).order(date: :asc)
+      Event.where("date > ?", Time.now - 1.month).order(date: :asc) || []
     end
 
     def region_for(role, param_region)
