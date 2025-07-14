@@ -5,7 +5,9 @@
         <table class="table-fixed w-full text-left rtl:text-right">
           <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs">
             <tr>
-              <th scope="col" class="px-3 py-3 w-12">Select</th>
+               <% unless local_assigns[:context] == :kidos %>
+                <th scope="col" class="px-3 py-3 w-12">Select</th>
+              <% end %>
               <th scope="col" class="px-3 py-3 w-12">View</th>
               <th scope="col" class="px-3 py-3 w-20">State</th>
               <th scope="col" class="px-3 py-3 w-40">City</th>
@@ -22,19 +24,20 @@
           </thead>
           <tbody>
             <% local_assigns[:educators].each do |educator| %>
-              <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
-               <td class="text-center">
-                 <% if @educator_ids_with_participants.include?(educator.id) %>
-                    <span class="text-blue-700">
-                      <i class="fa-solid fa-link"></i>
-                    </span>
+            
+              <% unless local_assigns[:context] == :kidos %>
+                 <td class="text-center">
+                   <% if @educator_ids_with_participants.include?(educator.id) %>
+                      <span class="text-blue-700">
+                        <i class="fa-solid fa-link"></i>
+                      </span>
                   <% else %>
                     <input type="checkbox" 
                       class="educator-checkbox h-5 w-5 text-blue-900 focus:ring-blue-900 rounded border-gray-300"
                       value="<%= educator.id %>">
                   <% end %>
-
                 </td>
+              <% end %>
 
                 <td class="px-3 py-2">
                   <%= link_to netball_educator_path(educator), data: { turbo: false }, class: "mx-2 text-blue-900 hover:text-blue-600" do %>

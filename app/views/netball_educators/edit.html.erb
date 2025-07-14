@@ -1,4 +1,13 @@
-<% content_for(:page_title, "Educators: Edit")%>
+<% content_for :page_title do %>
+  <% if @netball_educator.role == "Kidokinetics" %>
+    Kidos: Edit Franchise Record
+  <% elsif @netball_educator.is_pe_director? %>
+    PE Director: Edit
+  <% else %>
+    Educator: Edit
+  <% end %>
+<% end %>
+
 
 <%= render "form", netball_educator: @netball_educator %>
 

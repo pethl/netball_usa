@@ -326,6 +326,10 @@ module ApplicationHelper
      educator_level = educator_level.pluck(:value)       
    end
 
+   def educator_roles
+    Reference.where(active: true, group: 'educator_roles').pluck(:value)
+  end
+
     def grant_status
       grant_status = Reference.where(active: "TRUE", group: 'grant_status')
       grant_status = grant_status.pluck(:value)       

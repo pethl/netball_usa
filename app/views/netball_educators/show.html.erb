@@ -1,5 +1,6 @@
 <% if user_signed_in? %>
- <% content_for(:page_title, "Educator")%>
+ <% content_for :page_title, page_title_for(@netball_educator) %>
+
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
   <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
 <% end %>
@@ -14,15 +15,17 @@
 <br>
 <% if user_signed_in? %>
   <div>
-  <%= link_to "Edit this educator", edit_netball_educator_path(@netball_educator), class: block_link_class %> 
+  <%= link_to "Edit this record", edit_netball_educator_path(@netball_educator), class: block_link_class %> 
   <%= link_to "Back to netball educators", netball_educators_path, class: block_link_class %>
+  <%= link_to "Back to P.E. Directors", pe_directors_netball_educators_path, class: block_link_class %>
+  <%= link_to "Back to Kidokinetics", kidos_path, class: block_link_class %>
 
  <% if current_user.admin? %>
   <%= button_to "MGMT ADMIN ONLY: Delete this record", @netball_educator, method: :delete,
   form: { data: { turbo_confirm: "Are you sure?" } }, class: red_link_class %>
  <% end %>
 
-  <div class="my-4">
+  <div class="my-4 text-right">
   <%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
   </div>
 

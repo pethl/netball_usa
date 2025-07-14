@@ -1,6 +1,6 @@
 <div class="border-b border-gray-200">
   <nav class="flex space-x-2 border-b border-gray-200" aria-label="Tabs">
-    <ul class="flex space-x-2 list-none">
+    <ul class="flex space-x-1 list-none">
       <li>
         <%= link_to "All Educators", netball_educators_path, class: educators_tab_class(netball_educators_path) %>
       </li>
@@ -9,6 +9,9 @@
       </li>
       <li>
         <%= link_to "PE Directors", pe_directors_netball_educators_path, class: educators_tab_class(pe_directors_netball_educators_path) %>
+      </li>
+      <li>
+        <%= link_to "Kidos", kidos_path, class: educators_tab_class(kidos_path) %>
       </li>
       <li>
         <%= link_to "Equipment", equipment_index_path, class: educators_tab_class(equipment_index_path) %>

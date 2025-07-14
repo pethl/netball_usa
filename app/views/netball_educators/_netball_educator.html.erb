@@ -6,17 +6,28 @@
   </div>
 
   <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-  <% if is_admin? %>
-    <div class="mt-2 mb-2">
-        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-           Is P.E. Director?:
-        </p>
-        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-        
-        <%= netball_educator.is_pe_director? ? 'Yes' : 'No' %>
-        </p>
+      <% if is_admin? %>
+      <% if kidokinetics?(netball_educator) %>
+        <div class="mt-2 mb-2">
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            Speciality Role:
+          </p>
+          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+            <%= netball_educator.role.presence || "N/A" %>
+          </p>
         </div>
-   <% end %>
+      <% else %>
+        <div class="mt-2 mb-2">
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            Is P.E. Director?:
+          </p>
+          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+            <%= netball_educator.is_pe_director? ? 'Yes' : 'No' %>
+          </p>
+        </div>
+      <% end %>
+    <% end %>
+
 
 
         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -55,22 +66,23 @@
        </div>
     
         <div class="mt-2">
-        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-            School Name:
-        </p>
-        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-        <%= netball_educator.school_name %> 
-        </p>
-         </div>
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            <%= kidokinetics?(netball_educator) ? "Franchise Name:" : "School Name:" %>
+          </p>
+          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+            <%= netball_educator.school_name %> 
+          </p>
+        </div>
 
-          <div class="mt-2">
-        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-            School Website:
-        </p>
-        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-        <%= netball_educator.website %> 
-        </p>
-         </div>
+        <div class="mt-2">
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            <%= kidokinetics?(netball_educator) ? "Franchise Website:" : "School Website:" %>
+          </p>
+          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+            <%= netball_educator.website %> 
+          </p>
+        </div>
+
        
         <div class="mt-2">
           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -81,6 +93,7 @@
           </p>
         </div>
        
+        <% unless kidokinetics?(netball_educator) %>
         <div class="mt-2">
           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
               Level:
@@ -120,6 +133,7 @@
         </div>
               
         <% end %>
+          <% end %> 
  
 <% if user_signed_in? %>
   

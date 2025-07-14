@@ -110,6 +110,7 @@ Rails.application.routes.draw do
   resources :grants
  
   get 'netball_educators/pe_directors' => 'netball_educators#pe_directors', :as => :pe_directors
+  get 'netball_educators/kidos', to: 'netball_educators#kidos', as: :kidos
   get 'netball_educators/search' => 'netball_educators#search', :as => :search
   get 'netball_educators/index_user' => 'netball_educators#index_user', :as => :index_user
   get 'netball_educators/my_educators' => 'netball_educators#my_educators', :as => :my_educators

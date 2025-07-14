@@ -46,7 +46,7 @@
     </div>
 
     <div class="mb-6">
-      <%= form.label :netball_educator_id, class: label_class  %>
+      <%= form.label :netball_educator_id, "Educator / Kidokinetics", class: label_class  %>
       <div class="mt-1">
       <%= form.collection_select(:netball_educator_id, @netball_educators, :id, :reverse_name_school_state,{:prompt=>true}, {:class=>"block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-900 focus:outline-none focus:ring-blue-900 sm:text-sm"
       }) %>

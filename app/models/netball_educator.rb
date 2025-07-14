@@ -22,12 +22,14 @@ class NetballEducator < ApplicationRecord
   validates :school_name, presence: true, length: { maximum: 100 }
   validates :city, presence: true, length: { maximum: 50 }, on: :create
   validates :state, presence: true
-  validates :level, presence: true, on: :create
+  validates :level, presence: true, on: :create, unless: -> { role == "Kidokinetics" }
+
 
     # Scope: Only PE Directors, sorted by state, then last_name
     scope :pe_directors_by_state, -> {
       where(is_pe_director: true).order(:state, :last_name, :first_name)
     }
+    scope :excluding_kidos, -> { where.not(role: "Kidokinetics") }
 
      # Method: Display format "STATE - Lastname, Firstname"
   def state_name_display

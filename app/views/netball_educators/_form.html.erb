@@ -2,6 +2,8 @@
   <div class="bg-white py-2 px-2 shadow sm:rounded-lg sm:px-6">
     
     <%= form_with(model: netball_educator, data: { turbo: false }) do |form| %>
+    <%= form.hidden_field :role, value: netball_educator.role.presence || (params[:kidokinetics] == "true" ? "Kidokinetics" : nil) %>
+
 
       <%= form_errors_for(netball_educator) %>
 
@@ -43,14 +45,17 @@
       </div>
 
       <div class="mb-6">
-        <%= form.label :school_name, "School Name*", class: label_class %>
+        <%= form.label :school_name, kidokinetics?(netball_educator) ? "Franchise Name*" : "School Name*", class: label_class %>
+
+       
         <div class="mt-1">
           <%= form.text_field :school_name, class: input_class %>
         </div>
       </div>
 
       <div class="mb-6">
-        <%= form.label :address, "School Address", class: label_class %>
+       <%= form.label :address, kidokinetics?(netball_educator) ? "Franchise Address" : "School Address", class: label_class %>
+
         <div class="mt-1">
           <%= form.text_field :address, class: input_class %>
         </div>
@@ -78,19 +83,23 @@
       </div>
 
       <div class="mb-6">
-        <%= form.label :website, "School Website", class: label_class %>
+       <%= form.label :website, kidokinetics?(netball_educator) ? "Franchise Website" : "School Website", class: label_class %>
+
         <div class="mt-1">
           <%= form.text_field :website, class: input_class %>
         </div>
       </div>
 
+    <% unless kidokinetics?(netball_educator) %>
       <div class="mb-6">
         <%= form.label :level, "Level*", class: label_class %>
         <div class="mt-1">
           <%= form.select :level, options_for_select(educator_level, selected: netball_educator.level), { prompt: true }, class: input_class %>
         </div>
       </div>
+    <% end %>
 
+ <% unless kidokinetics?(netball_educator) %>
       <div class="mb-6">
         <%= form.label :educator_notes, "What would you like more information on?", class: label_class %>
         <div class="mt-1">
@@ -111,6 +120,7 @@
           <%= form.check_box :authorize, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-2" %>
         </div>
       </div>
+      <% end %>
 
      <!-- FIELDS NOT TO BE SHOWN TO GENERAL PUBLIC IN FORM -->
       <% unless current_user.nil? %>
@@ -118,13 +128,26 @@
       <div class="mb-6 border border-blue-800 rounded-md p-4">
       <h3 class="text-sm font-semibold text-center text-gray-700 mb-4">Admin Team Only</h3>
 
-
-      <div class="mb-6">
-        <%= form.label :is_pe_director, "PE Director?", class: label_class %>
-        <div class="mt-1">
-          <%= form.check_box :is_pe_director, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-2" %>
+      <% unless kidokinetics?(netball_educator) %>
+        <div class="mb-6">
+          <%= form.label :is_pe_director, "PE Director?", class: label_class %>
+          <div class="mt-1">
+            <%= form.check_box :is_pe_director, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-2" %>
+          </div>
         </div>
-      </div>
+        <% end %>
+
+        <% if kidokinetics?(netball_educator) %>
+          <div class="mb-6">
+            <%= form.label :role, "Speciality Role", class: label_class %>
+            <div class="mt-1">
+              <%= form.select :role,
+                    options_for_select(educator_roles, selected: netball_educator.role),
+                    { prompt: true },
+                    class: input_class %>
+            </div>
+          </div>
+        <% end %>
 
         <div class="mb-6">
           <%= form.label :user_id, "Allocated To", class: label_class %>
