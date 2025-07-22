@@ -180,10 +180,12 @@ class TransfersController < ApplicationController
       :grouping_pickup_time, :grouping_departure_time, :departure_meetup_location, :hotel_confirmation_personal, :dietary_requirements_allergies,
       :hotel_arrival, :hotel_departure, :check_in, :check_out, :room_type, :hotel_reservation, :share_volunteer, 
       :arrival_airline, :arrival_flight, :arrival_terminal, :arrival_time, 
-      :departure_airline, :departure_flight, :departure_terminal, :departure_time, 
+      :departure_airline, :departure_flight, :departure_terminal, :departure_time, :transfer_departure_type,
       :notes, :hotel_name, :pick_up_grouping, :pickup_type, :pickup_location, :pickup_note, :departure_grouping, :departure_type, :departure_note, 
       :t_shirt_size, :visa_type, :umpire_badge_level, :certification_date,  :headshot, :certification, :event_title, :registration_form_completed, :waiver_form_completed, :read_and_agreed_tcs, 
-      person_attributes: [ :id, :level_submitted, :associated, :gender, :tshirt_size, :uniform_size, :certification, :certification_date, :headshot ] )
+      person_attributes: 
+      [ :id, :level_submitted, :associated, :gender, :tshirt_size, :inferno_top_polo_size,
+      :inferno_top_vneck_size, :inferno_bottom_skirt_size, :inferno_bottom_shorts_size, :certification, :certification_date, :headshot ] )
     end
 
     def latest_event_name

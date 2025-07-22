@@ -105,7 +105,7 @@
           <%= form.label :pickup_type, "Arrivals Pick-up Type", class: label_class %>
 
           <div class="mt-1">
-            <%= form.select :transfer_departure_type,
+            <%= form.select :pickup_type,
                   Reference.where(group: 'transfer_pickup_type', active: true).map { |r|
                     label = r.key.present? ? "#{r.value} (#{r.key})" : r.value
                     [label, label]
