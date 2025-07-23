@@ -9,7 +9,7 @@
                 <th scope="col" class="px-3 py-3 w-12">Select</th>
               <% end %>
               <th scope="col" class="px-3 py-3 w-12">View</th>
-              <th scope="col" class="px-3 py-3 w-20">State</th>
+              <th scope="col" class="px-3 py-3 w-20 text-center">State</th>
               <th scope="col" class="px-3 py-3 w-40">City</th>
               <th scope="col" class="px-3 py-3 w-64">School/District</th>
               <th scope="col" class="px-3 py-3 w-52">Name</th>
@@ -44,8 +44,8 @@
                     <i class="fa-solid fa-eye"></i>
                   <% end %>
                 </td>
-                <td class="px-3 py-2 truncate"><%= educator.state %></td>
-                <td class="px-3 py-2"><%= educator.city %></td>
+                <td class="px-2 py-2 text-center"><%= educator.state %></td>
+                <td class="px-2 py-2"><%= educator.city %></td>
                 <td class="px-3 py-2 text-wrap truncate">
                   <%= educator.school_name %><br>
                   <%= (link_to educator.website, educator.website, target: '_blank', class: link_class) unless (educator.website.to_s.empty?)%>
@@ -59,7 +59,8 @@
                   <% if educator.is_pe_director? %>
                     <div class="font-bold">P.E. Director</div>
                   <% end %>
-                  <div><%= educator.level %></div>
+                 <div class="whitespace-normal break-words max-w-xs"><%= educator.level %></div>
+
                 </td>
               <% end %>
 
