@@ -1,8 +1,10 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # , :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :validatable, :trackable
+  devise :database_authenticatable, :registerable, 
+         :recoverable, :rememberable, :validatable, :trackable #,:confirmable,
+
+  before_create :skip_confirmation!
          
   validates :first_name, :last_name, presence: true
   after_create :send_admin_mail
@@ -161,6 +163,11 @@ class User < ApplicationRecord
   def send_sonya_mail
     # email to advise Sonya / info@netballamerica.com that a new user has registered, most are club admins
     UserMailer.new_team_sign_up(email).deliver
+  end
+
+  private
+  def skip_confirmation!
+    self.confirmed_at ||= Time.current
   end
   
 end
