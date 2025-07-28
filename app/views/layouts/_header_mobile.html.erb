@@ -25,6 +25,9 @@
         <div><a href="/grants" class="block py-1 hover:font-bold">GRANTS</a></div>
         <div><a href="/events" class="block py-1 hover:font-bold">EVENTS</a></div>
         <div><a href="/programs" class="block py-1 hover:font-bold">BAI PROGRAMS</a></div>
+         <% if can_see_netball_academy_section? %>
+            <div><a href="/netball_academies" class="block py-1 hover:font-bold">MY NETBALL ACADEMY</a></div>
+          <% end %>
         <div><a href="/people" class="block py-1 hover:font-bold">PEOPLE</a></div>
         <div><a href="/transfers" class="block py-1 hover:font-bold">US OPEN</a></div>
         <div><a href="/clubs/index_admin" class="block py-1 hover:font-bold">MEMBERSHIP</a></div>

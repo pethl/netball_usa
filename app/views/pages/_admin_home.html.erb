@@ -11,7 +11,9 @@
   <%= render partial: "dashboard/cards/sponsors" %>
   <%= render partial: "dashboard/cards/grants" %>
   <%= render partial: "dashboard/cards/partners" %>
-  <%= render partial: "dashboard/cards/netball_academies" %>
+  <% if can_see_netball_academy_section? %>
+    <%= render "dashboard/cards/netball_academies" %>
+  <% end %>
   <%= render partial: "dashboard/cards/vendors" %>
   <%= render partial: "dashboard/cards/tours" %>
   <%= render partial: "dashboard/cards/venues" %>

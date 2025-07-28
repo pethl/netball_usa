@@ -42,35 +42,33 @@
   </ul>
 </div>
 
-
 <% if @netball_academies.any? %>
-  <div class="relative overflow-x-auto mt-4 border border-gray-300 rounded-md shadow-sm bg-white mb-20">
-    <table class="w-full table-fixed text-left text-sm">
-      <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
-        <tr>
-          <th class="px-4 py-2 w-64 whitespace-nowrap truncate">Name</th>
-          <th class="px-4 py-2 w-72 whitespace-nowrap truncate">Email</th>
-          <th class="px-2 py-2">City</th>
-          <th class="px-2 py-2">State</th>
-         <th class="px-4 py-2 w-60">Netball Club</th>
-         <th class="px-4 py-2 w-48">Subscription Plan</th>
+ <div class="overflow-x-auto w-full mt-4 border border-gray-300 rounded-md shadow-sm bg-white mb-20">
+  <table class="w-full text-left text-sm">
+    <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
+      <tr>
+        <th class="px-4 py-2 min-w-[140px]">Name</th>
+        <th class="px-4 py-2 min-w-[180px]">Email</th>
+        <th class="px-2 py-2">City</th>
+        <th class="px-2 py-2">State</th>
+        <th class="px-4 py-2 min-w-[150px]">Netball Club</th>
+        <th class="px-4 py-2 min-w-[120px]">Subscription Plan</th>
+        <th class="px-4 py-2 w-28 whitespace-nowrap">Signed Up</th>
 
-          <th class="px-4 py-2 w-28">Signed Up</th>
-          <th class="px-4 py-2 w-24 text-right">Amount</th>
-
-        </tr>
-      </thead>
-      <tbody>
-        <% @netball_academies.each do |na| %>
-          <tr class="border-b hover:bg-gray-50">
-            <td class="px-4 py-2 whitespace-nowrap w-48"><%= na.full_name %></td>
-            <td class="px-4 py-2 whitespace-nowrap w-64">
-             <% if na.email.present? %>
-                <%= link_to na.email, edit_netball_academy_path(na), class: link_class %>
-              <% end %>
-            </td>
-            <td class="px-2 py-2"><%= na.city %></td>
-            <td class="px-4 py-2 align-top text-sm text-nowrap">
+        <th class="px-4 py-2 w-24 text-right">Amount</th>
+      </tr>
+    </thead>
+        <tbody>
+          <% @netball_academies.each do |na| %>
+            <tr class="border-b hover:bg-gray-50">
+              <td class="px-4 py-2 whitespace-nowrap w-48 truncate"><%= na.full_name %></td>
+              <td class="px-4 py-2 whitespace-nowrap w-64 truncate">
+                <% if na.email.present? %>
+                  <%= link_to na.email, edit_netball_academy_path(na), class: link_class %>
+                <% end %>
+              </td>
+              <td class="px-2 py-2"><%= na.city %></td>
+              <td class="px-4 py-2 text-sm whitespace-nowrap">
                 <% if na.us_state.present? %>
                   <%= na.us_state %>
                 <% elsif na.city.present? %>
@@ -79,29 +77,29 @@
                   <%= na.country %>
                 <% end %>
               </td>
-            <td class="px-4 py-2">
-              <% if na.club.present? %>
-                <%= na.club.name %>
-                <% if na.other_club_name.present? %>
-                  <br><span class="text-xs text-gray-600 italic">Other: <%= na.other_club_name %></span>
+              <td class="px-4 py-2">
+                <% if na.club.present? %>
+                  <%= na.club.name %>
+                  <% if na.other_club_name.present? %>
+                    <br><span class="text-xs text-gray-600 italic">Other: <%= na.other_club_name %></span>
+                  <% end %>
+                <% elsif na.other_club_name.present? %>
+                  <%= na.other_club_name %>
                 <% end %>
-              <% elsif na.other_club_name.present? %>
-                <%= na.other_club_name %>
-              <% end %>
-            </td>
-
-            <td class="px-2 py-2"><%= na.subscribed_plans %></td>
-            <td class="px-2 py-2"><%= na.signed_up&.strftime("%m-%d-%Y") %></td>
-           <td class="px-4 py-2 align-top text-right text-sm">
-              <%= number_with_precision(na.amount, precision: 2, strip_insignificant_zeros: true) if na.amount.present? %>
-              <%= "$" if na.amount.present? %>
-            </td>
-
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+              </td>
+              <td class="px-2 py-2"><%= na.subscribed_plans %></td>
+              <td class="px-2 py-2"><%= na.signed_up&.strftime("%m-%d-%Y") %></td>
+              <td class="px-4 py-2 text-right text-sm">
+                <%= number_with_precision(na.amount, precision: 2, strip_insignificant_zeros: true) if na.amount.present? %>
+                <%= "$" if na.amount.present? %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 <% else %>
   <p class="mt-4 text-gray-600 px-4">No records to view.</p>
 <% end %>
+

@@ -22,6 +22,21 @@ class ApplicationController < ActionController::Base
      {:locale => I18n.locale}
    end
 
+    # Define the admin emails
+  def netball_academy_admins
+    [
+      "pethicklisa@gmail.com",
+      "president@netballamerica.com",
+      "steve@netballamerica.com"
+    ]
+  end
+
+  def can_see_netball_academy_section?
+    current_user && netball_academy_admins.include?(current_user.email)
+  end
+  
+  helper_method :netball_academy_admins, :can_see_netball_academy_section?
+
 
     def is_admin?
       user_signed_in? ? current_user.admin : false
