@@ -3,6 +3,12 @@ class PressRelease < ApplicationRecord
 
   validate :release_date_required_if_link_present
 
+  scope :published, -> {
+    where.not(media_announcement_link: [nil, ""])
+    .where.not(release_date: nil)
+  }
+
+
   private
 
   def release_date_required_if_link_present

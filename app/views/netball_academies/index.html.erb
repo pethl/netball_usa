@@ -1,0 +1,107 @@
+<% content_for(:page_title, "My Netball Academy") %>
+<div class="mt-2 mb-4">
+    <%= link_to "New Record", new_netball_academy_path, class: form_button_class %>
+  </div>
+
+<div class="bg-gray-100 p-2 rounded-lg border border-gray-200">
+  <p class="text-sm mb-2">SEARCH OR FILTER BY ANY OF THESE PARAMETERS</p>
+  <%= form_with url: netball_academies_path, method: :get, local: true, class: "flex flex-wrap items-end gap-2" do %>
+
+    <div class="flex flex-col flex-1 min-w-[100px]">
+      <%= label_tag :q, "Name or Email", class: "text-xs font-medium text-gray-700" %>
+      <%= text_field_tag :q, params[:q], class: "rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm" %>
+    </div>
+
+    <div class="flex flex-col flex-1 min-w-[100px]">
+      <%= label_tag :city, "City", class: "text-xs font-medium text-gray-700" %>
+      <%= text_field_tag :city, params[:city], class: "rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm" %>
+    </div>
+
+    <div class="flex flex-col flex-1 min-w-[100px]">
+      <%= label_tag :us_state, "US State", class: "text-xs font-medium text-gray-700" %>
+     <%= select_tag :us_state, options_for_select(american_states, params[:us_state]), include_blank: "Select",
+      class: "rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm" %>
+    </div>
+
+    <%= submit_tag "Filter", class: "px-3 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-blue-800 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+
+    <%= link_to "Clear", netball_academies_path, class: "px-3 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+
+  <% end %>
+</div>
+<% current_statuses = @netball_academies.map(&:status).uniq %>
+
+<div class="mb-4 flex justify-between items-center border-b">
+  <ul class="flex space-x-2">
+    <li>
+      <%= link_to "Active", netball_academies_path(filter: "active"), class: "inline-block py-2 px-4 text-sm font-medium border-b-2 #{current_statuses == ['Inactive'] ? 'border-transparent text-gray-500' : 'border-blue-900 text-blue-900'}" %>
+    </li>
+    <li>
+      <%= link_to "Inactive", netball_academies_path(filter: "inactive"), class: "inline-block py-2 px-4 text-sm font-medium border-b-2 #{current_statuses == ['Inactive'] ? 'border-blue-900 text-blue-900' : 'border-transparent text-gray-500'}" %>
+    </li>
+  </ul>
+</div>
+
+
+<% if @netball_academies.any? %>
+  <div class="relative overflow-x-auto mt-4 border border-gray-300 rounded-md shadow-sm bg-white mb-20">
+    <table class="w-full table-fixed text-left text-sm">
+      <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
+        <tr>
+          <th class="px-4 py-2 w-64 whitespace-nowrap truncate">Name</th>
+          <th class="px-4 py-2 w-72 whitespace-nowrap truncate">Email</th>
+          <th class="px-2 py-2">City</th>
+          <th class="px-2 py-2">State</th>
+         <th class="px-4 py-2 w-60">Netball Club</th>
+         <th class="px-4 py-2 w-48">Subscription Plan</th>
+
+          <th class="px-4 py-2 w-28">Signed Up</th>
+          <th class="px-4 py-2 w-24 text-right">Amount</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <% @netball_academies.each do |na| %>
+          <tr class="border-b hover:bg-gray-50">
+            <td class="px-4 py-2 whitespace-nowrap w-48"><%= na.full_name %></td>
+            <td class="px-4 py-2 whitespace-nowrap w-64">
+             <% if na.email.present? %>
+                <%= link_to na.email, edit_netball_academy_path(na), class: link_class %>
+              <% end %>
+            </td>
+            <td class="px-2 py-2"><%= na.city %></td>
+            <td class="px-4 py-2 align-top text-sm text-nowrap">
+                <% if na.us_state.present? %>
+                  <%= na.us_state %>
+                <% elsif na.city.present? %>
+                  &nbsp;
+                <% else %>
+                  <%= na.country %>
+                <% end %>
+              </td>
+            <td class="px-4 py-2">
+              <% if na.club.present? %>
+                <%= na.club.name %>
+                <% if na.other_club_name.present? %>
+                  <br><span class="text-xs text-gray-600 italic">Other: <%= na.other_club_name %></span>
+                <% end %>
+              <% elsif na.other_club_name.present? %>
+                <%= na.other_club_name %>
+              <% end %>
+            </td>
+
+            <td class="px-2 py-2"><%= na.subscribed_plans %></td>
+            <td class="px-2 py-2"><%= na.signed_up&.strftime("%m-%d-%Y") %></td>
+           <td class="px-4 py-2 align-top text-right text-sm">
+              <%= number_with_precision(na.amount, precision: 2, strip_insignificant_zeros: true) if na.amount.present? %>
+              <%= "$" if na.amount.present? %>
+            </td>
+
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p class="mt-4 text-gray-600 px-4">No records to view.</p>
+<% end %>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :netball_academies
 
   devise_for :users, controllers: {
     registrations: 'users/registrations'

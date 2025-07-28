@@ -1,0 +1,103 @@
+<%= form_with(model: netball_academy, local: true) do |form| %>
+
+  <%= form_errors_for(netball_academy) %>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 mx-4">
+
+
+    <div>
+      <%= form.label :first_name, class: label_class %>
+      <%= form.text_field :first_name, class: tight_form_input_class %>
+      <%= field_error_for(netball_academy, :first_name) %>
+    </div>
+
+    <div>
+      <%= form.label :last_name, class: label_class %>
+      <%= form.text_field :last_name, class: tight_form_input_class %>
+      <%= field_error_for(netball_academy, :last_name) %>
+    </div>
+
+    <div>
+      <%= form.label :email, class: label_class %>
+      <%= form.email_field :email, class: tight_form_input_class %>
+      <%= field_error_for(netball_academy, :email) %>
+    </div>
+
+    <div>
+      <%= form.label :city, class: label_class %>
+      <%= form.text_field :city, class: tight_form_input_class %>
+    </div>
+
+   <div>
+      <%= form.label :us_state, "State", class: label_class %>
+      <%= form.select :us_state, options_for_select(us_states, selected: netball_academy.us_state), { prompt: true }, class: tight_form_input_class %>
+    </div>
+
+
+    <div>
+      <%= form.label :country, class: label_class %>
+      <%= form.text_field :country, class: tight_form_input_class %>
+    </div>
+
+    <div class="col-span-3 border border-blue-900 rounded-md p-4">
+  <p class="text-sm text-center font-semibold text-blue-900 mb-2">Link to Club  OR  Give Other Name</p>
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div>
+      <%= form.label :club_id, "Netball Club", class: label_class %>
+      <%= form.collection_select :club_id, Club.order(:name), :id, :name, { prompt: "Select if Club Registered" }, class: tight_form_input_class %>
+      <%= field_error_for(netball_academy, :club_id) %>
+    </div>
+
+    <div>
+      <%= form.label :other_club_name, "Other Club Name", class: label_class %>
+      <%= form.text_field :other_club_name, class: tight_form_input_class %>
+    </div>
+  </div>
+</div>
+
+
+    <div>
+      <%= form.label :status, class: label_class %>
+      <%= form.select :status, options_for_select(my_netball_status, selected: netball_academy.status), { prompt: true }, class: tight_form_input_class %>
+      <%= field_error_for(netball_academy, :status) %>
+    </div>
+
+    <div>
+      <%= form.label :subscribed_plans, class: label_class %>
+      <%= form.select :subscribed_plans, options_for_select(subscription_plan, selected: netball_academy.subscribed_plans), { prompt: true }, class: tight_form_input_class %>
+      <%= field_error_for(netball_academy, :subscribed_plans) %>
+    </div>
+
+    <div>
+      <%= form.label :signed_up, class: label_class %>
+      <%= form.date_field :signed_up, class: "#{tight_form_input_class} w-1/2" %>
+    </div>
+
+    <div>
+      <%= form.label :purchase_date, class: label_class %>
+      <%= form.date_field :purchase_date, class: "#{tight_form_input_class} w-1/2" %>
+    </div>
+
+    <div>
+      <%= form.label :training_completed_date, class: label_class %>
+      <%= form.date_field :training_completed_date, class: "#{tight_form_input_class} w-1/2" %>
+    </div>
+
+    <div>
+      <%= form.label :amount, class: label_class %>
+      <%= form.number_field :amount, step: "0.01", class: "#{tight_form_input_class} w-1/2" %>
+    </div>
+
+    <div class="col-span-3">
+      <%= form.label :notes, class: label_class %>
+      <%= form.text_area :notes, rows: 4, class: tight_form_input_class %>
+    </div>
+
+  </div>
+
+  <div class="mt-4 ml-4">
+    <%= form.submit "Save Registration", class: form_button_class %>
+  </div>
+
+<% end %>

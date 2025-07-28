@@ -1,0 +1,2 @@
+module NetballAcademiesHelper
+end

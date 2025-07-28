@@ -65,7 +65,43 @@ class PagesController < ApplicationController
       "COALESCE(SUM(purchase_amount), 0) AS total_purchase"
     )
     .order("year DESC")
+
+    
+    # MY NETBALL ACADEMY CARD
+    # Define your subscription order
+      subscription_order = Reference.where(active: true, group: 'subscription_plan')
+      .pluck(:value)
+      .sort_by { |v| v.to_f }
+
+      # Fetch and group only ACTIVE records
+      @netball_academy_active_stats = NetballAcademy
+      .where(status: 'Active')
+      .select(
+      "COALESCE(NULLIF(TRIM(subscribed_plans), ''), 'Unknown') AS course",
+      "COUNT(*) FILTER (WHERE amount > 0) AS paid_count",
+      "COUNT(*) FILTER (WHERE amount IS NULL OR amount <= 0) AS unpaid_count",
+      "COALESCE(SUM(amount), 0) AS total_amount"
+      )
+      .group("course")
+
+      # Sort active stats by subscription order, Unknown last
+      @netball_academy_active_stats = @netball_academy_active_stats.sort_by do |s|
+      index = subscription_order.index(s.course)
+      index.nil? || s.course == 'Unknown' ? Float::INFINITY : index
+      end
+
+      # Separate inactive summary (no course grouping needed)
+      inactive_scope = NetballAcademy.where(status: 'Inactive')
+      @netball_academy_inactive_summary = {
+      count: inactive_scope.count,
+      total_amount: inactive_scope.sum(:amount).to_f
+      }
+          
+      # MY NETBALL ACADEMY END
+
+
   end
+
   
   def educator_sign_up
     @netball_educator = NetballEducator.new

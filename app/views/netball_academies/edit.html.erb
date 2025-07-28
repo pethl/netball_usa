@@ -1,0 +1,10 @@
+<% content_for(:page_title, "My Netball Academy: Edit - #{@netball_academy.full_name}")%>
+
+  <%= render "form", netball_academy: @netball_academy %>
+
+<br>
+
+<div>
+  <%= link_to "Show Record", @netball_academy %> <br>
+  <%= link_to "<< Back to All", netball_academies_path %>
+</div> 

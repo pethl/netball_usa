@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_08_091615) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_28_075959) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
@@ -333,6 +334,27 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_08_091615) do
     t.text "other_sm"
     t.index ["member_id"], name: "index_na_teams_on_member_id"
     t.index ["member_key_role_id"], name: "index_na_teams_on_member_key_role_id"
+  end
+
+  create_table "netball_academies", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "city"
+    t.string "us_state"
+    t.string "country"
+    t.bigint "club_id"
+    t.string "other_club_name"
+    t.string "status"
+    t.date "signed_up"
+    t.date "purchase_date"
+    t.string "subscribed_plans"
+    t.decimal "amount"
+    t.date "training_completed_date"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_id"], name: "index_netball_academies_on_club_id"
   end
 
   create_table "netball_associations", force: :cascade do |t|
@@ -854,6 +876,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_08_091615) do
   add_foreign_key "member_key_roles", "members"
   add_foreign_key "members", "clubs"
   add_foreign_key "members", "teams"
+  add_foreign_key "netball_academies", "clubs"
   add_foreign_key "netball_associations", "users"
   add_foreign_key "notes", "clubs"
   add_foreign_key "open_invites", "people"

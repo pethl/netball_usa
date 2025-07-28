@@ -284,12 +284,22 @@ module ApplicationHelper
      reference_group = reference_group.uniq() 
    end
    
-   def us_states
-    Reference
-      .where(active: true, group: 'us_states')
-      .order(Arel.sql('CAST("desc" AS INTEGER) ASC')) # ✅ quoting reserved word
-      .pluck(:value, :key)
-  end
+    def us_states
+      Reference
+        .where(active: true, group: 'us_states')
+        .order(Arel.sql('CAST("desc" AS INTEGER) ASC')) # ✅ quoting reserved word
+        .pluck(:value, :key)
+    end
+
+    def my_netball_status
+      Reference.where(active: true, group: 'my_netball_status').pluck(:value)   
+    end
+
+    def subscription_plan
+      Reference.where(active: true, group: 'subscription_plan')
+              .pluck(:value)
+              .sort_by { |v| v.to_f }
+    end
    
    def club_membership_category
     club_membership_category = Reference.where(active: "TRUE", group: 'club_membership_category').order(:id)

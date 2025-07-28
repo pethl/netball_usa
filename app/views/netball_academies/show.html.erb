@@ -1,0 +1,104 @@
+<% content_for(:page_title, "Netball Academy Registration") %>
+
+<div class="bg-white p-6 rounded-md shadow border border-gray-200 max-w-6xl mx-auto">
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+    <div>
+      <span class="text-sm font-semibold text-gray-600">First Name</span><br>
+      <%= @netball_academy.first_name %>
+    </div>
+
+    <div>
+      <span class="text-sm font-semibold text-gray-600">Last Name</span><br>
+      <%= @netball_academy.last_name %>
+    </div>
+
+    <div>
+      <span class="text-sm font-semibold text-gray-600">Email</span><br>
+      <%= @netball_academy.email %>
+    </div>
+
+    <div>
+      <span class="text-sm font-semibold text-gray-600">City</span><br>
+      <%= @netball_academy.city %>
+    </div>
+
+    <div>
+      <span class="text-sm font-semibold text-gray-600">State</span><br>
+      <%= @netball_academy.us_state %>
+    </div>
+
+    <div>
+      <span class="text-sm font-semibold text-gray-600">Country</span><br>
+      <%= @netball_academy.country %>
+    </div>
+
+  </div>
+
+  <div class="border border-blue-900 rounded-md p-4 mt-6">
+    <p class="text-sm font-semibold text-blue-900 mb-2">Club OR Other Club Name</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <span class="text-sm font-semibold text-gray-600">Netball Club</span><br>
+        <%= @netball_academy.club&.name %>
+      </div>
+
+      <div>
+        <span class="text-sm font-semibold text-gray-600">Other Club Name</span><br>
+        <%= @netball_academy.other_club_name %>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+
+    <div>
+      <span class="text-sm font-semibold text-gray-600">Status</span><br>
+      <%= @netball_academy.status %>
+    </div>
+
+    <div>
+      <span class="text-sm font-semibold text-gray-600">Subscribed Plans</span><br>
+      <%= @netball_academy.subscribed_plans %>
+    </div>
+
+    <div>
+      <span class="text-sm font-semibold text-gray-600">Signed Up</span><br>
+      <%= @netball_academy.signed_up&.strftime("%B %d, %Y") %>
+    </div>
+
+    <div>
+      <span class="text-sm font-semibold text-gray-600">Purchase Date</span><br>
+      <%= @netball_academy.purchase_date&.strftime("%B %d, %Y") %>
+    </div>
+
+    <div>
+      <span class="text-sm font-semibold text-gray-600">Training Completed</span><br>
+      <%= @netball_academy.training_completed_date&.strftime("%B %d, %Y") %>
+    </div>
+
+    <div>
+      <span class="text-sm font-semibold text-gray-600">Amount</span><br>
+      $<%= number_with_precision(@netball_academy.amount || 0, precision: 2) %>
+    </div>
+
+  </div>
+
+  <% if @netball_academy.notes.present? %>
+    <div class="mt-6">
+      <span class="text-sm font-semibold text-gray-600">Notes</span><br>
+      <div class="whitespace-pre-wrap mt-1"><%= @netball_academy.notes %></div>
+    </div>
+  <% end %>
+  </div>
+
+  <div class="mt-8 ml-12">
+    <%= link_to "Edit This Record", edit_netball_academy_path(@netball_academy), class: "text-sm text-blue-800 hover:underline" %> <br>
+    <%= link_to "<< Back to All", netball_academies_path, class: "text-sm text-gray-600 hover:underline" %><br>
+    <%= link_to "Add New", new_netball_academy_path, class: "text-sm text-gray-600 hover:underline" %>
+  </div>
+
+
+

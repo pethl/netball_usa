@@ -1,0 +1,63 @@
+<%= link_to netball_academies_path, class: "bg-blue-900 shadow-lg rounded-md flex flex-col justify-between p-4 border-b-4 border-gray-300 text-white font-medium group min-h-[200px] hover:shadow-xl hover:scale-[1.01] transition-all duration-200" do %>
+  <div class="flex justify-between items-start">
+    <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
+      <i class="fa-solid fa-school text-xl text-blue-800"></i>
+    </div>
+    <div class="text-right">
+      <p class="text-3xl font-bold leading-tight">
+        <%= NetballAcademy.where(status: 'Active').count %>  <span class="text-base text-blue-200"> / <%= NetballAcademy.where(status: 'Inactive').count %></span>
+      </p>
+      <p class="text-sm text-gray-200 uppercase tracking-wide mt-1">Academies</p>
+    </div>
+  </div>
+
+  <% if @netball_academy_active_stats.present? %>
+    <div class="mt-4 text-sm text-blue-200 grid gap-0.5">
+      <div class="grid grid-cols-4 font-semibold text-white border-b border-blue-600 pb-1">
+        <div>Course</div>
+        <div class="text-center">Paid</div>
+        <div class="text-center">Unpaid</div>
+        <div class="text-right">Total</div>
+      </div>
+
+      <% @netball_academy_active_stats.each do |s| %>
+        <% label = case s.course
+          when "Coach Package" then "Co Pack"
+          when "Umpire Package" then "Ump Pack"
+          when "Coach & Umpire" then "C & U"
+          else s.course
+        end %>
+
+        <div class="grid grid-cols-4 items-center py-0.5 bg-blue-800/20 rounded" title="Active">
+          <div><%= label %></div>
+          <div class="text-center"><%= s.paid_count %></div>
+          <div class="text-center"><%= s.unpaid_count %></div>
+          <div class="text-right">
+            <%= s.total_amount.to_f > 0 ? number_to_currency(s.total_amount, precision: 2) : "-" %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if @netball_academy_inactive_summary[:count] > 0 %>
+        <div class="grid grid-cols-4 items-center py-1 bg-blue-800/30 rounded border-t border-blue-500 mt-1 text-gray-300 font-light" title="Inactive">
+          <div>Inactive</div>
+          <div class="text-center"><%= @netball_academy_inactive_summary[:count] %></div>
+          <div></div>
+          <div class="text-right">
+            <%= @netball_academy_inactive_summary[:total_amount] > 0 ? number_to_currency(@netball_academy_inactive_summary[:total_amount]) : "-" %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="grid grid-cols-4 py-1 border-t border-blue-400 mt-2 font-semibold text-white">
+        <div>Total</div>
+        <div></div>
+        <div></div>
+        <div class="text-right">
+          <% total = @netball_academy_active_stats.sum { |s| s.total_amount.to_f } %>
+          <%= number_to_currency(total, precision: 2) unless total.zero? %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
