@@ -34,7 +34,7 @@ class NetballEducator < ApplicationRecord
      # Method: Display format "STATE - Lastname, Firstname"
   def state_name_display
     "#{state} - #{last_name}, #{first_name}"
-  end
+  end 
                      
  
   def follow_up

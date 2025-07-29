@@ -64,7 +64,10 @@ class NetballEducatorsController < ApplicationController
 
 
   def pe_directors
-    @netball_educators = NetballEducator.excluding_kidos.where(level: "School/District Lead")
+    @netball_educators = NetballEducator.excluding_kidos.where(
+          "level = ? OR is_pe_director IS TRUE", "School/District Lead"
+          )
+    #@netball_educators = NetballEducator.excluding_kidos.where(level: "School/District Lead")
 
     # Apply filters
     @netball_educators = @netball_educators.where(state: params[:state]) if params[:state].present?
