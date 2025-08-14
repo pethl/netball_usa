@@ -13,7 +13,10 @@
         <tr>
           <th class="px-4 py-2 w-12">View</th>
           <th class="px-4 py-2 w-48">Name</th>
-          <th class="px-4 py-2 w-48">Location</th>
+          <th class="px-4 py-2 w-40">City</th>
+          <th class="px-4 py-2 w-24">State</th>
+          <th class="px-4 py-2 w-32">Country</th>
+          <th class="px-4 py-2 w-32">Role</th>
           <th class="px-4 py-2 w-40">Level</th>
           <th class="px-4 py-2 w-64">Email</th>
           <th class="px-4 py-2 w-24 text-center">Headshot?</th>
@@ -42,8 +45,21 @@
             </td>
 
               <td class="px-4 py-2">
-                <%= person.location %>
+                <%= person.city %>
               </td>
+
+               <td class="px-4 py-2">
+                <%= person.state %>
+              </td>
+
+                <td class="px-4 py-2">
+                <%= person.country %>
+              </td>
+
+               <td class="px-4 py-2">
+                <%= person.role %>
+              </td>
+            
              
               <td class="px-4 py-2">
                 <%= person.level %>

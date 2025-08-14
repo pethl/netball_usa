@@ -5,17 +5,22 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-4 p-4">
       <div><span class="text-gray-500">First Name:</span><br><%= person.first_name %></div>
       <div><span class="text-gray-500">Last Name:</span><br><%= person.last_name %></div>
+      <div><span class="text-gray-500">Status:</span><br><%= person.status %></div>
+
       <div><span class="text-gray-500">Role:</span><br><%= person.role %></div>
       <div><span class="text-gray-500">Educator Role:</span><br><%= person.educator_role %></div>
-      <div><span class="text-gray-500">Region:</span><br><%= person.region %></div>
-
-      <div><span class="text-gray-500">Associated or Independent?:</span><br><%= person.associated %></div>
       <div><span class="text-gray-500">Gender:</span><br><%= person.gender %></div>
+
+      <div><span class="text-gray-500">Region:</span><br><%= person.region %></div>
+      <div><span class="text-gray-500">Associated or Independent?:</span><br><%= person.associated %></div>
+      
       <div><span class="text-gray-500">Phone:</span><br><%= person.phone %></div>
       <div class="break-words"><span class="text-gray-500">Email:</span><br><%= person.email %></div>
       <div class="break-words"><span class="text-gray-500">Address:</span><br><%= person.address %></div>
 
-      <div><span class="text-gray-500">Location:</span><br><%= person.location %></div>
+      <div><span class="text-gray-500">City:</span><br><%= person.city %></div>
+       <div><span class="text-gray-500">State:</span><br><%= person.state %></div>
+        <div><span class="text-gray-500">Country:</span><br><%= person.country %></div>
 
       <div class="col-span-1 sm:col-span-2 break-words">
         <span class="text-gray-500">Frequent Flyer Numbers:</span><br>

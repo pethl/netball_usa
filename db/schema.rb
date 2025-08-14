@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_28_075959) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_14_085629) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -546,6 +546,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_28_075959) do
     t.string "inferno_bottom_shorts_size"
     t.string "inferno_top_polo_size"
     t.string "inferno_top_vneck_size"
+    t.string "city"
+    t.string "state"
+    t.string "country"
   end
 
   create_table "press_releases", force: :cascade do |t|

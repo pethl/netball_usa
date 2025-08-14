@@ -1,20 +1,51 @@
 <%# app/views/people/index.html.erb %>
-
-<div class="my-4">
-  <%= link_to "Add New Person", new_person_path, class: form_button_class %>
-  <%= link_to "🖨️ US Umpires (PDF)", print_details_pdf_people_path, class: clear_button_class, target: "_blank" %>
-</div>
-
-
-
-<%# Title %>
-<% content_for :page_title, "People – #{@role.pluralize}" %>
-
-<div class="ml-2">
-
-<%= turbo_frame_tag "people_filters_nav" do %>
-  <%= render "people/people_filters_nav" %>
+<%# Page title %>
+<% content_for :page_title do %>
+  <% if @searching %>
+    People – Search Results
+  <% elsif @role == "All" %>
+    People – All People
+  <% else %>
+    People – <%= @role.pluralize %>
+  <% end %>
 <% end %>
 
-</div>
+<div class="space-y-2">
 
+  <%# 1) NAV TABS FIRST %>
+ <div class="ml-2 border-b border-gray-300 pb-1">
+    <%= turbo_frame_tag "people_filters_nav" do %>
+      <%= render "people/people_filters_nav" %>
+    <% end %>
+    
+  </div>
+
+  <%# 2) TOOLBAR ROW: BUTTONS (LEFT) + FILTERS (RIGHT) %>
+  <div class="flex flex-wrap items-end justify-between gap-2">
+
+    <%# Left: primary actions %>
+    <div class="flex flex-wrap items-center gap-1">
+      <%= link_to "Add New Person", new_person_path, class: form_button_class %>
+      <%= link_to "🖨️ US Umpires (PDF)", print_details_pdf_people_path,
+                  class: clear_button_class, target: "_blank" %>
+    </div>
+
+    <%# Right: filters (you can swap in your multi-filter partial here) %>
+    <div class="min-w-0">
+      <%= turbo_frame_tag "people_filters" do %>
+        <%= render "people/people_filters" %> <%# <- create this partial (city/state/country/name) %>
+      <% end %>
+    </div>
+  </div>
+
+  <%# 3) TABLE (results) %>
+  <div>
+    <%= turbo_frame_tag "people_list" do %>
+      <%= render partial: "people/people_table",
+                 locals: { people: @people,
+                           searching: params[:search].present?,
+                           search_term: params[:search] } %>
+    <% end %>
+  </div>
+
+</div>

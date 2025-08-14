@@ -1,0 +1,68 @@
+<% base_params = request.query_parameters.slice(:role, :region, :status) %>
+<% base_url    = people_path(base_params) %>
+
+<div class="ml-auto flex flex-wrap items-end gap-2 min-w-0"
+     data-controller="multi-filter"
+     data-multi-filter-url-value="<%= base_url %>">
+
+  <!-- Small header -->
+  <div class="w-full text-xs text-gray-600">Filter / Search By:</div>
+
+  <!-- Role -->
+<div class="flex flex-col w-36 mb-2">
+  <select id="role_filter" name="role"
+          class="rounded-md border border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900 text-sm"
+          data-multi-filter-target="field"
+          data-action="change->multi-filter#filter">
+    <option value="All" <%= "selected" if params[:role] == "All" %>>All Roles</option>
+    <% people_role.each do |role_option| %>
+      <option value="<%= role_option %>" <%= "selected" if params[:role] == role_option %>><%= role_option %></option>
+    <% end %>
+  </select>
+</div>
+
+  <!-- State -->
+    <div class="flex flex-col w-36 mb-2">
+      <select id="state_filter" name="state"
+              class="rounded-md border border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900 text-sm"
+              data-multi-filter-target="field"
+              data-action="change->multi-filter#filter">
+        <option value=""><%= "All States" %></option>
+        <%= options_for_select(us_states, params[:state]) %>
+      </select>
+    </div>
+
+  <!-- City -->
+  <div class="flex flex-col w-32 mb-2">
+    <input id="city_filter" type="text" name="city" value="<%= params[:city] %>" placeholder="City"
+           class="rounded-md border border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900 text-sm"
+           data-multi-filter-target="field"
+           data-action="input->multi-filter#filter blur->multi-filter#filter">
+  </div>
+
+  <!-- Country -->
+  <div class="flex flex-col w-36 mb-2">
+    <input id="country_filter" type="text" name="country" value="<%= params[:country] %>" placeholder="Country"
+           class="rounded-md border border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900 text-sm"
+           data-multi-filter-target="field"
+           data-action="input->multi-filter#filter blur->multi-filter#filter">
+  </div>
+
+  <!-- Name/Email -->
+  <div class="flex flex-col w-44 mb-2">
+    <input id="query_filter" type="text" name="query" value="<%= params[:query] %>" placeholder="Name or Email"
+           class="rounded-md border border-gray-300 shadow-sm focus:border-blue-900 focus:ring-blue-900 text-sm"
+           data-multi-filter-target="field"
+           data-action="input->multi-filter#filter">
+  </div>
+
+  <!-- Clear -->
+  <div class="flex flex-col justify-end mb-2">
+    <%= link_to "Clear All",
+          people_path(role: "All"),
+          data: { turbo: false },
+          class: "text-xs text-blue-900 underline hover:font-semibold whitespace-nowrap" %>
+  </div>
+</div>
+
+

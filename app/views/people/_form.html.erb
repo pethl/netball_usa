@@ -2,14 +2,12 @@
 <div class="container m-4 mr-4 w-fit">
 
   <!-- Form Start -->
-  <%= form_with(model: person) do |form| %>
-
+  <%= form_with(model: person, local: true) do |form| %>
     <!-- Error Display -->
     <%= form_errors_for(person) %>
 
     <!-- Personal Info Section -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 m-4">
-
       <!-- First Name -->
       <div class="mb-0">
         <%= form.label :first_name, "First Name*", class: label_class %>
@@ -31,70 +29,67 @@
         <%= form.label :status, "Status*", class: label_class %>
         <div class="mt-1">
           <%= form.select :status,
-                options_for_select(people_status, form.object.status),
-                { include_blank: "Select status" },
-                class: input_class %>
+            options_for_select(people_status, form.object.status),
+            { include_blank: "Select status" },
+            class: input_class %>
         </div>
       </div>
-
 
       <!-- Role -->
       <div class="mb-0">
-        <%= form.label :role,"Role*", class: label_class %>
+        <%= form.label :role, "Role*", class: label_class %>
         <div class="mt-1">
-          <%= form.select :role, options_for_select(people_role, :selected => person.role),{}, :required => true, class: input_class %>
+          <%= form.select :role,
+            options_for_select(people_role, selected: person.role),
+            {},
+            { required: true, class: input_class } %>
         </div>
       </div>
 
-     <!-- Role -->
-    <div class="mb-0">
-      <%= form.label :educator_role, "Educator Role (Trainers only)", class: label_class %>
-      <div class="mt-1">
-      <%= form.select :educator_role, options_for_select(people_educator_role, person.educator_role), { include_blank: "Please select" }, class: input_class %>
+      <!-- Educator Role -->
+      <div class="mb-0">
+        <%= form.label :educator_role, "Educator Role (Trainers only)", class: label_class %>
+        <div class="mt-1">
+          <%= form.select :educator_role,
+            options_for_select(people_educator_role, person.educator_role),
+            { include_blank: "Please select" },
+            class: input_class %>
+        </div>
       </div>
-    </div>
 
-       <!-- Gender -->
+      <!-- Gender -->
       <div class="mb-0">
         <%= form.label :gender, class: label_class %>
         <div class="mt-1">
-          <%= form.select :gender, options_for_select(gender, :selected => person.gender),{:prompt=>true}, class: input_class %>
+          <%= form.select :gender,
+            options_for_select(gender, selected: person.gender),
+            { prompt: true },
+            class: input_class %>
         </div>
       </div>
 
-      <!-- Region -->
+      <!-- Region + Associated (nested grid) -->
       <div class="mb-0">
-        <%= form.label :region,"Region*", class: label_class %>
-        <div class="mt-1">
-          <%= form.select :region, options_for_select(people_region, :selected => person.region),{}, class: input_class %>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Region -->
+          <div>
+            <%= form.label :region, "Region*", class: label_class %>
+            <div class="mt-1">
+              <%= form.select :region,
+                options_for_select(people_region, selected: person.region),
+                {},
+                class: input_class %>
+            </div>
+          </div>
+          <!-- Associated -->
+          <div>
+            <%= form.label :associated, "Associated or Independent?", class: label_class %>
+            <div class="mt-1">
+              <%= form.text_field :associated, class: input_class %>
+            </div>
+          </div>
         </div>
       </div>
-
-      <!-- Location -->
-      <div class="mb-0">
-        <%= form.label :location, class: label_class %>
-        <div class="mt-1">
-          <%= form.text_field :location, class: input_class %>
-        </div>
-      </div>
-
-       <!-- Address -->
-      <div class="mb-0">
-        <%= form.label :address, class: label_class %>
-        <div class="mt-1">
-          <%= form.text_field :address, class: input_class %>
-        </div>
-      </div>
-
-      <!-- Associated or Independent -->
-      <div class="mb-0">
-        <%= form.label :associated, "Associated or Independent?", class: label_class %>
-        <div class="mt-1">
-          <%= form.text_field :associated, class: input_class %>
-        </div>
-      </div>
-
-     
 
       <!-- Email -->
       <div class="mb-0">
@@ -112,8 +107,46 @@
         </div>
       </div>
 
-     
+      <!-- Address -->
+      <div class="mb-0">
+        <%= form.label :address, class: label_class %>
+        <div class="mt-1">
+          <%= form.text_field :address, class: input_class %>
+        </div>
+      </div>
+
+      <!-- City + State (nested grid) -->
+      <div class="mb-0">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- City -->
+          <div>
+            <%= form.label :city, class: label_class %>
+            <div class="mt-1">
+              <%= form.text_field :city, class: input_class %>
+            </div>
+          </div>
+          <!-- State -->
+          <div>
+            <%= form.label :state, class: label_class %>
+            <div class="mt-1">
+              <%= form.select :state,
+                options_for_select(us_states, selected: person.state),
+                { prompt: true },
+                class: input_class %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Country -->
+      <div class="mb-0">
+        <%= form.label :country, class: label_class %>
+        <div class="mt-1">
+          <%= form.text_field :country, class: input_class %>
+        </div>
+      </div>
     </div>
+    <!-- END Personal Info Section -->
    
     
     <!-- Umpires/Scorers Section -->
@@ -383,10 +416,8 @@
   </div>
 <% end %>
 
-
-
-  <div class="text-right">
-    <%= form.submit "Save Record", class: form_button_class %>
-  </div>
-<% end %>
-    
+   <div class="text-right">
+      <%= form.submit "Save Record", class: form_button_class %>
+    </div>
+  <% end %>
+</div>
