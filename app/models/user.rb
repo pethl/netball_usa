@@ -7,7 +7,7 @@ class User < ApplicationRecord
   before_create :skip_confirmation!
          
   validates :first_name, :last_name, presence: true
-  after_create :send_admin_mail
+  after_create :send_admin_alert
   after_create :send_sonya_mail
 
   # app/models/user.rb
@@ -68,7 +68,7 @@ class User < ApplicationRecord
   after_initialize :set_default_role, :if => :new_record?
   
   def set_default_role
-    self.role || :teamlead
+    self.role ||= :teamlead  # only if nil
   end
 
   def send_reset_password_instructions
@@ -155,9 +155,9 @@ class User < ApplicationRecord
     account_active? ? super : :account_inactive
   end
 
-  def send_admin_mail
+  def send_admin_alert
     # originally intended for users needed approval, approval switched off so left for alerting security
-    UserMailer.new_user_waiting_for_approval(email).deliver
+    UserMailer.admin_new_user_alert(self).deliver_later
   end
 
   def send_sonya_mail

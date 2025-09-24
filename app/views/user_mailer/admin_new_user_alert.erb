@@ -1,0 +1,5 @@
+<!-- app/views/user_mailer/admin_new_user_alert.html.erb -->
+<p><%= @user.email %> has registered on your site!</p>
+<p>This user has been set access rights of <strong><%= @user.role.humanize %></strong>.</p>
+<p>ID: <%= @user.id %></p>
+<p>Name: <%= @user.full_name %></p>

@@ -1,4 +1,4 @@
-# config/initializers/us_state_abbreviations.rb (create this file if needed)
+# config/initializers/us_state_abbreviations.rb 
 US_STATE_ABBREVIATIONS = {
   "Alabama" => "AL", "Alaska" => "AK", "Arizona" => "AZ", "Arkansas" => "AR",
   "California" => "CA", "Colorado" => "CO", "Connecticut" => "CT", "Delaware" => "DE",
@@ -14,3 +14,4 @@ US_STATE_ABBREVIATIONS = {
   "Virginia" => "VA", "Washington" => "WA", "West Virginia" => "WV", "Wisconsin" => "WI",
   "Wyoming" => "WY"
 }
+

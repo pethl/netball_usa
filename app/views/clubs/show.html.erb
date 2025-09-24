@@ -16,44 +16,93 @@
   <% end %>
 </div>
 
-    <div class=" m-4">
-     <span class="text-2xl text-blue-900"> <%= @club.name %></span><br>
-      <span class="text-sm text-gray-500 ml-4">administered by: <%= @club.creator.full_name %> </span>
-       <div class="flex justify-left gap-4 ">
-          <div> 
-            <% if @club.website? %>
-              <span class="text-gray-500"><i class="fa-solid fa-globe"></i> <%= link_to @club.website, "#(club.website)", class: link_class %> </span><% end %>
-          </div> 
-          <div>
-            <% if @club.email? %>
-              <span class="text-gray-500">
-                <i class="fa-solid fa-envelope"></i> 
-                <%= mail_to @club.email, @club.email, class: link_class %>
-              </span>
-            <% end %>
-          </div>
-          
-          <div>
-             <% if @club.facebook? %>
-              <span class="text-gray-500"><i class="fa-brands fa-facebook"></i> <%= link_to @club.facebook, "https://www.facebook.com/#{@club.facebook}", class: link_class %>  </span><% end %>
-          </div> 
-          
-          <div>
-             <% if @club.instagram? %>
-              <span class="text-gray-800"><i class="fa-brands fa-instagram"></i> <%= link_to @club.instagram, "http://www.instagram.com/#{@club.instagram}", class: link_class %>  </span><% end %>
-          </div>  
-          
-          <div>
-            <% if @club.twitter? %>
-              <span class="text-gray-500"><i class="fa-brands fa-twitter"></i><i class="fa-brands fa-x-twitter"></i> <%= @club.twitter %> </span><% end %>
-          </div> 
-          
-          <div>
-              <% if @club.other_sm? %>
-                <span class="text-gray-500"><i class="fa-regular fa-thumbs-up"></i> <%= @club.other_sm %> </span><% end %>
-          </div> 
-        </div></span>
+   <div class="m-4">
+  <% admin = @club.creator %>
+  <% admin_inactive = admin && !admin.account_active? %>
+
+  <!-- Club name -->
+  <span class="text-2xl font-semibold <%= 'text-gray-400' if admin_inactive %>">
+    <%= @club.name %>
+  </span>
+
+  <% if admin_inactive %>
+    <span class="ml-2 inline-flex items-center rounded-full bg-gray-200 px-2 py-0.5 text-xs font-medium text-gray-700"
+          title="Administrator is inactive">
+      <i class="fa-solid fa-lock mr-1"></i> locked
+    </span>
+  <% end %>
+
+  <br>
+
+  <!-- Administered by -->
+  <span class="text-sm text-gray-500 ml-4">
+    administered by:
+    <span class="<%= 'text-gray-400' if admin_inactive %>">
+      <%= admin.full_name %>
+    </span>
+    <% if admin_inactive %>
+      <i class="fa-solid fa-lock ml-1 text-gray-500" title="Administrator is inactive"></i>
+    <% end %>
+  </span>
+
+  <!-- Social links row -->
+  <div class="flex justify-left gap-4 mt-2">
+    <div>
+      <% if @club.website? %>
+        <span class="text-gray-500">
+          <i class="fa-solid fa-globe"></i>
+          <%= link_to @club.website, @club.website, class: link_class %>
+        </span>
+      <% end %>
     </div>
+
+    <div>
+      <% if @club.email? %>
+        <span class="text-gray-500">
+          <i class="fa-solid fa-envelope"></i>
+          <%= mail_to @club.email, @club.email, class: link_class %>
+        </span>
+      <% end %>
+    </div>
+
+    <div>
+      <% if @club.facebook? %>
+        <span class="text-gray-500">
+          <i class="fa-brands fa-facebook"></i>
+          <%= link_to @club.facebook, "https://www.facebook.com/#{@club.facebook}", class: link_class %>
+        </span>
+      <% end %>
+    </div>
+
+    <div>
+      <% if @club.instagram? %>
+        <span class="text-gray-800">
+          <i class="fa-brands fa-instagram"></i>
+          <%= link_to @club.instagram, "http://www.instagram.com/#{@club.instagram}", class: link_class %>
+        </span>
+      <% end %>
+    </div>
+
+    <div>
+      <% if @club.twitter? %>
+        <span class="text-gray-500">
+          <i class="fa-brands fa-twitter"></i>
+          <%= @club.twitter %>
+        </span>
+      <% end %>
+    </div>
+
+    <div>
+      <% if @club.other_sm? %>
+        <span class="text-gray-500">
+          <i class="fa-regular fa-thumbs-up"></i>
+          <%= @club.other_sm %>
+        </span>
+      <% end %>
+    </div>
+  </div>
+</div>
+
    
     <div class="p-4 m-2 border border-grey-500 shadow-md shadow-blue-900 hover:border-black rounded-lg">
       <div class="ml-4 text-gray-700 text-lg text-left font-semibold">

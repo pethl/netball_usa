@@ -1,8 +1,13 @@
 class UserMailer < ApplicationMailer
     
-    def new_user_waiting_for_approval(email)
-      @email = email
-      mail(to: 'pethicklisa@gmail.com', subject: 'IMPORTANT: New user awaiting admin approval')
+    
+
+    def admin_new_user_alert(user)
+      @user = user
+      mail(
+        to:    "pethicklisa@gmail.com",
+        subject: "IMPORTANT: New user: #{user.full_name} (#{user.role.humanize})"
+      )
     end
     
     def new_team_sign_up(email)

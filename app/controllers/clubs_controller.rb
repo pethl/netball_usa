@@ -4,7 +4,8 @@ class ClubsController < ApplicationController
 
 
   def index_admin
-    @clubs = Club.all.ordered
+   # @clubs = Club.all.ordered
+    @clubs = Club.includes(:creator).ordered
   end 
   
   # GET /clubs

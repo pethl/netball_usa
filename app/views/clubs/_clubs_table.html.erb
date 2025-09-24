@@ -1,4 +1,4 @@
-<div id="clubs">
+<div id="clubs"> 
   <div class="relative overflow-x-auto">
     <table class="table-auto w-full text-left rtl:text-right">
       <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs">
@@ -39,14 +39,34 @@
       <tbody>
         <% @clubs.each do |club| %>
           <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
-            <td class="px-4 py-4 truncate border-x border-gray-200">
-             <span class="text-lg font-semibold"> <%= link_to club.name, club_path(club), class: link_class %></span><br>
-              <% if club&.email.present? %>
-                <span class="text-sm text-gray-500">
-                  <i class="fa-solid fa-envelope"></i> <%= link_to club.email, "mailto:#{club.email}" %>
+
+           <td class="px-4 py-4 truncate border-x border-gray-200">
+                <% admin = club.creator %>
+                <% admin_inactive = admin && !admin.account_active? %>
+
+                <span class="text-lg font-semibold <%= 'text-gray-400' if admin_inactive %>">
+                  <%= link_to club.name,
+                              club_path(club),
+                              class: "#{link_class} #{'text-gray-400 hover:text-gray-400' if admin_inactive}",
+                              title: (admin_inactive ? 'Administrator is inactive' : nil) %>
                 </span>
-              <% end %>
-            </td>
+
+                <% if admin_inactive %>
+                  <span class="ml-2 inline-flex items-center rounded-full bg-gray-200 px-2 py-0.5 text-[10px] font-medium text-gray-700"
+                        title="Administrator is inactive">
+                    <i class="fa-solid fa-lock mr-1"></i> locked
+                  </span>
+                <% end %>
+
+                <% if club&.email.present? %>
+                  <br>
+                  <span class="text-sm text-gray-500">
+                    <i class="fa-solid fa-envelope"></i>
+                    <%= link_to club.email, "mailto:#{club.email}" %>
+                  </span>
+                <% end %>
+              </td>
+
             <td class="px-4 py-4 border-x border-gray-200"><%= club.city %></td>
             <td class="px-4 py-4 border-x border-gray-200"><%= club.us_state %></td>
             <td class="px-4 py-4 border-x border-gray-200 text-center">
@@ -99,8 +119,13 @@
               <%= club.has_youth? ? 'Yes' : 'No' %>
             </td>
 
-            <td class="px-4 py-4 text-left border-x border-gray-200">
-              <%= club.creator.full_name %>
+           <td class="px-4 py-4 text-left border-x border-gray-200">
+              <% admin = club.creator %>
+              <% admin_inactive = admin && !admin.account_active? %>
+              <span class="<%= 'text-gray-400' if admin_inactive %>"><%= admin.full_name %></span>
+              <% if admin_inactive %>
+                <i class="fa-solid fa-lock ml-1 text-gray-500" title="Administrator is inactive"></i>
+              <% end %>
             </td>
 
             <td class="px-4 py-4 text-left border-x border-gray-200">
