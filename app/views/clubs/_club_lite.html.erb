@@ -40,8 +40,9 @@
     </div>
 
     <div>
-      <strong>Number of Members:</strong>
-      <%= club.estimate_total_number_of_club_members %>
+     <strong>Number of Members:</strong>
+        Estimated: <%= club.estimate_total_number_of_club_members.to_i %>,
+        Entered: <%= club.members.size %>
     </div>
 
     <div>

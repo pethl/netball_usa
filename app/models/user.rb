@@ -157,12 +157,12 @@ class User < ApplicationRecord
 
   def send_admin_alert
     # originally intended for users needed approval, approval switched off so left for alerting security
-    UserMailer.admin_new_user_alert(self).deliver_later
+    UserMailer.admin_new_user_alert(self).deliver_now
   end
 
   def send_sonya_mail
     # email to advise Sonya / info@netballamerica.com that a new user has registered, most are club admins
-    UserMailer.new_team_sign_up(email).deliver
+    UserMailer.new_team_sign_up(email).deliver_now
   end
 
   private
