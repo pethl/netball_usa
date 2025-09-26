@@ -3,33 +3,40 @@
   <!-- Top Row: Tabs + Filter -->
   <div class="flex flex-wrap justify-between items-center space-y-0 mb-2">
 
-    
     <!-- Tabs -->
+    <div class="ml-2">
     <%= render partial: "transfers/transfer_nav_tabs" %>
+    </div>
 
-    <!-- Filter Form Box -->
-    <div class="relative bg-gray-100  rounded-md p-2 max-w-sm w-full sm:w-auto">
-      <!-- Badge -->
-      <div class="absolute -top-3 right-4 bg-gray-100 rounded px-2 text-xs text-gray-600 font-semibold tracking-wide uppercase shadow-sm">
-        Filter Events
+   <!-- Toolbar Row -->
+      <div class="flex mt-2 justify-between items-start w-full">
+        <!-- New Button (Far Left) -->
+        <%= link_to "Add New Record",
+            new_transfer_path,
+            class: form_button_class%>
+
+        <!-- Filter Form Box (Far Right) -->
+        <div class="relative bg-gray-100 rounded-md p-2 max-w-sm w-full sm:w-auto">
+          <!-- Badge -->
+          <div class="absolute -top-3 right-4 bg-gray-100 rounded px-2 text-xs text-gray-600 font-semibold tracking-wide uppercase shadow-sm">
+            Filter Events
+          </div>
+
+          <%= form_with url: transfers_path, method: :get, local: true, class: "flex items-center gap-2" do %>
+            <%= select_tag :event_name,
+                options_for_select(us_open_events, params[:event_name]),
+                include_blank: "Select",
+                class: "w-32 #{input_class}" %>
+
+            <%= submit_tag "Filter", class: form_button_class %>
+            <%= link_to "Clear", transfers_path, class: "bg-white #{clear_button_class}" %>
+          <% end %>
+        </div>
       </div>
 
-      <%= form_with url: transfers_path, method: :get, local: true, class: "flex items-center gap-2" do %>
-        <%= select_tag :event_name,
-            options_for_select(us_open_events, params[:event_name]),
-            include_blank: "Select",
-            class: "w-32 #{input_class}" %>
-
-        <%= submit_tag "Filter", class: form_button_class %>
-        <%= link_to "Clear", transfers_path, class:"bg-white #{clear_button_class}" %>
-      <% end %>
-    </div>
   </div>
 
-  <!-- Add New Button -->
-  <div class="my-4">
-    <%= link_to "Add New Record", new_transfer_path, class: form_button_class %>
-  </div>
+ 
 
   <div id="transfers">
   <div class="relative overflow-x-auto ml-2">
@@ -37,47 +44,47 @@
           <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs ">
                <tr>
                   
-                  <th scope="col" class="px-4 py-3 w-24">
+                  <th scope="col" class="px-3 py-2 w-24">
                      Year 
                   </th>
-                  <th scope="col" class="px-4 py-3 w-48">
+                  <th scope="col" class="px-3 py-2 w-48">
                       Name 
                   </th>
-                  <th scope="col" class="px-4 py-3 w-48 truncate">
+                  <th scope="col" class="px-3 py-2 w-48 truncate">
                       Role: Title
                   </th>
-                  <th scope="col" class="px-4 py-3 w-24 text-center">
+                  <th scope="col" class="px-3 py-2 w-24 text-center">
                       Reg Form
                  </th>
-                  <th scope="col" class="px-4 py-3 w-24 text-center">
+                  <th scope="col" class="px-3 py-2 w-24 text-center">
                       Waiver
                   </th>
-                  <th scope="col" class="px-4 py-3 w-24 text-center">
+                  <th scope="col" class="px-3 py-2 w-24 text-center">
                       Head Shot?
                   </th>
                  
                   
-                  <th scope="col" class="px-4 py-3 w-64 text-center">
+                  <th scope="col" class="px-3 py-2 w-64 text-center">
                       Arriv. Pick Up?
                   </th>
                   
-                  <th scope="col" class="px-4 py-3 w-64 text-left">
+                  <th scope="col" class="px-3 py-2 w-64 text-left">
                       Arrv Flight
                   </th>
 
-                   <th scope="col" class="px-4 py-3 w-64 text-center">
+                   <th scope="col" class="px-3 py-2 w-64 text-center">
                       Depart. Pick Up?
                   </th>
                   
-                  <th scope="col" class="px-4 py-3 w-64 text-left">
+                  <th scope="col" class="px-3 py-2 w-64 text-left">
                       Dept Flight
                   </th>
 
-                   <th scope="col" class="px-4 py-3 w-64 text-left">
+                   <th scope="col" class="px-3 py-2 w-64 text-left">
                      Hotel Res #
                   </th>
 
-                  <th scope="col" class="px-4 py-3 w-64 truncate text-left">
+                  <th scope="col" class="px-3 py-2 w-64 truncate text-left">
                       Notes
                   </th>
               </tr>
@@ -88,51 +95,51 @@
               <tr class="bg-white border-b hover:bg-gray-100">
                   
 
-                  <td class="px-4 py-4 whitespace-nowrap">
+                  <td class="px-3 py-4 whitespace-nowrap">
                     <%= transfer.event.date.strftime('%Y') if transfer.event.date.present? %>
                   </td>
                
-                  <td class="px-4 py-4 whitespace-nowrap">
+                  <td class="px-3 py-4 whitespace-nowrap">
                      <%= link_to transfer.person.full_name, edit_transfer_path(transfer), class: link_class %>
                   </td>
                
-                  <td class="px-4 py-4 whitespace-nowrap">
+                  <td class="px-3 py-4 whitespace-nowrap">
                      <%= transfer.role %> <% unless transfer.event_title.to_s.empty? %> : <%= transfer.event_title %><% end %>
                   </td>
 
-                  <td class="px-4 py-4 text-center ">
+                  <td class="px-3 py-4 text-center ">
                      <%= transfer.registration_form_completed? ? 'Yes' : 'No'  %>
                   </td>
 
-                  <td class="px-4 py-4 text-center">
+                  <td class="px-3 py-4 text-center">
                     <%= transfer.waiver_form_completed? ? 'Yes' : 'No'  %>
                   </td>
 
-                  <td class="px-4 py-4 text-center">
+                  <td class="px-3 py-4 text-center">
                     <%= transfer.obtain_headshot? ? 'Yes' : 'No'  %>
                   </td>
    
-                  <td class="px-4 py-4 text-center whitespace-nowrap">
+                  <td class="px-3 py-4 text-center whitespace-nowrap">
                     <%= transfer.arrival_airport_transport_request  %>
                   </td>
                 
-                  <td class="px-4 py-4 whitespace-nowrap">
+                  <td class="px-3 py-4 whitespace-nowrap">
                     <%= transfer.arrival_time.to_formatted_s(:usa) unless (transfer.arrival_time.to_s.empty?)  %>
                   </td>
 
-                  <td class="px-4 py-4 text-center whitespace-nowrap">
+                  <td class="px-3 py-4 text-center whitespace-nowrap">
                     <%= transfer.departure_airport_transport_request  %>
                   </td>
                 
-                  <td class="px-4 py-4 whitespace-nowrap">
+                  <td class="px-3 py-4 whitespace-nowrap">
                     <%= transfer.departure_time.to_formatted_s(:usa) unless (transfer.departure_time.to_s.empty?)  %>
                   </td>
 
-                   <td class="px-4 py-4 text-center whitespace-nowrap">
+                   <td class="px-3 py-4 text-center whitespace-nowrap">
                     <%= transfer.hotel_reservation  %>
                   </td>
 
-                   <td class="px-4 py-4">
+                   <td class="px-3 py-4">
                     <p class=" truncate"> <%= transfer.notes %></p>
                   </td>
                </tr>
@@ -159,7 +166,7 @@ Please click on your name and enter details in the form provided.<br><br> Please
     <table class="table-auto w-full text-left rtl:text-right">
         <thead class="bg-white border-b text-gray-300 font-light text-xs ">
              <tr>
-                <th scope="col" class="px-4 py-3 w-64">
+                <th scope="col" class="px-3 py-3 w-64">
                     Name 
                 </th>
               </tr>
@@ -168,7 +175,7 @@ Please click on your name and enter details in the form provided.<br><br> Please
               <% @transfers.each do |transfer| %>
                  <tr class="bg-white border-b hover:bg-gray-100">
                
-                     <td class="px-4 py-2">
+                     <td class="px-3 py-2">
                         <%= link_to transfer.person.full_name, edit_transfer_path(transfer), class: link_class %>
                         </td>
                         <% end %>

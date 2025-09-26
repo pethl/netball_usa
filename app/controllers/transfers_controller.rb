@@ -165,7 +165,25 @@ class TransfersController < ApplicationController
       end
     end
   end
-  
+
+  # app/controllers/transfers_controller.rb
+  def download_flights_pdf
+    respond_to do |format|
+      format.pdf do
+        begin
+          pdf_data = FlightDetailsPdfGenerator.new.generate
+          send_data pdf_data,
+                    filename: 'flight_details.pdf',
+                    type: 'application/pdf',
+                    disposition: 'inline'
+        rescue => e
+          Rails.logger.error("Flight Details PDF generation failed: #{e.message}")
+          flash[:error] = "There was an error generating the Flight Details PDF. Please alert tech support."
+          redirect_to transfers_path
+        end
+      end
+    end
+  end  
 
   private
     # Use callbacks to share common setup or constraints between actions.

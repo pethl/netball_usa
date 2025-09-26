@@ -93,7 +93,7 @@ Rails.application.routes.draw do
   get 'transfers/outbound_sheet', to: 'transfers#download_transfers_out_sheet_pdf', as: :download_transfers_out_sheet_pdf
   get 'transfers/uniforms_pdf', to: 'transfers#download_uniforms_pdf', as: :download_uniforms_pdf
   get 'transfers/attendee_list_pdf', to: 'transfers#download_attendee_list_pdf', defaults: { format: :pdf }
-
+  get 'transfers/flights_pdf', to: 'transfers#download_flights_pdf', as: :download_flights_pdf
 
   resources :transfers do
     collection do
