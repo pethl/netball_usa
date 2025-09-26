@@ -23,9 +23,15 @@
           </div>
 
           <%= form_with url: transfers_path, method: :get, local: true, class: "flex items-center gap-2" do %>
+
+            <%= select_tag :role,
+                options_for_select(@roles, params[:role]),
+                include_blank: "Role",
+                class: "w-40 #{input_class}" %>
+
             <%= select_tag :event_name,
                 options_for_select(us_open_events, params[:event_name]),
-                include_blank: "Select",
+                include_blank: "Event",
                 class: "w-32 #{input_class}" %>
 
             <%= submit_tag "Filter", class: form_button_class %>

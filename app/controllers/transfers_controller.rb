@@ -8,16 +8,27 @@ class TransfersController < ApplicationController
 
   # GET /transfers
   def index
-      @event_name = params[:event_name]
-      
-      # Fetch Transfers with optional filtering by event_name
-      @transfers = if @event_name.present?
-        Transfer.joins(:event, :person).where(events: { name: @event_name }).order('people.first_name ASC')
+    @event_name = params[:event_name]
+    @role       = params[:role]
+  
+    @transfers =
+      if @event_name.present?
+        Transfer.joins(:event, :person)
+                .where(events: { name: @event_name })
+                .order('people.first_name ASC')
       else
-        Transfer.joins(:event, :person).where(events: { name: 'US Open 2025 - Austin' }).order('people.first_name ASC')
+        Transfer.joins(:event, :person)
+                .where(events: { name: 'US Open 2025 - Austin' })
+                .order('people.first_name ASC')
       end
-    
+  
+    # Add role filter if selected
+    @transfers = @transfers.where(role: @role) if @role.present?
+  
+    # Build roles list for dropdown
+    @roles = Transfer.distinct.where.not(role: [nil, ""]).order(:role).pluck(:role)
   end
+  
 
   def inbound_pickups
     @event_name = 'US Open 2025 - Austin'
