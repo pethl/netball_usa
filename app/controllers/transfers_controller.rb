@@ -40,21 +40,31 @@ class TransfersController < ApplicationController
                    .where(arrival_airport_transport_request: "Yes - Requesting transport")
                    .order(:arrival_time)
   
-    @transfers_by_date = @transfers.group_by(&:arrival_date_only)
+        @transfers_by_date = @transfers.group_by do |t|
+        t.arrival_time&.in_time_zone&.to_date   # => Date or nil
+      end
   end
   
   def outbound_pickups
     @event_name = 'US Open 2025 - Austin'
-    event_id = Event.find_by(name: @event_name)&.id
+    event = Event.find_by(name: @event_name)
   
-    @transfers = Transfer
-                   .includes(:person)
-                   .where(event_id: event_id)
+    scope = Transfer.includes(:person)
+    scope = event ? scope.where(event_id: event.id) : scope.none
+  
+    @transfers = scope
                    .where(departure_airport_transport_request: "Yes - Requesting transport")
                    .order(:departure_time)
   
-    @transfers_by_date = @transfers.group_by(&:departure_date_only)
+    grouped = @transfers.group_by do |t|
+      t.departure_time&.in_time_zone&.to_date || :no_departure_time
+    end
+  
+    @ordered_transfers_by_date = grouped.sort_by do |key, _|
+      key == :no_departure_time ? Date.new(9999, 12, 31) : key
+    end
   end
+  
   
   
   # GET /transfers/1

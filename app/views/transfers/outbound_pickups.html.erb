@@ -2,54 +2,79 @@
 
 <%= render partial: "transfers/transfer_nav_tabs" %>
 
-<% @transfers_by_date.each do |date, transfers| %>
-  <div class="text-xl text-blue-800 mt-8 border-b pb-2"><%= date %></div>
+<% @ordered_transfers_by_date.each do |date_key, transfers| %>
+  <% if date_key == :no_departure_time %>
+    <div class="text-xl text-blue-800 mt-8 border-b pb-2">No departure time yet</div>
+  <% else %>
+    <div class="text-xl text-blue-800 mt-8 border-b pb-2">
+      <%= date_key.strftime("%A, %B %e") %>
+    </div>
+  <% end %>
 
   <% transfers_by_group = transfers.group_by { |t| t.departure_grouping.presence || "Ungrouped" } %>
 
   <% transfers_by_group.each do |group, grouped_transfers| %>
     <div class="ml-4 mt-4 text-lg text-gray-700 font-semibold">
       Group: <%= group %> (<%= grouped_transfers.size %>)
-      <% if (time = grouped_transfers.first.grouping_departure_time).present? %>
-        — <%= time.strftime("%H:%M") %> (<%= time.strftime("%I:%M %p") %>)
+      <%# show the earliest grouping_departure_time if present %>
+      <% if (gt = grouped_transfers.map(&:grouping_departure_time).compact.min).present? %>
+        — <%= gt.strftime("%H:%M") %> (<%= gt.strftime("%I:%M %p") %>)
       <% end %>
     </div>
 
-    <% transfers_by_flight = grouped_transfers
-                              .sort_by { |t| [t.departure_flight.to_s, t.person_full_name.to_s] }
-                              .group_by(&:departure_flight) %>
+    <%# 1) group by flight %>
+    <% by_flight = grouped_transfers.group_by(&:departure_flight) %>
 
-    <% transfers_by_flight.each do |flight, flight_transfers| %>
+    <%# 2) order flight groups by earliest departure_time (nils go last) %>
+    <% ordered_flights = by_flight.sort_by do |flight, trs|
+         [
+           trs.map(&:departure_time).compact.min || Time.zone.parse("9999-12-31"),
+           flight.to_s
+         ]
+       end %>
+
+    <% ordered_flights.each do |flight, flight_transfers| %>
+      <%# 3) order rows within each flight by time, then name; nil time rows go to bottom %>
+      <% flight_transfers_sorted =
+           flight_transfers.sort_by { |t| [t.departure_time || Time.zone.parse("9999-12-31"), t.person_full_name.to_s] } %>
+
       <div class="text-sm text-gray-600 ml-6 mt-2">
         ✈️ Flight: <%= flight.presence || "—" %> — <%= flight_transfers.size %> passengers
-        @ <%= flight_transfers.first.departure_time&.strftime("%H:%M") %>
+        @ <%= flight_transfers.map(&:departure_time).compact.min&.strftime("%H:%M") %>
       </div>
 
       <div class="relative overflow-x-auto mt-1 ml-8 mb-12">
         <table class="table-fixed w-full text-sm border-collapse border border-gray-200">
           <thead class="bg-gray-100 text-xs text-gray-700 font-semibold">
             <tr>
-              <th class="border px-2 py-1">Name</th>
-              <th class="border px-2 py-1">Phone</th>
-              <th class="border px-2 py-1">Dep. Time</th>
-              <th class="border px-2 py-1">Airline</th>
-              <th class="border px-2 py-1">Terminal</th>
-              <th class="border px-2 py-1">Pick Up</th>
-              <th class="border px-2 py-1">Hotel</th>
-              <th class="border px-2 py-1">Notes</th>
+              <th class="border px-2 py-1 text-left">Name</th>
+              <th class="border px-2 py-1 text-left">Phone</th>
+              <th class="border px-2 py-1 text-left">Dep. Time</th>
+              <th class="border px-2 py-1 text-left">Airline</th>
+              <th class="border px-2 py-1 text-left">Terminal</th>
+              <th class="border px-2 py-1 text-left">Pick Up</th>
+              <th class="border px-2 py-1 text-left">Hotel</th>
+              <th class="border px-2 py-1 text-left">Notes</th>
             </tr>
           </thead>
           <tbody>
-            <% flight_transfers.each do |t| %>
+            <% flight_transfers_sorted.each do |t| %>
               <tr class="bg-white border-t hover:bg-gray-50">
-                <td class="px-2 py-1"><%= t.person&.full_name || "—" %></td>
+                <td class="px-2 py-1">
+                  <% if t.person&.full_name.present? %>
+                    <%= link_to t.person.full_name, edit_transfer_path(t), class: link_class %>
+                  <% else %> — <% end %>
+                </td>
+
                 <td class="px-2 py-1"><%= t.departure_phone.presence || "—" %></td>
+
                 <td class="px-2 py-1">
                   <% if t.departure_time.present? %>
                     <%= t.departure_time.strftime("%H:%M") %><br>
                     <span class="text-xs text-gray-500"><%= t.departure_time.strftime("%I:%M %p") %></span>
-                  <% end %>
+                  <% else %> — <% end %>
                 </td>
+
                 <td class="px-2 py-1"><%= t.departure_airline.presence || "—" %></td>
                 <td class="px-2 py-1"><%= t.departure_terminal.presence || "—" %></td>
                 <td class="px-2 py-1"><%= t.departure_type.presence || "—" %></td>

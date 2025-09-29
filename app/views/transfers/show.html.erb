@@ -1,6 +1,11 @@
 <% if user_signed_in? %> 
   <div class="mt-1 mb-4">
     <%= link_to "<< Back to Event Attendees", transfers_path, class: link_class if current_user.role != "na_people" %>
+   <br>
+    <%= link_to "<< Back to Arrivals Transfers", inbound_pickups_transfers_path, class: link_class if current_user.role != "na_people" %>
+ <br>
+    <%= link_to "<< Back to Departutres Transfers", outbound_pickups_transfers_path, class: link_class if current_user.role != "na_people" %>
+
   </div>
 
   <% if current_user.role == "na_people" %>
