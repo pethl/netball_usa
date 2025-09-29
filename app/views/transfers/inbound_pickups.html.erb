@@ -42,7 +42,14 @@
           <tbody>
             <% flight_transfers.each do |t| %>
               <tr class="bg-white border-t hover:bg-gray-50">
-                <td class="px-2 py-1"><%= t.person&.full_name || "—" %></td>
+               <td class="px-2 py-1">
+                <% if t.person&.full_name.present? %>
+                  <%= link_to t.person.full_name, edit_transfer_path(t), class: link_class %>
+                  <%# or: edit_transfer_path(t) if you want the edit form %>
+                <% else %>
+                  —
+                <% end %>
+              </td>
                 <td class="px-2 py-1"><%= t.departure_phone.presence || "—" %></td>
                 <td class="px-2 py-1">
                   <% if t.departure_time.present? %>

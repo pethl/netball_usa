@@ -106,6 +106,26 @@
 
   <% else %>
 
+  <% my_person   = my_person_for(current_user) %>
+
+    <% if can? :manage, Person %>
+      <% if current_user.admin? %>
+        <!-- Admin sees full people index -->
+        <li class="mt-2">
+          <%= link_to "NA PEOPLE", people_path, class: "text-gray-100 hover:font-bold" %>
+        </li>
+      <% else %>
+        <!-- Educators_events_plus (and similar) see just their own profile -->
+        <li class="mt-2">
+          <%= link_to "My Profile",
+              (my_person ? edit_person_path(my_person)
+                        : new_person_path(person: { email: current_user.email })),
+              class: "text-gray-100 hover:font-bold" %>
+        </li>
+      <% end %>
+    <% end %>
+
+
  <% if can? :manage, NetballEducator %>
         <li class="mt-2">
           <a href="/netball_educators" class="text-gray-100 hover:font-bold">EDUCATORS</a>
@@ -249,9 +269,8 @@
       </li>
     <% end %>
 
-   
 
-    <% if can? :manage, Transfer %>
+   <% if can? :menu_all, Transfer %>
       <li class="mt-2">
         <a href="/transfers/" class="text-gray-100 hover:font-bold">US OPEN</a>
       </li>
@@ -262,10 +281,18 @@
         <a href="/transfers/" class="text-gray-100 hover:font-bold">- Event Attendees</a>
       </li>
       <li class="mt-2 ml-2">
-        <a href="/transfers/inbound_pickups_transfers_path" class="text-gray-100 hover:font-bold">- Arrivals Transfers</a>
+        <%= link_to "- Arrivals Transfers",  inbound_pickups_transfers_path,  class: "text-gray-100 hover:font-bold" %>
       </li>
       <li class="mt-2 ml-2">
-        <a href="/transfers/outbound_pickups_transfers_path" class="text-gray-100 hover:font-bold">- Departure Transfers</a>
+         <%= link_to "- Departures Transfers",  outbound_pickups_transfers_path,  class: "text-gray-100 hover:font-bold" %>
+      </li>
+      <% elsif can? :manage, Transfer %>
+      <%# self-service only (educators_events_plus) %>
+      <% my_transfer = Transfer.joins(:person).find_by(people: { email: current_user.email }) %>
+      <li class="mt-2">
+        <%= link_to "My US OPEN Details",
+            (my_transfer ? edit_transfer_path(my_transfer) : new_transfer_path),
+            class: "text-gray-100 hover:font-bold" %>
       </li>
     <% end %>
   <% end %>

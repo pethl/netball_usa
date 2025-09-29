@@ -58,12 +58,13 @@ class TransferPdfGenerator
       
             pdf.table(transfer_table_data, width: 510, cell_style: { inline_format: true, size: 6 }) do
               row(0).font_style = :bold
+              row(0).background_color = "E0E0E0"
               columns(0).width = 20
-              columns(1).width = 70
-              columns(2).width = 40
+              columns(1).width = 65
+              columns(2).width = 55
               columns(3).width = 25
               columns(4).width = 35
-              columns(5).width = 60
+              columns(5).width = 50
               columns(6).width = 50
               columns(7).width = 50
               columns(8).width = 80

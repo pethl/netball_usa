@@ -37,6 +37,16 @@ module ApplicationHelper
       end
     end
 
+    #for educators_events_plus (and similar) - CanCan ability related
+    def my_person_for(user)
+      Person.find_by(email: user.email)
+    end
+  
+    def my_transfer_for(user)
+      Transfer.joins(:person).find_by(people: { email: user.email })
+    end
+    # ------------------------------------------------------------
+
     # app/helpers/application_helper.rb
     def events_tab_class(path)
       if URI.parse(request.path).path == URI.parse(path).path

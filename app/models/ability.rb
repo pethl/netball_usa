@@ -2,9 +2,20 @@
 
 class Ability
   include CanCan::Ability
+
+ 
  
   def initialize(user)
     # 🔒 Public user (not logged in)
+    alias_action :inbound_pickups,
+    :outbound_pickups,
+    :download_transfers_in_sheet_pdf,
+    :download_transfers_out_sheet_pdf,
+    :download_uniforms_pdf,
+    :download_attendee_list_pdf,
+    :download_flights_pdf,
+    to: :read
+    
     if user.nil?
       can :create, NetballEducator
       can :show, NetballEducator
@@ -89,6 +100,10 @@ class Ability
     # 7 : us_open (US Open and people)
     when "us_open"
       can :manage, Transfer
+      can :menu_all, Transfer
+      can :inbound_pickups,  Transfer
+      can :outbound_pickups, Transfer
+
       can :manage, Person
        # 🔍 Read-only access to Event
       can [:read, :index, :show], Event
@@ -150,6 +165,28 @@ class Ability
         can [:read, :create, :update], Transfer, person_id: person.id
         cannot :index, Transfer
       end
+
+    # 13 : special for Nathalie 
+    when "educators_events_self_selftransfer"
+      can :manage, NetballEducator
+      can :manage, FollowUp
+      can :manage, Equipment
+      can :manage, Event
+      cannot :destroy, Event
+      can :heat_map, NetballEducator
+      # NEW: manage your own Person (profile) by email
+      can :manage, Person, email: user.email
+
+      # NEW: manage Transfers tied to that Person (via association)
+      # Works as Transfer belongs_to :person
+      can :manage, Transfer
+      
+      # FOR IF PEOPLE NEED ACCESS TO OWN ONLY 
+      # can :manage, Transfer, person: { email: user.email }
+      # ✋ ensure the full menu never shows
+      # cannot :menu_all, Transfer
+      # cannot :inbound_pickups,  Transfer
+      # cannot :outbound_pickups, Transfer
 
       # 0 : admin (everything) 
     when "admin"

@@ -54,9 +54,10 @@ class DeparturePdfGenerator
   
           pdf.table(table_data, width: 545, cell_style: { inline_format: true, size: 6 }) do
             row(0).font_style = :bold
+            row(0).background_color = "E0E0E0"
             columns(0).width = 40
-            columns(1).width = 90
-            columns(2).width = 50
+            columns(1).width = 85
+            columns(2).width = 55
             columns(3).width = 30
             columns(4).width = 35
             columns(5).width = 60
