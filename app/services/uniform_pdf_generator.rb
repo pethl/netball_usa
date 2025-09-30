@@ -1,3 +1,4 @@
+# app/services/uniform_pdf_generator.rb
 class UniformPdfGenerator
   def initialize
     @attendees = []
@@ -19,145 +20,107 @@ class UniformPdfGenerator
 
   def build_pdf
     pdf = Prawn::Document.new
+    safe_w = pdf.bounds.width - 10
 
-    pdf.image "#{Rails.root}/app/assets/images/US Open 2025 Logo_Small.png", at: [462, 737], width: 80
-    pdf.image "#{Rails.root}/app/assets/images/Netball_America_Logo.png", at: [0, 737], width: 80
+    # ===== Page 1 =====
+    # Logos (top left & top right)
+    pdf.image "#{Rails.root}/app/assets/images/Netball_America_Logo.png",
+              at: [0, pdf.cursor], width: 80
+    pdf.image "#{Rails.root}/app/assets/images/US Open 2025 Logo_Small.png",
+              at: [pdf.bounds.width - 80, pdf.cursor], width: 80
+    pdf.move_down 60
 
-    pdf.move_down 20
-    pdf.text "Uniforms & T-Shirts Sheet", size: 14, style: :bold, align: :center
-    pdf.text "Print Date: #{Date.today.strftime('%b %d, %Y')}", size: 6, align: :center
-    pdf.move_down 30
+    # Title
+    pdf.text "Uniforms & T-Shirts Sheet", size: 16, style: :bold, align: :center
+    pdf.move_down 6
+    pdf.text "Print Date: #{Date.today.strftime('%b %d, %Y')}", size: 8, align: :center
+    pdf.move_down 16
 
-    pdf.text "T-Shirt Sizes Summary", size: 10, style: :bold
-    pdf.move_up 12
-    pdf.indent(270) do
-      pdf.text "Missing T-Shirt Sizes", size: 10, style: :bold
-    end
-    pdf.move_down 4
+    # --- T-Shirt Sizes Summary (fixed width, centered) ---
+    ordered = ["XS", "Small", "Medium", "Large", "XL", "2XL", "3XL", "4XL", "Not Given"]
+    size_counts = @attendees.group_by { |t| (t.person&.tshirt_size.to_s.strip.presence || "Not Given") }
+                            .transform_values(&:count)
+    rows = ordered.map { |s| [s, size_counts[s] || 0] }
+    total = rows.sum { |_, c| c.to_i }
+    summary_data = [["T-Shirt Size", "Count"]] + rows + [["Total", total]]
 
-    ordered_tshirt_sizes = ["XS", "Small", "Medium", "Large", "XL", "2XL", "3XL", "4XL", "Size Not Yet Given"]
-    size_counts = @attendees.group_by { |t| t.person&.tshirt_size.to_s.strip.presence || "Size Not Yet Given" }
-                             .transform_values(&:count)
+    pdf.text "T-Shirt Sizes Summary", size: 12, style: :bold, align: :center
+    pdf.move_down 6
 
-    sorted_size_counts = ordered_tshirt_sizes.map { |size| [size, size_counts[size] || 0] }
-    total_count = sorted_size_counts.sum { |_, count| count }
-    sorted_size_counts << ["Total", total_count]
-    summary_data = [["T-Shirt Size", "Count"]] + sorted_size_counts
-
-    missing_data = [["Name", "Role"]]
-    @attendees.select { |t| t.person&.tshirt_size.to_s.strip.blank? }
-              .each { |t| missing_data << [t.person.full_name, t.person.role] if t.person }
-
-    missing_data << ["All attendees", "have submitted a size"] if missing_data.size == 1
-
-    combined_table = [
-      [
-        pdf.make_table(summary_data, cell_style: { size: 8 }) do
-          row(0).font_style = :bold
-          row(0).background_color = "CCCCCC"
-          row(-1).font_style = :bold if summary_data.length > 2
-        end,
-        pdf.make_table(missing_data, cell_style: { size: 8 }) do
-          row(0).font_style = :bold
-          row(0).background_color = "CCCCCC"
-        end
-      ]
-    ]
-
-    pdf.table(combined_table, cell_style: { borders: [] }, width: pdf.bounds.width)
-    pdf.move_down 20
-
-    pdf.text "T-Shirt Sizes - Full List", size: 8, style: :bold
-    pdf.move_down 2
-
-    tshirt_table_data = [["", "Name", "Role", "T-Shirt Size"]]
-    @attendees.select { |t| t.person }
-              .sort_by { |t| t.person.first_name.to_s }
-              .each do |t|
-                tshirt_table_data << ["", t.person.full_name, t.person.role, t.person.tshirt_size || "N/A"]
-              end
-
-    if tshirt_table_data.length > 1
-      pdf.table(tshirt_table_data, header: true, row_colors: ["F8F8F8", "FFFFFF"], cell_style: { size: 6 }) do
+    summary_table_w = 400.0
+    summary_x = (pdf.bounds.width - summary_table_w) / 2.0
+    pdf.bounding_box([summary_x, pdf.cursor], width: summary_table_w) do
+      pdf.table(summary_data,
+                width: summary_table_w,
+                column_widths: [(summary_table_w * 0.6).round(2), (summary_table_w * 0.4).round(2)],
+                header: true,
+                cell_style: { size: 9, padding: 3, overflow: :shrink_to_fit, min_font_size: 7, inline_format: false }) do
         row(0).font_style = :bold
-        row(0).background_color = "E0E0E0"
-        columns(0).width = 20
+        row(0).background_color = "DDDDDD"
+        columns(1).align = :right
+        row(-1).background_color = "DDDDDD" # highlight total row
+        row(-1).font_style = :bold
       end
-    else
-      pdf.text "No T-Shirt data found.", size: 10, style: :italic
     end
 
-    pdf.move_down 30
-    pdf.start_new_page
-    pdf.text "Uniform Summary Grid", size: 12, style: :bold
-    pdf.move_down 10
+    # --- Missing T-Shirt Sizes (fixed width, centered) ---
+    pdf.move_down 14
+    pdf.text "Missing T-Shirt Sizes", size: 12, style: :bold, align: :center
+    pdf.move_down 6
 
-    uniform_fields = {
-      inferno_bottom_skirt_size: "Inferno Bottom Skirt Size",
-      inferno_bottom_shorts_size: "Inferno Bottom Shorts Size",
-      inferno_top_polo_size: "Inferno Top Polo Size",
-      inferno_top_vneck_size: "Inferno Top V-Neck Size"
-    }
+    missing = [["Name", "Role"]]
+    @attendees.select { |t| t.person&.tshirt_size.to_s.strip.blank? }
+              .each { |t| missing << [t.person&.full_name || "Unknown", t.person&.role || ""] }
+    missing << ["All attendees", "have submitted a size"] if missing.size == 1
 
-    people = @attendees.map(&:person).compact
-
-    all_sizes = people.flat_map { |p| uniform_fields.keys.map { |f| p.send(f).to_s.strip.presence } }
-                      .compact.uniq.sort
-
-    common_order = %w[XXS XS S M L XL XXL XXXL]
-    ordered_sizes = (common_order & all_sizes) + (all_sizes - common_order)
-
-    header_row = ["Item"] + ordered_sizes
-
-    summary_rows = uniform_fields.map do |field, label|
-      counts = people.group_by { |p| p.send(field).to_s.strip.presence || "N/A" }
-                     .transform_values(&:count)
-      [label] + ordered_sizes.map { |size| counts[size] || 0 }
+    missing_table_w = 400.0
+    missing_x = (pdf.bounds.width - missing_table_w) / 2.0
+    pdf.bounding_box([missing_x, pdf.cursor], width: missing_table_w) do
+      pdf.table(missing,
+                width: missing_table_w,
+                column_widths: [(missing_table_w * 0.7).round(2), (missing_table_w * 0.3).round(2)],
+                header: true,
+                cell_style: { size: 9, padding: 3, overflow: :shrink_to_fit, min_font_size: 7, inline_format: false }) do
+        row(0).font_style = :bold
+        row(0).background_color = "DDDDDD"
+      end
     end
 
-    uniform_summary_table = [header_row] + summary_rows
+    # --- Full list table (full width) ---
+    pdf.move_down 14
+    pdf.text "T-Shirt Sizes - Full List", size: 11, style: :bold
+    pdf.move_down 6
 
-    pdf.table(uniform_summary_table, header: true, cell_style: { size: 8 }) do
-      row(0).font_style = :bold
-      row(0).background_color = "CCCCCC"
-      columns(0).font_style = :bold
-      columns(1..-1).width = 30
-      columns(1..-1).align = :right
-    end
-
-    pdf.move_down 20
-
-    pdf.text "Uniform Sizes (Umpires Only)", size: 10, style: :bold
-    pdf.move_down 4
-
-    uniform_table_data = [["Name", "Role", "Skirt", "Shorts", "Polo", "V-Neck"]]
-    @attendees.select { |t| t.role.to_s.include?("Umpire") && t.person }
+    list_data = [["#", "Name", "Role", "T-Shirt Size"]]
+    @attendees.select(&:person)
               .sort_by { |t| t.person.first_name.to_s }
-              .each do |t|
+              .each_with_index do |t, i|
                 p = t.person
-                uniform_table_data << [
+                list_data << [
+                  i + 1,
                   p.full_name,
-                  t.role,
-                  p.inferno_bottom_skirt_size || "N/A",
-                  p.inferno_bottom_shorts_size || "N/A",
-                  p.inferno_top_polo_size || "N/A",
-                  p.inferno_top_vneck_size || "N/A"
+                  p.role,
+                  p.tshirt_size.presence || "N/A"
                 ]
               end
 
-    if uniform_table_data.length > 1
-      pdf.table(uniform_table_data, header: true, row_colors: ["F0F0F0", "FFFFFF"], cell_style: { size: 9 }) do
-        row(0).font_style = :bold
-        row(0).background_color = "CCCCCC"
-        columns(0).width = 150
-        columns(1).width = 80
-        columns(2..5).width = 50
-      end
-    else
-      pdf.text "No umpire uniform data found.", size: 10, style: :italic
+    w0 = 24.0
+    rem = (safe_w - w0).round(2)
+    w1 = (rem * 0.55).round(2)
+    w2 = (rem * 0.25).round(2)
+    w3 = (rem - w1 - w2).round(2)
+
+    pdf.table(list_data,
+              width: safe_w,
+              column_widths: [w0, w1, w2, w3],
+              header: true,
+              row_colors: ["F8F8F8", "FFFFFF"],
+              cell_style: { size: 8, padding: 2, overflow: :shrink_to_fit, min_font_size: 7, inline_format: false }) do
+      row(0).font_style = :bold
+      row(0).background_color = "EEEEEE"
+      columns(0).align = :right
     end
 
     pdf.render
   end
-  
 end
