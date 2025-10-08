@@ -3,8 +3,8 @@
 <%= render partial: "transfers/transfer_nav_tabs" %>
 
 <% @transfers_by_date.each do |date, transfers| %>
- <div class="text-xl text-blue-800 mt-8 border-b pb-2">
-  <%= date.strftime("%A, %B %e") %>
+<div class="text-xl text-blue-800 mt-8 border-b pb-2">
+  <%= date ? l(date, format: :long) : "Date TBC" %>
 </div>
 
   <% transfers_by_group = transfers.group_by { |t| t.pick_up_grouping.presence || "Ungrouped" } %>
