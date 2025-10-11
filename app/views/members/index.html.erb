@@ -1,13 +1,62 @@
 <% content_for(:page_title, "All Members")%>
 
-<% if current_user.admin? %>
-  <div class="inline-block">
-    <label class="text-xs invisible h-[20px] leading-none">Export</label>
-    <%= link_to "Export Members To Excel >",
-        members_path(format: "xlsx", state: params[:state], city: params[:city], created_at: params[:created_at]),
-        class: "border border-blue-900 text-blue-900 text-sm px-3 py-2 rounded hover:bg-blue-100 inline-block whitespace-nowrap" %>
+<!-- Top bar -->
+<div class="flex justify-between items-end mb-3">
+
+  <!-- Left side: export buttons (admins only) -->
+  <% if current_user.admin? %>
+    <div class="flex gap-3">
+      <!-- Export ALL Members -->
+      <div class="relative group inline-block">
+        <label class="text-xs invisible h-[20px] leading-none">Export</label>
+        <%= link_to "Export ALL Members To Excel >",
+            members_path(format: "xlsx",
+                         state: params[:state],
+                         city: params[:city],
+                         created_at: params[:created_at],
+                         club_id: params[:club_id]),
+            class: "border border-blue-900 font-bold text-blue-900 text-sm px-3 py-2 rounded hover:bg-blue-100 inline-block whitespace-nowrap" %>
+        <div class="absolute bottom-full mb-1 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
+          Basic data export, use filter if applicable
+        </div>
+      </div>
+
+      <!-- Active Club Members Export -->
+      <div class="relative group inline-block">
+        <label class="text-xs invisible h-[20px] leading-none">Export</label>
+        <%= link_to "Active Club Members Export >",
+            active_club_members_path(format: "csv", club_id: params[:club_id]),
+            class: "border border-green-700 font-bold text-green-700 text-sm px-3 py-2 rounded hover:bg-green-100 inline-block whitespace-nowrap" %>
+        <div class="absolute bottom-full mb-1 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
+          Only active clubs and their members to CSV
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Right side: Club filter (visible to all users) -->
+  <div>
+    <%= form_with url: members_path, method: :get, local: true, class: "inline-flex items-end gap-2" do %>
+      <div>
+        <label class="block text-xs text-gray-600 mb-1">Club</label>
+        <%= select_tag :club_id,
+          options_for_select([["All clubs", ""]] + @clubs, params[:club_id]),
+          class: "border px-3 py-2 rounded",
+          onchange: "this.form.submit();" %>
+      </div>
+
+      <!-- preserve other filters -->
+      <%= hidden_field_tag :state,      params[:state] if params[:state].present? %>
+      <%= hidden_field_tag :city,       params[:city] if params[:city].present? %>
+      <%= hidden_field_tag :created_at, params[:created_at] if params[:created_at].present? %>
+
+      <%= link_to "Clear", members_path, class: "text-sm text-gray-600 underline ml-2" %>
+    <% end %>
   </div>
-<% end %>
+
+</div>
+
+
 
 <div id="members">
   <br>
