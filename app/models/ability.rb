@@ -152,6 +152,13 @@ class Ability
       can :teams_list_index, Club
       can :index_admin, Club
 
+      # NEW: manage your own Person (profile) by email
+      can :manage, Person, email: user.email
+
+      # NEW: manage Transfers tied to that Person (via association)
+      # Works as Transfer belongs_to :person
+      can :manage, Transfer
+
     # 11 : spare (no specific permissions)
     when "spare"
       # No specific permissions assigned yet

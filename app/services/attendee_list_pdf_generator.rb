@@ -47,10 +47,23 @@ class AttendeeListPdfGenerator
   end
 
   def build_pdf
-    pdf = Prawn::Document.new
+    # Switch to LANDSCAPE and keep everything else intact
+    pdf = Prawn::Document.new(page_layout: :landscape)
 
-    pdf.image "#{Rails.root}/app/assets/images/US Open 2025 Logo_Small.png", at: [462, 737], width: 80 rescue nil
-    pdf.image "#{Rails.root}/app/assets/images/Netball_America_Logo.png",     at: [0,   737], width: 80 rescue nil
+    # Logos placed relative to bounds so they render correctly in landscape, too
+    begin
+      pdf.image "#{Rails.root}/app/assets/images/US Open 2025 Logo_Small.png",
+                at: [pdf.bounds.right - 80, pdf.bounds.top], width: 80
+    rescue StandardError
+      # ignore missing image
+    end
+
+    begin
+      pdf.image "#{Rails.root}/app/assets/images/Netball_America_Logo.png",
+                at: [pdf.bounds.left, pdf.bounds.top], width: 80
+    rescue StandardError
+      # ignore missing image
+    end
 
     pdf.number_pages ":: Attendee List — Page <page> of <total>", at: [pdf.bounds.left, 0], size: 6, align: :left
 
@@ -93,9 +106,9 @@ class AttendeeListPdfGenerator
 
     sorted_roles = grouped.keys.sort_by { |r| sort_key_for.call(r) }
 
-    # ---- Columns (keep total ~520) ----
-    # New order: Name | Title | Email | Phone | T-Shirt
-    col_widths = { name: 120, title: 120, email: 140, phone: 80, tshirt: 60 }
+    # ---- Columns (landscape ≈ 720pt inside default margins) ----
+    # New order: Name | Title | Email | Phone | T-Shirt | Diet/Allergies
+    col_widths = { name: 160, title: 120, email: 180, phone: 90, tshirt: 60, diet: 110 }
 
     sorted_roles.each do |role|
       transfers = grouped[role]
@@ -103,23 +116,25 @@ class AttendeeListPdfGenerator
       pdf.text "Role: #{role}", size: 10, style: :bold
       pdf.move_down 4
 
-      table_data = [["Name", "Title", "Email", "Phone", "T-Shirt"]]
+      # Add new "Diet/Allergies" column at the END
+      table_data = [["Name", "Title", "Email", "Phone", "T-Shirt", "Diet/Allergies"]]
 
       transfers.sort_by { |t| t.person.full_name.to_s }.each do |transfer|
         person = transfer.person
         table_data << [
           person&.full_name.to_s,
-          transfer.event_title.to_s,  # Title now 2nd
+          transfer.event_title.to_s,           # Title 2nd
           person&.email.to_s,
           person&.phone.to_s,
-          tshirt_for(person)
+          tshirt_for(person),
+          transfer.dietary_requirements_allergies.to_s
         ]
       end
 
       pdf.table(table_data,
                 header: true,
                 row_colors: %w[F9F9F9 FFFFFF],
-                cell_style: { size: 8 }) do
+                cell_style: { size: 8, overflow: :shrink_to_fit, min_font_size: 6 }) do
         row(0).font_style = :bold
         row(0).background_color = "DDDDDD"
         columns(0).width = col_widths[:name]
@@ -127,6 +142,7 @@ class AttendeeListPdfGenerator
         columns(2).width = col_widths[:email]
         columns(3).width = col_widths[:phone]
         columns(4).width = col_widths[:tshirt]
+        columns(5).width = col_widths[:diet]
       end
 
       pdf.move_down 15
