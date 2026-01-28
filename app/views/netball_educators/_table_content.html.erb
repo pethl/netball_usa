@@ -65,12 +65,25 @@
               <%= educator.user&.full_name %>
             </td>
 
-            <!-- Notes: 2-line clamp, no layout blowout -->
-            <td class="px-3 py-2">
-              <p class="text-sm text-gray-700 line-clamp-2 break-words">
-                <%= educator.mgmt_notes %>
-              </p>
+           <!-- Notes: single-line truncate with hover tooltip -->
+            <td class="px-3 py-2 max-w-xs relative group">
+              <span class="block truncate text-sm text-gray-700 cursor-help">
+                <%= educator.mgmt_notes.presence || "—" %>
+              </span>
+
+              <% if educator.mgmt_notes.present? %>
+                <div
+                  class="absolute z-[9999] left-0 top-full mt-1 w-96
+                        bg-gray-900 text-white text-xs
+                        rounded-md shadow-xl border border-gray-700
+                        p-3 hidden
+                        group-hover:block
+                        pointer-events-none">
+                  <%= simple_format(educator.mgmt_notes) %>
+                </div>
+              <% end %>
             </td>
+
 
             <!-- Tight date -->
             <td class="px-3 py-2 font-medium text-gray-800 whitespace-nowrap">
