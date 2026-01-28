@@ -4,14 +4,13 @@ class PartnersController < ApplicationController
 
   # GET /partners
   def index
-    @partners = Partner.all.ordered
-    if params[:search].present?
-      @partners = @partners.where("company ILIKE ?", "%#{params[:search]}%").ordered
-    end
+    @partners = apply_search(Partner.all.ordered)
   end
-
+  
   def my_partners
-    @partners = Partner.where(user_id: current_user.id)
+    @partners = apply_search(
+      Partner.where(user_id: current_user.id).ordered
+    )
     render :index
   end
 
@@ -77,13 +76,30 @@ class PartnersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def partner_params
-      params.require(:partner).permit(:company, :user_id, :description, :location, :city, :us_state, :country, :website, :date_initially_connected, :date_pitch_to_na, :date_pitch_by_na, :pitch_to_na, :pitch_by_na, :follow_up_action, :partnership_agreement, :accept_partnership, :date_of_decision, :first_name_primary, :last_name_primary, :role_primary, :email_primary, :cell_primary, :work_phone_primary, :first_name_secondary, :last_name_secondary, :role_secondary, :email_secondary, :cell_secondary, :work_phone_secondary, :first_name_third, :last_name_third, :role_third, :email_third, :cell_third, :work_phone_third )
+      params.require(:partner).permit(:company, :user_id, :description, :location, :city, :us_state, :country, :zip_code, :website, :date_initially_connected, :date_pitch_to_na, :date_pitch_by_na, :pitch_to_na, :pitch_by_na, :follow_up_action, :partnership_agreement, :accept_partnership, :date_of_decision, :first_name_primary, :last_name_primary, :role_primary, :email_primary, :cell_primary, :work_phone_primary, :first_name_secondary, :last_name_secondary, :role_secondary, :email_secondary, :cell_secondary, :work_phone_secondary, :first_name_third, :last_name_third, :role_third, :email_third, :cell_third, :work_phone_third )
     end
 
     def send_allocation_email(partner)
       unless partner.user_id == partner.old_user_id
         PartnerMailer.with(partner: partner).record_allocation_notification.deliver_later
       end
+    end
+
+
+    def apply_search(scope)
+      search_term = params[:query].presence || params[:search].presence
+      return scope unless search_term.present?
+
+      q = "%#{search_term}%"
+
+      scope.where(
+        "company ILIKE :q
+        OR city ILIKE :q
+        OR us_state ILIKE :q
+        OR zip_code ILIKE :q
+        OR country ILIKE :q",
+        q: q
+      )
     end
 
 end

@@ -12,20 +12,22 @@
   </ul>
 
   <!-- Search box -->
-  <div class="flex items-center gap-2">
-    <input type="text"
-           placeholder="🔍 Search by company..."
-           class="p-2 border rounded w-64 shadow-sm shadow-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-900"
-           data-controller="search"
-           data-search-url-value="<%= request.path %>"
-           data-search-delay-value="300"
-           data-search-target="input"
-           data-action="input->search#search"
-           autocomplete="off"
-           value="<%= params[:query] %>" />
+  <div class="flex items-center gap-2 flex-1 justify-end">
+    <input
+      type="text"
+      placeholder="🔍 Search by company, city, state, zip, or country..."
+      class="p-2 border rounded w-full max-w-md shadow-sm shadow-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-900"
+      data-controller="search"
+      data-search-url-value="<%= request.path %>"
+      data-search-delay-value="300"
+      data-search-target="input"
+      data-action="input->search#search"
+      autocomplete="off"
+      value="<%= params[:query].presence || params[:search] %>" />
 
     <%= link_to "Clear",
         request.path,
         class: "text-sm text-blue-900 underline hover:font-semibold whitespace-nowrap" %>
   </div>
 </div>
+

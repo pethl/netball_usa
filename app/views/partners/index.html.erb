@@ -45,9 +45,9 @@
                 <%= link_to partner.company, partner_path(partner), class: link_class %>
             </td>
                
-            <td class="px-4 py-4 align-top">
-                <%= partner.city %>   <%= partner.us_state %> <br> <%= partner.country %>
-            </td>
+           <td class="px-4 py-4 align-top">
+                <%= partner.address_index_compact %>
+                </td>
             <td class="px-4 py-4 align-top truncate">
                 <%= (link_to partner.website, partner.website, target: '_blank', class: link_class) unless (partner.website.to_s.empty?)%>
             </td>

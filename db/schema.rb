@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_14_085629) do
+ActiveRecord::Schema[7.1].define(version: 2026_01_28_073424) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -487,6 +487,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_085629) do
     t.string "country"
     t.bigint "user_id"
     t.integer "old_user_id"
+    t.string "zip_code"
     t.index ["user_id"], name: "index_partners_on_user_id"
   end
 

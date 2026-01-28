@@ -33,28 +33,29 @@ class Partner < ApplicationRecord
     end
 
     def address_condensed
-        if self.location.to_s.blank? && self.city.to_s.blank? && self.us_state.to_s.blank?
-            return ""
-        elsif self.location.to_s.blank? && self.city.to_s.blank?
-           return "#{self.us_state} #{country}"
-    
-        elsif self.location.to_s.blank? && self.us_state.to_s.blank?
-            "#{self.city} #{country}"
-        
-        elsif self.city.to_s.blank? && self.us_state.to_s.blank?
-            "#{self.location} #{country}"
-    
-        elsif self.location.to_s.blank? 
-            "#{self.city}, #{self.us_state}  #{country}"
-        
-        elsif self.city.to_s.blank? 
-            "#{self.location}, #{self.us_state} #{country}"
-           
-        elsif self.us_state.to_s.blank? 
-            "#{self.location}, #{self.city} #{country}"
-        
-        else
-            "#{self.location}, #{self.city}, #{self.us_state} #{country}"
-        end
-    end
+        parts = []
+      
+        # street / location
+        parts << location if location.present?
+      
+        # city + state + zip on one line
+        city_state_zip = [city, us_state, zip_code].compact.reject(&:blank?).join(" ")
+        parts << city_state_zip if city_state_zip.present?
+      
+        # country
+        parts << country if country.present?
+      
+        parts.join(", ")
+      end
+
+      def address_index_compact
+        line_one = [city, us_state, zip_code]
+                     .compact
+                     .reject(&:blank?)
+                     .join(" ")
+      
+        line_two = country.presence
+      
+        [line_one, line_two].compact.join("<br>").html_safe
+      end
 end

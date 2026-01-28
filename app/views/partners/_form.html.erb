@@ -36,7 +36,7 @@
       </div>
     </div> 
     
-    <div class="mb-0 md:col-span-1">
+    <div class="mb-0 md:col-span-3">
       <%= form.label :location, class: label_class%>
         <div class="mt-1">
         <%= form.text_field :location, class: tight_form_input_class  %>
@@ -56,11 +56,11 @@
         <%= form.select :us_state, options_for_select(us_states, :selected => partner.us_state),{:prompt=>true}, class: tight_form_input_class %>
         </div>
     </div>
-
-    <div class="mb-0 md:col-span-3 sm:mt-2 md:mt-0">
-      <%= form.label :description, class: label_class%>
+    
+    <div class="mb-0">
+      <%= form.label :zip_code, "Zip Code", class: label_class  %>
         <div class="mt-1">
-          <%= form.text_area :description, size: "30x5", class: tight_form_input_class  %>
+        <%= form.text_field :zip_code, class: tight_form_input_class %>
         </div>
     </div>
 
