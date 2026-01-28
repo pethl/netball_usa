@@ -1,184 +1,172 @@
 <div id="<%= dom_id netball_educator %>" class="text-center">
-
-<% unless user_signed_in? %>
-  <h2>Thank you for sharing your contact details, we will be in touch!<br><br></h2>
+  <% unless user_signed_in? %>
+    <h2>
+      Thank you for sharing your contact details, we will be in touch!
+      <br><br>
+    </h2>
   <% end %>
-  </div>
-
-  <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-      <% if is_admin? %>
-      <% if kidokinetics?(netball_educator) %>
-        <div class="mt-2 mb-2">
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-            Speciality Role:
-          </p>
-          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-            <%= netball_educator.role.presence || "N/A" %>
-          </p>
-        </div>
-      <% else %>
-        <div class="mt-2 mb-2">
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-            Is P.E. Director?:
-          </p>
-          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-            <%= netball_educator.is_pe_director? ? 'Yes' : 'No' %>
-          </p>
-        </div>
-      <% end %>
-    <% end %>
-
-
-
-        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-            Name:
-        </p>
-        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-        <%= netball_educator.first_name %> <%= netball_educator.last_name %> 
-        </p>
-    
-      
-       <div class="mt-2">
-         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-             Email:
-         </p>
-         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-         <%= netball_educator.email %> 
-         </p> 
-        </div>
-        
-      <div class="mt-2">
-         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-             Phone:
-         </p>
-         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-         <%= netball_educator.formatted_phone %> 
-         </p>
-      </div>    
-      
-      <div class="mt-2">
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-          Title:
-      </p>
-      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-      <%= netball_educator.title %> 
-      </p>
-       </div>
-    
-        <div class="mt-2">
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-            <%= kidokinetics?(netball_educator) ? "Franchise Name:" : "School Name:" %>
-          </p>
-          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-            <%= netball_educator.school_name %> 
-          </p>
-        </div>
-
-        <div class="mt-2">
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-            <%= kidokinetics?(netball_educator) ? "Franchise Website:" : "School Website:" %>
-          </p>
-          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-            <%= netball_educator.website %> 
-          </p>
-        </div>
-
-       
-        <div class="mt-2">
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-             Address, City, State, ZIP:
-          </p>
-          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-           <%= netball_educator.address %> <%= netball_educator.city %>,   <%= netball_educator.state %>  <%= netball_educator.zip %> 
-          </p>
-        </div>
-       
-        <% unless kidokinetics?(netball_educator) %>
-        <div class="mt-2">
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-              Level:
-          </p>
-          <p class="text-sm font-medium text-gray-900 dark:text-white">
-          <%= netball_educator.level %> 
-          </p>
-        </div>
-
-        <div class="mt-2">
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-               More Information:
-          </p>
-          <p class="text-sm font-medium text-gray-900 dark:text-white">
-           <%= netball_educator.educator_notes %> 
-          </p>
-        </div>
-            
-            <% unless netball_educator.level=="School/District Lead" %>
-        <div class="mt-2">
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                Feedback:
-          </p>
-          <p class="text-sm font-medium text-gray-900 dark:text-white">
-            <%= netball_educator.feedback %> 
-          </p>
-        </div>
-             
-       
-        <div class="mt-2">
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                 Authorize use of feedback on social media?:
-          </p>
-          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-             <%= netball_educator.authorize? ? 'Yes' : 'No' %>
-          </p>
-        </div>
-              
-        <% end %>
-          <% end %> 
- 
-<% if user_signed_in? %>
-  
-        <div class="mt-2">
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-              Allocated To:
-          </p>
-          <p class="text-sm font-medium text-gray-900 dark:text-white">
-           <%= netball_educator.user.full_name unless (netball_educator.user_id.to_s.empty?) %>
-          </p>
-         </div>
-  
-         <div class="mt-2">
-            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                Mgmt Notes:
-            </p>
-            <p class="text-sm font-medium text-gray-900 dark:text-white">
-            <%= netball_educator.mgmt_notes %> 
-            </p>
-        </div>
-
-         <div class="mt-2">
-            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                Registered At Event?:
-            </p>
-            <p class="text-sm font-medium text-gray-900 dark:text-white">
-            <%= netball_educator.events.first&.event_date_state_type_name || "Not registered" %>
-            </p>
-        </div>
-           
-        <div class="mt-2">
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                  Equipment Sales:
-          </p>
-          <p class="text-sm font-medium text-gray-900 dark:text-white">
-              <% if netball_educator.equipment.any? %>
-                <% netball_educator.equipment.each do |equipment| %>
-                  <ul>
-                  <li><%= equipment.sale_date.to_formatted_s(:usa) unless (equipment.sale_date.to_s.empty?) %>  <%= equipment.items_purchased %>   <%= number_to_currency(equipment.purchase_amount, precision: 2) %><br>
-                  </li></ul>
-                 <% end %>
-                <% end %>
-          </p>
-        </div>
-        
-  <% end %>  
 </div>
 
+<div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow
+            hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+  <% if is_admin? %>
+    <div class="mt-2 mb-2">
+      <p class="text-sm text-gray-500 dark:text-gray-400">
+        Role:
+      </p>
+      <p class="text-sm font-medium text-gray-900 dark:text-white">
+        <%= netball_educator.role.presence || "N/A" %>
+      </p>
+    </div>
+  <% end %>
+
+  <!-- Name -->
+  <p class="text-sm text-gray-500 dark:text-gray-400">Name:</p>
+  <p class="text-sm font-medium text-gray-900 dark:text-white">
+    <%= netball_educator.first_name %> <%= netball_educator.last_name %>
+  </p>
+
+  <!-- Email -->
+  <div class="mt-2">
+    <p class="text-sm text-gray-500 dark:text-gray-400">Email:</p>
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
+      <%= netball_educator.email %>
+    </p>
+  </div>
+
+  <!-- Phone -->
+  <div class="mt-2">
+    <p class="text-sm text-gray-500 dark:text-gray-400">Phone:</p>
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
+      <%= netball_educator.formatted_phone %>
+    </p>
+  </div>
+
+  <!-- Title -->
+  <div class="mt-2">
+    <p class="text-sm text-gray-500 dark:text-gray-400">Title:</p>
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
+      <%= netball_educator.title %>
+    </p>
+  </div>
+
+  <!-- School / Franchise -->
+  <div class="mt-2">
+    <p class="text-sm text-gray-500 dark:text-gray-400">
+      <%= kidokinetics?(netball_educator) ? "Franchise Name:" : "School Name:" %>
+    </p>
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
+      <%= netball_educator.school_name %>
+    </p>
+  </div>
+
+  <!-- Website -->
+  <div class="mt-2">
+    <p class="text-sm text-gray-500 dark:text-gray-400">
+      <%= kidokinetics?(netball_educator) ? "Franchise Website:" : "School Website:" %>
+    </p>
+    <p class="text-sm font-medium text-gray-900 dark:text-white break-words">
+      <%= netball_educator.website %>
+    </p>
+  </div>
+
+  <!-- Address -->
+  <div class="mt-2">
+    <p class="text-sm text-gray-500 dark:text-gray-400">
+      Address, City, State, ZIP:
+    </p>
+    <p class="text-sm font-medium text-gray-900 dark:text-white break-words">
+      <%= netball_educator.address %>
+      <%= netball_educator.city %>,
+      <%= netball_educator.state %>
+      <%= netball_educator.zip %>
+    </p>
+  </div>
+
+  <% unless kidokinetics?(netball_educator) %>
+
+    <!-- Level -->
+    <div class="mt-2">
+      <p class="text-sm text-gray-500 dark:text-gray-400">Level:</p>
+      <p class="text-sm font-medium text-gray-900 dark:text-white">
+        <%= netball_educator.level %>
+      </p>
+    </div>
+
+    <!-- More Info -->
+    <div class="mt-2">
+      <p class="text-sm text-gray-500 dark:text-gray-400">More Information:</p>
+      <p class="text-sm font-medium text-gray-900 dark:text-white whitespace-pre-wrap">
+        <%= netball_educator.educator_notes %>
+      </p>
+    </div>
+
+    <% unless netball_educator.level == "School/District Lead" %>
+
+      <!-- Feedback -->
+      <div class="mt-2">
+        <p class="text-sm text-gray-500 dark:text-gray-400">Feedback:</p>
+        <p class="text-sm font-medium text-gray-900 dark:text-white whitespace-pre-wrap">
+          <%= netball_educator.feedback %>
+        </p>
+      </div>
+
+      <!-- Authorize -->
+      <div class="mt-2">
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          Authorize use of feedback on social media?
+        </p>
+        <p class="text-sm font-medium text-gray-900 dark:text-white">
+          <%= netball_educator.authorize? ? "Yes" : "No" %>
+        </p>
+      </div>
+
+    <% end %>
+  <% end %>
+
+  <% if user_signed_in? %>
+
+    <!-- Allocated -->
+    <div class="mt-2">
+      <p class="text-sm text-gray-500 dark:text-gray-400">Allocated To:</p>
+      <p class="text-sm font-medium text-gray-900 dark:text-white">
+        <%= netball_educator.user&.full_name %>
+      </p>
+    </div>
+
+    <!-- Mgmt Notes -->
+    <div class="mt-2">
+      <p class="text-sm text-gray-500 dark:text-gray-400">Mgmt Notes:</p>
+      <p class="text-sm font-medium text-gray-900 dark:text-white whitespace-pre-wrap">
+        <%= netball_educator.mgmt_notes %>
+      </p>
+    </div>
+
+    <!-- Event -->
+    <div class="mt-2">
+      <p class="text-sm text-gray-500 dark:text-gray-400">
+        Registered At Event?
+      </p>
+      <p class="text-sm font-medium text-gray-900 dark:text-white">
+        <%= netball_educator.events.first&.event_date_state_type_name || "Not registered" %>
+      </p>
+    </div>
+
+    <!-- Equipment -->
+    <div class="mt-2">
+      <p class="text-sm text-gray-500 dark:text-gray-400">Equipment Sales:</p>
+
+      <% netball_educator.equipment.each do |equipment| %>
+        <p class="text-sm font-medium text-gray-900 dark:text-white">
+          <%= equipment.sale_date&.to_formatted_s(:mdy_short) %>
+          –
+          <%= equipment.items_purchased %>
+          –
+          <%= number_to_currency(equipment.purchase_amount, precision: 2) %>
+        </p>
+      <% end %>
+    </div>
+
+  <% end %>
+</div>

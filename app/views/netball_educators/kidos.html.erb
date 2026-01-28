@@ -1,23 +1,28 @@
-<% content_for(:page_title, "Kidos / Kidokinetics Franchises") %>
+<%= content_for(:page_title, "Kidos / Kidokinetics Franchises") %>
 
 <%= render 'nav_tabs' %>
 
 <div class="flex justify-between items-end flex-wrap gap-4 px-4 pt-4 pb-2">
   <!-- Left side: Add New button -->
   <div>
-    <%= link_to "Add New Kidokinetics", new_netball_educator_path(kidokinetics: true), class: form_button_class %>
+    <%= link_to "Add New Kidokinetics",
+      new_netball_educator_path(role: "Kidokinetics"),
+      class: form_button_class %>
   </div>
 
   <!-- Right side: Filters -->
   <div class="ml-auto">
-    <%= render 'netball_educators/filters', filter_url: kidos_path %>
+    <%= render 'netball_educators/filters',
+      filter_url: kidos_netball_educators_path %>
   </div>
 </div>
 
-<div class="">
+<div>
   <% if @netball_educators.any? %>
     <div id="educators">
-      <%= render 'educators_table', educators: @netball_educators, context: :kidos %>
+      <%= render 'educators_table',
+        educators: @netball_educators,
+        context: :kidos %>
     </div>
   <% else %>
     <p class="px-4 py-2">No records to view</p>

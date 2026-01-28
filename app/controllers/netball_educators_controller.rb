@@ -7,50 +7,14 @@ class NetballEducatorsController < ApplicationController
 
   def index
     # used for the modal
-    #@events = Event.educational.gone# or  filtered events 
-   
+    # @events = Event.educational.gone
+  
     @events = Event.educational.ordered_desc
-
+  
     # 🔥 Educator Access Control
     @netball_educators = NetballEducator.all
-
-    # 🔥 Filters
-    if params[:state].present?
-      @netball_educators = @netball_educators.where(state: params[:state])
-    end
-
-    if params[:city].present?
-      @netball_educators = @netball_educators.where("city ILIKE ?", "%#{params[:city]}%")
-    end
-
-    # Filter by created_at if a date is selected
-    if params[:created_at].present?
-      selected_date = Date.parse(params[:created_at]) # Parse the date from the form
-     @netball_educators = @netball_educators.where("created_at >= ?", selected_date.beginning_of_day)
-    end
-
-    # 🔍 Name or Email Search
-    if params[:query].present?
-     query = "%#{params[:query]}%"
-     @netball_educators = @netball_educators.where(
-      "first_name ILIKE :q OR last_name ILIKE :q OR email ILIKE :q", q: query
-      )
-    end
-
-    # 🔥 Ordering
-      if params[:state].present? || params[:city].present? || params[:created_at].present? || params[:query].present?
-        # Apply this sort order when filters are active
-        @netball_educators = @netball_educators.order(:state, :city, :first_name)
-      else
-        # Default sort when unfiltered
-        @netball_educators = @netball_educators.order(created_at: :desc)
-      end
-
-
-     # ✅ Preload event participants as a set of educator IDs (for fast lookup in view)
-    @educator_ids_with_participants = EventParticipant.where(netball_educator_id: @netball_educators.pluck(:id)).distinct.pluck(:netball_educator_id).to_set
-
-
+    apply_common_filters!
+  
     respond_to do |format|
       format.html do
         @pagy, @netball_educators = pagy(@netball_educators)
@@ -64,58 +28,29 @@ class NetballEducatorsController < ApplicationController
 
 
   def pe_directors
-    @netball_educators = NetballEducator.excluding_kidos.where(
-          "level = ? OR is_pe_director IS TRUE", "School/District Lead"
-          )
-    #@netball_educators = NetballEducator.excluding_kidos.where(level: "School/District Lead")
-
-    # Apply filters
-    @netball_educators = @netball_educators.where(state: params[:state]) if params[:state].present?
-    @netball_educators = @netball_educators.where(city: params[:city]) if params[:city].present?
-    if params[:query].present?
-      q = "%#{params[:query]}%"
-      @netball_educators = @netball_educators.where("first_name ILIKE ? OR last_name ILIKE ? OR email ILIKE ?", q, q, q)
-    end
-    if params[:created_at].present?
-      @netball_educators = @netball_educators.where("DATE(created_at) = ?", params[:created_at])
-    end
+    @netball_educators = NetballEducator
+      .where(role: "PE Director")
+      .or(NetballEducator.where(is_pe_director: true))
   
-    # Order
-    @netball_educators = @netball_educators.order("state ASC, city ASC, first_name ASC")
-  
-    # Preload event participant IDs for fast view lookup
-    @educator_ids_with_participants = EventParticipant
-      .where(netball_educator_id: @netball_educators.pluck(:id))
-      .distinct
-      .pluck(:netball_educator_id)
-      .to_set
+    apply_common_filters!
   end
-
+  
   def kidos
     @netball_educators = NetballEducator.where(role: "Kidokinetics")
-  
-    # Apply filters
-    @netball_educators = @netball_educators.where(state: params[:state]) if params[:state].present?
-    @netball_educators = @netball_educators.where(city: params[:city]) if params[:city].present?
-    
-    if params[:query].present?
-      q = "%#{params[:query]}%"
-      @netball_educators = @netball_educators.where("first_name ILIKE ? OR last_name ILIKE ? OR email ILIKE ?", q, q, q)
-    end
-  
-    if params[:created_at].present?
-      @netball_educators = @netball_educators.where("DATE(created_at) = ?", params[:created_at])
-    end
-  
-    # Order
-    @netball_educators = @netball_educators.order("state ASC, city ASC, first_name ASC")
+    apply_common_filters!
   end
+  
+  def talentlockr
+    @netball_educators = NetballEducator.where(role: "Talentlockr")
+    apply_common_filters!
+  end
+  
 
   def my_educators
     @netball_educators = NetballEducator.where(user_id: current_user.id)
     @netball_educators = @netball_educators.order("created_at DESC, state ASC, city ASC")
       # ✅ Preload event participants as a set of educator IDs (for fast lookup in view)
-      @educator_ids_with_participants = EventParticipant.where(netball_educator_id: @netball_educators.pluck(:id)).distinct.pluck(:netball_educator_id).to_set
+    @educator_ids_with_participants = EventParticipant.where(netball_educator_id: @netball_educators.pluck(:id)).distinct.pluck(:netball_educator_id).to_set
   end
 
   def search
@@ -171,9 +106,13 @@ class NetballEducatorsController < ApplicationController
 
   def new
     @netball_educator = NetballEducator.new
-
-    # If opened from ?kidokinetics=true, set the role
-    @netball_educator.role = "Kidokinetics" if params[:kidokinetics] == "true"
+  
+    if params[:role].present?
+      @netball_educator.role = params[:role]
+    elsif params[:kidokinetics] == "true"
+      @netball_educator.role = "Kidokinetics"
+    end
+  
     @netball_educator.level = "Franchise"
   end
 
@@ -231,7 +170,6 @@ class NetballEducatorsController < ApplicationController
     params.require(:netball_educator).permit(
       :first_name, 
       :last_name, 
-      :is_pe_director,
       :email, 
       :phone, 
       :title,
@@ -273,5 +211,34 @@ class NetballEducatorsController < ApplicationController
     #special group defined in helpers
     @users = User.active_educator_users
   end
+
+  def apply_common_filters!
+    @netball_educators = @netball_educators.where(state: params[:state]) if params[:state].present?
+    @netball_educators = @netball_educators.where(city: params[:city]) if params[:city].present?
+  
+    if params[:query].present?
+      q = "%#{params[:query]}%"
+      @netball_educators = @netball_educators.where(
+        "first_name ILIKE :q OR last_name ILIKE :q OR email ILIKE :q",
+        q: q
+      )
+    end
+  
+    if params[:created_at].present?
+      @netball_educators = @netball_educators.where(
+        "DATE(created_at) = ?", params[:created_at]
+      )
+    end
+  
+    @netball_educators = @netball_educators.order(:state, :city, :first_name)
+  
+    @educator_ids_with_participants =
+      EventParticipant
+        .where(netball_educator_id: @netball_educators.pluck(:id))
+        .distinct
+        .pluck(:netball_educator_id)
+        .to_set
+  end
+  
 end 
  

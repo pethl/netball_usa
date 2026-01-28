@@ -108,23 +108,18 @@ Rails.application.routes.draw do
     end
   end
   
-  
   resources :references
   resources :grants
  
-  get 'netball_educators/pe_directors' => 'netball_educators#pe_directors', :as => :pe_directors
-  get 'netball_educators/kidos', to: 'netball_educators#kidos', as: :kidos
-  get 'netball_educators/search' => 'netball_educators#search', :as => :search
-  get 'netball_educators/index_user' => 'netball_educators#index_user', :as => :index_user
-  get 'netball_educators/my_educators' => 'netball_educators#my_educators', :as => :my_educators
-  get 'netball_educators/trainers_etc' => 'netball_educators#trainers_etc', as: :trainers_etc
-  get 'netball_educators/heat_map' => 'netball_educators#heat_map', as: :heat_map
-
- 
   resources :netball_educators do
     collection do
-      get 'pe_directors'
-      get 'search'
+      get :pe_directors
+      get :kidos
+      get :talentlockr
+      get :my_educators
+      get :search
+      get :trainers_etc
+      get :heat_map
     end
   end
   

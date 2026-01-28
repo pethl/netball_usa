@@ -44,3 +44,7 @@ Time::DATE_FORMATS[:usa_dt_no_time] = "%b %d, %Y"
 
 Time::DATE_FORMATS[:usa_day_dt] = "%A %b %d, %Y  %H:%M"
 # => "Monday Aug 09, 2024  14:45  " — With time
+
+# === COMPACT / TABLE DATES ===
+Time::DATE_FORMATS[:mdy_short] = "%m/%d/%y"
+# => "08/09/24"

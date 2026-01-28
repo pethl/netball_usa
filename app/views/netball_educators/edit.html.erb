@@ -1,12 +1,16 @@
 <% content_for :page_title do %>
-  <% if @netball_educator.role == "Kidokinetics" %>
+  <% case @netball_educator.role %>
+  <% when "Kidokinetics" %>
     Kidos: Edit Franchise Record
-  <% elsif @netball_educator.is_pe_director? %>
+  <% when "PE Director" %>
     PE Director: Edit
+  <% when "Talentlockr" %>
+    Talentlockr: Edit
   <% else %>
     Educator: Edit
   <% end %>
 <% end %>
+
 
 
 <%= render "form", netball_educator: @netball_educator %>

@@ -1,32 +1,9 @@
-<% content_for(:page_title, "All Events") %>
+<% content_for(:page_title, @page_title || "Events") %>
 
-<div class="flex flex-wrap justify-between items-center my-4 space-x-4">
-  <div class="ml-2">
-    <%= link_to "Add New Event", new_event_path, class: form_button_class %>
-  </div>
-
-  <div class="mr-8">
-    <%= render "filter_form" %>
-  </div>
-</div>
-
-<!-- ✅ Always show nav tabs -->
-<header class="ml-2 mt-4 mb-2 flex space-x-6">
-  <ul class="flex space-x-4 list-none">
-    <li>
-      <%= link_to "Current Events", events_path, class: events_tab_class(events_path) %>
-    </li>
-    <li>
-      <%= link_to "Past Events", past_events_path, class: events_tab_class(past_events_path) %>
-    </li>
-    <li>
-      <%= link_to "Calendar", calendar_events_path, class: events_tab_class(calendar_events_path) %>
-    </li>
-    <li>
-      <%= link_to "My Events", my_events_path, class: events_tab_class(my_events_path) %>
-    </li>
-  </ul>
-</header>
+<%= render "events_header",
+  show_new_button: true,
+  show_filters: true
+%>
 
 <div class="m-2">
   <% if @events.any? %>
@@ -35,3 +12,4 @@
     <p class="px-6 py-4">No records to view</p>
   <% end %>
 </div>
+

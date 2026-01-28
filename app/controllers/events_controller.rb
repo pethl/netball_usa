@@ -8,25 +8,35 @@ class EventsController < ApplicationController
  
   # GET /events
   def index
-    @events = filtered_events(upcoming: true).order(:date) 
+    @page_title = "Current Events"
+    @events = filtered_events(upcoming: true).order(:date)
   end
-
-  def my
-    @events = Event.where(assigned_user_id: current_user.id).ordered
-    render :index
-  end
-
+  
   def index_past
+    @page_title = "Past Events"
     @events = filtered_events(upcoming: false).order(date: :desc)
     render :index
   end
-
-  def educational
-    @events = filtered_educational_events(upcoming: true).order(:date)
-    render :educational
+  
+  def my
+    @page_title = "My Events"
+    @events = Event.where(assigned_user_id: current_user.id).ordered
+    render :index
   end
-
+  
+  def calendar
+    @page_title = "Events Calendar"
+    @year = params[:year]&.to_i || Date.current.year
+    @events = Event.all
+  end
+  
+  def educational
+    @page_title = "Educational Events"
+    @events = filtered_educational_events(upcoming: true).order(:date)
+  end
+  
   def educational_past
+    @page_title = "Past Educational Events"
     @events = filtered_educational_events(upcoming: false).order(date: :desc)
     render :educational
   end

@@ -5,83 +5,104 @@
         <table class="table-fixed w-full text-left rtl:text-right">
           <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs">
             <tr>
-               <% unless local_assigns[:context] == :kidos %>
+              <% unless local_assigns[:context].in?([:kidos, :talentlockr]) %>
                 <th scope="col" class="px-3 py-3 w-12">Select</th>
               <% end %>
+
               <th scope="col" class="px-3 py-3 w-12">View</th>
               <th scope="col" class="px-3 py-3 w-20 text-center">State</th>
               <th scope="col" class="px-3 py-3 w-40">City</th>
               <th scope="col" class="px-3 py-3 w-64">School/District</th>
               <th scope="col" class="px-3 py-3 w-52">Name</th>
+
               <% unless local_assigns[:hide_level] %>
                 <th scope="col" class="px-4 py-3 w-40">Level</th>
               <% end %>
+
               <th scope="col" class="px-4 py-3 w-64">Contact</th>
               <th scope="col" class="px-3 py-3 w-52">Allocated To</th>
-              <th scope="col" class="px-3 py-3 w-96 truncate">Notes</th>
               <th scope="col" class="px-3 py-3 w-32">Date Created</th>
+              <th scope="col" class="px-3 py-3">Notes</th>
             </tr>
           </thead>
+
           <tbody>
             <% local_assigns[:educators].each do |educator| %>
-            
-              <% unless local_assigns[:context] == :kidos %>
-                 <td class="text-center">
-                   <% if @educator_ids_with_participants.include?(educator.id) %>
+              <tr class="border-b">
+
+                <% unless local_assigns[:context].in?([:kidos, :talentlockr]) %>
+                  <td class="text-center">
+                    <% if @educator_ids_with_participants.include?(educator.id) %>
                       <span class="text-blue-700">
                         <i class="fa-solid fa-link"></i>
                       </span>
-                  <% else %>
-                    <input type="checkbox" 
-                      class="educator-checkbox h-5 w-5 text-blue-900 focus:ring-blue-900 rounded border-gray-300"
-                      value="<%= educator.id %>">
-                  <% end %>
-                </td>
-              <% end %>
+                    <% else %>
+                      <input type="checkbox"
+                        class="educator-checkbox h-5 w-5 text-blue-900 focus:ring-blue-900 rounded border-gray-300"
+                        value="<%= educator.id %>">
+                    <% end %>
+                  </td>
+                <% end %>
 
                 <td class="px-3 py-2">
-                  <%= link_to netball_educator_path(educator), data: { turbo: false }, class: "mx-2 text-blue-900 hover:text-blue-600" do %>
+                  <%= link_to netball_educator_path(educator),
+                    data: { turbo: false },
+                    class: "mx-2 text-blue-900 hover:text-blue-600" do %>
                     <i class="fa-solid fa-eye"></i>
                   <% end %>
                 </td>
+
                 <td class="px-2 py-2 text-center"><%= educator.state %></td>
                 <td class="px-2 py-2"><%= educator.city %></td>
-                <td class="px-3 py-2 text-wrap truncate">
-                  <%= educator.school_name %><br>
-                  <%= (link_to educator.website, educator.website, target: '_blank', class: link_class) unless (educator.website.to_s.empty?)%>
-                </td>
+
                 <td class="px-3 py-2 truncate">
-                  <%= link_to educator.full_name, edit_netball_educator_path(educator), class: link_class %>
+                  <%= educator.school_name %><br>
+                  <%= link_to educator.website,
+                        educator.website,
+                        target: "_blank",
+                        class: link_class if educator.website.present? %>
                 </td>
 
-               <% unless local_assigns[:hide_level] %>
-                <td class="px-4 py-2 whitespace-nowrap">
-                  <% if educator.is_pe_director? %>
-                    <div class="font-bold">P.E. Director</div>
-                  <% end %>
-                 <div class="whitespace-normal break-words max-w-xs"><%= educator.level %></div>
-
+                <!-- Name links to EDIT (as requested) -->
+                <td class="px-3 py-2 truncate">
+                  <%= link_to educator.full_name,
+                    edit_netball_educator_path(educator),
+                    class: link_class %>
                 </td>
-              <% end %>
+
+                <% unless local_assigns[:hide_level] %>
+                  <td class="px-4 py-2 whitespace-nowrap">
+                    <% if educator.role == "PE Director" %>
+                      <div class="font-bold">P.E. Director</div>
+                    <% end %>
+                    <div class="whitespace-normal break-words max-w-xs">
+                      <%= educator.level.presence || "—" %>
+                    </div>
+                  </td>
+                <% end %>
 
                 <td class="px-4 py-2 truncate">
-                 <%= educator.formatted_phone %>
-                  <% if educator.formatted_phone.present? %>
-                    <br>
-                    <%= educator.email %>
-                  <% else %>
-                    <%= educator.email %>
-                  <% end %>
+                  <%= educator.formatted_phone %>
+                  <br>
+                  <%= educator.email %>
                 </td>
+
                 <td class="px-3 py-2">
-                  <%= educator.user.full_name unless (educator.user_id.to_s.empty?) %>
+                  <%= educator.user&.full_name %>
                 </td>
-                <td class="px-3 py-2">
-                  <p class="text-wrap truncate"><%= educator.mgmt_notes %></p>
-                </td>
+
+                <!-- Date CREATED moved before notes -->
                 <td class="px-3 py-2 font-medium text-gray-800 whitespace-nowrap">
-                  <%= educator.created_at.to_formatted_s(:usa) unless (educator.created_at.to_s.empty?) %>
+                  <%= educator.created_at&.to_formatted_s(:mdy_short) %>
                 </td>
+
+                <!-- Notes: 2-line clamp, no width explosion -->
+                <td class="px-3 py-2">
+                  <p class="text-sm text-gray-700 line-clamp-2 break-words">
+                    <%= educator.mgmt_notes %>
+                  </p>
+                </td>
+
               </tr>
             <% end %>
           </tbody>

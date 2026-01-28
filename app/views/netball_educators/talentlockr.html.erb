@@ -1,26 +1,28 @@
-<%= content_for(:page_title, "P.E. Directors") %>
+<%= content_for(:page_title, "Talentlockr") %>
 
 <%= render 'nav_tabs' %>
 
-<div class="flex justify-between items-end flex-wrap gap-4 px-4 py-4">
+<div class="flex justify-between items-end flex-wrap gap-4 px-4 pt-4 pb-2">
   <!-- Left side: Add New button -->
   <div>
-    <%= link_to "Add New",
-      new_netball_educator_path(role: "PE Director"),
+    <%= link_to "Add New Talentlockr",
+      new_netball_educator_path(role: "Talentlockr"),
       class: form_button_class %>
   </div>
 
   <!-- Right side: Filters -->
   <div class="ml-auto">
     <%= render 'netball_educators/filters',
-      filter_url: pe_directors_netball_educators_path %>
+      filter_url: talentlockr_netball_educators_path %>
   </div>
 </div>
 
 <div>
   <% if @netball_educators.any? %>
     <div id="educators">
-      <%= render 'educators_table', educators: @netball_educators %>
+      <%= render 'educators_table',
+        educators: @netball_educators,
+        context: :talentlockr %>
     </div>
   <% else %>
     <p class="px-4 py-2">No records to view</p>

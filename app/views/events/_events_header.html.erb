@@ -1,0 +1,34 @@
+<%# Shared header for all event views %>
+
+<div class="flex flex-wrap justify-between items-center mb-2 space-x-4">
+  <% if show_new_button %>
+    <div class="ml-2">
+      <%= link_to "Add New Event", new_event_path, class: form_button_class %>
+    </div>
+  <% end %>
+
+  <% if show_filters %>
+    <div class="mr-8">
+      <%= render "filter_form" %>
+    </div>
+  <% end %>
+</div>
+<hr class="my-1">
+
+<!-- Navigation Tabs -->
+<header class="ml-2 mt-2 mb-2 flex space-x-6">
+  <ul class="flex space-x-4 list-none">
+    <li>
+      <%= link_to "Current Events", events_path, class: events_tab_class(events_path) %>
+    </li>
+    <li>
+      <%= link_to "Past Events", past_events_path, class: events_tab_class(past_events_path) %>
+    </li>
+    <li>
+      <%= link_to "Calendar", calendar_events_path, class: events_tab_class(calendar_events_path) %>
+    </li>
+    <li>
+      <%= link_to "My Events", my_events_path, class: events_tab_class(my_events_path) %>
+    </li>
+  </ul>
+</header>

@@ -34,7 +34,7 @@ RSpec.feature "PageSmoke", type: :feature, js: true do
 
       { path: people_path, title: "People" },
 
-      { path: events_path, title: "All Events" },
+      { path: events_path, title: "Current Events" },
 
       { path: programs_path, title: "BAI Programs" },
 

@@ -14,23 +14,55 @@
 
 <br>
 <% if user_signed_in? %>
-  <div>
-  <%= link_to "Edit this record", edit_netball_educator_path(@netball_educator), class: block_link_class %> 
-  <%= link_to "Back to netball educators", netball_educators_path, class: block_link_class %>
-  <%= link_to "Back to P.E. Directors", pe_directors_netball_educators_path, class: block_link_class %>
-  <%= link_to "Back to Kidokinetics", kidos_path, class: block_link_class %>
+  <div class="space-y-2">
 
- <% if current_user.admin? %>
-  <%= button_to "MGMT ADMIN ONLY: Delete this record", @netball_educator, method: :delete,
-  form: { data: { turbo_confirm: "Are you sure?" } }, class: red_link_class %>
- <% end %>
+    <!-- Navigation links -->
+    <%= link_to "<< All Educators",
+      netball_educators_path,
+      class: block_link_class %>
 
-  <div class="my-4 text-right">
-  <%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
-  </div>
+    <%= link_to "<< All Kidokinetics",
+      kidos_netball_educators_path,
+      class: block_link_class %>
+
+    <%= link_to "<< All Talentlockr",
+      talentlockr_netball_educators_path,
+      class: block_link_class %>
+
+    <%= link_to "<< All PE Directors",
+      pe_directors_netball_educators_path,
+      class: block_link_class %>
+
+    <hr class="my-2">
+
+    <!-- General actions (all signed-in users) -->
+    <div class="my-2">
+      <%= button_to "Edit this record",
+        edit_netball_educator_path(@netball_educator),
+        method: :get,
+        class: form_button_class %>
+    </div>
+
+    <!-- Admin-only actions -->
+    <% if current_user.admin? %>
+      <div class="my-2">
+        <%= button_to "MGMT ADMIN ONLY: Delete this record",
+          @netball_educator,
+          method: :delete,
+          form: { data: { turbo_confirm: "Are you sure?" } },
+          class: red_link_class %>
+      </div>
+    <% end %>
+
+   <hr class="my-2">
+<br>
+    <div class="mt-4 text-left">
+      <%= link_to "Add New Educator",
+        new_netball_educator_path,
+        class: form_button_class %>
+    </div>
 
   </div>
-  </div>
-</div>
 <% end %>
+
 
