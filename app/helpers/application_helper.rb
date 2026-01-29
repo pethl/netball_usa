@@ -354,6 +354,11 @@ module ApplicationHelper
       grant_status = Reference.where(active: "TRUE", group: 'grant_status')
       grant_status = grant_status.pluck(:value)       
     end
+
+    def grant_type_options
+      grant_type_options = Reference.where(active: "TRUE", group: 'grant_type_options')
+      grant_type_options = grant_type_options.pluck(:value)       
+    end
     
     def people_role
       people_role = Reference.where(active: "TRUE", group: 'people_role')

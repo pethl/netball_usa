@@ -1,17 +1,26 @@
 <% content_for(:page_title, "Grant: #{@grant.name}")%>
 
-  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md md:max-w-lg">
+  <div class="mt-2 sm:mx-auto sm:w-full sm:max-w-md md:max-w-lg">
   <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
  
-<%= render @grant %>
+<div class="text-left">
+  <%= render @grant %>
+</div>
 
 <br>
 
-<div>
+<div class="ml-12 mt-2 mb-8">
   <%= link_to "Edit this Grant", edit_grant_path(@grant), class: link_class %> | 
-  <%= link_to "Back to Grants", grants_path, class: link_class %>
+  <%= link_to "<< Back to Grants", grants_path, class: link_class %>
 
-  <%= button_to "Delete this record",  @grant, method: :delete %>
+  <% if is_admin? %>
+    <%= button_to "Delete this record",
+          @grant,
+          method: :delete,
+          data: { turbo_confirm: "Are you sure you want to delete this grant?" },
+          class: "mt-2 text-red-600 hover:text-red-800" %>
+  <% end %>
+
 </div>
 
 

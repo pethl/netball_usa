@@ -7,47 +7,57 @@
 <% if @grants.any? %>
 <div id="grants">
 <div class="relative overflow-x-auto ml-2">
-    <table class="table-auto w-full text-left rtl:text-right">
+  
+    <table class="table-fixed w-full text-left rtl:text-right">
+
         <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs ">
              <tr>
-                <th scope="col" class="px-6 px-1 w-52">
+                <th scope="col" class="px-4 py-1 w-64">
                     Grant Name
                 </th>
-                <th scope="col" class="px-6 px-1 w-52">
+                <th scope="col" class="px-4 py-1 w-24 text-center">
                     Apply?
                 </th>
-                <th scope="col" class="px-6 px-1 w-52">
+                  <th scope="col" class="px-4 py-1 w-32">
+                    Type
+                </th>
+                <th scope="col" class="px-4 py-1 w-28 text-right">
                     Amount
                 </th>
-                <th scope="col" class="px-6 px-1 w-52">
+                <th scope="col" class="px-4 py-1 w-48 truncate">
                     Location
                 </th>
-                <th scope="col" class="px-6 px-1 w-52">
+                <th scope="col" class="px-4 py-1 w-52">
                     Due Date
                 </th>
-                <th scope="col" class="px-6 px-1 w-60 truncate">
+                <th scope="col" class="px-4 py-1 w-60 truncate text-center">
                     Status
                 </th>
-                <th scope="col" class="px-6 px-1 w-60 truncate">
+                <th scope="col" class="px-4 py-1 w-60 truncate">
                     Allocated To
                 </th>
-                <th scope="col" class="px-6 px-1 w-60 truncate">
+                <th scope="col" class="px-4 py-1 w-60 truncate">
                     Action by
                 </th>
-                <th scope="col" class="px-6 px-1 w-60 truncate">
+                <th scope="col" class="px-4 py-1 w-60 truncate">
                     Date Submitted
                 </th>
-                <th scope="col" class="px-6 px-1 w-52">
+                <th scope="col" class="px-4 py-1 w-52">
                     Notification Date
                 </th>
-                <th scope="col" class="px-6 px-1 w-52">
+                <th scope="col" class="px-4 py-1 w-52 truncate">
                     Purpose
                 </th>
                 
-                <th scope="col" class="px-6 px-1 w-40">
+                <th scope="col" class="px-4 py-1 w-40">
                     Grant Link
                 </th>
-                <th scope="col" class="px-6 px-1 w-52">
+
+                 <th scope="col" class="px-4 py-1 w-52">
+                   Inkind Desc
+                </th>
+
+                <th scope="col" class="px-4 py-1 w-52">
                    Notes
                 </th>
              </tr>
@@ -56,57 +66,63 @@
         <% @grants.each do |grant| %>
             <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
                
-                <td class="px-6 py-4 truncate">
+                <td class="px-4 py-4 truncate">
                    <%= link_to grant.name, edit_grant_path(grant), class: link_class %>
                 </td>
                 
-                <td class="px-6 py-4">
+                <td class="px-4 py-4 text-center">
                    <%= grant.apply? ? 'Yes' : 'No'  %>
                 </td>
+
+                 <td class="px-4 py-4 truncate">
+                  <%= grant.grant_type%>
+                </td>
                 
-                <td class="px-6 py-4">
+                <td class="px-4 py-4 text-right">
                    <%= number_to_currency(grant.amount, precision: 0) %>
                 </td>
                 
-                <td class="px-6 py-4 truncate">
-                  <%= grant.location%><br>
-                  
+                <td class="px-4 py-4 truncate">
+                  <%= grant.location %>
                 </td>
-                <td class="px-6 py-4">
+
+                <td class="px-4 py-4">
                    <%= grant.due_date.to_formatted_s(:usa_dt) unless (grant.due_date.to_s.empty?) %> - <%= grant.timezone %>
                 </td>
                 
-                <td class="px-6 py-4">
-                 <%= grant.status %>
-               </td>
-               
-                 <td class="px-6 py-4">
+                <td class="px-4 py-4 text-center <%= grant.status == "Won" ? "text-green-600 font-semibold" : "" %>">
+                    <%= grant.status %>
+                </td>
+
+                 <td class="px-4 py-4">
                  <%= grant.user.full_name %>
                 </td>
                
-                <td class="px-6 py-4">
+                <td class="px-4 py-4">
                  <%= grant.action_by.to_formatted_s(:usa) unless (grant.action_by.to_s.empty?) %> 
                 </td>
 
-                <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                <th scope="row" class="px-4 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
                   <%= grant.date_submitted.to_formatted_s(:usa) unless (grant.date_submitted.to_s.empty?) %>
                 </th>
 
-                <th scope="row" class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
+                <th scope="row" class="px-4 py-4 font-medium text-gray-800 whitespace-nowrap dark:text-white">
                   <%= grant.notification_date.to_formatted_s(:usa) unless (grant.notification_date.to_s.empty?) %>
                 </th>
                 
-                 <td class="px-6 py-4 truncate">
+                 <td class="px-4 py-4 truncate">
                   <%= grant.purpose %>
                 </td>
-
-               
                 
-                <td class="px-6 py-4 truncate">
+                <td class="px-4 py-4 truncate">
                   <%= (link_to grant.grant_link, grant.grant_link, target: '_blank', class: link_class) unless (grant.grant_link.to_s.empty?)%>
                 </td>
+
+                 <td class="px-4 py-4 truncate">
+                  <%= grant.inkind_description %>
+                </td>
                 
-                <td class="px-6 py-4 truncate">
+                <td class="px-4 py-4 truncate">
                   <%= grant.notes %>
                 </td>
                
@@ -119,7 +135,7 @@
 </div>
 
     <% else %>
-    <p class="px-6 py-4">
+    <p class="px-4 py-4">
     No records to view</p>
     <% end %>
 <br>

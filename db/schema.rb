@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_01_28_073424) do
+ActiveRecord::Schema[7.1].define(version: 2026_01_29_085602) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -217,6 +217,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_28_073424) do
     t.string "state"
     t.integer "old_user_id"
     t.datetime "notification_date"
+    t.string "grant_type"
+    t.text "inkind_description"
   end
 
   create_table "individual_members", force: :cascade do |t|

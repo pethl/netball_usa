@@ -4,7 +4,7 @@
       <p class="text-sm text-gray-500 truncate ">
           Grant Name:
       </p>
-      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+      <p class="text-lg font-medium text-gray-900 truncate dark:text-white">
        <%= grant.name %> 
       </p>
       
@@ -15,6 +15,15 @@
        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
         <%= grant.apply? ? 'Yes' : 'No' %>
        </p>
+     </div>
+
+      <div class="mt-2">
+       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+           Type:
+       </p>
+       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+        <%= grant.grant_type %> 
+       </p> 
      </div>
 
      <div class="mt-2">
@@ -44,14 +53,13 @@
       </p> 
      </div>
 
-    <div class="mt-2">
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+   <div class="mt-2">
+        <p class="text-sm text-gray-500 dark:text-gray-400">
           Purpose:
-      </p>
-      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-       <%= grant.purpose %> 
-      </p>
-     </div>
+        </p>
+      <p class="mt-1 text-sm font-medium text-gray-900 whitespace-pre-wrap break-words leading-relaxed dark:text-white"><%= grant.purpose %></p>
+
+      </div>
  
      <div class="mt-2">
      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -137,15 +145,21 @@
             <%= grant.notification_date.present? ? grant.notification_date.strftime("%m/%d, %Y") : "" %>
           </p>
          </div>
+
+          <div class="mt-2">
+           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+               Inkind Description:
+           </p>
+            <p class="mt-1 text-sm font-medium text-gray-900 whitespace-pre-wrap break-words leading-relaxed dark:text-white"><%= grant.inkind_description %></p>
+        </div>
          
          <div class="mt-2">
            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                Notes:
            </p>
-           <p class="text-sm font-medium truncate text-gray-900 dark:text-white">
-            <%= grant.notes %> 
-           </p>
+            <p class="mt-1 text-sm font-medium text-gray-900 whitespace-pre-wrap break-words leading-relaxed dark:text-white"><%= grant.notes %></p>
         </div>
+         
 
 </div>
 </div>
