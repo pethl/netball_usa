@@ -1,0 +1,51 @@
+<div class="bg-gray-100 px-4 rounded-md mb-4">
+  <%= form_with url: filings_path, method: :get, local: true do %>
+
+    <div class="flex flex-wrap gap-3 justify-end items-center">
+
+      <!-- Frequency -->
+      <div>
+        <%= label_tag :frequency, "Frequency", class: "text-xs text-gray-700" %>
+        <%= select_tag :frequency,
+              options_for_select(
+                [['All', '']] + filing_frequency.map { |f| [f, f] },
+                params[:frequency]
+              ),
+              class: "mt-1 rounded-md border-gray-300 text-sm" %>
+      </div>
+
+      <!-- Company search -->
+      <div>
+        <%= label_tag :q, "Company", class: "text-xs text-gray-700" %>
+        <%= text_field_tag :q,
+              params[:q],
+              placeholder: "Search company",
+              class: "mt-1 rounded-md border-gray-300 text-sm" %>
+      </div>
+
+      <!-- Active -->
+      <div>
+        <%= label_tag :active, "Active", class: "text-xs text-gray-700" %>
+        <%= select_tag :active,
+              options_for_select(
+                [
+                  ['All', ''],
+                  ['Active', 'true'],
+                  ['Inactive', 'false']
+                ],
+                params[:active]
+              ),
+              class: "mt-1 rounded-md border-gray-300 text-sm" %>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex gap-2 pt-5">
+        <%= submit_tag "Filter", class: form_button_class %>
+        <%= link_to "Clear", filings_path,
+              class: "text-sm text-gray-600 underline self-center" %>
+      </div>
+
+    </div>
+
+  <% end %>
+</div>

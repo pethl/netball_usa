@@ -10,9 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_01_29_085602) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_01_080311) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
@@ -171,6 +170,41 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_29_085602) do
     t.date "booth_registration_due"
     t.integer "assigned_user_id"
     t.uuid "key_pe_director_id"
+  end
+
+  create_table "filing_occurrences", force: :cascade do |t|
+    t.bigint "filing_id", null: false
+    t.date "due_date", null: false
+    t.boolean "filed", default: false
+    t.date "filed_at"
+    t.decimal "cost", precision: 10, scale: 2
+    t.boolean "generated", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["filing_id", "due_date"], name: "index_filing_occurrences_on_filing_id_and_due_date", unique: true
+    t.index ["filing_id"], name: "index_filing_occurrences_on_filing_id"
+  end
+
+  create_table "filings", force: :cascade do |t|
+    t.string "corporate_name", null: false
+    t.string "filing_type"
+    t.string "frequency", null: false
+    t.date "start_date", null: false
+    t.date "paused_at"
+    t.date "date"
+    t.integer "day_of_month"
+    t.integer "month_of_year"
+    t.decimal "cost", precision: 10, scale: 2, default: "0.0"
+    t.string "website"
+    t.string "site_user_id"
+    t.string "site_password"
+    t.string "site_email"
+    t.boolean "active", default: true
+    t.text "notes"
+    t.bigint "created_by_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_filings_on_created_by_id"
   end
 
   create_table "follow_ups", force: :cascade do |t|
@@ -875,6 +909,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_29_085602) do
   add_foreign_key "event_assignments", "umpires"
   add_foreign_key "event_participants", "events"
   add_foreign_key "event_participants", "people"
+  add_foreign_key "filing_occurrences", "filings", on_delete: :restrict
+  add_foreign_key "filings", "users", column: "created_by_id"
   add_foreign_key "frequent_flyer_numbers", "people"
   add_foreign_key "individual_members", "clubs"
   add_foreign_key "individual_members", "teams"

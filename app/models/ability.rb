@@ -3,8 +3,6 @@
 class Ability
   include CanCan::Ability
 
- 
- 
   def initialize(user)
     # 🔒 Public user (not logged in)
     alias_action :inbound_pickups,
@@ -25,6 +23,12 @@ class Ability
     # 🧍 Logged-in user: always allow basic profile access
     cannot :index, User
     can [:read, :update], User, id: user.id
+
+    # 🔒 Filings are admin-only by default - belt and braces
+    cannot :manage, Filing
+    cannot :manage, FilingOccurrence
+    cannot :read, Filing
+    cannot :read, FilingOccurrence
 
     case user.role
     
@@ -198,6 +202,7 @@ class Ability
       # 0 : admin (everything) 
     when "admin"
       can :manage, :all
+      can :read, :audit_log
     else
       # default fallback for unknown/missing role
       cannot :manage, :all

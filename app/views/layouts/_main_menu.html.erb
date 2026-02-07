@@ -297,26 +297,55 @@
     <% end %>
   <% end %>
       
-  <% if current_user.admin? %>  
-    <li class="mt-2 text-blue-300 font-semibold">
-      Admin Only
-    </li>
-     <li class="mt-2 ml-2">
-      <a href="/audits" class="text-blue-300 hover:font-bold">Audit Log</a>
-    </li>
+  <% if can?(:manage, :all) %>
+  <li class="mt-2 text-blue-300 font-semibold">
+    Admin Only
+  </li>
+
+  <% if can?(:read, Budget) %>
     <li class="mt-2 ml-2">
-      <a href="/budgets" class="text-blue-300 hover:font-bold">Budgets</a>
+      <%= link_to "Budgets", budgets_path,
+          class: "text-blue-300 hover:font-bold" %>
     </li>
-    <li class="mt-2 ml-2">
-      <a href="/references/" class="text-blue-300 hover:font-bold">Ref Data</a>
-    </li>
-    <li class="mt-2 ml-2">
-      <a href="/sample_words" class="text-blue-300 hover:font-bold">Sample Wording</a>
-    </li>
-    <li class="mt-2 ml-2">
-      <a href="/users" class="text-blue-300 hover:font-bold">Users</a><br>
-    </li>
-    <br><br>
   <% end %>
+
+   <% if can?(:read, :audit_log) %>
+  <li class="mt-2 ml-2">
+    <%= link_to "Club Audit", audits_path,
+        class: "text-blue-300 hover:font-bold" %>
+  </li>
+<% end %>
+
+  <% if can?(:read, Filing) %>
+    <li class="mt-2 ml-2">
+      <%= link_to "Filings",filings_path,
+          class: "text-blue-300 hover:font-bold" %>
+    </li>
+  <% end %>
+
+  <% if can?(:read, Reference) %>
+    <li class="mt-2 ml-2">
+      <%= link_to "Ref Data", references_path,
+          class: "text-blue-300 hover:font-bold" %>
+    </li>
+  <% end %>
+
+  <% if can?(:read, SampleWord) %>
+    <li class="mt-2 ml-2">
+      <%= link_to "Sample Wording", sample_words_path,
+          class: "text-blue-300 hover:font-bold" %>
+    </li>
+  <% end %>
+
+  <% if can?(:read, User) %>
+    <li class="mt-2 ml-2">
+      <%= link_to "Users", users_path,
+          class: "text-blue-300 hover:font-bold" %>
+    </li>
+  <% end %>
+
+  <br><br>
+<% end %>
+
 </ul>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> 

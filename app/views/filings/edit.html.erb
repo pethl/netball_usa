@@ -1,0 +1,11 @@
+<% content_for(:page_title, "Edit: #{@filing.corporate_name}")%>
+
+
+<%= render "form", filing: @filing %>
+
+<div>
+    <%= link_to "<< Show Filing Occurrences", filing_path(@filing), class: link_class %><br>
+  <%= link_to "<< Back to All Filings", filings_path, class: link_class %><br>
+</div>
+
+<br><br><br>

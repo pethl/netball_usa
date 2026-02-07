@@ -99,7 +99,28 @@ class PagesController < ApplicationController
           
       # MY NETBALL ACADEMY END
 
+      # stats for filing
+      today = Date.current
+      month_range = today.beginning_of_month..today.end_of_month
+      
+      @dashboard_month = today.month
+      @dashboard_year  = today.year
+      
+      @dashboard_occurrences =
+      FilingOccurrence
+        .joins(:filing)
+        .includes(:filing)
+        .where(due_date: month_range)
+        .where(
+          "filings.active = TRUE
+          OR filing_occurrences.due_date < filings.paused_at"
+        )
+        .order(:due_date)
 
+      
+      @dashboard_month_total =
+        @dashboard_occurrences.sum { |o| o.filing.cost.to_f }
+      
   end
 
   

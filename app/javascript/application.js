@@ -15,6 +15,8 @@ import EducatorsWizardController from "./controllers/educators_wizard_controller
 import PopoverController from "./controllers/popover_controller"
 import PlotlyMapController from "./controllers/plotly_map_controller"
 import MobileMenuController from "./controllers/mobile_menu_controller"
+import PasswordController from "./controllers/password_controller"
+
 
 
 const application = Application.start()
@@ -35,6 +37,8 @@ application.register("educators-wizard", EducatorsWizardController)
 application.register("popover", PopoverController)
 application.register("plotly-map", PlotlyMapController)
 application.register("mobile-menu", MobileMenuController)
+application.register("password", PasswordController)
+
 
 // Make Stimulus available globally
 window.Stimulus = application

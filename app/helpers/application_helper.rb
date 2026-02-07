@@ -220,11 +220,14 @@ module ApplicationHelper
      "m-2 bg-blue-900 hover:bg-blue-700 text-white font-light py-2 px-3 rounded"
   end
 
+  def red_button_class
+    "m-2 bg-red-800 hover:bg-red-600 text-white font-light py-2 px-3 rounded"
+ end
+
   def clear_button_class
     "m-2 bg-white hover:bg-blue-100 text-blue-900 border border-blue-900 font-light py-2 px-3 rounded text-base leading-normal"
   end
   
-
   def small_button_class
     "justify-center rounded-md border border-transparent bg-blue-900 py-2 px-4 text-sm font-light text-white shadow-sm hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2"
   end
@@ -293,6 +296,14 @@ module ApplicationHelper
      reference_group = reference_group.pluck(:group) 
      reference_group = reference_group.uniq() 
    end
+
+   def filing_types
+    Reference.where(active: true, group: 'filing_types').pluck(:value)
+  end
+
+  def filing_frequency
+    Reference.where(active: true, group: 'filing_frequency').pluck(:value)
+  end
    
     def us_states
       Reference

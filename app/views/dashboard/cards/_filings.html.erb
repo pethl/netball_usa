@@ -1,0 +1,90 @@
+<%= link_to filings_path(year: Date.current.year),
+      class: "bg-blue-900 shadow-lg rounded-md flex flex-col justify-between p-4 border-b-4 border-gray-300 text-white font-medium group min-h-[200px] hover:shadow-xl hover:scale-[1.01] transition-all duration-200" do %>
+
+  <div class="flex justify-between items-start">
+    <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
+      <i class="fa-solid fa-briefcase text-xl text-blue-800"></i>
+    </div>
+
+    <div class="text-right">
+      <p class="text-3xl font-bold leading-tight"><%= Filing.count %></p>
+      <p class="text-sm text-gray-200 uppercase tracking-wide mt-1">
+        Filings
+      </p>
+    </div>
+  </div>
+
+ <div class="mt-4 text-xs">
+
+  <!-- Month header (same as calendar) -->
+  <div class="flex justify-between items-start mb-2">
+
+    <div class="flex items-center gap-2">
+
+      <% if @dashboard_occurrences.any? %>
+
+        <% if @dashboard_occurrences.any? { |o| !o.filed? } %>
+          <!-- RED: action required -->
+          <div class="flex items-center justify-center
+                      w-8 h-8 rounded-full bg-red-500/90">
+            <i class="fa-solid fa-circle-exclamation
+                      text-white text-xl"
+              title="Payment or filing due this month"></i>
+          </div>
+
+        <% else %>
+          <!-- GREEN: all done -->
+          <div class="flex items-center justify-center
+                      w-8 h-8 rounded-full bg-green-500/90">
+            <i class="fa-solid fa-circle-check
+                      text-white text-xl"
+              title="All filings completed for this month"></i>
+          </div>
+        <% end %>
+
+      <% end %>
+
+      <span class="font-semibold text-blue-200 text-sm leading-none">
+        <%= Date::MONTHNAMES[@dashboard_month].upcase.first(3) %>
+      </span>
+
+    </div>
+
+    <span class="font-semibold text-white text-sm">
+      <%= number_to_currency(@dashboard_month_total) %>
+    </span>
+
+  </div>
+
+  <!-- Entries (same as calendar) -->
+  <div class="space-y-1 max-h-28 overflow-y-auto">
+
+    <% @dashboard_occurrences.each do |occ| %>
+      <div class="flex justify-between items-center
+                  <%= occ.filed? ? 'text-blue-300 line-through' : 'text-white' %>">
+
+        <span class="text-blue-200">
+          <%= occ.due_date.day %>
+        </span>
+
+        <span class="truncate max-w-[110px] ml-2">
+          <%= occ.filing.corporate_name %>
+        </span>
+
+        <span class="ml-auto font-medium">
+          <%= number_to_currency(occ.filing.cost) %>
+        </span>
+
+      </div>
+    <% end %>
+
+    <% if @dashboard_occurrences.empty? %>
+      <div class="text-blue-300 italic">
+        —
+      </div>
+    <% end %>
+
+  </div>
+</div>
+
+<% end %>

@@ -1,0 +1,145 @@
+<% content_for(:page_title, "Filings") %>
+
+<%= render "year_calendar" %>
+
+<div
+  data-controller="accordion"
+  class="mx-2 my-3 mr-4 border border-gray-200 bg-blue-100 rounded"
+>
+  <!-- Header -->
+  <button
+    type="button"
+    data-action="click->accordion#toggle"
+    class="w-full flex items-center justify-between px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+  >
+    <span>Need help?</span>
+    <span class="text-xs text-gray-400">Click to expand</span>
+  </button>
+
+  <!-- Body (hidden by default) -->
+  <div
+    data-accordion-target="body"
+    class="hidden px-4 py-3 text-sm text-gray-600 border-t bg-gray-50"
+  >
+    <ul class="list-disc pl-5 space-y-1">
+      <li>Create each Filing [New Filing button], include frequency, start date and cost.</li>
+      <li>A year of payments will be auto generated and displayed in calendar</li>
+      <li>Click the <b>corp name</b> in any month to view/edit details. Once payment confirmed entry turns to green with strike through</li>
+      <li>Generate more future payments, or amend costs, by clicking on Corp Name anywhere.</li>
+      <li>To stop/pause a Filing, set to <b>Inactive</b> and future payments will be removed from calendar. </li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="flex flex-col sm:flex-row sm:items-center bg-gray-100 pl-2 ml-2 pr-4 mr-4">
+
+  <!-- Filter bar -->
+  <div class="w-full order-1 sm:order-2">
+    <%= render "filter_nav" %>
+  </div>
+
+  <!-- Add button -->
+  <div class="order-2 sm:order-1 sm:flex-shrink-0 ">
+    <%= link_to "New Filing", new_filing_path, class: form_button_class %>
+  </div>
+
+</div>
+
+
+
+<% if @filings.any? %>
+  <div id="filings">
+    <div class="relative overflow-x-auto mr-4">
+      <table class="w-full table-fixed ml-2 text-left rtl:text-right">
+        <thead class="bg-gray-200 border-b text-gray-800 font-light text-xs">
+          <tr>
+            <th scope="col" class="px-2 py-2 w-6 text-center">
+            </th>
+
+            <th scope="col" class="px-2 py-2 w-64">
+              Company
+            </th>
+            
+            <th scope="col" class="px-2 py-2 w-40">
+              Type
+            </th>
+
+            <th scope="col" class="px-2 py-2 w-32">
+              Frequency
+            </th>
+
+            <th scope="col" class="px-2 py-2 w-40  text-right">
+              Due Date
+            </th>
+
+            <th scope="col" class="px-2 py-2 w-32 text-right">
+              Cost
+            </th>
+
+            <th scope="col" class="px-2 py-2">
+              Notes
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @filings.each do |filing| %>
+            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+            <!-- Active -->
+              <td class="px-2 py-4 align-top text-center">
+                <% if filing.active? %>
+                  <span class="inline-block w-2 h-2 rounded-full bg-green-500"
+                        title="Active"></span>
+                <% else %>
+                  <span class="inline-block w-2 h-2 rounded-full bg-gray-300"
+                        title="Inactive"></span>
+                <% end %>
+              </td>
+
+
+              <!-- Company -->
+              <td class="align-top px-2 py-4 font-medium text-gray-800 whitespace-normal break-words max-w-[200px]">
+                <%= link_to filing.corporate_name, filing_path(filing), class: link_class %>
+              </td>
+
+             
+
+              <!-- Type -->
+              <td class="px-2 py-4 align-top truncate">
+                <%= filing.filing_type %>
+              </td>
+
+              <!-- Frequency -->
+              <td class="px-2 py-4 align-top truncate">
+                <%= filing.frequency %>
+              </td>
+
+              <!-- Due Date -->
+              <td class="px-2 py-4 align-top truncate  text-right">
+                <%= filing.day_of_month %>
+              </td>
+
+              <!-- Cost -->
+              <td class="px-2 py-4 align-top truncate  text-right">
+                <%= number_to_currency(filing.cost) %>
+              </td>
+
+              <!-- Notes -->
+              <td class="px-2 py-4 align-top truncate">
+                <%= filing.notes %>
+              </td>
+
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% else %>
+  <p class="px-2 py-4">
+    No records to view
+  </p>
+<% end %>
+
+<br>

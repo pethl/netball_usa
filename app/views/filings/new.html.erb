@@ -1,0 +1,7 @@
+<% content_for(:page_title, "Filings: Add new record")%>
+
+<%= render "form", filing: @filing %>
+
+<div>
+  <%= link_to "<< Back to Filings", filings_path, class: link_class %>
+</div>

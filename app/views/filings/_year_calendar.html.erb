@@ -1,0 +1,85 @@
+<div class="bg-white shadow sm:rounded-lg p-4">
+
+     <div class="flex justify-between items-center mb-4">
+
+        <%= link_to filings_path(year: @prev_year),
+              class: "text-sm text-gray-600 hover:text-blue-800 font-medium" do %>
+          ← <%= @prev_year %>
+        <% end %>
+
+        <h2 class="text-lg font-medium">
+          Calendar – <%= @calendar_year %>
+        </h2>
+
+        <%= link_to filings_path(year: @next_year),
+              class: "text-sm text-gray-600 hover:text-blue-800 font-medium" do %>
+          <%= @next_year %> →
+        <% end %>
+
+    </div>
+
+
+    <div class="grid grid-cols-4 gap-2">
+
+      <% (1..12).each do |month| %>
+        <% month_occurrences = @occurrences_by_month[month] || [] %>
+
+        <div class="border rounded-md p-2 text-xs border-blue-800  <%= month == @current_month ? 'border-blue-800 border-4' : 'border-gray-200' %>">
+
+          <!-- Month header -->
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-semibold text-blue-800 text-lg">
+              <%= Date::MONTHNAMES[month].upcase.first(3) %>
+            </span>
+
+            <span class="font-semibold text-gray-700 text-lg">
+                      <span class=" text-gray-500 text-base">Total Due: </span><%= number_to_currency(@monthly_totals[month] || 0) %>
+            </span>
+          </div>
+
+          <!-- Entries -->
+          <div class="space-y-1 max-h-28 overflow-y-auto text-base">
+
+            <% month_occurrences.each do |occ| %>
+              <div class="flex justify-between items-center
+                          <%= occ.filed? ? 'text-green-600 line-through' : 'text-red-700' %>">
+
+                <span class="mr-2 text-gray-500">
+                  <%= occ.due_date.day %>
+                </span>
+
+                <span class="truncate max-w-[90px]">
+                   <%= link_to occ.filing.corporate_name, filing_path(occ.filing),
+            class: "hover:underline hover:text-blue-800" %>
+                </span>
+               
+
+                
+                <span class="ml-auto font-medium">
+                  <%= number_to_currency(occ.filing.cost) %>
+                </span>
+
+              </div>
+            <% end %>
+
+            <% if month_occurrences.empty? %>
+              <div class="text-gray-400 italic">—</div>
+            <% end %>
+
+          </div>
+
+        </div>
+      <% end %>
+
+    </div>
+
+    <div class="mt-4 border-t pt-2 m-2 flex justify-end">
+      <div class="text-sm font-semibold text-gray-800">
+        Total Scheduled for <%= @calendar_year %>:
+        <span class="ml-2 text-blue-800">
+          <%= number_to_currency(@yearly_total) %>
+        </span>
+      </div>
+  </div>
+
+</div>

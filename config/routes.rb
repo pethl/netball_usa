@@ -110,6 +110,12 @@ Rails.application.routes.draw do
   
   resources :references
   resources :grants
+  resources :filings do
+    post :generate_next_year, on: :member
+  end
+  
+  resources :filing_occurrences, only: [:update]
+
  
   resources :netball_educators do
     collection do
