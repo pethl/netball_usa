@@ -3,6 +3,18 @@
 
 <%= form_with(model: equipment) do |form| %>
    <%= form_errors_for(equipment) %>
+
+   <div class="mb-6">
+    <label class="<%= label_class %>">Status</label>
+    <div class="mt-1">
+      <input type="text"
+            value="<%= equipment.status %>"
+            disabled
+            class="block w-full rounded-md border border-gray-300 bg-gray-100 px-3 py-2 text-gray-700 sm:text-sm" />
+    </div>
+  </div>
+
+<% if equipment.sale? %>
   <div class="mb-6">
    <%= form.label :sale_date,"Date of Sale", class: label_class%>
     <div class="mt-1">
@@ -22,6 +34,30 @@
      <%= form.number_field :purchase_amount, step: 0.01, placeholder: "$ 0.00",  class: small_input_class %>
      </div>
    </div>
+
+   <% end %>
+
+   <% if equipment.quote? %>
+
+  <div class="mb-6">
+    <%= form.label :items_quoted, class: label_class %>
+    <div class="mt-1">
+      <%= form.text_area :items_quoted, size: "20x10", class: input_class %>
+    </div>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :quote_amount, class: label_class %>
+    <div class="mt-1">
+      <%= form.number_field :quote_amount,
+            step: 0.01,
+            placeholder: "$ 0.00",
+            class: small_input_class %>
+    </div>
+  </div>
+
+<% end %>
+
    
   <div class="mb-6">
     <%= form.label :netball_educator_id, class: label_class  %>
@@ -31,9 +67,12 @@
  </div>
   </div>
   
-   <div>
-     <%= form.submit "Save Equipment", class: form_button_class %>
-   </div>
+  <div>
+  <%= form.submit(
+    equipment.sale? ? "Save Equipment Sale" : "Save Quote",
+    class: form_button_class
+  ) %>
+</div>
  <% end %>
 
 

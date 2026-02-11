@@ -1,19 +1,52 @@
-<% content_for(:page_title, "Equipment Purchased")%>
+<% content_for(:page_title, "Equipment")%>
 
 <%= render 'netball_educators/nav_tabs' %>
 
-<div class="font-xl text-blue-900 m-4 font-semibold">
+<div class="font-xl text-blue-900 mx-4 mt-2 font-semibold">
   Please ensure educator details exist before creating equipment sale record. Go to <span class="font-light border m-2 border-blue-900"> <%= link_to "Educator Search >>", search_netball_educators_path %></span>
 </div>
  
-<div class="py-4">
-    <%= link_to "Add New Equipment Sale", new_equipment_path, class: form_button_class %>
+<div class="flex items-end justify-between border-b border-gray-200 ">
+
+  <!-- Tabs (left) -->
+  <nav aria-label="Tabs">
+    <ul class="flex space-x-1 list-none ml-2">
+
+      <li>
+        <%= link_to "Sales",
+          equipment_index_path(status: "Sale"),
+          class: equipment_tab_class("Sale") %>
+      </li>
+
+      <li>
+        <%= link_to "Quotes",
+          equipment_index_path(status: "Quote"),
+          class: equipment_tab_class("Quote") %>
+      </li>
+
+    </ul>
+  </nav>
+
+  <!-- Actions (right) -->
+  <div class="flex gap-3 -mr-2">
+    <%= link_to "New Sale",
+      new_equipment_path(status: "Sale"),
+      class: form_button_class %>
+
+    <%= link_to "New Quote",
+      new_equipment_path(status: "Quote"),
+      class: form_button_class %>
+  </div>
+
 </div>
+
+
+
 
 <% if @equipment.any? %>
 <div id="equipment">
 
-<div class="relative overflow-x-auto rounded-lg shadow-md ml-2">
+<div class="relative overflow-x-auto shadow-md ml-2">
   <table class="w-full text-sm text-left rtl:text-right text-gray-700">
     <thead class="text-xs text-gray-500 bg-gray-200 border-b">
       <tr>
@@ -52,7 +85,7 @@
 </div>
 
 <% else %>
- <p class="px-3 py-2">
+ <p class="px-3 py-2 ml-2">
  No records to view</p>
 <% end %>
 <br>

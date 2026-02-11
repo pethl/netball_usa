@@ -1,43 +1,100 @@
 <div id="<%= dom_id equipment %>">
 
-<div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+  <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow
+              hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
-  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-   Date of Sale:
-  </p>
-  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-  <%=  equipment.sale_date.to_formatted_s(:usa) unless ( equipment.sale_date.to_s.empty?) %> 
-  </p>
+    <!-- ================================================= -->
+    <!-- STATUS (always visible) -->
+    <!-- ================================================= -->
+    <p class="text-xs uppercase tracking-wide text-gray-500 mb-1">
+      Status
+    </p>
+    <p class="text-sm font-semibold text-blue-900 mb-3">
+      <%= equipment.status %>
+    </p>
 
-  <div class="mt-2">
-  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-      Items purchased:
-  </p>
-  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-  <%= equipment.items_purchased %> 
-  </p> 
+    <!-- ================================================= -->
+    <!-- SALE DETAILS -->
+    <!-- ================================================= -->
+    <% if equipment.sale? %>
+
+      <!-- Sale date -->
+      <p class="text-sm text-gray-500 truncate">
+        Date of Sale:
+      </p>
+      <p class="text-sm font-medium text-gray-900">
+        <%= equipment.sale_date.to_formatted_s(:usa) if equipment.sale_date.present? %>
+      </p>
+
+      <!-- Items purchased -->
+      <div class="mt-2">
+        <p class="text-sm text-gray-500 truncate">
+          Items purchased:
+        </p>
+        <p class="text-sm font-medium text-gray-900">
+          <%= equipment.items_purchased %>
+        </p>
+      </div>
+
+      <!-- Purchase amount -->
+      <div class="mt-2">
+        <p class="text-sm text-gray-500 truncate">
+          Purchase Amount:
+        </p>
+        <p class="text-sm font-medium text-gray-900">
+          <%= number_to_currency(equipment.purchase_amount, precision: 2) if equipment.purchase_amount.present? %>
+        </p>
+      </div>
+
+    <% end %>
+
+    <!-- ================================================= -->
+    <!-- QUOTE DETAILS -->
+    <!-- ================================================= -->
+    <% if equipment.quote? %>
+
+      <!-- Items quoted -->
+      <div class="mt-2">
+        <p class="text-sm text-gray-500 truncate">
+          Items quoted:
+        </p>
+        <p class="text-sm font-medium text-gray-900">
+          <%= equipment.items_quoted %>
+        </p>
+      </div>
+
+      <!-- Quote amount -->
+      <div class="mt-2">
+        <p class="text-sm text-gray-500 truncate">
+          Quote Amount:
+        </p>
+        <p class="text-sm font-medium text-gray-900">
+          <%= number_to_currency(equipment.quote_amount, precision: 2) if equipment.quote_amount.present? %>
+        </p>
+      </div>
+
+    <% end %>
+
+    <!-- ================================================= -->
+    <!-- SALE / QUOTE PARTY (Educator OR free-form customer) -->
+    <!-- ================================================= -->
+    <div class="mt-3">
+      <p class="text-sm text-gray-500 truncate">
+        <%= equipment.sale? ? "Sale To:" : "Quote For:" %>
+      </p>
+
+      <p class="text-sm font-medium text-gray-900">
+        <% if equipment.netball_educator.present? %>
+          <%= equipment.netball_educator.full_name %><br>
+          <%= equipment.netball_educator.school_and_location %><br>
+          <%= equipment.netball_educator.contact_details %>
+        <% else %>
+          <%= equipment.customer_name.presence || "—" %><br>
+          <%= equipment.customer_email.presence %>
+        <% end %>
+      </p>
+    </div>
+
   </div>
-  
-  <div class="mt-2">
-  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-      Items Ammount:
-  </p>
-  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-    <%= number_to_currency(equipment.purchase_amount, precision: 2) %>
-  </p> 
-  </div>
-  
-  <div class="mt-2">
-  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-      Sale To:
-  </p>
-  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-   <%= equipment.netball_educator.full_name %> <br>
-   <%= equipment.netball_educator.school_and_location %> <br>
-   <%= equipment.netball_educator.contact_details %>
-  </p> 
-  </div>
-
- 
-
 </div>
+

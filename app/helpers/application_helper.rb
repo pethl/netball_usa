@@ -28,12 +28,24 @@ module ApplicationHelper
         "inline-block py-2 px-4 text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700"
       end
     end
+
+    #TAB CLASSES
     # app/helpers/people_helper.rb (or wherever you want it)
     def people_tab_class(is_active)
       if is_active
         "inline-block py-2 px-4 text-blue-900 border-b-2 border-blue-900 hover:border-blue-700 hover:text-blue-700"
       else
         "inline-block py-2 px-4 text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700"
+      end
+    end
+
+    def equipment_tab_class(tab_status)
+      base = "inline-flex items-center px-4 py-2 text-sm font-medium rounded-t-md"
+    
+      if params[:status] == tab_status || (params[:status].blank? && tab_status == "Sale")
+        "#{base} bg-blue-200 text-blue-900"
+      else
+        "#{base} text-gray-500 hover:text-gray-700 hover:bg-gray-100"
       end
     end
 
@@ -290,6 +302,9 @@ module ApplicationHelper
      end
    
    
+
+
+
     #REFERENECE DATA ONLY
    def reference_group
      reference_group = Reference.all.order(group: :asc)
@@ -359,6 +374,10 @@ module ApplicationHelper
 
    def educator_roles
     Reference.where(active: true, group: 'educator_roles').pluck(:value)
+  end
+
+  def equipment_status
+    Reference.where(active: true, group: 'equipment_status').pluck(:value)        
   end
 
     def grant_status

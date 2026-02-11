@@ -13,7 +13,7 @@ RSpec.feature "PageSmoke", type: :feature, js: true do
       { path: netball_educators_path, title: "All Educators" },
      # { path: my_educators_path, title: "My Educators (allocated to me)" }, SKIP AS ISSUE WITH PAGE TITLE
       { path: pe_directors_netball_educators_path, title: "P.E. Directors" },
-      { path: equipment_index_path, title: "Equipment Purchased" },
+      { path: equipment_index_path, title: "Equipment" },
       { path: follow_ups_path, title: "Educator Follow Up" },
       { path: educational_events_path, title: "Educational Events" },
       { path: "netball_educators/search", title: "Educators: Search" },
@@ -35,6 +35,8 @@ RSpec.feature "PageSmoke", type: :feature, js: true do
       { path: people_path, title: "People" },
 
       { path: events_path, title: "Current Events" },
+
+      { path: filings_path, title: "Filings" },
 
       { path: programs_path, title: "BAI Programs" },
 

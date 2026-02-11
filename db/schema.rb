@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_01_080311) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_08_120410) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
@@ -124,6 +125,13 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_01_080311) do
     t.datetime "sale_date"
     t.uuid "netball_educator_id"
     t.decimal "purchase_amount"
+    t.string "status", default: "quote", null: false
+    t.string "customer_name"
+    t.string "customer_email"
+    t.text "customer_address"
+    t.text "items_quoted"
+    t.decimal "quote_amount", precision: 10, scale: 2
+    t.index ["status"], name: "index_equipment_on_status"
   end
 
   create_table "event_assignments", force: :cascade do |t|

@@ -3,10 +3,23 @@ class EquipmentController < ApplicationController
   load_and_authorize_resource
   # GET /equipment
   def index
-  @equipment = Equipment.left_joins(:netball_educator)
-                        .order(sale_date: :desc)
- 
+    @status = params[:status] || "Sale"
+  
+    @equipment =
+      case @status
+      when "Quote"
+        Equipment
+          .where(status: "Quote")
+          .left_joins(:netball_educator)
+          .order(created_at: :desc)
+      else
+        Equipment
+          .where(status: "Sale")
+          .joins(:netball_educator)
+          .order(sale_date: :desc)
+      end
   end
+  
 
   # GET /equipment/1
   def show
@@ -14,7 +27,7 @@ class EquipmentController < ApplicationController
 
   # GET /equipment/new
   def new
-    @equipment = Equipment.new
+    @equipment = Equipment.new(status: params[:status])
   
     # Preassign Netball Educator if coming from a link
     @equipment.netball_educator_id = params[:netball_educator_id] if params[:netball_educator_id].present?
@@ -68,6 +81,6 @@ class EquipmentController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def equipment_params
-      params.require(:equipment).permit(:items_purchased, :purchase_amount, :sale_date, :netball_educator_id)
+      params.require(:equipment).permit(:status, :items_purchased, :purchase_amount, :sale_date, :customer_name, :customer_email, :customer_address, :items_quoted, :quote_amount, :netball_educator_id)
     end
 end

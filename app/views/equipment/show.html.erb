@@ -6,13 +6,32 @@
    <%= render @equipment %>
 
    <br>
-
 <div>
-  <%= link_to "Edit this equipment sale", edit_equipment_path(@equipment), class: link_class  %> |
-  <%= link_to "<< Back to all equipment sales", equipment_index_path, class: link_class  %><br>
-   <%= link_to "Edit this educator", edit_netball_educator_path(@equipment.netball_educator), class: link_class  %> |
-  <%= link_to "<< Back to all educators", netball_educators_path, class: link_class  %>
+  <%= link_to "Edit this equipment",
+      edit_equipment_path(@equipment),
+      class: link_class %>
+  |
+  <%= link_to "<< Back to all equipment",
+      equipment_index_path,
+      class: link_class %>
 
-  <%= button_to "Destroy this equipment record", @equipment, method: :delete %>
+  <% if @equipment.netball_educator.present? %>
+    <br>
+    <%= link_to "Edit this educator",
+        edit_netball_educator_path(@equipment.netball_educator),
+        class: link_class %>
+    |
+    <%= link_to "<< Back to all educators",
+        netball_educators_path,
+        class: link_class %>
+  <% end %>
+
+  <div class="mt-4">
+    <%= button_to "Destroy this equipment record",
+        @equipment,
+        method: :delete,
+        data: { confirm: "Are you sure?" } %>
+  </div>
 </div>
+
 

@@ -1,4 +1,6 @@
-<% content_for(:page_title, "Equipment Sale: Add new record")%>
+<% content_for(:page_title,
+   @equipment.status == "Quote" ? "Equipment Quote: New" : "Equipment Sale: New"
+) %>
 
 
 <%= render "form", equipment: @equipment %>
