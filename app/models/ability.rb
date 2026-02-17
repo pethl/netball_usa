@@ -198,6 +198,18 @@ class Ability
       # cannot :menu_all, Transfer
       # cannot :inbound_pickups,  Transfer
       # cannot :outbound_pickups, Transfer
+      
+     # 14 : calendar + clubs user (restricted view-only)
+      when "calendar_clubs_user"
+
+      # Allow access to the calendar view
+      can :calendar, Event
+
+      # Allow access to the user-safe clubs view
+      can :index_user, Club
+
+      # Optional: allow reading individual club if needed by the view
+      #can :read, Club 
 
       # 0 : admin (everything) 
     when "admin"

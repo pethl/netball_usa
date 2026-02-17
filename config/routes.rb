@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   end
 
   get 'clubs/index_admin' => 'clubs#index_admin', :as => :index_admin
+  get 'clubs/index_user' => 'clubs#index_user', :as => :index_user
+ 
   get 'regions/team_list_index' => 'regions#team_list_index', :as => :team_list_index
   get 'clubs/teams_list_index' => 'clubs#teams_list_index', :as => :teams_list_index
   get 'members' => 'members#index', as: :members
@@ -62,7 +64,11 @@ Rails.application.routes.draw do
   resources :regions
 
   resources :follow_ups
-  resources :equipment
+  resources :equipment do
+    member do
+      patch :make_sale
+    end
+  end
   resources :sample_words
   resources :budgets
   

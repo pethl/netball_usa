@@ -59,11 +59,13 @@
                   </div>
 
                   <div>
-                    <% if event.city.present? || event.state.present? %>
-                      <div class="text-blue-900 font-semibold">
-                        <%= [event.city, event.state].compact.join(', ') %>
-                      </div>
-                    <% end %>
+                   <% location = [event.city.presence, event.state.presence].compact.join(', ') %>
+
+                  <% if location.present? %>
+                    <div class="text-blue-900 font-semibold">
+                      <%= location %>
+                    </div>
+                  <% end %>
 
                     <div class="text-gray-800 font-bold">
                       <%= event.name %>

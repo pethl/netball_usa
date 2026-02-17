@@ -15,7 +15,7 @@ class EquipmentController < ApplicationController
       else
         Equipment
           .where(status: "Sale")
-          .joins(:netball_educator)
+          .left_joins(:netball_educator)
           .order(sale_date: :desc)
       end
   end
@@ -72,6 +72,21 @@ class EquipmentController < ApplicationController
     @equipment.destroy
     redirect_to equipment_index_url, notice: "Equipment was successfully destroyed.", status: :see_other
   end
+
+  def make_sale
+  @equipment = Equipment.find(params[:id])
+
+  return redirect_to @equipment, alert: "Already a sale." if @equipment.sale?
+
+  @equipment.update(
+    status: "Sale",
+    items_purchased: @equipment.items_quoted,
+    purchase_amount: @equipment.quote_amount,
+    sale_date: Time.current
+  )
+
+  redirect_to edit_equipment_path(@equipment), notice: "Quote converted to sale. Please complete then save this sale record."
+end
 
   private
     # Use callbacks to share common setup or constraints between actions.

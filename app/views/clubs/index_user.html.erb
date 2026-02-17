@@ -1,0 +1,20 @@
+<% content_for(:page_title, "All Clubs")%>
+
+
+
+<div class="m-2">
+  
+</div>
+
+<% if @clubs.any? %>
+
+    <%= render partial: "clubs_table_lite", clubs: @clubs %>
+
+    <% else %>
+        <p class="px-6 py-4">
+        No records to view</p>
+    <% end %>
+<br>
+
+
+

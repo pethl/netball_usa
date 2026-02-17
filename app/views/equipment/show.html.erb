@@ -6,14 +6,23 @@
    <%= render @equipment %>
 
    <br>
+    <div>
+   <% if @equipment.quote? %>
+  <%= button_to "Make Sale",
+      make_sale_equipment_path(@equipment),
+      method: :patch,
+      data: { turbo_confirm: "Convert this quote into a sale?" },
+      class: form_button_class %>
+<% end %>
+</div>
 <div>
-  <%= link_to "Edit this equipment",
+  <%= link_to "Edit this equipment record",
       edit_equipment_path(@equipment),
       class: link_class %>
   |
-  <%= link_to "<< Back to all equipment",
-      equipment_index_path,
-      class: link_class %>
+ <%= link_to "<< Back to all equipment",
+    equipment_index_path(status: @equipment.status),
+    class: link_class %>
 
   <% if @equipment.netball_educator.present? %>
     <br>
@@ -30,7 +39,7 @@
     <%= button_to "Destroy this equipment record",
         @equipment,
         method: :delete,
-        data: { confirm: "Are you sure?" } %>
+       data: { turbo_confirm: "Are you sure?" } %>
   </div>
 </div>
 

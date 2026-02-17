@@ -125,7 +125,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_08_120410) do
     t.datetime "sale_date"
     t.uuid "netball_educator_id"
     t.decimal "purchase_amount"
-    t.string "status", default: "quote", null: false
+    t.string "status"
     t.string "customer_name"
     t.string "customer_email"
     t.text "customer_address"

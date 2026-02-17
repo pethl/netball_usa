@@ -48,36 +48,129 @@
 
 <div class="relative overflow-x-auto shadow-md ml-2">
   <table class="w-full text-sm text-left rtl:text-right text-gray-700">
-    <thead class="text-xs text-gray-500 bg-gray-200 border-b">
-      <tr>
-        <th scope="col" class="px-3 py-3">State</th>
-        <th scope="col" class="px-3 py-3">City</th>
-        <th scope="col" class="px-3 py-3">Sale To</th>
-        <th scope="col" class="px-3 py-3">Date of Sale</th>
-        <th scope="col" class="px-3 py-3 text-right whitespace-nowrap">Purchase $</th>
-        <th scope="col" class="px-6 py-3">Items Purchased</th>
-        <th scope="col" class="px-3 py-3">School</th>
-        <th scope="col" class="px-3 py-3">Contact Details</th>
-      </tr>
-    </thead>
+   <thead class="text-xs text-gray-500 bg-gray-200 border-b">
+  <tr>
+
+    <% if @status == "Sale" %>
+
+      <th class="px-3 py-3">State</th>
+      <th class="px-3 py-3">City</th>
+      <th class="px-3 py-3">Sale To</th>
+      <th class="px-3 py-3">Date of Sale</th>
+      <th class="px-3 py-3 text-right whitespace-nowrap">Purchase $</th>
+      <th class="px-6 py-3">Items Purchased</th>
+      <th class="px-3 py-3">School</th>
+      <th class="px-3 py-3">Contact Details</th>
+
+    <% else %>
+
+        <th class="px-3 py-3 text-left">Actions</th>
+      <th class="px-3 py-3">State</th>
+      <th class="px-3 py-3">City</th>
+      <th class="px-3 py-3">Quote For</th>
+      <th class="px-3 py-3">Quote Date</th>
+      <th class="px-3 py-3 text-right whitespace-nowrap">Quote $</th>
+      <th class="px-6 py-3">Items Quoted</th>
+      <th class="px-3 py-3">School / Address</th>
+      <th class="px-3 py-3">Contact Details</th>
+
+    <% end %>
+
+  </tr>
+</thead>
     <tbody>
       <% @equipment.each do |equipment| %>
-        <tr class="bg-white border-b hover:bg-gray-50 whitespace-nowrap">
-          <td class="px-3 py-2"><%= equipment.netball_educator&.state || "N/A" %></td>
-          <td class="px-3 py-2"><%= equipment.netball_educator&.city || "N/A" %></td>
-          <td class="px-3 py-2"><%= equipment.netball_educator&.full_name || "N/A" %></td>
-          <td class="px-3 py-2">
-            <%= link_to equipment.sale_date.to_formatted_s(:usa), edit_equipment_path(equipment), class: link_class if equipment.sale_date.present? %>
-          </td>
-          <td class="px-3 py-2 text-right truncate">
-            <%= number_to_currency(equipment.purchase_amount, precision: 2) if equipment.purchase_amount.present? %>
-          </td>
-          <td class="px-6 py-2 break-words"><%= equipment.items_purchased %></td>
-          <td class="px-3 py-2"><%= equipment.netball_educator&.school_name || "N/A" %></td>
-          <td class="px-3 py-2">
-            <%= equipment.netball_educator&.formatted_phone %><br>
-            <%= equipment.netball_educator&.email %>
-          </td>
+       <tr class="bg-white border-b hover:bg-gray-50 whitespace-nowrap">
+
+          <% if @status == "Sale" %>
+
+            <td class="px-3 py-2"><%= equipment.netball_educator&.state || "N/A" %></td>
+            <td class="px-3 py-2"><%= equipment.netball_educator&.city || "N/A" %></td>
+           <td class="px-3 py-2">
+                <% if equipment.netball_educator.present? %>
+
+                  <%= equipment.netball_educator.full_name %>
+
+                <% elsif equipment.customer_name.present? %>
+
+                  <span
+                    class="text-red-600 font-medium cursor-help"
+                    title="Please link to full educator record">
+                    <%= equipment.customer_name %>
+                  </span>
+
+                <% else %>
+
+                  N/A
+
+                <% end %>
+              </td>
+
+            <td class="px-3 py-2">
+              <%= link_to equipment.sale_date&.strftime('%d %b %Y'),
+                  edit_equipment_path(equipment),
+                  class: link_class if equipment.sale_date.present? %>
+            </td>
+
+            <td class="px-3 py-2 text-right">
+              <%= number_to_currency(equipment.purchase_amount) if equipment.purchase_amount.present? %>
+            </td>
+
+            <td class="px-6 py-2 break-words"><%= equipment.items_purchased %></td>
+
+            <td class="px-3 py-2"><%= equipment.netball_educator&.school_name || "N/A" %></td>
+
+            <td class="px-3 py-2">
+              <%= equipment.netball_educator&.formatted_phone %><br>
+              <%= equipment.netball_educator&.email %>
+            </td>
+
+          <% else %>
+         
+              <td class="px-3 py-2 text-left">
+                <%= button_to "Make Sale",
+                    make_sale_equipment_path(equipment),
+                    method: :patch,
+                    data: { turbo_confirm: "Convert this quote into a sale?" },
+                    class: "text-sm bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700" %>
+              </td>
+           
+            <td class="px-3 py-2"><%= equipment.netball_educator&.state || "N/A" %></td>
+            <td class="px-3 py-2"><%= equipment.netball_educator&.city || "N/A" %></td>
+
+            <td class="px-3 py-2">
+              <%= equipment.netball_educator&.full_name || equipment.customer_name || "N/A" %>
+            </td>
+
+            <td class="px-3 py-2">
+              <%= link_to equipment.created_at.strftime('%d %b %Y'),
+                  equipment_path(equipment),
+                  class: link_class %>
+            </td>
+
+            <td class="px-3 py-2 text-right">
+              <%= number_to_currency(equipment.quote_amount) if equipment.quote_amount.present? %>
+            </td>
+
+            <td class="px-6 py-2 break-words">
+              <%= equipment.items_quoted %>
+            </td>
+
+            <td class="px-3 py-2">
+              <%= equipment.netball_educator&.school_name || equipment.customer_address || "N/A" %>
+            </td>
+
+            <td class="px-3 py-2">
+              <% if equipment.netball_educator.present? %>
+                <%= equipment.netball_educator.formatted_phone %><br>
+                <%= equipment.netball_educator.email %>
+              <% else %>
+                <%= equipment.customer_email %>
+              <% end %>
+            </td>
+
+          <% end %>
+
         </tr>
       <% end %>
     </tbody>

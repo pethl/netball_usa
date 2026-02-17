@@ -1,0 +1,152 @@
+<div id="clubs"> 
+  <div class="relative overflow-x-auto">
+    <table class="table-auto w-full text-left rtl:text-right">
+      <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs">
+        <tr>
+          <th scope="col" class="px-4 px-2 w-52">Club Name</th>
+          <th scope="col" class="px-4 px-2">City</th>
+          <th scope="col" class="px-4 px-2">State</th>
+           <th scope="col" class="px-4 px-2">Renewed?</th> 
+
+          <th scope="col" class="px-4 px-2 w-52 text-center">Members Category</th>
+          <th scope="col" class="px-4 px-2 w-60 text-left">Administered By</th>
+          <th scope="col" class="px-4 px-2 w-60 truncate">Club President</th>
+          <th scope="col" class="px-4 px-2 w-60 truncate">Club Key Contact</th>
+          <th scope="col" class="px-4 px-2 w-60 truncate">Website</th>
+           <th scope="col" class="px-4 px-2 w-60 truncate">Facebook</th>
+            <th scope="col" class="px-4 px-2 w-60 truncate">X</th>
+             <th scope="col" class="px-4 px-2 w-60 truncate">Insta</th>
+              <th scope="col" class="px-4 px-2 w-60 truncate">Other</th>
+          <th scope="col" class="px-4 px-2 w-60">Date Created</th>
+
+         
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @clubs.each do |club| %>
+          <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+
+           <td class="px-4 py-4 truncate border-x border-gray-200">
+                <% admin = club.creator %>
+                <% admin_inactive = admin && !admin.account_active? %>
+
+                <span class="text-lg font-semibold <%= 'text-gray-400' if admin_inactive %>">
+                 
+                 <% name_classes = "#{link_class} #{'text-gray-400 hover:text-gray-400' if admin_inactive}" %>
+
+                    <% if can?(:read, club) %>
+                      <%= link_to club.name,
+                                  club_path(club),
+                                  class: name_classes,
+                                  title: (admin_inactive ? 'Administrator is inactive' : nil) %>
+                    <% else %>
+                      <span class="<%= name_classes %>"
+                            title="<%= admin_inactive ? 'Administrator is inactive' : nil %>">
+                        <%= club.name %>
+                      </span>
+                    <% end %>
+                 
+                  </span>
+
+                <% if admin_inactive %>
+                  <span class="ml-2 inline-flex items-center rounded-full bg-gray-200 px-2 py-0.5 text-[10px] font-medium text-gray-700"
+                        title="Administrator is inactive">
+                    <i class="fa-solid fa-lock mr-1"></i> locked
+                  </span>
+                <% end %>
+
+                <% if club&.email.present? %>
+                  <br>
+                  <span class="text-sm text-gray-500">
+                    <i class="fa-solid fa-envelope"></i>
+                    <%= link_to club.email, "mailto:#{club.email}" %>
+                  </span>
+                <% end %>
+              </td>
+
+            <td class="px-4 py-4 border-x border-gray-200"><%= club.city %></td>
+            <td class="px-4 py-4 border-x border-gray-200"><%= club.us_state %></td>
+            <td class="px-4 py-4 border-x border-gray-200 text-center">
+             <% if club.renewed_for_year?(2025) %>
+                <span style="color: green;">2025</span>
+              <% elsif club.renewal_response.to_s.downcase == 'no' %>
+                <span style="color: red;">2025</span>
+              <% end %>
+          </td>
+
+           
+
+            <td class="px-4 py-4 text-center border-x border-gray-200"><%= club.membership_category %></td>
+
+           
+
+           <td class="px-4 py-4 text-left border-x border-gray-200">
+              <% admin = club.creator %>
+              <% admin_inactive = admin && !admin.account_active? %>
+              <span class="<%= 'text-gray-400' if admin_inactive %>"><%= admin.full_name %></span>
+              <% if admin_inactive %>
+                <i class="fa-solid fa-lock ml-1 text-gray-500" title="Administrator is inactive"></i>
+              <% end %>
+            </td>
+
+            <td class="px-4 py-4 text-left border-x border-gray-200">
+              <% if club.club_president == "Please nominate" %>
+                <span class="text-sm text-gray-400 italic"><%= club.club_president %><br></span>
+              <% else %>
+                <%= club.club_president %><br>
+              <% end %>
+
+              <% unless club.club_president_phone.to_s.empty? %>
+                <span class="text-sm text-gray-500">
+                  <i class="fa-solid fa-phone"></i> <%= club.club_president_phone %>
+                </span>
+              <% end %>
+            </td>
+
+            <td class="px-4 py-4 text-left border-x border-gray-200">
+              <% if club.club_key_contact == "Please nominate" %>
+                <span class="text-sm text-gray-400 italic"><%= club.club_key_contact %><br></span>
+              <% else %>
+                <%= club.club_key_contact %><br>
+              <% end %>
+
+              <% unless club.club_key_contact_phone.to_s.empty? %>
+                <span class="text-sm text-gray-500">
+                  <i class="fa-solid fa-phone"></i> <%= club.club_key_contact_phone %>
+                </span>
+              <% end %>
+            </td>
+
+            <td class="px-4 py-4 truncate border-x border-gray-200">
+              <%= link_to(club.website, club.website, target: '_blank', class: link_class) unless club.website.blank? %>
+            </td>
+
+             <td class="px-4 py-4 truncate border-x border-gray-200">
+              <%= link_to(club.facebook, club.facebook, target: '_blank', class: link_class) unless club.facebook.blank? %>
+            </td>
+
+             <td class="px-4 py-4 truncate border-x border-gray-200">
+              <%= link_to(club.twitter, club.twitter, target: '_blank', class: link_class) unless club.twitter.blank? %>
+            </td>
+
+             <td class="px-4 py-4 truncate border-x border-gray-200">
+              <%= link_to(club.instagram, club.instagram, target: '_blank', class: link_class) unless club.instagram.blank? %>
+            </td>
+
+             <td class="px-4 py-4 truncate border-x border-gray-200">
+              <%= link_to(club.other_sm, club.other_sm, target: '_blank', class: link_class) unless club.other_sm.blank? %>
+            </td>
+
+            <td class="px-4 py-4 border-x border-gray-200">
+              <%= club.created_at.to_formatted_s(:usa) unless club.created_at.blank? %>
+            </td>
+
+           
+
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

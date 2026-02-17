@@ -59,13 +59,14 @@ class User < ApplicationRecord
   :educators_events_medium=>10,
   :spare=>11,
   :na_people=>12,
-  :educators_events_self_selftransfer=>13}
+  :educators_events_self_selftransfer=>13,
+  :calendar_clubs_user=>14}
 
   # User::Roles
   # The available roles
   Roles = [:admin, :teams_grants, :teamlead, :grants, :educators, :teams_admin, 
            :sponsors_events, :us_open, :educators_events, :sponsors_media_events, 
-           :educators_events_medium, :spare, :na_people]
+           :educators_events_medium, :spare, :na_people, :educators_events_self_selftransfer, :calendar_clubs_user]
   after_initialize :set_default_role, :if => :new_record?
   
   def set_default_role
@@ -138,6 +139,10 @@ class User < ApplicationRecord
 
  def educators_events_self_selftransfer
   self.role == 'educators_events_self_selftransfer'
+ end
+
+  def calendar_clubs_user
+  self.role == 'calendar_clubs_user'
  end
   
  

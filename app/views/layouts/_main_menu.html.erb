@@ -165,8 +165,8 @@
 
     <% end %>
     <!-- Dynamic menu based on user permissions -->
-   
 
+   
     <% if can? :manage, Sponsor %>
       <li class="mt-2">
         <a href="/sponsors" class="text-gray-100 hover:font-bold">SPONSORS</a>
@@ -296,6 +296,30 @@
       </li>
     <% end %>
   <% end %>
+
+  <% if can?(:calendar, Event) || can?(:index_user, Club) %>
+
+  <% if can?(:calendar, Event) %>
+    <li class="mt-2">
+      <span class="text-gray-100 hover:font-bold">EVENTS</span>
+    </li>
+    <li class="mt-2 ml-2">
+      <%= link_to "- Calendar", calendar_events_path,
+          class: "text-gray-100 hover:font-bold" %>
+    </li>
+  <% end %>
+
+  <% if can?(:index_user, Club) %>
+    <li class="mt-2">
+      <span class="text-gray-100 hover:font-bold">MEMBERSHIP</span>
+    </li>
+    <li class="mt-2 ml-2">
+      <%= link_to "- Clubs", index_user_path,
+          class: "text-gray-100 hover:font-bold" %>
+    </li>
+  <% end %>
+
+<% end %>
       
   <% if can?(:manage, :all) %>
   <li class="mt-2 text-blue-300 font-semibold">

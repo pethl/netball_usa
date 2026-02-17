@@ -32,11 +32,38 @@ class MembersController < ApplicationController
   
 
   def active_club_members
-    # ✅ Find the most recent renewal year in the data (e.g. "2026" or "2025")
-    latest_year = Club.where.not(renewal_years: nil).maximum(:renewal_years)
+  today = Date.today
 
-    # Load clubs for that year
-    clubs = Club.where(renewal_years: latest_year).includes(:members)
+  # Find the most recent renewal year in the data
+  latest_year =
+  Club
+    .where.not(renewal_years: nil)
+    .pluck(:renewal_years)
+    .flat_map { |s| s.split(",") }
+    .map(&:to_i)
+    .max
+
+  # Membership runs July 1 – June 30
+  cutoff_date = Date.new(today.year, 6, 30)
+
+  valid_years =
+    if today <= cutoff_date
+      [latest_year, latest_year.to_i - 1]
+    else
+      [latest_year]
+    end
+
+  # Load clubs for valid membership years
+ 
+  year_conditions = valid_years.map do |y|
+  "renewal_years LIKE ?"
+    end.join(" OR ")
+
+    year_values = valid_years.map { |y| "%#{y}%" }
+
+    clubs = Club
+              .where(year_conditions, *year_values)
+              .includes(:members)
 
     excluded    = %w[id na_team_id updated_at membership_type team_id]
     member_cols = Member.column_names - excluded
