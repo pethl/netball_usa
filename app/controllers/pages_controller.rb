@@ -56,7 +56,14 @@ class PagesController < ApplicationController
     @media_stats = Medium.group(:media_type).count
 
     #Special Stats for Equipment card - Sonya 4/25
-    @equipment_stats = Equipment
+    #
+    ## TOTAL COUNTS
+  @total_sales  = Equipment.where(status: "sale").count
+  @total_quotes = Equipment.where(status: "quote").count
+
+
+    @equipment_sales_stats = Equipment
+    .where(status: "Sale") 
     .where(sale_date: 3.years.ago.beginning_of_year..Time.current.end_of_year)
     .group("EXTRACT(YEAR FROM sale_date)")
     .select(
@@ -65,6 +72,14 @@ class PagesController < ApplicationController
       "COALESCE(SUM(purchase_amount), 0) AS total_purchase"
     )
     .order("year DESC")
+
+    #stats for equip QUOTE
+   quote_scope = Equipment.where(status: "Quote")
+
+    @total_quotes        = quote_scope.count
+    @total_quote_amount  = quote_scope.sum(:quote_amount)
+
+
 
     
     # MY NETBALL ACADEMY CARD
