@@ -58,8 +58,8 @@ class PagesController < ApplicationController
     #Special Stats for Equipment card - Sonya 4/25
     #
     ## TOTAL COUNTS
-  @total_sales  = Equipment.where(status: "sale").count
-  @total_quotes = Equipment.where(status: "quote").count
+  @total_sales  = Equipment.where(status: "Sale").count
+  @total_quotes = Equipment.where(status: "Quote").count
 
 
     @equipment_sales_stats = Equipment
