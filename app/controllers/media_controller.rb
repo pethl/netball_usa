@@ -45,7 +45,7 @@ class MediaController < ApplicationController
 
   def edit
     @medium.press_releases.build if @medium.press_releases.empty?
-    @medium.old_user_id = current_user.id
+    @medium.old_user_id = @medium.user_id
   end
 
   def create
@@ -62,13 +62,16 @@ class MediaController < ApplicationController
   end
 
   def update
-    if @medium.update(medium_params)
-      send_allocation_email(@medium)
-      redirect_to @medium, notice: "Medium was successfully updated.", status: :see_other
-    else
-      render :edit, status: :unprocessable_entity
+      attrs = medium_params.dup
+      attrs[:user_id] = @medium.user_id if attrs[:user_id].blank?
+
+      if @medium.update(attrs)
+        send_allocation_email(@medium)
+        redirect_to @medium, notice: "Medium was successfully updated.", status: :see_other
+      else
+        render :edit, status: :unprocessable_entity
+      end
     end
-  end
 
   def destroy
     @medium.destroy
@@ -98,9 +101,11 @@ class MediaController < ApplicationController
       )
     end
 
-    def send_allocation_email(medium)
-      unless medium.user_id == medium.old_user_id
-        MediumMailer.with(medium: medium).record_allocation_notification.deliver_later
-      end
-    end
+   def send_allocation_email(medium, previous_user_id = nil)
+  old_user_id = previous_user_id || medium.old_user_id
+  return if medium.user_id.blank?
+  return if medium.user_id == old_user_id
+
+  MediumMailer.with(medium: medium).record_allocation_notification.deliver_later
+end
 end

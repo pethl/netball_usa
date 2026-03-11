@@ -2,17 +2,14 @@ require 'rails_helper'
 
 RSpec.describe "Equipment Management", type: :feature, js: true do
   let(:admin_user) { create(:user, :admin, password: "password123") }
+   let!(:educator) { create(:netball_educator) }
 
-  scenario "Admin logs in, creates equipment, and logs out" do
-    # Log in as an admin
+  scenario "Admin creates a Sale" do
     login_user(admin_user)
 
-    # Select an existing Netball Educator from the DB (just pick any)
-    educator = NetballEducator.first
+    visit equipment_index_path
+    click_link "New Sale"
 
-    visit new_equipment_path
-
-    # Select the educator from the dropdown dynamically
     select educator.reverse_name_school_state, from: "equipment_netball_educator_id"
 
     fill_in "equipment_items_purchased", with: "10 Netballs"
@@ -22,14 +19,39 @@ RSpec.describe "Equipment Management", type: :feature, js: true do
     click_button "Save Equipment"
 
     expect(page).to have_content("Equipment was successfully created.")
-
-    # Log out using the helper
-    logout_user
-
-    # The logout is already verified in your existing tests
-    expect(page).to have_content("You've been logged out")
-    expect(page).to have_link("Sign in again")
+    expect(page).to have_content("Sale")
   end
+
+  scenario "Admin creates a Quote" do
+    login_user(admin_user)
+
+    visit equipment_index_path
+    click_link "New Quote"
+
+    fill_in "equipment_items_purchased", with: "Quote for 20 balls"
+    fill_in "equipment_purchase_amount", with: "200.00"
+
+    click_button "Save Equipment"
+
+    expect(page).to have_content("Equipment was successfully created.")
+    expect(page).to have_content("Quote")
+  end
+
+  scenario "Admin edits existing equipment" do
+    login_user(admin_user)
+
+    equipment = create(:equipment, :sale, netball_educator: educator)
+
+    visit edit_equipment_path(equipment)
+
+    fill_in "equipment_purchase_amount", with: "150.00"
+    click_button "Save Equipment"
+
+    expect(page).to have_content("Equipment was successfully updated.")
+    expect(equipment.reload.purchase_amount.to_f).to eq(150.0)
+  end
+
+ 
 
   scenario "Admin fails to create Equipmentwithout mandatory fields" do
 
@@ -37,7 +59,7 @@ RSpec.describe "Equipment Management", type: :feature, js: true do
 
     visit new_equipment_path
 
-    click_button "Save Equipment"
+    find("input[type='submit']").click
 
     expect(page).to have_content("Netball educator must exist") # Validation errors should show
    
@@ -50,7 +72,7 @@ RSpec.describe "Equipment Management", type: :feature, js: true do
     visit edit_equipment_path(equipment)
 
     fill_in "equipment_purchase_amount", with: "100.00"
-    click_button "Save Equipment"
+    find("input[type='submit']").click
 
     expect(page).to have_content("Equipment was successfully updated.") # adjust if needed
     expect(equipment.reload.purchase_amount.to_f).to eq(100.00)

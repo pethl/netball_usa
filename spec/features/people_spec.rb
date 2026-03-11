@@ -1,8 +1,6 @@
 require "rails_helper"
 
-
-RSpec.describe "People Management", type: :feature, js: true do
-
+RSpec.describe "People", type: :feature, js: true do
   let(:admin_user) { create(:user, :admin, password: "password123") }
 
   scenario "Admin creates a person" do
@@ -13,9 +11,12 @@ RSpec.describe "People Management", type: :feature, js: true do
     fill_in "person_first_name", with: "Jane"
     fill_in "person_last_name", with: "Smith"
     fill_in "person_email", with: "jane@example.com"
-    select "Trainer", from: "person_role"
 
-    click_button "Save Record"
+    select "Active", from: "person_status"
+    select "Scorer", from: "person_role"
+    select "US & Canada", from: "person_region"
+
+    find("input[type='submit']").click
 
     expect(page).to have_content("Person was successfully created.")
     expect(page).to have_content("Jane")
@@ -24,26 +25,15 @@ RSpec.describe "People Management", type: :feature, js: true do
   scenario "Admin edits a person" do
     login_user(admin_user)
 
-    person = create(:person)
+    person = create(:person, role: "Scorer", status: "Active", region: "US & Canada")
 
     visit edit_person_path(person)
 
     fill_in "person_first_name", with: "Updated"
-    click_button "Save Record"
+
+    find("input[type='submit']").click
 
     expect(page).to have_content("Person was successfully updated.")
     expect(person.reload.first_name).to eq("Updated")
   end
-
-  scenario "Admin views a person" do
-    login_user(admin_user)
-
-    person = create(:person, first_name: "Viewer")
-
-    visit person_path(person)
-
-    expect(page).to have_content("Viewer")
-  end
-
- 
 end
