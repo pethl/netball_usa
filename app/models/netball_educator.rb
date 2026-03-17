@@ -32,7 +32,8 @@ class NetballEducator < ApplicationRecord
 
   validates :city, presence: true, length: { maximum: 50 }, on: :create
   validates :state, presence: true
-  validates :level, presence: true, on: :create, unless: -> { role.in?(["Kidokinetics", "Talentlockr"]) }
+  validates :title, presence: true #new mar 26
+  #validates :level, presence: true, on: :create, unless: -> { role.in?(["Kidokinetics", "Talentlockr"]) } #REMOVED 3/26 SONYA EMAIL
 
 
     # Scope: Only PE Directors, sorted by state, then last_name

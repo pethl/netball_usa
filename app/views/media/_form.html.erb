@@ -1,20 +1,30 @@
 <%= form_with(model: medium) do |form| %>
 
-  <%= form_errors_for(medium) %>
-
   <div class="grid grid-cols-3 gap-4 mt-4 mx-4">
-  
-    <div>
-      <%= form.label :media_type, class: label_class %>
-      <%= form.select :media_type, options_for_select(media_type, :selected => medium.media_type),{:prompt=>true}, class: tight_form_input_class %>
-      <%= field_error_for(medium, :media_type) %>
-    </div>
 
+     <div>
+        <%= form.label :media_type, class: label_class %>
+
+        <% error_id = @medium.errors[:media_type].any? ? "#{@medium.model_name.singular}_media_type_error" : nil %>
+
+        <%= form.text_field :media_type,
+        class: error_class(medium, :media_type, base: tight_form_input_class),
+        aria: { invalid: @medium.errors[:media_type].any?, describedby: error_id } %>
+
+    <%= field_error_for(@medium, :media_type, id: error_id) %>
+     </div>
+    
     <div>
       <%= form.label :company_name, class: label_class %>
-      <%= form.text_field :company_name, class: tight_form_input_class %>
-      <%= field_error_for(medium, :company_name) %>
+
+      <% error_id = medium.errors[:company_name].any? ? "#{medium.model_name.singular}_company_name_error" : nil %>
+      <%= form.text_field :company_name,
+          class: error_class(medium, :company_name, base: tight_form_input_class),
+          aria: { invalid: medium.errors[:company_name].any?, describedby: error_id } %>
+
+      <%= field_error_for(medium, :company_name, id: error_id) %>
     </div>
+    
 
     <div>
       <%= form.label :company_website, class: label_class %>

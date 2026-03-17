@@ -35,6 +35,14 @@
     </p>
   </div>
 
+   <!-- Gender -->
+  <div class="mt-2">
+    <p class="text-sm text-gray-500 dark:text-gray-400">Gender:</p>
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
+      <%= netball_educator.gender %>
+    </p>
+  </div>
+
   <!-- Phone -->
   <div class="mt-2">
     <p class="text-sm text-gray-500 dark:text-gray-400">Phone:</p>
@@ -60,14 +68,12 @@
       <%= netball_educator.school_name %>
     </p>
   </div>
-
-  <!-- Website -->
+  
+  <!-- School District -->
   <div class="mt-2">
-    <p class="text-sm text-gray-500 dark:text-gray-400">
-      <%= kidokinetics?(netball_educator) ? "Franchise Website:" : "School Website:" %>
-    </p>
-    <p class="text-sm font-medium text-gray-900 dark:text-white break-words">
-      <%= netball_educator.website %>
+    <p class="text-sm text-gray-500 dark:text-gray-400">School District:</p>
+    <p class="text-sm font-medium text-gray-900 dark:text-white">
+      <%= netball_educator.school_district %>
     </p>
   </div>
 
@@ -80,7 +86,8 @@
       <%= netball_educator.address %>
       <%= netball_educator.city %>,
       <%= netball_educator.state %>
-      <%= netball_educator.zip %>
+      <%= netball_educator.zip %><br>
+      <%= netball_educator.country %>
     </p>
   </div>
 
@@ -88,37 +95,21 @@
 
     <!-- Level -->
     <div class="mt-2">
-      <p class="text-sm text-gray-500 dark:text-gray-400">Level:</p>
+      <p class="text-sm text-gray-500 dark:text-gray-400">School Level:</p>
       <p class="text-sm font-medium text-gray-900 dark:text-white">
         <%= netball_educator.level %>
       </p>
     </div>
 
-    <!-- More Info -->
-    <div class="mt-2">
-      <p class="text-sm text-gray-500 dark:text-gray-400">More Information:</p>
-      <p class="text-sm font-medium text-gray-900 dark:text-white whitespace-pre-wrap">
-        <%= netball_educator.educator_notes %>
-      </p>
-    </div>
+   
 
     <% unless netball_educator.level == "School/District Lead" %>
 
       <!-- Feedback -->
       <div class="mt-2">
-        <p class="text-sm text-gray-500 dark:text-gray-400">Feedback:</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Feedback and More Information?:</p>
         <p class="text-sm font-medium text-gray-900 dark:text-white whitespace-pre-wrap">
           <%= netball_educator.feedback %>
-        </p>
-      </div>
-
-      <!-- Authorize -->
-      <div class="mt-2">
-        <p class="text-sm text-gray-500 dark:text-gray-400">
-          Authorize use of feedback on social media?
-        </p>
-        <p class="text-sm font-medium text-gray-900 dark:text-white">
-          <%= netball_educator.authorize? ? "Yes" : "No" %>
         </p>
       </div>
 

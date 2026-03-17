@@ -2,17 +2,15 @@
 
 <%= form_with(model: venue) do |form| %> 
 
-   <%= form_errors_for(venue) %>
-
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
 
   <div class="mb-2">
-      <%= form.label :facility_type, class: label_class %>
+      <%= form.label :facility_type, "Facility Type*", class: label_class %>
         <div class="mt-1">
-         <%= form.select :facility_type, options_for_select(facility_type, :selected => venue.facility_type),{:prompt=>true}, class: form_input_class %>  
-        </div> 
-         <%= field_error_for(venue, :facility_type) %>
+         <% error_id = venue.errors[:facility_type].any? ? "#{venue.model_name.singular}_facility_type_error" : nil %> <%= form.select :facility_type, options_for_select(facility_type, selected: venue.facility_type), { prompt: true }, class: error_class(venue, :facility_type, base: form_input_class), aria: { invalid: venue.errors[:facility_type].any?, describedby: error_id } %>
+          <%= field_error_for(venue, :facility_type, id: error_id) %>
     </div>
+  </div>
   
   <div class="mb-2 md:col-span-2 sm:mt-4 md:mt-0">
       <%= form.label :venue_name, class: label_class%>

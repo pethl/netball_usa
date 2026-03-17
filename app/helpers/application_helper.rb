@@ -15,10 +15,19 @@ module ApplicationHelper
       end
     end
 
-    def field_error_for(record, field)
-      return unless record.errors[field].any?
-    
-      content_tag(:p, record.errors[field].first, class: "text-sm text-red-600 mt-1")
+
+    def field_error_for(record, field, id: nil)
+      return unless record&.respond_to?(:errors) && record.errors[field].any?
+
+      id ||= "#{record.model_name.singular}_#{field}_error"
+      content_tag(:p, record.errors[field].first, id: id, class: "text-sm text-red-600 mt-1", role: "alert")
+    end
+
+   
+
+    def error_class(record, field, base: "mt-1 block w-full rounded-md border-gray-300 px-3 py-2", error: "border-red-500 ring-1 ring-red-300")
+      return base unless record&.respond_to?(:errors) && record.errors[field].any?
+      "#{base} #{error}"
     end
 
     def tab_class(path) #netball educators
@@ -367,14 +376,17 @@ module ApplicationHelper
     sponsor_type = sponsor_type.pluck(:value)  
    end
 
-   def educator_level
-     educator_level = Reference.where(active: "TRUE", group: 'educator_level')
-     educator_level = educator_level.pluck(:value)       
+   def educator_level  
+       Reference.where(active: true, group: 'educator_level').pluck(:value)
    end
+
+    def educator_title
+     Reference.where(active: true, group: 'educator_title').pluck(:value)
+    end
 
    def educator_roles
     Reference.where(active: true, group: 'educator_roles').pluck(:value)
-  end
+   end
 
   def equipment_status
     Reference.where(active: true, group: 'equipment_status').pluck(:value)        

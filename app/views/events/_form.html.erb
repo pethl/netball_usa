@@ -2,33 +2,32 @@
   <div class="bg-white py-6 px-4 shadow sm:rounded-lg sm:px-10">
 
     <%= form_with(model: event) do |form| %>
-      <%= form_errors_for(event) %>
 
    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3">
         
         <!-- Normal Fields -->
         <div>
-          <%= form.label :event_type, class: label_class %>
-          <div class="mt-1">
-            <%= form.select :event_type, options_for_select(event_type, selected: event.event_type), { prompt: true }, class: input_class %>
-          </div>
-          <%= field_error_for(event, :event_type) %>
+          <%= form.label :event_type, "Event Type*", class: label_class %>
+            <div class="mt-1">
+              <% error_id = event.errors[:event_type].any? ? "#{event.model_name.singular}_event_type_error" : nil %> <%= form.select :event_type, options_for_select(event_type, selected: event.event_type), { prompt: true }, class: error_class(event, :event_type, base: input_class), aria: { invalid: event.errors[:event_type].any?, describedby: error_id } %>
+              <%= field_error_for(event, :event_type, id: error_id) %>
+            </div>
         </div> 
 
          <div>
           <%= form.label :is_educational, "Is Educational?", class: label_class %>
-          <div class="mt-1">
-            <%= form.select :is_educational, [["Yes", "Yes"], ["No", "No"]], {}, class: input_class %>
+            <div class="mt-1">
+              <%= form.select :is_educational, [["Yes", "Yes"], ["No", "No"]], {}, class: input_class %>
           </div>
-          <%= field_error_for(event, :is_educational) %>
         </div> 
 
         <div>
-          <%= form.label :name, class: label_class %>
-          <div class="mt-1">
-            <%= form.text_field :name, class: input_class %>
+          <%= form.label :name, "Name*", class: label_class %>
+            <div class="mt-1">
+            <% error_id = event.errors[:name].any? ? "#{event.model_name.singular}_name_error" : nil %>
+             <%= form.text_field :name, class: error_class(event, :name, base: input_class), aria: { invalid: event.errors[:name].any?, describedby: error_id } %>
           </div>
-          <%= field_error_for(event, :name) %>
+        <%= field_error_for(event, :name, id: error_id) %>
         </div>
 
         <div>

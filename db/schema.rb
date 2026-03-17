@@ -10,9 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_08_120410) do
+ActiveRecord::Schema[7.1].define(version: 2026_03_12_091207) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
@@ -441,6 +440,9 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_08_120410) do
     t.string "zip"
     t.boolean "is_pe_director"
     t.string "role"
+    t.string "gender"
+    t.string "country"
+    t.string "school_district"
   end
 
   create_table "notes", force: :cascade do |t|

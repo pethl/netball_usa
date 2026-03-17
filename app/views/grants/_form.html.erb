@@ -2,17 +2,15 @@
   <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
     <%= form_with(model: grant) do |form| %>
 
-      <%= form_errors_for(grant) %>
-
       <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
         
-        <div class="mb-2">
-          <%= form.label :name, class: label_class %>
-          <div class="mt-1">
-            <%= form.text_field :name, class: input_class %>
+          <div class="mb-2">
+            <%= form.label :name, "Name*", class: label_class %>
+            <div class="mt-1">
+              <% error_id = grant.errors[:name].any? ? "#{grant.model_name.singular}_name_error" : nil %> <%= form.text_field :name, class: error_class(grant, :name, base: input_class), aria: { invalid: grant.errors[:name].any?, describedby: error_id } %>
+              <%= field_error_for(grant, :name, id: error_id) %>
+            </div>
           </div>
-          <%= field_error_for(grant, :name) %>
-        </div>
 
             <div class="mb-4 flex items-end justify-between w-full gap-4">
        <!-- Apply (checkbox) -->

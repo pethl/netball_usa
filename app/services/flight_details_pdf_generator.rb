@@ -1,6 +1,7 @@
 # app/services/flight_details_pdf_generator.rb
 class FlightDetailsPdfGenerator
-  def initialize
+  def initialize(event_name:)
+    @event_name = event_name
     @attendees = []
   end
 
@@ -12,11 +13,15 @@ class FlightDetailsPdfGenerator
   private
 
   def fetch_attendees
+    return @attendees = Transfer.none unless @event_name.present?
+
+    event = Event.find_by(name: @event_name)
+    return @attendees = Transfer.none unless event
+
     @attendees = Transfer
-      .includes(:person, :event)
-      .joins(:event)
-      .where(events: { name: 'US Open 2025 - Austin' })
-      .where.not(person_id: nil)
+                   .includes(:person, :event)
+                   .where(event_id: event.id)
+                   .where.not(person_id: nil)
   end
 
   def build_pdf
@@ -61,32 +66,24 @@ class FlightDetailsPdfGenerator
 
     if table_data.length > 1
       pdf.table(table_data,
-          header: true,
-          row_colors: ["F8F8F8", "FFFFFF"],
-          cell_style: { size: 8 }) do
-        # Style both header rows
+                header: true,
+                row_colors: ["F8F8F8", "FFFFFF"],
+                cell_style: { size: 8 }) do
         row(0).font_style = :bold
         row(1).font_style = :bold
         row(0).background_color = "E0E0E0"
         row(1).background_color = "EFEFEF"
-
-        # Center the grouped header cells
         row(0).align = :center
 
-        # Column widths: name, role, then the 3+3 detail columns
         columns(0).width = 160 # Name
         columns(1).width = 90  # Role
-        columns(2).width = 20  # spacer column
-        columns(6).width = 20 
-        # Optional: set fixed widths for detail columns
-        # columns(2..4).width = 60  # Arrival Date/Flight/Time
-        # columns(5..7).width = 60  # Departure Date/Flight/Time
+        columns(2).width = 20  # spacer
+        columns(6).width = 20  # spacer
 
-        # Force spacer column to always white, no top/bottom borders
-          columns([2,6]).style do |c|
-            c.background_color = "FFFFFF"
-            c.borders = [:left, :right]  # drop :top and :bottom
-          end
+        columns([2, 6]).style do |c|
+          c.background_color = "FFFFFF"
+          c.borders = [:left, :right]
+        end
       end
     else
       pdf.text "No flight data for this group.", size: 9, style: :italic
@@ -102,9 +99,9 @@ class FlightDetailsPdfGenerator
     remaining = attendees - umpires - scorers
 
     other_groups = remaining
-      .group_by { |t| t.role.presence || "Other" }
-      .sort_by   { |role, _| role.to_s }
-      .to_h
+                    .group_by { |t| t.role.presence || "Other" }
+                    .sort_by { |role, _| role.to_s }
+                    .to_h
 
     ordered = {}
     ordered["Umpires (US + International)"] = umpires.sort_by { |t| sort_name_key(t) }
@@ -119,45 +116,41 @@ class FlightDetailsPdfGenerator
     [t.person&.first_name.to_s, t.person&.last_name.to_s].join(" ")
   end
 
-  # ===== Table (split arrival/departure) =====
-  # Name | Role | Arr Date | Arr Flight | Arr Time | Dep Date | Dep Flight | Dep Time
   def build_group_table(transfers)
     top_header = [
       "Name",
       "Role",
-      "", # spacer column
+      "", # spacer
       { content: "Arrival", colspan: 3, align: :center },
-      "", # spacer column
+      "", # spacer
       { content: "Departure", colspan: 3, align: :center }
     ]
-  
+
     sub_header = [
-      "", "", "",                        # (Name, Role)
+      "", "", "",
       "Date", "Flight", "Time",
-      "",                             # spacer
+      "",
       "Date", "Flight", "Time"
     ]
-  
+
     rows = transfers.map do |t|
       p = t.person
       [
         (p&.try(:full_name).presence || [p&.first_name, p&.last_name].compact.join(" ").presence || "—"),
         (t.role.presence || p&.role.presence || "—"),
-        "", # spacer cell
+        "",
         format_date(t.arrival_time),
         (t.arrival_flight.presence || "—"),
         format_time(t.arrival_time),
-        "", # spacer cell
+        "",
         format_date(t.departure_time),
         (t.departure_flight.presence || "—"),
         format_time(t.departure_time)
       ]
     end
-  
+
     [top_header, sub_header] + rows
   end
-  
-  
 
   def format_date(dt)
     dt.present? ? dt.strftime("%b-%d").upcase : "—"

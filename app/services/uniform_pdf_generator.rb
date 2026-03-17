@@ -1,6 +1,6 @@
-# app/services/uniform_pdf_generator.rb
 class UniformPdfGenerator
-  def initialize
+  def initialize(event_name:)
+    @event_name = event_name
     @attendees = []
   end
 
@@ -12,9 +12,13 @@ class UniformPdfGenerator
   private
 
   def fetch_attendees
+    return @attendees = Transfer.none unless @event_name.present?
+
+    event = Event.find_by(name: @event_name)
+    return @attendees = Transfer.none unless event
+
     @attendees = Transfer.includes(:person, :event)
-                         .joins(:event)
-                         .where(events: { name: 'US Open 2025 - Austin' })
+                         .where(event_id: event.id)
                          .where.not(people: { id: nil })
   end
 
@@ -58,7 +62,7 @@ class UniformPdfGenerator
         row(0).font_style = :bold
         row(0).background_color = "DDDDDD"
         columns(1).align = :right
-        row(-1).background_color = "DDDDDD" # highlight total row
+        row(-1).background_color = "DDDDDD"
         row(-1).font_style = :bold
       end
     end

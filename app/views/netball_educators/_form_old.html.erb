@@ -14,7 +14,6 @@
         <div class="mt-1">
           <%= form.text_field :first_name, class: input_class %>
         </div>
-         <%= field_error_for(netball_educator, :first_name) %>
       </div>
 
       <div class="mb-6">
@@ -29,50 +28,30 @@
         <div class="mt-1">
           <%= form.text_field :email, class: input_class %>
         </div>
-
-
-      </div> <!-- Gender -->
-      <div class="mb-6">
-        <%= form.label :gender, "Gender", class: label_class %>
-        <div class="mt-1">
-          <%= form.select :gender,
-            options_for_select(gender, selected: netball_educator.title),
-            { prompt: true },
-            class: input_class %>
-        </div>
       </div>
 
       <div class="mb-6">
-        <%= form.label :phone, "Cell", class: label_class %>
+        <%= form.label :phone, "Phone (include area code)", class: label_class %>
         <div class="mt-1">
           <%= form.text_field :phone, class: input_class %>
         </div>
       </div>
 
       <div class="mb-6">
-        <%= form.label :title, "Title*", class: label_class %>
+        <%= form.label :title, "Title", class: label_class %>
         <div class="mt-1">
-          <%= form.select :title,
-            options_for_select(educator_title, selected: netball_educator.title),
-            { prompt: true },
-            class: input_class %>
+          <%= form.text_field :title, class: input_class %>
         </div>
       </div>
 
       <div class="mb-6">
-        <%= form.label :school_name, kidokinetics?(netball_educator) ? "Franchise Name*" : "School/Organization Name*", class: label_class %>
+        <%= form.label :school_name, kidokinetics?(netball_educator) ? "Franchise Name*" : "School Name*", class: label_class %>
+
+       
         <div class="mt-1">
           <%= form.text_field :school_name, class: input_class %>
         </div>
       </div>
-
-      <div class="mb-6">
-        <%= form.label :school_district, "School District (if relevant)", class: label_class %>
-        <div class="mt-1">
-          <%= form.text_field :school_district, class: input_class %>
-        </div>
-      </div>
-
 
       <div class="mb-6">
        <%= form.label :address, kidokinetics?(netball_educator) ? "Franchise Address" : "School Address", class: label_class %>
@@ -103,19 +82,17 @@
         </div>
       </div>
 
-       <div class="mb-6">
-        <%= form.label :country, "Country", class: label_class %>
+      <div class="mb-6">
+       <%= form.label :website, kidokinetics?(netball_educator) ? "Franchise Website" : "School Website", class: label_class %>
+
         <div class="mt-1">
-          <%= form.text_field :country, class: input_class %>
+          <%= form.text_field :website, class: input_class %>
         </div>
       </div>
 
-
-    
-
     <% unless kidokinetics?(netball_educator) %>
       <div class="mb-6">
-        <%= form.label :level, "School Level", class: label_class %>
+        <%= form.label :level, "Level*", class: label_class %>
         <div class="mt-1">
           <%= form.select :level, options_for_select(educator_level, selected: netball_educator.level), { prompt: true }, class: input_class %>
         </div>
@@ -123,15 +100,26 @@
     <% end %>
 
  <% unless kidokinetics?(netball_educator) %>
-     
       <div class="mb-6">
-        <%= form.label :feedback, "Feedback and More Information?", class: label_class %>
+        <%= form.label :educator_notes, "What would you like more information on?", class: label_class %>
+        <div class="mt-1">
+          <%= form.text_area :educator_notes, class: input_class %>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :feedback, "Quote/Feedback on your session", class: label_class %>
         <div class="mt-1">
           <%= form.text_area :feedback, class: input_class %>
         </div>
       </div>
 
-     
+      <div class="mb-6">
+        <%= form.label :authorize, "Do you authorize us to use feedback on social media?", class: label_class %>
+        <div class="mt-1">
+          <%= form.check_box :authorize, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-2" %>
+        </div>
+      </div>
       <% end %>
 
      <!-- FIELDS NOT TO BE SHOWN TO GENERAL PUBLIC IN FORM -->

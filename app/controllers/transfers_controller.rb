@@ -18,7 +18,7 @@ class TransfersController < ApplicationController
                 .order('people.first_name ASC')
       else
         Transfer.joins(:event, :person)
-                .where(events: { name: 'US Open 2025 - Austin' })
+                .where(events: { name: 'The 2026 U.S. Open Netball Championships' })
                 .order('people.first_name ASC')
       end
   
@@ -31,39 +31,35 @@ class TransfersController < ApplicationController
   
 
   def inbound_pickups
-    @event_name = 'US Open 2025 - Austin'
-    event_id = Event.find_by(name: @event_name)&.id
-  
-    @transfers = Transfer
-                   .includes(:person)
-                   .where(event_id: event_id)
-                   .where(arrival_airport_transport_request: "Yes - Requesting transport")
-                   .order(:arrival_time)
-  
-        @transfers_by_date = @transfers.group_by do |t|
-        t.arrival_time&.in_time_zone&.to_date   # => Date or nil
-      end
-  end
+  event_name = params[:event_name].presence || latest_event_name
+  event = Event.find_by(name: event_name)
+  @event_name = event_name
+
+  scope = Transfer.includes(:person)
+  scope = event ? scope.where(event_id: event.id) : scope.none
+
+  @transfers = scope
+               .where(arrival_airport_transport_request: "Yes - Requesting transport")
+               .order(:arrival_time)
+
+  @transfers_by_date = @transfers.group_by { |t| t.arrival_time&.in_time_zone&.to_date }
+end
   
   def outbound_pickups
-    @event_name = 'US Open 2025 - Austin'
-    event = Event.find_by(name: @event_name)
-  
-    scope = Transfer.includes(:person)
-    scope = event ? scope.where(event_id: event.id) : scope.none
-  
-    @transfers = scope
-                   .where(departure_airport_transport_request: "Yes - Requesting transport")
-                   .order(:departure_time)
-  
-    grouped = @transfers.group_by do |t|
-      t.departure_time&.in_time_zone&.to_date || :no_departure_time
-    end
-  
-    @ordered_transfers_by_date = grouped.sort_by do |key, _|
-      key == :no_departure_time ? Date.new(9999, 12, 31) : key
-    end
-  end
+  event_name = params[:event_name].presence || latest_event_name
+  event = Event.find_by(name: event_name)
+  @event_name = event_name
+
+  scope = Transfer.includes(:person)
+  scope = event ? scope.where(event_id: event.id) : scope.none
+
+  @transfers = scope
+               .where(departure_airport_transport_request: "Yes - Requesting transport")
+               .order(:departure_time)
+
+  grouped = @transfers.group_by { |t| t.departure_time&.in_time_zone&.to_date || :no_departure_time }
+  @ordered_transfers_by_date = grouped.sort_by { |key, _| key == :no_departure_time ? Date.new(9999,12,31) : key }
+end
   
   
   
@@ -82,7 +78,7 @@ class TransfersController < ApplicationController
   def edit
     @events = Event.where(event_type: "US Open").where("date >= ?", Date.today.beginning_of_month).ordered
     @people = Person.active.ordered
-    @sonya_message = SampleWord.find_by(category: "US Open 2025 Austin")&.desc
+    @sonya_message = SampleWord.find_by(category: "The 2026 U.S. Open Netball Championships")&.desc
 
   end
 
@@ -125,86 +121,98 @@ class TransfersController < ApplicationController
     redirect_to transfers_url, notice: "Transfer was successfully destroyed.", status: :see_other
   end
   
-  def download_transfers_in_sheet_pdf
-    respond_to do |format|
-      format.pdf do
-        begin
-          pdf_data = TransferPdfGenerator.new.generate
-          send_data pdf_data, filename: 'transfer_sheet.pdf', type: 'application/pdf', disposition: 'inline'
-        rescue => e
-          Rails.logger.error("PDF generation failed: #{e.message}")
-          flash[:error] = "There was an error generating the PDF. Please alert tech support at techsupport@netballamerica.com."
-          redirect_to inbound_pickups_transfers_path
-        end
+def download_transfers_in_sheet_pdf
+  respond_to do |format|
+    format.pdf do
+      begin
+        event_name = params[:event_name].presence || latest_event_name
+        event = Event.find_by(name: event_name)
+
+        start_date = (event&.date || Date.today.beginning_of_year).to_date
+
+        pdf_data = ::TransferPdfGenerator.new(start_date: start_date, event_name: event_name).generate
+        send_data pdf_data, filename: 'transfer_sheet.pdf', type: 'application/pdf', disposition: 'inline'
+      rescue => e
+        Rails.logger.error("PDF generation failed: #{e.message}")
+        flash[:error] = "There was an error generating the PDF. Please alert tech support."
+        redirect_to inbound_pickups_transfers_path
       end
     end
   end
+end
+
+
   
   def download_transfers_out_sheet_pdf
-    respond_to do |format|
-      format.pdf do
-        begin
-          pdf_data = ::DeparturePdfGenerator.new(start_date: Date.parse(params[:value])).generate
-          send_data pdf_data, filename: 'transfer_sheet.pdf', type: 'application/pdf', disposition: 'inline'
-        rescue => e
-          Rails.logger.error("PDF generation failed: #{e.message}")
-          flash[:error] = "There was an error generating the PDF. Please alert tech support at techsupport@netballamerica.com."
-          redirect_to outbound_pickups_transfers_path
-        end
-      end
-    end
-  end
+  event_name = params[:event_name].presence || latest_event_name
+  start_date = params[:value].presence || Date.today.beginning_of_year
 
-  def download_uniforms_pdf
-    respond_to do |format|
-      format.pdf do
-        begin
-          pdf_data = UniformPdfGenerator.new.generate
-          send_data pdf_data, filename: 'uniforms_and_tshirts.pdf', type: 'application/pdf', disposition: 'inline'
-        rescue => e
-          Rails.logger.error("PDF generation failed: #{e.message}")
-          flash[:error] = "There was an error generating the Uniform PDF. Please alert tech support."
-          redirect_to transfers_path
-        end
+  respond_to do |format|
+    format.pdf do
+      begin
+        pdf_data = ::DeparturePdfGenerator.new(start_date: Date.parse(start_date), event_name: event_name).generate
+        send_data pdf_data, filename: 'transfer_sheet.pdf', type: 'application/pdf', disposition: 'inline'
+      rescue => e
+        Rails.logger.error("PDF generation failed: #{e.message}")
+        flash[:error] = "There was an error generating the PDF. Please alert tech support."
+        redirect_to outbound_pickups_transfers_path
       end
     end
   end
+end
 
-  def download_attendee_list_pdf
-    event_name = params[:event_name].presence || latest_event_name
-  
-    respond_to do |format|
-      format.pdf do
-        begin
-          pdf_data = AttendeeListPdfGenerator.new(event_name: event_name).generate
-          send_data pdf_data, filename: 'attendee_list_by_role.pdf', type: 'application/pdf', disposition: 'inline'
-        rescue => e
-          Rails.logger.error("Attendee List PDF generation failed: #{e.message}")
-          flash[:error] = "There was an error generating the attendee list PDF. Please contact support."
-          redirect_to transfers_path
-        end
+ def download_uniforms_pdf
+  respond_to do |format|
+    format.pdf do
+      begin
+        event_name = params[:event_name].presence || latest_event_name
+        pdf_data = UniformPdfGenerator.new(event_name: event_name).generate
+        send_data pdf_data, filename: 'uniforms_and_tshirts.pdf', type: 'application/pdf', disposition: 'inline'
+      rescue => e
+        Rails.logger.error("PDF generation failed: #{e.message}")
+        flash[:error] = "There was an error generating the Uniform PDF. Please alert tech support."
+        redirect_to transfers_path
       end
     end
   end
+end
+
+ def download_attendee_list_pdf
+  event_name = params[:event_name].presence || latest_event_name
+  respond_to do |format|
+    format.pdf do
+      begin
+        pdf_data = AttendeeListPdfGenerator.new(event_name: event_name).generate
+        send_data pdf_data, filename: 'attendee_list_by_role.pdf', type: 'application/pdf', disposition: 'inline'
+      rescue => e
+        Rails.logger.error("Attendee List PDF generation failed: #{e.message}")
+        flash[:error] = "There was an error generating the attendee list PDF. Please contact support."
+        redirect_to transfers_path
+      end
+    end
+  end
+end
 
   # app/controllers/transfers_controller.rb
-  def download_flights_pdf
-    respond_to do |format|
-      format.pdf do
-        begin
-          pdf_data = FlightDetailsPdfGenerator.new.generate
-          send_data pdf_data,
-                    filename: 'flight_details.pdf',
-                    type: 'application/pdf',
-                    disposition: 'inline'
-        rescue => e
-          Rails.logger.error("Flight Details PDF generation failed: #{e.message}")
-          flash[:error] = "There was an error generating the Flight Details PDF. Please alert tech support."
-          redirect_to transfers_path
-        end
+ def download_flights_pdf
+  respond_to do |format|
+    format.pdf do
+      begin
+        event_name = params[:event_name].presence || latest_event_name
+        start_date = params[:value].presence || Date.today.beginning_of_year
+        pdf_data = FlightDetailsPdfGenerator.new(event_name: event_name).generate
+        send_data pdf_data,
+                  filename: 'flight_details.pdf',
+                  type: 'application/pdf',
+                  disposition: 'inline'
+      rescue => e
+        Rails.logger.error("Flight Details PDF generation failed: #{e.message}")
+        flash[:error] = "There was an error generating the Flight Details PDF. Please alert tech support."
+        redirect_to transfers_path
       end
     end
-  end  
+  end
+end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -228,7 +236,7 @@ class TransfersController < ApplicationController
     end
 
     def latest_event_name
-      'US Open 2025 - Austin'
+      'The 2026 U.S. Open Netball Championships'
     end
 end
 

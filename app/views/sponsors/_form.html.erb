@@ -1,33 +1,42 @@
 
 <%= form_with(model: sponsor) do |form| %>
- 
-    <%= form_errors_for(sponsor) %>
 
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
 
-    <div class="mb-2 md:col-span-2 sm:mt-4 md:mt-0">
-      <%= form.label :company_name, class: label_class%>
-        <div class="mt-1">
-          <%= form.text_field :company_name, class: form_input_class  %>
-        </div>
-           <%= field_error_for(sponsor, :company_name) %>
+     <div class="mb-2 md:col-span-2 sm:mt-4 md:mt-0">
+      <%= form.label :company_name, class: label_class %>
+      <div class="mt-1">
+        <% error_id = sponsor.errors[:company_name].any? ? "#{sponsor.model_name.singular}_company_name_error" : nil %>
+        <%= form.text_field :company_name,
+            class: error_class(sponsor, :company_name, base: form_input_class),
+            aria: { invalid: sponsor.errors[:company_name].any?, describedby: error_id } %>
+      </div>
+      <%= field_error_for(sponsor, :company_name, id: error_id) %>
     </div>
-    
-    <div class="mb-2">
-      <%= form.label :industry, class: label_class %>
-        <div class="mt-1">
-         <%= form.select :industry, options_for_select(sponsor_industry, :selected => sponsor.industry),{:prompt=>true}, class: form_input_class %>  
-        </div> 
-         <%= field_error_for(sponsor, :industry) %>
-    </div>
-   
-    <div class="mb-2">
-      <%= form.label :sponsor_category, "Category", class: label_class%>
-       <div class="mt-1">
-         <%= form.select :sponsor_category, options_for_select(sponsor_category, :selected => sponsor.sponsor_category),{:prompt=>true}, class: form_input_class %>
-       </div> 
-       <%= field_error_for(sponsor, :sponsor_category) %>
 
+    
+     <div class="mb-2">
+      <%= form.label :industry, class: label_class %>
+      <div class="mt-1">
+        <% error_id = sponsor.errors[:industry].any? ? "#{sponsor.model_name.singular}_industry_error" : nil %>
+        <%= form.select :industry, options_for_select(sponsor_industry, selected: sponsor.industry),
+            { prompt: true },
+            class: error_class(sponsor, :industry, base: form_input_class),
+            aria: { invalid: sponsor.errors[:industry].any?, describedby: error_id } %>
+      </div>
+      <%= field_error_for(sponsor, :industry, id: error_id) %>
+    </div>
+
+    <div class="mb-2">
+      <%= form.label :sponsor_category, "Category", class: label_class %>
+      <div class="mt-1">
+        <% error_id = sponsor.errors[:sponsor_category].any? ? "#{sponsor.model_name.singular}_sponsor_category_error" : nil %>
+        <%= form.select :sponsor_category, options_for_select(sponsor_category, selected: sponsor.sponsor_category),
+            { prompt: true },
+            class: error_class(sponsor, :sponsor_category, base: form_input_class),
+            aria: { invalid: sponsor.errors[:sponsor_category].any?, describedby: error_id } %>
+      </div>
+      <%= field_error_for(sponsor, :sponsor_category, id: error_id) %>
     </div>
 
     <!-- Developer Note: This field was renamed to social media on request from sonya 25 mar 25 -->
