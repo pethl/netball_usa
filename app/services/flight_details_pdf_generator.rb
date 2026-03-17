@@ -32,7 +32,8 @@ class FlightDetailsPdfGenerator
     safe_image(pdf, "#{Rails.root}/app/assets/images/Netball_America_Logo.png",    at: [0,   737], width: 80)
 
     pdf.move_down 20
-    pdf.text "Flight Details", size: 14, style: :bold, align: :center
+     title_event = @event_name.presence || "Unknown Event"
+    pdf.text "Flight Details \n #{title_event}", size: 14, style: :bold, align: :center
     pdf.text "Print Date: #{Date.today.strftime('%b %d, %Y')}", size: 6, align: :center
     pdf.move_down 16
 

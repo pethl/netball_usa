@@ -35,7 +35,8 @@ class UniformPdfGenerator
     pdf.move_down 60
 
     # Title
-    pdf.text "Uniforms & T-Shirts Sheet", size: 16, style: :bold, align: :center
+    title_event = @event_name.presence || "Unknown Event"
+    pdf.text "Uniforms & T-Shirts Sheet \n #{title_event}", size: 16, style: :bold, align: :center
     pdf.move_down 6
     pdf.text "Print Date: #{Date.today.strftime('%b %d, %Y')}", size: 8, align: :center
     pdf.move_down 16

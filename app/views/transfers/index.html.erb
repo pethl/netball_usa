@@ -42,8 +42,13 @@
 
   </div>
 
- 
+  <% if @event.present? %>
+      <h2 class="text-sm text-gray-600 ml-2">Selected event: <span class="font-semibold"><%= @event.name %></span></h2>
+    <% elsif @event_name.present? %>
+      <h2 class="text-sm text-gray-600">Selected event: <%= @event_name %></h2>
+  <% end %>
 
+ 
   <div id="transfers">
   <div class="relative overflow-x-auto ml-2">
       <table class="table-auto w-full text-left rtl:text-right">
