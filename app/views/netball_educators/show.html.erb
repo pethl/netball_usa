@@ -1,68 +1,46 @@
 <% if user_signed_in? %>
- <% content_for :page_title, page_title_for(@netball_educator) %>
-
-  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-<% end %>
-
- <% unless user_signed_in? %>
-   <br>
-   <p class="text-center text-xl text-blue-900">Educator's Sign Up</p><br>
-  <% end %>
-
-<%= render @netball_educator %>
-
-<br>
-<% if user_signed_in? %>
-  <div class="space-y-2">
-
+  <% content_for :page_title, page_title_for(@netball_educator) %>
+  <div class="sm:mx-auto sm:w-full sm:max-w-5xl">
+    <div class="bg-white py-2 px-2 sm:px-6">
+      <%= render "netball_educator_admin", netball_educator: @netball_educator %>
+    </div>
+  </div>
+  <br>
+  <div class="space-y-2 ">
+    <!-- Align all links/actions with the main content -->
+    <div class="space-y-2 bg-white px-2 sm:px-6 mt-2 rounded-b-lg shadow">
+  
     <!-- Navigation links -->
-    <%= link_to "<< All Educators",
-      netball_educators_path,
-      class: block_link_class %>
-
-    <%= link_to "<< All Kidokinetics",
-      kidos_netball_educators_path,
-      class: block_link_class %>
-
-    <%= link_to "<< All Talentlockr",
-      talentlockr_netball_educators_path,
-      class: block_link_class %>
-
-    <%= link_to "<< All PE Directors",
-      pe_directors_netball_educators_path,
-      class: block_link_class %>
-
+    <%= link_to "<< All Educators", netball_educators_path, class: block_link_class %>
+    <%= link_to "<< All Kidokinetics", kidos_netball_educators_path, class: block_link_class %>
+    <%= link_to "<< All Talentlockr", talentlockr_netball_educators_path, class: block_link_class %>
+    <%= link_to "<< All PE Directors", pe_directors_netball_educators_path, class: block_link_class %>
     <hr class="my-2">
 
-    <!-- General actions (all signed-in users) -->
+    <!-- General actions -->
     <div class="my-2">
-      <%= button_to "Edit this record",
-        edit_netball_educator_path(@netball_educator),
-        method: :get,
-        class: form_button_class %>
+      <%= button_to "Edit this record", edit_netball_educator_path(@netball_educator), method: :get, class: form_button_class %>
     </div>
 
     <!-- Admin-only actions -->
     <% if current_user.admin? %>
       <div class="my-2">
-        <%= button_to "MGMT ADMIN ONLY: Delete this record",
-          @netball_educator,
-          method: :delete,
-          form: { data: { turbo_confirm: "Are you sure?" } },
-          class: red_link_class %>
+        <%= button_to "MGMT ADMIN ONLY: Delete this record", @netball_educator, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class: red_link_class %>
       </div>
     <% end %>
-
-   <hr class="my-2">
-<br>
+    <hr class="my-2">
+    <br>
     <div class="mt-4 text-left">
-      <%= link_to "Add New Educator",
-        new_netball_educator_path,
-        class: form_button_class %>
+      <%= link_to "Add New Educator", new_netball_educator_path, class: form_button_class %>
     </div>
-
+  </div>
+    </div>
+<% else %>
+  <br>
+  <p class="text-center text-xl text-blue-900">Educator's Sign Up</p><br>
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <%= render "netball_educator", netball_educator: @netball_educator %>
+    </div>
   </div>
 <% end %>
-
-

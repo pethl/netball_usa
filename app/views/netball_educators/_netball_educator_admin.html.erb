@@ -1,0 +1,177 @@
+<div class="sm:mx-auto sm:w-full sm:max-w-5xl">
+  <div class="bg-white py-2 px-2 sm:px-6">
+
+    <!-- Main educator info -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-3">
+
+      <!-- First & Last Name -->
+      <div class="mb-6"><!-- First Name* -->
+        <label class="<%= label_class %>">First Name*</label>
+        <div class="mt-1"><%= netball_educator.first_name.presence || "—" %></div>
+      </div>
+      <div class="mb-6"><!-- Last Name* -->
+        <label class="<%= label_class %>">Last Name*</label>
+        <div class="mt-1"><%= netball_educator.last_name.presence || "—" %></div>
+      </div>
+
+      <!-- Row break for md+ screens -->
+      <div class="hidden md:block md:col-span-3"></div>
+
+      <!-- Email -->
+      <div class="mb-6">
+        <label class="<%= label_class %>">Email*</label>
+        <div class="mt-1"><%= netball_educator.email.presence || "—" %></div>
+      </div>
+
+      <!-- Gender -->
+      <div class="mb-6">
+        <label class="<%= label_class %>">Gender</label>
+        <div class="mt-1"><%= netball_educator.gender.presence || "—" %></div>
+      </div>
+
+      <!-- Cell -->
+      <div class="mb-6">
+        <label class="<%= label_class %>">Cell</label>
+        <div class="mt-1"><%= netball_educator.phone.presence || "—" %></div>
+      </div>
+
+      <!-- Title -->
+      <div class="mb-6">
+        <label class="<%= label_class %>">Title*</label>
+        <div class="mt-1"><%= netball_educator.title.presence || "—" %></div>
+      </div>
+
+      <div class="mb-6"><!-- School Name -->
+        <label class="<%= label_class %>">
+          <%= kidokinetics?(netball_educator) ? "Franchise Name*" : "School/Organization Name*" %>
+        </label>
+        <div class="mt-1"><%= netball_educator.school_name.presence || "—" %></div>
+      </div>
+
+      <div class="mb-6"><!-- School District -->
+        <label class="<%= label_class %>">School District (if relevant)</label>
+        <div class="mt-1"><%= netball_educator.school_district.presence || "—" %></div>
+      </div>
+
+      <div class="mb-6">
+        <label class="<%= label_class %>">
+          <%= kidokinetics?(netball_educator) ? "Franchise Address" : "School Address" %>
+        </label>
+        <div class="mt-1"><%= netball_educator.address.presence || "—" %></div>
+      </div>
+
+      <div class="mb-6"><!-- City* -->
+        <label class="<%= label_class %>">City*</label>
+        <div class="mt-1"><%= netball_educator.city.presence || "—" %></div>
+      </div>
+
+      <div class="mb-6"><!-- State* -->
+        <label class="<%= label_class %>">State*</label>
+        <div class="mt-1"><%= netball_educator.state.presence || "—" %></div>
+      </div>
+
+      <div class="mb-6"><!-- Zip Code -->
+        <label class="<%= label_class %>">Zip Code</label>
+        <div class="mt-1"><%= netball_educator.zip.presence || "—" %></div>
+      </div>
+
+      <div class="mb-6"><!-- Country -->
+        <label class="<%= label_class %>">Country</label>
+        <div class="mt-1"><%= netball_educator.country.presence || "—" %></div>
+      </div>
+
+      <div class="mb-6"><!-- Website -->
+        <label class="<%= label_class %>">
+          <%= kidokinetics?(netball_educator) ? "Franchise Website" : "School Website" %>
+        </label>
+        <div class="mt-1"><%= netball_educator.website.presence || "—" %></div>
+      </div>
+
+      <% unless kidokinetics?(netball_educator) %>
+        <div class="mb-6">
+          <label class="<%= label_class %>">School Level</label>
+          <div class="mt-1"><%= netball_educator.level.presence || "—" %></div>
+        </div>
+        <div class="mb-2 col-span-2">
+          <label class="<%= label_class %>">Feedback and More Information?</label>
+          <div class="mt-1"><%= simple_format(netball_educator.feedback.presence || "—") %></div>
+        </div>
+      <% end %>
+
+    </div>
+
+    <!-- ADMIN SECTION -->
+    <% unless current_user.nil? %>
+      <h3 class="text-lg font-bold text-left text-gray-700 mb-2">Admin Team Only</h3>
+      <div class="border-2 border-blue-900 bg-blue-50 rounded-md p-4 mb-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4">
+          <div class="flex flex-col flex-1">
+            <label class="<%= label_class %>">Educator Category</label>
+            <div class="mt-1"><%= netball_educator.role.presence || "—" %></div>
+          </div>
+          <div class="mb-4">
+            <label class="<%= label_class %>">Allocated To</label>
+            <div class="mt-1">
+              <% if netball_educator.user %>
+                <%= netball_educator.user.full_name %>
+              <% else %>
+                —
+              <% end %>
+            </div>
+          </div>
+          <div class="mb-4 col-span-2">
+            <label class="<%= label_class %>">Management Notes</label>
+            <div class="mt-1"><%= simple_format(netball_educator.mgmt_notes.presence || "—") %></div>
+          </div>
+          <% if netball_educator.persisted? %>
+            <div class="field">
+              <label>Registered at Event? (scroll to view full list)</label><br>
+              <div class="mt-1">
+                <% if netball_educator.events.any? %>
+                  <% netball_educator.events.each do |event| %>
+                    <div><%= event.event_date_state_type_name %></div>
+                  <% end %>
+                <% else %>
+                  —
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <!-- END ADMIN SECTION -->
+
+    <!-- Equipment Section -->
+    <div class="mx-2">
+      <% if current_user.present? && netball_educator.persisted? %>
+        <hr class="my-4 border-gray-300">
+        <h2 class="text-lg font-semibold text-gray-700 mb-2">Equipment Sales</h2>
+        <% if netball_educator.equipment.any? %>
+          <ul class="space-y-2 mb-4">
+            <% netball_educator.equipment.each do |equipment| %>
+              <li class="flex justify-between items-center p-2 border rounded bg-gray-50">
+                <div>
+                  <strong><%= equipment.sale_date.to_formatted_s(:usa) if equipment.sale_date %></strong> –
+                  <%= equipment.items_purchased %> –
+                  <%= number_to_currency(equipment.purchase_amount) %>
+                </div>
+                <div class="flex gap-2">
+                  <%= link_to "Edit", edit_equipment_path(equipment), class: "text-blue-600 hover:underline text-sm" %>
+                  <%= link_to "Delete", equipment_path(equipment), method: :delete, data: { confirm: "Are you sure?" }, class: "text-red-600 hover:underline text-sm" %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="text-gray-500 text-sm mb-4">No equipment sales recorded yet.</p>
+        <% end %>
+        <%= link_to "➕ Add New Equipment Sale", new_equipment_path(netball_educator_id: netball_educator.id), class: "inline-block text-sm text-blue-800 hover:underline" %>
+      <% elsif current_user.present? %>
+        <div class="mt-6">
+          <p class="text-sm text-gray-500">Save the educator record, then link to event or add equipment sales.</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

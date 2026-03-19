@@ -4,35 +4,43 @@
     <%= form_with(model: netball_educator, data: { turbo: false }) do |form| %>
     <%= form.hidden_field :role, value: netball_educator.role.presence || (params[:kidokinetics] == "true" ? "Kidokinetics" : nil) %>
 
+    <!-- Your normal educator fields -->
 
-      <%= form_errors_for(netball_educator) %>
-
-      <!-- Your normal educator fields -->
-
-      <div class="mb-6">
+      <div class="mb-6"><!-- First Name* -->
         <%= form.label :first_name, "First Name*", class: label_class %>
         <div class="mt-1">
-          <%= form.text_field :first_name, class: input_class %>
+          <% error_id = netball_educator.errors[:first_name].any? ? "#{netball_educator.model_name.singular}_first_name_error" : nil %>
+          <%= form.text_field :first_name,
+              class: error_class(netball_educator, :first_name, base: input_class),
+              aria: { invalid: netball_educator.errors[:first_name].any?, describedby: error_id } %>
         </div>
-         <%= field_error_for(netball_educator, :first_name) %>
+        <%= field_error_for(netball_educator, :first_name, id: error_id) %>
       </div>
 
-      <div class="mb-6">
+      <div class="mb-6"><!-- Last Name* -->
         <%= form.label :last_name, "Last Name*", class: label_class %>
         <div class="mt-1">
-          <%= form.text_field :last_name, class: input_class %>
+          <% error_id = netball_educator.errors[:last_name].any? ? "#{netball_educator.model_name.singular}_last_name_error" : nil %>
+          <%= form.text_field :last_name,
+              class: error_class(netball_educator, :last_name, base: input_class),
+              aria: { invalid: netball_educator.errors[:last_name].any?, describedby: error_id } %>
         </div>
+        <%= field_error_for(netball_educator, :last_name, id: error_id) %>
       </div>
 
-      <div class="mb-6">
+      <div class="mb-6"><!-- Email *-->
         <%= form.label :email, "Email*", class: label_class %>
         <div class="mt-1">
-          <%= form.text_field :email, class: input_class %>
+          <% error_id = netball_educator.errors[:email].any? ? "#{netball_educator.model_name.singular}_email_error" : nil %>
+          <%= form.email_field :email,
+              class: error_class(netball_educator, :email, base: input_class),
+              aria: { invalid: netball_educator.errors[:email].any?, describedby: error_id } %>
         </div>
+        <%= field_error_for(netball_educator, :email, id: error_id) %>
+      </div>
 
-
-      </div> <!-- Gender -->
-      <div class="mb-6">
+      <!-- Gender -->
+        <div class="mb-6">
         <%= form.label :gender, "Gender", class: label_class %>
         <div class="mt-1">
           <%= form.select :gender,
@@ -42,31 +50,41 @@
         </div>
       </div>
 
-      <div class="mb-6">
+      <div class="mb-6"><!-- Cell -->
         <%= form.label :phone, "Cell", class: label_class %>
         <div class="mt-1">
           <%= form.text_field :phone, class: input_class %>
         </div>
       </div>
+      
 
-      <div class="mb-6">
+     <div class="mb-6"><!-- Title* -->
         <%= form.label :title, "Title*", class: label_class %>
         <div class="mt-1">
+          <% error_id = netball_educator.errors[:title].any? ? "#{netball_educator.model_name.singular}_title_error" : nil %>
           <%= form.select :title,
             options_for_select(educator_title, selected: netball_educator.title),
             { prompt: true },
-            class: input_class %>
+            class: error_class(netball_educator, :title, base: input_class),
+            aria: { invalid: netball_educator.errors[:title].any?, describedby: error_id } %>
         </div>
+        <%= field_error_for(netball_educator, :title, id: error_id) %>
       </div>
 
-      <div class="mb-6">
-        <%= form.label :school_name, kidokinetics?(netball_educator) ? "Franchise Name*" : "School/Organization Name*", class: label_class %>
-        <div class="mt-1">
-          <%= form.text_field :school_name, class: input_class %>
-        </div>
-      </div>
 
-      <div class="mb-6">
+     <div class="mb-6"><!-- School Name -->
+      <%= form.label :school_name, kidokinetics?(netball_educator) ? "Franchise Name*" : "School/Organization Name*", class: label_class %>
+      <div class="mt-1">
+        <% error_id = netball_educator.errors[:school_name].any? ? "#{netball_educator.model_name.singular}_school_name_error" : nil %>
+        <%= form.text_field :school_name,
+            class: error_class(netball_educator, :school_name, base: input_class),
+            aria: { invalid: netball_educator.errors[:school_name].any?, describedby: error_id } %>
+      </div>
+      <%= field_error_for(netball_educator, :school_name, id: error_id) %>
+    </div>
+
+
+      <div class="mb-6"><!-- School District -->
         <%= form.label :school_district, "School District (if relevant)", class: label_class %>
         <div class="mt-1">
           <%= form.text_field :school_district, class: input_class %>
@@ -74,7 +92,7 @@
       </div>
 
 
-      <div class="mb-6">
+      <div class="mb-6"> <!-- Address -->
        <%= form.label :address, kidokinetics?(netball_educator) ? "Franchise Address" : "School Address", class: label_class %>
 
         <div class="mt-1">
@@ -82,36 +100,43 @@
         </div>
       </div>
 
-      <div class="mb-6">
+     <div class="mb-6"><!-- City* -->
         <%= form.label :city, "City*", class: label_class %>
         <div class="mt-1">
-          <%= form.text_field :city, class: input_class %>
+          <% error_id = netball_educator.errors[:city].any? ? "#{netball_educator.model_name.singular}_city_error" : nil %>
+          <%= form.text_field :city, class: error_class(netball_educator, :city, base: input_class), aria: { invalid: netball_educator.errors[:city].any?, describedby: error_id } %>
         </div>
+        <%= field_error_for(netball_educator, :city, id: error_id) %>
       </div>
 
-      <div class="mb-6">
+
+     <div class="mb-6"><!-- State* -->
         <%= form.label :state, "State*", class: label_class %>
         <div class="mt-1">
-          <%= form.select :state, options_for_select(us_states, selected: netball_educator.state), { prompt: true }, class: input_class %>
+          <% error_id = netball_educator.errors[:state].any? ? "#{netball_educator.model_name.singular}_state_error" : nil %>
+          <%= form.select :state,
+              options_for_select(us_states, selected: netball_educator.state),
+              { prompt: true },
+              class: error_class(netball_educator, :state, base: input_class),
+              aria: { invalid: netball_educator.errors[:state].any?, describedby: error_id } %>
         </div>
+        <%= field_error_for(netball_educator, :state, id: error_id) %>
       </div>
 
-      <div class="mb-6">
+
+      <div class="mb-6"><!-- Zip -->
         <%= form.label :zip, "Zip Code", class: label_class %>
         <div class="mt-1">
           <%= form.text_field :zip, class: input_class %>
         </div>
       </div>
 
-       <div class="mb-6">
+       <div class="mb-6"><!-- Country -->
         <%= form.label :country, "Country", class: label_class %>
         <div class="mt-1">
           <%= form.text_field :country, class: input_class %>
         </div>
-      </div>
-
-
-    
+      </div>   
 
     <% unless kidokinetics?(netball_educator) %>
       <div class="mb-6">
@@ -131,7 +156,6 @@
         </div>
       </div>
 
-     
       <% end %>
 
      <!-- FIELDS NOT TO BE SHOWN TO GENERAL PUBLIC IN FORM -->

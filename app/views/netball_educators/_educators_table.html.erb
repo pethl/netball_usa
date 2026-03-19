@@ -12,7 +12,7 @@
               <th scope="col" class="px-3 py-3 w-12">View</th>
               <th scope="col" class="px-3 py-3 w-20 text-center">State</th>
               <th scope="col" class="px-3 py-3 w-40">City</th>
-              <th scope="col" class="px-3 py-3 w-64">School/District</th>
+              <th scope="col" class="px-3 py-3 w-64">School Name/District</th>
               <th scope="col" class="px-3 py-3 w-52">Name</th>
 
               <% unless local_assigns[:hide_level] %>
@@ -58,10 +58,7 @@
 
                 <td class="px-3 py-2 truncate">
                   <%= educator.school_name %><br>
-                  <%= link_to educator.website,
-                        educator.website,
-                        target: "_blank",
-                        class: link_class if educator.website.present? %>
+                  <span class="text-sm text-gray-600"><%= educator.school_district %></span>
                 </td>
 
                 <!-- Name links to EDIT (as requested) -->
