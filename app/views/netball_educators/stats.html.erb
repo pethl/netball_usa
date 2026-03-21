@@ -1,0 +1,74 @@
+<!-- app/views/netball_educators/stats.html.erb -->
+<%= content_for(:page_title, "Educators by School District") %>
+
+<!-- app/views/netball_educators/stats.html.erb -->
+<div class="w-2/3 mx-auto py-8">
+ <div class="mb-6 flex items-center justify-between">
+    <h1 class="text-2xl font-semibold">Educators Per School District by State</h1>
+
+    <div class="flex items-center gap-3">
+      <%= form_with url: stats_netball_educators_path, method: :get, local: true, class: "flex items-center gap-2" do %>
+        <label for="state" class="sr-only">State</label>
+        <%= select_tag :state,
+              options_for_select([["All states",""]] + @states_list.map { |s| [s, s] }, @selected_state),
+              id: "state",
+              class: input_class %>
+        <%= submit_tag "Filter", class: form_button_class %>
+      <% end %>
+
+      <%= link_to "Show all", stats_netball_educators_path, class: "text-sm text-blue-600" %>
+    </div>
+  </div>
+
+
+  <% special_bottom = ["USA", "No state"] %>
+  <% normal_states = @by_state.keys.reject { |k| special_bottom.include?(k) }.sort %>
+  <% ordered_states = normal_states + special_bottom.select { |s| @by_state.key?(s) } %>
+
+  <% ordered_states.each do |state| %>
+    <% districts = @by_state[state] %>
+    <div class="mb-8">
+      <h2 class="text-lg font-semibold text-blue-800 mb-3">
+        <%= state %> <span class="text-sm text-gray-600"> - <%= @state_totals[state] %> educators</span>
+      </h2>
+
+      <% missing_label = "Missing school district" %>
+      <% has_real_districts = districts.any? { |d| d[:district] != missing_label } %>
+
+      <% if has_real_districts %>
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-300 bg-white">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">School District</th>
+                <th class="px-4 py-2 text-right text-sm font-medium text-gray-700">Count</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <% districts.each do |d| %>
+                <% missing = d[:district] == missing_label %>
+                <tr class="hover:bg-gray-50">
+                 <td class="px-4 py-2 text-sm <%= 'text-blue-600 font-medium' if missing %>">
+                    <% if missing %>
+                      <%= d[:district] %>
+                    <% else %>
+                      <%= link_to d[:district],
+                            netball_educators_path(state: (state == "No state" ? "" : state), school_district: d[:district]),
+                            class: link_class %>
+                    <% end %>
+                  </td>
+
+                  <td class="px-4 py-2 text-sm text-right <%= 'text-red-600 font-medium' if missing %>">
+                    <%= d[:count] %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% else %>
+        <!-- optional note when only missing districts exist -->
+      <% end %>
+    </div>
+  <% end %>
+</div>

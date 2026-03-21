@@ -10,6 +10,9 @@ class NetballEducator < ApplicationRecord
  
   before_save { email.downcase! }
   before_save :normalize_phone
+
+  # this code sets role to Kidkinetics if the title is set to KIDOS. It does not currently undo if role is changed. mar 26.
+  before_validation :set_role_for_kidos
   
   validates :first_name, presence: true, length: { maximum: 30 }
   validates :last_name, presence: true, length: { maximum: 50 }
@@ -97,6 +100,10 @@ class NetballEducator < ApplicationRecord
   private
  
   def normalize_phone
-      self.phone = Phonelib.parse(phone).full_e164.presence
-    end
+    self.phone = Phonelib.parse(phone).full_e164.presence
+  end
+
+  def set_role_for_kidos
+    self.role = "Kidokinetics" if title == "KIDOS"
+  end
 end

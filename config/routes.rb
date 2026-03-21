@@ -132,6 +132,7 @@ Rails.application.routes.draw do
       get :search
       get :trainers_etc
       get :heat_map
+      get :stats
     end
   end
   

@@ -160,6 +160,48 @@ class NetballEducatorsController < ApplicationController
     redirect_to netball_educators_url, notice: 'Educator was successfully deleted.'
   end
 
+   MISSING_LABEL = "Missing school district"
+
+  def stats
+    # normalize school_district: trim, turn '' into NULL, then coalesce to label
+    normalized_sd_sql = "COALESCE(NULLIF(TRIM(school_district), ''), '#{MISSING_LABEL}')"
+    normalized_state_sql = "COALESCE(TRIM(state), 'No state')"
+
+    counts = NetballEducator
+               .select("#{normalized_state_sql} AS state_key, #{normalized_sd_sql} AS district_key, COUNT(*) AS cnt")
+               .group("state_key", "district_key")
+               .order("state_key", "district_key")
+               .map { |r| [ [r.state_key, r.district_key], r.cnt.to_i ] }
+               .to_h
+
+    @by_state = {}
+    counts.each do |(state, district), count|
+      @by_state[state] ||= []
+      @by_state[state] << { district: district, count: count }
+    end
+
+    @by_state.each do |k, arr|
+      arr.sort_by! { |h| h[:district] == MISSING_LABEL ? "~~~~" : h[:district].downcase }
+    end
+
+    @state_totals = @by_state.transform_values { |arr| arr.sum { |h| h[:count] } }
+
+     @states_list = @by_state.keys.sort.reject { |k| k == "No state" } # for dropdown; adjust as desired
+      if params[:state].present?
+        selected = params[:state]
+        # keep only the selected state if present
+        if @by_state.key?(selected)
+          @by_state = { selected => @by_state[selected] }
+          @state_totals = { selected => @state_totals[selected] }
+        else
+          @by_state = {}
+          @state_totals = {}
+        end
+        @selected_state = selected
+      end
+  end
+
+
   private
 
   def set_netball_educator
@@ -215,33 +257,41 @@ class NetballEducatorsController < ApplicationController
     @users = User.active_educator_users
   end
 
-  def apply_common_filters!
-    @netball_educators = @netball_educators.where(state: params[:state]) if params[:state].present?
-    @netball_educators = @netball_educators.where(city: params[:city]) if params[:city].present?
-  
-    if params[:query].present?
-      q = "%#{params[:query]}%"
-      @netball_educators = @netball_educators.where(
-        "first_name ILIKE :q OR last_name ILIKE :q OR email ILIKE :q",
-        q: q
-      )
-    end
-  
-    if params[:created_at].present?
-      @netball_educators = @netball_educators.where(
-        "DATE(created_at) = ?", params[:created_at]
-      )
-    end
-  
-    @netball_educators = @netball_educators.order(:state, :city, :first_name)
-  
-    @educator_ids_with_participants =
-      EventParticipant
-        .where(netball_educator_id: @netball_educators.pluck(:id))
-        .distinct
-        .pluck(:netball_educator_id)
-        .to_set
+ def apply_common_filters!
+  @netball_educators = @netball_educators.where(state: params[:state]) if params[:state].present?
+  @netball_educators = @netball_educators.where(city: params[:city]) if params[:city].present?
+
+  if params[:school_district].present?
+    sd = params[:school_district].strip
+    # DB-independent:
+    @netball_educators = @netball_educators.where("LOWER(TRIM(school_district)) = ?", sd.downcase)
+
+    # OR, if you're on PostgreSQL you can use ILIKE (simpler):
+    # @netball_educators = @netball_educators.where("TRIM(school_district) ILIKE ?", sd)
   end
+
+  if params[:query].present?
+    q = "%#{params[:query]}%"
+    @netball_educators = @netball_educators.where(
+      "first_name ILIKE :q OR last_name ILIKE :q OR email ILIKE :q OR school_district ILIKE :q",
+      q: q
+    )
+  end
+
+  if params[:created_at].present?
+    @netball_educators = @netball_educators.where("DATE(created_at) = ?", params[:created_at])
+  end
+
+  @netball_educators = @netball_educators.order(:state, :school_district, :city, :first_name)
+
+  @educator_ids_with_participants =
+    EventParticipant
+      .where(netball_educator_id: @netball_educators.pluck(:id))
+      .distinct
+      .pluck(:netball_educator_id)
+      .to_set
+end
+
   
 end 
  
