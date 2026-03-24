@@ -257,25 +257,21 @@ class NetballEducatorsController < ApplicationController
     @users = User.active_educator_users
   end
 
- def apply_common_filters!
+def apply_common_filters!
   @netball_educators = @netball_educators.where(state: params[:state]) if params[:state].present?
   @netball_educators = @netball_educators.where(city: params[:city]) if params[:city].present?
 
-  if params[:school_district].present?
-    sd = params[:school_district].strip
-    # DB-independent:
-    @netball_educators = @netball_educators.where("LOWER(TRIM(school_district)) = ?", sd.downcase)
-
-    # OR, if you're on PostgreSQL you can use ILIKE (simpler):
-    # @netball_educators = @netball_educators.where("TRIM(school_district) ILIKE ?", sd)
+  if params[:query].present?
+    term = "%#{params[:query].to_s.strip}%"
+    @netball_educators = @netball_educators.where(
+      "first_name ILIKE :t OR last_name ILIKE :t OR email ILIKE :t",
+      t: term
+    )
   end
 
-  if params[:query].present?
-    q = "%#{params[:query]}%"
-    @netball_educators = @netball_educators.where(
-      "first_name ILIKE :q OR last_name ILIKE :q OR email ILIKE :q OR school_district ILIKE :q",
-      q: q
-    )
+  if params[:school_district].present?
+    term = "%#{params[:school_district].to_s.strip}%"
+    @netball_educators = @netball_educators.where("TRIM(school_district) ILIKE ?", term)
   end
 
   if params[:created_at].present?
@@ -286,7 +282,7 @@ class NetballEducatorsController < ApplicationController
 
   @educator_ids_with_participants =
     EventParticipant
-      .where(netball_educator_id: @netball_educators.pluck(:id))
+      .where(netball_educator_id: @netball_educators.select(:id))
       .distinct
       .pluck(:netball_educator_id)
       .to_set

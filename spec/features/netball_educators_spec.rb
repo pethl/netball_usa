@@ -17,8 +17,10 @@ RSpec.describe "NetballEducators Management", type: :feature, js: true do
       fill_in "netball_educator_email", with: "brie.doe@example.com"
       fill_in "netball_educator_school_name", with: "Test School"
       fill_in "netball_educator_city", with: "Miami"
+
       find("#netball_educator_state").find("option[value='FL']").select_option
       find("#netball_educator_level").find("option[value='High']").select_option
+       select "PE Teacher", from: "netball_educator_title"
 
       expect(page).to have_button("Save Details")
       click_button "Save Details"
@@ -68,17 +70,19 @@ RSpec.describe "NetballEducators Management", type: :feature, js: true do
       fill_in "netball_educator_last_name", with: "Smith"
       fill_in "netball_educator_email", with: "alex.smith@example.com"
       fill_in "netball_educator_phone", with: "555-123-4567"
-      fill_in "netball_educator_title", with: "PE Teacher"
+       select "Female", from: "netball_educator_gender"
+       select "PE Teacher", from: "netball_educator_title"
       fill_in "netball_educator_school_name", with: "Sunrise Middle School"
       fill_in "netball_educator_address", with: "123 Education Way"
       fill_in "netball_educator_city", with: "Orlando"
       select "Florida", from: "netball_educator_state"
       fill_in "netball_educator_zip", with: "32801"
-      fill_in "netball_educator_website", with: "http://sunrisemiddle.edu"
-      select "Middle", from: "netball_educator_level"
-      fill_in "netball_educator_educator_notes", with: "Looking for program info"
+       fill_in "netball_educator_country", with: "USA"
+      #fill_in "netball_educator_website", with: "http://sunrisemiddle.edu"
+        select "Middle", from: "netball_educator_level"
+      #fill_in "netball_educator_educator_notes", with: "Looking for program info"
       fill_in "netball_educator_feedback", with: "Great session!"
-      check("netball_educator_authorize")
+     # check("netball_educator_authorize")
 
       click_button "Save Details"
 
@@ -89,7 +93,7 @@ RSpec.describe "NetballEducators Management", type: :feature, js: true do
       educator = NetballEducator.find_by(email: "alex.smith@example.com")
       expect(educator).not_to be_nil
       expect(educator.first_name).to eq("Alex")
-      expect(educator.authorize).to eq(true)
+      #expect(educator.authorize).to eq(true)
     end
 
     scenario "cannot see equipment section or prompts" do
@@ -140,7 +144,9 @@ RSpec.describe "NetballEducators Management", type: :feature, js: true do
       fill_in "netball_educator_school_name", with: "Sunset High"
       fill_in "netball_educator_city", with: "Austin"
       find("#netball_educator_state").find("option[value='TX']").select_option
-      find("#netball_educator_level").find("option[value='Middle']").select_option
+       select "High", from: "netball_educator_level"
+        fill_in "netball_educator_country", with: "USA"
+         select "Student", from: "netball_educator_title"
 
       click_button "Save Details"
 

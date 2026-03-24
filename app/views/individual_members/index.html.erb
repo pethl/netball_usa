@@ -1,8 +1,25 @@
 <% content_for(:page_title, "Individual Members (Not linked to a Team)") %>
-
-<div class="my-4">
+<div class="mt-6 mb-4 flex items-center justify-between">
+  <div>
     <%= link_to "Add Individual Member", new_individual_member_path, class: form_button_class %>
+  </div>
+
+  <div class="relative group inline-block">
+    <label class="text-xs invisible h-[20px] leading-none">Export</label>
+    <%= link_to "Export ALL Individual Members To Excel >",
+        individual_members_path(format: "xlsx",
+                                state: params[:state],
+                                city: params[:city],
+                                created_at: params[:created_at],
+                                club_id: params[:club_id]),
+        class: "border border-blue-900 font-bold text-blue-900 text-sm px-3 py-2 rounded hover:bg-blue-100 inline-block whitespace-nowrap" %>
+    <div class="absolute bottom-full mb-1 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
+      Basic data export
+    </div>
+  </div>
 </div>
+
+
 <% if @individual_members.any? %>
 
 <div class="relative overflow-x-auto">

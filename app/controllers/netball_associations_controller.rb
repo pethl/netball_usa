@@ -4,8 +4,18 @@ class NetballAssociationsController < ApplicationController
 
 
   def index
-    @netball_associations = NetballAssociation.ordered
+  @netball_associations = NetballAssociation.includes(clubs: :members).ordered
+
+  respond_to do |format|
+    format.html
+    format.xlsx do
+      response.headers['Content-Disposition'] =
+        "attachment; filename=netball_associations_members_#{Date.today}.xlsx"
+      # renders app/views/netball_associations/index.xlsx.axlsx
+    end
   end
+end
+
 
   def show
     @clubs = @netball_association.clubs.includes(:creator) # eager load to avoid N+1

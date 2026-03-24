@@ -1,0 +1,48 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Association Members") do |sheet|
+  header_style = sheet.styles.add_style(b: true)
+  sheet.add_row [
+    "Association",
+    "Club",
+    "First Name",
+    "Last Name",
+    "Email",
+    "Phone",
+    "Address",
+    "City",
+    "State",
+    "ZIP",
+    "Gender",
+     "Age Status", "Engagement Status", "Membership Type", "Notes",
+    "Created At"
+  ], style: header_style
+
+  @netball_associations.each do |assoc|
+    assoc.clubs.each do |club|
+      club.members.each do |m|
+        sheet.add_row [
+          assoc.name,
+          club.name,
+          m.first_name,
+          m.last_name,
+          m.email,
+          m.phone,
+          m.address,
+          m.city,
+          m.state,
+          m.zip,
+          m.gender,
+          m.age_status,
+          m.engagement_status,
+        m.membership_type,
+        m.notes,
+          m.created_at&.strftime("%Y-%m-%d %H:%M")
+        ]
+      end
+    end
+  end
+
+  # optional: set some column widths
+  sheet.column_widths 25, 30, 15, 15, 30, 15, 30, 15, 30, 10, 10, 20
+end

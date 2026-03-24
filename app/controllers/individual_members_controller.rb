@@ -2,15 +2,26 @@ class IndividualMembersController < ApplicationController
   before_action :set_individual_member, only: %i[ show edit update destroy ]
   load_and_authorize_resource
 
-  # GET /individual_members
-  def index
-   
-    if is_admin? || current_user.role=="teams_grants" || current_user.role=="teams_admin" || current_user.role=="teams_admin"|| current_user.role=="educators_events_medium"
-      @individual_members = IndividualMember.all.order(:first_name)
-   else
-     @individual_members = IndividualMember.where(user_id: current_user.id)
-   end
+    def index
+  @individual_members = if is_admin? || %w[teams_grants teams_admin educators_events_medium].include?(current_user&.role)
+                          IndividualMember.all
+                        else
+                          IndividualMember.where(user_id: current_user.id)
+                        end
+
+
+  @individual_members = @individual_members.order(:last_name, :first_name)
+
+  respond_to do |format|
+    format.html
+    format.xlsx do
+      response.headers['Content-Disposition'] =
+        "attachment; filename=individual_members_export_#{Date.today}.xlsx"
+      # renders app/views/individual_members/index.xlsx.axlsx (caxlsx_rails uses .axlsx templates)
+    end
   end
+end
+
 
   def renew_individual_membership
     individual = IndividualMember.find_by('LOWER(email) = ?', current_user.email.downcase)
