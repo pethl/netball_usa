@@ -47,11 +47,11 @@
       </div>
 
       <!-- Gender -->
-        <div class="mb-4">
+      <div class="mb-4">
         <%= form.label :gender, "Gender", class: label_class %>
         <div class="mt-1">
           <%= form.select :gender,
-            options_for_select(gender, selected: netball_educator.title),
+            options_for_select(gender, netball_educator.gender),
             { prompt: true },
             class: input_class %>
         </div>
