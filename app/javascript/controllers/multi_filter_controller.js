@@ -39,6 +39,6 @@ export default class extends Controller {
 
       console.log("Navigating to:", url.toString())
       window.location.href = url.toString()
-    }, 300)
+    }, 500)
   }
 }

@@ -90,8 +90,10 @@
 
   <!-- Clear -->
   <div class="flex flex-col justify-end">
-    <%= link_to "Clear Filters", netball_educators_path, class: "text-xs text-blue-900 underline hover:font-semibold whitespace-nowrap" %>
-  </div>
+  <%= link_to "Clear",
+      netball_educators_path,
+      class: "inline-block text-xs px-2 py-1 rounded #{teal_button_class}" %>
+</div>
 </div>
 </div>
 
