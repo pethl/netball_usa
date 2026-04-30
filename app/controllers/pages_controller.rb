@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only:[:educator_sign_up, :goodbye]
+     
   
 
   def goodbye
@@ -8,135 +9,159 @@ class PagesController < ApplicationController
   end
 
   def home
-    @created_last_7_days = NetballEducator.where("created_at > ?", Time.now-7.days).count
-    @created_last_30_days = NetballEducator.where("created_at > ?", Time.now-30.days).count
-    @created_this_year = NetballEducator.where("created_at > ?", Time.now.beginning_of_year).count
+  # -----------------------------
+  # Netball Educator stats
+  # -----------------------------
+  @created_last_7_days  = NetballEducator.where("created_at > ?", Time.now - 7.days).count
+  @created_last_30_days = NetballEducator.where("created_at > ?", Time.now - 30.days).count
+  @created_this_year    = NetballEducator.where("created_at > ?", Time.now.beginning_of_year).count
 
-    @usa_umpires = Person.where(role: "Umpire", region: "US & Canada").count
-    @international_umpires = Person.where(role: "Umpire", region: "International").count
-   
-    @scorers = Person.where(role: "Scorer").count
-    @trainers = Person.where(role: "Trainer").count
-    @coaches = Person.where(role: "Coach").count
-    @operations = Person.where(role: "Operations").count
-    
-    @admins = User.where(role: 0, account_active: true).count
-    @support_staff = User.where.not(role: [0, 2, 12]).where(account_active: true).count
-    @teamleads = User.where(role: 2, account_active: true).count
-    @na_people = User.where(role: 12, account_active: true).count
+  # -----------------------------
+  # People stats
+  # NOTE: @scorers and @operations are later overwritten by US Open transfer stats.
+  # -----------------------------
+  @people_usa_umpires            = Person.where(role: "Umpire", region: "US & Canada").count
+  @people_international_umpires  = Person.where(role: "Umpire", region: "International").count
+  @people_scorers    = Person.where(role: "Scorer").count
+  @people_trainers   = Person.where(role: "Trainer").count
+  @people_coaches    = Person.where(role: "Coach").count
+  @people_operations = Person.where(role: "Operations").count
 
-    @events_this_year = Event.where('date > ?', Time.now.beginning_of_year)
-    @events_this_year_by_status = @events_this_year.group_by { |t| t.status }
-    @events_next_year = Event.where('date > ?', Time.now.end_of_year)
-    @events_next_year_by_status = @events_next_year.group_by { |t| t.status }
+  # -----------------------------
+  # User/account stats
+  # -----------------------------
+  @admins        = User.where(role: 0, account_active: true).count
+  @support_staff = User.where.not(role: [0, 2, 12]).where(account_active: true).count
+  @teamleads     = User.where(role: 2, account_active: true).count
+  @na_people     = User.where(role: 12, account_active: true).count
 
-    Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(role: "Operations").count
+  # -----------------------------
+  # Event stats
+  # -----------------------------
+  @events_this_year           = Event.where("date > ?", Time.now.beginning_of_year)
+  @events_this_year_by_status = @events_this_year.group_by { |t| t.status }
 
-    @operations = Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(role: "Operations").count
-    @umpires = Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(role: "US Umpire").count
-    @int_umpires =  Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(role: "Int Umpire").count
-    @scorers = Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(role: "Scorer").count
-    @medics = Transfer.joins(:event).where(events: { name: 'US Open 2025 - Austin' }).where(role: "Medic").count
+  @events_next_year           = Event.where("date > ?", Time.now.end_of_year)
+  @events_next_year_by_status = @events_next_year.group_by { |t| t.status }
+
+  # -----------------------------
+# US Open transfer stats
+# -----------------------------
+us_open_transfers =
+  Transfer
+    .joins(:event)
+    .where(events: { id: current_us_open_event.id })
+
+    @us_open_operations  = us_open_transfers.where(role: "Operations").count
+    @us_open_umpires     = us_open_transfers.where(role: "US Umpire").count
+    @us_open_int_umpires = us_open_transfers.where(role: "Int Umpire").count
+    @us_open_scorers     = us_open_transfers.where(role: "Scorer").count
+    @us_open_medics      = us_open_transfers.where(role: "Medic").count
 
 
-    @total_members = (Member.all.count)+(IndividualMember.all.count)
-    @grants_submitted_this_year = Grant.where('date_submitted > ?', Time.now.beginning_of_year).count
+  # -----------------------------
+  # Membership and grants
+  # -----------------------------
+  @total_members = Member.all.count + IndividualMember.all.count
+  @grants_submitted_this_year = Grant.where("date_submitted > ?", Time.now.beginning_of_year).count
 
-    @opportunities = Opportunity.all.order(status: :asc)
-    @opportunities_by_status = @opportunities.group_by { |t| t.status }
+  @opportunities = Opportunity.all.order(status: :asc)
+  @opportunities_by_status = @opportunities.group_by { |t| t.status }
 
-    @grants_applying_for = Grant.where(apply: true).order(status: :desc)
-   # @grants_sub = Grant.all.order(status: :asc)
-    @grants_by_status = @grants_applying_for.group_by { |t| t.status }
-  
-    #special stats for follow_ups card
-    @follow_up_stats = FollowUp.group(:lead_type).count
+  @grants_applying_for = Grant.where(apply: true).order(status: :desc)
+  # @grants_sub = Grant.all.order(status: :asc)
+  @grants_by_status = @grants_applying_for.group_by { |t| t.status }
 
-    #special stats for media card
-    @media_stats = Medium.group(:media_type).count
+  # -----------------------------
+  # Follow-up card stats
+  # -----------------------------
+  @follow_up_stats = FollowUp.group(:lead_type).count
 
-    #Special Stats for Equipment card - Sonya 4/25
-    #
-    ## TOTAL COUNTS
+  # -----------------------------
+  # Media card stats
+  # -----------------------------
+  @media_stats = Medium.group(:media_type).count
+
+  # -----------------------------
+  # Equipment card stats
+  # -----------------------------
   @total_sales  = Equipment.where(status: "Sale").count
   @total_quotes = Equipment.where(status: "Quote").count
 
+  @equipment_sales_stats =
+    Equipment
+      .where(status: "Sale")
+      .where(sale_date: 3.years.ago.beginning_of_year..Time.current.end_of_year)
+      .group("EXTRACT(YEAR FROM sale_date)")
+      .select(
+        "EXTRACT(YEAR FROM sale_date) AS year",
+        "COUNT(*) AS sales_count",
+        "COALESCE(SUM(purchase_amount), 0) AS total_purchase"
+      )
+      .order("year DESC")
 
-    @equipment_sales_stats = Equipment
-    .where(status: "Sale") 
-    .where(sale_date: 3.years.ago.beginning_of_year..Time.current.end_of_year)
-    .group("EXTRACT(YEAR FROM sale_date)")
-    .select(
-      "EXTRACT(YEAR FROM sale_date) AS year",
-      "COUNT(*) AS sales_count",
-      "COALESCE(SUM(purchase_amount), 0) AS total_purchase"
-    )
-    .order("year DESC")
+  # Equipment quote stats
+  quote_scope = Equipment.where(status: "Quote")
 
-    #stats for equip QUOTE
-   quote_scope = Equipment.where(status: "Quote")
+  @total_quotes       = quote_scope.count
+  @total_quote_amount = quote_scope.sum(:quote_amount)
 
-    @total_quotes        = quote_scope.count
-    @total_quote_amount  = quote_scope.sum(:quote_amount)
-
-
-
-    
-    # MY NETBALL ACADEMY CARD
-    # Define your subscription order
-      subscription_order = Reference.where(active: true, group: 'subscription_plan')
+  # -----------------------------
+  # Netball Academy card stats
+  # -----------------------------
+  subscription_order =
+    Reference
+      .where(active: true, group: "subscription_plan")
       .pluck(:value)
       .sort_by { |v| v.to_f }
 
-      # Fetch and group only ACTIVE records
-      @netball_academy_active_stats = NetballAcademy
-      .where(status: 'Active')
+  @netball_academy_active_stats =
+    NetballAcademy
+      .where(status: "Active")
       .select(
-      "COALESCE(NULLIF(TRIM(subscribed_plans), ''), 'Unknown') AS course",
-      "COUNT(*) FILTER (WHERE amount > 0) AS paid_count",
-      "COUNT(*) FILTER (WHERE amount IS NULL OR amount <= 0) AS unpaid_count",
-      "COALESCE(SUM(amount), 0) AS total_amount"
+        "COALESCE(NULLIF(TRIM(subscribed_plans), ''), 'Unknown') AS course",
+        "COUNT(*) FILTER (WHERE amount > 0) AS paid_count",
+        "COUNT(*) FILTER (WHERE amount IS NULL OR amount <= 0) AS unpaid_count",
+        "COALESCE(SUM(amount), 0) AS total_amount"
       )
       .group("course")
 
-      # Sort active stats by subscription order, Unknown last
-      @netball_academy_active_stats = @netball_academy_active_stats.sort_by do |s|
+  @netball_academy_active_stats =
+    @netball_academy_active_stats.sort_by do |s|
       index = subscription_order.index(s.course)
-      index.nil? || s.course == 'Unknown' ? Float::INFINITY : index
-      end
+      index.nil? || s.course == "Unknown" ? Float::INFINITY : index
+    end
 
-      # Separate inactive summary (no course grouping needed)
-      inactive_scope = NetballAcademy.where(status: 'Inactive')
-      @netball_academy_inactive_summary = {
-      count: inactive_scope.count,
-      total_amount: inactive_scope.sum(:amount).to_f
-      }
-          
-      # MY NETBALL ACADEMY END
+  inactive_scope = NetballAcademy.where(status: "Inactive")
 
-      # stats for filing
-      today = Date.current
-      month_range = today.beginning_of_month..today.end_of_month
-      
-      @dashboard_month = today.month
-      @dashboard_year  = today.year
-      
-      @dashboard_occurrences =
-      FilingOccurrence
-        .joins(:filing)
-        .includes(:filing)
-        .where(due_date: month_range)
-        .where(
-          "filings.active = TRUE
-          OR filing_occurrences.due_date < filings.paused_at"
-        )
-        .order(:due_date)
+  @netball_academy_inactive_summary = {
+    count: inactive_scope.count,
+    total_amount: inactive_scope.sum(:amount).to_f
+  }
 
-      
-      @dashboard_month_total =
-        @dashboard_occurrences.sum { |o| o.filing.cost.to_f }
-      
-  end
+  # -----------------------------
+  # Filing card stats
+  # -----------------------------
+  today = Date.current
+  month_range = today.beginning_of_month..today.end_of_month
+
+  @dashboard_month = today.month
+  @dashboard_year  = today.year
+
+  @dashboard_occurrences =
+    FilingOccurrence
+      .joins(:filing)
+      .includes(:filing)
+      .where(due_date: month_range)
+      .where(
+        "filings.active = TRUE
+        OR filing_occurrences.due_date < filings.paused_at"
+      )
+      .order(:due_date)
+
+  @dashboard_month_total =
+  @dashboard_occurrences.sum { |o| o.filing.cost.to_f }
+end
 
   
   def educator_sign_up

@@ -7,8 +7,18 @@ class ApplicationController < ActionController::Base
   skip_before_action :authenticate_user!, if: :devise_controller?  # Add this line
   #include AbstractController::Rendering
   helper_method :is_admin?
+  helper_method :current_us_open_event
 
-
+  # NOTE:
+# This method is duplicated in ApplicationHelper for view access.
+# TODO: consolidate to a single source (ApplicationHelper + helper_method)
+  def current_us_open_event
+    @current_us_open_event ||= Event
+      .where(event_type: "US Open")
+      .where("extract(year from date) = ?", Time.zone.now.year)
+      .order(date: :desc)
+      .first
+  end
  
   def after_sign_in_path_for(resource)
     if current_user.teamlead?

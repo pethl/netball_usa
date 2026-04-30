@@ -1,19 +1,43 @@
 <%= link_to netball_educators_path, class: "bg-blue-900 shadow-lg rounded-md flex flex-col justify-between p-4 border-b-4 border-gray-300 text-white font-medium group min-h-[200px] hover:shadow-xl hover:scale-[1.01] transition-all duration-200" do %>
-    <div class="flex justify-between items-start">
-      <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-        <i class="fa-solid fa-chalkboard-user text-xl text-blue-800"></i>
-      </div>
-      <div class="text-right">
-        <p class="text-3xl font-bold leading-tight"><%= NetballEducator.count %></p>
-        <p class="text-sm text-gray-200 uppercase tracking-wide mt-1">Educators</p>
-      </div>
+
+  <!-- Top section -->
+  <div class="flex justify-between items-start">
+    <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
+      <i class="fa-solid fa-chalkboard-user text-xl text-blue-800"></i>
     </div>
-    <div class="mt-4 space-y-1 text-blue-200 text-sm">
-      <p>PE Directors: <%= NetballEducator.where(level: "School/District Lead").count %></p>
-      <p>Educators: <%= NetballEducator.where.not(level: "School/District Lead").count %></p>
-      <p class="text-gray-300 font-light">Last 7 Days: <%= @created_last_7_days %></p>
-      <p class="text-gray-300 font-light">Last 30 Days: <%= @created_last_30_days %></p>
-      <p class="text-gray-300 font-light">This Year: <%= @created_this_year %></p>
+
+    <div class="text-right">
+      <p class="text-3xl font-bold leading-tight"><%= NetballEducator.count %></p>
+      <p class="text-sm text-gray-200 uppercase tracking-wide mt-1">Educators</p>
     </div>
-  <% end %>
-  
+  </div>
+
+  <!-- Stats section -->
+  <div class="mt-4 text-blue-200 text-sm space-y-1">
+    <div class="flex justify-between">
+      <span>PE Directors</span>
+      <span class="font-semibold"><%= NetballEducator.where(level: "School/District Lead").count %></span>
+    </div>
+
+    <div class="flex justify-between">
+      <span>Educators</span>
+      <span class="font-semibold"><%= NetballEducator.where.not(level: "School/District Lead").count %></span>
+    </div>
+
+    <div class="flex justify-between text-gray-300 font-light">
+      <span>Last 7 Days</span>
+      <span><%= @created_last_7_days %></span>
+    </div>
+
+    <div class="flex justify-between text-gray-300 font-light">
+      <span>Last 30 Days</span>
+      <span><%= @created_last_30_days %></span>
+    </div>
+
+    <div class="flex justify-between text-gray-300 font-light">
+      <span>This Year</span>
+      <span><%= @created_this_year %></span>
+    </div>
+  </div>
+
+<% end %>

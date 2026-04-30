@@ -2,7 +2,6 @@ module ApplicationHelper
   require 'yaml'
     include Pagy::Frontend
 
-
     def form_errors_for(record)
       return unless record.errors.any?
     
@@ -648,6 +647,9 @@ module ApplicationHelper
       end
     end
 
+    # NOTE:
+# This method is duplicated in ApplicationController for controller access.
+# TODO: consolidate to a single source (ApplicationController + helper_method)
     def current_us_open_event
       @current_us_open_event ||= Event
         .where(event_type: "US Open")
