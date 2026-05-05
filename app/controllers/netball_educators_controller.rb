@@ -20,9 +20,11 @@ class NetballEducatorsController < ApplicationController
         @pagy, @netball_educators = pagy(@netball_educators)
       end
   
-      format.xlsx do
-        # No pagination — use full filtered list
+    format.xlsx do
+      unless can_export_educators?
+        redirect_to netball_educators_path, alert: "You are not authorized to export educators."
       end
+    end
     end
   end
 

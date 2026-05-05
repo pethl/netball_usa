@@ -6,12 +6,19 @@
 
   <!-- Button Group -->
   <div class="flex gap-2 shrink-0 items-end">
-    <% if current_user.admin? %>
+   <% if can_export_educators? %>
       <div class="flex flex-col space-y-0.5">
         <label class="text-xs invisible h-[20px] leading-none">Export</label>
         <%= link_to "To Excel >", 
-            netball_educators_path(format: "xlsx", state: params[:state], city: params[:city], created_at: params[:created_at]),
-            class: "border border-blue-900 text-blue-900 text-sm px-3 py-2 rounded hover:bg-blue-100" %>
+            netball_educators_path(
+            format: "xlsx",
+            state: params[:state],
+            city: params[:city],
+            query: params[:query],
+            school_district: params[:school_district],
+            created_at: params[:created_at]
+          ),
+     class: "border border-blue-900 text-blue-900 text-sm px-3 py-2 rounded hover:bg-blue-100" %>
       </div>
     <% end %>
 
