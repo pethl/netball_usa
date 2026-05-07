@@ -6,16 +6,22 @@ class FollowUpsController < ApplicationController
   load_and_authorize_resource
 
   # GET /follow_ups
-  def index
-   # authorize! :read, @follow_ups 
-    if is_admin? 
-       @follow_ups = FollowUp.all
-       @follow_ups = @follow_ups.order(created_at: :desc)
+def index
+  base_scope =
+    if is_admin?
+      FollowUp.all
     else
-        @follow_ups = FollowUp.where(user_id: current_user.id)
-        @follow_ups = @follow_ups.order(created_at: :desc)
-      end
-  end
+      FollowUp.where(user_id: current_user.id)
+    end
+
+  @follow_ups =
+    case params[:type]
+    when "talentlockr"
+      base_scope.talentlockr
+    else
+      base_scope.excluding_talentlockr
+    end.order(created_at: :desc)
+end
 
   # GET /follow_ups/1
   def show

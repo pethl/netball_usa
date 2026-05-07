@@ -75,7 +75,12 @@ us_open_transfers =
   # -----------------------------
   # Follow-up card stats
   # -----------------------------
-  @follow_up_stats = FollowUp.group(:lead_type).count
+  @follow_up_stats = FollowUp
+  .excluding_talentlockr
+  .group(:lead_type)
+  .count
+
+  @talentlockr_follow_ups_count = FollowUp.talentlockr.count
 
   # -----------------------------
   # Media card stats

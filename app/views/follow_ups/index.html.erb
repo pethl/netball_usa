@@ -9,6 +9,24 @@
 <div class="py-4">
   <%= link_to "Add New Follow-Up", new_follow_up_path, class: form_button_class %>
 </div>
+
+<hr class="my-1">
+
+<header class="ml-2 mt-2 mb-2 flex space-x-6">
+  <ul class="flex space-x-4 list-none">
+    <li>
+      <%= link_to "Follow Ups",
+          follow_ups_path,
+          class: follow_ups_tab_class %>
+    </li>
+
+    <li>
+      <%= link_to "Talentlockr",
+          follow_ups_path(type: "talentlockr"),
+          class: follow_ups_tab_class("talentlockr") %>
+    </li>
+  </ul>
+</header>
  
  <div class="ml-2">
     <% if @follow_ups.any? %>

@@ -10,34 +10,44 @@
       <p class="text-3xl font-bold leading-tight"><%= NetballEducator.count %></p>
       <p class="text-sm text-gray-200 uppercase tracking-wide mt-1">Educators</p>
     </div>
-  </div>
+  </div> 
 
   <!-- Stats section -->
   <div class="mt-4 text-blue-200 text-sm space-y-1">
-    <div class="flex justify-between">
-      <span>PE Directors</span>
-      <span class="font-semibold"><%= NetballEducator.where(level: "School/District Lead").count %></span>
-    </div>
-
-    <div class="flex justify-between">
-      <span>Educators</span>
-      <span class="font-semibold"><%= NetballEducator.where.not(level: "School/District Lead").count %></span>
-    </div>
-
-    <div class="flex justify-between text-gray-300 font-light">
-      <span>Last 7 Days</span>
-      <span><%= @created_last_7_days %></span>
-    </div>
-
-    <div class="flex justify-between text-gray-300 font-light">
-      <span>Last 30 Days</span>
-      <span><%= @created_last_30_days %></span>
-    </div>
-
-    <div class="flex justify-between text-gray-300 font-light">
-      <span>This Year</span>
-      <span><%= @created_this_year %></span>
-    </div>
+  <div class="flex justify-between">
+    <span>Educators</span>
+    <span class="font-semibold"><%= NetballEducator.educators_only.count %></span>
   </div>
+
+  <div class="flex justify-between">
+    <span>PE Directors</span>
+    <span class="font-semibold"><%= NetballEducator.pe_directors.count %></span>
+  </div>
+
+  <div class="flex justify-between">
+    <span>KIDOS</span>
+    <span class="font-semibold"><%= NetballEducator.kidos.count %></span>
+  </div>
+
+  <div class="flex justify-between">
+    <span>Talentlockr</span>
+    <span class="font-semibold"><%= NetballEducator.talentlockr.count %></span>
+  </div>
+
+  <div class="flex justify-between text-gray-300 font-light">
+    <span>Last 7 Days</span>
+    <span><%= @created_last_7_days %></span>
+  </div>
+
+  <div class="flex justify-between text-gray-300 font-light">
+    <span>Last 30 Days</span>
+    <span><%= @created_last_30_days %></span>
+  </div>
+
+  <div class="flex justify-between text-gray-300 font-light">
+    <span>This Year</span>
+    <span><%= @created_this_year %></span>
+  </div>
+</div>
 
 <% end %>

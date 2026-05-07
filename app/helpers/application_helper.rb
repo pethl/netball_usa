@@ -84,6 +84,16 @@ module ApplicationHelper
       end
     end
 
+    def follow_ups_tab_class(type = nil)
+  current_type = params[:type].presence
+
+  if current_type == type
+    "inline-block py-2 px-4 text-blue-900 border-b-2 border-blue-900 hover:border-blue-700 hover:text-blue-700"
+  else
+    "inline-block py-2 px-4 text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700"
+  end
+end
+
     #for pagy
     def pagy_tailwind_nav(pagy)
       link_proc = pagy_link_proc(pagy)
