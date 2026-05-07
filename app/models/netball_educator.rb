@@ -8,12 +8,14 @@ class NetballEducator < ApplicationRecord
    # 2. Events where this educator is the *key PE Director contact* (one-to-many direct)
   has_many :key_events, class_name: "Event", foreign_key: :key_pe_director_id
  
+
   before_save { email.downcase! }
   before_save :normalize_phone
 
   # this code sets role to Kidkinetics if the title is set to KIDOS. It does not currently undo if role is changed. mar 26.
   before_validation :set_role_for_kidos
   
+
   validates :first_name, presence: true, length: { maximum: 30 }
   validates :last_name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -21,7 +23,7 @@ class NetballEducator < ApplicationRecord
                     format:     { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   
-#  validates :phone, phone: true, allow_blank: true
+  #validates :phone, phone: true, allow_blank: true
   validates :school_name,
   presence: true,
   length: { maximum: 100 },
@@ -30,12 +32,13 @@ class NetballEducator < ApplicationRecord
   validates :school_name,
   presence: true,
   length: { maximum: 100 },
-  unless: -> { role.in?(["Kidokinetics", "Talentlockr"]) },
+  unless: -> { role == "Kidokinetics" || partner_group == "Talentlockr" },
   on: :update
 
   validates :city, presence: true, length: { maximum: 50 }, on: :create
   validates :state, presence: true
   validates :title, presence: true #new mar 26
+  validates :partner_group, allow_blank: true, inclusion: { in: ->(r) { Reference.where(group: "educator_partner_group").pluck(:value) } } #may7 '26'
 
   #REMOVED 3/26 SONYA EMAIL
   #validates :level, presence: true, on: :create, unless: -> { role.in?(["Kidokinetics", "Talentlockr"]) } 
@@ -49,13 +52,19 @@ class NetballEducator < ApplicationRecord
     
     scope :excluding_kidos, -> { where.not(role: "Kidokinetics") }
 
-     # Method: Display format "STATE - Lastname, Firstname"
-  def state_name_display
-    "#{state} - #{last_name}, #{first_name}"
-  end 
+    scope :talentlockr, -> { where(partner_group: "Talentlockr") }
+
+    def talentlockr?
+      partner_group == "Talentlockr"
+    end
+
+    # Method: Display format "STATE - Lastname, Firstname"
+    def state_name_display
+      "#{state} - #{last_name}, #{first_name}"
+    end 
                      
   
-  def formatted_phone
+    def formatted_phone
       parsed_phone = Phonelib.parse(phone)
       return phone if parsed_phone.invalid?
 

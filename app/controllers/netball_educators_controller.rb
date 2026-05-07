@@ -43,7 +43,7 @@ class NetballEducatorsController < ApplicationController
   end
   
   def talentlockr
-    @netball_educators = NetballEducator.where(role: "Talentlockr")
+    @netball_educators = NetballEducator.talentlockr
     apply_common_filters!
   end
   
@@ -226,6 +226,7 @@ class NetballEducatorsController < ApplicationController
       :website,
       :level,
       :role,
+      :partner_group,
       :educator_notes,
       :feedback,
       :authorize,

@@ -104,11 +104,20 @@
     <% unless current_user.nil? %>
       <h3 class="text-lg font-bold text-left text-gray-700 mb-2">Admin Team Only</h3>
       <div class="border-2 border-blue-900 bg-blue-50 rounded-md p-4 mb-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-4">
+          
           <div class="flex flex-col flex-1">
             <label class="<%= label_class %>">Educator Category</label>
             <div class="mt-1"><%= netball_educator.role.presence || "—" %></div>
           </div>
+
+          <div class="flex flex-col flex-1">
+            <label class="<%= label_class %>">Talentlockr?</label>
+            <div class="mt-1">
+              <%= netball_educator.talentlockr? ? "YES" : "—" %>
+            </div>
+          </div>
+
           <div class="mb-4">
             <label class="<%= label_class %>">Allocated To</label>
             <div class="mt-1">

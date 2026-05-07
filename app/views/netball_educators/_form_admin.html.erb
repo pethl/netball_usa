@@ -166,17 +166,25 @@
         <% unless current_user.nil? %>
 
         <h3 class="text-sm font-bold text-left text-gray-700 mb-2">Admin Team Only</h3>
-          <div class="border-2 border-blue-900 bg-blue-50 rounded-md p-4 my-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4">
+          <div class="border-2 border-blue-900 bg-blue-50 rounded-md p-4 my-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-4">
 
                 <!-- Category ROLE-->
                    <div class="flex flex-col flex-1">
-                      <%= form.label :role, "Educator Category", class: label_class %>
-                      <%= form.select :role,
-                            options_for_select(educator_roles, selected: netball_educator.role),
-                            { prompt: "Please select " },
-                            class: "#{input_class}  w-full" %>
-                   </div>
+                    <%= form.label :role, "Educator Category", class: label_class %>
+                    <%= form.select :role,
+                          educator_roles,
+                          { include_blank: "Please select" },
+                          class: "#{input_class} w-full" %>
+                  </div>
+
+                   <div class="flex flex-col flex-1">
+                    <%= form.label :partner_group, "Talentlockr", class: label_class %>
+                    <%= form.select :partner_group,
+                          educator_partner_group,
+                          { include_blank: "Please select" },
+                          class: "#{input_class} w-full" %>
+                  </div>
                 
                   <div class="mb-4">
                       <%= form.label :user_id, "Allocated To", class: label_class %>

@@ -387,9 +387,13 @@ module ApplicationHelper
     Reference.where(active: true, group: 'educator_roles').pluck(:value)
    end
 
-  def equipment_status
-    Reference.where(active: true, group: 'equipment_status').pluck(:value)        
+   def educator_partner_group
+    Reference.where(active: true, group: "educator_partner_group").pluck(:value)
   end
+
+    def equipment_status
+      Reference.where(active: true, group: 'equipment_status').pluck(:value)        
+    end
 
     def grant_status
       grant_status = Reference.where(active: "TRUE", group: 'grant_status')
