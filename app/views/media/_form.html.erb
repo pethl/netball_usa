@@ -3,7 +3,7 @@
   <div class="grid grid-cols-3 gap-4 mt-4 mx-4">
 
      <div>
-        <%= form.label :media_type, class: label_class %>
+        <%= form.label :media_type, "Media type*", class: label_class %>
 
         <% error_id = @medium.errors[:media_type].any? ? "#{@medium.model_name.singular}_media_type_error" : nil %>
 
@@ -15,7 +15,7 @@
      </div>
     
     <div>
-      <%= form.label :company_name, class: label_class %>
+      <%= form.label :company_name, "Company name*", class: label_class %>
 
       <% error_id = medium.errors[:company_name].any? ? "#{medium.model_name.singular}_company_name_error" : nil %>
       <%= form.text_field :company_name,

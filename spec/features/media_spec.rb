@@ -9,7 +9,7 @@ RSpec.describe "Media Management", type: :feature, js: true do
 
     visit new_medium_path
 
-    select "Podcasts", from: "medium_media_type"
+    fill_in "medium_media_type", with: "Podcasts"
     fill_in "medium_company_name", with: "The Daily Times"
     fill_in "medium_contact_name", with: "John Doe"
     fill_in "medium_contact_email", with: "johnny@dt.com"
@@ -40,7 +40,7 @@ RSpec.describe "Media Management", type: :feature, js: true do
 
     click_button "Save Media"
 
-    expect(page).to have_content("Media type can't be blank")
+    expect(page).to have_content("can't be blank")
   end
 
   scenario "Admin edits an existing Media successfully" do

@@ -6,8 +6,8 @@ RSpec.describe "Follow_ups Management", type: :feature, js: true do
   scenario "Admin logs in, creates follow_ups, and logs out" do
     login_user(admin_user)
 
-    educator = NetballEducator.first
-    user = User.second
+    educator = create(:netball_educator)
+    user = create(:user, :admin)
 
     visit new_follow_up_path
 
@@ -21,7 +21,8 @@ RSpec.describe "Follow_ups Management", type: :feature, js: true do
     user_select = find("#follow_up_user_id", visible: true)
     page.execute_script("arguments[0].scrollIntoView(true);", user_select.native)
     user_select.click
-    select user.full_name, from: "follow_up_user_id"
+    
+    find("#follow_up_user_id").find("option[value='#{user.id}']").select_option
 
     # Select lead_type safely
     lead_type_select = find("#follow_up_lead_type", visible: true)

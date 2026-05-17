@@ -46,6 +46,9 @@ class NetballEducator < ApplicationRecord
 
     # Scope: Only PE Directors, sorted by state, then last_name
     scope :pe_directors, -> { where(role: "PE Director") }
+    scope :pe_directors_by_state, -> {
+      pe_directors.order(:state, :last_name, :first_name)
+    }
     scope :kidos, -> { where(role: "Kidokinetics") }
     scope :excluding_kidos, -> { where.not(role: "Kidokinetics") }
     scope :talentlockr, -> { where(partner_group: "Talentlockr") }
@@ -54,6 +57,7 @@ class NetballEducator < ApplicationRecord
       where("(role IS NULL OR role NOT IN (?))", ["PE Director", "Kidokinetics"])
         .where("(partner_group IS NULL OR partner_group != ?)", "Talentlockr")
     }
+
 
     def talentlockr?
       partner_group == "Talentlockr"

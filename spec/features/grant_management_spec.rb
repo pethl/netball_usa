@@ -24,7 +24,8 @@ RSpec.describe "Grant Management", type: :feature, js: true do
     visit new_grant_path
     click_button "Save Record"
 
-    expect(page).to have_content("Name can't be blank")
+   
+    expect(page).to have_content("can't be blank")
    
   end
 

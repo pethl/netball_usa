@@ -39,7 +39,8 @@ RSpec.describe "Individual Members User ", type: :feature, js: true do
 
     expect(page).to have_content("Individual member was successfully created.")
     expect(page).to have_title("Individual Member: #{user.first_name} #{user.last_name}")
-    expect(page).to have_content("Payment Due for 2025")
+   
+    expect(page).to have_content("Payment Due for #{Date.current.year}")
 
     # Log out using the helper
     logout_user
