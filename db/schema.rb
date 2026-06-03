@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_05_07_122920) do
+ActiveRecord::Schema[7.1].define(version: 2026_06_03_203828) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -114,6 +114,19 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_07_122920) do
     t.integer "partner_id"
     t.index ["grant_id"], name: "index_contacts_on_grant_id"
     t.index ["sponsor_id"], name: "index_contacts_on_sponsor_id"
+  end
+
+  create_table "donated_items", force: :cascade do |t|
+    t.text "description"
+    t.string "item_type"
+    t.integer "value"
+    t.text "requirements"
+    t.string "status"
+    t.date "expiry_date"
+    t.string "donor_name"
+    t.text "internal_notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "equipment", force: :cascade do |t|

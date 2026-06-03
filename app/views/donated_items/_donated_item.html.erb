@@ -1,0 +1,68 @@
+<div id="<%= dom_id donated_item %>">
+
+  <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+  <div class="mb-2 md:col-span-2 sm:mt-4 md:mt-0">
+    <p class="<%= label_class %>">Item Description</p>
+    <div class="mt-1 p-2 border rounded bg-gray-50 min-h-[120px] whitespace-pre-wrap break-words">
+      <%= donated_item.description.presence || "-" %>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <p class="<%= label_class %>">Item Type</p>
+    <div class="mt-1 p-2 border rounded bg-gray-50">
+      <%= donated_item.item_type.presence || "-" %>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <p class="<%= label_class %>">Status</p>
+    <div class="mt-1 p-2 border rounded bg-gray-50">
+      <%= donated_item.status.presence || "-" %>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <p class="<%= label_class %>">Value $</p>
+    <div class="mt-1 p-2 border rounded bg-gray-50">
+      <%= donated_item.value.present? ? number_to_currency(donated_item.value, precision: 0) : "-" %>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <p class="<%= label_class %>">Expiry Date</p>
+    <div class="mt-1 p-2 border rounded bg-gray-50">
+      <%= donated_item.expiry_date.present? ? donated_item.expiry_date.to_formatted_s(:usa) : "-" %>
+    </div>
+  </div>
+
+  <div class="mb-2 md:col-span-2">
+    <p class="<%= label_class %>">Donor Name</p>
+    <div class="mt-1 p-2 border rounded bg-gray-50">
+      <%= donated_item.donor_name.presence || "-" %>
+    </div>
+  </div>
+
+  <div class="mb-2 md:col-span-2">
+    <p class="<%= label_class %>">Any Other Requirement</p>
+    <div class="mt-1 p-2 border rounded bg-gray-50 min-h-[120px] whitespace-pre-wrap break-words">
+      <%= donated_item.requirements.presence || "-" %>
+    </div>
+  </div>
+
+  <% if is_admin? %>
+    <div class="mb-2 md:col-span-2">
+      <p class="<%= label_class %>">Internal Notes</p>
+      <div class="mt-1 p-2 border rounded bg-gray-50 min-h-[120px] whitespace-pre-wrap break-words">
+        <%= donated_item.internal_notes.presence || "-" %>
+      </div>
+    </div>
+  <% end %>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,10 @@
+<% content_for(:page_title, "Donated Items: Add new")%>
+
+
+<%= render "form", donated_item: @donated_item %>
+
+<br>
+
+<div>
+  <%= link_to "<< Back to Donated Items", donated_items_path %>
+</div>

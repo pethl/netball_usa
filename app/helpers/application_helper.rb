@@ -330,6 +330,14 @@ end
      reference_group = reference_group.uniq() 
    end
 
+   def donated_items_status
+    Reference.where(active: true, group: 'donated_items_status').pluck(:value)
+  end
+ 
+  def donated_items_type
+    Reference.where(active: true, group: "donated_items_type").pluck(:value)
+  end
+  
    def filing_types
     Reference.where(active: true, group: 'filing_types').pluck(:value)
   end
