@@ -1,39 +1,74 @@
 # lib/tasks/refresh_data.rake
+
 namespace :db do
-  desc "Backup Heroku DB, download, restore to local dev and test, and clean up"
-  task refresh: :environment do
-    puts "🧹 Checking for existing latest.dump..."
-      if File.exist?("latest.dump")
-        puts "⚠️ Found existing latest.dump, deleting..."
-        File.delete("latest.dump")
-        puts "✅ Old latest.dump deleted."
-      else
-        puts "✅ No existing latest.dump found. Good to go."
-      end
+  desc "Backup Heroku DB, download, restore to local dev/test, migrate both, clean up, then start server"
+  task :refresh do
+    app = "netball-america"
+    dump = "latest.dump"
+    restore_list = "restore.list"
 
-    puts "🚀 Starting backup from Heroku..."
+    dev_db = "netball_usa_development"
+    test_db = "netball_usa_test"
 
-    system("heroku pg:backups:capture --app netball-america") || abort("❌ Failed to capture backup.")
-    puts "✅ Backup captured."
+    puts "🧹 Cleaning up old backup/list files..."
+    File.delete(dump) if File.exist?(dump)
+    File.delete(restore_list) if File.exist?(restore_list)
 
-    system("heroku pg:backups:download --app netball-america") || abort("❌ Failed to download backup.")
-    puts "✅ Backup downloaded."
+    puts "🚀 Capturing Heroku backup..."
+    system("heroku pg:backups:capture --app #{app}") ||
+      abort("❌ Failed to capture Heroku backup.")
 
-    puts "🛠️ Restoring to development database..."
-    system("pg_restore --verbose --clean --no-acl --no-owner -h localhost -d netball_usa_development latest.dump") || abort("❌ Failed to restore development database.")
-    puts "✅ Development database restored."
+    puts "⬇️ Downloading Heroku backup..."
+    system("heroku pg:backups:download --app #{app}") ||
+      abort("❌ Failed to download Heroku backup.")
 
-    puts "🛠️ Restoring to test database..."
-    system("pg_restore --verbose --clean --no-acl --no-owner -h localhost -d netball_usa_test latest.dump") || abort("❌ Failed to restore test database.")
-    puts "✅ Test database restored."
+    puts "🧾 Creating filtered restore list..."
+    system("pg_restore -l #{dump} | grep -v pg_stat_statements > #{restore_list}") ||
+      abort("❌ Failed to create filtered restore list.")
 
-    puts "🛠️ reet ENV to test..."
-    system("RAILS_ENV=test bundle exec rails db:environment:set") || abort("❌ Failed to set environment to test.")
-     puts "✅ ENV SET TEST."
+    puts "🧨 Dropping and recreating development database..."
+    system("dropdb --if-exists --force #{dev_db}") ||
+      abort("❌ Failed to drop development database.")
 
-    puts "🧹 Cleaning up backup file..."
-    File.delete("latest.dump") if File.exist?("latest.dump")
-    puts "✅ Backup file deleted."
+    system("createdb #{dev_db}") ||
+      abort("❌ Failed to create development database.")
+
+    puts "🧨 Dropping and recreating test database..."
+    system("dropdb --if-exists --force #{test_db}") ||
+      abort("❌ Failed to drop test database.")
+
+    system("createdb #{test_db}") ||
+      abort("❌ Failed to create test database.")
+
+    puts "🛠️ Restoring backup into development database..."
+    system("pg_restore --verbose --no-acl --no-owner -L #{restore_list} -h localhost -d #{dev_db} #{dump}") ||
+      abort("❌ Failed to restore development database.")
+
+    puts "🛠️ Restoring backup into test database..."
+    system("pg_restore --verbose --no-acl --no-owner -L #{restore_list} -h localhost -d #{test_db} #{dump}") ||
+      abort("❌ Failed to restore test database.")
+
+    puts "🔐 Setting Rails environment metadata for development..."
+    system("bin/rails db:environment:set") ||
+      abort("❌ Failed to set development environment metadata.")
+
+    puts "🔐 Setting Rails environment metadata for test..."
+    system("RAILS_ENV=test bin/rails db:environment:set") ||
+      abort("❌ Failed to set test environment metadata.")
+
+    puts "🚚 Running migrations on development..."
+    system("bin/rails db:migrate") ||
+      abort("❌ Failed to migrate development database.")
+
+    puts "🚚 Running migrations on test..."
+    system("RAILS_ENV=test bin/rails db:migrate") ||
+      abort("❌ Failed to migrate test database.")
+
+    puts "🧹 Cleaning up backup/list files..."
+    File.delete(dump) if File.exist?(dump)
+    File.delete(restore_list) if File.exist?(restore_list)
+
+    puts "✅ Development and test databases refreshed from Heroku backup."
 
     puts "💻 Starting Rails server..."
     exec("bin/rails server")
