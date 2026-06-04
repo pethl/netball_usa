@@ -1,0 +1,144 @@
+<%= form_with(model: donated_item_request) do |form| %>
+
+  <% donated_item = donated_item_request.donated_item %>
+
+  <% if donated_item.present? %>
+    <div class="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+      <h3 class="text-lg font-semibold text-blue-900">
+        Donated Item Requested
+      </h3>
+
+      <div class="mt-3 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <p class="text-xs font-semibold uppercase text-gray-500">Item Type</p>
+          <p><%= donated_item.item_type.presence || "-" %></p>
+        </div>
+
+        <div>
+          <p class="text-xs font-semibold uppercase text-gray-500">Value</p>
+          <p><%= donated_item.value.present? ? number_to_currency(donated_item.value, precision: 0) : "-" %></p>
+        </div>
+
+        <div>
+          <p class="text-xs font-semibold uppercase text-gray-500">Status</p>
+          <p class="<%= donated_item_status_class(donated_item.status) %>">
+            <%= donated_item.status.presence || "-" %>
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-3">
+        <p class="text-xs font-semibold uppercase text-gray-500">Description</p>
+        <p class="whitespace-pre-wrap break-words"><%= donated_item.description.presence || "-" %></p>
+      </div>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :donated_item_id %>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+  <div>
+    <div class="mb-2">
+      <%= form.label :purpose, "What is this item for?*", class: label_class %>
+      <div class="mt-1">
+        <% error_id = donated_item_request.errors[:purpose].any? ? "#{donated_item_request.model_name.singular}_purpose_error" : nil %>
+        <%= form.text_area :purpose,
+            class: error_class(donated_item_request, :purpose, base: form_input_class),
+            size: "20x5",
+            aria: { invalid: donated_item_request.errors[:purpose].any?, describedby: error_id } %>
+      </div>
+      <%= field_error_for(donated_item_request, :purpose, id: error_id) %>
+    </div>
+
+    <div class="mb-2">
+      <%= form.label :recipient_name, "Recipient Name*", class: label_class %>
+      <div class="mt-1">
+        <% error_id = donated_item_request.errors[:recipient_name].any? ? "#{donated_item_request.model_name.singular}_recipient_name_error" : nil %>
+        <%= form.text_field :recipient_name,
+            class: error_class(donated_item_request, :recipient_name, base: form_input_class),
+            aria: { invalid: donated_item_request.errors[:recipient_name].any?, describedby: error_id } %>
+      </div>
+      <%= field_error_for(donated_item_request, :recipient_name, id: error_id) %>
+    </div>
+
+    <div class="mb-2">
+      <%= form.label :recipient_phone, "Recipient Phone*", class: label_class %>
+      <div class="mt-1">
+        <% error_id = donated_item_request.errors[:recipient_phone].any? ? "#{donated_item_request.model_name.singular}_recipient_phone_error" : nil %>
+        <%= form.telephone_field :recipient_phone,
+            class: error_class(donated_item_request, :recipient_phone, base: form_input_class),
+            aria: { invalid: donated_item_request.errors[:recipient_phone].any?, describedby: error_id } %>
+      </div>
+      <%= field_error_for(donated_item_request, :recipient_phone, id: error_id) %>
+    </div>
+
+    <div class="mb-2">
+      <%= form.label :delivery_method, "Delivery Method*", class: label_class %>
+      <div class="mt-1">
+        <% error_id = donated_item_request.errors[:delivery_method].any? ? "#{donated_item_request.model_name.singular}_delivery_method_error" : nil %>
+        <%= form.select :delivery_method,
+            options_for_select(donated_item_delivery_method, selected: donated_item_request.delivery_method),
+            { prompt: true },
+            class: error_class(donated_item_request, :delivery_method, base: form_input_class),
+            aria: { invalid: donated_item_request.errors[:delivery_method].any?, describedby: error_id } %>
+      </div>
+      <%= field_error_for(donated_item_request, :delivery_method, id: error_id) %>
+    </div>
+
+    <div class="mb-2">
+      <%= form.label :date_needed_by, "Date Needed By*", class: label_class %>
+      <div class="mt-1">
+        <% error_id = donated_item_request.errors[:date_needed_by].any? ? "#{donated_item_request.model_name.singular}_date_needed_by_error" : nil %>
+        <%= form.date_field :date_needed_by,
+            class: error_class(donated_item_request, :date_needed_by, base: form_input_class),
+            aria: { invalid: donated_item_request.errors[:date_needed_by].any?, describedby: error_id } %>
+      </div>
+      <%= field_error_for(donated_item_request, :date_needed_by, id: error_id) %>
+    </div>
+  </div>
+
+  <div>
+   <div class="mb-2">
+      <%= form.label :delivery_email, "Delivery Email", class: label_class %>
+      <div class="mt-1">
+        <% error_id = donated_item_request.errors[:delivery_email].any? ? "#{donated_item_request.model_name.singular}_delivery_email_error" : nil %>
+        <%= form.email_field :delivery_email,
+            class: error_class(donated_item_request, :delivery_email, base: form_input_class),
+            aria: { invalid: donated_item_request.errors[:delivery_email].any?, describedby: error_id } %>
+      </div>
+      <%= field_error_for(donated_item_request, :delivery_email, id: error_id) %>
+    </div>
+
+
+    <div class="mb-2">
+      <%= form.label :delivery_name, "Mailing Name", class: label_class %>
+      <div class="mt-1">
+        <% error_id = donated_item_request.errors[:delivery_name].any? ? "#{donated_item_request.model_name.singular}_delivery_name_error" : nil %>
+        <%= form.text_field :delivery_name,
+            class: error_class(donated_item_request, :delivery_name, base: form_input_class),
+            aria: { invalid: donated_item_request.errors[:delivery_name].any?, describedby: error_id } %>
+      </div>
+      <%= field_error_for(donated_item_request, :delivery_name, id: error_id) %>
+    </div>
+
+    <div class="mb-2">
+      <%= form.label :delivery_address, "Mailing Address", class: label_class %>
+      <div class="mt-1">
+        <% error_id = donated_item_request.errors[:delivery_address].any? ? "#{donated_item_request.model_name.singular}_delivery_address_error" : nil %>
+        <%= form.text_area :delivery_address,
+            class: error_class(donated_item_request, :delivery_address, base: form_input_class),
+            size: "20x5",
+            aria: { invalid: donated_item_request.errors[:delivery_address].any?, describedby: error_id } %>
+      </div>
+      <%= field_error_for(donated_item_request, :delivery_address, id: error_id) %>
+    </div>
+  </div>
+
+</div>
+
+<div class="mt-4 justify-start">
+  <%= form.submit "Submit Request", class: form_button_class %>
+</div>
+
+<% end %>

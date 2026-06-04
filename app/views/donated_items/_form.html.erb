@@ -42,10 +42,10 @@
 
     <div class="mb-2">
       <%= form.label :value, "Value $", class: label_class %>
-      <div class="mt-1">
+      <div class="mt-1 ">
         <% error_id = donated_item.errors[:value].any? ? "#{donated_item.model_name.singular}_value_error" : nil %>
-        <%= form.number_field :value,
-            class: error_class(donated_item, :value, base: form_input_class),
+       <%= form.number_field :value,
+            class: "#{error_class(donated_item, :value, base: form_input_class)} text-right",
             min: 0,
             step: 1,
             aria: { invalid: donated_item.errors[:value].any?, describedby: error_id } %>

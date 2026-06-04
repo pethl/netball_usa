@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
+  
+  resources :donated_item_requests do
+      member do
+        patch :approve
+        patch :decline
+      end
+    end
   resources :donated_items
+  
   resources :netball_academies
 
   devise_for :users, controllers: {

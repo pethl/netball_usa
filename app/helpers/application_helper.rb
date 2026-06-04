@@ -337,6 +337,10 @@ end
   def donated_items_type
     Reference.where(active: true, group: "donated_items_type").pluck(:value)
   end
+
+  def donated_item_delivery_method
+     Reference.where(active: true, group: "donated_item_delivery_method").pluck(:value)
+  end
   
    def filing_types
     Reference.where(active: true, group: 'filing_types').pluck(:value)

@@ -1,0 +1,27 @@
+<p>Good news!</p>
+
+<p>Your donated item request has been approved.</p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @item.description %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @item.item_type %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= number_to_currency(@item.value, precision: 0) %>
+</p>
+
+<p>
+  <strong>Approved By:</strong>
+  <%= @approver.full_name if @approver.present? %>
+</p>
+
+<p>
+  <a href="<%= @link %>">View Request</a>
+</p>

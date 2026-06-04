@@ -1,0 +1,30 @@
+<p>A donated item request has been submitted.</p>
+
+<p>
+  <strong>Requested By:</strong>
+  <%= @requestor.full_name %>
+</p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @item.description %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @item.item_type %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= number_to_currency(@item.value, precision: 0) %>
+</p>
+
+<p>
+  <strong>Purpose:</strong><br>
+  <%= @request.purpose %>
+</p>
+
+<p>
+  <a href="<%= @link %>">Review Request</a>
+</p>

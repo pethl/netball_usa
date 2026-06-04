@@ -24,11 +24,11 @@
               Value
             </th>
 
-            <th scope="col" class="px-4 py-2 w-40">
+            <th scope="col" class="px-4 py-2 w-32">
               Status
             </th>
 
-            <th scope="col" class="px-4 py-2 w-40">
+            <th scope="col" class="px-4 py-2 w-32">
               Expiry Date
             </th>
 
@@ -39,6 +39,12 @@
             <th scope="col" class="px-4 py-2">
               Requirements
             </th>
+
+
+              <th scope="col" class="px-4 py-2 w-40 text-center">
+                Action
+              </th>
+
           </tr>
         </thead>
 
@@ -46,7 +52,7 @@
           <% @donated_items.each do |donated_item| %>
             <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
               <td class="align-top px-4 py-4 font-medium text-gray-800 whitespace-normal break-words max-w-[200px]">
-                <%= link_to donated_item.description, edit_donated_item_path(donated_item), class: link_class %>
+                <%= link_to donated_item.description, donated_item_path(donated_item), class: link_class %>
               </td>
 
               <td class="px-4 py-4 align-top truncate">
@@ -72,6 +78,32 @@
 
               <td class="px-4 py-4 align-top truncate">
                 <%= donated_item.requirements %>
+              </td>
+
+              <td class="px-4 py-4 align-top whitespace-nowrap text-center">
+                <% if donated_item.status == "Available" %>
+                  <%= link_to "Request Item",
+                        new_donated_item_request_path(donated_item_id: donated_item.id),
+                        class: form_button_class %>
+
+                <% elsif donated_item.status == "Requested" && donated_item.latest_request.present? %>
+                  <% if is_admin? %>
+                    <%= link_to "Review Request",
+                          donated_item_request_path(donated_item.latest_request),
+                          class: form_button_class %>
+                  <% else %>
+                    <span class="text-sm text-blue-700">
+                      Requested by<br>
+                      <strong><%= donated_item.latest_request.requested_by.full_name %></strong>
+                    </span>
+                  <% end %>
+
+                <% elsif donated_item.status == "Approved" && donated_item.latest_request.present? %>
+                  <span class="text-sm text-gray-500">
+                    Approved for<br>
+                    <strong><%= donated_item.latest_request.recipient_name %></strong>
+                  </span>
+                <% end %>
               </td>
             </tr>
           <% end %>

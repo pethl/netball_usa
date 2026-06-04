@@ -1,0 +1,123 @@
+<% item = @donated_item_request.donated_item %>
+
+<% content_for(:page_title, "Review Donated Item Request") %>
+
+<div class="mt-2 mx-auto w-full max-w-5xl">
+  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+
+    <div class="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+      <h3 class="text-lg font-semibold text-blue-900">
+        Donated Item
+      </h3>
+
+      <div class="mt-3 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <p class="text-sm font-semibold uppercase text-gray-500">Item Type</p>
+          <p><%= item.item_type.presence || "-" %></p>
+        </div>
+
+        <div>
+          <p class="text-sm font-semibold uppercase text-gray-500">Value</p>
+          <p><%= item.value.present? ? number_to_currency(item.value, precision: 0) : "-" %></p>
+        </div>
+
+        <div>
+          <p class="text-sm font-semibold uppercase text-gray-500">Status</p>
+          <p class="<%= donated_item_status_class(item.status) %>">
+            <%= item.status.presence || "-" %>
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-3">
+        <p class="text-sm font-semibold uppercase text-gray-500">Description</p>
+        <p class="whitespace-pre-wrap break-words"><%= item.description.presence || "-" %></p>
+      </div>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
+      <h3 class="text-lg font-semibold text-gray-900 mb-4">
+        Request Details
+      </h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <p class="<%= label_class %>">Requested By</p>
+          <p class="mt-1"><%= @donated_item_request.requested_by.full_name %></p>
+        </div>
+
+        <div>
+          <p class="<%= label_class %>">Request Status</p>
+          <p class="mt-1"><%= @donated_item_request.status %></p>
+        </div>
+
+        <div>
+          <p class="<%= label_class %>">What is this item for?</p>
+          <p class="mt-1 whitespace-pre-wrap break-words"><%= @donated_item_request.purpose.presence || "-" %></p>
+        </div>
+
+        <div>
+          <p class="<%= label_class %>">Date Needed By</p>
+          <p class="mt-1">
+            <%= @donated_item_request.date_needed_by.to_formatted_s(:usa) unless @donated_item_request.date_needed_by.to_s.empty? %>
+          </p>
+        </div>
+
+        <div>
+          <p class="<%= label_class %>">Recipient Name</p>
+          <p class="mt-1"><%= @donated_item_request.recipient_name.presence || "-" %></p>
+        </div>
+
+        <div>
+          <p class="<%= label_class %>">Recipient Phone</p>
+          <p class="mt-1"><%= @donated_item_request.recipient_phone.presence || "-" %></p>
+        </div>
+
+        <div>
+          <p class="<%= label_class %>">Delivery Method</p>
+          <p class="mt-1"><%= @donated_item_request.delivery_method.presence || "-" %></p>
+        </div>
+
+        <div>
+          <p class="<%= label_class %>">Delivery Email</p>
+          <p class="mt-1"><%= @donated_item_request.delivery_email.presence || "-" %></p>
+        </div>
+
+        <div>
+          <p class="<%= label_class %>">Mailing Name</p>
+          <p class="mt-1"><%= @donated_item_request.delivery_name.presence || "-" %></p>
+        </div>
+
+        <div>
+          <p class="<%= label_class %>">Mailing Address</p>
+          <p class="mt-1 whitespace-pre-wrap break-words"><%= @donated_item_request.delivery_address.presence || "-" %></p>
+        </div>
+      </div>
+    </div>
+
+    <% if is_admin? && @donated_item_request.status == "Pending" %>
+      <div class="mt-4 inline-flex items-center gap-3 border border-red-400 rounded px-3 py-2 bg-red-50">
+        <span class="text-xs font-semibold uppercase text-red-700">
+          Admin Only
+        </span>
+
+        <%= button_to "Approve",
+              approve_donated_item_request_path(@donated_item_request),
+              method: :patch,
+              data: { turbo_confirm: "Approve this request?" },
+              class: form_button_class %>
+
+        <%= button_to "Decline",
+              decline_donated_item_request_path(@donated_item_request),
+              method: :patch,
+              data: { turbo_confirm: "Decline this request?" },
+              class: "text-sm text-red-600 hover:text-red-800" %>
+      </div>
+    <% end %>
+
+    <div class="mt-6">
+      <%= link_to "<< Back to Donated Items", donated_items_path, class: link_class %>
+    </div>
+
+  </div>
+</div>

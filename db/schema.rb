@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_06_03_203828) do
+ActiveRecord::Schema[7.1].define(version: 2026_06_04_115916) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -114,6 +114,28 @@ ActiveRecord::Schema[7.1].define(version: 2026_06_03_203828) do
     t.integer "partner_id"
     t.index ["grant_id"], name: "index_contacts_on_grant_id"
     t.index ["sponsor_id"], name: "index_contacts_on_sponsor_id"
+  end
+
+  create_table "donated_item_requests", force: :cascade do |t|
+    t.bigint "donated_item_id", null: false
+    t.bigint "requested_by_id", null: false
+    t.bigint "approved_by_id"
+    t.text "purpose"
+    t.string "recipient_name"
+    t.string "recipient_phone"
+    t.string "delivery_method"
+    t.string "delivery_email"
+    t.string "delivery_name"
+    t.text "delivery_address"
+    t.date "date_needed_by"
+    t.string "status", default: "Pending", null: false
+    t.text "admin_notes"
+    t.datetime "approved_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["approved_by_id"], name: "index_donated_item_requests_on_approved_by_id"
+    t.index ["donated_item_id"], name: "index_donated_item_requests_on_donated_item_id"
+    t.index ["requested_by_id"], name: "index_donated_item_requests_on_requested_by_id"
   end
 
   create_table "donated_items", force: :cascade do |t|
@@ -927,6 +949,9 @@ ActiveRecord::Schema[7.1].define(version: 2026_06_03_203828) do
   add_foreign_key "clubs", "users"
   add_foreign_key "contacts", "grants"
   add_foreign_key "contacts", "sponsors"
+  add_foreign_key "donated_item_requests", "donated_items"
+  add_foreign_key "donated_item_requests", "users", column: "approved_by_id"
+  add_foreign_key "donated_item_requests", "users", column: "requested_by_id"
   add_foreign_key "equipment", "netball_educators"
   add_foreign_key "equipment", "people"
   add_foreign_key "event_assignments", "events"

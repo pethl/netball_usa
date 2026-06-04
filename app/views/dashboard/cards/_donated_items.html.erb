@@ -1,0 +1,50 @@
+<%= link_to donated_items_path, class: "bg-blue-900 shadow-lg rounded-md flex flex-col justify-between p-4 border-b-4 border-gray-300 text-white font-medium group min-h-[200px] hover:shadow-xl hover:scale-[1.01] transition-all duration-200" do %>
+
+  <!-- Top section -->
+  <div class="flex justify-between items-start">
+    <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
+      <i class="fa-solid fa-gift text-xl text-blue-800"></i>
+    </div>
+
+   <div class="flex items-start gap-3">
+
+  <% if DonatedItem.where(status: "Requested").exists? %>
+    <div class="flex items-center justify-center
+                w-8 h-8 rounded-full bg-red-500/90">
+      <i class="fa-solid fa-circle-exclamation
+                text-white text-xl"
+         title="Donated item requests awaiting review"></i>
+    </div>
+  <% end %>
+
+  <div class="text-right">
+    <p class="text-3xl font-bold leading-tight"><%= DonatedItem.count %></p>
+    <p class="text-sm text-gray-200 uppercase tracking-wide mt-1">
+      Donated Items
+    </p>
+  </div>
+
+</div>  
+  </div>
+
+  <!-- Stats section -->
+  <div class="mt-4 text-blue-200 text-sm space-y-1">
+    <% DonatedItem.group(:status).count.sort_by { |status, _count|
+        case status
+        when "Available" then 1
+        when "Requested" then 2
+        when "Approved" then 3
+        when "Expired" then 4
+        else 99
+        end
+      }.each do |status, count| %>
+
+      <div class="flex justify-between text-blue-300 font-base">
+        <span><%= status.presence || "No Status" %></span>
+        <span><%= count %></span>
+      </div>
+
+    <% end %>
+  </div>
+
+<% end %>

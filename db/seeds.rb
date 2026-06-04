@@ -350,3 +350,109 @@
 # Region.create(state:'QC',	region:	'Canada');
 # Region.create(state:'SK',	region:	'Canada');
 # Region.create(state:'YT',	region:	'Canada');
+puts "Creating Donated Items..."
+
+items = [
+
+  {
+    description: "Amazon eGift Card",
+    item_type: "egift card",
+    value: 25,
+    status: "Available",
+    donor_name: "Amazon Community Giving",
+    requirements: "Use for volunteer recognition"
+  },
+
+  {
+    description: "Target Gift Card",
+    item_type: "physical gift card",
+    value: 50,
+    status: "Available",
+    donor_name: "Target Foundation",
+    requirements: ""
+  },
+
+  {
+    description: "Starbucks Gift Card",
+    item_type: "physical gift card",
+    value: 20,
+    status: "Requested",
+    donor_name: "Local Starbucks Franchise",
+    requirements: "Must be used before year end"
+  },
+
+  {
+    description: "Nike eGift Card",
+    item_type: "egift card",
+    value: 100,
+    status: "Requested",
+    donor_name: "Nike Community Relations",
+    requirements: ""
+  },
+
+  {
+    description: "Coach Appreciation Gift Basket",
+    item_type: "gift basket",
+    value: 75,
+    status: "Approved",
+    donor_name: "Whole Foods",
+    requirements: "Pickup only"
+  },
+
+  {
+    description: "Volunteer Thank You Basket",
+    item_type: "gift basket",
+    value: 40,
+    status: "Available",
+    donor_name: "Trader Joe's",
+    requirements: ""
+  },
+
+  {
+    description: "Netball USA Hoodie",
+    item_type: "inventory product",
+    value: 45,
+    status: "Available",
+    donor_name: "Netball America",
+    requirements: "Adult sizes only"
+  },
+
+  {
+    description: "Netball USA Water Bottle",
+    item_type: "inventory product",
+    value: 15,
+    status: "Approved",
+    donor_name: "Netball America",
+    requirements: ""
+  },
+
+  {
+    description: "Dick's Sporting Goods Gift Card",
+    item_type: "physical gift card",
+    value: 50,
+    status: "Expired",
+    donor_name: "Dick's Sporting Goods",
+    requirements: "Expired donation"
+  },
+
+  {
+    description: "Visa Prepaid Card",
+    item_type: "egift card",
+    value: 200,
+    status: "Available",
+    donor_name: "Corporate Donor",
+    requirements: "For tournament prizes only",
+    expiry_date: Date.current + 180.days
+  }
+
+]
+
+items.each do |attrs|
+  DonatedItem.find_or_create_by!(
+    description: attrs[:description]
+  ) do |item|
+    item.assign_attributes(attrs)
+  end
+end
+
+puts "Created #{DonatedItem.count} Donated Items"
