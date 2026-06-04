@@ -18,12 +18,14 @@
     </div>
   </div>
 
-  <div class="mb-2">
-    <p class="<%= label_class %>">Status</p>
-    <div class="mt-1 p-2 border rounded bg-gray-50">
+ <div class="mb-2">
+  <p class="<%= label_class %>">Status</p>
+  <div class="mt-1 p-2 border rounded bg-gray-50">
+    <span class="<%= donated_item_status_class(donated_item.status) %>">
       <%= donated_item.status.presence || "-" %>
-    </div>
+    </span>
   </div>
+</div>
 
   <div class="mb-2">
     <p class="<%= label_class %>">Value $</p>

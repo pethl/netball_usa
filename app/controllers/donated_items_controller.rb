@@ -5,14 +5,14 @@ class DonatedItemsController < ApplicationController
  # app/controllers/donated_items_controller.rb
 
 def index
-  @status = params[:status].presence || "Available"
+ @status = params[:status].presence
   @search = params[:search].to_s.strip
 
   @statuses = Reference.where(active: true, group: "donated_items_status").pluck(:value)
 
-  @donated_items = DonatedItem.all
+ @donated_items = DonatedItem.all
 
-  @donated_items = @donated_items.where(status: @status) if @status.present?
+@donated_items = @donated_items.where(status: @status) if @status.present?
 
   if @search.present?
     @donated_items = @donated_items.where(
@@ -21,7 +21,18 @@ def index
     )
   end
 
-  @donated_items = @donated_items.order(created_at: :desc)
+   @donated_items = @donated_items.order(
+    Arel.sql("
+      CASE status
+        WHEN 'Available' THEN 1
+        WHEN 'Requested' THEN 2
+        WHEN 'Approved' THEN 3
+        WHEN 'Expired' THEN 4
+        ELSE 99
+      END,
+      created_at DESC
+    ")
+  )
 end
 
   # GET /donated_items/1
@@ -42,16 +53,18 @@ end
     @donated_item = DonatedItem.new(donated_item_params)
 
     if @donated_item.save
-      redirect_to @donated_item, notice: "Donated item was successfully created."
+     redirect_to donated_items_path, notice: "Donated item was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /donated_items/1
-  def update
+ def update
     if @donated_item.update(donated_item_params)
-      redirect_to @donated_item, notice: "Donated item was successfully updated.", status: :see_other
+      redirect_to donated_items_path,
+                  notice: "Donated item was successfully updated.",
+                  status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end

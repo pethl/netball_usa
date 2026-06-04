@@ -3,7 +3,7 @@
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
 
     <div class="mb-2 md:col-span-2 sm:mt-4 md:mt-0">
-      <%= form.label :description, "Item Description", class: label_class %>
+      <%= form.label :description, "Item Description*", class: label_class %>
       <div class="mt-1">
         <% error_id = donated_item.errors[:description].any? ? "#{donated_item.model_name.singular}_description_error" : nil %>
         <%= form.text_area :description,
@@ -15,7 +15,7 @@
     </div>
 
     <div class="mb-2">
-      <%= form.label :item_type, "Item Type", class: label_class %>
+      <%= form.label :item_type, "Item Type*", class: label_class %>
       <div class="mt-1">
         <% error_id = donated_item.errors[:item_type].any? ? "#{donated_item.model_name.singular}_item_type_error" : nil %>
         <%= form.select :item_type,
@@ -28,7 +28,7 @@
     </div>
 
     <div class="mb-2">
-      <%= form.label :status, class: label_class %>
+      <%= form.label :status, "Status*", class: label_class %>
       <div class="mt-1">
         <% error_id = donated_item.errors[:status].any? ? "#{donated_item.model_name.singular}_status_error" : nil %>
         <%= form.select :status,
@@ -54,7 +54,7 @@
     </div>
 
     <div class="mb-2">
-      <%= form.label :expiry_date, "Expiry Date", class: label_class %>
+      <%= form.label :expiry_date, "Expiry Date (if applicable)", class: label_class %>
       <div class="mt-1">
         <%= form.date_field :expiry_date, class: form_input_class %>
       </div>
@@ -81,7 +81,7 @@
       </div>
     </div>
 
-    <div class="justify-self-center self-center">
+    <div class="justify-start ">
       <%= form.submit "Save Record", class: form_button_class %>
     </div>
 

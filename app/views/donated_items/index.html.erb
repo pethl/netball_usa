@@ -20,7 +20,7 @@
               Type
             </th>
 
-            <th scope="col" class="px-4 py-2 w-28">
+            <th scope="col" class="px-4 py-2 w-28 text-right">
               Value
             </th>
 
@@ -46,21 +46,22 @@
           <% @donated_items.each do |donated_item| %>
             <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
               <td class="align-top px-4 py-4 font-medium text-gray-800 whitespace-normal break-words max-w-[200px]">
-                <%= link_to donated_item.description, donated_item_path(donated_item), class: link_class %>
+                <%= link_to donated_item.description, edit_donated_item_path(donated_item), class: link_class %>
               </td>
 
               <td class="px-4 py-4 align-top truncate">
                 <%= donated_item.item_type %>
               </td>
 
-              <td class="px-4 py-4 align-top truncate">
+              <td class="px-4 py-4 align-top truncate  text-right">
                 <%= number_to_currency(donated_item.value, precision: 0) unless donated_item.value.blank? %>
               </td>
 
-              <td class="px-4 py-4 align-top truncate">
-                <%= donated_item.status %>
+             <td class="px-4 py-4 align-top truncate">
+                <span class="<%= donated_item_status_class(donated_item.status) %>">
+                  <%= donated_item.status %>
+                </span>
               </td>
-
               <td class="px-4 py-4 align-top truncate">
                 <%= donated_item.expiry_date.to_formatted_s(:usa) unless donated_item.expiry_date.blank? %>
               </td>
