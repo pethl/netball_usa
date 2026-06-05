@@ -30,6 +30,11 @@ class Ability
     cannot :read, Filing
     cannot :read, FilingOccurrence
 
+    if user.donated_items_access?
+      can :read, DonatedItem
+      can :create, DonatedItemRequest
+    end
+
     case user.role
     
       # 1 : teams_grants (teams and grants, events, programs, venues, tours)

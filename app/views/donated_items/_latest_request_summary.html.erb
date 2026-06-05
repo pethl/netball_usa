@@ -1,0 +1,66 @@
+<% return unless request.present? %>
+
+<div class="mt-6 bg-gray-50 border border-gray-200 rounded-lg p-4 shadow-sm">
+  <div class="flex items-center justify-between">
+    <h3 class="text-sm font-semibold text-gray-900">
+      Latest Request
+    </h3>
+
+    <%= link_to "View Full Request",
+          donated_item_request_path(request),
+          class: link_class %>
+  </div>
+
+  <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-3 text-sm">
+
+    <% if request.requested_by.present? %>
+      <div>
+        <p class="text-xs font-semibold uppercase text-gray-500">Requested By</p>
+        <p><%= request.requested_by.full_name %></p>
+      </div>
+    <% end %>
+
+    <% if request.status.present? %>
+      <div>
+        <p class="text-xs font-semibold uppercase text-gray-500">Status</p>
+        <p><%= request.status %></p>
+      </div>
+    <% end %>
+
+    <% if request.date_needed_by.present? %>
+      <div>
+        <p class="text-xs font-semibold uppercase text-gray-500">Date Needed</p>
+        <p><%= request.date_needed_by.to_formatted_s(:usa) %></p>
+      </div>
+    <% end %>
+
+    <% if request.recipient_name.present? %>
+      <div>
+        <p class="text-xs font-semibold uppercase text-gray-500">Recipient</p>
+        <p><%= request.recipient_name %></p>
+      </div>
+    <% end %>
+
+    <% if request.delivery_method.present? %>
+      <div>
+        <p class="text-xs font-semibold uppercase text-gray-500">Delivery</p>
+        <p><%= request.delivery_method %></p>
+      </div>
+    <% end %>
+
+    <% if request.purpose.present? %>
+      <div class="md:col-span-3">
+        <p class="text-xs font-semibold uppercase text-gray-500">Purpose</p>
+        <p class="whitespace-pre-wrap break-words"><%= request.purpose %></p>
+      </div>
+    <% end %>
+
+    <% if request.admin_notes.present? %>
+      <div class="md:col-span-3">
+        <p class="text-xs font-semibold uppercase text-gray-500">Admin Notes</p>
+        <p class="whitespace-pre-wrap break-words"><%= request.admin_notes %></p>
+      </div>
+    <% end %>
+
+  </div>
+</div>

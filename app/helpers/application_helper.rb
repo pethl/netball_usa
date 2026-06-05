@@ -254,6 +254,18 @@ end
     "m-2 bg-red-800 hover:bg-red-600 text-white font-light py-2 px-3 rounded"
  end
 
+ def red_clear_button_class
+    "m-2 bg-red-200 border border-red-600 hover:bg-red-600 hover:text-white text-red-600 font-medium py-2 px-3 rounded"
+ end
+
+ def green_clear_button_class
+    "m-2 bg-green-200 border border-green-600 hover:bg-green-600 hover:text-white text-green-600 font-medium py-2 px-3 rounded"
+ end
+
+ def yellow_clear_button_class
+    "m-2 bg-yellow-200 border border-yellow-600 hover:bg-yellow-600 hover:text-black text-yellow-600 font-medium py-2 px-3 rounded"
+ end
+
   def clear_button_class
     "m-2 bg-white hover:bg-blue-100 text-blue-900 border border-blue-900 font-light py-2 px-3 rounded text-base leading-normal"
   end

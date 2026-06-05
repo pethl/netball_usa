@@ -6,9 +6,8 @@
 
   <div class="mb-2 md:col-span-2 sm:mt-4 md:mt-0">
     <p class="<%= label_class %>">Item Description</p>
-    <div class="mt-1 p-2 border rounded bg-gray-50 min-h-[120px] whitespace-pre-wrap break-words">
-      <%= donated_item.description.presence || "-" %>
-    </div>
+   <div class="mt-1 px-3 py-2 border rounded bg-gray-50 text-sm whitespace-pre-wrap break-words"><%= donated_item.description.presence || "-" %>
+   </div>
   </div>
 
   <div class="mb-2">
@@ -50,17 +49,13 @@
 
   <div class="mb-2 md:col-span-2">
     <p class="<%= label_class %>">Any Other Requirement</p>
-    <div class="mt-1 p-2 border rounded bg-gray-50 min-h-[120px] whitespace-pre-wrap break-words">
-      <%= donated_item.requirements.presence || "-" %>
-    </div>
+    <div class="mt-1 px-3 py-2 border rounded bg-gray-50 text-sm whitespace-pre-wrap break-words"><%= donated_item.requirements.presence || "-" %></div>
   </div>
 
   <% if is_admin? %>
     <div class="mb-2 md:col-span-2">
       <p class="<%= label_class %>">Internal Notes</p>
-      <div class="mt-1 p-2 border rounded bg-gray-50 min-h-[120px] whitespace-pre-wrap break-words">
-        <%= donated_item.internal_notes.presence || "-" %>
-      </div>
+      <div class="mt-1 px-3 py-2 border rounded bg-gray-50 text-sm whitespace-pre-wrap break-words"><%= donated_item.internal_notes.presence || "-" %></div>
     </div>
   <% end %>
 

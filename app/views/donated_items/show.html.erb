@@ -7,6 +7,11 @@
       <%= render @donated_item %>
     </div>
 
+   <% latest_request = @donated_item.latest_request %>
+
+    <% if @donated_item.status.in?(["Requested", "Approved"]) && latest_request.present? %>
+      <%= render "latest_request_summary", request: latest_request %>
+    <% end %>
     <br>
 
     <div class="mt-2 mb-8 ml-2">

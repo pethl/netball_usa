@@ -65,45 +65,51 @@ class DonatedItemRequestsController < ApplicationController
   end
 
   def approve
-      DonatedItemRequest.transaction do
-        @donated_item_request.update!(
+    DonatedItemRequest.transaction do
+      @donated_item_request.update!(
+        donated_item_request_params.merge(
           status: "Approved",
           approved_by: current_user,
           approved_at: Time.current
         )
+      )
 
-        @donated_item_request.donated_item.update!(
-          status: "Approved"
-        )
-      end
-
-      DonatedItemRequestMailer
-        .with(request: @donated_item_request)
-        .request_approved
-        .deliver_later
-
-      redirect_to donated_item_request_path(@donated_item_request),
-                  notice: "Donated item request was approved.",
-                  status: :see_other
+      @donated_item_request.donated_item.update!(
+        status: "Approved"
+      )
     end
 
-    def decline
-      DonatedItemRequest.transaction do
-        @donated_item_request.update!(
+    DonatedItemRequestMailer
+      .with(request: @donated_item_request)
+      .request_approved
+      .deliver_later
+
+    redirect_to donated_item_request_path(@donated_item_request),
+                notice: "Donated item request was approved.",
+                status: :see_other
+  end
+
+  def decline
+    DonatedItemRequest.transaction do
+      @donated_item_request.update!(
+        donated_item_request_params.merge(
           status: "Declined",
           approved_by: current_user,
           approved_at: Time.current
         )
+      )
 
-        @donated_item_request.donated_item.update!(
-          status: "Available"
-        )
-      end
-
-      redirect_to donated_item_request_path(@donated_item_request),
-                  notice: "Donated item request was declined.",
-                  status: :see_other
+      @donated_item_request.donated_item.update!(
+        status: "Available"
+      )
     end
+
+    redirect_to donated_item_request_path(@donated_item_request),
+                notice: "Donated item request was declined.",
+                status: :see_other
+  end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
