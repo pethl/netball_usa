@@ -9,6 +9,7 @@
     password_confirmation { "password123" }
     confirmed_at { Time.current }
     account_active { true }
+    donated_items_access { false }
 
     role { :teamlead }   # ✅ enum symbol
     admin { false }
@@ -20,6 +21,10 @@
     trait :admin do
       role { :admin }    # enum value 0
       admin { true }     # keep if app expects it elsewhere
+    end
+
+    trait :donated_items_access do
+      donated_items_access { true }
     end
   end
 end

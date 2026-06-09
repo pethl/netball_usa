@@ -34,19 +34,38 @@
       </div>
     <% end %>
 
-    <% if request.recipient_name.present? %>
-      <div>
-        <p class="text-xs font-semibold uppercase text-gray-500">Recipient</p>
-        <p><%= request.recipient_name %></p>
-      </div>
-    <% end %>
+   <% if request.recipient_name.present? %>
+  <div>
+    <p class="text-xs font-semibold uppercase text-gray-500">Recipient</p>
+    <p><%= request.recipient_name %></p>
+  </div>
+<% end %>
 
-    <% if request.delivery_method.present? %>
-      <div>
-        <p class="text-xs font-semibold uppercase text-gray-500">Delivery</p>
-        <p><%= request.delivery_method %></p>
-      </div>
+<div>
+  <p class="text-xs font-semibold uppercase text-gray-500">Recipient Phone</p>
+  <p><%= request.recipient_phone.presence || "-" %></p>
+</div>
+
+<% if request.delivery_method.present? %>
+  <div>
+    <p class="text-xs font-semibold uppercase text-gray-500">Delivery Method</p>
+
+    <% if request.delivery_method == "Email" %>
+      <p>Email to <%= request.delivery_email.presence || "-" %></p>
+    <% elsif request.delivery_method == "Mail" %>
+      <p>Mail to <%= request.delivery_name.presence || request.recipient_name.presence || "-" %></p>
+
+      <% if request.delivery_address.present? %>
+        <p class="whitespace-pre-wrap break-words"><%= request.delivery_address %></p>
+      <% end %>
+    <% else %>
+      <p><%= request.delivery_method %></p>
     <% end %>
+  </div>
+<% end %>
+  
+
+    
 
     <% if request.purpose.present? %>
       <div class="md:col-span-3">
