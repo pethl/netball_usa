@@ -134,8 +134,8 @@
           </div>
           <% if netball_educator.persisted? %>
             <div class="field">
-              <label>Registered at Event? (scroll to view full list)</label><br>
-              <div class="mt-1">
+              <label>Registered at Event? </label><br>
+              <div class="mt-1 font-medium">
                 <% if netball_educator.events.any? %>
                   <% netball_educator.events.each do |event| %>
                     <div><%= event.event_date_state_type_name %></div>

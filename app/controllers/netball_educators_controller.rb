@@ -29,13 +29,14 @@ class NetballEducatorsController < ApplicationController
   end
 
 
-  def pe_directors
-    @netball_educators = NetballEducator
-      .where(role: "PE Director")
-      .or(NetballEducator.where(is_pe_director: true))
-  
-    apply_common_filters!
-  end
+ def pe_directors
+  @netball_educators = NetballEducator
+    .where(role: "PE Director")
+    .or(NetballEducator.where(is_pe_director: true))
+    .or(NetballEducator.where(title: ["PD Coordinator", "District Lead", "PD Director"]))
+
+  apply_common_filters!
+end
   
   def kidos
     @netball_educators = NetballEducator.where(role: "Kidokinetics")
