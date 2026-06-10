@@ -29,6 +29,7 @@ class Club < ApplicationRecord
  # validates :estimate_total_part_time_members, presence: true, on: :create - not needed a defaulted
 
   scope :ordered, -> { order(name: :asc) }
+  scope :alphabetical, -> { order(:name) } #used in donated items
 
   def renewed_for_year?(year = Date.today.year)
     (renewal_years || "").split(",").map(&:to_i).include?(year)

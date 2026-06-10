@@ -1,4 +1,8 @@
 class DonatedItem < ApplicationRecord
+
+  belongs_to :club, optional: true
+  belongs_to :program, optional: true
+  
   has_many :donated_item_requests, dependent: :destroy
   
   validates :description, presence: true

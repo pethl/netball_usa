@@ -65,29 +65,31 @@ class DonatedItemRequestsController < ApplicationController
   end
 
   def approve
-    DonatedItemRequest.transaction do
-      @donated_item_request.update!(
-        donated_item_request_params.merge(
-          status: "Approved",
-          approved_by: current_user,
-          approved_at: Time.current
-        )
+  DonatedItemRequest.transaction do
+    @donated_item_request.update!(
+      donated_item_request_params.merge(
+        status: "Approved",
+        approved_by: current_user,
+        approved_at: Time.current
       )
+    )
 
-      @donated_item_request.donated_item.update!(
-        status: "Approved"
-      )
-    end
-
-    DonatedItemRequestMailer
-      .with(request: @donated_item_request)
-      .request_approved
-      .deliver_later
-
-    redirect_to donated_item_request_path(@donated_item_request),
-                notice: "Donated item request was approved.",
-                status: :see_other
+    @donated_item_request.donated_item.update!(
+      status: "Approved",
+      club_id: params.dig(:donated_item, :club_id).presence,
+      program_id: params.dig(:donated_item, :program_id).presence
+    )
   end
+
+  DonatedItemRequestMailer
+    .with(request: @donated_item_request)
+    .request_approved
+    .deliver_later
+
+  redirect_to donated_item_request_path(@donated_item_request),
+              notice: "Donated item request was approved.",
+              status: :see_other
+end
 
   def decline
     DonatedItemRequest.transaction do

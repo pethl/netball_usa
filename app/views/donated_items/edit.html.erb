@@ -1,10 +1,15 @@
-<% content_for(:page_title, "Donated Items: Edit")%>
+<% content_for(:page_title, "Donated Item: Edit") %>
 
-<%= render "form", donated_item: @donated_item %>
+<div class="mt-2 mx-auto w-full max-w-5xl">
+  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
 
-<br>
+    <%= render "form", donated_item: @donated_item %>
 
-<div>
-  <%= link_to "Show this donated item", @donated_item, class: link_class  %> <br>
-  <%= link_to "<< Back to donated items", donated_items_path, class: link_class  %>
+    <div class="mt-6">
+      <%= link_to "Show this donated item", @donated_item, class: link_class %>
+      <br>
+      <%= link_to "<< Back to donated items", donated_items_path, class: link_class %>
+    </div>
+
+  </div>
 </div>

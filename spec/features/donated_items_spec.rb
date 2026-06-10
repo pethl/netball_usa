@@ -1,5 +1,6 @@
 # spec/features/donated_items_workflow_spec.rb
 require "rails_helper"
+require "securerandom"
 
 #
 # Workflow:
@@ -7,7 +8,7 @@ require "rails_helper"
 # 1. Admin creates donated item
 # 2. Eligible user requests item
 # 3. Request email sent
-# 4. Admin reviews and approves
+# 4. Admin reviews and approves with club assignment
 # 5. Approval email sent
 # 6. Admin can later view request details from donated item
 #
@@ -17,12 +18,13 @@ RSpec.describe "Donated items workflow", type: :feature do
 
   let(:admin) { create(:user, :admin) }
   let(:requester) { create(:user, :donated_items_access) }
+  let!(:club) { create(:club, name: "ZZZ Spec Club #{SecureRandom.hex(4)}") }
 
   before do
     ActionMailer::Base.deliveries.clear
   end
 
-  it "covers create, request, approve, and admin viewing approved request details on donated item show page" do
+  it "covers create, request, approve with club, and admin viewing approved request details on donated item show page" do
     #
     # 1. Admin creates donated item
     #
@@ -96,7 +98,7 @@ RSpec.describe "Donated items workflow", type: :feature do
     logout(:user)
 
     #
-    # 3. Admin reviews and approves request
+    # 3. Admin reviews and approves request with club assignment
     #
     login_as(admin, scope: :user)
 
@@ -112,6 +114,9 @@ RSpec.describe "Donated items workflow", type: :feature do
     expect(page).to have_content("Volunteer recognition prize")
     expect(page).to have_content("Jane Smith")
     expect(page).to have_content("Pending")
+    expect(page).to have_select("Club", with_options: [club.name])
+
+    select club.name, from: "Club"
 
     expect {
       perform_enqueued_jobs do
@@ -128,6 +133,8 @@ RSpec.describe "Donated items workflow", type: :feature do
     expect(donated_item_request.approved_by).to eq(admin)
     expect(donated_item_request.approved_at).to be_present
     expect(donated_item.status).to eq("Approved")
+    expect(donated_item.club).to eq(club)
+    expect(donated_item.program).to be_nil
 
     #
     # 4. Admin opens approved donated item and sees request details
@@ -137,11 +144,13 @@ RSpec.describe "Donated items workflow", type: :feature do
     expect(page).to have_content("Approved for")
     expect(page).to have_content("Jane Smith")
     expect(page).to have_content("Amazon eGift Card")
+    expect(page).to have_content(club.name)
 
     click_link "Amazon eGift Card"
 
     expect(page).to have_content("Amazon eGift Card")
     expect(page).to have_content("Approved")
+    expect(page).to have_content(club.name)
     expect(page).to have_content("Latest Request")
     expect(page).to have_content(requester.full_name)
     expect(page).to have_content("Volunteer recognition prize")

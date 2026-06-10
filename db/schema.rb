@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_06_05_072756) do
+ActiveRecord::Schema[7.1].define(version: 2026_06_10_084559) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -149,6 +149,10 @@ ActiveRecord::Schema[7.1].define(version: 2026_06_05_072756) do
     t.text "internal_notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "club_id"
+    t.bigint "program_id"
+    t.index ["club_id"], name: "index_donated_items_on_club_id"
+    t.index ["program_id"], name: "index_donated_items_on_program_id"
   end
 
   create_table "equipment", force: :cascade do |t|
@@ -953,6 +957,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_06_05_072756) do
   add_foreign_key "donated_item_requests", "donated_items"
   add_foreign_key "donated_item_requests", "users", column: "approved_by_id"
   add_foreign_key "donated_item_requests", "users", column: "requested_by_id"
+  add_foreign_key "donated_items", "clubs"
+  add_foreign_key "donated_items", "programs"
   add_foreign_key "equipment", "netball_educators"
   add_foreign_key "equipment", "people"
   add_foreign_key "event_assignments", "events"
