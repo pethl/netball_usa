@@ -354,8 +354,14 @@ end
      Reference.where(active: true, group: "donated_item_delivery_method").pluck(:value)
   end
   
-   def filing_types
+  def filing_types
     Reference.where(active: true, group: 'filing_types').pluck(:value)
+  end
+
+ def club_names
+    Reference.where(active: true, group: 'club_names')
+            .order(:value)
+            .pluck(:value)
   end
 
   def filing_frequency

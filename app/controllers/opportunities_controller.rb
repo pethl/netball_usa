@@ -91,7 +91,8 @@ class OpportunitiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def opportunity_params
-      params.require(:opportunity).permit(:sponsor_id, :contact_id, :status, :in_progress_status, :user_id, :old_user_id, :opportunity_type, :website, :area, :pitch, :follow_up_actions, :notes, :outcome, :outcome_date, :outcome_received, :date_submitted)
+      params.require(:opportunity).permit(:sponsor_id, :contact_id, :status, :in_progress_status, :user_id, :old_user_id, :opportunity_type, :website, :area, :pitch, :follow_up_actions, :notes, :outcome, :outcome_date, :outcome_received, :date_submitted, :amount,
+  :member_name)
     end
 
     def send_allocation_email(opportunity)

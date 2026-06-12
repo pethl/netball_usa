@@ -4,22 +4,36 @@ class SponsorsController < ApplicationController
   load_and_authorize_resource
  
   # GET /sponsors
-  def index
-    @sponsors = Sponsor.all.ordered
+ def index
+  @sponsors = Sponsor.all.ordered
 
-    # Filter by city
-    @sponsors = @sponsors.where('city ILIKE ?', "%#{params[:city]}%").ordered if params[:city].present?
+  # Filter by city
+  @sponsors = @sponsors.where('city ILIKE ?', "%#{params[:city]}%").ordered if params[:city].present?
 
-    # Filter by state
-    @sponsors = @sponsors.where(state: params[:state]).ordered if params[:state].present?
+  # Filter by state
+  @sponsors = @sponsors.where(state: params[:state]).ordered if params[:state].present?
 
-    # Add search by company_name
-    @sponsors = @sponsors.where('company_name ILIKE ?', "%#{params[:company_name]}%") if params[:company_name].present?
-    
-     # Filter by expat_co
-     @sponsors = @sponsors.where(expat_co: params[:expat_co]).ordered if params[:expat_co].present?
+  # Search by company name
+  @sponsors = @sponsors.where('company_name ILIKE ?', "%#{params[:company_name]}%") if params[:company_name].present?
 
+  # Filter by expat_co
+  @sponsors = @sponsors.where(expat_co: params[:expat_co]).ordered if params[:expat_co].present?
+
+  # Filter by club (opportunities.member_name)
+  if params[:club].present?
+    @sponsors = @sponsors
+      .joins(:opportunities)
+      .where(opportunities: { member_name: params[:club] })
+      .distinct
   end
+
+  if params[:opportunity_status].present?
+    @sponsors = @sponsors
+      .joins(:opportunities)
+      .where(opportunities: { status: params[:opportunity_status] })
+      .distinct
+  end
+end
 
   # GET /sponsors/1 
   def show
