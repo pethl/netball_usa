@@ -20,7 +20,7 @@
       </thead>
       <tbody>
       <tr class="border-b border-gray-400">
-          <td class="align-top  pl-1"> <%= link_to opportunity.opportunity_type,[:edit, @sponsor, opportunity], class: link_class %></td>
+          <td class="align-top  pl-1"> <%= link_to opportunity.opportunity_type,[:edit, @sponsor, opportunity], class: link_class %><br> <%= "$#{opportunity.amount}" if opportunity.amount.present? %></td>
           <td class="align-top border-l border-gray-400 pl-1"> <%= opportunity.area %></td>
           <td class="align-top border-l border-gray-400 pl-1"> <%= opportunity.status %></td>
           <td class="align-top border-l border-gray-400 pl-1"> <% if opportunity.user_id? %><%= opportunity.user.full_name %><% end %></td>

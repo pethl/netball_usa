@@ -19,6 +19,7 @@ RSpec.feature "PageSmoke", type: :feature, js: true do
 
       { path: sponsors_path, title: "Sponsors" },
       { path: opportunities_path, title: "Opportunities" },
+      { path: donated_items_path, title: "Donated Items" },
 
       { path: grants_path, title: "Grants" },
       # { path: contacts_path, title: "Contacts" },
