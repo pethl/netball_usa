@@ -237,6 +237,7 @@
             <% netball_educator.equipment.each do |equipment| %>
               <li class="flex justify-between items-center p-2 border rounded bg-gray-50">
                 <div>
+                 <strong><%= equipment.status if equipment.status %></strong> –
                   <strong><%= equipment.sale_date.to_formatted_s(:usa) if equipment.sale_date %></strong> –
                   <%= equipment.items_purchased %> –
                   <%= number_to_currency(equipment.purchase_amount) %>
@@ -251,9 +252,9 @@
         <% else %>
           <p class="text-gray-500 text-sm mb-4">No equipment sales recorded yet.</p>
         <% end %>
-
-        <%= link_to "➕ Add New Equipment Sale", new_equipment_path(netball_educator_id: netball_educator.id), class: "inline-block text-sm text-blue-800 hover:underline" %>
-
+         <p class="text-sm text-gray-600 mt-4">
+        Save this educator before adding equipment sales or quotes.
+      </p>
       <% else %>
         <div class="mt-6">
           <p class="text-sm text-gray-500">Save the educator record, then link to event or add equipment sales.</p>

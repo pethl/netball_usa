@@ -161,6 +161,7 @@
             <% netball_educator.equipment.each do |equipment| %>
               <li class="flex justify-between items-center p-2 border rounded bg-gray-50">
                 <div>
+                  <strong><%= equipment.status if equipment.status %></strong> –
                   <strong><%= equipment.sale_date.to_formatted_s(:usa) if equipment.sale_date %></strong> –
                   <%= equipment.items_purchased %> –
                   <%= number_to_currency(equipment.purchase_amount) %>
@@ -175,7 +176,22 @@
         <% else %>
           <p class="text-gray-500 text-sm mb-4">No equipment sales recorded yet.</p>
         <% end %>
-        <%= link_to "➕ Add New Equipment Sale", new_equipment_path(netball_educator_id: netball_educator.id), class: "inline-block text-sm text-blue-800 hover:underline" %>
+        <div class="flex gap-3 mt-4">
+            <%= link_to "➕ Add New Equipment Sale",
+              new_equipment_path(
+                status: "Sale",
+                netball_educator_id: @netball_educator.id
+              ),
+              class: "inline-flex items-center rounded-md bg-blue-900 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-800" %>
+
+            <%= link_to "➕ Add New Equipment Quote",
+              new_equipment_path(
+                status: "Quote",
+                netball_educator_id: @netball_educator.id
+              ),
+              class: "inline-flex items-center rounded-md bg-gray-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-600" %>
+          </div>
+          <hr class="mt-2">
       <% elsif current_user.present? %>
         <div class="mt-6">
           <p class="text-sm text-gray-500">Save the educator record, then link to event or add equipment sales.</p>
