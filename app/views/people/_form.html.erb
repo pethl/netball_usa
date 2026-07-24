@@ -138,13 +138,26 @@
         </div>
       </div>
 
-      <!-- Country -->
-      <div class="mb-0">
-        <%= form.label :country, class: label_class %>
-        <div class="mt-1">
-          <%= form.text_field :country, class: input_class %>
+     <!-- Country + Date of Birth (nested grid) -->
+    <div class="mb-0">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Country -->
+        <div>
+          <%= form.label :country, class: label_class %>
+          <div class="mt-1">
+            <%= form.text_field :country, class: input_class %>
+          </div>
+        </div>
+
+        <!-- Date of Birth -->
+        <div>
+          <%= form.label :dob, "Date of Birth", class: label_class %>
+          <div class="mt-1">
+            <%= form.date_field :dob, class: input_class %>
+          </div>
         </div>
       </div>
+    </div>
     </div>
     <!-- END Personal Info Section -->
    

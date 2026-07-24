@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_06_12_110254) do
+ActiveRecord::Schema[7.1].define(version: 2026_07_24_092653) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -638,6 +638,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_06_12_110254) do
     t.string "city"
     t.string "state"
     t.string "country"
+    t.date "dob"
   end
 
   create_table "press_releases", force: :cascade do |t|

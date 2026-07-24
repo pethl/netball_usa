@@ -19,8 +19,9 @@
       <div class="break-words"><span class="text-gray-500">Address:</span><br><%= person.address %></div>
 
       <div><span class="text-gray-500">City:</span><br><%= person.city %></div>
-       <div><span class="text-gray-500">State:</span><br><%= person.state %></div>
-        <div><span class="text-gray-500">Country:</span><br><%= person.country %></div>
+      <div><span class="text-gray-500">State:</span><br><%= person.state %></div>
+      <div><span class="text-gray-500">Country:</span><br><%= person.country %></div>
+      <div><span class="text-gray-500">Date of Birth:</span><br><%= @person.dob&.strftime("%m/%d/%Y")%></div>
 
       <div class="col-span-1 sm:col-span-2 break-words">
         <span class="text-gray-500">Frequent Flyer Numbers:</span><br>
