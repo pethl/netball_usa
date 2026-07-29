@@ -204,8 +204,8 @@ class Ability
       # cannot :inbound_pickups,  Transfer
       # cannot :outbound_pickups, Transfer
       
-     # 14 : calendar + clubs user (restricted view-only)
-      when "calendar_clubs_user"
+    # 14 : calendar + clubs user (restricted view-only)
+    when "calendar_clubs_user"
 
       # Allow access to the calendar view
       can :calendar, Event
@@ -215,8 +215,28 @@ class Ability
 
       # Optional: allow reading individual club if needed by the view
       #can :read, Club 
+      #
+    
+    # 15 : us_open (US Open  people media)
+    # # NOTE:
+    # This intentionally duplicates us_open permissions,
+    # with additional Media access.
+    when "us_open_media"
+      can :manage, Transfer
+      can :menu_all, Transfer
+      can :inbound_pickups,  Transfer
+      can :outbound_pickups, Transfer
 
-      # 0 : admin (everything) 
+      can :manage, Person
+       # 🔍 Read-only access to Event
+      can [:read, :index, :show], Event
+      can :calendar, Event
+
+      can :manage, Medium
+      #can :upload_media, Event
+    
+
+    # 0 : admin (everything) 
     when "admin"
       can :manage, :all
       can :read, :audit_log

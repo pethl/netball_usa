@@ -60,7 +60,9 @@ class User < ApplicationRecord
   :spare=>11,
   :na_people=>12,
   :educators_events_self_selftransfer=>13,
-  :calendar_clubs_user=>14}
+  :calendar_clubs_user=>14,
+  :us_open_media=>15
+}
 
   # User::Roles
   # The available roles
@@ -143,6 +145,10 @@ class User < ApplicationRecord
 
   def calendar_clubs_user
   self.role == 'calendar_clubs_user'
+ end
+
+ def us_open_media
+   self.role == 'us_open_media'
  end
   
  
