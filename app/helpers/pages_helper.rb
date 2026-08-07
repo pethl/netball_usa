@@ -15,11 +15,15 @@ module PagesHelper
       spare: { partial: "office_home", title: "Dashboard" },
 
       teamlead: { partial: "teamlead_home", title: "" },
-      na_people: { partial: "na_people", title: "" }
+      na_people: { partial: "na_people", title: "" },
+      us_open_media: {partial: "us_open_home", title: "Dashboard"}
     }.freeze
   
-    def role_config
+   def role_config
+      return unless current_user&.role
+
       ROLE_HOME_VIEWS[current_user.role.to_sym]
     end
+    
   end
   
