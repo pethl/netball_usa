@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: %i[ show edit update destroy ]
-  load_and_authorize_resource
+before_action :set_person, only: %i[show edit update]
+load_and_authorize_resource except: :destroy
 
   def print_details_pdf
     people = Person.where(role: "Umpire")
@@ -189,20 +189,28 @@ class PeopleController < ApplicationController
   end
 
   # DELETE /people/1
-  def destroy
-    begin
+ def destroy
+      @person = Person.find_by(id: params[:id])
+
+      unless @person
+        redirect_to people_url(format: :html),
+                    notice: "This person has already been deleted.",
+                    status: :see_other
+        return
+      end
+
+      authorize! :destroy, @person
+
       @person.destroy
-      respond_to do |format|
-        format.html { redirect_to people_url, notice: "Person was successfully destroyed.", status: :see_other }
-        format.turbo_stream { redirect_to people_url, notice: "Person was successfully destroyed.", status: :see_other }
-      end
-    rescue ActiveRecord::InvalidForeignKey => e
-      respond_to do |format|
-        format.html { redirect_to @person, alert: "Cannot delete this person because they are linked to other records." }
-        format.turbo_stream { redirect_to @person, alert: "Cannot delete this person because they are linked to other records." }
-      end
+
+      redirect_to people_url(format: :html),
+                  notice: "Person was successfully deleted.",
+                  status: :see_other
+    rescue ActiveRecord::InvalidForeignKey
+      redirect_to @person,
+                  alert: "Cannot delete this person because they are linked to other records.",
+                  status: :see_other
     end
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
