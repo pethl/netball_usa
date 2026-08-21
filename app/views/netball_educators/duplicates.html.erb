@@ -1,0 +1,229 @@
+<%= content_for(:page_title, "Possible Duplicate Educators") %>
+
+
+<div class="mx-auto px-2 py-5">
+  <div class="mb-5">
+   
+
+    <p class="mt-1 text-gray-600">
+      These records share the same first and last name. Review carefully:
+      matching names do not necessarily mean they are the same person.
+    </p>
+
+    <p class="mt-1 font-semibold text-red-700">
+      <%= pluralize(@duplicate_groups.size, "duplicate name group") %>
+    </p>
+  </div>
+
+  <% if @duplicate_groups.any? %>
+    <% @duplicate_groups.each do |(_name_key, educators)| %>
+      <% first_record = educators.first %>
+
+      <% locations = educators.filter_map do |educator| %>
+        <% city = educator.city.to_s.strip.presence %>
+        <% state = educator.state.to_s.strip.presence %>
+        <% [city, state].compact.join(", ").presence %>
+      <% end.uniq %>
+
+      <section class="mb-6 overflow-hidden rounded-lg border border-gray-300 bg-white shadow">
+        <div class="bg-blue-900 px-4 py-3 text-white">
+          <h2 class="text-xl font-bold">
+            <%= first_record.first_name %>
+            <%= first_record.last_name %>
+
+            <% if locations.any? %>
+              <span class="ml-2 text-lg font-normal text-blue-100">
+                — <%= locations.join(" / ") %>
+              </span>
+            <% end %>
+          </h2>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="min-w-max divide-y divide-gray-300 text-sm">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="px-2 py-2 text-left font-semibold">Record created</th>
+                <th class="px-2 py-2 text-left font-semibold">Events</th>
+                <th class="px-2 py-2 text-left font-semibold">Record</th>
+                <th class="px-2 py-2 text-left font-semibold">First name</th>
+                <th class="px-2 py-2 text-left font-semibold">Last name</th>
+                <th class="px-2 py-2 text-left font-semibold">Email</th>
+                <th class="px-2 py-2 text-left font-semibold">Phone</th>
+                <th class="px-2 py-2 text-left font-semibold">Gender</th>
+                <th class="px-2 py-2 text-left font-semibold">Title</th>
+                <th class="px-2 py-2 text-left font-semibold">Role</th>
+                <th class="px-2 py-2 text-left font-semibold">School</th>
+                <th class="px-2 py-2 text-left font-semibold">District</th>
+                <th class="px-2 py-2 text-left font-semibold">Address</th>
+                <th class="px-2 py-2 text-left font-semibold">City</th>
+                <th class="px-2 py-2 text-left font-semibold">State</th>
+                <th class="px-2 py-2 text-left font-semibold">ZIP</th>
+                <th class="px-2 py-2 text-left font-semibold">Country</th>
+                <th class="px-2 py-2 text-left font-semibold">Website</th>
+                <th class="px-2 py-2 text-left font-semibold">Level</th>
+                <th class="px-2 py-2 text-left font-semibold">Partner group</th>
+                <th class="px-2 py-2 text-left font-semibold">Allocated user</th>
+                <th class="px-2 py-2 text-left font-semibold">Authorized</th>
+                <th class="px-2 py-2 text-left font-semibold">PE Director</th>
+                <th class="px-2 py-2 text-left font-semibold">Educator notes</th>
+                <th class="px-2 py-2 text-left font-semibold">Management notes</th>
+                <th class="px-2 py-2 text-left font-semibold">Feedback</th>
+                <th class="px-2 py-2 text-left font-semibold">Last updated</th>
+              </tr>
+            </thead>
+
+            <tbody class="divide-y divide-gray-200 bg-white">
+              <% educators.each do |educator| %>
+                <tr class="align-top hover:bg-yellow-50">
+                  <td class="whitespace-nowrap px-2 py-2">
+                    <%= educator.created_at.strftime("%d %b %Y") %>
+                  </td>
+
+                <td class="px-2 py-2" style="min-width: 10rem;">
+                    <% if educator.events.any? %>
+                      <ul class="space-y-1">
+                        <% educator.events.sort_by { |event| event.date || Date.new(1900) }.each do |event| %>
+                          <li>
+                            <%= link_to event.name,
+                                        event_path(event),
+                                        class: "text-blue-700 hover:underline",
+                                        target: "_blank" %>
+
+                            <% if event.date.present? %>
+                              <span class="text-gray-500">
+                                (<%= event.event_date_formatted %>)
+                              </span>
+                            <% end %>
+                          </li>
+                        <% end %>
+                      </ul>
+                    <% else %>
+                      <span class="text-gray-400">No linked events</span>
+                    <% end %>
+                  </td>
+
+                  <td class="whitespace-nowrap px-2 py-2">
+                    <%= link_to "View/edit",
+                                edit_netball_educator_path(educator),
+                                class: "font-semibold text-blue-700 hover:underline",
+                                target: "_blank" %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <%= educator.first_name.presence || "—" %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <%= educator.last_name.presence || "—" %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <%= educator.email.presence || "—" %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <%= educator.phone.presence || "—" %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <%= educator.gender.presence || "—" %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <%= educator.title.presence || "—" %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <%= educator.role.presence || "—" %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <%= educator.school_name.presence || "—" %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <%= educator.school_district.presence || "—" %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <%= educator.address.presence || "—" %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <%= educator.city.presence || "—" %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <%= educator.state.presence || "—" %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <%= educator.zip.presence || "—" %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <%= educator.country.presence || "—" %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <% if educator.website.present? %>
+                      <%= link_to educator.website,
+                                  educator.website.match?(/\Ahttps?:\/\//) ? educator.website : "https://#{educator.website}",
+                                  class: "text-blue-700 hover:underline",
+                                  target: "_blank" %>
+                    <% else %>
+                      —
+                    <% end %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <%= educator.level.presence || "—" %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <%= educator.partner_group.presence || "—" %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <%= educator.user&.full_name.presence ||
+                        educator.user&.email.presence ||
+                        "—" %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <%= educator.authorize? ? "Yes" : "No" %>
+                  </td>
+
+                  <td class="px-2 py-2">
+                    <%= educator.is_pe_director? ? "Yes" : "No" %>
+                  </td>
+
+                  <td class="min-w-56 whitespace-pre-wrap px-2 py-2">
+                    <%= educator.educator_notes.presence || "—" %>
+                  </td>
+
+                  <td class="min-w-56 whitespace-pre-wrap px-2 py-2">
+                    <%= educator.mgmt_notes.presence || "—" %>
+                  </td>
+
+                  <td class="min-w-56 whitespace-pre-wrap px-2 py-2">
+                    <%= educator.feedback.presence || "—" %>
+                  </td>
+
+                  <td class="whitespace-nowrap px-2 py-2">
+                    <%= educator.updated_at.strftime("%d %b %Y") %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    <% end %>
+  <% else %>
+    <p class="rounded border border-green-300 bg-green-50 p-4 text-green-800">
+      No possible duplicate educators were found.
+    </p>
+  <% end %>
+</div>

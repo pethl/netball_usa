@@ -1,7 +1,9 @@
 <div class="sm:mx-auto sm:w-full sm:max-w-5xl"> <!-- increased max width for multi-column -->
   <div class="bg-white py-2 px-2 sm:px-6">
 
-    <%= form_with(model: netball_educator, data: { turbo: false }) do |form| %>
+    <%= form_with(model: netball_educator, 
+    data: { turbo: false },
+    html: { novalidate: true }) do |form| %>
       <%= form.hidden_field :role, value: netball_educator.role.presence || (params[:kidokinetics] == "true" ? "Kidokinetics" : nil) %>
 
       <!-- responsive grid: 1 col mobile, 2 cols md, 3 cols lg -->
@@ -217,6 +219,20 @@
         </div>
       </div>
        <% end %> 
+
+       <% if netball_educator.errors.any? %>
+  <div class="mb-4 rounded border border-red-600 bg-red-50 p-4 text-red-800">
+    <p class="font-semibold">
+      This educator could not be saved:
+    </p>
+
+    <ul class="mt-2 list-disc pl-5">
+      <% netball_educator.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
       <!-- Submit button for Educator -->
       <div class="mt-2 ml-4">

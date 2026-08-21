@@ -154,7 +154,16 @@ end
     if @netball_educator.save
       redirect_to @netball_educator, notice: 'Educator was successfully updated.'
     else
-      render :edit
+
+        Rails.logger.error(
+          "[EducatorUpdateError] " \
+          "id=#{@netball_educator.id} " \
+          "user_id=#{current_user&.id} " \
+          "errors=#{@netball_educator.errors.full_messages.to_sentence}"
+        )
+
+        render :edit, status: :unprocessable_entity
+
     end
   end
 
@@ -202,6 +211,25 @@ end
         end
         @selected_state = selected
       end
+  end
+
+  def duplicates
+    raise CanCan::AccessDenied unless current_user.admin?
+
+    educators = NetballEducator
+      .includes(:events, :user)
+      .order(:last_name, :first_name, :created_at)
+
+    grouped = educators.group_by do |educator|
+      first_name = educator.first_name.to_s.downcase.gsub(/[^a-z0-9]/, "")
+      last_name  = educator.last_name.to_s.downcase.gsub(/[^a-z0-9]/, "")
+
+      [first_name, last_name]
+    end
+
+    @duplicate_groups = grouped
+      .reject { |(first_name, last_name), records| first_name.blank? || last_name.blank? || records.size < 2 }
+      .sort_by { |(_key, records)| [records.first.last_name.to_s.downcase, records.first.first_name.to_s.downcase] }
   end
 
 

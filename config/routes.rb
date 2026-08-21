@@ -142,6 +142,7 @@ Rails.application.routes.draw do
       get :trainers_etc
       get :heat_map
       get :stats
+      get :duplicates
     end
   end
   
