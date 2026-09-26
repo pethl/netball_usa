@@ -7,80 +7,87 @@
 %>
 
 <turbo-frame id="calendar" data-turbo="false">
-  <!-- Year Navigation -->
-  <div class="flex items-center justify-between px-6 py-2 my-4 bg-gray-200 text-gray-800 rounded-md shadow-sm w-full">
-    <%= link_to calendar_events_path(year: @year - 1),
+    <!-- Year Navigation -->
+    <div class="flex items-center justify-between px-6 py-2 my-4 bg-gray-200 text-gray-800 rounded-md shadow-sm w-full">
+        <%= link_to calendar_events_path(year: @year - 1),
       class: "text-gray-600 hover:text-teal-600 text-2xl" do %>
-      <i class="fas fa-chevron-left"></i>
-    <% end %>
+        <i class="fas fa-chevron-left"></i>
+        <% end %>
 
-    <h1 class="text-2xl font-semibold tracking-wide">
-      <%= @year %>
-    </h1>
+        <h1 class="text-2xl font-semibold tracking-wide">
+            <%= @year %>
+        </h1>
 
-    <%= link_to calendar_events_path(year: @year + 1),
+        <%= link_to calendar_events_path(year: @year + 1),
       class: "text-gray-600 hover:text-teal-600 text-2xl" do %>
-      <i class="fas fa-chevron-right"></i>
-    <% end %>
-  </div>
+        <i class="fas fa-chevron-right"></i>
+        <% end %>
+    </div>
 
-  <!-- Calendar Months -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto my-4">
-    <% Date::MONTHNAMES.compact.each_with_index do |month, index| %>
-      <% is_current_month =
+    <!-- Calendar Months -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto my-4">
+        <% Date::MONTHNAMES.compact.each_with_index do |month, index| %>
+        <% is_current_month =
         (index + 1) == Date.current.month &&
         @year == Date.current.year
       %>
 
-      <div class="p-4 hover:shadow-lg transition rounded-xl border
+        <div class="p-4 hover:shadow-lg transition rounded-xl border
         <%= is_current_month ? 'border-teal-600 border-2' : 'border-gray-200' %>
         shadow-md bg-white">
 
-        <h2 class="text-xl font-semibold text-gray-800 mb-2 text-center">
-          <%= month %>
-        </h2>
+            <h2 class="text-xl font-semibold text-gray-800 mb-2 text-center">
+                <%= month %>
+            </h2>
 
-        <% events_in_month = @events
+            <% events_in_month = @events
           .where('extract(month from date) = ? AND extract(year from date) = ?', index + 1, @year)
           .order(:date)
         %>
 
-        <% if events_in_month.any? %>
-          <ul class="space-y-4 text-sm text-gray-700">
-            <% events_in_month.each do |event| %>
-              <li>
-                <%= link_to event_path(event),
+            <% if events_in_month.any? %>
+            <ul class="space-y-4 text-sm text-gray-700">
+                <% events_in_month.each do |event| %>
+                <li>
+                    <%= link_to event_path(event),
                   class: "flex items-start gap-3 p-2 hover:bg-blue-50 rounded-lg transition" do %>
 
-                  <div class="flex-shrink-0 w-8 h-8 bg-blue-900 text-white rounded-md
+                    <div class="flex-shrink-0 w-8 h-8 bg-blue-900 text-white rounded-md
                               flex items-center justify-center text-xs shadow
                               border-l-4 border-blue-300">
-                    <%= event.date.strftime('%d') %>
-                  </div>
-
-                  <div>
-                   <% location = [event.city.presence, event.state.presence].compact.join(', ') %>
-
-                  <% if location.present? %>
-                    <div class="text-blue-900 font-semibold">
-                      <%= location %>
+                        <%= event.date.strftime('%d') %>
                     </div>
-                  <% end %>
 
-                    <div class="text-gray-800 font-bold">
-                      <%= event.name %>
+                    <div>
+                        <% location = [event.city.presence, event.state.presence].compact.join(', ') %>
+
+                        <% if location.present? %>
+                        <div class="text-blue-900 font-semibold">
+                            <%= location %>
+                        </div>
+                        <% end %>
+
+                        <div class="text-gray-800 font-bold">
+                            <%= event.name %>
+                        </div>
+
+                        <% if event.time.present? %>
+                        <div class="text-gray-500 text-xs mt-1">
+                            <i class="far fa-clock mr-1"></i>
+                            <%= event.time %>
+                        </div>
+                        <% end %>
                     </div>
-                  </div>
 
+                    <% end %>
+                </li>
                 <% end %>
-              </li>
+            </ul>
+            <% else %>
+            <p class="text-gray-400 text-sm text-center">No events</p>
             <% end %>
-          </ul>
-        <% else %>
-          <p class="text-gray-400 text-sm text-center">No events</p>
-        <% end %>
 
-      </div>
-    <% end %>
-  </div>
+        </div>
+        <% end %>
+    </div>
 </turbo-frame>

@@ -52,6 +52,13 @@
           </div>
         </div>
 
+        <div>
+          <%= form.label :time, "Time", class: label_class %>
+           <div class="mt-1">
+              <%= form.text_field :time, placeholder: "e.g. 9:00 AM EST / 2:00 PM GMT", class: input_class %>
+            </div>
+        </div>
+
           <!-- Assigned User Dropdown -->
           <div>
             <%= form.label :assigned_user_id, "Assign to", class: label_class %>
@@ -65,8 +72,7 @@
             </div>
           </div>
 
-         <!--intentional spacer -->
-         <div class="h-4"></div>
+        
 
          <div>
           <%= form.label :proposal_submission_due, "Proposal Submission Due Date", class: label_class %>

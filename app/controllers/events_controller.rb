@@ -41,6 +41,18 @@ class EventsController < ApplicationController
     render :educational
   end
 
+
+  def university
+    @page_title = "University Events"
+    @events = filtered_university_events(upcoming: true).order(:date)
+  end
+
+  def university_past
+    @page_title = "Past Uni Events"
+    @events = filtered_university_events(upcoming: false).order(date: :desc)
+    render :university
+  end
+
   def assign_educators
     @event = Event.find(params[:id])
   
@@ -138,7 +150,7 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:event_type, :is_educational, :assigned_user_id, :name, :date, :end_date, :proposal_submission_due, :booth_registration_due, :attend, :website, :key_pe_director_id, :key_contact, :city, :state, :location, :details, :booth, :cost_notes, :status, :outcome, person_ids: [], netball_educator_ids: [])
+      params.require(:event).permit(:event_type, :is_educational, :assigned_user_id, :name, :date, :end_date, :time, :proposal_submission_due, :booth_registration_due, :attend, :website, :key_pe_director_id, :key_contact, :city, :state, :location, :details, :booth, :cost_notes, :status, :outcome, person_ids: [], netball_educator_ids: [])
     end
 
     def filtered_events(upcoming:)
@@ -148,6 +160,12 @@ class EventsController < ApplicationController
     
     def filtered_educational_events(upcoming:)
       base_scope = upcoming ? Event.educational.upcoming : Event.educational.past
+      apply_event_filters(base_scope)
+    end
+
+    def filtered_university_events(upcoming:)
+      base_scope = upcoming ? Event.upcoming : Event.past
+      base_scope = base_scope.where(event_type: "University Event")
       apply_event_filters(base_scope)
     end
 
