@@ -1,0 +1,109 @@
+<% content_for(:page_title, "USA University Strategy") %>
+
+<div class="my-4">
+    <%= link_to "Add New Objective",
+    new_university_objective_path,
+    class: form_button_class %>
+</div>
+
+<h2 class="mt-6 mb-3 text-xl font-semibold text-gray-800">
+    Short Term Objectives
+</h2>
+
+<% if @short_term_objectives.any? %>
+<div class="relative overflow-x-auto ml-2">
+    <table class="w-full text-left rtl:text-right">
+        <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Objective
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Description
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Active
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @short_term_objectives.each do |objective| %>
+            <tr class="bg-white border-b hover:bg-gray-100">
+                <td class="align-top px-6 py-4 font-medium text-gray-800">
+                    <%= link_to objective.title,
+                university_objective_path(objective),
+                class: link_class %>
+                </td>
+
+                <td class="align-top px-6 py-4">
+                    <%= objective.description %>
+                </td>
+
+                <td class="align-top px-6 py-4 whitespace-nowrap">
+                    <%= objective.active? ? "Yes" : "No" %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+<% else %>
+<p class="px-6 py-4">
+    No short term objectives to view
+</p>
+<% end %>
+
+<h2 class="mt-8 mb-3 text-xl font-semibold text-gray-800">
+    Long Term Objectives
+</h2>
+
+<% if @long_term_objectives.any? %>
+<div class="relative overflow-x-auto ml-2">
+    <table class="w-full text-left rtl:text-right">
+        <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Objective
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Description
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Active
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @long_term_objectives.each do |objective| %>
+            <tr class="bg-white border-b hover:bg-gray-100">
+                <td class="align-top px-6 py-4 font-medium text-gray-800">
+                    <%= link_to objective.title,
+                university_objective_path(objective),
+                class: link_class %>
+                </td>
+
+                <td class="align-top px-6 py-4">
+                    <%= objective.description %>
+                </td>
+
+                <td class="align-top px-6 py-4 whitespace-nowrap">
+                    <%= objective.active? ? "Yes" : "No" %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+<% else %>
+<p class="px-6 py-4">
+    No long term objectives to view
+</p>
+<% end %>
+
+<br>

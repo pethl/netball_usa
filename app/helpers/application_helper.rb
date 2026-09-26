@@ -342,31 +342,35 @@ end
      reference_group = reference_group.uniq() 
    end
 
+   def university_objective_timeframes
+      Reference.where(active: true, group: "university_objective_timeframe").ordered.pluck(:value)
+   end
+
    def donated_items_status
     Reference.where(active: true, group: 'donated_items_status').pluck(:value)
-  end
+   end
  
-  def donated_items_type
-    Reference.where(active: true, group: "donated_items_type").pluck(:value)
-  end
+    def donated_items_type
+      Reference.where(active: true, group: "donated_items_type").pluck(:value)
+    end
 
-  def donated_item_delivery_method
-     Reference.where(active: true, group: "donated_item_delivery_method").pluck(:value)
-  end
-  
-  def filing_types
-    Reference.where(active: true, group: 'filing_types').pluck(:value)
-  end
+    def donated_item_delivery_method
+      Reference.where(active: true, group: "donated_item_delivery_method").pluck(:value)
+    end
+    
+    def filing_types
+      Reference.where(active: true, group: 'filing_types').pluck(:value)
+    end
 
- def club_names
-    Reference.where(active: true, group: 'club_names')
-            .order(:value)
-            .pluck(:value)
-  end
+    def club_names
+        Reference.where(active: true, group: 'club_names')
+                .order(:value)
+                .pluck(:value)
+      end
 
-  def filing_frequency
-    Reference.where(active: true, group: 'filing_frequency').pluck(:value)
-  end
+      def filing_frequency
+        Reference.where(active: true, group: 'filing_frequency').pluck(:value)
+      end
    
     def us_states
       Reference
@@ -423,13 +427,13 @@ end
      Reference.where(active: true, group: 'educator_title').pluck(:value)
     end
 
-   def educator_roles
-    Reference.where(active: true, group: 'educator_roles').pluck(:value)
-   end
+    def educator_roles
+      Reference.where(active: true, group: 'educator_roles').pluck(:value)
+    end
 
-   def educator_partner_group
-    Reference.where(active: true, group: "educator_partner_group").pluck(:value)
-  end
+    def educator_partner_group
+      Reference.where(active: true, group: "educator_partner_group").pluck(:value)
+    end
 
     def equipment_status
       Reference.where(active: true, group: 'equipment_status').pluck(:value)        

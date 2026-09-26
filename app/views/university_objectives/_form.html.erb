@@ -1,0 +1,78 @@
+<%= form_with model: university_objective do |form| %>
+<% if university_objective.errors.any? %>
+<div class="mb-6 rounded-md bg-red-50 p-4 text-red-700">
+    <h2 class="font-semibold">
+        Please correct the following:
+    </h2>
+
+    <ul class="mt-2 list-disc pl-5">
+        <% university_objective.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<div class="my-4">
+    <%= form.label :timeframe,
+      "Timeframe",
+      class: "block mb-2 font-medium text-gray-700" %>
+
+    <%= form.select :timeframe,
+        options_for_select(
+            university_objective_timeframes,
+            university_objective.timeframe
+        ),
+        { prompt: "Select timeframe" },
+        class: form_input_class %>
+</div>
+
+<div class="my-4">
+    <%= form.label :title,
+      "Objective",
+      class: "block mb-2 font-medium text-gray-700" %>
+
+    <%= form.text_field :title,
+      class: form_input_class,
+      required: true %>
+</div>
+
+<div class="my-4">
+    <%= form.label :description,
+      class: "block mb-2 font-medium text-gray-700" %>
+
+    <%= form.text_area :description,
+      rows: 6,
+      class: form_input_class %>
+</div>
+
+<div class="my-4">
+    <%= form.label :position,
+      "Display Position",
+      class: "block mb-2 font-medium text-gray-700" %>
+
+    <%= form.number_field :position,
+      min: 0,
+      class: form_input_class %>
+
+    <p class="mt-1 text-sm text-gray-500">
+        Objectives with lower numbers appear first.
+    </p>
+</div>
+
+<div class="my-4 flex items-center">
+    <%= form.check_box :active,
+      class: "h-4 w-4 rounded border-gray-300 text-teal-600" %>
+
+    <%= form.label :active,
+      class: "ml-2 font-medium text-gray-700" %>
+</div>
+
+<div class="my-6 flex items-center space-x-4">
+    <%= form.submit class: form_button_class %>
+
+    <%= link_to "Cancel",
+      university_objectives_path,
+      class: link_class %>
+</div>
+<% end %>

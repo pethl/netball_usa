@@ -1,0 +1,21 @@
+<% content_for(:page_title, "USA University Objective") %>
+
+<div class="w-full">
+    <div class="my-4 flex items-center space-x-4">
+        <%= link_to "Edit Objective",
+      edit_university_objective_path(@university_objective),
+      class: form_button_class %>
+
+        <%= link_to "Back to Strategy",
+      university_objectives_path,
+      class: link_class %>
+    </div>
+
+    <div class="relative mt-6 flex min-h-32 w-full items-center justify-center overflow-hidden rounded-lg border-l-8 border-blue-900 bg-gray-100 px-16 py-6 shadow-sm">
+        <span class="absolute left-5 top-1 text-7xl font-serif leading-none text-blue-200">
+            &ldquo;
+        </span>
+
+        <p class="m-0 w-full text-center text-2xl font-medium italic leading-relaxed text-gray-800"><%= @university_objective.description.presence || "No description has been added." %></p>
+    </div>
+</div>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  resources :university_objectives
   
   resources :donated_item_requests do
       member do
