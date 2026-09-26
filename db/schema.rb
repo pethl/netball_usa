@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_09_26_101800) do
+ActiveRecord::Schema[7.1].define(version: 2026_09_26_114429) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -577,6 +577,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_09_26_101800) do
     t.bigint "user_id"
     t.integer "old_user_id"
     t.string "zip_code"
+    t.boolean "usa_university_partner", default: false, null: false
     t.index ["user_id"], name: "index_partners_on_user_id"
   end
 
@@ -885,6 +886,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_09_26_101800) do
     t.integer "position", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "partner_id"
+    t.index ["partner_id"], name: "index_university_tasks_on_partner_id"
     t.index ["university_objective_id"], name: "index_university_tasks_on_university_objective_id"
   end
 
@@ -1019,5 +1022,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_09_26_101800) do
   add_foreign_key "teams", "users"
   add_foreign_key "transfers", "events"
   add_foreign_key "transfers", "people"
+  add_foreign_key "university_tasks", "partners"
   add_foreign_key "university_tasks", "university_objectives"
 end

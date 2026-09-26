@@ -37,6 +37,24 @@ module ApplicationHelper
       end
     end
 
+    #special helper for uni tasks page
+    def university_task_partner_options
+      university_partners = Partner
+        .where(usa_university_partner: true)
+        .ordered
+        .pluck(:company, :id)
+
+      other_partners = Partner
+        .where(usa_university_partner: false)
+        .ordered
+        .pluck(:company, :id)
+
+      [
+        ["USA University Partners", university_partners],
+        ["All Other Partners", other_partners]
+      ]
+    end
+
     #TAB CLASSES
     # app/helpers/people_helper.rb (or wherever you want it)
     def people_tab_class(is_active)

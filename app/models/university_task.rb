@@ -1,5 +1,9 @@
 class UniversityTask < ApplicationRecord
   belongs_to :university_objective
+  belongs_to :partner, optional: true
+
+  after_save_commit :mark_partner_as_usa_university_partner,
+                  if: :saved_change_to_partner_id?
 
   validates :category, presence: true
   validates :action, presence: true
@@ -42,5 +46,15 @@ class UniversityTask < ApplicationRecord
     return if status.in?(valid_statuses)
 
     errors.add(:status, "is not a valid active task status")
+  end
+
+  def mark_partner_as_usa_university_partner
+    return if partner.blank?
+    return if partner.usa_university_partner?
+
+    partner.update_columns(
+      usa_university_partner: true,
+      updated_at: Time.current
+    )
   end
 end

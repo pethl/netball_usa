@@ -84,6 +84,7 @@ end
   def university_task_params
     params.require(:university_task).permit(
       :university_objective_id,
+      :partner_id,
       :category,
       :action,
       :notes,

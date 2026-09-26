@@ -175,6 +175,7 @@ resources :university_tasks, only: [:index, :new, :create] #must be before uni_o
   resources :partners do
     collection do
       get :my_partners
+       get :university
     end
   
     resources :contacts, except: [:index, :show]

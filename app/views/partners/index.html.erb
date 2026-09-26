@@ -1,79 +1,82 @@
-<% content_for(:page_title, "Partners")%> 
+<% content_for(:page_title, @page_title || "Partners") %>
 
 <%= render "filter_nav" %>
 
 <div class="my-4">
-  <%= link_to "Add New Partner", new_partner_path, class: form_button_class %>
-</div> 
+    <% if @usa_university_view %>
+    <%= link_to "Add New University Partner",
+      new_partner_path(usa_university_partner: true),
+      class: form_button_class %>
+    <% else %>
+    <%= link_to "Add New Partner",
+      new_partner_path,
+      class: form_button_class %>
+    <% end %>
+</div>
 
 <% if @partners.any? %>
 <div id="partners">
-<div class="relative overflow-x-auto">
-    <table class="w-full table-fixed ml-2 text-left rtl:text-right">
-        <thead class="bg-gray-200 border-b text-gray-800 font-light text-xs ">
-            <tr>
-                <th scope="col" class="px-4 py-2 w-64">
-                    Company
-                </th>
-                
-                <th scope="col" class="px-4 py-2 w-48">
-                    Location
-                </th>
-                
-                <th scope="col" class="px-4 py-2 w-64 truncate">
-                    Website
-                </th>
-                
-                <th scope="col" class="px-4 py-2 w-40">
-                    Date of Initial Connect
-                </th>
+    <div class="relative overflow-x-auto">
+        <table class="w-full table-fixed ml-2 text-left rtl:text-right">
+            <thead class="bg-gray-200 border-b text-gray-800 font-light text-xs ">
+                <tr>
+                    <th scope="col" class="px-4 py-2 w-64">
+                        Company
+                    </th>
 
-                <th scope="col" class="px-4 py-2 w-40">
-                   Assigned To
-                </th>
-               
-                <th scope="col" class="px-4 py-2">
-                    Description
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-        <% @partners.each do |partner| %>
-            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
-                
-                <td class="align-top px-4 py-4 font-medium text-gray-800 whitespace-normal break-words max-w-[200px]">
-                <%= link_to partner.company, partner_path(partner), class: link_class %>
-            </td>
-               
-           <td class="px-4 py-4 align-top">
-                <%= partner.address_index_compact %>
-                </td>
-            <td class="px-4 py-4 align-top truncate">
-                <%= (link_to partner.website, partner.website, target: '_blank', class: link_class) unless (partner.website.to_s.empty?)%>
-            </td>
-            <td class="px-4 py-4 align-top truncate">
-                <%= partner.date_initially_connected.to_formatted_s(:usa) unless  partner.date_initially_connected.to_s.empty? %>
-            </td> 
-            <td class="px-4 py-4 align-top truncate">
-             <%= partner.user.full_name %>
-            </td>
-            <td class="px-4 py-4 align-top truncate">
-             <%= partner.description %>
-            </td>
-        </tr>
-        <% end %>
-        </tbody>
-    </table>
+                    <th scope="col" class="px-4 py-2 w-48">
+                        Location
+                    </th>
+
+                    <th scope="col" class="px-4 py-2 w-64 truncate">
+                        Website
+                    </th>
+
+                    <th scope="col" class="px-4 py-2 w-40">
+                        Date of Initial Connect
+                    </th>
+
+                    <th scope="col" class="px-4 py-2 w-40">
+                        Assigned To
+                    </th>
+
+                    <th scope="col" class="px-4 py-2">
+                        Description
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @partners.each do |partner| %>
+                <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
+
+                    <td class="align-top px-4 py-4 font-medium text-gray-800 whitespace-normal break-words max-w-[200px]">
+                        <%= link_to partner.company, partner_path(partner), class: link_class %>
+                    </td>
+
+                    <td class="px-4 py-4 align-top">
+                        <%= partner.address_index_compact %>
+                    </td>
+                    <td class="px-4 py-4 align-top truncate">
+                        <%= (link_to partner.website, partner.website, target: '_blank', class: link_class) unless (partner.website.to_s.empty?)%>
+                    </td>
+                    <td class="px-4 py-4 align-top truncate">
+                        <%= partner.date_initially_connected.to_formatted_s(:usa) unless  partner.date_initially_connected.to_s.empty? %>
+                    </td>
+                    <td class="px-4 py-4 align-top truncate">
+                        <%= partner.user.full_name %>
+                    </td>
+                    <td class="px-4 py-4 align-top truncate">
+                        <%= partner.description %>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
 </div>
- </div>
 
-    <% else %>
-        <p class="px-4 py-4">
-        No records to view</p>
-    <% end %>
+<% else %>
+<p class="px-4 py-4">
+    No records to view</p>
+<% end %>
 <br>
-
-
- 
-   
-

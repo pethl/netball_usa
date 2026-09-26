@@ -1,5 +1,7 @@
 class Partner < ApplicationRecord
     has_many :contacts
+    has_many :university_tasks,
+         dependent: :nullify
    # has_one :person - not sure what this was doe
     belongs_to :user
 
