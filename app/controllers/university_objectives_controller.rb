@@ -46,6 +46,9 @@ class UniversityObjectivesController < ApplicationController
   end
 
   def show
+    @university_tasks = @university_objective
+      .university_tasks
+      .ordered
   end
 
 

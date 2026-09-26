@@ -1,0 +1,76 @@
+<div id="<%= dom_id university_task %>" class="w-full">
+    <div class="flex justify-end">
+        <div class="relative w-full rounded-lg border-l-4 border-blue-900 bg-blue-100 px-6 py-4 lg:max-w-2xl">
+            <span class="absolute left-2 top-0 text-4xl font-serif leading-none text-blue-300">
+                &ldquo;
+            </span>
+
+            <p class="text-right text-xs font-medium uppercase tracking-wide text-gray-500">
+                Objective
+            </p>
+
+            <p class="mt-1 text-right text-sm font-medium italic leading-relaxed text-gray-800">
+                <%= link_to university_task.university_objective.description,
+          university_objective_path(
+            university_task.university_objective
+          ),
+          class: "hover:text-blue-700" %>
+            </p>
+        </div>
+    </div>
+
+    <div class="mt-8">
+        <p class="text-sm text-gray-500">
+            Task
+        </p>
+
+        <p class="mt-1 text-xl font-medium leading-relaxed text-gray-900">
+            <%= university_task.action %>
+        </p>
+    </div>
+
+    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div>
+            <p class="text-sm text-gray-500">
+                Category
+            </p>
+
+            <p class="mt-1 text-sm font-medium text-gray-900">
+                <%= university_task.category %>
+            </p>
+        </div>
+
+        <div>
+            <p class="text-sm text-gray-500">
+                Status
+            </p>
+
+            <p class="mt-1 text-sm font-medium text-gray-900">
+                <%= university_task.status %>
+            </p>
+        </div>
+
+        <div>
+            <p class="text-sm text-gray-500">
+                Due Date
+            </p>
+
+            <p class="mt-1 text-sm font-medium text-gray-900">
+                <% if university_task.due_date.present? %>
+                <%= university_task.due_date.to_formatted_s(:usa) %>
+                <% else %>
+                —
+                <% end %>
+            </p>
+        </div>
+    </div>
+
+    <div class="mt-8 mb-8">
+        <p class="text-sm text-gray-500">
+            Notes
+        </p>
+
+        <p class="mt-1 whitespace-pre-wrap break-words text-sm font-medium leading-relaxed text-gray-900"><%= university_task.notes.presence || "—" %></p>
+    </div>
+</div>
+<hr>

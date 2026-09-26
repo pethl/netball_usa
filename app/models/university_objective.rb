@@ -1,4 +1,7 @@
 class UniversityObjective < ApplicationRecord
+  has_many :university_tasks,
+         dependent: :restrict_with_error
+         
   validates :title, presence: true
   validates :timeframe, presence: true
   validates :position,

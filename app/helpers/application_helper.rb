@@ -346,6 +346,17 @@ end
       Reference.where(active: true, group: "university_objective_timeframe").ordered.pluck(:value)
    end
 
+   def university_task_categories
+      Reference.where(active: true, group: "university_task_category").ordered.pluck(:value)
+    end
+
+    def university_task_statuses
+      Reference
+        .where(active: true, group: "university_task_status")
+        .order(Arel.sql('CAST("desc" AS INTEGER) ASC'))
+        .pluck(:value)
+    end
+
    def donated_items_status
     Reference.where(active: true, group: 'donated_items_status').pluck(:value)
    end

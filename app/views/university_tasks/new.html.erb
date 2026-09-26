@@ -1,0 +1,19 @@
+<% content_for(:page_title, "New USA University Task") %>
+
+<div class="w-full">
+    <% if @university_objective.present? %>
+    <div class="mb-6 rounded-lg border-l-4 border-blue-900 bg-gray-100 px-6 py-4">
+        <p class="text-xs font-medium uppercase tracking-wide text-gray-500">
+            Objective
+        </p>
+
+        <p class="mt-1 text-sm font-medium italic text-gray-800">
+            <%= @university_objective.title %>
+        </p>
+    </div>
+    <% end %>
+
+    <%= render "form",
+    university_task: @university_task,
+    university_objective: @university_objective %>
+</div>

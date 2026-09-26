@@ -1,0 +1,17 @@
+<% content_for(:page_title, "Edit USA University Task") %>
+
+<div class="w-full">
+    <div class="mb-6 text-right rounded-lg border-l-4 border-blue-900 bg-blue-100 px-6 py-4">
+        <p class="text-xs font-medium uppercase tracking-wide text-gray-500">
+            Objective
+        </p>
+
+        <p class="mt-1 text-sm font-medium italic text-gray-800">
+            <%= @university_task.university_objective.title %>
+        </p>
+    </div>
+
+    <%= render "form",
+    university_task: @university_task,
+    university_objective: @university_task.university_objective %>
+</div>

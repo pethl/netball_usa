@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
 
-  resources :university_objectives
+resources :university_tasks, only: [:index, :new, :create] #must be before uni_objectives
+
+  resources :university_objectives do
+    resources :university_tasks,
+              except: :index,
+              shallow: true
+  end
+
+
   
   resources :donated_item_requests do
       member do
