@@ -1,101 +1,109 @@
 <%# app/views/people/_people_table.html.erb %>
 
 <% if searching && search_term.present? %>
-  <p class="mb-4 ml-4 text-sm text-gray-600">
+<p class="mb-4 ml-4 text-sm text-gray-600">
     Showing results for "<strong><%= search_term %></strong>"
-  </p>
+</p>
 <% end %>
 
 <div id="persons">
- <div class="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
-    <table class="table-fixed w-full text-left rtl:text-right shadow-md">
-      <thead class="border-b bg-gray-200 text-gray-500 font-light text-xs">
-        <tr>
-          <th class="px-4 py-2 w-12">View</th>
-          <th class="px-4 py-2 w-48">Name</th>
-          <th class="px-4 py-2 w-40">City</th>
-          <th class="px-4 py-2 w-24">State</th>
-          <th class="px-4 py-2 w-32">Country</th>
-          <th class="px-4 py-2 w-32">Role</th>
-          <th class="px-4 py-2 w-40">Level</th>
-          <th class="px-4 py-2 w-64">Email</th>
-          <th class="px-4 py-2 w-24 text-center">Headshot?</th>
-          <th class="px-4 py-2 w-48">Associated?</th>
-          <th class="px-4 py-2 w-40">Gender</th>
-          <th class="px-4 py-2 w-96 truncate">Notes</th>
-        </tr>
-      </thead>
+    <div class="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+        <table class="table-fixed w-full text-left rtl:text-right shadow-md">
+            <thead class="border-b bg-gray-200 text-gray-500 font-light text-xs">
+                <tr>
+                    <th class="px-4 py-2 w-12">View</th>
+                    <th class="px-4 py-2 w-48">Name</th>
+                    <th class="px-4 py-2 w-40">City</th>
+                    <th class="px-4 py-2 w-24">State</th>
+                    <th class="px-4 py-2 w-32">Country</th>
+                    <th class="px-4 py-2 w-32">Role</th>
+                    <th class="px-4 py-2 w-40">Level</th>
+                    <th class="px-4 py-2 w-64">Email</th>
+                    <th class="px-4 py-2 w-24 text-center">Headshot?</th>
+                    <th class="px-4 py-2 w-48">Associated?</th>
+                    <th class="px-4 py-2 w-40">Gender</th>
+                    <th class="px-4 py-2 w-96 truncate">Notes</th>
+                </tr>
+            </thead>
 
-      <tbody>
-        <% if people.any? %>
-          <% people.each do |person| %>
-            <tr class="bg-white border-b hover:bg-gray-100 whitespace-nowrap">
-              <td class="px-4 py-2">
-                <%= link_to person, data: { turbo: false }, class: "mx-2 text-blue-900 hover:text-blue-600" do %>
-                  <i class="fas fa-eye"></i>
+            <tbody>
+                <% if people.any? %>
+                <% people.each do |person| %>
+                <%
+                    inactive = person.status.to_s.casecmp?("Inactive")
+                    row_class =
+                      if inactive
+                        "bg-gray-200 text-gray-500 opacity-60"
+                      else
+                        "bg-white hover:bg-gray-100"
+                      end
+                  %>
+
+                <tr class="<%= row_class %> border-b whitespace-nowrap">
+                    <td class="px-4 py-2">
+                        <%= link_to person, data: { turbo: false }, class: "mx-2 text-blue-900 hover:text-blue-600" do %>
+                        <i class="fas fa-eye"></i>
+                        <% end %>
+                    </td>
+
+                    <td class="px-4 py-2">
+                        <% if can?(:edit, person) %>
+                        <%= link_to person.full_name, edit_person_path(person), class: "text-blue-900 hover:text-blue-700", data: { turbo: false } %>
+                        <% else %>
+                        <span class="text-gray-500"><%= person.full_name %></span>
+                        <% end %>
+                    </td>
+
+                    <td class="px-4 py-2">
+                        <%= person.city %>
+                    </td>
+
+                    <td class="px-4 py-2">
+                        <%= person.state %>
+                    </td>
+
+                    <td class="px-4 py-2">
+                        <%= person.country %>
+                    </td>
+
+                    <td class="px-4 py-2">
+                        <%= person.role %>
+                    </td>
+
+
+                    <td class="px-4 py-2">
+                        <%= person.level %>
+                    </td>
+
+                    <td class="px-4 py-2 break-all max-w-xs whitespace-normal">
+                        <%= person.email %><br>
+                        <%= person.phone %>
+                    </td>
+
+                    <td class="px-4 py-2 text-center">
+                        <%= person.headshot_present? ? 'Yes' : 'No' %>
+                    </td>
+
+                    <td class="px-4 py-2 break-words max-w-xs whitespace-normal"><%= person.associated %></td>
+                    <td class="px-4 py-2"><%= person.gender %></td>
+
+                    <td class="px-4 py-2 max-w-xs">
+                        <span class="block truncate text-sm text-gray-700" title="<%= person.notes %>">
+                            <%= person.notes.presence || "—" %>
+                        </span>
+                    </td>
+
+
+                </tr>
                 <% end %>
-              </td>
-
-            <td class="px-4 py-2">
-              <% if can?(:edit, person) %>
-                <%= link_to person.full_name, edit_person_path(person), class: "text-blue-900 hover:text-blue-700", data: { turbo: false } %>
-              <% else %>
-                <span class="text-gray-500"><%= person.full_name %></span>
-              <% end %>
-            </td>
-
-              <td class="px-4 py-2">
-                <%= person.city %>
-              </td>
-
-               <td class="px-4 py-2">
-                <%= person.state %>
-              </td>
-
-                <td class="px-4 py-2">
-                <%= person.country %>
-              </td>
-
-               <td class="px-4 py-2">
-                <%= person.role %>
-              </td>
-            
-             
-              <td class="px-4 py-2">
-                <%= person.level %>
-              </td>
-            
-              <td class="px-4 py-2 break-all max-w-xs whitespace-normal">
-                <%= person.email %><br>
-                <%= person.phone %>
-              </td>
-
-              <td class="px-4 py-2 text-center">
-                <%= person.headshot_present? ? 'Yes' : 'No' %>
-              </td>
-
-             <td class="px-4 py-2 break-words max-w-xs whitespace-normal"><%= person.associated %></td>
-              <td class="px-4 py-2"><%= person.gender %></td>
-
-           <td class="px-4 py-2 max-w-xs">
-              <span
-                class="block truncate text-sm text-gray-700"
-                title="<%= person.notes %>">
-                <%= person.notes.presence || "—" %>
-              </span>
-            </td>
-
-
-            </tr>
-          <% end %>
-        <% else %>
-          <tr>
-            <td colspan="10" class="text-center px-4 py-2 text-gray-400">
-              No results found.
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+                <% else %>
+                <tr>
+                    <td colspan="10" class="text-center px-4 py-2 text-gray-400">
+                        No results found.
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
 </div>
