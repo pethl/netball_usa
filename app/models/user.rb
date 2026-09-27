@@ -5,25 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable #,:confirmable,
 
   before_create :skip_confirmation!
-         
-  validates :first_name, :last_name, presence: true
-  after_create :send_admin_alert
-  after_create :send_sonya_mail
 
-  # app/models/user.rb
-  scope :active_admins, -> { where(account_active: true)
-  .where.not(role: [2, 12])
-  .where.not(last_name: 'Pethick')
-  .order(:first_name) }
+  has_many :user_group_memberships,
+         dependent: :destroy
 
-  #special group for educators  - sonya
-  scope :active_educator_users, -> {
-    where(account_active: true)
-      .where.not(last_name: "Pethick")
-      .where("(role IN (?) OR last_name = ?)", [4, 8, 10], "Ottaway")
-      .order(:first_name)
-  }
-
+  has_many :user_groups,
+         through: :user_group_memberships
   
   has_many(
     :na_teams,
@@ -44,6 +31,39 @@ class User < ApplicationRecord
     foreign_key: 'user_id',
     inverse_of: :creator
   )
+
+  has_many :assigned_university_tasks,
+         class_name: "UniversityTask",
+         foreign_key: :assigned_user_id,
+         dependent: :nullify
+
+  has_many :created_university_tasks,
+          class_name: "UniversityTask",
+          foreign_key: :created_by_id,
+          dependent: :nullify
+
+  has_many :updated_university_tasks,
+          class_name: "UniversityTask",
+          foreign_key: :updated_by_id,
+          dependent: :nullify
+
+   validates :first_name, :last_name, presence: true
+  after_create :send_admin_alert
+  after_create :send_sonya_mail
+
+  # app/models/user.rb
+  scope :active_admins, -> { where(account_active: true)
+  .where.not(role: [2, 12])
+  .where.not(last_name: 'Pethick')
+  .order(:first_name) }
+
+  #special group for educators  - sonya
+  scope :active_educator_users, -> {
+    where(account_active: true)
+      .where.not(last_name: "Pethick")
+      .where("(role IN (?) OR last_name = ?)", [4, 8, 10], "Ottaway")
+      .order(:first_name)
+  }
   
   #enum role: [:admin, :office, :teamlead]
   enum :role, {:admin=>0, 
@@ -150,6 +170,12 @@ class User < ApplicationRecord
  def us_open_media
    self.role == 'us_open_media'
  end
+
+ def in_group?(group_key)
+    user_groups
+      .where(active: true)
+      .exists?(key: group_key)
+  end
   
  
 #  def active_for_authentication? 

@@ -46,10 +46,11 @@ class UniversityObjectivesController < ApplicationController
   end
 
   def show
-    @university_tasks = @university_objective
-      .university_tasks
-      .ordered
-  end
+  @university_tasks = @university_objective
+    .university_tasks
+    .includes(:assigned_user, :partner)
+    .ordered
+end
 
 
   private

@@ -50,6 +50,7 @@
             </p>
         </div>
 
+
         <div>
             <p class="text-sm text-gray-500">
                 Due Date
@@ -61,6 +62,32 @@
                 <% else %>
                 —
                 <% end %>
+            </p>
+        </div>
+
+        <div>
+            <p class="text-sm text-gray-500">
+                Partner/Organization
+            </p>
+
+            <p class="mt-1 text-sm font-medium text-gray-900">
+                <% if university_task.partner.present? %>
+                <%= link_to university_task.partner.company,
+        partner_path(university_task.partner),
+        class: link_class %>
+                <% else %>
+                —
+                <% end %>
+            </p>
+        </div>
+
+        <div>
+            <p class="text-sm text-gray-500">
+                Assigned To
+            </p>
+
+            <p class="mt-1 text-sm font-medium text-gray-900">
+                <%= university_task.assigned_user&.full_name || "Not assigned" %>
             </p>
         </div>
     </div>

@@ -1,6 +1,17 @@
 class UniversityTask < ApplicationRecord
   belongs_to :university_objective
   belongs_to :partner, optional: true
+  belongs_to :assigned_user,
+           class_name: "User",
+           optional: true
+
+  belongs_to :created_by,
+            class_name: "User",
+            optional: true
+
+  belongs_to :updated_by,
+            class_name: "User",
+            optional: true
 
   after_save_commit :mark_partner_as_usa_university_partner,
                   if: :saved_change_to_partner_id?

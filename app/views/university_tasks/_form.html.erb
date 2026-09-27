@@ -49,6 +49,17 @@
 </div>
 <% end %>
 
+<div class="my-4">
+    <%= form.label :action,
+      "Task",
+      class: "block mb-2 font-medium text-gray-700" %>
+
+    <%= form.text_area :action,
+      rows: 3,
+      class: form_input_class,
+      required: true %>
+</div>
+
 <div class="my-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
     <div>
         <%= form.label :category,
@@ -96,41 +107,51 @@
     </div>
 </div>
 
-<div class="my-4">
-    <%= form.label :partner_id,
-    "Partner Organization",
-    class: "block mb-2 font-medium text-gray-700" %>
-
-    <%= form.select :partner_id,
-    grouped_options_for_select(
-      university_task_partner_options,
-      university_task.partner_id
-    ),
-    { prompt: "Select partner organization" },
-    class: form_input_class %>
-
-    <p class="mt-1 text-sm text-gray-500">
-        Selecting an organization automatically adds it to USA University Partners.
-    </p>
-</div>
-
-<div class="my-4">
-    <%= form.label :action,
-      "Task",
+<div class="my-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+    <div>
+        <%= form.label :partner_id,
+      "Partner Organization",
       class: "block mb-2 font-medium text-gray-700" %>
 
-    <%= form.text_area :action,
-      rows: 4,
-      class: form_input_class,
-      required: true %>
+        <%= form.select :partner_id,
+      grouped_options_for_select(
+        university_task_partner_options,
+        university_task.partner_id
+      ),
+      { prompt: "Select partner organization" },
+      class: form_input_class %>
+
+        <p class="mt-1 text-sm text-gray-500">
+            Selecting an organization automatically adds it to USA University Partners.
+        </p>
+    </div>
+
+    <div>
+        <%= form.label :assigned_user_id,
+      "Assigned To",
+      class: "block mb-2 font-medium text-gray-700" %>
+
+        <%= form.collection_select :assigned_user_id,
+      @assignment_users,
+      :id,
+      :full_name,
+      { prompt: "Unassigned" },
+      class: form_input_class %>
+
+        <p class="mt-1 text-sm text-gray-500">
+            Choices come from the University Admin Team.
+        </p>
+    </div>
 </div>
+
+
 
 <div class="my-4">
     <%= form.label :notes,
       class: "block mb-2 font-medium text-gray-700" %>
 
     <%= form.text_area :notes,
-      rows: 6,
+      rows: 8,
       class: form_input_class %>
 </div>
 

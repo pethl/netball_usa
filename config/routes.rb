@@ -206,5 +206,13 @@ resources :university_tasks, only: [:index, :new, :create] #must be before uni_o
   get "pages/membership_landing"
   match '/users',   to: 'users#index',   via: 'get'
 
+  resources :user_groups,
+          param: :key,
+          only: [:show] do
+  resources :user_group_memberships,
+            only: [:create, :destroy],
+            shallow: true
+end
+
   
 end

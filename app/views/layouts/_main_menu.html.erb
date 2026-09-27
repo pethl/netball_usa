@@ -40,6 +40,11 @@
     <li class="mt-2 ml-2">
         <%= link_to "- Events", university_events_path, class: "text-gray-100" %>
     </li>
+    <li class="mt-2 ml-2">
+        <%= link_to "- Admin Team",
+    user_group_path("university_admin_team"),
+    class: "text-gray-100 hover:font-bold" %>
+    </li>
     <li class="mt-2">
         <a href="/sponsors" class="text-gray-100 hover:font-bold">SPONSORS</a>
     </li>

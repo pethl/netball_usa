@@ -72,7 +72,13 @@
                         </td>
 
                         <td class="align-top px-6 py-4 whitespace-nowrap">
-                            Not assigned
+                            <% if task.assigned_user.present? %>
+                            <%= task.assigned_user.full_name.presence || task.assigned_user.email %>
+                            <% else %>
+                            <span class="font-semibold text-blue-800">
+                                Not assigned
+                            </span>
+                            <% end %>
                         </td>
 
                         <td class="align-top px-6 py-4 whitespace-nowrap">
