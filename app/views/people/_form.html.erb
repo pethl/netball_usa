@@ -1,436 +1,68 @@
 <!-- Main Container -->
 <div class="container m-4 mr-4 w-fit">
 
-  <!-- Form Start -->
-  <%= form_with(model: person, local: true) do |form| %>
+
+    <!-- Form Start -->
+    <%= form_with(model: person, local: true) do |form| %>
     <!-- Error Display -->
     <%= form_errors_for(person) %>
 
-    <!-- Personal Info Section -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 m-4">
-      <!-- First Name -->
-      <div class="mb-0">
-        <%= form.label :first_name, "First Name*", class: label_class %>
-        <div class="mt-1">
-          <%= form.text_field :first_name, class: input_class %>
-        </div>
-      </div>
+    <%= render "personal_details_fields",
+      form: form,
+      person: person %>
 
-      <!-- Last Name -->
-      <div class="mb-0">
-        <%= form.label :last_name, "Last Name*", class: label_class %>
-        <div class="mt-1">
-          <%= form.text_field :last_name, class: input_class %>
-        </div>
-      </div>
+    <br>
 
-      <!-- Status -->
-      <div class="mb-0">
-        <%= form.label :status, "Status*", class: label_class %>
-        <div class="mt-1">
-          <%= form.select :status,
-            options_for_select(people_status, form.object.status),
-            { include_blank: "Select status" },
-            class: input_class %>
-        </div>
-      </div>
+    <%= render "umpire_scorer_fields",
+      form: form,
+      person: person %>
 
-      <!-- Role -->
-      <div class="mb-0">
-        <%= form.label :role, "Role*", class: label_class %>
-        <div class="mt-1">
-          <%= form.select :role,
-            options_for_select(people_role, selected: person.role),
-            {},
-            { required: true, class: input_class } %>
-        </div>
-      </div>
+    <br>
 
-      <!-- Educator Role -->
-      <div class="mb-0">
-        <%= form.label :educator_role, "Educator Role (Trainers only)", class: label_class %>
-        <div class="mt-1">
-          <%= form.select :educator_role,
-            options_for_select(people_educator_role, person.educator_role),
-            { include_blank: "Please select" },
-            class: input_class %>
-        </div>
-      </div>
+    <%= render "frequent_flyer_fields",
+      form: form,
+      person: person %>
 
-      <!-- Gender -->
-      <div class="mb-0">
-        <%= form.label :gender, class: label_class %>
-        <div class="mt-1">
-          <%= form.select :gender,
-            options_for_select(gender, selected: person.gender),
-            { prompt: true },
-            class: input_class %>
-        </div>
-      </div>
+    <br>
 
-      <!-- Region + Associated (nested grid) -->
-      <div class="mb-0">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <!-- Region -->
-          <div>
-            <%= form.label :region, "Region*", class: label_class %>
-            <div class="mt-1">
-              <%= form.select :region,
-                options_for_select(people_region, selected: person.region),
-                {},
-                class: input_class %>
-            </div>
-          </div>
-          <!-- Associated -->
-          <div>
-            <%= form.label :associated, "Associated or Independent?", class: label_class %>
-            <div class="mt-1">
-              <%= form.text_field :associated, class: input_class %>
-            </div>
-          </div>
-        </div>
-      </div>
+    <%= render "event_uniform_fields",
+      form: form,
+      person: person %>
 
-      <!-- Email -->
-      <div class="mb-0">
-        <%= form.label :email, "Email*", class: label_class %>
-        <div class="mt-1">
-          <%= form.text_field :email, class: input_class %>
-        </div>
-      </div>
+    <br>
 
-      <!-- Phone -->
-      <div class="mb-0">
-        <%= form.label :phone, class: label_class %>
-        <div class="mt-1">
-          <%= form.text_field :phone, class: input_class %>
-        </div>
-      </div>
-
-      <!-- Address -->
-      <div class="mb-0">
-        <%= form.label :address, class: label_class %>
-        <div class="mt-1">
-          <%= form.text_field :address, class: input_class %>
-        </div>
-      </div>
-
-      <!-- City + State (nested grid) -->
-      <div class="mb-0">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <!-- City -->
-          <div>
-            <%= form.label :city, class: label_class %>
-            <div class="mt-1">
-              <%= form.text_field :city, class: input_class %>
-            </div>
-          </div>
-          <!-- State -->
-          <div>
-            <%= form.label :state, class: label_class %>
-            <div class="mt-1">
-              <%= form.select :state,
-                options_for_select(us_states, selected: person.state),
-                { prompt: true },
-                class: input_class %>
-            </div>
-          </div>
-        </div>
-      </div>
-
-     <!-- Country + Date of Birth (nested grid) -->
-    <div class="mb-0">
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <!-- Country -->
-        <div>
-          <%= form.label :country, class: label_class %>
-          <div class="mt-1">
-            <%= form.text_field :country, class: input_class %>
-          </div>
-        </div>
-
-        <!-- Date of Birth -->
-        <div>
-          <%= form.label :dob, "Date of Birth", class: label_class %>
-          <div class="mt-1">
-            <%= form.date_field :dob, class: input_class %>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
-    <!-- END Personal Info Section -->
-   
-    
-    <!-- Umpires/Scorers Section -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 m-4">
-      <div class="p-2 border-double border-2 border-blue-900 rounded-md mt-2">
-        <div class="text-sm text-center text-gray-500 m-2">Umpires/Scorers Only</div>
-
-        <!-- Umpire Badge Level -->
-        <div class="mb-6">
-          <%= form.label :level, "NA Umpire Level [Admin Only]", class: label_class %>
-          <div class="mt-1">
-            <%= form.select :level, options_for_select(people_level, :selected => person.level),{prompt: true}, class: input_class %>
-          </div>
-        </div>
-
-         <!-- Level Submittedb y User -->
-        <div class="mb-6">
-          <%= form.label :level_submitted, "Umpire Badge Level", class: label_class %>
-          <div class="mt-1">
-          <%= form.text_field :level_submitted, placeholder: "Country and level of award", class: input_class  %>
-
-          </div>
-        </div>
-
-      
-        <!-- Certification Date -->
-        <div class="mb-6">
-          <%= form.label :certification_date, class: label_class %>
-          <div class="mt-1">
-            <%= form.date_field :certification_date, class: input_class %>
-          </div>
-        </div> 
-
-        <!-- Level Notes -->
-        <div class="mb-4">
-          <%= form.label :level_note, "Level notes", class: label_class %>
-          <div class="mt-1">
-            <%= form.text_area :level_note, class: input_class %>
-          </div>
-        </div>
-
-
-        <!-- Certification File Upload -->
-        <div class="mb-4 mt-4">
-          <%= form.label :certification, "Certification file upload", class: label_class %>
-          <div class="mt-1">
-            <%= form.hidden_field :certification, value: form.object.cached_certification_data, id: nil %>
-            <%= form.file_field :certification, class:"block w-fit ml-5 mb-5 text-xs text-gray-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-30 focus:outline-none" %>
-          </div>
-        </div>
-
-        <!-- Display Certification Image -->
-        <div>
-          <% unless person.certification_url.to_s.empty? %>
-            <%= image_tag person.certification_url, :class => "h-20 w-auto" %>
-            <span class="italic text-sm">To change file, use Certification Upload above.</span>
-          <% end %>
-        </div>
-      </div>
-
- <div class="p-2 border-double border-2 border-blue-900 rounded-md mt-2">
-   <div class="text-sm text-center text-gray-500 m-2">
-   Frequent Flyer Numbers (if relevent)
-   </div>
-
-    <div class="nested-fields p-2 ">
-      <% # Always render 3 FFN fields %>
-      <%= form.fields_for :frequent_flyer_numbers do |ffn_form| %>
-        <div class= "border border-gray-400 mb-2 rounded-md p-2">
-          <div class="field">
-            <%= ffn_form.label :airline, class: label_class %>
-            <%= ffn_form.text_field :airline, class: input_class  %>
-          </div>
-          <div class="field">
-            <%= ffn_form.label :number, class: label_class  %>
-            <%= ffn_form.text_field :number, class: input_class  %>
-          </div>
-    
-          <div class="actions">
-            <%= ffn_form.check_box :_destroy %>
-            <%= ffn_form.label :_destroy, "Remove this FFN", class: "italic text-blue-900" %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div> 
-
-  
-  <!-- Event Related Section -->
-  <div class="p-2 border border-2 border-blue-900 rounded-md mt-2">
-      <div class="text-sm text-center text-gray-500 m-2">Event Related</div>
-    
-      <!-- T-Shirt Size -->
-      <div class="mb-6">
-        <%= form.label :tshirt_size, class: label_class %>
-        <div class="mt-1">
-          <%= form.select :tshirt_size, options_for_select(tshirt_size, :selected => person.tshirt_size), {prompt: true}, class: input_class %>
-        </div>
-      </div>
-
-      <!-- 🔥 Inferno Uniform Block -->
-        <div class="mb-6">
-          <p class="font-semibold text-sm text-blue-900 mb-2">Inferno Uniform</p>
-
-          <!-- 🔼 Top Section -->
-          <p class="text-xs text-gray-500 mb-1">Top</p>
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <%= form.label :inferno_top_polo_size, "Polo Top", class: label_class %>
-              <%= form.text_field :inferno_top_polo_size, class: "#{input_class} text-sm" %>
-            </div>
-            <div>
-              <%= form.label :inferno_top_vneck_size, "V Neck", class: label_class %>
-              <%= form.text_field :inferno_top_vneck_size, class: "#{input_class} text-sm" %>
-            </div>
-          </div>
-
-          <!-- 🔽 Bottom Section -->
-          <p class="text-xs text-gray-500 mt-4 mb-1">Bottom</p>
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <%= form.label :inferno_bottom_skirt_size, "Skirt", class: label_class %>
-              <%= form.text_field :inferno_bottom_skirt_size, class: "#{input_class} text-sm" %>
-            </div>
-            <div>
-              <%= form.label :inferno_bottom_shorts_size, "Shorts", class: label_class %>
-              <%= form.text_field :inferno_bottom_shorts_size, class: "#{input_class} text-sm" %>
-            </div>
-          </div>
-        </div>
-
-      <!-- Invite Back - Admin Only -->
-      <% if current_user&.admin? %>
-        <div class="mb-6 mt-4">
-          <%= form.label :invite_back, "Invite Back (admin only)", class: label_class %>
-          <div class="mt-1">
-            <%= form.select :invite_back, options_for_select(people_invite_back, :selected => person.invite_back), {prompt: true}, class: input_class %>
-          </div>
-        </div>
-      <% end %>
-    </div>
 
     <!-- Trainers/Ambassadors Section -->
     <% if is_admin? %>
-    <div class="p-2 border-double border-2 border-blue-900 rounded-md mt-2">
-      <div class="text-sm text-center text-gray-500 m-2">Trainers/Ambassadors Only</div>
-
-      <!-- In Person Trained -->
-      <div class="flex items-center mb-4 p-2">
-        <%= form.check_box :in_person_trained, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" %>
-        <%= form.label :in_person_trained, "In Person Trained?", class: "ms-2 text-sm font-medium" %>
-      </div>
-
-      <!-- Virtually Trained -->
-      <div class="flex items-center mb-4 p-2">
-        <%= form.check_box :virtually_trained, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" %>
-        <%= form.label :virtually_trained, "Virtually Trained?", class: "ms-2 text-sm font-medium" %>
-      </div>
-
-      <!-- Booth Trained -->
-      <div class="flex items-center mb-4 p-2">
-        <%= form.check_box :booth_trained, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" %>
-        <%= form.label :booth_trained, "Booth Trained?", class: "ms-2 text-sm font-medium" %>
-      </div>
-    </div>
+    <%= render "trainer_ambassador_fields",
+      form: form,
+      person: person %>
     <% end %>
 
-    <!-- Headshot Section -->
-    <div class="p-2 border-double border-2 border-blue-900 rounded-md mt-2">
-      <div class="text-sm text-center text-gray-500 m-2">Headshot</div>
+    <br>
 
-      <div class="flex items-center mb-4">
-        <%= form.check_box :headshot_present, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>      
-        <%= form.label :headshot_present, "Have Headshot?",class: "ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"  %>
-      </div>
-          
-      <div class="mb-4 mt-4">
-        <%= form.label :image, "Headshot file upload", class: label_class %>
-          <div class="mt-1">
-            <%= form.hidden_field :headshot, value: form.object.cached_headshot_data, id: nil %>
-            <%= form.file_field :headshot, class:"block w-fit ml-5 mb-5 text-xs text-gray-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-30 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" %>
-          </div>
-      </div>
+    <%= render "document_fields",
+      form: form,
+      person: person %>
 
-      <div class="">
-        <% unless person.headshot_url.to_s.empty? %>
-        <%= image_tag person.headshot_url, :class => "h-20 w-auto" %>
-        <span class="italic text-sm">To change file, use Headshot Upload above.</span>
-        <% end %>
-      </div>
-    </div>
-    
+    <br>
 
-  <div>
-      <% if is_admin? %>
-      <!-- Resume Section -->
-    <div class="p-2 border-double border-2 border-blue-900 rounded-md mt-2">
-    <div class="text-sm text-center text-gray-500 m-2">Resume</div>
-        
-        <div class="mb-4 mt-4">
-          <%= form.label :image, "Resume file upload", class: label_class %>
-            <div class="mt-1">
-              <%= form.hidden_field :resume, value: form.object.cached_resume_data, id: nil %>
-              <%= form.file_field :resume, class:"block w-fit ml-5 mb-5 text-xs text-gray-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-30 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" %>
-            </div>
-        </div>
-
-        <div class="">
-          <% unless person.resume_url.to_s.empty? %>
-          <%= image_tag person.resume_url, :class => "h-20 w-auto" %>
-          <span class="italic text-sm">To change file, use Resume Upload above.</span>
-          <% end %>
-        </div>
-      
-      </div>
-    </div>
-          <% end %>
-  </div>
-
-<% if is_admin? %>
-<div class="m-4 p-2 border-double border-2 border-blue-900 rounded-md mt-2">
-  <div class="text-sm text-left text-gray-500 m-2">Notes (Admin Only)</div>
-    <div class="mb-2 mt-4">
-     
-      <div class="mt-1">
-        <%= form.text_area :notes,  size: "20x4", class: input_class %>
-      </div>
-    </div>
-  </div>
-<% end %>
-
-<% if current_user&.role != "na_people" %>
-  <div class="m-4 p-2 border-double border-2 border-blue-900 rounded-md mt-2">
-    <div class="text-sm text-left text-gray-500 m-2">Events (Admin/Event Admin Only)</div>
-
-    <p class="text-sm font-medium text-gray-900 dark:text-white">
-      <% if person.events.any? %>
-        <ul class="list-disc ms-6">
-          <% person.events.each do |event| %>
-            <li class="text-sm">
-              <%= event.date.to_formatted_s(:usa) unless event.date.blank? %> - <%= event.name %><br>
-            </li>
-          <% end %>
-        </ul>
-      <% else %>
-        <span class="text-sm text-gray-500 my-2">No events assigned yet.</span>
-      <% end %>
-    </p>
-
-    <%= link_to "Assign to New Event? >>", events_path, class: routing_link_class %>
-
-    <% if @events.present? %>
-      <div class="mb-6">
-        <p class="block text-sm font-medium text-gray-700">Personnel (check box to assign to event)</p>
-        <div class="mt-1">
-          <%= form.collection_check_boxes :event_ids, @events, :id, :event_date_type_name do |b| %>
-            <span class="indent-3">
-              <%= b.check_box %>
-              <%= b.label %><br>
-            </span>
-          <% end %>
-        </div>
-      </div>
-    <% else %>
-      <p class="text-sm text-red-500 mt-2">There are no future events to assign.</p>
+    <% if is_admin? %>
+    <%= render "admin_notes_fields",
+        form: form,
+        person: person %>
     <% end %>
-  </div>
-<% end %>
 
-   <div class="text-right">
-      <%= form.submit "Save Record", class: form_button_class %>
+    <br>
+
+    <% if current_user&.role != "na_people" %>
+    <%= render "event_assignment_fields",
+        form: form,
+        person: person %>
+    <% end %>
+
+    <div class="text-right">
+        <%= form.submit "Save Record", class: form_button_class %>
     </div>
-  <% end %>
+    <% end %>
 </div>

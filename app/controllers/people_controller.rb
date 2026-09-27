@@ -145,19 +145,39 @@ load_and_authorize_resource except: :destroy
   end
 
   # GET /people/new
-  def new
+ def new
     @person = Person.new
-    # Always build 3 FrequentFlyerNumber records (even if they are empty)
-    3.times { @person.frequent_flyer_numbers.build }
+
+    if params[:role] == "University Squad"
+      @person.role = "University Squad"
+
+      @person.build_university_athlete_profile(
+        registered_at: Date.current
+      )
+    end
+
+    3.times do
+      @person.frequent_flyer_numbers.build
+    end
+
     @events = get_future_events
   end
 
   # GET /people/1/edit
   def edit
-   # @person.frequent_flyer_numbers.build if @person.frequent_flyer_numbers.empty? # Ensure a field is present
-   3.times { @person.frequent_flyer_numbers.build if @person.frequent_flyer_numbers.size < 3 } 
-   @events = get_future_events
-  end
+      if @person.role == "University Squad" &&
+          @person.university_athlete_profile.blank?
+        @person.build_university_athlete_profile
+      end
+
+      3.times do
+        if @person.frequent_flyer_numbers.size < 3
+          @person.frequent_flyer_numbers.build
+        end
+      end
+
+      @events = get_future_events
+    end
 
   # POST /people
   def create
@@ -212,6 +232,13 @@ load_and_authorize_resource except: :destroy
                   status: :see_other
     end
 
+  def university_squad
+      @people = Person
+        .where(role: "University Squad")
+        .includes(:university_athlete_profile)
+        .ordered
+    end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_person
@@ -219,20 +246,95 @@ load_and_authorize_resource except: :destroy
     end
 
     # Only allow a list of trusted parameters through.
-    def person_params
-      person_params= params.require(:person).permit(:first_name, :last_name, :dob, :status, :role, :educator_role, :region, :location, :city, :state, :country, :email, :level, :level_note, :level_submitted, :phone, :address, :associated, :gender, :tshirt_size, :uniform_size,  :inferno_top_polo_size, :inferno_top_vneck_size, :inferno_bottom_skirt_size, :inferno_bottom_shorts_size, :invite_back,:headshot, :headshot_path, :description, :image, :accept_notes, :notes, :in_person_trained, :virtually_trained, :booth_trained, :headshot_present, :certification, :certification_date, :resume, event_ids: [], frequent_flyer_numbers_attributes: [:id, :airline, :number, :_destroy])
-     
-      # Add invite_back only for admin users
-      person_params[:invite_back] = params.dig(:person, :invite_back) if current_user&.admin?
-    
-      # Ensure we're checking each ffn correctly
-      person_params[:frequent_flyer_numbers_attributes].reject! do |index, ffn|
-        ffn[:airline].blank? && ffn[:number].blank?
-      end
-    
-      person_params
-    end
+   def person_params
+        permitted = params.require(:person).permit(
+          :first_name,
+          :last_name,
+          :dob,
+          :status,
+          :role,
+          :educator_role,
+          :region,
+          :location,
+          :city,
+          :state,
+          :zip_code,
+          :country,
+          :email,
+          :phone,
+          :address,
+          :gender,
+          :associated,
+          :level,
+          :level_note,
+          :level_submitted,
+          :description,
+          :notes,
+          :accept_notes,
+          :tshirt_size,
+          :uniform_size,
+          :inferno_top_polo_size,
+          :inferno_top_vneck_size,
+          :inferno_bottom_skirt_size,
+          :inferno_bottom_shorts_size,
+          :in_person_trained,
+          :virtually_trained,
+          :booth_trained,
+          :headshot_present,
+          :headshot,
+          :headshot_path,
+          :image,
+          :certification,
+          :certification_date,
+          :resume,
+          event_ids: [],
+          frequent_flyer_numbers_attributes: [
+            :id,
+            :airline,
+            :number,
+            :_destroy
+          ],
+          university_athlete_profile_attributes: [
+            :id,
+            :registered_at,
+            :american,
+            :usa_college,
+            :final_eligibility,
+            :trial_fee_paid,
+            :platform_fee,
+            :net_fee,
+            :netball_america_experience,
+            :previous_netball_america_involvement,
+            :netball_pathway_experience,
+            :first_position,
+            :second_position,
+            :trial_format,
+            :virtual_trial_footage,
+            :trial_footage_explanation,
+            :fast5_experience,
+            :international_health_insurance,
+            :emergency_contact
+          ]
+        )
 
+        if current_user&.admin?
+          permitted[:invite_back] = params.dig(
+            :person,
+            :invite_back
+          )
+        end
+
+        if permitted[:frequent_flyer_numbers_attributes].present?
+          permitted[:frequent_flyer_numbers_attributes].reject! do |_index, ffn|
+            ffn[:airline].blank? &&
+              ffn[:number].blank?
+          end
+        end
+
+        permitted
+      end
+     
+     
     def get_future_events
       Event.where("date > ?", Time.now - 1.month).order(date: :asc) || []
     end

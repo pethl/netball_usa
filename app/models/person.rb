@@ -12,6 +12,11 @@ class Person < ApplicationRecord
   has_many :frequent_flyer_numbers, dependent: :destroy
   accepts_nested_attributes_for :frequent_flyer_numbers, allow_destroy: true
 
+  has_one :university_athlete_profile,
+        dependent: :destroy
+
+  accepts_nested_attributes_for :university_athlete_profile
+
   # ========== Scopes ==========
   scope :ordered, -> { order(first_name: :asc) }
   scope :active,   -> { where(status: "Active") }

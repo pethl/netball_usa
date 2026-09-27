@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_09_27_101853) do
+ActiveRecord::Schema[7.1].define(version: 2026_09_27_153856) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -641,6 +641,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_09_27_101853) do
     t.string "state"
     t.string "country"
     t.date "dob"
+    t.string "zip_code"
   end
 
   create_table "press_releases", force: :cascade do |t|
@@ -866,6 +867,31 @@ ActiveRecord::Schema[7.1].define(version: 2026_09_27_101853) do
     t.string "level_note"
   end
 
+  create_table "university_athlete_profiles", force: :cascade do |t|
+    t.bigint "person_id", null: false
+    t.date "registered_at"
+    t.boolean "american"
+    t.string "usa_college"
+    t.string "final_eligibility"
+    t.boolean "trial_fee_paid"
+    t.decimal "platform_fee", precision: 10, scale: 2
+    t.decimal "net_fee", precision: 10, scale: 2
+    t.boolean "netball_america_experience"
+    t.text "previous_netball_america_involvement"
+    t.text "netball_pathway_experience"
+    t.string "first_position"
+    t.string "second_position"
+    t.string "trial_format"
+    t.string "virtual_trial_footage"
+    t.text "trial_footage_explanation"
+    t.text "fast5_experience"
+    t.string "international_health_insurance"
+    t.text "emergency_contact"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_university_athlete_profiles_on_person_id", unique: true
+  end
+
   create_table "university_objectives", force: :cascade do |t|
     t.string "timeframe", null: false
     t.string "title", null: false
@@ -1048,6 +1074,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_09_27_101853) do
   add_foreign_key "teams", "users"
   add_foreign_key "transfers", "events"
   add_foreign_key "transfers", "people"
+  add_foreign_key "university_athlete_profiles", "people"
   add_foreign_key "university_tasks", "partners"
   add_foreign_key "university_tasks", "university_objectives"
   add_foreign_key "university_tasks", "users", column: "assigned_user_id"

@@ -1,0 +1,96 @@
+<% content_for(:page_title, "USA University Squad") %>
+
+<div class="my-4">
+    <%= link_to "Add New Squad Member",
+    new_person_path(role: "University Squad"),
+    class: form_button_class %>
+</div>
+
+<% if @people.any? %>
+<div class="relative overflow-x-auto">
+    <table class="w-full text-left rtl:text-right">
+        <thead class="border-b bg-gray-200 text-xs font-light text-gray-500">
+            <tr>
+                <th scope="col" class="px-4 py-3">
+                    Name
+                </th>
+
+                <th scope="col" class="px-4 py-3">
+                    USA College
+                </th>
+
+                <th scope="col" class="px-4 py-3">
+                    Eligibility
+                </th>
+
+                <th scope="col" class="px-4 py-3">
+                    Positions
+                </th>
+
+                <th scope="col" class="px-4 py-3">
+                    Location
+                </th>
+
+                <th scope="col" class="px-4 py-3">
+                    Email
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @people.each do |person| %>
+            <%
+            profile = person.university_athlete_profile
+            inactive = person.status.to_s.casecmp?("Inactive")
+
+            row_class =
+              if inactive
+                "bg-gray-200 text-gray-500 opacity-60"
+              else
+                "bg-white hover:bg-gray-100"
+              end
+          %>
+
+            <tr class="<%= row_class %> border-b">
+                <td class="px-4 py-3 align-top font-medium">
+                    <%= link_to person.full_name,
+                edit_person_path(person),
+                class: link_class,
+                data: { turbo: false } %>
+                </td>
+
+                <td class="px-4 py-3 align-top">
+                    <%= profile&.usa_college.presence || "—" %>
+                </td>
+
+                <td class="px-4 py-3 align-top">
+                    <%= profile&.final_eligibility.presence || "—" %>
+                </td>
+
+                <td class="px-4 py-3 align-top">
+                    <%= [
+                profile&.first_position.presence,
+                profile&.second_position.presence
+              ].compact.join(" / ").presence || "—" %>
+                </td>
+
+                <td class="px-4 py-3 align-top">
+                    <%= [
+                person.city.presence,
+                person.state.presence
+              ].compact.join(", ").presence || "—" %>
+                </td>
+
+                <td class="px-4 py-3 align-top">
+                    <%= person.email %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+<% else %>
+<p class="px-4 py-4 text-gray-500">
+    No USA University squad members have been added.
+</p>
+<% end %>

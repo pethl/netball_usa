@@ -1,0 +1,261 @@
+<div class="mx-4 mt-8 rounded-lg border border-blue-900 bg-blue-50 p-4">
+    <h2 class="mb-6 text-lg font-semibold text-gray-800">
+        USA University Athlete Details
+    </h2>
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-4">
+        <div>
+            <%= form.label :registered_at,
+        "Date Registered",
+        class: label_class %>
+
+            <div class="mt-1">
+                <%= form.date_field :registered_at,
+          class: input_class %>
+            </div>
+        </div>
+
+        <div>
+            <%= form.label :american,
+        "American?",
+        class: label_class %>
+
+            <div class="mt-1">
+                <%= form.select :american,
+          options_for_select(
+            [["Yes", true], ["No", false]],
+            form.object.american
+          ),
+          { include_blank: "Not answered" },
+          class: input_class %>
+            </div>
+        </div>
+
+        <div>
+            <%= form.label :usa_college,
+        "USA College",
+        class: label_class %>
+
+            <div class="mt-1">
+                <%= form.text_field :usa_college,
+          class: input_class %>
+            </div>
+        </div>
+
+        <div>
+            <%= form.label :final_eligibility,
+        "Final Eligibility",
+        class: label_class %>
+
+            <div class="mt-1">
+                <%= form.text_field :final_eligibility,
+          class: input_class %>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="mb-4 mt-8 font-semibold text-gray-700">
+        Fees
+    </h3>
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div>
+            <%= form.label :trial_fee_paid,
+        "Trial Fee Paid?",
+        class: label_class %>
+
+            <div class="mt-1">
+                <%= form.select :trial_fee_paid,
+          options_for_select(
+            [["Yes", true], ["No", false]],
+            form.object.trial_fee_paid
+          ),
+          { include_blank: "Not answered" },
+          class: input_class %>
+            </div>
+        </div>
+
+        <div>
+            <%= form.label :platform_fee,
+        "Platform Fee",
+        class: label_class %>
+
+            <div class="mt-1">
+                <%= form.number_field :platform_fee,
+          step: "0.01",
+          min: 0,
+          class: input_class %>
+            </div>
+        </div>
+
+        <div>
+            <%= form.label :net_fee,
+        "Net Fee",
+        class: label_class %>
+
+            <div class="mt-1">
+                <%= form.number_field :net_fee,
+          step: "0.01",
+          min: 0,
+          class: input_class %>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="mb-4 mt-8 font-semibold text-gray-700">
+        Playing Experience
+    </h3>
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div>
+            <%= form.label :first_position,
+        "First Position",
+        class: label_class %>
+
+            <div class="mt-1">
+                <%= form.text_field :first_position,
+          class: input_class %>
+            </div>
+        </div>
+
+        <div>
+            <%= form.label :second_position,
+        "Second Position",
+        class: label_class %>
+
+            <div class="mt-1">
+                <%= form.text_field :second_position,
+          class: input_class %>
+            </div>
+        </div>
+
+        <div>
+            <%= form.label :netball_america_experience,
+        "Previous Netball America Experience?",
+        class: label_class %>
+
+            <div class="mt-1">
+                <%= form.select :netball_america_experience,
+          options_for_select(
+            [["Yes", true], ["No", false]],
+            form.object.netball_america_experience
+          ),
+          { include_blank: "Not answered" },
+          class: input_class %>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div>
+            <%= form.label :netball_pathway_experience,
+        "Netball Pathway Experience",
+        class: label_class %>
+
+            <div class="mt-1">
+                <%= form.text_area :netball_pathway_experience,
+          rows: 5,
+          class: input_class %>
+            </div>
+        </div>
+
+        <div>
+            <%= form.label :previous_netball_america_involvement,
+        "Previous Netball America Involvement",
+        class: label_class %>
+
+            <div class="mt-1">
+                <%= form.text_area :previous_netball_america_involvement,
+          rows: 5,
+          class: input_class %>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <%= form.label :fast5_experience,
+      "FAST5 Experience",
+      class: label_class %>
+
+        <div class="mt-1">
+            <%= form.text_area :fast5_experience,
+        rows: 3,
+        class: input_class %>
+        </div>
+    </div>
+
+    <h3 class="mb-4 mt-8 font-semibold text-gray-700">
+        Trial
+    </h3>
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div>
+            <%= form.label :trial_format,
+        "In Person / Virtual",
+        class: label_class %>
+
+            <div class="mt-1">
+                <%= form.select :trial_format,
+          options_for_select(
+            ["In Person", "Virtual"],
+            form.object.trial_format
+          ),
+          { include_blank: "Please select" },
+          class: input_class %>
+            </div>
+        </div>
+
+        <div>
+            <%= form.label :virtual_trial_footage,
+        "Virtual Trial Footage",
+        class: label_class %>
+
+            <div class="mt-1">
+                <%= form.url_field :virtual_trial_footage,
+          placeholder: "https://",
+          class: input_class %>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <%= form.label :trial_footage_explanation,
+      "Competition or Training Shown in the Video",
+      class: label_class %>
+
+        <div class="mt-1">
+            <%= form.text_area :trial_footage_explanation,
+        rows: 4,
+        class: input_class %>
+        </div>
+    </div>
+
+    <h3 class="mb-4 mt-8 font-semibold text-gray-700">
+        Health and Emergency Information
+    </h3>
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div>
+            <%= form.label :international_health_insurance,
+        "International Health Insurance",
+        class: label_class %>
+
+            <div class="mt-1">
+                <%= form.text_field :international_health_insurance,
+          class: input_class %>
+            </div>
+        </div>
+
+        <div>
+            <%= form.label :emergency_contact,
+        "Emergency Contact",
+        class: label_class %>
+
+            <div class="mt-1">
+                <%= form.text_area :emergency_contact,
+          rows: 3,
+          class: input_class %>
+            </div>
+        </div>
+    </div>
+</div>

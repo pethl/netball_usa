@@ -93,10 +93,11 @@ resources :university_tasks, only: [:index, :new, :create] #must be before uni_o
   
   # ========== People ==========
   resources :people do
-    collection do
-      get :print_details_pdf
+      collection do
+        get :print_details_pdf
+        get :university_squad
+      end
     end
-  end
   
   # ========== Events ==========
   resources :events do

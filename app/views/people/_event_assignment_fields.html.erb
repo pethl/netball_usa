@@ -1,0 +1,94 @@
+<section data-controller="accordion" class="mt-6 rounded-lg border border-gray-200 border-t-4 border-t-blue-900 bg-white shadow-sm">
+    <button type="button" data-action="click->accordion#toggle" class="flex w-full items-center justify-between p-6 text-left transition-colors duration-200 hover:bg-blue-50">
+        <span>
+            <span class="block text-sm font-semibold uppercase tracking-wide text-blue-900">
+                Event Assignments
+            </span>
+
+            <span class="mt-1 block text-xs font-normal text-gray-500">
+                <%= pluralize(person.events.size, "event") %> currently assigned
+            </span>
+        </span>
+
+        <span class="text-xs font-medium text-blue-800">
+            Show / hide
+        </span>
+    </button>
+
+    <div data-accordion-target="body" class="hidden border-t border-gray-200 p-6">
+        <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+
+            <!-- Current Events -->
+            <div class="rounded-lg border border-gray-200 bg-gray-50 p-6">
+                <h3 class="text-sm font-semibold text-blue-900">
+                    Current Events
+                </h3>
+
+                <% if person.events.any? %>
+                <ul class="mt-4 space-y-2">
+                    <% person.events.each do |event| %>
+                    <li class="rounded-md border border-gray-200 bg-white p-3 text-sm text-gray-700">
+                        <% if event.date.present? %>
+                        <span class="font-medium">
+                            <%= event.date.to_formatted_s(:usa) %>
+                        </span>
+                        <span class="mx-1 text-gray-400">—</span>
+                        <% end %>
+
+                        <%= event.name %>
+                    </li>
+                    <% end %>
+                </ul>
+                <% else %>
+                <p class="mt-4 text-sm text-gray-500">
+                    No events assigned yet.
+                </p>
+                <% end %>
+
+                <div class="mt-5">
+                    <%= link_to "View Events",
+                events_path,
+                class: routing_link_class %>
+                </div>
+            </div>
+
+            <!-- Assign Future Events -->
+            <div class="rounded-lg border border-gray-200 bg-gray-50 p-6">
+                <h3 class="text-sm font-semibold text-blue-900">
+                    Assign to Future Events
+                </h3>
+
+                <% if @events.present? %>
+                <p class="mt-1 text-xs text-gray-500">
+                    Select each event this person should attend.
+                </p>
+
+                <div class="mt-4 space-y-3">
+                    <%= form.collection_check_boxes(
+                  :event_ids,
+                  @events,
+                  :id,
+                  :event_date_type_name
+                ) do |event_box| %>
+
+                    <label class="flex cursor-pointer items-start rounded-md border border-gray-200 bg-white p-3 transition-colors duration-200 hover:bg-blue-50">
+                        <%= event_box.check_box(
+                      class: "mt-1 h-4 w-4 rounded border-gray-300 text-blue-900 focus:ring-blue-800"
+                    ) %>
+
+                        <span class="ml-3 text-sm text-gray-700">
+                            <%= event_box.text %>
+                        </span>
+                    </label>
+                    <% end %>
+                </div>
+                <% else %>
+                <p class="mt-4 text-sm text-red-600">
+                    There are no future events to assign.
+                </p>
+                <% end %>
+            </div>
+
+        </div>
+    </div>
+</section>

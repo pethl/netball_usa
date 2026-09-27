@@ -1,0 +1,116 @@
+<section data-controller="accordion" class="rounded-lg border border-gray-200 border-t-4 border-t-blue-900 bg-white shadow-sm md:col-span-3">
+    <button type="button" data-action="click->accordion#toggle" class="flex w-full items-center justify-between p-6 text-left transition-colors duration-200 hover:bg-blue-50" <span class="text-sm font-semibold uppercase tracking-wide text-blue-900">
+        Event and Uniform Details
+        </span>
+
+        <span class="text-xs font-medium text-blue-800">
+            Show / hide
+        </span>
+    </button>
+
+    <div data-accordion-target="body" class="hidden border-t border-gray-200 p-6">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+
+            <!-- T-Shirt Size -->
+            <div>
+                <%= form.label :tshirt_size,
+              "T-Shirt Size",
+              class: label_class %>
+
+                <div class="mt-1">
+                    <%= form.select :tshirt_size,
+                options_for_select(
+                  tshirt_size,
+                  selected: person.tshirt_size
+                ),
+                { prompt: true },
+                class: input_class %>
+                </div>
+            </div>
+
+            <!-- Invite Back -->
+            <% if current_user&.admin? %>
+            <div>
+                <%= form.label :invite_back,
+                "Invite Back (Admin Only)",
+                class: label_class %>
+
+                <div class="mt-1">
+                    <%= form.select :invite_back,
+                  options_for_select(
+                    people_invite_back,
+                    selected: person.invite_back
+                  ),
+                  { prompt: true },
+                  class: input_class %>
+                </div>
+            </div>
+            <% end %>
+
+        </div>
+
+        <div class="mt-6 border-t border-gray-200 pt-5">
+            <div class="mb-4">
+                <h3 class="text-sm font-semibold text-blue-900">
+                    Inferno Uniform
+                </h3>
+
+                <p class="mt-1 text-xs text-gray-500">
+                    Record the required top and bottom sizes.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+
+                <!-- Polo Top -->
+                <div>
+                    <%= form.label :inferno_top_polo_size,
+                "Polo Top",
+                class: label_class %>
+
+                    <div class="mt-1">
+                        <%= form.text_field :inferno_top_polo_size,
+                  class: input_class %>
+                    </div>
+                </div>
+
+                <!-- V-Neck Top -->
+                <div>
+                    <%= form.label :inferno_top_vneck_size,
+                "V-Neck Top",
+                class: label_class %>
+
+                    <div class="mt-1">
+                        <%= form.text_field :inferno_top_vneck_size,
+                  class: input_class %>
+                    </div>
+                </div>
+
+                <!-- Skirt -->
+                <div>
+                    <%= form.label :inferno_bottom_skirt_size,
+                "Skirt",
+                class: label_class %>
+
+                    <div class="mt-1">
+                        <%= form.text_field :inferno_bottom_skirt_size,
+                  class: input_class %>
+                    </div>
+                </div>
+
+                <!-- Shorts -->
+                <div>
+                    <%= form.label :inferno_bottom_shorts_size,
+                "Shorts",
+                class: label_class %>
+
+                    <div class="mt-1">
+                        <%= form.text_field :inferno_bottom_shorts_size,
+                  class: input_class %>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

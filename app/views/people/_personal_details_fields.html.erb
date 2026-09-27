@@ -1,0 +1,200 @@
+<section class="rounded-lg border border-gray-200 border-t-4 border-t-blue-900 bg-white p-6 shadow-sm transition-colors duration-200 hover:bg-blue-50">
+    <div class="mb-5 flex flex-col gap-1 border-b border-gray-200 pb-3 sm:flex-row sm:items-baseline sm:justify-between">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-blue-900">
+            Personal Details
+        </h2>
+
+        <p class="text-xs text-gray-500">
+            Contact information and general details
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+
+        <!-- First Name -->
+        <div>
+            <%= form.label :first_name, "First Name*", class: label_class %>
+
+            <div class="mt-1">
+                <%= form.text_field :first_name, class: input_class %>
+            </div>
+        </div>
+
+        <!-- Last Name -->
+        <div>
+            <%= form.label :last_name, "Last Name*", class: label_class %>
+
+            <div class="mt-1">
+                <%= form.text_field :last_name, class: input_class %>
+            </div>
+        </div>
+
+        <!-- Status -->
+        <div>
+            <%= form.label :status, "Status*", class: label_class %>
+
+            <div class="mt-1">
+                <%= form.select :status,
+              options_for_select(people_status, form.object.status),
+              { include_blank: "Select status" },
+              class: input_class %>
+            </div>
+        </div>
+
+        <!-- Role -->
+        <div>
+            <%= form.label :role, "Role*", class: label_class %>
+
+            <div class="mt-1">
+                <%= form.select :role,
+              options_for_select(people_role, selected: person.role),
+              {},
+              { required: true, class: input_class } %>
+            </div>
+        </div>
+
+        <!-- Educator Role -->
+        <div>
+            <%= form.label :educator_role, "Educator Role", class: label_class %>
+
+            <div class="mt-1">
+                <%= form.select :educator_role,
+              options_for_select(
+                people_educator_role,
+                person.educator_role
+              ),
+              { include_blank: "Please select" },
+              class: input_class %>
+            </div>
+        </div>
+
+        <!-- Date of Birth -->
+        <div>
+            <%= form.label :dob, "Date of Birth", class: label_class %>
+
+            <div class="mt-1">
+                <%= form.date_field :dob, class: input_class %>
+            </div>
+        </div>
+
+        <!-- Gender -->
+        <div>
+            <%= form.label :gender, class: label_class %>
+
+            <div class="mt-1">
+                <%= form.select :gender,
+              options_for_select(gender, selected: person.gender),
+              { prompt: true },
+              class: input_class %>
+            </div>
+        </div>
+
+        <!-- Region -->
+        <div>
+            <%= form.label :region, "Region*", class: label_class %>
+
+            <div class="mt-1">
+                <%= form.select :region,
+              options_for_select(
+                people_region,
+                selected: person.region
+              ),
+              {},
+              class: input_class %>
+            </div>
+        </div>
+
+        <!-- Associated or Independent -->
+        <div>
+            <%= form.label :associated,
+            "Associated or Independent?",
+            class: label_class %>
+
+            <div class="mt-1">
+                <%= form.text_field :associated, class: input_class %>
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="lg:col-span-2">
+            <%= form.label :email, "Email*", class: label_class %>
+
+            <div class="mt-1">
+                <%= form.text_field :email,
+              class: input_class,
+              autocomplete: "email" %>
+            </div>
+        </div>
+
+        <!-- Phone -->
+        <div>
+            <%= form.label :phone, class: label_class %>
+
+            <div class="mt-1">
+                <%= form.text_field :phone,
+              class: input_class,
+              autocomplete: "tel" %>
+            </div>
+        </div>
+
+        <!-- Address -->
+        <div class="md:col-span-2">
+            <%= form.label :address, class: label_class %>
+
+            <div class="mt-1">
+                <%= form.text_field :address,
+              class: input_class,
+              autocomplete: "street-address" %>
+            </div>
+        </div>
+
+        <!-- City -->
+        <div>
+            <%= form.label :city, class: label_class %>
+
+            <div class="mt-1">
+                <%= form.text_field :city,
+              class: input_class,
+              autocomplete: "address-level2" %>
+            </div>
+        </div>
+
+        <!-- State -->
+        <div>
+            <%= form.label :state, class: label_class %>
+
+            <div class="mt-1">
+                <%= form.select :state,
+              options_for_select(
+                us_states,
+                selected: person.state
+              ),
+              { prompt: true },
+              class: input_class %>
+            </div>
+        </div>
+
+        <!-- ZIP Code -->
+        <div>
+            <%= form.label :zip_code, "ZIP Code", class: label_class %>
+
+            <div class="mt-1">
+                <%= form.text_field :zip_code,
+              class: input_class,
+              autocomplete: "postal-code" %>
+            </div>
+        </div>
+
+        <!-- Country -->
+        <div>
+            <%= form.label :country, class: label_class %>
+
+            <div class="mt-1">
+                <%= form.text_field :country,
+              class: input_class,
+              autocomplete: "country-name" %>
+            </div>
+        </div>
+
+    </div>
+</section>
