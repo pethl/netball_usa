@@ -116,7 +116,7 @@
         </div>
 
         <!-- Email -->
-        <div class="lg:col-span-2">
+        <div class="md:col-span-2">
             <%= form.label :email, "Email*", class: label_class %>
 
             <div class="mt-1">
@@ -138,7 +138,7 @@
         </div>
 
         <!-- Address -->
-        <div class="md:col-span-2">
+        <div class="md:col-span-3">
             <%= form.label :address, class: label_class %>
 
             <div class="mt-1">
@@ -147,6 +147,9 @@
               autocomplete: "street-address" %>
             </div>
         </div>
+
+        <!-- spacer -->
+        <div class="hidden md:block"></div>
 
         <!-- City -->
         <div>

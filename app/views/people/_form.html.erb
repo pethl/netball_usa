@@ -1,68 +1,63 @@
 <!-- Main Container -->
 <div class="container m-4 mr-4 w-fit">
 
-
-    <!-- Form Start -->
     <%= form_with(model: person, local: true) do |form| %>
-    <!-- Error Display -->
     <%= form_errors_for(person) %>
 
-    <%= render "personal_details_fields",
-      form: form,
-      person: person %>
+    <div class="flex flex-col gap-6">
+        <%= render "personal_details_fields",
+            form: form,
+            person: person %>
 
-    <br>
+        <% if person.role == "University Squad" ||
+            person.university_athlete_profile.present? %>
 
-    <%= render "umpire_scorer_fields",
-      form: form,
-      person: person %>
+                <%= form.fields_for :university_athlete_profile do |profile_form| %>
+                <%= render "university_athlete_profile_fields",
+                form: profile_form %>
+                <% end %>
 
-    <br>
+        <% end %>
 
-    <%= render "frequent_flyer_fields",
-      form: form,
-      person: person %>
+        <%= render "umpire_scorer_fields",
+            form: form,
+            person: person %>
 
-    <br>
+        <%= render "frequent_flyer_fields",
+            form: form,
+            person: person %>
 
-    <%= render "event_uniform_fields",
-      form: form,
-      person: person %>
+        <%= render "event_uniform_fields",
+            form: form,
+            person: person %>
 
-    <br>
+        <% if is_admin? %>
+        <%= render "trainer_ambassador_fields",
+              form: form,
+              person: person %>
+        <% end %>
 
+        <%= render "document_fields",
+            form: form,
+            person: person %>
 
-    <!-- Trainers/Ambassadors Section -->
-    <% if is_admin? %>
-    <%= render "trainer_ambassador_fields",
-      form: form,
-      person: person %>
-    <% end %>
+        <% if is_admin? %>
+        <%= render "admin_notes_fields",
+              form: form,
+              person: person %>
+        <% end %>
 
-    <br>
+        <% if current_user&.role != "na_people" %>
+        <%= render "event_assignment_fields",
+              form: form,
+              person: person %>
+        <% end %>
+    </div>
 
-    <%= render "document_fields",
-      form: form,
-      person: person %>
-
-    <br>
-
-    <% if is_admin? %>
-    <%= render "admin_notes_fields",
-        form: form,
-        person: person %>
-    <% end %>
-
-    <br>
-
-    <% if current_user&.role != "na_people" %>
-    <%= render "event_assignment_fields",
-        form: form,
-        person: person %>
-    <% end %>
-
-    <div class="text-right">
-        <%= form.submit "Save Record", class: form_button_class %>
+    <div class="mt-6 pb-4 text-right">
+        <%= form.submit "Save Record",
+            class: large_form_button_class %>
     </div>
     <% end %>
+
 </div>

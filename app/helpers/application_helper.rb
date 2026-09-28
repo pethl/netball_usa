@@ -268,6 +268,10 @@ end
      "m-2 bg-blue-900 hover:bg-blue-700 text-white font-light py-2 px-3 rounded"
   end
 
+  def large_form_button_class
+    "inline-flex items-center justify-center rounded-lg bg-blue-900 px-6 py-3 text-base font-medium text-white shadow-sm transition-colors duration-200 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2"
+  end
+
   def red_button_class
     "m-2 bg-red-800 hover:bg-red-600 text-white font-light py-2 px-3 rounded"
  end

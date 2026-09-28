@@ -5,7 +5,7 @@
         </h2>
 
         <p class="text-xs text-gray-500">
-            Headshot and résumé files
+            Headshot and resume files
         </p>
     </div>
 
@@ -60,18 +60,18 @@
         <!-- Résumé -->
         <div class="rounded-lg border border-gray-200 bg-gray-50 p-6 transition-colors duration-200 hover:bg-blue-50">
             <h3 class="text-sm font-semibold text-blue-900">
-                Résumé
+                Resume
             </h3>
 
             <div class="mt-4 flex items-center">
                 <p class="text-sm text-gray-600">
-                    Upload the latest résumé or CV.
+                    Upload the latest resume or CV.
                 </p>
             </div>
 
             <div class="mt-5">
                 <%= form.label :resume,
-              "Résumé File",
+              "Resume File",
               class: label_class %>
 
                 <div class="mt-1">
@@ -87,7 +87,7 @@
             <% if person.resume_url.present? %>
             <div class="mt-5 border-t border-gray-200 pt-4">
                 <p class="mb-2 text-xs font-medium text-gray-500">
-                    Current Résumé
+                    Current Resume
                 </p>
 
                 <%= image_tag person.resume_url,

@@ -1,149 +1,447 @@
-<div id="<%= dom_id person %>">
-    <div class="border border-blue-900 rounded-md mt-4 p-4">
+<div id="<%= dom_id person %>" class="flex flex-col gap-6">
 
-        <!-- Row 1: Basic Info -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-4 p-4">
-            <div><span class="text-gray-500">First Name:</span><br><%= person.first_name %></div>
-            <div><span class="text-gray-500">Last Name:</span><br><%= person.last_name %></div>
-            <div><span class="text-gray-500">Status:</span><br><%= person.status %></div>
+    <!-- Personal Details -->
+    <section class="rounded-lg border border-gray-200 border-t-4 border-t-blue-900 bg-white p-6 shadow-sm transition-colors duration-200 hover:bg-blue-50">
+        <div class="mb-5 flex flex-col gap-1 border-b border-gray-200 pb-3 sm:flex-row sm:items-baseline sm:justify-between">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-blue-900">
+                Personal Details
+            </h2>
 
-            <div><span class="text-gray-500">Role:</span><br><%= person.role %></div>
-            <div><span class="text-gray-500">Educator Role:</span><br><%= person.educator_role %></div>
-            <div><span class="text-gray-500">Gender:</span><br><%= person.gender %></div>
+            <p class="text-xs text-gray-500">
+                Contact information and general details
+            </p>
+        </div>
 
-            <div><span class="text-gray-500">Region:</span><br><%= person.region %></div>
-            <div><span class="text-gray-500">Associated or Independent?:</span><br><%= person.associated %></div>
-
-            <div><span class="text-gray-500">Phone:</span><br><%= person.phone %></div>
-            <div class="break-words"><span class="text-gray-500">Email:</span><br><%= person.email %></div>
-            <div class="break-words"><span class="text-gray-500">Address:</span><br><%= person.address %></div>
-
-            <div><span class="text-gray-500">City:</span><br><%= person.city %></div>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             <div>
-                <span class="text-gray-500">State / ZIP:</span><br>
-                <%= [person.state.presence, person.zip_code.presence].compact.join(" / ") %>
+                <p class="text-sm text-gray-500">First Name</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.first_name.presence || "—" %>
+                </p>
             </div>
-            <div><span class="text-gray-500">Country:</span><br><%= person.country %></div>
-            <div><span class="text-gray-500">Date of Birth:</span><br><%= @person.dob&.strftime("%m/%d/%Y")%></div>
 
-            <div class="col-span-1 sm:col-span-2 break-words">
-                <span class="text-gray-500">Frequent Flyer Numbers:</span><br>
-                <% if person.frequent_flyer_numbers.any? %>
-                <ul class="list-disc ml-4">
-                    <% person.frequent_flyer_numbers.each do |ffn| %>
-                    <li><%= ffn.airline %>: <%= ffn.number %></li>
+            <div>
+                <p class="text-sm text-gray-500">Last Name</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.last_name.presence || "—" %>
+                </p>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-500">Status</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.status.presence || "—" %>
+                </p>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-500">Role</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.role.presence || "—" %>
+                </p>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-500">Educator Role</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.educator_role.presence || "—" %>
+                </p>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-500">Date of Birth</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.dob&.strftime("%m/%d/%Y") || "—" %>
+                </p>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-500">Gender</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.gender.presence || "—" %>
+                </p>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-500">Region</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.region.presence || "—" %>
+                </p>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-500">Associated or Independent?</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.associated.presence || "—" %>
+                </p>
+            </div>
+
+            <div class="md:col-span-2">
+                <p class="text-sm text-gray-500">Email</p>
+                <p class="mt-1 break-words font-medium text-gray-900">
+                    <% if person.email.present? %>
+                    <%= mail_to person.email, person.email, class: link_class %>
+                    <% else %>
+                    —
                     <% end %>
-                </ul>
+                </p>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-500">Phone</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.phone.presence || "—" %>
+                </p>
+            </div>
+
+            <div class="md:col-span-2 lg:col-span-3">
+                <p class="text-sm text-gray-500">Address</p>
+                <p class="mt-1 break-words font-medium text-gray-900">
+                    <%= person.address.presence || "—" %>
+                </p>
+            </div>
+
+            <div class="hidden lg:block"></div>
+
+            <div>
+                <p class="text-sm text-gray-500">City</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.city.presence || "—" %>
+                </p>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-500">State</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.state.presence || "—" %>
+                </p>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-500">ZIP Code</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.zip_code.presence || "—" %>
+                </p>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-500">Country</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.country.presence || "—" %>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Umpire and Scorer Details -->
+    <section class="rounded-lg border border-gray-200 border-t-4 border-t-blue-900 bg-white p-6 shadow-sm transition-colors duration-200 hover:bg-blue-50">
+        <div class="mb-5 flex flex-col gap-1 border-b border-gray-200 pb-3 sm:flex-row sm:items-baseline sm:justify-between">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-blue-900">
+                Umpire and Scorer Details
+            </h2>
+
+            <p class="text-xs text-gray-500">
+                Certification and badge information
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div>
+                <p class="text-sm text-gray-500">NA Umpire Level</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.level.presence || "—" %>
+                </p>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-500">Umpire Badge Level</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.level_submitted.presence || "—" %>
+                </p>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-500">Level Notes</p>
+                <p class="mt-1 whitespace-pre-line font-medium text-gray-900">
+                    <%= person.level_note.presence || "—" %>
+                </p>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-500">Certification Date</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.certification_date&.to_formatted_s(:usa) || "—" %>
+                </p>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-500">Certification File</p>
+
+                <% if person.certification_url.present? %>
+                <div class="mt-2">
+                    <%= link_to "View Certification",
+                  person.certification_url,
+                  target: "_blank",
+                  class: link_class %>
+                </div>
                 <% else %>
-                <p>No frequent flyer numbers added.</p>
+                <p class="mt-1 font-medium text-gray-900">—</p>
                 <% end %>
             </div>
         </div>
+    </section>
 
-        <!-- Row 2: Umpires + Event -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-            <!-- Umpires Block -->
-            <div class="p-4 border border-blue-900 rounded-md">
-                <div class="text-sm text-center text-gray-600 mb-2">Umpires/Scorers Only</div>
-                <div><span class="text-gray-500">Umpire Badge Level (office):</span><br><%= person.level %></div>
-                <div><span class="text-gray-500">Badge Level (submitted):</span><br><%= person.level_submitted %></div>
-                <div><span class="text-gray-500">Certification Date:</span><br><%= person.certification_date.to_formatted_s(:usa) unless person.certification_date.blank? %></div>
-                <div><span class="text-gray-500">Level Notes:</span><br><%= person.level_note %></div>
-                <% unless person.certification_url.blank? %>
-                <div class="mt-2">
-                    <%= image_tag person.certification_url, class: "h-20 w-auto" %>
-                    <div class="italic text-sm">To change file, use Certification Upload above.</div>
+    <!-- Frequent Flyer Details -->
+    <section class="rounded-lg border border-gray-200 border-t-4 border-t-blue-900 bg-white p-6 shadow-sm transition-colors duration-200 hover:bg-blue-50">
+        <div class="mb-5 flex flex-col gap-1 border-b border-gray-200 pb-3 sm:flex-row sm:items-baseline sm:justify-between">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-blue-900">
+                Frequent Flyer Details
+            </h2>
+
+            <p class="text-xs text-gray-500">
+                Airline membership information
+            </p>
+        </div>
+
+        <% if person.frequent_flyer_numbers.any? %>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <% person.frequent_flyer_numbers.each do |ffn| %>
+            <div class="rounded-lg border border-gray-200 bg-gray-50 p-6">
+                <p class="text-sm text-gray-500">Airline</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= ffn.airline.presence || "—" %>
+                </p>
+
+                <p class="mt-4 text-sm text-gray-500">Number</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= ffn.number.presence || "—" %>
+                </p>
+            </div>
+            <% end %>
+        </div>
+        <% else %>
+        <p class="text-sm text-gray-500">
+            No frequent flyer numbers added.
+        </p>
+        <% end %>
+    </section>
+
+    <!-- Event and Uniform Details -->
+    <section class="rounded-lg border border-gray-200 border-t-4 border-t-blue-900 bg-white p-6 shadow-sm transition-colors duration-200 hover:bg-blue-50">
+        <div class="mb-5 flex flex-col gap-1 border-b border-gray-200 pb-3 sm:flex-row sm:items-baseline sm:justify-between">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-blue-900">
+                Event and Uniform Details
+            </h2>
+
+            <p class="text-xs text-gray-500">
+                Clothing and uniform sizes
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div>
+                <p class="text-sm text-gray-500">T-Shirt Size</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.tshirt_size.presence || "—" %>
+                </p>
+            </div>
+
+            <% if is_admin? %>
+            <div>
+                <p class="text-sm text-gray-500">Invite Back</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.invite_back.presence || "—" %>
+                </p>
+            </div>
+            <% end %>
+        </div>
+
+        <div class="mt-6 border-t border-gray-200 pt-5">
+            <h3 class="text-sm font-semibold text-blue-900">
+                Inferno Uniform
+            </h3>
+
+            <div class="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <div>
+                    <p class="text-sm text-gray-500">Polo Top</p>
+                    <p class="mt-1 font-medium text-gray-900">
+                        <%= person.inferno_top_polo_size.presence || "—" %>
+                    </p>
                 </div>
+
+                <div>
+                    <p class="text-sm text-gray-500">V-Neck Top</p>
+                    <p class="mt-1 font-medium text-gray-900">
+                        <%= person.inferno_top_vneck_size.presence || "—" %>
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-sm text-gray-500">Skirt</p>
+                    <p class="mt-1 font-medium text-gray-900">
+                        <%= person.inferno_bottom_skirt_size.presence || "—" %>
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-sm text-gray-500">Shorts</p>
+                    <p class="mt-1 font-medium text-gray-900">
+                        <%= person.inferno_bottom_shorts_size.presence || "—" %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trainer and Ambassador Details -->
+    <% if is_admin? %>
+    <section class="rounded-lg border border-gray-200 border-t-4 border-t-blue-900 bg-white p-6 shadow-sm transition-colors duration-200 hover:bg-blue-50">
+        <div class="mb-5 flex flex-col gap-1 border-b border-gray-200 pb-3 sm:flex-row sm:items-baseline sm:justify-between">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-blue-900">
+                Trainer and Ambassador Details
+            </h2>
+
+            <p class="text-xs text-gray-500">
+                Training completed with Netball America
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+            <div class="rounded-lg border border-gray-200 bg-gray-50 p-6">
+                <p class="text-sm text-gray-500">In-Person Trained</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.in_person_trained? ? "Yes" : "No" %>
+                </p>
+            </div>
+
+            <div class="rounded-lg border border-gray-200 bg-gray-50 p-6">
+                <p class="text-sm text-gray-500">Virtually Trained</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.virtually_trained? ? "Yes" : "No" %>
+                </p>
+            </div>
+
+            <div class="rounded-lg border border-gray-200 bg-gray-50 p-6">
+                <p class="text-sm text-gray-500">Booth Trained</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.booth_trained? ? "Yes" : "No" %>
+                </p>
+            </div>
+        </div>
+    </section>
+    <% end %>
+
+    <!-- Documents -->
+    <section class="rounded-lg border border-gray-200 border-t-4 border-t-blue-900 bg-white p-6 shadow-sm">
+        <div class="mb-5 flex flex-col gap-1 border-b border-gray-200 pb-3 sm:flex-row sm:items-baseline sm:justify-between">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-blue-900">
+                Documents
+            </h2>
+
+            <p class="text-xs text-gray-500">
+                Headshot and resume files
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div class="rounded-lg border border-gray-200 bg-gray-50 p-6 transition-colors duration-200 hover:bg-blue-50">
+                <h3 class="text-sm font-semibold text-blue-900">
+                    Headshot
+                </h3>
+
+                <p class="mt-4 text-sm text-gray-500">Headshot Present?</p>
+                <p class="mt-1 font-medium text-gray-900">
+                    <%= person.headshot_present? ? "Yes" : "No" %>
+                </p>
+
+                <% if person.headshot_url.present? %>
+                <div class="mt-5 border-t border-gray-200 pt-4">
+                    <%= image_tag person.headshot_url,
+                  class: "h-32 w-auto rounded-md border border-gray-200 bg-white" %>
+
+                    <div class="mt-3">
+                        <%= link_to "View Full Headshot",
+                    person.headshot_url,
+                    target: "_blank",
+                    class: link_class %>
+                    </div>
+                </div>
+                <% else %>
+                <p class="mt-4 text-sm text-gray-500">
+                    No headshot loaded.
+                </p>
                 <% end %>
             </div>
 
-            <!-- Event Block -->
-            <div class="p-4 border border-blue-900 rounded-md">
-                <div class="text-sm text-center text-gray-600 mb-2">Event Related</div>
-                <div><span class="text-gray-500">T-Shirt Size:</span><br><%= person.tshirt_size %></div>
+            <div class="rounded-lg border border-gray-200 bg-gray-50 p-6 transition-colors duration-200 hover:bg-blue-50">
+                <h3 class="text-sm font-semibold text-blue-900">
+                    Resume
+                </h3>
 
+                <% if person.resume_url.present? %>
                 <div class="mt-4">
-                    <p class="text-blue-900 font-semibold text-sm">Inferno Uniform</p>
-
-                    <p class="text-xs text-gray-500 mt-2">Top</p>
-                    <div class="grid grid-cols-2 gap-2 text-sm">
-                        <div><span class="text-gray-500">Polo Top:</span><br><%= person.inferno_top_polo_size.presence || "—" %></div>
-                        <div><span class="text-gray-500">V Neck:</span><br><%= person.inferno_top_vneck_size.presence || "—" %></div>
-                    </div>
-
-                    <p class="text-xs text-gray-500 mt-4">Bottom</p>
-                    <div class="grid grid-cols-2 gap-2 text-sm">
-                        <div><span class="text-gray-500">Skirt:</span><br><%= person.inferno_bottom_skirt_size.presence || "—" %></div>
-                        <div><span class="text-gray-500">Shorts:</span><br><%= person.inferno_bottom_shorts_size.presence || "—" %></div>
-                    </div>
+                    <%= link_to "View Resume",
+                  person.resume_url,
+                  target: "_blank",
+                  class: link_class %>
                 </div>
-
-                <% if is_admin? %>
-                <div class="mt-4"><span class="text-gray-500">Invite Back? [Admin only]:</span><br><%= person.invite_back %></div>
+                <% else %>
+                <p class="mt-4 text-sm text-gray-500">
+                    No resume loaded.
+                </p>
                 <% end %>
             </div>
         </div>
+    </section>
 
-        <!-- Row 3: Trainers + Headshot + Resume -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-            <% if is_admin? %>
-            <!-- Trainers -->
-            <div class="p-4 border border-blue-900 rounded-md">
-                <div class="text-sm text-center text-gray-600 mb-2">Trainers/Ambassadors Only</div>
-                <p><span class="text-gray-500">In Person Trained?:</span><br><%= person.in_person_trained? ? 'Yes' : 'No' %></p>
-                <p><span class="text-gray-500">Virtually Trained?:</span><br><%= person.virtually_trained? ? 'Yes' : 'No' %></p>
-                <p><span class="text-gray-500">Booth Trained?:</span><br><%= person.booth_trained? ? 'Yes' : 'No' %></p>
-            </div>
-            <% end %>
+    <!-- Admin Notes -->
+    <% if is_admin? %>
+    <section class="rounded-lg border border-gray-200 border-t-4 border-t-blue-900 bg-white p-6 shadow-sm transition-colors duration-200 hover:bg-blue-50">
+        <div class="mb-5 border-b border-gray-200 pb-3">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-blue-900">
+                Admin Notes
+            </h2>
+        </div>
 
-            <!-- Headshot -->
-            <div class="p-4 border border-blue-900 rounded-md">
-                <div class="text-sm text-center text-gray-600 mb-2">Headshot</div>
-                <p><span class="text-gray-500">Headshot Present?:</span><br><%= person.headshot_present? ? 'Yes' : 'No' %></p>
-                <% unless person.headshot_url.blank? %>
-                <div class="mt-2">
-                    <%= image_tag person.headshot_url, class: "h-20 w-auto" %>
-                    <div class="italic text-sm">To change file, use Headshot Upload above.</div>
-                </div>
-                <% end %>
-            </div>
+        <p class="whitespace-pre-line break-words text-sm text-gray-900">
+            <%= person.notes.presence || "No notes added." %>
+        </p>
+    </section>
+    <% end %>
 
-            <% if is_admin? %>
-            <!-- Resume -->
-            <div class="p-4 border border-blue-900 rounded-md">
-                <div class="text-sm text-center text-gray-600 mb-2">Resume</div>
-                <% if person.resume_url.blank? %>
-                <p class="text-sm text-gray-500">No resume loaded.</p>
-                <% else %>
-                <%= link_to "View Resume", person.resume_url, target: "_blank", class: "text-blue-600 underline" %>
-                <div class="italic text-sm">To change file, use Resume Upload above.</div>
-                <% end %>
+    <!-- Event Assignments -->
+    <% if current_user&.role != "na_people" %>
+    <section class="rounded-lg border border-gray-200 border-t-4 border-t-blue-900 bg-white p-6 shadow-sm transition-colors duration-200 hover:bg-blue-50">
+        <div class="mb-5 flex flex-col gap-1 border-b border-gray-200 pb-3 sm:flex-row sm:items-baseline sm:justify-between">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-blue-900">
+                Event Assignments
+            </h2>
+
+            <p class="text-xs text-gray-500">
+                <%= pluralize(person.events.size, "event") %> currently assigned
+            </p>
+        </div>
+
+        <% if person.events.any? %>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <% person.events.each do |event| %>
+            <div class="rounded-lg border border-gray-200 bg-gray-50 p-4">
+                <p class="font-medium text-gray-900">
+                    <%= event.name %>
+                </p>
+
+                <p class="mt-1 text-sm text-gray-500">
+                    <%= event.date&.to_formatted_s(:usa) || "Date not set" %>
+                </p>
             </div>
             <% end %>
         </div>
-
-        <!-- Notes -->
-        <% if is_admin? %>
-        <div class="p-4 border border-blue-900 rounded-md mt-4">
-            <p class="text-sm text-gray-600">Notes:</p>
-            <p class="text-sm text-gray-900 break-words"><%= person.notes %></p>
-        </div>
+        <% else %>
+        <p class="text-sm text-gray-500">
+            No events listed.
+        </p>
         <% end %>
+    </section>
+    <% end %>
 
-        <!-- Events -->
-        <% if current_user&.role != "na_people" %>
-        <div class="p-4 border border-blue-900 rounded-md mt-4">
-            <p class="text-sm text-gray-500">Events:</p>
-            <div class="text-sm font-medium text-gray-900 break-words">
-                <% if person.events.any? %>
-                <% person.events.each do |event| %>
-                <%= event.date.to_formatted_s(:usa) unless event.date.blank? %> - <%= event.name %><br>
-                <% end %>
-                <% else %>
-                <p>No events listed.</p>
-                <% end %>
-            </div>
-        </div>
-        <% end %>
-    </div>
 </div>

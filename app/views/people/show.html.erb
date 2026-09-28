@@ -1,40 +1,62 @@
-<% content_for(:page_title, "#{@person.full_name} - #{@person.role} ")%>
+<% content_for(:page_title, "#{@person.full_name} - #{@person.role}") %>
 
 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
 
-   <div class="w-full mb-6">
-    <%= render @person %>
-  </div>
-
-  
- <div class="m-4 space-y-2">
-  <%= link_to "Edit this person", edit_person_path(@person), class: link_class  %> <br>
-
-  <% if user_signed_in? && current_user.role == "na_people" %>
-    <div class="mt-6 text-center">
-      <%= link_to "« Back to Home Page", root_path, class: "text-blue-900 font-semibold hover:underline" %>
+    <!-- Person Details -->
+    <div class="mb-6 w-full">
+        <%= render @person %>
     </div>
-  <% end %>
 
-  <% if can?(:manage, Person) %>
-    <%= link_to "<< Back to people", people_path, class: link_class  %> <br>
-    <%= link_to "<< Back to Educators - people", trainers_etc_netball_educators_path, class: link_class %>
-    <%= link_to "Add new person", new_person_path, class: link_class  %>
-    <br>
-    
-      <% if current_user&.id.in?([9, 10]) %>
-       <%= button_to "[ DELETE THIS PERSON ]",
-              person_path(@person),
-              method: :delete,
-              data: {
-                turbo: false,
-                turbo_confirm: "Are you sure?"
-              } %>
-      <% end %>
-      <br>
-   
-  <% end %>
- 
-  </div>
+    <!-- Page Actions -->
+    <div class="px-6">
+        <div class="border-t border-gray-200 pt-6">
+
+            <!-- Main Actions -->
+            <div class="flex flex-wrap items-center gap-4">
+                <%= link_to "Edit Person",
+              edit_person_path(@person),
+              class: form_button_class %>
+
+                <% if can?(:manage, Person) %>
+                <%= link_to "Add New Person",
+                new_person_path,
+                class: clear_button_class %>
+                <% end %>
+            </div>
+
+            <!-- Navigation -->
+            <div class="mt-6 flex flex-wrap items-center gap-6 text-sm">
+                <% if user_signed_in? && current_user.role == "na_people" %>
+                <%= link_to "← Back to Home Page",
+                root_path,
+                class: "font-medium text-blue-900 hover:text-blue-700 hover:underline" %>
+                <% end %>
+
+                <% if can?(:manage, Person) %>
+                <%= link_to "← Back to People",
+                people_path,
+                class: "font-medium text-blue-900 hover:text-blue-700 hover:underline" %>
+
+                <%= link_to "← Back to Educators",
+                trainers_etc_netball_educators_path,
+                class: "font-medium text-blue-900 hover:text-blue-700 hover:underline" %>
+                <% end %>
+            </div>
+
+            <!-- Destructive Action -->
+            <% if can?(:manage, Person) && current_user&.id.in?([9, 10]) %>
+            <div class="mt-6 border-t border-gray-200 pt-6">
+                <%= button_to "Delete this Person",
+      person_path(@person),
+      method: :delete,
+      data: {
+        turbo_confirm: "Are you sure you want to delete this person?"
+      },
+      class: "inline-flex items-center justify-center rounded-md border border-red-500 bg-white px-4 py-2 text-sm font-medium text-red-600 transition-colors duration-200 hover:bg-red-50 hover:text-red-800" %>
+       </div>
+            <% end %>
+
+        </div>
+    </div>
+
 </div>
-

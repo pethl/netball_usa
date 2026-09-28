@@ -13,28 +13,33 @@
 </div>
 
 <!-- Page Actions -->
-<div class="m-4 mt-6 px-6">
-    <div class="flex flex-wrap items-center gap-4">
-        <%= link_to "Show this Person",
-          @person,
-          class: link_class %>
+<div class="m-4 px-6">
+    <div class="border-t border-gray-200 pt-6">
 
-        <% if can?(:manage, Person) %>
-        <%= link_to "<< Back to People",
-            people_path,
-            class: link_class %>
+        <!-- Navigation -->
+        <div class="flex flex-wrap items-center gap-6 text-sm">
+            <%= link_to "View Person",
+            @person,
+            class: "font-medium text-blue-900 hover:text-blue-700 hover:underline" %>
+
+            <% if can?(:manage, Person) %>
+            <%= link_to "← Back to People",
+              people_path,
+              class: "font-medium text-blue-900 hover:text-blue-700 hover:underline" %>
+            <% end %>
+        </div>
+
+
+        <!-- Destructive Action -->
+        <% if current_user&.id.in?([9, 10]) %>
+        <div class="mt-6 border-t border-gray-200 pt-6">
+            <%= button_to "Delete this Person",
+          person_path(@person),
+          method: :delete,
+          data: {
+            turbo_confirm: "Are you sure you want to delete this person?"
+          },
+          class: "inline-flex items-center justify-center rounded-md border border-red-500 bg-white px-4 py-2 text-sm font-medium text-red-600 transition-colors duration-200 hover:bg-red-50 hover:text-red-800" %>
+        </div>
         <% end %>
     </div>
-
-    <% if current_user&.id.in?([9, 10]) %>
-    <div class="mt-4">
-        <%= button_to "Delete this Person",
-            person_path(@person),
-            method: :delete,
-            data: {
-              turbo_confirm: "Are you sure you want to delete this person?"
-            },
-            class: "rounded-md border border-red-400 bg-white px-3 py-2 text-sm font-semibold text-red-600 hover:bg-red-50" %>
-    </div>
-    <% end %>
-</div>
