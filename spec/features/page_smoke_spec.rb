@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.feature "PageSmoke", type: :feature, js: true do
+RSpec.feature "PageSmoke", type: :feature do
   scenario "admin user loads all important index pages successfully" do
     admin = create(:user, role: :admin, confirmed_at: Time.current)
     login_user(admin)

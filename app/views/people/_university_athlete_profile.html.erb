@@ -1,0 +1,174 @@
+<section class="rounded-lg border border-gray-200 border-t-4 border-t-blue-900 bg-white p-6 shadow-sm transition-colors duration-200 hover:bg-blue-50">
+  <div class="mb-5 flex flex-col gap-1 border-b border-gray-200 pb-3 sm:flex-row sm:items-baseline sm:justify-between">
+    <h2 class="text-sm font-semibold uppercase tracking-wide text-blue-900">
+      USA University Athlete Details
+    </h2>
+
+    <p class="text-xs text-gray-500">
+      Eligibility, fees, playing experience and trial information
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+    <div>
+      <p class="text-sm text-gray-500">Date Registered</p>
+      <p class="mt-1 font-medium text-gray-900">
+        <%= profile&.registered_at&.to_formatted_s(:usa) || "—" %>
+      </p>
+    </div>
+
+    <div>
+      <p class="text-sm text-gray-500">American?</p>
+      <p class="mt-1 font-medium text-gray-900">
+        <% if profile.nil? || profile.american.nil? %>
+          —
+        <% else %>
+          <%= profile.american? ? "Yes" : "No" %>
+        <% end %>
+      </p>
+    </div>
+
+    <div>
+      <p class="text-sm text-gray-500">USA College</p>
+      <p class="mt-1 break-words font-medium text-gray-900">
+        <%= profile&.usa_college.presence || "—" %>
+      </p>
+    </div>
+
+    <div>
+      <p class="text-sm text-gray-500">Final Eligibility</p>
+      <p class="mt-1 break-words font-medium text-gray-900">
+        <%= profile&.final_eligibility.presence || "—" %>
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-6 border-t border-gray-200 pt-5">
+    <h3 class="text-sm font-semibold text-blue-900">Fees</h3>
+
+    <div class="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-3">
+      <% [
+        ["Trial Fee Paid", profile&.trial_fee_paid],
+        ["Platform Fee", profile&.platform_fee],
+        ["Net Fee", profile&.net_fee]
+      ].each do |label, amount| %>
+        <div>
+          <p class="text-sm text-gray-500"><%= label %></p>
+          <p class="mt-1 font-medium text-gray-900">
+            <%= amount.present? ? number_to_currency(amount) : "—" %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="mt-6 border-t border-gray-200 pt-5">
+    <h3 class="text-sm font-semibold text-blue-900">Playing Experience</h3>
+
+    <div class="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div>
+        <p class="text-sm text-gray-500">First Position</p>
+        <p class="mt-1 font-medium text-gray-900">
+          <%= profile&.first_position.presence || "—" %>
+        </p>
+      </div>
+
+      <div>
+        <p class="text-sm text-gray-500">Second Position</p>
+        <p class="mt-1 font-medium text-gray-900">
+          <%= profile&.second_position.presence || "—" %>
+        </p>
+      </div>
+
+      <div>
+        <p class="text-sm text-gray-500">Netball America Experience?</p>
+        <p class="mt-1 font-medium text-gray-900">
+          <% if profile.nil? || profile.netball_america_experience.nil? %>
+            —
+          <% else %>
+            <%= profile.netball_america_experience? ? "Yes" : "No" %>
+          <% end %>
+        </p>
+      </div>
+
+      <div class="md:col-span-2 lg:col-span-3">
+        <p class="text-sm text-gray-500">Previous Netball America Involvement</p>
+        <p class="mt-1 whitespace-pre-wrap break-words font-medium text-gray-900">
+          <%= profile&.previous_netball_america_involvement.presence || "—" %>
+        </p>
+      </div>
+
+      <div class="md:col-span-2 lg:col-span-3">
+        <p class="text-sm text-gray-500">Netball Pathway Experience</p>
+        <p class="mt-1 whitespace-pre-wrap break-words font-medium text-gray-900">
+          <%= profile&.netball_pathway_experience.presence || "—" %>
+        </p>
+      </div>
+
+      <div class="md:col-span-2 lg:col-span-3">
+        <p class="text-sm text-gray-500">FAST5 Experience</p>
+        <p class="mt-1 whitespace-pre-wrap break-words font-medium text-gray-900">
+          <%= profile&.fast5_experience.presence || "—" %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 border-t border-gray-200 pt-5">
+    <h3 class="text-sm font-semibold text-blue-900">Trial</h3>
+
+    <div class="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div>
+        <p class="text-sm text-gray-500">In Person / Virtual</p>
+        <p class="mt-1 font-medium text-gray-900">
+          <%= profile&.trial_format.presence || "—" %>
+        </p>
+      </div>
+
+      <div>
+        <p class="text-sm text-gray-500">Virtual Trial Footage</p>
+
+        <% if profile&.virtual_trial_footage.present? %>
+          <p class="mt-1 break-all font-medium">
+            <%= link_to "View Footage",
+                  profile.virtual_trial_footage,
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  class: link_class %>
+          </p>
+        <% else %>
+          <p class="mt-1 font-medium text-gray-900">—</p>
+        <% end %>
+      </div>
+
+      <div class="md:col-span-2">
+        <p class="text-sm text-gray-500">Competition or Training Shown in the Video</p>
+        <p class="mt-1 whitespace-pre-wrap break-all font-medium text-gray-900">
+          <%= profile&.trial_footage_explanation.presence || "—" %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 border-t border-gray-200 pt-5">
+    <h3 class="text-sm font-semibold text-blue-900">
+      Health and Emergency Information
+    </h3>
+
+    <div class="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div>
+        <p class="text-sm text-gray-500">International Health Insurance</p>
+        <p class="mt-1 whitespace-pre-wrap break-words font-medium text-gray-900">
+          <%= profile&.international_health_insurance.presence || "—" %>
+        </p>
+      </div>
+
+      <div>
+        <p class="text-sm text-gray-500">Emergency Contact</p>
+        <p class="mt-1 whitespace-pre-wrap break-words font-medium text-gray-900">
+          <%= profile&.emergency_contact.presence || "—" %>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

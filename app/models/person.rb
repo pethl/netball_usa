@@ -27,6 +27,8 @@ class Person < ApplicationRecord
 
   # ========== Validations ==========
   validates :role, presence: true
+  validates :first_name, presence: true
+  validates :status, presence: true
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
   validates :email,

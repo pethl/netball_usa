@@ -1,0 +1,23 @@
+{
+  "editor.formatOnSaveMode": "file",
+  
+  "files.associations": {
+    "*.erb": "erb",
+    "*.html.erb": "erb"
+  },
+
+  "[erb]": {
+    "editor.defaultFormatter": "aliariff.vscode-erb-beautify",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
+  },
+
+  "vscode-erb-beautify.useBundler": true,
+  "vscode-erb-beautify.keepBlankLines": 1,
+
+  "vscode-erb-beautify.customEnvVar": {
+    "LANG": "en_GB.UTF-8",
+    "LC_ALL": "en_GB.UTF-8",
+    "RUBYOPT": "-EUTF-8:UTF-8"
+  }
+}

@@ -11,7 +11,9 @@ class CreateUniversityAthleteProfiles < ActiveRecord::Migration[7.1]
       t.string :usa_college
       t.string :final_eligibility
 
-      t.boolean :trial_fee_paid
+      t.decimal :trial_fee_paid,
+                precision: 10,
+                scale: 2
       t.decimal :platform_fee,
                 precision: 10,
                 scale: 2

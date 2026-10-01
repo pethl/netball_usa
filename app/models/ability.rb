@@ -172,15 +172,22 @@ class Ability
     when "spare"
       # No specific permissions assigned yet
 
-    # 12 : na_people (person and US Open access)  
-    when "na_people"
-      can [:read, :update], Person, email: user.email
-      cannot :index, Person
+   # 12 : na_people (own Person + own US Open access)
+when "na_people"
 
-      if (person = Person.find_by(email: user.email))
-        can [:read, :create, :update], Transfer, person_id: person.id
-        cannot :index, Transfer
-      end
+  # Can create their own Person profile
+    can :create, Person
+
+    # Can only view/edit their Person profile
+    can [:read, :update], Person, email: user.email
+    cannot :index, Person
+
+    # Can only view/edit an EXISTING Transfer belonging to their Person
+    # Transfer creation remains an admin task
+    can [:read, :update], Transfer,
+        person: { email: user.email }
+
+    cannot :index, Transfer
 
     # 13 : special for Nathalie 
     when "educators_events_self_selftransfer"

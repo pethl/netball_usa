@@ -232,12 +232,149 @@ load_and_authorize_resource except: :destroy
                   status: :see_other
     end
 
+
+
   def university_squad
-      @people = Person
-        .where(role: "University Squad")
-        .includes(:university_athlete_profile)
-        .ordered
+  scope = Person
+    .where(role: "University Squad")
+    .left_joins(:university_athlete_profile)
+    .includes(:university_athlete_profile)
+
+  if params[:view] == "future"
+    scope = scope.where(
+      "university_athlete_profiles.final_eligibility IS NULL
+       OR university_athlete_profiles.final_eligibility NOT ILIKE ?",
+      "Yes%"
+    )
+  else
+    scope = scope.where(
+      "university_athlete_profiles.final_eligibility ILIKE ?",
+      "Yes%"
+    )
+  end
+
+  if params[:country].present?
+    scope = scope.where(
+      "LOWER(people.country) LIKE ?",
+      "%#{params[:country].downcase}%"
+    )
+  end
+
+  if params[:state].present?
+    scope = scope.where(people: { state: params[:state] })
+  end
+
+  if params[:city].present?
+    scope = scope.where(
+      "LOWER(people.city) LIKE ?",
+      "%#{params[:city].downcase}%"
+    )
+  end
+
+  if params[:college].present?
+    scope = scope.where(
+      "LOWER(university_athlete_profiles.usa_college) LIKE ?",
+      "%#{params[:college].downcase}%"
+    )
+  end
+
+  if params[:query].present?
+    query = "%#{params[:query].downcase}%"
+
+    scope = scope.where(
+      <<~SQL.squish,
+        LOWER(people.first_name) LIKE :query
+        OR LOWER(people.last_name) LIKE :query
+        OR LOWER(people.email) LIKE :query
+      SQL
+      query: query
+    )
+  end
+
+  @people = scope.distinct.ordered
+end
+
+def location_map
+  @selected_role = params[:role].presence || "All"
+  @map_mode = params[:map] == "world" ? "world" : "usa"
+
+  scope = Person.all
+
+  if @selected_role != "All"
+    scope = scope.where(role: @selected_role)
+  end
+
+  @map_context =
+  if params[:context] == "university"
+    "university"
+  else
+    "people"
+  end
+
+  @total_people_count = scope.count
+
+  @people_state_counts = Hash.new(0)
+  @country_counts = Hash.new(0)
+
+  @non_usa_count = 0
+  @missing_state_count = 0
+  @missing_country_count = 0
+
+  valid_state_codes = US_STATE_ABBREVIATIONS.values + ["DC"]
+
+  usa_country_names = [
+    "united states",
+    "united states of america",
+    "usa",
+    "us",
+    "u.s.",
+    "u.s.a.",
+    "america"
+  ]
+
+  scope.select(:id, :state, :country).find_each do |person|
+    state = person.state.to_s.strip
+    country = person.country.to_s.strip
+
+    full_state_match = US_STATE_ABBREVIATIONS.find do |state_name, _code|
+      state_name.casecmp?(state)
     end
+
+    normalized_state =
+      if full_state_match.present?
+        full_state_match.last
+      else
+        state.upcase
+      end
+
+    valid_usa_state = valid_state_codes.include?(normalized_state)
+
+    if valid_usa_state
+      @people_state_counts[normalized_state] += 1
+    elsif country.present? &&
+          !usa_country_names.include?(country.downcase)
+      @non_usa_count += 1
+    else
+      @missing_state_count += 1
+    end
+
+    normalized_country =
+      if country.present?
+        country
+      elsif valid_usa_state
+        "United States"
+      end
+
+    if normalized_country.present?
+      @country_counts[normalized_country] += 1
+    else
+      @missing_country_count += 1
+    end
+  end
+
+  @mapped_people_count = @people_state_counts.values.sum
+  @mapped_country_count = @country_counts.values.sum
+end
 
   private
     # Use callbacks to share common setup or constraints between actions.

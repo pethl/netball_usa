@@ -1,0 +1,55 @@
+<%
+  active_view =
+    local_assigns.fetch(:active_view, "summary")
+
+  preserved_filters =
+    local_assigns.fetch(:active_filters, {})
+
+  tab_base_class =
+    "border-b-2 px-1 py-2 text-sm font-medium transition-colors duration-200"
+
+  active_tab_class =
+    "#{tab_base_class} border-blue-900 text-blue-900"
+
+  inactive_tab_class =
+    "#{tab_base_class} border-transparent text-gray-500 hover:border-blue-300 hover:text-blue-800"
+%>
+
+<div class="border-b border-gray-200">
+  <nav class="flex flex-wrap items-center gap-8 px-2 pt-1"
+       aria-label="University Squad views">
+
+    <%= link_to "Summary View",
+          university_squad_people_path(
+            preserved_filters.merge(view: "summary")
+          ),
+          class: active_view == "summary" ?
+            active_tab_class :
+            inactive_tab_class %>
+
+    <%= link_to "Full View",
+          university_squad_people_path(
+            preserved_filters.merge(view: "full")
+          ),
+          class: active_view == "full" ?
+            active_tab_class :
+            inactive_tab_class %>
+
+    <%= link_to "Future Athletes",
+          university_squad_people_path(
+            preserved_filters.merge(view: "future")
+          ),
+          class: active_view == "future" ?
+            active_tab_class :
+            inactive_tab_class %>
+
+    <%= link_to "Location Map",
+          location_map_people_path(
+            role: "University Squad",
+            context: "university"
+          ),
+          class: active_view == "map" ?
+            active_tab_class :
+            inactive_tab_class %>
+  </nav>
+</div>

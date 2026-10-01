@@ -41,6 +41,12 @@
                 trainers_etc_netball_educators_path,
                 class: "font-medium text-blue-900 hover:text-blue-700 hover:underline" %>
                 <% end %>
+
+                <% if can?(:manage, Person) && @person.role == "University Squad" %>
+                <%= link_to "← Back to University Squad",
+                    university_squad_people_path,
+                    class: "font-medium text-blue-900 hover:text-blue-700 hover:underline" %>
+                <% end %>
             </div>
 
             <!-- Destructive Action -->
@@ -53,10 +59,11 @@
         turbo_confirm: "Are you sure you want to delete this person?"
       },
       class: "inline-flex items-center justify-center rounded-md border border-red-500 bg-white px-4 py-2 text-sm font-medium text-red-600 transition-colors duration-200 hover:bg-red-50 hover:text-red-800" %>
-       </div>
+            </div>
             <% end %>
 
         </div>
     </div>
 
 </div>
+<br><br><br><br>

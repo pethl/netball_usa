@@ -758,7 +758,37 @@ end
       ]
     end
 
-    
+    def table_tooltip_text(value, width: "w-64")
+  text = value.presence || "—"
 
+  tooltip_data =
+      if text == "—"
+        {}
+      else
+        { table_tooltip_text: text }
+      end
+
+    tag.span(
+      text,
+      class: [
+        "block",
+        width,
+        "truncate",
+        "cursor-help"
+      ].join(" "),
+      tabindex: text == "—" ? nil : 0,
+      data: tooltip_data
+    )
+  end
+
+
+  #special for us open hotel booking link
+ def us_open_additional_nights_url
+  Reference.find_by(
+    active: true,
+    group: "us_open_additional_nights_url",
+    key: Date.current.year.to_s
+  )&.value
+end
      
 end

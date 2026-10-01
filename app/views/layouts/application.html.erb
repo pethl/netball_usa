@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
- 
 
- <title><%= content_for?(:page_title) ? yield(:page_title) : "Netball America" %></title>
+  <title><%= content_for?(:page_title) ? yield(:page_title) : "Netball America" %></title>
 
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
@@ -19,97 +18,98 @@
   <script src="https://kit.fontawesome.com/d868e3ba9e.js" crossorigin="anonymous"></script>
 </head>
 
-  <body class="bg-blue-900">
+<body class="bg-blue-900">
 
-   <% if current_user %> 
-     
-  <!-- Header bar sticky starts -->
-  <header class="bg-blue-900 text-blue-900 sticky top-0 z-10">
+  <% if current_user %>
+
+    <!-- Header bar sticky starts -->
+    <header class="bg-blue-900 text-blue-900 sticky top-0 z-10">
       <%= render "layouts/header_desktop" %>
-      <%= render "layouts/header_mobile" %>  
-        
-     <!-- Second row of the header: hello (left) and page title (right), both aligned with main content -->
-<div class="bg-blue-900 text-white w-full py-2 flex items-start">
-  <!-- Spacer to match sidebar width -->
-  <div class="w-1/5">
-    <div class="hidden ml-2 md:block font-mono text-sm md:text-md text-white text-left">
-      Hello <%= current_user.first_name %><br>
-      <% if current_user.admin? %> <%= current_user.role %><% end %>
-    </div>
-  </div>
+      <%= render "layouts/header_mobile" %>
 
-  <!-- Content area aligned with main -->
-  
-   <% if content_for(:page_title)%>
-      <div class="w-full text-center md:text-left self-center">
-        <% if flash[:error] %>
-          <div class="alert alert-danger">
-            <%= flash[:error] %>
+      <!-- Second row of the header: hello (left) and page title (right), both aligned with main content -->
+      <div class="bg-blue-900 text-white w-full py-2 flex items-start">
+        <!-- Spacer to match sidebar width -->
+        <div class="w-1/5">
+          <div class="hidden ml-2 md:block font-mono text-sm md:text-md text-white text-left">
+            Hello <%= current_user.first_name %><br>
+            <% if current_user.admin? %> <%= current_user.role %><% end %>
+          </div>
+        </div>
+
+        <!-- Content area aligned with main -->
+
+        <% if content_for(:page_title)%>
+          <div class="w-full text-center md:text-left self-center">
+            <% if flash[:error] %>
+              <div class="alert alert-danger">
+                <%= flash[:error] %>
+              </div>
+            <% end %>
+            <p data-page-title-target="text" class="text-base md:text-2xl font-semibold text-white">
+              <%= yield(:page_title) || "People – Umpires" %>
+            </p>
           </div>
         <% end %>
-        <p data-page-title-target="text" class="text-base md:text-2xl font-semibold text-white">
-          <%= yield(:page_title) || "People – Umpires" %>
-        </p>
       </div>
-    <% end %>
-  </div>
-</div>
-     
-  </header>
-<!-- Headerbar Sticky end -->
-     
- <!-- Layout wrapper -->
-    <div class="flex w-full h-[calc(100vh-100px)]"> <!-- Adjust height if your header is taller/shorter -->
-
-      <!-- Sidebar: fixed on left -->
-      <aside class="hidden md:block w-[17%] h-full bg-blue-900 overflow-y-auto sticky top-[100px]">
-        <%= render 'layouts/main_menu' %>
-      </aside>
-
-      <!-- Main content -->
-      <section class="w-full md:w-4/5 h-full overflow-y-auto border-l-2 border-blue-900 bg-white">
-        <div class="p-4 text-sm">
-          
-          <!-- Notices -->
-          <div class="text-center text-blue-700 text-lg mb-2">
-            <p class="notice"><%= notice %></p>
-            <p class="alert"><%= alert %></p>
-          </div>
-
-          <!-- Main content -->
-          <main class="overflow-auto">
-            <%= yield %>
-          </main>
-        </div>
-      </section>
     </div>
-   
-    <% else %>
-     <div class="mt-8 max-w-lg sm:mx-auto sm:w-full ">
-      <div class="bg-white py-6 px-2 shadow rounded-lg sm:px-10 overflow-x-auto">
-       <%= image_tag 'Netball_America_Logo.png', :class => "mx-auto h-11 w-auto" %>
-       <%= yield :auth_header if content_for?(:auth_header) %>
-       <% if content_for(:page_title)%>
-         <header class="bg-white shadow">
-           <div class="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
-             <h1 class="text-xl font-bold border-2 border-white tracking-tight text-blue-900">
-             <%= yield(:page_title)%></h1>
-           </div>
-         </header>
-       <% end %>
-     
-       <main>
-         <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-     
-           <p class="notice"><%= notice %></p>
-            <p class="alert"><%= alert %></p>
-                       
-           <%= yield %>
-     
-         </div>
-       </main>
+
+  </header>
+  <!-- Headerbar Sticky end -->
+
+  <!-- Layout wrapper -->
+  <div class="flex w-full h-[calc(100vh-100px)]"> <!-- Adjust height if your header is taller/shorter -->
+
+    <!-- Sidebar: fixed on left -->
+    <aside class="hidden md:block w-[17%] h-full bg-blue-900 overflow-y-auto sticky top-[100px]">
+      <%= render 'layouts/main_menu' %>
+    </aside>
+
+    <!-- Main content -->
+    <section class="w-full md:w-4/5 h-full overflow-y-auto border-l-2 border-blue-900 bg-white">
+      <div class="p-4 text-sm">
+
+        <!-- Notices -->
+        <div class="text-center text-blue-700 text-lg mb-2">
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+        </div>
+
+        <!-- Main content -->
+        <main class="overflow-auto">
+          <%= yield %>
+
+          <div style="height: 6rem;" aria-hidden="true"></div>
+        </main>
+      </div>
+    </section>
+  </div>
+
+<% else %>
+  <div class="mt-8 max-w-lg sm:mx-auto sm:w-full ">
+    <div class="bg-white py-6 px-2 shadow rounded-lg sm:px-10 overflow-x-auto">
+      <%= image_tag 'Netball_America_Logo.png', :class => "mx-auto h-11 w-auto" %>
+      <%= yield :auth_header if content_for?(:auth_header) %>
+      <% if content_for(:page_title)%>
+        <header class="bg-white shadow">
+          <div class="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
+            <h1 class="text-xl font-bold border-2 border-white tracking-tight text-blue-900">
+              <%= yield(:page_title)%></h1>
+          </div>
+        </header>
+      <% end %>
+
+      <main>
+        <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+
+          <%= yield %>
+
+        </div>
+      </main>
     <% end %>
-  
 
   </body>
-  </html>
+</html>

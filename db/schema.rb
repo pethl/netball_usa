@@ -873,7 +873,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_09_27_153856) do
     t.boolean "american"
     t.string "usa_college"
     t.string "final_eligibility"
-    t.boolean "trial_fee_paid"
+    t.decimal "trial_fee_paid", precision: 10, scale: 2
     t.decimal "platform_fee", precision: 10, scale: 2
     t.decimal "net_fee", precision: 10, scale: 2
     t.boolean "netball_america_experience"

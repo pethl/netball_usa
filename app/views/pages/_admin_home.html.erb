@@ -14,13 +14,16 @@
   <% if can_see_netball_academy_section? %>
     <%= render "dashboard/cards/netball_academies" %>
   <% end %>
+  <%= render partial: "dashboard/cards/university" %>
   <%= render partial: "dashboard/cards/vendors" %>
   <%= render partial: "dashboard/cards/tours" %>
   <%= render partial: "dashboard/cards/venues" %>
   <%= render partial: "dashboard/cards/donated_items" %>
   <%= render partial: "dashboard/cards/programs" %>
-    <%= render partial: "dashboard/cards/filings" %>
+  <%= render partial: "dashboard/cards/filings" %>
   <%= render partial: "dashboard/cards/users" %>
 </div>
-<br><br><br>
+<br>
+<br>
+<br>
 <!-- ./Statistics Cards -->

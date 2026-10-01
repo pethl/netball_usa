@@ -1,0 +1,81 @@
+<%
+  base_url = university_squad_people_path(view: view_mode)
+%>
+
+<div class="flex min-w-0 flex-wrap items-end gap-2"
+     data-controller="multi-filter"
+     data-multi-filter-url-value="<%= base_url %>">
+
+  <div class="w-full text-xs text-gray-600">
+    Filter / Search By:
+  </div>
+
+  <!-- Country -->
+  <div class="mb-2 flex w-36 flex-col">
+    <input id="squad_country_filter"
+           type="text"
+           name="country"
+           value="<%= params[:country] %>"
+           placeholder="Country"
+           class="rounded-md border border-gray-300 text-sm shadow-sm focus:border-blue-900 focus:ring-blue-900"
+           data-multi-filter-target="field"
+           data-action="input->multi-filter#filter blur->multi-filter#filter">
+  </div>
+
+  <!-- State -->
+  <div class="mb-2 flex w-36 flex-col">
+    <select id="squad_state_filter"
+            name="state"
+            class="rounded-md border border-gray-300 text-sm shadow-sm focus:border-blue-900 focus:ring-blue-900"
+            data-multi-filter-target="field"
+            data-action="change->multi-filter#filter">
+
+      <option value="">All States</option>
+      <%= options_for_select(us_states, params[:state]) %>
+    </select>
+  </div>
+
+  <!-- City -->
+  <div class="mb-2 flex w-36 flex-col">
+    <input id="squad_city_filter"
+           type="text"
+           name="city"
+           value="<%= params[:city] %>"
+           placeholder="City"
+           class="rounded-md border border-gray-300 text-sm shadow-sm focus:border-blue-900 focus:ring-blue-900"
+           data-multi-filter-target="field"
+           data-action="input->multi-filter#filter blur->multi-filter#filter">
+  </div>
+
+  <!-- University -->
+  <div class="mb-2 flex w-48 flex-col">
+    <input id="squad_college_filter"
+           type="text"
+           name="college"
+           value="<%= params[:college] %>"
+           placeholder="USA College"
+           class="rounded-md border border-gray-300 text-sm shadow-sm focus:border-blue-900 focus:ring-blue-900"
+           data-multi-filter-target="field"
+           data-action="input->multi-filter#filter blur->multi-filter#filter">
+  </div>
+
+  <!-- Name or Email -->
+  <div class="mb-2 flex w-44 flex-col">
+    <input id="squad_query_filter"
+           type="text"
+           name="query"
+           value="<%= params[:query] %>"
+           placeholder="Name or Email"
+           class="rounded-md border border-gray-300 text-sm shadow-sm focus:border-blue-900 focus:ring-blue-900"
+           data-multi-filter-target="field"
+           data-action="input->multi-filter#filter">
+  </div>
+
+  <!-- Clear -->
+  <div class="mb-2 flex flex-col justify-end">
+    <%= link_to "Clear All",
+          university_squad_people_path(view: view_mode),
+          data: { turbo: false },
+          class: "whitespace-nowrap text-xs text-blue-900 underline hover:font-semibold" %>
+  </div>
+</div>

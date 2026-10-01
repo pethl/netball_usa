@@ -1,0 +1,302 @@
+<div
+  class="mt-4"
+  data-controller="table-tooltip"
+  data-action="
+    pointerover->table-tooltip#show
+    pointermove->table-tooltip#move
+    pointerout->table-tooltip#hide
+    focusin->table-tooltip#show
+    focusout->table-tooltip#hide
+    keydown@window->table-tooltip#closeWithKeyboard
+  "
+>
+  <p class="mb-3 text-sm text-gray-500">
+    Scroll horizontally to view all athlete details.
+  </p>
+
+  <div class="relative overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+    <table class="min-w-max text-left">
+      <thead class="border-b bg-gray-200 text-xs font-light uppercase tracking-wide text-gray-500">
+        <tr>
+          <th class="px-4 py-3 whitespace-nowrap">Date Registered</th>
+          <th class="px-4 py-3 whitespace-nowrap">First Name</th>
+          <th class="px-4 py-3 whitespace-nowrap">Last Name</th>
+          <th class="px-4 py-3 whitespace-nowrap">Email</th>
+          <th class="px-4 py-3 whitespace-nowrap">American?</th>
+          <th class="w-48 px-4 py-3 whitespace-nowrap">USA College</th>
+          <th class="w-40 px-4 py-3 whitespace-nowrap">Final Eligibility</th>
+          <th class="px-4 py-3 whitespace-nowrap">Trial Fee Paid?</th>
+          <th class="px-4 py-3 whitespace-nowrap">Platform Fee</th>
+          <th class="px-4 py-3 whitespace-nowrap">Net Fee</th>
+          <th class="px-4 py-3 whitespace-nowrap">NA Experience?</th>
+          <th class="w-64 px-4 py-3 whitespace-nowrap">Previous NA Involvement</th>
+          <th class="px-4 py-3 whitespace-nowrap">Date of Birth</th>
+          <th class="px-4 py-3 whitespace-nowrap">Age</th>
+          <th class="px-4 py-3 whitespace-nowrap">Phone Number</th>
+          <th class="px-4 py-3 min-w-64">Address</th>
+          <th class="px-4 py-3 whitespace-nowrap">City</th>
+          <th class="px-4 py-3 whitespace-nowrap">State</th>
+          <th class="px-4 py-3 whitespace-nowrap">ZIP Code</th>
+          <th class="px-4 py-3 whitespace-nowrap">Country</th>
+          <th class="w-64 px-4 py-3 whitespace-nowrap">Netball Pathway Experience</th>
+          <th class="px-4 py-3 whitespace-nowrap">1st Position</th>
+          <th class="px-4 py-3 whitespace-nowrap">2nd Position</th>
+          <th class="px-4 py-3 whitespace-nowrap">In Person / Virtual</th>
+          <th class="px-4 py-3 whitespace-nowrap">Virtual Trial Footage</th>
+          <th class="w-64 px-4 py-3 whitespace-nowrap">Video Explanation</th>
+          <th class="px-4 py-3 min-w-64">FAST5 Experience</th>
+          <th class="px-4 py-3 min-w-64">International Health Insurance</th>
+          <th class="px-4 py-3 min-w-64">Emergency Contact</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% people.each do |person| %>
+          <%
+            profile = person.university_athlete_profile
+            inactive = person.status.to_s.casecmp?("Inactive")
+
+            row_class =
+              if inactive
+                "bg-gray-200 text-gray-500 opacity-60"
+              else
+                "bg-white hover:bg-blue-50"
+              end
+
+            age =
+              if person.dob.present?
+                today = Date.current
+
+                today.year -
+                  person.dob.year -
+                  (
+                    today.month > person.dob.month ||
+                    (
+                      today.month == person.dob.month &&
+                      today.day >= person.dob.day
+                    ) ? 0 : 1
+                  )
+              end
+          %>
+
+          <tr class="<%= row_class %> border-b transition-colors duration-200">
+
+            <!-- Date Registered -->
+            <td class="px-4 py-3 align-top whitespace-nowrap">
+              <%= profile&.registered_at&.to_formatted_s(:usa) || "—" %>
+            </td>
+
+            <!-- First Name -->
+            <td class="px-4 py-3 align-top font-medium whitespace-nowrap">
+              <%= link_to person.first_name.presence || "—",
+                    person_path(person),
+                    class: link_class %>
+            </td>
+
+            <!-- Last Name -->
+            <td class="px-4 py-3 align-top font-medium whitespace-nowrap">
+              <%= link_to person.last_name.presence || "—",
+                    person_path(person),
+                    class: link_class %>
+            </td>
+
+            <!-- Email -->
+            <td class="px-4 py-3 align-top whitespace-nowrap">
+              <% if person.email.present? %>
+                <%= mail_to person.email,
+                      person.email,
+                      class: link_class %>
+              <% else %>
+                —
+              <% end %>
+            </td>
+
+            <!-- American -->
+            <td class="px-4 py-3 align-top whitespace-nowrap">
+              <% if profile.nil? || profile.american.nil? %>
+                —
+              <% else %>
+                <%= profile.american? ? "Yes" : "No" %>
+              <% end %>
+            </td>
+
+            <!-- USA College -->
+            <td class="px-4 py-3 align-top">
+              <%= table_tooltip_text(
+                    profile&.usa_college,
+                    width: "w-48"
+                  ) %>
+            </td>
+
+            <!-- Final Eligibility -->
+            <td class="px-4 py-3 align-top">
+              <%= table_tooltip_text(
+                    profile&.final_eligibility,
+                    width: "w-40"
+                  ) %>
+            </td>
+
+            <!-- Trial Fee Paid -->
+            <td class="px-4 py-3 align-top text-right whitespace-nowrap">
+              <% if profile&.trial_fee_paid.present? %>
+                <%= number_to_currency(
+                      profile.trial_fee_paid,
+                      precision: 2
+                    ) %>
+              <% else %>
+                —
+              <% end %>
+            </td>
+
+            <!-- Platform Fee -->
+            <td class="px-4 py-3 align-top text-right whitespace-nowrap">
+              <% if profile&.platform_fee.present? %>
+                <%= number_to_currency(
+                      profile.platform_fee,
+                      precision: 2
+                    ) %>
+              <% else %>
+                —
+              <% end %>
+            </td>
+
+            <!-- Net Fee -->
+            <td class="px-4 py-3 align-top text-right whitespace-nowrap">
+              <% if profile&.net_fee.present? %>
+                <%= number_to_currency(
+                      profile.net_fee,
+                      precision: 2
+                    ) %>
+              <% else %>
+                —
+              <% end %>
+            </td>
+
+            <!-- Netball America Experience -->
+            <td class="px-4 py-3 align-top whitespace-nowrap">
+              <% if profile.nil? ||
+                    profile.netball_america_experience.nil? %>
+              —
+            <% else %>
+              <%= profile.netball_america_experience? ? "Yes" : "No" %>
+            <% end %>
+          </td>
+
+          <!-- Previous NA Involvement -->
+          <td class="px-4 py-3 align-top">
+            <%= table_tooltip_text(
+                  profile&.previous_netball_america_involvement,
+                  width: "w-64"
+                ) %>
+          </td>
+
+          <!-- Date of Birth -->
+          <td class="px-4 py-3 align-top whitespace-nowrap">
+            <%= person.dob&.to_formatted_s(:usa) || "—" %>
+          </td>
+
+          <!-- Age -->
+          <td class="px-4 py-3 align-top text-center">
+            <%= age || "—" %>
+          </td>
+
+          <!-- Phone -->
+          <td class="px-4 py-3 align-top whitespace-nowrap">
+            <%= person.phone.presence || "—" %>
+          </td>
+
+          <!-- Address -->
+          <td class="max-w-sm px-4 py-3 align-top whitespace-normal">
+            <%= person.address.presence || "—" %>
+          </td>
+
+          <!-- City -->
+          <td class="px-4 py-3 align-top whitespace-nowrap">
+            <%= person.city.presence || "—" %>
+          </td>
+
+          <!-- State -->
+          <td class="px-4 py-3 align-top whitespace-nowrap">
+            <%= person.state.presence || "—" %>
+          </td>
+
+          <!-- ZIP -->
+          <td class="px-4 py-3 align-top whitespace-nowrap">
+            <%= person.zip_code.presence || "—" %>
+          </td>
+
+          <!-- Country -->
+          <td class="px-4 py-3 align-top whitespace-nowrap">
+            <%= person.country.presence || "—" %>
+          </td>
+
+          <!-- Pathway Experience -->
+          <td class="px-4 py-3 align-top">
+            <%= table_tooltip_text(
+                  profile&.netball_pathway_experience,
+                  width: "w-64"
+                ) %>
+          </td>
+
+          <!-- First Position -->
+          <td class="px-4 py-3 align-top text-center whitespace-nowrap">
+            <%= profile&.first_position.presence || "—" %>
+          </td>
+
+          <!-- Second Position -->
+          <td class="px-4 py-3 align-top text-center whitespace-nowrap">
+            <%= profile&.second_position.presence || "—" %>
+          </td>
+
+          <!-- Trial Format -->
+          <td class="px-4 py-3 align-top whitespace-nowrap">
+            <%= profile&.trial_format.presence || "—" %>
+          </td>
+
+          <!-- Virtual Trial Footage -->
+          <td class="px-4 py-3 align-top whitespace-nowrap">
+            <% if profile&.virtual_trial_footage.present? %>
+              <%= link_to "View Footage",
+                      profile.virtual_trial_footage,
+                      target: "_blank",
+                      class: link_class %>
+            <% else %>
+              —
+            <% end %>
+          </td>
+
+          <!-- Footage Explanation -->
+          <td class="px-4 py-3 align-top">
+            <%= table_tooltip_text(
+                  profile&.trial_footage_explanation,
+                  width: "w-64"
+                ) %>
+          </td>
+
+          <!-- FAST5 Experience -->
+          <td class="max-w-sm px-4 py-3 align-top whitespace-normal">
+            <%= profile&.fast5_experience.presence || "—" %>
+          </td>
+
+          <!-- Health Insurance -->
+          <td class="max-w-sm px-4 py-3 align-top whitespace-normal">
+            <%= profile&.international_health_insurance.presence || "—" %>
+          </td>
+
+          <!-- Emergency Contact -->
+          <td class="max-w-sm px-4 py-3 align-top whitespace-normal">
+            <%= profile&.emergency_contact.presence || "—" %>
+          </td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div
+  class="pointer-events-none fixed z-[100] hidden max-w-md whitespace-pre-wrap break-all rounded-lg border border-blue-200 bg-gray-900 px-4 py-3 text-sm leading-relaxed text-white shadow-xl"
+  role="tooltip"
+  data-table-tooltip-target="bubble"
+></div>
+</div>

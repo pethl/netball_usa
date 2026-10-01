@@ -1,17 +1,22 @@
 <%# app/views/people/_people_filters_nav.html.erb %>
-<div data-controller="page-title" data-page-title-prefix-value="People">
-  <div class="md:flex md:items-center md:justify-between space-y-2 md:space-y-0">
+
+<div data-controller="page-title"
+     data-page-title-prefix-value="People">
+
+  <div class="space-y-2 md:flex md:items-center md:justify-between md:space-y-0">
 
     <!-- Tabs -->
-    <ul class="flex flex-wrap text-sm font-medium text-left text-gray-600">
-      <% if params[:query].present? %>
+    <ul class="flex flex-wrap text-left text-sm font-medium text-gray-600">
+      <% if params[:query].present? && action_name == "index" %>
         <li class="me-1">
-          <span class="inline-block px-2 py-2 text-blue-900 font-semibold border-b-2 border-blue-900">Search Results</span>
+          <span class="inline-block border-b-2 border-blue-900 px-2 py-2 font-semibold text-blue-900">
+            Search Results
+          </span>
         </li>
       <% end %>
 
       <% [
-        ["All People", ["All", nil]],       
+        ["All People", ["All", nil]],
         ["Umpires (US)", ["Umpire", "US & Canada"]],
         ["Umpires (Int)", ["Umpire", "International"]],
         ["Coaches", ["Coach", nil]],
@@ -21,23 +26,59 @@
         ["Volunteers", ["Volunteer", nil]],
         ["Inactive", [nil, nil, "Inactive"]]
       ].each do |label, (role, region, status)| %>
+
         <li class="me-1">
-          <% is_active = params[:role] == role %>
-          <% if role == "Umpire" %>
-            <% is_active &&= (params[:region].presence || "") == (region.presence || "") %>
-          <% end %>
-          <% if status.present? %>
-            <% is_active &&= (params[:status].presence || "") == (status.presence || "") %>
-          <% end %>
+          <%
+            is_active =
+              action_name == "index" &&
+              params[:role] == role
+
+            if role == "Umpire"
+              is_active &&=
+                (params[:region].presence || "") ==
+                (region.presence || "")
+            end
+
+            if status.present?
+              is_active &&=
+                (params[:status].presence || "") ==
+                (status.presence || "")
+            end
+
+            tab_path = people_path(
+              { role: role, status: status }.tap do |options|
+                options[:region] = region if region.present?
+              end
+            )
+          %>
 
           <%= link_to label,
-              people_path({ role: role, status: status }.tap { |h| h[:region] = region if region.present? }),
-              data: { turbo: false },  
-              class: people_tab_class(is_active) %>
+                tab_path,
+                data: { turbo: false },
+                class: people_tab_class(is_active) %>
         </li>
       <% end %>
+
+      <!-- University Squad -->
+      <li class="me-1">
+        <%= link_to "Uni Squad",
+              university_squad_people_path(view: "summary"),
+              data: { turbo: false },
+              class: people_tab_class(
+                action_name == "university_squad"
+              ) %>
+      </li>
+
+      <!-- People Location Map -->
+      <li class="me-1">
+        <%= link_to "Map",
+             location_map_people_path(role: "All", context: "people"),
+              data: { turbo: false },
+              class: people_tab_class(
+                action_name == "location_map"
+              ) %>
+      </li>
     </ul>
 
   </div>
 </div>
-

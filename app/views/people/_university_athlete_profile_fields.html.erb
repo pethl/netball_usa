@@ -1,4 +1,4 @@
-<div class="mx-4 mt-8 rounded-lg border border-blue-900 bg-blue-50 p-4">
+<div class="rounded-lg border border-blue-900 bg-blue-50 p-6">
     <h2 class="mb-6 text-lg font-semibold text-gray-800">
         USA University Athlete Details
     </h2>
@@ -61,17 +61,19 @@
     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
         <div>
             <%= form.label :trial_fee_paid,
-        "Trial Fee Paid?",
+        "Trial Fee Paid",
         class: label_class %>
 
-            <div class="mt-1">
-                <%= form.select :trial_fee_paid,
-          options_for_select(
-            [["Yes", true], ["No", false]],
-            form.object.trial_fee_paid
-          ),
-          { include_blank: "Not answered" },
-          class: input_class %>
+            <div class="relative mt-1">
+                <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+                    $
+                </span>
+
+                <%= form.number_field :trial_fee_paid,
+          step: "0.01",
+          min: 0,
+          inputmode: "decimal",
+          class: "#{input_class} pl-7" %>
             </div>
         </div>
 
@@ -80,11 +82,16 @@
         "Platform Fee",
         class: label_class %>
 
-            <div class="mt-1">
+            <div class="relative mt-1">
+                <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+                    $
+                </span>
+
                 <%= form.number_field :platform_fee,
           step: "0.01",
           min: 0,
-          class: input_class %>
+          inputmode: "decimal",
+          class: "#{input_class} pl-7" %>
             </div>
         </div>
 
@@ -93,11 +100,16 @@
         "Net Fee",
         class: label_class %>
 
-            <div class="mt-1">
+            <div class="relative mt-1">
+                <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+                    $
+                </span>
+
                 <%= form.number_field :net_fee,
           step: "0.01",
           min: 0,
-          class: input_class %>
+          inputmode: "decimal",
+          class: "#{input_class} pl-7" %>
             </div>
         </div>
     </div>

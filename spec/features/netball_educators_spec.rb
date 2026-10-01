@@ -50,14 +50,25 @@ RSpec.describe "NetballEducators Management", type: :feature, js: true do
       expect(educator.reload.city).to eq("New York")
     end
 
-    scenario "sees equipment section after saving" do
-      educator = create(:netball_educator)
+   scenario "shows equipment actions after saving the educator" do
+  educator = create(:netball_educator)
 
-      visit edit_netball_educator_path(educator)
+  visit edit_netball_educator_path(educator)
 
-      expect(page).to have_content("Equipment Sales")
-      expect(page).to have_link("➕ Add New Equipment Sale")
-    end
+  expect(page).to have_content("Equipment Sales")
+  expect(page).not_to have_link("➕ Add New Equipment Sale")
+  expect(page).to have_content(
+    "Save this educator before adding equipment sales or quotes."
+  )
+
+  click_button "Save Details"
+
+  expect(page).to have_content(
+    "Educator was successfully updated."
+  )
+  expect(page).to have_link("➕ Add New Equipment Sale")
+  expect(page).to have_link("➕ Add New Equipment Quote")
+end
   end
 
   context "as an anonymous user" do

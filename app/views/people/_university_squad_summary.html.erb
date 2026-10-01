@@ -1,0 +1,124 @@
+<div
+  class="mt-4"
+  data-controller="table-tooltip"
+  data-action="
+    pointerover->table-tooltip#show
+  pointermove->table-tooltip#move
+  pointerout->table-tooltip#hide
+  focusin->table-tooltip#show
+  focusout->table-tooltip#hide
+  keydown@window->table-tooltip#closeWithKeyboard
+  "
+  >
+  <div class="relative overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+    <table class="w-full text-left">
+      <thead class="border-b bg-gray-200 text-xs font-light uppercase tracking-wide text-gray-500">
+        <tr>
+          <th scope="col" class="px-4 py-3 whitespace-nowrap">
+            Date Registered
+          </th>
+
+          <th scope="col" class="px-4 py-3 whitespace-nowrap">
+            First Name
+          </th>
+
+          <th scope="col" class="px-4 py-3 whitespace-nowrap">
+            Last Name
+          </th>
+
+          <th scope="col" class="px-4 py-3">
+            Email
+          </th>
+
+          <th scope="col" class="px-4 py-3 whitespace-nowrap">
+            American?
+          </th>
+
+          <th scope="col" class="px-4 py-3">
+            USA College
+          </th>
+
+          <th scope="col" class="px-4 py-3 whitespace-nowrap">
+            Final Eligibility
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% people.each do |person| %>
+          <%
+          profile = person.university_athlete_profile
+          inactive = person.status.to_s.casecmp?("Inactive")
+
+          row_class =
+            if inactive
+              "bg-gray-200 text-gray-500 opacity-60"
+            else
+              "bg-white hover:bg-blue-50"
+            end
+        %>
+
+          <tr class="<%= row_class %> border-b transition-colors duration-200">
+            <!-- Date Registered -->
+            <td class="px-4 py-3 align-top whitespace-nowrap">
+              <%= profile&.registered_at&.to_formatted_s(:usa) || "—" %>
+            </td>
+
+            <!-- First Name -->
+            <td class="px-4 py-3 align-top font-medium whitespace-nowrap">
+              <%= link_to person.first_name.presence || "—",
+                  person_path(person),
+                  class: link_class %>
+            </td>
+
+            <!-- Last Name -->
+            <td class="px-4 py-3 align-top font-medium whitespace-nowrap">
+              <%= link_to person.last_name.presence || "—",
+                  person_path(person),
+                  class: link_class %>
+            </td>
+
+            <!-- Email -->
+            <td class="px-4 py-3 align-top break-words">
+              <% if person.email.present? %>
+                <%= mail_to person.email,
+                    person.email,
+                    class: link_class %>
+              <% else %>
+                —
+              <% end %>
+            </td>
+
+            <!-- American -->
+            <td class="px-4 py-3 align-top whitespace-nowrap">
+              <% if profile.nil? || profile.american.nil? %>
+                —
+              <% else %>
+                <%= profile.american? ? "Yes" : "No" %>
+              <% end %>
+            </td>
+
+            <!-- USA College -->
+            <td class="px-4 py-3 align-top">
+              <%= table_tooltip_text(
+                  profile&.usa_college,
+                  width: "w-48"
+                ) %>
+            </td>
+
+            <!-- Final Eligibility -->
+            <td class="px-4 py-3 align-top">
+              <%= profile&.final_eligibility.presence || "—" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div
+    class="pointer-events-none fixed z-[100] hidden max-w-md rounded-lg border border-blue-200 bg-gray-900 px-4 py-3 text-sm leading-relaxed text-white shadow-xl"
+    role="tooltip"
+    data-table-tooltip-target="bubble"
+  ></div>
+</div>

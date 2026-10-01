@@ -69,7 +69,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 6.1.0'
   gem 'capybara'
   gem 'selenium-webdriver' # for browser testing
-  gem 'webdrivers' 
+
   gem 'factory_bot_rails'
   gem 'annotate'
   gem 'database_cleaner-active_record'

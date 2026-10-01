@@ -406,49 +406,130 @@ RSpec.describe Ability, type: :model do
     end
     
 
-    #------------------------ NA PEPOLE --------
+    #------------------------ NA PEOPLE --------
 
     context "na_people role" do
-      let(:user) { build(:user, role: "na_people", email: "user@example.com") }
-      let(:person) { build_stubbed(:person, email: user.email, id: 101) }
-      let(:other_person) { build_stubbed(:person, email: "other@example.com", id: 102) }
-      let(:transfer) { build_stubbed(:transfer, person_id: person.id) }
-      let(:other_transfer) { build_stubbed(:transfer, person_id: 999) }
-    
-      before do
-        allow(Person).to receive(:find_by).with(email: user.email).and_return(person)
+      let(:user) do
+        build(:user, role: "na_people", email: "user@example.com")
       end
-    
+
+      let(:person) do
+        build_stubbed(:person, email: user.email, id: 101)
+      end
+
+      let(:other_person) do
+        build_stubbed(:person, email: "other@example.com", id: 102)
+      end
+
+      let(:transfer) do
+        build_stubbed(:transfer, person: person)
+      end
+
+      let(:other_transfer) do
+        build_stubbed(:transfer, person: other_person)
+      end
+
+      # ---------------- PERSON ----------------
+
+      it "can create a new Person profile" do
+        new_person = build(:person, email: user.email)
+
+        expect(ability).to be_able_to(:create, new_person)
+      end
+
       it "can read and update their own Person record" do
         expect(ability).to be_able_to(:read, person)
         expect(ability).to be_able_to(:update, person)
       end
-    
-      it "cannot access index of Person" do
-        expect(ability).not_to be_able_to(:index, Person)
-      end
-    
+
       it "cannot access or modify another Person" do
         expect(ability).not_to be_able_to(:read, other_person)
         expect(ability).not_to be_able_to(:update, other_person)
       end
-    
-      it "can manage their own Transfers only" do
+
+      it "cannot destroy their Person" do
+        expect(ability).not_to be_able_to(:destroy, person)
+      end
+
+      it "cannot access index of Person" do
+        expect(ability).not_to be_able_to(:index, Person)
+      end
+
+      # ---------------- TRANSFER ----------------
+
+      it "can read and update their own Transfer" do
         expect(ability).to be_able_to(:read, transfer)
-        expect(ability).to be_able_to(:create, transfer)
         expect(ability).to be_able_to(:update, transfer)
       end
-    
-      it "cannot manage unrelated Transfers" do
+
+      it "cannot create a Transfer" do
+        new_transfer = build(:transfer, person: person)
+
+        expect(ability).not_to be_able_to(:create, new_transfer)
+      end
+
+      it "cannot access or modify another person's Transfer" do
         expect(ability).not_to be_able_to(:read, other_transfer)
         expect(ability).not_to be_able_to(:update, other_transfer)
       end
-    
+
+      it "cannot destroy their Transfer" do
+        expect(ability).not_to be_able_to(:destroy, transfer)
+      end
+
       it "cannot index Transfers" do
         expect(ability).not_to be_able_to(:index, Transfer)
       end
+
+      context "when the user does not have a Person profile yet" do
+        it "can create their Person profile" do
+          new_person = Person.new(email: user.email)
+
+          expect(ability).to be_able_to(:create, new_person)
+        end
+
+        it "still cannot create a Transfer" do
+          expect(ability).not_to be_able_to(:create, Transfer.new)
+        end
+      end
     end
-    
+
+    #------------------------ US OPEN MEDIA --------
+
+    context "us_open_media role" do
+      let(:user) { build(:user, role: "us_open_media") }
+
+      it "can manage transfers, people, and media" do
+        expect(ability).to be_able_to(:manage, Transfer)
+        expect(ability).to be_able_to(:manage, Person)
+        expect(ability).to be_able_to(:manage, Medium)
+      end
+
+      it "can access transfer menus and pickup actions" do
+        expect(ability).to be_able_to(:menu_all, Transfer)
+        expect(ability).to be_able_to(:inbound_pickups, Transfer)
+        expect(ability).to be_able_to(:outbound_pickups, Transfer)
+      end
+
+      it "can read events and access the calendar" do
+        expect(ability).to be_able_to(:read, Event)
+        expect(ability).to be_able_to(:index, Event)
+        expect(ability).to be_able_to(:show, Event)
+        expect(ability).to be_able_to(:calendar, Event)
+      end
+
+      it "cannot modify events" do
+        expect(ability).not_to be_able_to(:create, Event)
+        expect(ability).not_to be_able_to(:update, Event)
+        expect(ability).not_to be_able_to(:destroy, Event)
+      end
+
+      it "cannot manage unrelated resources" do
+        expect(ability).not_to be_able_to(:manage, Club)
+        expect(ability).not_to be_able_to(:manage, Grant)
+        expect(ability).not_to be_able_to(:manage, Sponsor)
+      end
+    end
 
    #------------------------- -------
 

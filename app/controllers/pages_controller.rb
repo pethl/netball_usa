@@ -1,7 +1,6 @@
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only:[:educator_sign_up, :goodbye]
      
-  
 
   def goodbye
     # renders app/views/pages/goodbye.html.erb    
@@ -45,24 +44,24 @@ class PagesController < ApplicationController
   @events_next_year_by_status = @events_next_year.group_by { |t| t.status }
 
   # -----------------------------
-# US Open transfer stats
-# -----------------------------
-us_open_transfers =
-  Transfer
-    .joins(:event)
-    .where(events: { id: current_us_open_event.id })
+  # US Open transfer stats
+  # -----------------------------
+  us_open_transfers =
+    Transfer
+      .joins(:event)
+      .where(events: { id: current_us_open_event.id })
 
-    @us_open_operations  = us_open_transfers.where(role: "Operations").count
-    @us_open_umpires     = us_open_transfers.where(role: "US Umpire").count
-    @us_open_int_umpires = us_open_transfers.where(role: "Int Umpire").count
-    @us_open_scorers     = us_open_transfers.where(role: "Scorer").count
-    @us_open_medics      = us_open_transfers.where(role: "Medic").count
+      @us_open_operations  = us_open_transfers.where(role: "Operations").count
+      @us_open_umpires     = us_open_transfers.where(role: "US Umpire").count
+      @us_open_int_umpires = us_open_transfers.where(role: "Int Umpire").count
+      @us_open_scorers     = us_open_transfers.where(role: "Scorer").count
+      @us_open_medics      = us_open_transfers.where(role: "Medic").count
 
 
   # -----------------------------
   # Membership and grants
   # -----------------------------
-  @total_members = Member.all.count + IndividualMember.all.count
+  @total_members = Member.count + IndividualMember.count
   @grants_submitted_this_year = Grant.where("date_submitted > ?", Time.now.beginning_of_year).count
 
   @opportunities = Opportunity.all.order(status: :asc)
@@ -90,13 +89,21 @@ us_open_transfers =
   # -----------------------------
   # Equipment card stats
   # -----------------------------
-  @total_sales  = Equipment.where(status: "Sale").count
-  @total_quotes = Equipment.where(status: "Quote").count
+  sales_scope = Equipment.where(status: "Sale")
+  quote_scope = Equipment.where(status: "Quote")
+
+  @total_sales = sales_scope.count
+
+  @total_quotes = quote_scope.count
+  @total_quote_amount = quote_scope.sum(:quote_amount)
 
   @equipment_sales_stats =
-    Equipment
-      .where(status: "Sale")
-      .where(sale_date: 3.years.ago.beginning_of_year..Time.current.end_of_year)
+    sales_scope
+      .where(
+        sale_date:
+          3.years.ago.beginning_of_year..
+          Time.current.end_of_year
+      )
       .group("EXTRACT(YEAR FROM sale_date)")
       .select(
         "EXTRACT(YEAR FROM sale_date) AS year",
@@ -104,12 +111,6 @@ us_open_transfers =
         "COALESCE(SUM(purchase_amount), 0) AS total_purchase"
       )
       .order("year DESC")
-
-  # Equipment quote stats
-  quote_scope = Equipment.where(status: "Quote")
-
-  @total_quotes       = quote_scope.count
-  @total_quote_amount = quote_scope.sum(:quote_amount)
 
   # -----------------------------
   # Netball Academy card stats
@@ -166,7 +167,56 @@ us_open_transfers =
 
   @dashboard_month_total =
   @dashboard_occurrences.sum { |o| o.filing.cost.to_f }
+
+
+  # -----------------------------
+    # USA University dashboard stats
+    # -----------------------------
+    @university_tasks_complete =
+      UniversityTask
+        .where("status ILIKE ?", "Complete%")
+        .count
+
+    @university_tasks_open =
+      UniversityTask
+        .where("status NOT ILIKE ?", "Complete%")
+        .count
+
+    @university_partners =
+      Partner
+        .where(usa_university_partner: true)
+        .count
+
+    university_players =
+      Person
+        .where(role: "University Squad")
+        .left_joins(:university_athlete_profile)
+
+    @university_confirmed_players =
+      university_players
+        .where(
+          "university_athlete_profiles.final_eligibility ILIKE ?",
+          "Yes%"
+        )
+        .count
+
+    @university_future_players =
+      university_players
+        .where(
+          <<~SQL.squish,
+            university_athlete_profiles.final_eligibility IS NULL
+            OR (
+              university_athlete_profiles.final_eligibility NOT ILIKE :confirmed
+              AND university_athlete_profiles.final_eligibility NOT ILIKE :withdrawn
+            )
+          SQL
+          confirmed: "Yes%",
+          withdrawn: "Withdrawn%"
+        )
+        .count
 end
+
+    
 
   
   def educator_sign_up

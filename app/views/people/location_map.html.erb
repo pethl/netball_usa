@@ -1,0 +1,233 @@
+<% content_for(
+  :page_title,
+  @map_context == "university" ?
+    "USA University Squad Map" :
+    "People – Location Map"
+) %>
+
+<%
+  selected_label =
+    if @selected_role == "All"
+      "All People"
+    else
+      @selected_role
+    end
+
+  map_label =
+    if @selected_role == "University Squad"
+      "Athletes"
+    else
+      "People"
+    end
+
+  tab_base_class =
+    "border-b-2 px-1 py-2 text-sm font-medium transition-colors duration-200"
+
+  inactive_tab_class =
+    "#{tab_base_class} border-transparent text-gray-500 hover:border-blue-300 hover:text-blue-800"
+
+  active_tab_class =
+    "#{tab_base_class} border-blue-900 text-blue-900"
+%>
+
+<!-- Section Navigation -->
+<% if @map_context == "people" %>
+  <div class="border-b border-gray-300 pb-1">
+    <%= render "people/people_filters_nav" %>
+  </div>
+<% else %>
+  <%= render "people/university_squad_nav",
+        active_view: "map" %>
+<% end %>
+
+<!-- Role Filter -->
+<div class="mb-2 mt-2 flex flex-wrap items-end justify-between gap-3">
+  <div>
+    <p class="text-sm font-medium text-gray-700">
+      Showing: <%= selected_label %>
+    </p>
+
+    <p class="text-xs text-gray-500">
+      Locations are based on each person’s state and country.
+    </p>
+  </div>
+
+  <div class="flex items-end gap-2"
+       data-controller="multi-filter"
+       data-multi-filter-url-value="<%= location_map_people_path(
+         map: @map_mode,
+         context: @map_context
+       ) %>">
+
+    <div class="flex flex-col">
+      <label for="map_role_filter"
+             class="mb-1 text-xs text-gray-600">
+        Filter Map by Role
+      </label>
+
+      <select id="map_role_filter"
+              name="role"
+              class="w-44 rounded-md border border-gray-300 py-1.5 text-sm shadow-sm focus:border-blue-900 focus:ring-blue-900"
+              data-multi-filter-target="field"
+              data-action="change->multi-filter#filter">
+
+        <option value="All"
+                <%= "selected" if @selected_role == "All" %>>
+          All Roles
+        </option>
+
+        <%= options_for_select(
+              people_role,
+              @selected_role == "All" ? nil : @selected_role
+            ) %>
+      </select>
+        </div>
+
+        <%= link_to "Clear",
+          location_map_people_path(
+            role: "All",
+            map: @map_mode,
+            context: @map_context
+          ),
+          class: "mb-2 text-xs text-blue-900 underline hover:font-semibold" %>
+      </div>
+    </div>
+
+    <!-- Map Type Navigation -->
+    <div class="flex items-center justify-center gap-8 border-t border-gray-200">
+      <%= link_to "USA Map",
+        location_map_people_path(
+          role: @selected_role,
+          map: "usa",
+          context: @map_context
+        ),
+        class: @map_mode == "usa" ?
+          active_tab_class :
+          inactive_tab_class %>
+
+      <%= link_to "World Map",
+        location_map_people_path(
+          role: @selected_role,
+          map: "world",
+          context: @map_context
+        ),
+        class: @map_mode == "world" ?
+          active_tab_class :
+          inactive_tab_class %>
+    </div>
+
+    <!-- Counts -->
+    <div class="mt-3 grid grid-cols-2 gap-2 md:grid-cols-4">
+      <div class="rounded-md border border-gray-200 bg-white px-3 py-2 shadow-sm transition-colors duration-200 hover:bg-blue-100">
+        <p class="text-[11px] font-medium uppercase tracking-wide text-gray-500">
+          Total
+        </p>
+
+        <p class="mt-0.5 text-xl font-semibold text-blue-900">
+          <%= @total_people_count %>
+        </p>
+      </div>
+
+      <% if @map_mode == "world" %>
+        <div class="rounded-md border border-gray-200 bg-white px-3 py-2 shadow-sm transition-colors duration-200 hover:bg-blue-100">
+          <p class="text-[11px] font-medium uppercase tracking-wide text-gray-500">
+            Mapped to a Country
+          </p>
+
+          <p class="mt-0.5 text-xl font-semibold text-blue-900">
+            <%= @mapped_country_count %>
+          </p>
+        </div>
+
+        <div class="rounded-md border border-gray-200 bg-white px-3 py-2 shadow-sm transition-colors duration-200 hover:bg-blue-100">
+          <p class="text-[11px] font-medium uppercase tracking-wide text-gray-500">
+            Countries Represented
+          </p>
+
+          <p class="mt-0.5 text-xl font-semibold text-blue-900">
+            <%= @country_counts.length %>
+          </p>
+        </div>
+
+        <div class="rounded-md border border-gray-200 bg-white px-3 py-2 shadow-sm transition-colors duration-200 hover:bg-blue-100">
+          <p class="text-[11px] font-medium uppercase tracking-wide text-gray-500">
+            Country Missing
+          </p>
+
+          <p class="mt-0.5 text-xl font-semibold text-blue-900">
+            <%= @missing_country_count %>
+          </p>
+        </div>
+      <% else %>
+        <div class="rounded-md border border-gray-200 bg-white px-3 py-2 shadow-sm transition-colors duration-200 hover:bg-blue-100">
+          <p class="text-[11px] font-medium uppercase tracking-wide text-gray-500">
+            Mapped to a State
+          </p>
+
+          <p class="mt-0.5 text-xl font-semibold text-blue-900">
+            <%= @mapped_people_count %>
+          </p>
+        </div>
+
+        <div class="rounded-md border border-gray-200 bg-white px-3 py-2 shadow-sm transition-colors duration-200 hover:bg-blue-100">
+          <p class="text-[11px] font-medium uppercase tracking-wide text-gray-500">
+            Non-USA
+          </p>
+
+          <p class="mt-0.5 text-xl font-semibold text-blue-900">
+            <%= @non_usa_count %>
+          </p>
+        </div>
+
+        <div class="rounded-md border border-gray-200 bg-white px-3 py-2 shadow-sm transition-colors duration-200 hover:bg-blue-100">
+          <p class="text-[11px] font-medium uppercase tracking-wide text-gray-500">
+            State Missing or Invalid
+          </p>
+
+          <p class="mt-0.5 text-xl font-semibold text-blue-900">
+            <%= @missing_state_count %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Map -->
+    <%
+  map_data =
+    if @map_mode == "world"
+      @country_counts
+    else
+      @people_state_counts
+    end
+
+  map_title =
+    if @map_mode == "world"
+      "#{selected_label} by Country"
+    else
+      "#{selected_label} by State"
+    end
+
+  empty_map_message =
+    if @map_mode == "world"
+      "No country information is available for this selection."
+    else
+      "No valid USA state information is available for this selection."
+    end
+%>
+
+    <div class="mt-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+      <% if map_data.any? %>
+        <%= tag.div data: {
+          controller: "plotly-map",
+          plotly_map_data_value: map_data.to_json,
+          plotly_map_title_value: map_title,
+          plotly_map_label_value: map_label,
+          plotly_map_mode_value: @map_mode
+        },
+        class: "h-[700px] w-full" %>
+      <% else %>
+        <p class="px-4 py-12 text-center text-gray-500">
+          <%= empty_map_message %>
+        </p>
+      <% end %>
+    </div>
