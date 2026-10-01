@@ -9,7 +9,11 @@ class Member < ApplicationRecord
   validates :club_id, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
-  #validates :email, presence:   true,format:     { with: VALID_EMAIL_REGEX },uniqueness: { case_sensitive: false }
+  #specifically allow blank but not bad email formats
+  validates :email,
+          format: { with: VALID_EMAIL_REGEX },
+          uniqueness: { case_sensitive: false },
+          allow_blank: true  
   validates :city, presence: true
   validates :state, presence: true
   validates :gender, presence: true

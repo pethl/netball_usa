@@ -531,6 +531,28 @@ RSpec.describe Ability, type: :model do
       end
     end
 
+    context "university admin team member" do
+      let(:user) { build(:user, role: "no_access") }
+      let(:objective) { UniversityObjective.new }
+
+      before do
+        allow(user).to receive(:in_group?)
+          .with("university_admin_team")
+          .and_return(true)
+      end
+
+      it "can view the objective index and individual objectives" do
+        expect(ability).to be_able_to(:index, UniversityObjective)
+        expect(ability).to be_able_to(:show, objective)
+      end
+
+      it "cannot create, update, or destroy objectives" do
+        expect(ability).not_to be_able_to(:create, UniversityObjective)
+        expect(ability).not_to be_able_to(:update, objective)
+        expect(ability).not_to be_able_to(:destroy, objective)
+      end
+    end
+
    #------------------------- -------
 
   context "admin role" do

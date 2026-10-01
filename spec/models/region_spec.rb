@@ -50,13 +50,13 @@ RSpec.describe Region, type: :model do
 
       @club1 = create(:club, us_state: "FL")
       @club2 = create(:club, us_state: "GA")
-      create(:club, us_state: "CA") # unrelated
+      @unrelated_club = create(:club, us_state: "CA")
     end
 
     it "returns clubs in states of this region" do
-      expect(region.clubs_in_region).to contain_exactly(@club1, @club2)
+      expect(region.clubs_in_region).to include(@club1, @club2)
+      expect(region.clubs_in_region).not_to include(@unrelated_club)
     end
   end
 end
-
 

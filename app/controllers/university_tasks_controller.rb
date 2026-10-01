@@ -4,24 +4,27 @@ class UniversityTasksController < ApplicationController
               if: -> { params[:university_objective_id].present? }
   before_action :set_university_task,
                 only: [:show, :edit, :update, :destroy]
+
+  authorize_resource class: UniversityTask
+
+  #order matters here - do not move this line
   before_action :set_assignment_users,
               only: [:new, :create, :edit, :update]
 
-  def index
-    university_tasks = UniversityTask
-      .joins(:university_objective)
-      .includes(
-        :university_objective,
-        :assigned_user
-      )
-      .order(
-        "university_objectives.title ASC",
-        "university_tasks.status ASC",
-        "university_tasks.position ASC"
-      )
+ def index
+    @tasks_by_objective = grouped_tasks(
+      UniversityTask.all
+    )
+  end
 
-    @tasks_by_objective =
-      university_tasks.group_by(&:university_objective)
+  def my_tasks
+    @tasks_by_objective = grouped_tasks(
+      UniversityTask.where(
+        assigned_user_id: current_user.id
+      )
+    )
+
+    render :index
   end
 
   def show
@@ -119,6 +122,21 @@ end
     ).uniq(&:id).sort_by do |user|
       user.full_name.downcase
     end
+  end
+
+  def grouped_tasks(scope)
+    scope
+      .joins(:university_objective)
+      .includes(
+        :university_objective,
+        :assigned_user
+      )
+      .order(
+        "university_objectives.title ASC",
+        "university_tasks.status ASC",
+        "university_tasks.position ASC"
+      )
+      .group_by(&:university_objective)
   end
 
   def university_task_params

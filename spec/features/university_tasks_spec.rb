@@ -101,7 +101,7 @@ RSpec.describe "University task list", type: :feature do
     visit university_tasks_path
 
     expect(page).to have_content(
-      "No university tasks to view"
+      "No university programme objective tasks to view"
     )
   end
 end

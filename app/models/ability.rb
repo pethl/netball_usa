@@ -35,6 +35,12 @@ class Ability
       can :create, DonatedItemRequest
     end
 
+    if user.in_group?("university_admin_team")
+      can :read, UniversityObjective
+      can [:read, :my_tasks], UniversityTask
+      can :update, UniversityTask, assigned_user_id: user.id
+    end
+
     case user.role
     
       # 1 : teams_grants (teams and grants, events, programs, venues, tours)

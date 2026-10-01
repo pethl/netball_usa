@@ -1,85 +1,103 @@
 <% content_for(:page_title, "USA University Tasks") %>
-<div class="mt-4">
+
+<% if current_user.admin? %>
+  <div class="mt-4 mb-2">
     <%= link_to "Add Task",
-  new_university_task_path,
-  class: form_button_class %>
-</div>
+          new_university_task_path,
+          class: form_button_class %>
+  </div>
+<% end %>
+
+<ul class="flex border-b flex-shrink-0">
+  <li class="mr-1">
+    <%= link_to "All Tasks",
+          university_tasks_path,
+          class: exact_tab_class(university_tasks_path) %>
+  </li>
+
+  <li class="mr-1">
+    <%= link_to "My Tasks",
+          my_tasks_university_tasks_path,
+          class: exact_tab_class(my_tasks_university_tasks_path) %>
+  </li>
+</ul>
 
 <% if @tasks_by_objective.any? %>
-<div class="mt-6 space-y-8">
+  <div class="mt-4 space-y-8">
     <% @tasks_by_objective.each do |objective, tasks| %>
-    <section>
-        <div class="rounded-t-lg border-l-4 border-blue-900 bg-blue-100 px-6 py-4">
-            <%= link_to objective.title,
+      <section>
+        <div class="mt-2 mb-2 rounded-t-lg border-l-4 border-blue-900 bg-blue-100 px-6 py-4">
+          <%= link_to objective.title,
             university_objective_path(objective),
             class: "font-medium italic text-gray-800 hover:text-blue-800" %>
         </div>
 
         <div class="relative overflow-x-auto">
-            <table class="w-full text-left rtl:text-right">
-                <thead class="border-b bg-gray-200 text-xs font-light text-gray-500">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Task
-                        </th>
+          <table class="w-full text-left rtl:text-right">
+            <thead class="border-b bg-gray-200 text-xs font-light text-gray-500">
+              <tr>
+                <th scope="col" class="px-6 py-3">
+                  Task
+                </th>
 
-                        <th scope="col" class="px-6 py-3">
-                            Status
-                        </th>
+                <th scope="col" class="px-6 py-3">
+                  Status
+                </th>
 
-                        <th scope="col" class="px-6 py-3">
-                            Assigned
-                        </th>
+                <th scope="col" class="px-6 py-3">
+                  Assigned
+                </th>
 
-                        <th scope="col" class="px-6 py-3">
-                            Due Date
-                        </th>
-                    </tr>
-                </thead>
+                <th scope="col" class="px-6 py-3">
+                  Due Date
+                </th>
+              </tr>
+            </thead>
 
-                <tbody>
-                    <% tasks.each do |task| %>
-                    <tr class="border-b bg-white hover:bg-gray-100">
-                        <td class="align-top px-6 py-4">
-                            <%= link_to task.action,
+            <tbody>
+              <% tasks.each do |task| %>
+                <tr class="border-b bg-white hover:bg-gray-100">
+                  <td class="align-top px-6 py-4">
+                    <%= link_to task.action,
                       university_task_path(task),
                       class: link_class %>
-                        </td>
+                  </td>
 
-                        <td class="align-top px-6 py-4 whitespace-nowrap">
-                            <%= task.status %>
-                        </td>
+                  <td class="align-top px-6 py-4 whitespace-nowrap">
+                    <%= task.status %>
+                  </td>
 
-                        <td class="align-top px-6 py-4 whitespace-nowrap">
-                            <% if task.assigned_user.present? %>
-                            <%= task.assigned_user.full_name.presence ||
+                  <td class="align-top px-6 py-4 whitespace-nowrap">
+                    <% if task.assigned_user.present? %>
+                      <%= task.assigned_user.full_name.presence ||
                         task.assigned_user.email %>
-                            <% else %>
-                            <span class="font-semibold text-blue-800">
-                                Not assigned
-                            </span>
-                            <% end %>
-                        </td>
-
-                        <td class="align-top px-6 py-4 whitespace-nowrap">
-                            <% if task.due_date.present? %>
-                            <%= task.due_date.to_formatted_s(:short_usa_year) %>
-                            <% else %>
-                            —
-                            <% end %>
-                        </td>
-                    </tr>
+                    <% else %>
+                      <span class="font-semibold text-blue-800">
+                        Not assigned
+                      </span>
                     <% end %>
-                </tbody>
-            </table>
+                  </td>
+
+                  <td class="align-top px-6 py-4 whitespace-nowrap">
+                    <% if task.due_date.present? %>
+                      <%= task.due_date.to_formatted_s(:short_usa_year) %>
+                    <% else %>
+                      —
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
-    </section>
+      </section>
     <% end %>
-</div>
+  </div>
 <% else %>
-<p class="px-6 py-4">
-    No university tasks to view
-</p>
+  <p class="px-6 py-4">
+    No university programme objective tasks to view
+  </p>
 <% end %>
 <br>
-<hr><br><br>
+<hr><br>
+<br>

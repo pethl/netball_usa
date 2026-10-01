@@ -1,0 +1,40 @@
+<li class="mt-2">
+  <%= link_to "UNIVERSITY",
+        university_objectives_path,
+        class: "text-gray-100 hover:font-bold" %>
+</li>
+
+<% if can?(:read, UniversityTask) %>
+  <li class="mt-2 ml-2">
+    <%= link_to "- Tasks",
+          university_tasks_path,
+          class: "text-gray-100 hover:font-bold" %>
+  </li>
+<% end %>
+
+<% if current_user.admin? %>
+
+  <li class="mt-2 ml-2">
+    <%= link_to "- Partners",
+          university_partners_path,
+          class: "text-gray-100 hover:font-bold" %>
+  </li>
+
+  <li class="mt-2 ml-2">
+    <%= link_to "- Events",
+          university_events_path,
+          class: "text-gray-100" %>
+  </li>
+
+  <li class="mt-2 ml-2">
+    <%= link_to "- Squad",
+          university_squad_people_path,
+          class: "text-gray-100 hover:font-bold" %>
+  </li>
+
+  <li class="mt-2 ml-2">
+    <%= link_to "- Admin Team",
+          user_group_path("university_admin_team"),
+          class: "text-gray-100 hover:font-bold" %>
+  </li>
+<% end %>

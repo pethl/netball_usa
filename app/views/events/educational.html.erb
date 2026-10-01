@@ -18,22 +18,22 @@
     <li>
       <%= link_to "Current Educational Events",
         educational_events_path,
-        class: events_tab_class(educational_events_path) %>
+        class: exact_tab_class(educational_events_path) %>
     </li>
     <li>
       <%= link_to "Past Educational Events",
         educational_past_events_path,
-        class: events_tab_class(educational_past_events_path) %>
+        class: exact_tab_class(educational_past_events_path) %>
     </li>
     <li>
       <%= link_to "Calendar",
         calendar_events_path,
-        class: events_tab_class(calendar_events_path) %>
+        class: exact_tab_class(calendar_events_path) %>
     </li>
     <li>
       <%= link_to "My Events",
         my_events_path,
-        class: events_tab_class(my_events_path) %>
+        class: exact_tab_class(my_events_path) %>
     </li>
   </ul>
 </header>
@@ -45,4 +45,3 @@
     <p class="px-6 py-4">No educational events available</p>
   <% end %>
 </div>
-

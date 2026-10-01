@@ -86,7 +86,7 @@ module ApplicationHelper
     # ------------------------------------------------------------
 
     # app/helpers/application_helper.rb
-    def events_tab_class(path)
+    def exact_tab_class(path)
       if URI.parse(request.path).path == URI.parse(path).path
         "inline-block py-2 px-4 text-blue-900 border-b-2 border-blue-900 hover:border-blue-700 hover:text-blue-700"
       else

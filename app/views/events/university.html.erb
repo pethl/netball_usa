@@ -18,22 +18,22 @@
         <li>
             <%= link_to "Current University Events",
         university_events_path,
-        class: events_tab_class(university_events_path) %>
+        class: exact_tab_class(university_events_path) %>
         </li>
         <li>
             <%= link_to "Past University Events",
         university_past_events_path,
-        class: events_tab_class(university_past_events_path) %>
+        class: exact_tab_class(university_past_events_path) %>
         </li>
         <li>
             <%= link_to "Calendar",
         calendar_events_path,
-        class: events_tab_class(calendar_events_path) %>
+        class: exact_tab_class(calendar_events_path) %>
         </li>
         <li>
             <%= link_to "My Events",
         my_events_path,
-        class: events_tab_class(my_events_path) %>
+        class: exact_tab_class(my_events_path) %>
         </li>
     </ul>
 </header>

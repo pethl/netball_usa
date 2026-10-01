@@ -73,7 +73,7 @@ RSpec.describe Partner, type: :model do
 
   describe "#address_condensed" do
     it "returns full address when all fields present" do
-      expect(subject.address_condensed).to eq("#{subject.location}, #{subject.city}, #{subject.us_state} #{subject.country}")
+      expect(subject.address_condensed).to eq("#{subject.location}, #{subject.city} #{subject.us_state}, #{subject.country}")
     end
 
     it "returns partial address when some fields are blank" do
@@ -83,18 +83,17 @@ RSpec.describe Partner, type: :model do
 
     it "returns state + country when location and city are blank" do
       subject.assign_attributes(location: nil, city: nil, us_state: "TX", country: "USA")
-      expect(subject.address_condensed).to eq("TX USA")
+      expect(subject.address_condensed).to eq("TX, USA")
     end
     
     it "returns city + country when location and state are blank" do
       subject.assign_attributes(location: nil, us_state: nil, city: "Austin", country: "USA")
-      expect(subject.address_condensed).to eq("Austin USA")
+      expect(subject.address_condensed).to eq("Austin, USA")
     end
     
     it "returns location + country when city and state are blank" do
       subject.assign_attributes(city: nil, us_state: nil, location: "123 Main", country: "USA")
-      expect(subject.address_condensed).to eq("123 Main USA")
+      expect(subject.address_condensed).to eq("123 Main, USA")
     end
   end
 end
-

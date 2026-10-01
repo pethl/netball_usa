@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
-resources :university_tasks, only: [:index, :new, :create] #must be before uni_objectives
+resources :university_tasks,#must be before uni_objectives
+          only: [:index, :new, :create] do
+  collection do
+    get :my_tasks
+  end
+end
 
   resources :university_objectives do
     resources :university_tasks,

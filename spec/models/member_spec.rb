@@ -19,11 +19,7 @@ RSpec.describe Member, type: :model do
       expect(member).to_not be_valid
     end
 
-    it "is not valid without an email" do
-      member.email = nil
-      expect(member).to_not be_valid
-    end
-
+   
     it "is not valid with an improperly formatted email" do
       member.email = "bad_email"
       expect(member).to_not be_valid
