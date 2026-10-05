@@ -34,7 +34,8 @@ class Ability
     cannot :read, Filing
     cannot :read, FilingOccurrence
 
-    if user.donated_items_access?
+    # Keep the legacy user flag working while access is migrated to the group.
+    if user.donated_items_access? || user.in_group?("donated_items_team")
       can :read, DonatedItem
       can :create, DonatedItemRequest
     end
@@ -66,6 +67,18 @@ class Ability
 
     if user.in_group?("media_team")
       can :manage, Medium
+    end
+
+    if user.in_group?("sponsors_team")
+      can :manage, Sponsor
+      can :manage, Contact
+      can :manage, Opportunity, user_id: user.id
+    end
+
+    if user.in_group?("events_team")
+      can :manage, Event
+      cannot :destroy, Event
+      can :calendar, Event
     end
 
     case user.role

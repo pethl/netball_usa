@@ -1,5 +1,6 @@
 class DonatedItemsController < ApplicationController
   before_action :set_donated_item, only: %i[ show edit update destroy ]
+  authorize_resource
 
   # GET /donated_items
  # app/controllers/donated_items_controller.rb

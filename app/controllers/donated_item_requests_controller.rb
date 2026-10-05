@@ -1,5 +1,6 @@
 class DonatedItemRequestsController < ApplicationController
  before_action :set_donated_item_request, only: %i[ show edit update destroy approve decline ]
+ authorize_resource
 
   # GET /donated_item_requests
   def index

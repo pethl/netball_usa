@@ -178,7 +178,7 @@
     <% end %>
     <!-- Dynamic menu based on user permissions -->
 
-    <% if current_user.donated_items_access? %>
+    <% if can?(:read, DonatedItem) %>
       <li class="mt-2">
         <%= link_to "DONATED ITEMS",
           donated_items_path,

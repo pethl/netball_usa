@@ -2,9 +2,11 @@
 
 <%= render "filter_nav" %>
 
-<div class="my-4">
-  <%= link_to "Add New Donated Item", new_donated_item_path, class: form_button_class %>
-</div>
+<% if can?(:create, DonatedItem) %>
+  <div class="my-4">
+    <%= link_to "Add New Donated Item", new_donated_item_path, class: form_button_class %>
+  </div>
+<% end %>
 
 <% if @donated_items.any? %>
   <div id="donated_items">
@@ -51,7 +53,7 @@
           <% @donated_items.each do |donated_item| %>
             <tr class="<%= donated_item.status.in?(%w[Approved Expired]) ? 'bg-gray-100' : 'bg-white' %> border-b hover:bg-gray-100 whitespace-nowrap">
             <td class="px-4 py-4 align-top whitespace-nowrap text-center">
-                <% if donated_item.status == "Available" %>
+                <% if donated_item.status == "Available" && can?(:create, DonatedItemRequest) %>
                   <%= link_to "Request Item",
                         new_donated_item_request_path(donated_item_id: donated_item.id),
                         class: green_clear_button_class %>

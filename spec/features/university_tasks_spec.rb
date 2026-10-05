@@ -98,6 +98,8 @@ RSpec.describe "University task list", type: :feature do
   end
 
   scenario "Admin sees an empty message when no tasks exist" do
+    UniversityTask.delete_all
+
     visit university_tasks_path
 
     expect(page).to have_content(

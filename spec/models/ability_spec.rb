@@ -713,6 +713,96 @@ end
   end
 end
 
+#-------------------------SPONSORS AND EVENTS GROUPS -------
+
+context "office user in the Sponsors Team group" do
+  let(:user) { build_stubbed(:user, id: 100, role: "office") }
+
+  before do
+    allow(user).to receive(:in_group?).and_return(false)
+    allow(user).to receive(:in_group?).with("sponsors_team").and_return(true)
+  end
+
+  it "can manage sponsors and contacts" do
+    expect(ability).to be_able_to(:manage, Sponsor)
+    expect(ability).to be_able_to(:manage, Contact)
+  end
+
+  it "can manage only their own opportunities" do
+    own_opportunity = build_stubbed(:opportunity, user_id: user.id)
+    other_opportunity = build_stubbed(:opportunity, user_id: 999)
+
+    expect(ability).to be_able_to(:manage, own_opportunity)
+    expect(ability).not_to be_able_to(:manage, other_opportunity)
+  end
+
+  it "does not receive events or unrelated access" do
+    expect(ability).not_to be_able_to(:manage, Event)
+    expect(ability).not_to be_able_to(:manage, Medium)
+    expect(ability).not_to be_able_to(:manage, Person)
+  end
+end
+
+context "office user in the Events Team group" do
+  let(:user) { build_stubbed(:user, id: 100, role: "office") }
+
+  before do
+    allow(user).to receive(:in_group?).and_return(false)
+    allow(user).to receive(:in_group?).with("events_team").and_return(true)
+  end
+
+  it "can manage events except deleting them" do
+    expect(ability).to be_able_to(:index, Event)
+    expect(ability).to be_able_to(:show, Event)
+    expect(ability).to be_able_to(:create, Event)
+    expect(ability).to be_able_to(:update, Event)
+    expect(ability).not_to be_able_to(:destroy, Event)
+    expect(ability).to be_able_to(:calendar, Event)
+  end
+
+  it "does not receive sponsor or unrelated access" do
+    expect(ability).not_to be_able_to(:manage, Sponsor)
+    expect(ability).not_to be_able_to(:manage, Contact)
+    expect(ability).not_to be_able_to(:manage, Medium)
+    expect(ability).not_to be_able_to(:manage, Person)
+  end
+end
+
+context "office user in the Donated Items Team group" do
+  let(:user) do
+    build_stubbed(
+      :user,
+      id: 100,
+      role: "office",
+      donated_items_access: false
+    )
+  end
+
+  before do
+    allow(user).to receive(:in_group?).and_return(false)
+    allow(user).to receive(:in_group?).with("donated_items_team").and_return(true)
+  end
+
+  it "can view donated items and submit requests" do
+    expect(ability).to be_able_to(:read, DonatedItem)
+    expect(ability).to be_able_to(:create, DonatedItemRequest)
+  end
+
+  it "cannot administer donated items or requests" do
+    expect(ability).not_to be_able_to(:create, DonatedItem)
+    expect(ability).not_to be_able_to(:update, DonatedItem)
+    expect(ability).not_to be_able_to(:destroy, DonatedItem)
+    expect(ability).not_to be_able_to(:approve, DonatedItemRequest)
+    expect(ability).not_to be_able_to(:decline, DonatedItemRequest)
+  end
+
+  it "does not receive unrelated access" do
+    expect(ability).not_to be_able_to(:manage, Sponsor)
+    expect(ability).not_to be_able_to(:manage, Event)
+    expect(ability).not_to be_able_to(:manage, Person)
+  end
+end
+
 #-----------------------------------------------#
 
   context "admin role" do
