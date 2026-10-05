@@ -1,4 +1,5 @@
 class MediaController < ApplicationController
+   authorize_resource class: Medium
   before_action :set_medium, only: %i[ show edit update destroy ]
   before_action :set_users, only: %i[ new edit create update ]
 
@@ -85,7 +86,27 @@ class MediaController < ApplicationController
     end
 
     def set_users
-      @users = helpers.active_admin_users
+      media_group = UserGroup
+        .active
+        .find_by(key: "media_team")
+
+      media_users =
+        if media_group.present?
+          media_group
+            .users
+            .where(account_active: true)
+            .to_a
+        else
+          []
+        end
+
+      @users = (
+        helpers.active_admin_users.to_a +
+        media_users +
+        [current_user]
+      ).uniq(&:id).sort_by do |user|
+        user.full_name.downcase
+      end
     end
 
     def medium_params

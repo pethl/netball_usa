@@ -1,6 +1,17 @@
 class UserGroupsController < ApplicationController
   before_action :require_admin
 
+  def index
+    @user_groups = UserGroup
+      .active
+      .ordered
+      .includes(user_group_memberships: :user)
+
+    @available_users = User
+      .where(account_active: true)
+      .order(:first_name, :last_name)
+  end
+
   def show
     @user_group = UserGroup.find_by!(key: params[:key])
 

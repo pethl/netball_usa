@@ -72,7 +72,7 @@ class User < ApplicationRecord
   :teams_grants=>1, 
   :teamlead=>2, 
   :grants=>3, 
-  :no_access=>4, 
+  :office=>4, 
   :teams_admin=>5, 
   :sponsors_events=>6, 
   :us_open=>7,
@@ -91,7 +91,7 @@ class User < ApplicationRecord
     "teams_grants" => "Teams and grants — teams, grants, events, programs, venues and tours",
     "teamlead" => "Team lead — own team only",
     "grants" => "Grants — grants only",
-    "no_access" => "No access",
+    "office" => "Office — access provided through user groups",
     "teams_admin" => "Teams administrator",
     "sponsors_events" => "Sponsors and events",
     "us_open" => "US Open — people and transfers",
@@ -158,8 +158,8 @@ class User < ApplicationRecord
     self.role == 'teamlead'
   end
 
-  def no_access?
-    self.role == 'no_access'
+  def office?
+    role == "office"
   end
 
   def teams_admin?

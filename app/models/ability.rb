@@ -21,8 +21,12 @@ class Ability
     end
 
     # 🧍 Logged-in user: always allow basic profile access
-    cannot :index, User
+    # Every signed-in user can access their own account.
     can [:read, :update], User, id: user.id
+
+    # But only separately authorised users can access the user list.
+    cannot :index, User
+    
 
     # 🔒 Filings are admin-only by default - belt and braces
     cannot :manage, Filing
@@ -39,6 +43,29 @@ class Ability
       can :read, UniversityObjective
       can [:read, :my_tasks], UniversityTask
       can :update, UniversityTask, assigned_user_id: user.id
+
+      can :university_squad, Person
+      can :read, Person, role: "University Squad"
+
+      can :university, Partner
+      can :read, Partner, usa_university_partner: true
+
+      can :read, Event
+      can :calendar, Event
+    end
+
+    if user.in_group?("us_open_team")
+      can :manage, Transfer
+      can :menu_all, Transfer
+
+      can :manage, Person
+
+      can :read, Event
+      can :calendar, Event
+    end
+
+    if user.in_group?("media_team")
+      can :manage, Medium
     end
 
     case user.role
@@ -90,9 +117,11 @@ class Ability
     when "grants"
       can :manage, Grant
 
-     # 4 : no_access
-    when "no_access"
-       # No specific permissions assigned yet
+    # 4 : office
+    # Office users receive operational access through user groups.
+    when "office"
+      # Baseline access is defined above the role case.
+      # Do not add department-specific permissions here.
 
     # 5 : teams admin level
     when "teams_admin"

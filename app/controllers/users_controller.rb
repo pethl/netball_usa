@@ -1,33 +1,89 @@
 class UsersController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource only: :index
+
+  before_action :require_admin,
+                only: [:groups, :update_groups]
+
+  before_action :set_user,
+                only: [:groups, :update_groups]
+
   def index
     authorize! :index, User
-    # 🔹 Confirmed + Active System Users (excluding role 2 = team lead)
-    @users = User
+
+    users = User
       .accessible_by(current_ability)
-      .where.not(confirmed_at: nil)
-      .where.not(role: 2)
-      .where(account_active: true)
-      .order(:role, :last_name)
-  
-    # 🔹 Team Leads (confirmed, role == 2)
-    @team_leads = User
-    .accessible_by(current_ability)
-      .where.not(confirmed_at: nil)
-      .where(role: 2)
-      .order(:last_name)
-  
-    # 🔹 Locked Accounts
-    @users_locked = User
-    .accessible_by(current_ability)
-      .where(account_active: false)
-      .order(:last_name)
-  
-    # 🔹 Awaiting Email Confirmation
-    @users_awaiting_confirmation = User
-    .accessible_by(current_ability)
-      .where(confirmed_at: nil)
-      .order(:created_at)
+      .order(
+        account_active: :desc,
+        last_name: :asc,
+        first_name: :asc
+      )
+
+    @admin_users = users.where(role: :admin)
+
+    @office_users = users.where.not(
+      role: [
+        User.roles.fetch("admin"),
+        User.roles.fetch("na_people"),
+        User.roles.fetch("teamlead")
+      ]
+    )
+
+    @na_people = users.where(role: :na_people)
+    @team_leads = users.where(role: :teamlead)
   end
-  
+
+  def groups
+    @user_groups = UserGroup.active.ordered
+    @selected_group_ids = @user.user_group_ids
+  end
+
+  def update_groups
+    selected_group_ids = UserGroup
+      .active
+      .where(id: submitted_group_ids)
+      .pluck(:id)
+
+    UserGroupMembership.transaction do
+      active_memberships = @user
+        .user_group_memberships
+        .joins(:user_group)
+        .where(user_groups: { active: true })
+
+      active_memberships
+        .where.not(user_group_id: selected_group_ids)
+        .destroy_all
+
+      selected_group_ids.each do |user_group_id|
+        @user.user_group_memberships.find_or_create_by!(
+          user_group_id: user_group_id
+        )
+      end
+    end
+
+    redirect_to groups_user_path(@user),
+                notice: "User groups were updated."
+  rescue ActiveRecord::RecordInvalid => error
+    @user_groups = UserGroup.active.ordered
+    @selected_group_ids = submitted_group_ids.map(&:to_i)
+
+    flash.now[:alert] =
+      error.record.errors.full_messages.to_sentence
+
+    render :groups, status: :unprocessable_entity
+  end
+
+  private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def submitted_group_ids
+    Array(params.dig(:user, :user_group_ids))
+      .reject(&:blank?)
+  end
+
+  def require_admin
+    raise CanCan::AccessDenied unless current_user&.admin?
+  end
 end

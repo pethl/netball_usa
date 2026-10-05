@@ -1,4 +1,11 @@
-<div class="mt-4 text-xl text-blue-900"><%= title %></div>
+<div class="mt-6 text-2xl font-semibold text-blue-900"><%= title %></div>
+
+<%
+  active_users = users.select(&:account_active?)
+  locked_users = users.reject(&:account_active?)
+  ordered_users = active_users + locked_users
+  locked_heading_shown = false
+%>
 
 <table class="table-fixed h_scrolling_list_table w-full">
   <thead class="bg-gray-200 border-b text-gray-500 font-light text-xs">
@@ -6,40 +13,40 @@
       <th class="text-left p-2 w-40">First Name</th>
       <th class="text-left p-2 w-32">Last Name</th>
       <th class="text-left p-2 w-64 break-words">Email</th>
-      <th class="text-center p-2 w-32 whitespace-nowrap">Created</th>
-      <th class="text-center p-2 w-32 whitespace-nowrap">Last Sign In</th>
-      <th class="text-center p-2 w-36 whitespace-nowrap">Confirmed?</th>
+      <th class="text-center p-2 w-28 whitespace-nowrap">Created</th>
+      <th class="text-center p-2 w-28 whitespace-nowrap">Last Sign In</th>
+      <th class="text-center p-2 w-28 whitespace-nowrap">Confirmed?</th>
       <th class="text-left p-2 w-48">Role</th>
-      <th class="text-center p-2 w-24">Is_admin?</th>
-      <th class="text-left p-2 w-24 text-center">Is_active?</th>
+
+      <th class="text-left p-2 w-24 text-center">Active?</th>
       <th class="text-center p-2 w-40">Password</th>
       <th class="text-right p-2 w-20">[:Id]</th>
     </tr>
   </thead>
 
   <tbody>
-    <% users.each do |user| %>
-      <% row_class = user.account_active? ? "hover:bg-gray-100" : "bg-gray-300" %>
+    <% ordered_users.each do |user| %>
+      <% if !user.account_active? && !locked_heading_shown %>
+        <tr>
+          <td colspan="11"
+          class="border-y border-gray-300 bg-gray-100 px-3 py-2 text-left text-sm font-semibold text-gray-600">
+            Locked accounts
+          </td>
+        </tr>
+
+        <% locked_heading_shown = true %>
+      <% end %>
+      <% row_class = user.account_active? ? "hover:bg-gray-100" : "bg-gray-200" %>
       <tr class="<%= row_class %>">
         <td class="p-2 border-b text-left"><%= user.first_name %></td>
         <td class="p-2 border-b text-left"><%= user.last_name %></td>
-        <td class="p-2 border-b text-left break-words"><%= user.email %></td>
+        <td class="p-2 border-b text-left truncate"><%= user.email %></td>
 
         <td class="p-2 border-b text-center whitespace-nowrap"><%= user.created_at.to_formatted_s(:short_usa_year) %></td>
         <td class="p-2 border-b text-center whitespace-nowrap"><%= user.last_sign_in_at&.to_formatted_s(:short_usa_year) %></td>
         <td class="p-2 border-b text-center whitespace-nowrap"><%= user.confirmation_sent_at&.to_formatted_s(:short_usa_year) %></td>
 
         <td class="p-2 border-b text-left truncate"><%= user.role %></td>
-
-        <td class="p-2 border-b text-center">
-          <% if user.admin? %>
-            <span class="inline-block px-3 py-1 text-sm font-semibold bg-green-100 text-green-800 rounded-full">
-              Yes
-            </span>
-          <% else %>
-            No
-          <% end %>
-        </td>
 
         <td class="p-2 border-b text-center <%= user.account_active? ? "" : "font-semibold italic" %>">
           <%= user.account_active? ? 'Active' : 'Locked' %>

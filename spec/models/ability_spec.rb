@@ -182,22 +182,73 @@ RSpec.describe Ability, type: :model do
 
     #--------------------------------NO ACCESS ROLE--------------------------------
 
-    context "no_access role" do
-      let(:user) { build(:user, role: "no_access") }
-    
-    
-      it "cannot manage unrelated models" do
-        expect(ability).not_to be_able_to(:manage, Club)
-        expect(ability).not_to be_able_to(:manage, Payment)
-        expect(ability).not_to be_able_to(:manage, User)
-        expect(ability).not_to be_able_to(:manage, Event)
-        expect(ability).not_to be_able_to(:manage, Tour)
-        expect(ability).not_to be_able_to(:manage, Grant)
-        expect(ability).not_to be_able_to(:manage, Sponsor)
-        expect(ability).not_to be_able_to(:manage, Transfer)
-        expect(ability).not_to be_able_to(:manage, Opportunity)
-      end
-    end
+    # ----------------------------- OFFICE ROLE -----------------------------
+
+context "office role without group membership" do
+  let(:user) do
+    build_stubbed(
+      :user,
+      id: 100,
+      role: "office"
+    )
+  end
+
+  before do
+    allow(user)
+      .to receive(:in_group?)
+      .and_return(false)
+  end
+
+  it "can read and update its own user account" do
+    expect(ability).to be_able_to(:read, user)
+    expect(ability).to be_able_to(:update, user)
+  end
+
+  it "cannot access another user account" do
+    other_user = build_stubbed(
+      :user,
+      id: 200,
+      role: "office"
+    )
+
+    expect(ability).not_to be_able_to(:read, other_user)
+    expect(ability).not_to be_able_to(:update, other_user)
+  end
+
+  it "cannot access the user index" do
+    expect(ability).not_to be_able_to(:index, User)
+  end
+
+  it "does not receive operational access without a group" do
+    expect(ability).not_to be_able_to(:manage, Club)
+    expect(ability).not_to be_able_to(:manage, Payment)
+    expect(ability).not_to be_able_to(:manage, Event)
+    expect(ability).not_to be_able_to(:manage, Tour)
+    expect(ability).not_to be_able_to(:manage, Grant)
+    expect(ability).not_to be_able_to(:manage, Sponsor)
+    expect(ability).not_to be_able_to(:manage, Transfer)
+    expect(ability).not_to be_able_to(:manage, Person)
+    expect(ability).not_to be_able_to(:manage, Partner)
+    expect(ability).not_to be_able_to(:manage, Opportunity)
+  end
+
+  it "cannot access group-specific collection actions" do
+    expect(ability).not_to be_able_to(
+      :university_squad,
+      Person
+    )
+
+    expect(ability).not_to be_able_to(
+      :university,
+      Partner
+    )
+
+    expect(ability).not_to be_able_to(
+      :menu_all,
+      Transfer
+    )
+  end
+end
 
     #-------------------------------- TEAMS ADMIN
 
@@ -272,39 +323,107 @@ RSpec.describe Ability, type: :model do
 
     #--------------------------------US OPEN ROLE--------------------------------
 
-    context "us_open role" do
-      let(:user) { build(:user, role: "us_open") }
-    
+    context "legacy us_open role" do
+      let(:user) do
+        build_stubbed(
+          :user,
+          id: 100,
+          role: "us_open"
+        )
+      end
+
+      before do
+        allow(user)
+          .to receive(:in_group?)
+          .and_return(false)
+      end
+
       it "can manage transfers and people" do
         expect(ability).to be_able_to(:manage, Transfer)
         expect(ability).to be_able_to(:manage, Person)
       end
 
+      it "can access the full US Open menu" do
+        expect(ability).to be_able_to(:menu_all, Transfer)
+        expect(ability).to be_able_to(:inbound_pickups, Transfer)
+        expect(ability).to be_able_to(:outbound_pickups, Transfer)
+      end
+
       it "can access People show and edit pages" do
         person = build_stubbed(:person)
-      
+
         expect(ability).to be_able_to(:show, person)
         expect(ability).to be_able_to(:edit, person)
       end
 
       it "can access Transfers show and edit pages" do
         transfer = build_stubbed(:transfer)
-      
+
         expect(ability).to be_able_to(:show, transfer)
         expect(ability).to be_able_to(:edit, transfer)
       end
-    
-      it "can read events" do
+
+      it "has read-only event and calendar access" do
         expect(ability).to be_able_to(:read, Event)
         expect(ability).to be_able_to(:index, Event)
         expect(ability).to be_able_to(:show, Event)
+        expect(ability).to be_able_to(:calendar, Event)
+
+        expect(ability).not_to be_able_to(:create, Event)
+        expect(ability).not_to be_able_to(:update, Event)
+        expect(ability).not_to be_able_to(:destroy, Event)
       end
-    
+
       it "cannot manage unrelated models" do
         expect(ability).not_to be_able_to(:manage, Club)
         expect(ability).not_to be_able_to(:manage, Grant)
         expect(ability).not_to be_able_to(:manage, User)
         expect(ability).not_to be_able_to(:manage, Event)
+      end
+    end
+
+    context "office user in the US Open Team group" do
+      let(:user) do
+        build_stubbed(
+          :user,
+          id: 100,
+          role: "office"
+        )
+      end
+
+      before do
+        allow(user)
+          .to receive(:in_group?)
+          .and_return(false)
+
+        allow(user)
+          .to receive(:in_group?)
+          .with("us_open_team")
+          .and_return(true)
+      end
+
+      it "receives US Open permissions from the group" do
+        expect(ability).to be_able_to(:manage, Transfer)
+        expect(ability).to be_able_to(:menu_all, Transfer)
+        expect(ability).to be_able_to(:inbound_pickups, Transfer)
+        expect(ability).to be_able_to(:outbound_pickups, Transfer)
+        expect(ability).to be_able_to(:manage, Person)
+      end
+
+      it "has read-only event and calendar access" do
+        expect(ability).to be_able_to(:read, Event)
+        expect(ability).to be_able_to(:calendar, Event)
+
+        expect(ability).not_to be_able_to(:create, Event)
+        expect(ability).not_to be_able_to(:update, Event)
+        expect(ability).not_to be_able_to(:destroy, Event)
+      end
+
+      it "does not receive unrelated access" do
+        expect(ability).not_to be_able_to(:manage, Club)
+        expect(ability).not_to be_able_to(:manage, Grant)
+        expect(ability).not_to be_able_to(:manage, Sponsor)
+        expect(ability).not_to be_able_to(:manage, Medium)
       end
     end
 
@@ -532,14 +651,20 @@ RSpec.describe Ability, type: :model do
     end
 
     context "university admin team member" do
-      let(:user) { build(:user, role: "no_access") }
+      let(:user) { build(:user, role: "office") }
       let(:objective) { UniversityObjective.new }
 
       before do
-        allow(user).to receive(:in_group?)
+        allow(user)
+          .to receive(:in_group?)
+          .and_return(false)
+
+        allow(user)
+          .to receive(:in_group?)
           .with("university_admin_team")
           .and_return(true)
       end
+
 
       it "can view the objective index and individual objectives" do
         expect(ability).to be_able_to(:index, UniversityObjective)
@@ -553,7 +678,42 @@ RSpec.describe Ability, type: :model do
       end
     end
 
-   #------------------------- -------
+   #-------------------------MEDIA GROUP -------
+   #
+   context "office user in the Media Team group" do
+  let(:user) do
+    build_stubbed(
+      :user,
+      id: 100,
+      role: "office"
+    )
+  end
+
+  before do
+    allow(user)
+      .to receive(:in_group?)
+      .and_return(false)
+
+    allow(user)
+      .to receive(:in_group?)
+      .with("media_team")
+      .and_return(true)
+  end
+
+  it "can manage media" do
+    expect(ability).to be_able_to(:manage, Medium)
+  end
+
+  it "does not receive unrelated access" do
+    expect(ability).not_to be_able_to(:manage, Sponsor)
+    expect(ability).not_to be_able_to(:manage, Event)
+    expect(ability).not_to be_able_to(:manage, Person)
+    expect(ability).not_to be_able_to(:manage, Transfer)
+    expect(ability).not_to be_able_to(:manage, Club)
+  end
+end
+
+#-----------------------------------------------#
 
   context "admin role" do
     let(:user) { build(:user, role: "admin") }

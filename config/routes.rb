@@ -214,11 +214,11 @@ end
   get "pages/educator_sign_up"
   get "pages/teams_membership_fees"
   get "pages/membership_landing"
-  match '/users',   to: 'users#index',   via: 'get'
+  resources :users, only: [:index]
 
   resources :user_groups,
           param: :key,
-          only: [:show] do
+          only: [:index, :show] do
   resources :user_group_memberships,
             only: [:create, :destroy],
             shallow: true

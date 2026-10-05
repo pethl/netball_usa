@@ -2,6 +2,7 @@
 module PagesHelper
     ROLE_HOME_VIEWS = {
       admin: { partial: "admin_home", title: "Management Summary" },
+      office: {partial: "office_home",title: "Dashboard"},
       
       teams_grants: { partial: "office_home", title: "Dashboard" },
       grants: { partial: "office_home", title: "Dashboard" },

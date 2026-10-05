@@ -1,0 +1,39 @@
+<% if can?(:menu_all, Transfer) %>
+  <li class="mt-2">
+    <%= link_to "US OPEN",
+          transfers_path,
+          class: "text-gray-100 hover:font-bold" %>
+  </li>
+<% end %>
+
+<% if can?(:create, Transfer) %>
+  <li class="mt-2 ml-2">
+    <%= link_to "- Add New Attendee",
+          new_transfer_path,
+          class: "text-gray-100 hover:font-bold" %>
+  </li>
+<% end %>
+
+<% if can?(:read, Transfer) %>
+  <li class="mt-2 ml-2">
+    <%= link_to "- Event Attendees",
+          transfers_path,
+          class: "text-gray-100 hover:font-bold" %>
+  </li>
+<% end %>
+
+<% if can?(:inbound_pickups, Transfer) %>
+  <li class="mt-2 ml-2">
+    <%= link_to "- Arrivals Transfers",
+          inbound_pickups_transfers_path,
+          class: "text-gray-100 hover:font-bold" %>
+  </li>
+<% end %>
+
+<% if can?(:outbound_pickups, Transfer) %>
+  <li class="mt-2 ml-2">
+    <%= link_to "- Departure Transfers",
+          outbound_pickups_transfers_path,
+          class: "text-gray-100 hover:font-bold" %>
+  </li>
+<% end %>

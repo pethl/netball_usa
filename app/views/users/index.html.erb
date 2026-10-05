@@ -3,9 +3,13 @@
 <div class="px-2">
   <div id="users">
 
-    <div class="mb-2 flex justify-end">
+    <div class="mb-2 flex justify-end gap-4">
       <%= link_to "Create user account", new_admin_user_path,
       class: "inline-flex items-center rounded-md bg-blue-900 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-800" %>
+
+      <%= link_to "Manage user groups",
+      user_groups_path,
+      class: clear_button_class %>
     </div>
 
     <% headers = ["First Name", "Last Name", "Email", "Created", "Last Sign In", "Role", "Is_admin?", "Is_active?", "[:Id]"] %>
@@ -14,8 +18,8 @@
 
       <%= render partial: "user_table",
       locals: {
-        title: "Confirmed System Users",
-        users: @users,
+        title: "Administrators",
+        users: @admin_users,
         headers: headers,
         include_confirmation: false,
         include_active?: true
@@ -23,55 +27,68 @@
 
       <%= render partial: "user_table",
       locals: {
-        title: "Team Administrators",
+        title: "Office",
+        users: @office_users,
+        headers: headers,
+        include_confirmation: false,
+        include_active?: true
+      } %>
+
+      <%= render partial: "user_table",
+      locals: {
+        title: "NA People",
+        users: @na_people,
+        headers: headers,
+        include_confirmation: false,
+        include_active?: true
+      } %>
+
+      <%= render partial: "user_table",
+      locals: {
+        title: "Team Leads",
         users: @team_leads,
         headers: headers,
         include_confirmation: false,
         include_active?: true
       } %>
+    </div>
 
-      <%= render partial: "user_table",
-      locals: {
-        title: "Locked Accounts",
-        users: @users_locked,
-        headers: headers,
-        include_confirmation: false,
-        include_active?: true
-      } %>
+    <hr class="my-4">
 
-      <%= render partial: "user_table",
-      locals: {
-        title: "Users Awaiting Email Confirmation",
-        users: @users_awaiting_confirmation,
-        headers: headers,
-        include_confirmation: true,
-        include_active?: false
-      } %>
+    <div class="m-4 text-sm text-gray-700">
+      <strong>[OFFICE USE ONLY]</strong> User Role Definitions:
+      <ul class="mt-2 list-disc ml-6 space-y-1">
+        <li>0 : admin (everything)</li>
+        <li>1 : teams_grants (teams and grants, events, programs, venues, tours)</li>
+        <li>2 : teamlead (teams only)</li>
+        <li>3 : grants only </li>
+        <li>4 : office</li>
+        <li>5 : teams admin level</li>
+        <li>6 : sponsors_events</li>
+        <li>7 : us_open (US Open and people)</li>
+        <li>8 : educators_events (educators, followups and events)</li>
+        <li>9 : sponsors_media_events</li>
+        <li>10: educators_events_medium (includes us open</li>
+        <li>11: spare (no specific permissions)</li>
+        <li>12: na_people (person and US Open access)</li>
+        <li>13: as 8 but also manage own profile and own transfer</li>
+        <li>14: calendar_clubs_user (view only)</li>
+        <li>15: us_open_media (US Open and people and media)</li>
 
-      <hr class="my-4">
-      <div class="m-4 text-sm text-gray-700">
-        <strong>[OFFICE USE ONLY]</strong> User Role Definitions:
-        <ul class="mt-2 list-disc ml-6 space-y-1">
-          <li>0 : admin (everything)</li>
-          <li>1 : teams_grants (teams and grants, events, programs, venues, tours)</li>
-          <li>2 : teamlead (teams only)</li>
-          <li>3 : grants only </li>
-          <li>4 : no_access</li>
-          <li>5 : teams admin level</li>
-          <li>6 : sponsors_events</li>
-          <li>7 : us_open (US Open and people)</li>
-          <li>8 : educators_events (educators, followups and events)</li>
-          <li>9 : sponsors_media_events</li>
-          <li>10: educators_events_medium (includes us open</li>
-          <li>11: spare (no specific permissions)</li>
-          <li>12: na_people (person and US Open access)</li>
-          <li>13: as 8 but also manage own profile and own transfer</li>
-          <li>14: calendar_clubs_user (view only)</li>
-          <li>15: us_open_media (US Open and people and media)</li>
+      </ul>
+      <p class="mt-2">All roles have access to create Educator</p>
+    </div>
 
-        </ul>
-        <p class="mt-2">All roles have access to create Educator</p>
+    <hr class="my-4">
+
+    <div class="m-4 text-sm text-gray-700">
+      <strong>[OFFICE USE ONLY]</strong> TBD - New User Role Definitions:
+      <ul class="mt-2 list-disc ml-6 space-y-1">
+        <li>0 : admin (everything)</li>
+        <li>4 : office (role specific access + own person + events</li>
+        <li>2 : NA People (own person record and own US Open travel details only</li>
+        <li>3 : Team Leads (club and members) NO LONGER IN USE</li>
+
       </div>
     </div>
   </div>
-</div>

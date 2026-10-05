@@ -1,47 +1,49 @@
 <% content_for(:page_title, @page_title || "University Events") %>
 
-
-
 <div class="flex flex-wrap justify-between items-center my-4 space-x-4">
+  <% if current_user.admin? %>
     <div>
-        <%= link_to "Add New Event", new_event_path, class: form_button_class %>
+      <%= link_to "Add New Event",
+          new_event_path,
+          class: form_button_class %>
     </div>
+  <% end %>
 
-    <div>
-        <%= render "filter_form" %>
-    </div>
+  <div>
+    <%= render "filter_form" %>
+  </div>
 </div>
 
 <!-- University event tabs (always visible) -->
 <header class="ml-2 mt-4 mb-2 flex space-x-6">
-    <ul class="flex space-x-4 list-none">
-        <li>
-            <%= link_to "Current University Events",
+  <ul class="flex space-x-4 list-none">
+    <li>
+      <%= link_to "Current University Events",
         university_events_path,
         class: exact_tab_class(university_events_path) %>
-        </li>
-        <li>
-            <%= link_to "Past University Events",
+    </li>
+    <li>
+      <%= link_to "Past University Events",
         university_past_events_path,
         class: exact_tab_class(university_past_events_path) %>
-        </li>
-        <li>
-            <%= link_to "Calendar",
+    </li>
+    <li>
+      <%= link_to "Calendar",
         calendar_events_path,
         class: exact_tab_class(calendar_events_path) %>
-        </li>
-        <li>
-            <%= link_to "My Events",
+    </li>
+    <li>
+      <%= link_to "My Events",
         my_events_path,
         class: exact_tab_class(my_events_path) %>
-        </li>
-    </ul>
+    </li>
+  </ul>
 </header>
 
 <div class="m-4">
-    <% if @events.any? %>
+  <% if @events.any? %>
     <%= render "events_table" %>
-    <% else %>
+  <% else %>
     <p class="px-6 py-4">No university events available</p>
-    <% end %>
+  <% end %>
 </div>
