@@ -1,0 +1,37 @@
+<div style="margin:0 auto;max-width:560px;font-family:Arial,sans-serif;color:#1f2937;line-height:1.6;">
+  <div style="padding:20px;text-align:center;border-bottom:4px solid #173b73;">
+    <%= image_tag asset_url("Netball_America_Logo.png"), alt: "Netball America", style: "max-width:180px;height:auto;" %>
+  </div>
+
+  <div style="padding:28px 24px;">
+    <h1 style="margin:0 0 16px;color:#173b73;font-size:22px;">A grant has been assigned to you</h1>
+    <p>Hi <%= @assignee.first_name %>,</p>
+    <p><%= @assigner.present? ? @assigner.first_name : "A Netball America administrator" %> has assigned the following grant to you:</p>
+
+    <div style="margin:20px 0;padding:16px;border-left:4px solid #173b73;background:#f3f6fa;">
+      <p style="margin:0 0 8px;font-size:18px;font-weight:bold;"><%= @grant.name %></p>
+      <p style="margin:0 0 8px;"><strong>Status:</strong> <%= @grant.status %></p>
+      <% if @grant.grant_type.present? %>
+        <p style="margin:0 0 8px;"><strong>Grant type:</strong> <%= @grant.grant_type %></p>
+      <% end %>
+      <% if @grant.amount.present? %>
+        <p style="margin:0 0 8px;"><strong>Amount:</strong> <%= number_to_currency(@grant.amount) %></p>
+      <% end %>
+      <% if @grant.purpose.present? %>
+        <p style="margin:0 0 8px;"><strong>Purpose:</strong> <%= @grant.purpose %></p>
+      <% end %>
+      <% if @grant.program.present? %>
+        <p style="margin:0 0 8px;"><strong>Program:</strong> <%= @grant.program %></p>
+      <% end %>
+      <% if @grant.due_date.present? %>
+        <p style="margin:0;"><strong>Due date:</strong> <%= @grant.due_date.to_fs(:long) %></p>
+      <% end %>
+    </div>
+
+    <p style="margin:28px 0;text-align:center;">
+      <%= link_to "View grant", edit_grant_url(@grant), style: "display:inline-block;border-radius:6px;background:#173b73;color:#ffffff;padding:12px 22px;text-decoration:none;font-weight:bold;" %>
+    </p>
+
+    <p>Regards,<br>Netball America</p>
+  </div>
+</div>

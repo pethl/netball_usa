@@ -4,9 +4,11 @@ class ReferenceMailer < ApplicationMailer
 
     def new_reference_email
         @reference = params[:reference]
-        @email = "pethicklisa@gmail.com"
-    
-        mail(to: @email, subject: "NETBALL_AMERICA: New Reference Created!")
+
+        mail(
+          to: "pethicklisa@gmail.com",
+          subject: "New Netball America reference data created"
+        )
     end
 
     def update_reference_email

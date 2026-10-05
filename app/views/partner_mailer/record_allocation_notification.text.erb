@@ -1,0 +1,15 @@
+Hi <%= @assignee.first_name %>,
+
+<%= @assigner.present? ? @assigner.first_name : "A Netball America administrator" %> has assigned the following partner record to you:
+
+Company: <%= @partner.company %>
+<% if @partner.description.present? %>Description: <%= @partner.description %>
+<% end %><% if @partner.first_name_primary.present? || @partner.last_name_primary.present? %>Primary contact: <%= [@partner.first_name_primary, @partner.last_name_primary].compact_blank.join(" ") %>
+<% end %><% if @partner.email_primary.present? %>Contact email: <%= @partner.email_primary %>
+<% end %><% if @partner.address_condensed.present? %>Location: <%= @partner.address_condensed %>
+<% end %><% if @partner.accept_partnership.present? %>Partnership decision: <%= @partner.accept_partnership %>
+<% end %>
+View partner record: <%= edit_partner_url(@partner) %>
+
+Regards,
+Netball America

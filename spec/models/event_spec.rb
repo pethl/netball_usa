@@ -116,7 +116,7 @@ RSpec.describe Event, type: :model do
         end
       
         matching_emails = ActionMailer::Base.deliveries.select do |mail|
-          mail.to.include?(assignee.email) && mail.subject.match?(/assigned a new event/i)
+          mail.to.include?(assignee.email) && mail.subject.match?(/event assigned to you/i)
         end
       
         expect(matching_emails.size).to eq(1)
@@ -136,4 +136,3 @@ RSpec.describe Event, type: :model do
     end
   end
 end
-

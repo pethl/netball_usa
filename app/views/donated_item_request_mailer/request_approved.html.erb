@@ -1,27 +1,27 @@
-<p>Good news!</p>
+<div style="margin:0 auto;max-width:560px;font-family:Arial,sans-serif;color:#1f2937;line-height:1.6;">
+  <div style="padding:20px;text-align:center;border-bottom:4px solid #173b73;">
+    <%= image_tag asset_url("Netball_America_Logo.png"), alt: "Netball America", style: "max-width:180px;height:auto;" %>
+  </div>
 
-<p>Your donated item request has been approved.</p>
+  <div style="padding:28px 24px;">
+    <h1 style="margin:0 0 16px;color:#173b73;font-size:22px;">Your donated item request has been approved</h1>
+    <p>Hi <%= @requestor.first_name %>,</p>
+    <p>Good news—your donated item request has been approved.</p>
 
-<p>
-  <strong>Item:</strong>
-  <%= @item.description %>
-</p>
+    <div style="margin:20px 0;padding:16px;border-left:4px solid #173b73;background:#f3f6fa;">
+      <p style="margin:0 0 8px;font-size:18px;font-weight:bold;"><%= @item.description %></p>
+      <p style="margin:0 0 8px;"><strong>Type:</strong> <%= @item.item_type %></p>
+      <% if @item.value.present? %><p style="margin:0 0 8px;"><strong>Value:</strong> <%= number_to_currency(@item.value, precision: 0) %></p><% end %>
+      <p style="margin:0 0 8px;"><strong>Recipient:</strong> <%= @request.recipient_name %></p>
+      <p style="margin:0 0 8px;"><strong>Delivery:</strong> <%= @request.delivery_method %></p>
+      <p style="margin:0 0 8px;"><strong>Needed by:</strong> <%= @request.date_needed_by.to_fs(:long) %></p>
+      <p style="margin:0;"><strong>Approved by:</strong> <%= @approver&.full_name || "Netball America administrator" %></p>
+    </div>
 
-<p>
-  <strong>Type:</strong>
-  <%= @item.item_type %>
-</p>
+    <p style="margin:28px 0;text-align:center;">
+      <%= link_to "View request", donated_item_request_url(@request), style: "display:inline-block;border-radius:6px;background:#173b73;color:#ffffff;padding:12px 22px;text-decoration:none;font-weight:bold;" %>
+    </p>
 
-<p>
-  <strong>Value:</strong>
-  <%= number_to_currency(@item.value, precision: 0) %>
-</p>
-
-<p>
-  <strong>Approved By:</strong>
-  <%= @approver.full_name if @approver.present? %>
-</p>
-
-<p>
-  <a href="<%= @link %>">View Request</a>
-</p>
+    <p>Regards,<br>Netball America</p>
+  </div>
+</div>

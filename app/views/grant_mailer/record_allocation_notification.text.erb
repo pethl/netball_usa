@@ -1,0 +1,16 @@
+Hi <%= @assignee.first_name %>,
+
+<%= @assigner.present? ? @assigner.first_name : "A Netball America administrator" %> has assigned the following grant to you:
+
+Grant: <%= @grant.name %>
+Status: <%= @grant.status %>
+<% if @grant.grant_type.present? %>Grant type: <%= @grant.grant_type %>
+<% end %><% if @grant.amount.present? %>Amount: <%= number_to_currency(@grant.amount) %>
+<% end %><% if @grant.purpose.present? %>Purpose: <%= @grant.purpose %>
+<% end %><% if @grant.program.present? %>Program: <%= @grant.program %>
+<% end %><% if @grant.due_date.present? %>Due date: <%= @grant.due_date.to_fs(:long) %>
+<% end %>
+View grant: <%= edit_grant_url(@grant) %>
+
+Regards,
+Netball America

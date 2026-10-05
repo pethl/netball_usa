@@ -1,0 +1,36 @@
+<div style="margin:0 auto;max-width:560px;font-family:Arial,sans-serif;color:#1f2937;line-height:1.6;">
+  <div style="padding:20px;text-align:center;border-bottom:4px solid #173b73;">
+    <%= image_tag asset_url("Netball_America_Logo.png"), alt: "Netball America", style: "max-width:180px;height:auto;" %>
+  </div>
+
+  <div style="padding:28px 24px;">
+    <h1 style="margin:0 0 16px;color:#173b73;font-size:22px;">A partner record has been assigned to you</h1>
+    <p>Hi <%= @assignee.first_name %>,</p>
+    <p><%= @assigner.present? ? @assigner.first_name : "A Netball America administrator" %> has assigned the following partner record to you:</p>
+
+    <div style="margin:20px 0;padding:16px;border-left:4px solid #173b73;background:#f3f6fa;">
+      <p style="margin:0 0 8px;font-size:18px;font-weight:bold;"><%= @partner.company %></p>
+      <% if @partner.description.present? %>
+        <p style="margin:0 0 8px;"><strong>Description:</strong> <%= @partner.description %></p>
+      <% end %>
+      <% if @partner.first_name_primary.present? || @partner.last_name_primary.present? %>
+        <p style="margin:0 0 8px;"><strong>Primary contact:</strong> <%= [@partner.first_name_primary, @partner.last_name_primary].compact_blank.join(" ") %></p>
+      <% end %>
+      <% if @partner.email_primary.present? %>
+        <p style="margin:0 0 8px;"><strong>Contact email:</strong> <%= mail_to @partner.email_primary %></p>
+      <% end %>
+      <% if @partner.address_condensed.present? %>
+        <p style="margin:0 0 8px;"><strong>Location:</strong> <%= @partner.address_condensed %></p>
+      <% end %>
+      <% if @partner.accept_partnership.present? %>
+        <p style="margin:0;"><strong>Partnership decision:</strong> <%= @partner.accept_partnership %></p>
+      <% end %>
+    </div>
+
+    <p style="margin:28px 0;text-align:center;">
+      <%= link_to "View partner record", edit_partner_url(@partner), style: "display:inline-block;border-radius:6px;background:#173b73;color:#ffffff;padding:12px 22px;text-decoration:none;font-weight:bold;" %>
+    </p>
+
+    <p>Regards,<br>Netball America</p>
+  </div>
+</div>

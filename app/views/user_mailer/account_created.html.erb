@@ -1,0 +1,17 @@
+<div style="margin:0 auto;max-width:600px;font-family:Arial,sans-serif;color:#1f2937;line-height:1.6;">
+  <div style="padding:24px;text-align:center;border-bottom:4px solid #173b73;">
+    <%= image_tag asset_url("Netball_America_Logo.png"), alt: "Netball America", style: "max-width:210px;height:auto;" %>
+  </div>
+  <div style="padding:32px 24px;">
+    <h1 style="margin:0 0 16px;color:#173b73;font-size:24px;">Your account is ready</h1>
+    <p>Hello <%= @user.first_name %>,</p>
+    <p>A Netball America account has been created for you.</p>
+    <p><strong>Username:</strong> <%= @user.email %></p>
+    <p>For security, use the one-time link below to choose your own password. We have not included a password in this email.</p>
+    <p style="margin:28px 0;text-align:center;">
+      <%= link_to "Set my password", edit_password_url(@user, reset_password_token: @reset_password_token), style: "display:inline-block;border-radius:6px;background:#173b73;color:#ffffff;padding:12px 22px;text-decoration:none;font-weight:bold;" %>
+    </p>
+    <p style="font-size:13px;color:#6b7280;">This secure link expires in <%= distance_of_time_in_words(@reset_password_within) %>. If you were not expecting this account, please contact Netball America support at <%= mail_to "info@netballamerica.com" %>. For any system-related issues, contact <%= mail_to "pethicklisa@gmail.com" %>.</p>
+    <p>Regards,<br>Netball America</p>
+  </div>
+</div>

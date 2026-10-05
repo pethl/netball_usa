@@ -1,0 +1,14 @@
+Hi <%= @assignee.first_name %>,
+
+<%= @assigner.present? ? @assigner.first_name : "A Netball America administrator" %> has assigned the following media record to you:
+
+Company: <%= @medium.company_name %>
+Media type: <%= @medium.media_type %>
+<% if @medium.contact_name.present? %>Contact: <%= @medium.contact_name %>
+<% end %><% if @medium.contact_email.present? %>Contact email: <%= @medium.contact_email %>
+<% end %><% if @medium.city.present? || @medium.state.present? || @medium.country.present? %>Location: <%= [@medium.city, @medium.state, @medium.country].compact_blank.join(", ") %>
+<% end %>
+View media record: <%= edit_medium_url(@medium) %>
+
+Regards,
+Netball America

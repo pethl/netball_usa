@@ -1,0 +1,16 @@
+Hello <%= @user.first_name %>,
+
+A Netball America account has been created for you.
+
+Username: <%= @user.email %>
+
+For security, use this one-time link to choose your own password. We have not included a password in this email:
+
+<%= edit_password_url(@user, reset_password_token: @reset_password_token) %>
+
+This secure link expires in <%= distance_of_time_in_words(@reset_password_within) %>.
+
+If you were not expecting this account, please contact Netball America support at info@netballamerica.com. For any system-related issues, contact pethicklisa@gmail.com.
+
+Regards,
+Netball America

@@ -1,0 +1,14 @@
+Hi <%= @user.first_name %>,
+
+An event has been assigned to you in the Netball America database.
+
+Event: <%= @event.name %>
+Type: <%= @event.event_type %>
+Date: <%= @event.date.present? ? @event.date.to_fs(:long) : "To be confirmed" %>
+<% if @event.end_date.present? %>End date: <%= @event.end_date.to_fs(:long) %>
+<% end %><% if @event.location.present? || @event.city.present? || @event.state.present? %>Location: <%= [@event.location, @event.city, @event.state].compact_blank.join(", ") %>
+<% end %>
+View event: <%= event_url(@event) %>
+
+Regards,
+Netball America

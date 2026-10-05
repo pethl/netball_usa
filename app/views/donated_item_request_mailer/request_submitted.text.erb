@@ -1,0 +1,15 @@
+Donated item request awaiting approval
+
+<%= @requestor.full_name %> has submitted a donated item request for review.
+
+Item: <%= @item.description %>
+Type: <%= @item.item_type %>
+<% if @item.value.present? %>Value: <%= number_to_currency(@item.value, precision: 0) %>
+<% end %>Purpose: <%= @request.purpose %>
+Recipient: <%= @request.recipient_name %>
+Delivery: <%= @request.delivery_method %>
+Needed by: <%= @request.date_needed_by.to_fs(:long) %>
+
+Review request: <%= donated_item_request_url(@request) %>
+
+This is an automated notification from the Netball America system.

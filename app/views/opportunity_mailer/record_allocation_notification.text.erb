@@ -1,0 +1,15 @@
+Hi <%= @assignee.first_name %>,
+
+<%= @assigner.present? ? @assigner.first_name : "A Netball America administrator" %> has assigned the following sponsorship opportunity to you:
+
+Sponsor: <%= @opportunity.sponsor.company_name %>
+Opportunity type: <%= @opportunity.opportunity_type.presence || "—" %>
+Status: <%= @opportunity.status.presence || "—" %>
+<% if @opportunity.area.present? %>Area: <%= @opportunity.area %>
+<% end %><% if @opportunity.date_submitted.present? %>Date submitted: <%= @opportunity.date_submitted.to_fs(:long) %>
+<% end %><% if @opportunity.amount.present? %>Amount: <%= number_to_currency(@opportunity.amount) %>
+<% end %>
+View opportunity: <%= edit_sponsor_opportunity_url(@opportunity.sponsor, @opportunity) %>
+
+Regards,
+Netball America

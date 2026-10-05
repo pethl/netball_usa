@@ -50,6 +50,9 @@ end
 
   namespace :admin do
     resources :clubs, only: [:index, :show, :new, :create]
+    resources :users, only: [:new, :create] do
+      post :send_password_reset, on: :member
+    end
   end
 
   get 'clubs/index_admin' => 'clubs#index_admin', :as => :index_admin

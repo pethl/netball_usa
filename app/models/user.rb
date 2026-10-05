@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  attr_accessor :user_group_id, :send_account_email
+
   # Include default devise modules. Others available are:
   # , :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, 
@@ -84,6 +86,25 @@ class User < ApplicationRecord
   :us_open_media=>15
 }
 
+  ROLE_DESCRIPTIONS = {
+    "admin" => "Administrator — full access",
+    "teams_grants" => "Teams and grants — teams, grants, events, programs, venues and tours",
+    "teamlead" => "Team lead — own team only",
+    "grants" => "Grants — grants only",
+    "no_access" => "No access",
+    "teams_admin" => "Teams administrator",
+    "sponsors_events" => "Sponsors and events",
+    "us_open" => "US Open — people and transfers",
+    "educators_events" => "Educators and events",
+    "sponsors_media_events" => "Sponsors, media and events",
+    "educators_events_medium" => "Educators, events, media and supporting records",
+    "spare" => "Spare — no permissions assigned",
+    "na_people" => "Netball America person — own profile and US Open access",
+    "educators_events_self_selftransfer" => "Educators and events — own profile and transfer",
+    "calendar_clubs_user" => "Calendar and clubs — view only",
+    "us_open_media" => "US Open — people, transfers and media"
+  }.freeze
+
   # User::Roles
   # The available roles
   Roles = [:admin, :teams_grants, :teamlead, :grants, :educators, :teams_admin, 
@@ -107,6 +128,16 @@ class User < ApplicationRecord
   
   def full_name
     "#{self.first_name} #{self.last_name}"
+  end
+
+  def self.role_description(role_name)
+    ROLE_DESCRIPTIONS.fetch(role_name.to_s) { role_name.to_s.humanize }
+  end
+
+  # Generates a Devise one-time token; the submitted password is never emailed.
+  def deliver_account_setup_instructions
+    raw_token = set_reset_password_token
+    UserMailer.account_created(self, raw_token).deliver_later
   end
 
   def initials
@@ -204,7 +235,7 @@ class User < ApplicationRecord
 
   def send_sonya_mail
     # email to advise Sonya / info@netballamerica.com that a new user has registered, most are club admins
-    UserMailer.new_team_sign_up(email).deliver_now
+    UserMailer.new_team_sign_up(self).deliver_now
   end
 
   private

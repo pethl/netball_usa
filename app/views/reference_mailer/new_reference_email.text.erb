@@ -1,16 +1,13 @@
+New reference data created
 
-    A new Reference record was created for Group: <%= @reference.group %>.
-    
-    Order details<br>
-    --------------------------
-    
-    ID: <%= @reference.id %>
-    Created: <%= @reference.created_at %>
-    Group: <%= @reference.group %>
-    Value: <%= @reference.value %>
-    Key: <%= @reference.key %>
-    Desc: <%= @reference.desc %>
-    Active: <%= @reference.active %>
-    
-    ----------
-    
+A new reference record has been created in the Netball America database.
+
+Group: <%= @reference.group %>
+Value: <%= @reference.value %>
+Key: <%= @reference.key.presence || "—" %>
+Description: <%= @reference.desc.presence || "—" %>
+Active: <%= @reference.active? ? "Yes" : "No" %>
+Created: <%= @reference.created_at.to_fs(:long) %>
+Record ID: <%= @reference.id %>
+
+This is an automated notification from the Netball America system.

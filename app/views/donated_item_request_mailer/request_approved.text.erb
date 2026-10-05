@@ -1,0 +1,16 @@
+Hi <%= @requestor.first_name %>,
+
+Good news—your donated item request has been approved.
+
+Item: <%= @item.description %>
+Type: <%= @item.item_type %>
+<% if @item.value.present? %>Value: <%= number_to_currency(@item.value, precision: 0) %>
+<% end %>Recipient: <%= @request.recipient_name %>
+Delivery: <%= @request.delivery_method %>
+Needed by: <%= @request.date_needed_by.to_fs(:long) %>
+Approved by: <%= @approver&.full_name || "Netball America administrator" %>
+
+View request: <%= donated_item_request_url(@request) %>
+
+Regards,
+Netball America

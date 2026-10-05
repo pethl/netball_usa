@@ -1,6 +1,14 @@
 class UserMailer < ApplicationMailer
-    
-    
+    def account_created(user, reset_password_token)
+      @user = user
+      @reset_password_token = reset_password_token
+      @reset_password_within = user.class.reset_password_within
+
+      mail(
+        to: user.email,
+        subject: "Your Netball America account is ready"
+      )
+    end
 
     def admin_new_user_alert(user)
       @user = user
@@ -10,9 +18,12 @@ class UserMailer < ApplicationMailer
       )
     end
     
-    def new_team_sign_up(email)
-      @email = email
-      mail(to: 'info@netballamerica.com', subject: 'AUTOMATED NOTICE: New user sign up')
+    def new_team_sign_up(user)
+      @user = user
+      mail(
+        to: "info@netballamerica.com",
+        subject: "New Netball America user registration"
+      )
     end
         
   end

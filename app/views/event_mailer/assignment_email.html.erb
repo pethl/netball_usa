@@ -1,14 +1,29 @@
-<p>Hi <%= @user.full_name %>,</p>
+<div style="margin:0 auto;max-width:560px;font-family:Arial,sans-serif;color:#1f2937;line-height:1.6;">
+  <div style="padding:20px;text-align:center;border-bottom:4px solid #173b73;">
+    <%= image_tag asset_url("Netball_America_Logo.png"), alt: "Netball America", style: "max-width:180px;height:auto;" %>
+  </div>
 
-<p>You have been assigned the event: <strong><%= @event.name %></strong> to action.</p>
+  <div style="padding:28px 24px;">
+    <h1 style="margin:0 0 16px;color:#173b73;font-size:22px;">An event has been assigned to you</h1>
+    <p>Hi <%= @user.first_name %>,</p>
+    <p>You have been assigned the following event in the Netball America database:</p>
 
-<p><strong>Date:</strong> <%= @event.date.strftime('%m/%d/%Y') %></p>
+    <div style="margin:20px 0;padding:16px;border-left:4px solid #173b73;background:#f3f6fa;">
+      <p style="margin:0 0 8px;font-size:18px;font-weight:bold;"><%= @event.name %></p>
+      <p style="margin:0 0 8px;"><strong>Type:</strong> <%= @event.event_type %></p>
+      <p style="margin:0 0 8px;"><strong>Date:</strong> <%= @event.date.present? ? @event.date.to_fs(:long) : "To be confirmed" %></p>
+      <% if @event.end_date.present? %>
+        <p style="margin:0 0 8px;"><strong>End date:</strong> <%= @event.end_date.to_fs(:long) %></p>
+      <% end %>
+      <% if @event.location.present? || @event.city.present? || @event.state.present? %>
+        <p style="margin:0;"><strong>Location:</strong> <%= [@event.location, @event.city, @event.state].compact_blank.join(", ") %></p>
+      <% end %>
+    </div>
 
-<p>Click this link to view the event:</p>
-<p><%= link_to @event.name, event_url(@event) %></p>
+    <p style="margin:28px 0;text-align:center;">
+      <%= link_to "View event", event_url(@event), style: "display:inline-block;border-radius:6px;background:#173b73;color:#ffffff;padding:12px 22px;text-decoration:none;font-weight:bold;" %>
+    </p>
 
-<p>Regards,</p>
-
-<p>
-  <%= image_tag asset_url("Netball_America_Logo.png"), alt: "Netball America", style: "max-width: 200px;" %>
-</p>
+    <p>Regards,<br>Netball America</p>
+  </div>
+</div>
