@@ -32,7 +32,9 @@
       </div>
     <% end %>
 
-    <%= form_with url: update_profile_user_path(@user), method: :patch do %>
+    <%= form_with url: update_profile_user_path(@user),
+          method: :patch,
+          data: { turbo: false } do %>
       <div>
         <%= label_tag "user_person_id",
               "Linked Person record",
@@ -58,9 +60,9 @@
       </div>
 
       <div class="mt-8 flex justify-end gap-3 border-t border-gray-200 pt-5">
-        <%= link_to "Back to users",
+        <%= link_to "← Back to users",
               users_path,
-              class: clear_button_class %>
+              class: link_class %>
 
         <%= submit_tag "Save Person link",
               class: form_button_class %>

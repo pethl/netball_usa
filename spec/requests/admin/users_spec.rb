@@ -115,14 +115,14 @@ RSpec.describe "Admin user account creation", type: :request do
     patch update_profile_user_path(user),
           params: { user: { person_id: person.id } }
 
-    expect(response).to redirect_to(
-      profile_user_path(user, locale: :en)
-    )
+    expect(response).to redirect_to(users_path(locale: :en))
     expect(user.reload.person).to eq(person)
+    expect(person.reload.user_id).to eq(user.id)
 
     patch update_profile_user_path(user),
           params: { user: { person_id: "" } }
 
+    expect(response).to redirect_to(users_path(locale: :en))
     expect(user.reload.person).to be_nil
     expect(person.reload.user_id).to be_nil
   end

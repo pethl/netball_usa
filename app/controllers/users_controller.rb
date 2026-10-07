@@ -86,14 +86,21 @@ class UsersController < ApplicationController
           .where(user_id: [nil, @user.id])
           .find(person_id)
 
-        @user.person = person
+        current_person = @user.person
+
+        if current_person.present? && current_person.id != person.id
+          current_person.update!(user: nil)
+        end
+
+        person.update!(user: @user)
       elsif @user.person.present?
         @user.person.update!(user: nil)
       end
     end
 
-    redirect_to profile_user_path(@user),
-                notice: "Linked Person profile was updated."
+    redirect_to users_path,
+                notice: "Linked Person profile was updated.",
+                status: :see_other
   rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotFound => error
     set_available_people
     flash.now[:alert] = error.message
