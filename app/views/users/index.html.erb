@@ -6,11 +6,9 @@
     <div class="mb-2 flex justify-end gap-4">
       <%= link_to "Create user account", new_admin_user_path,
       class: "inline-flex items-center rounded-md bg-blue-900 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-800" %>
-
-      <%= link_to "Manage user groups",
-      user_groups_path,
-      class: clear_button_class %>
     </div>
+
+    <%= render "admin_nav" %>
 
     <% headers = ["First Name", "Last Name", "Email", "Created", "Last Sign In", "Role", "Is_admin?", "Is_active?", "[:Id]"] %>
 

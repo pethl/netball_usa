@@ -1,0 +1,19 @@
+<nav class="mb-6 mt-2 border-b border-gray-200" aria-label="User administration">
+  <ul class="flex list-none flex-wrap gap-x-4">
+    <li>
+      <%= link_to "Users",
+            users_path,
+            class: user_admin_tab_class(:users) %>
+    </li>
+    <li>
+      <%= link_to "Groups",
+            user_groups_path,
+            class: user_admin_tab_class(:groups) %>
+    </li>
+    <li>
+      <%= link_to "Access Report",
+            access_report_users_path,
+            class: user_admin_tab_class(:access_report) %>
+    </li>
+  </ul>
+</nav>

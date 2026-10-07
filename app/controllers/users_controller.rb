@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource only: :index
 
   before_action :require_admin,
-                only: [:groups, :update_groups, :profile, :update_profile]
+                only: [:groups, :update_groups, :profile, :update_profile, :access_report]
 
   before_action :set_user,
                 only: [:groups, :update_groups, :profile, :update_profile]
@@ -31,6 +31,20 @@ class UsersController < ApplicationController
 
     @na_people = users.where(role: :na_people)
     @team_leads = users.where(role: :teamlead)
+  end
+
+  def access_report
+    @access_report = OfficeAccessReport.new
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        send_data OfficeAccessReportPdfService.new(@access_report).generate,
+                  filename: "office_user_access_#{Date.current.iso8601}.pdf",
+                  type: "application/pdf",
+                  disposition: "attachment"
+      end
+    end
   end
 
   def groups

@@ -215,6 +215,10 @@ end
   get "pages/teams_membership_fees"
   get "pages/membership_landing"
   resources :users, only: [:index] do
+    collection do
+      get :access_report
+    end
+
     member do
       get :profile
       patch :update_profile

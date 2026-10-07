@@ -62,7 +62,10 @@ RSpec.feature "PageSmoke", type: :feature do
       { path: budgets_path, title: "Budgets" },
       { path: references_path, title: "Reference Data" },
       { path: sample_words_path, title: "Sample Words" },
-      { path: users_path, title: "Users" }
+      { path: users_path, title: "System Users" },
+      { path: user_groups_path, title: "User Groups" },
+      { path: access_report_users_path, title: "Office User Access Report" },
+      { path: new_admin_user_path, title: "Create user account" }
     ]
 
     visited_count = 0

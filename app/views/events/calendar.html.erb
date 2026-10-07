@@ -9,7 +9,7 @@
 <turbo-frame id="calendar" data-turbo="false">
     <!-- Year Navigation -->
     <div class="flex items-center justify-between px-6 py-2 my-4 bg-gray-200 text-gray-800 rounded-md shadow-sm w-full">
-        <%= link_to calendar_events_path(year: @year - 1),
+        <%= link_to calendar_events_path(@calendar_filter_params.merge(year: @year - 1)),
       class: "text-gray-600 hover:text-teal-600 text-2xl" do %>
         <i class="fas fa-chevron-left"></i>
         <% end %>
@@ -18,7 +18,7 @@
             <%= @year %>
         </h1>
 
-        <%= link_to calendar_events_path(year: @year + 1),
+        <%= link_to calendar_events_path(@calendar_filter_params.merge(year: @year + 1)),
       class: "text-gray-600 hover:text-teal-600 text-2xl" do %>
         <i class="fas fa-chevron-right"></i>
         <% end %>

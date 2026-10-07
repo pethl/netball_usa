@@ -8,6 +8,8 @@
     </p>
   </div>
 
+  <%= render "users/admin_nav" %>
+
   <% if @user_groups.any? %>
     <div class="space-y-3">
       <% @user_groups.each do |user_group| %>

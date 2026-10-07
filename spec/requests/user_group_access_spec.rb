@@ -213,10 +213,111 @@ RSpec.describe "User group access", type: :request do
     end
   end
 
+  describe "office access report" do
+    let(:admin) { create(:user, :admin) }
+
+    it "allows an administrator to view and download the role 4 report" do
+      office_user = create(
+        :user,
+        role: :office,
+        first_name: "Report",
+        last_name: "Tester"
+      )
+      create_group("grants_team", name: "Grants Team")
+      add_to_group(office_user, "grants_team")
+      sign_in admin
+
+      get access_report_users_path
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("Selected access by model")
+      expect(response.body).to include("Report Tester")
+      expect(response.body).to include("Grants Team")
+
+      get access_report_users_path(format: :pdf)
+
+      expect(response).to have_http_status(:ok)
+      expect(response.media_type).to eq("application/pdf")
+      expect(response.headers["Content-Disposition"]).to include(
+        "office_user_access_#{Date.current.iso8601}.pdf"
+      )
+    end
+
+    it "blocks a non-administrator" do
+      office_user = create(:user, role: :office)
+      sign_in office_user
+
+      get access_report_users_path
+
+      expect(response).to redirect_to(root_url(locale: :en))
+    end
+  end
+
+  describe "shared User Admin navigation" do
+    let(:admin) { create(:user, :admin) }
+
+    before do
+      sign_in admin
+    end
+
+    it "shows all three tabs and highlights the current page" do
+      {
+        users_path => "Users",
+        user_groups_path => "Groups",
+        access_report_users_path => "Access Report"
+      }.each do |path, active_label|
+        get path
+
+        expect(response).to have_http_status(:ok)
+        nav = user_admin_nav
+        expect(nav).to be_present
+        expect(nav.css("a").map { |link| link.text.strip }).to eq(
+          ["Users", "Groups", "Access Report"]
+        )
+
+        active_links = nav.css("a").select do |link|
+          link["class"].to_s.split.include?("border-blue-900")
+        end
+        expect(active_links.map { |link| link.text.strip }).to eq([active_label])
+      end
+    end
+
+    it "shows only the action belonging to each main page" do
+      get users_path
+      expect(response.body).to include("Create user account")
+      expect(response.body).not_to include("Download PDF")
+
+      get user_groups_path
+      expect(response.body).not_to include("Create user account")
+      expect(response.body).not_to include("Download PDF")
+
+      get access_report_users_path
+      expect(response.body).to include("Download PDF")
+      expect(response.body).not_to include("Create user account")
+    end
+  end
+
+  describe "User Admin authorization" do
+    it "blocks an office user from all three main pages" do
+      sign_in create(:user, role: :office)
+
+      [users_path, user_groups_path, access_report_users_path].each do |path|
+        get path
+        expect(response).to redirect_to(root_url(locale: :en))
+      end
+    end
+  end
+
   def main_menu
     document = Nokogiri::HTML(response.body)
     document.css("ul").find do |list|
       list["class"].to_s.split.include?("ml-6")
     end
+  end
+
+  def user_admin_nav
+    Nokogiri::HTML(response.body).at_css(
+      "nav[aria-label='User administration']"
+    )
   end
 end

@@ -29,10 +29,16 @@ class PagesController < ApplicationController
   # -----------------------------
   # User/account stats
   # -----------------------------
-  @admins        = User.where(role: 0, account_active: true).count
-  @support_staff = User.where.not(role: [0, 2, 12]).where(account_active: true).count
-  @teamleads     = User.where(role: 2, account_active: true).count
-  @na_people     = User.where(role: 12, account_active: true).count
+  active_current_users = User.where(
+    account_active: true,
+    role: %i[admin office na_people teamlead]
+  )
+
+  @active_users_total = active_current_users.count
+  @admins = active_current_users.where(role: :admin).count
+  @office_users_count = active_current_users.where(role: :office).count
+  @na_people = active_current_users.where(role: :na_people).count
+  @teamleads = active_current_users.where(role: :teamlead).count
 
   # -----------------------------
   # Event stats

@@ -102,6 +102,22 @@ module ApplicationHelper
       end
     end
 
+    def user_admin_tab_class(tab)
+      active = case tab
+               when :users
+                 (controller_path == "users" && action_name != "access_report") ||
+                   controller_path == "admin/users"
+               when :groups
+                 controller_path == "user_groups"
+               when :access_report
+                 controller_path == "users" && action_name == "access_report"
+               else
+                 false
+               end
+
+      people_tab_class(active)
+    end
+
     def educators_tab_class(match_path)
       if request.path == URI(match_path).path
         "inline-block py-2 px-4 text-blue-900 border-b-2 border-blue-900 hover:border-blue-700 hover:text-blue-700"

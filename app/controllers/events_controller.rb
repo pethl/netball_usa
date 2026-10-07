@@ -27,7 +27,9 @@ class EventsController < ApplicationController
   def calendar
     @page_title = "Events Calendar"
     @year = params[:year]&.to_i || Date.current.year
-    @events = Event.all
+    year_range = Date.new(@year, 1, 1)..Date.new(@year, 12, 31)
+    @events = apply_event_filters(Event.where(date: year_range)).order(:date)
+    @calendar_filter_params = params.permit(:event_type, :city, :state).to_h
   end
   
   def educational
@@ -82,11 +84,6 @@ class EventsController < ApplicationController
       end
   
     end
-  end
-
-  def calendar
-    @year = params[:year]&.to_i || Date.current.year
-    @events = Event.all  # or scope this if needed
   end
 
   def show
