@@ -6,6 +6,8 @@ class Person < ApplicationRecord
   include ImageUploader::Attachment(:resume)
 
   # ========== Associations ==========
+  belongs_to :user, optional: true
+
   has_many :event_participants, dependent: :destroy
   has_many :events, through: :event_participants
 

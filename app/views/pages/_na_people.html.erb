@@ -3,7 +3,7 @@
 <div class="min-h-screen bg-gray-50 justify-start relative overflow-hidden sm:py-8 sm:pl-12">
     <div class="max-w-7xl mx-auto">
 
-   <% @person = Person.find_by(email: current_user.email) %> 
+   <% @person = my_person_for(current_user) %>
 
     <div class="max-w-2xl mx-auto mt-8 space-y-6 text-center">
     

@@ -214,7 +214,12 @@ end
   get "pages/educator_sign_up"
   get "pages/teams_membership_fees"
   get "pages/membership_landing"
-  resources :users, only: [:index]
+  resources :users, only: [:index] do
+    member do
+      get :profile
+      patch :update_profile
+    end
+  end
 
   resources :user_groups,
           param: :key,

@@ -77,11 +77,19 @@ module ApplicationHelper
 
     #for educators_events_plus (and similar) - CanCan ability related
     def my_person_for(user)
-      Person.find_by(email: user.email)
+      return user.person if user&.person.present?
+
+      email = user&.email.to_s.strip.downcase
+      return if email.blank?
+
+      Person.find_by("LOWER(TRIM(email)) = ?", email)
     end
   
-    def my_transfer_for(user)
-      Transfer.joins(:person).find_by(people: { email: user.email })
+    def my_transfer_for(user, event: current_us_open_event)
+      person = user&.person
+      return if person.blank? || event.blank?
+
+      Transfer.find_by(person: person, event: event)
     end
     # ------------------------------------------------------------
 

@@ -219,6 +219,160 @@ context "office role without group membership" do
     expect(ability).not_to be_able_to(:index, User)
   end
 
+  it "can read and update the Person profile matching its email" do
+    own_person = create(
+      :person,
+      email: user.email.upcase,
+      status: "Active"
+    )
+
+    expect(ability).to be_able_to(:read, own_person)
+    expect(ability).to be_able_to(:update, own_person)
+  end
+
+  it "cannot access another Person profile or the People index" do
+    other_person = build_stubbed(
+      :person,
+      email: "someone.else@example.com"
+    )
+
+    expect(ability).not_to be_able_to(:read, other_person)
+    expect(ability).not_to be_able_to(:update, other_person)
+    expect(ability).not_to be_able_to(:index, Person)
+    expect(ability).not_to be_able_to(:create, Person)
+    expect(ability).not_to be_able_to(:destroy, other_person)
+  end
+
+  context "with an explicitly linked Person using a different email" do
+    let(:linked_person) do
+      build_stubbed(
+        :person,
+        email: "personal.address@example.com"
+      )
+    end
+
+    before do
+      allow(user).to receive(:person).and_return(linked_person)
+    end
+
+    it "uses the explicit link instead of requiring an email match" do
+      expect(ability).to be_able_to(:read, linked_person)
+      expect(ability).to be_able_to(:update, linked_person)
+    end
+  end
+
+  context "with a Person and current US Open Transfer" do
+    let!(:current_us_open_event) do
+      create(
+        :event,
+        event_type: "US Open",
+        name: "Current US Open ability spec",
+        date: Date.current.end_of_year
+      )
+    end
+
+    let!(:past_us_open_event) do
+      create(
+        :event,
+        event_type: "US Open",
+        name: "Past US Open ability spec",
+        date: Date.current.prev_year
+      )
+    end
+
+    let!(:own_person) do
+      create(
+        :person,
+        email: user.email.upcase,
+        status: "Active"
+      )
+    end
+
+    let!(:other_person) do
+      create(
+        :person,
+        email: "other.us.open.person@example.com",
+        status: "Active"
+      )
+    end
+
+    let!(:own_current_transfer) do
+      create(
+        :transfer,
+        person: own_person,
+        event: current_us_open_event
+      )
+    end
+
+    let!(:own_past_transfer) do
+      create(
+        :transfer,
+        person: own_person,
+        event: past_us_open_event
+      )
+    end
+
+    let!(:other_current_transfer) do
+      create(
+        :transfer,
+        person: other_person,
+        event: current_us_open_event
+      )
+    end
+
+    before do
+      allow(user).to receive(:person).and_return(own_person)
+    end
+
+    it "can read and update only its current US Open Transfer" do
+      expect(ability).to be_able_to(:read, own_current_transfer)
+      expect(ability).to be_able_to(:update, own_current_transfer)
+
+      expect(ability).not_to be_able_to(:read, own_past_transfer)
+      expect(ability).not_to be_able_to(:update, own_past_transfer)
+      expect(ability).not_to be_able_to(:read, other_current_transfer)
+      expect(ability).not_to be_able_to(:update, other_current_transfer)
+    end
+
+    it "cannot list, create, or delete Transfers" do
+      expect(ability).not_to be_able_to(:index, Transfer)
+      expect(ability).not_to be_able_to(:create, Transfer)
+      expect(ability).not_to be_able_to(:destroy, own_current_transfer)
+    end
+  end
+
+  context "with only an email-matched Person and no explicit link" do
+    let!(:current_us_open_event) do
+      create(
+        :event,
+        event_type: "US Open",
+        name: "Unlinked current US Open ability spec",
+        date: Date.current.end_of_year
+      )
+    end
+
+    let!(:email_matched_person) do
+      create(
+        :person,
+        email: user.email,
+        status: "Active"
+      )
+    end
+
+    let!(:email_matched_transfer) do
+      create(
+        :transfer,
+        person: email_matched_person,
+        event: current_us_open_event
+      )
+    end
+
+    it "does not grant Transfer access without an explicit User link" do
+      expect(ability).not_to be_able_to(:read, email_matched_transfer)
+      expect(ability).not_to be_able_to(:update, email_matched_transfer)
+    end
+  end
+
   it "does not receive operational access without a group" do
     expect(ability).not_to be_able_to(:manage, Club)
     expect(ability).not_to be_able_to(:manage, Payment)
@@ -402,12 +556,12 @@ end
           .and_return(true)
       end
 
-      it "receives US Open permissions from the group" do
+      it "receives Transfer-only US Open permissions from the group" do
         expect(ability).to be_able_to(:manage, Transfer)
         expect(ability).to be_able_to(:menu_all, Transfer)
         expect(ability).to be_able_to(:inbound_pickups, Transfer)
         expect(ability).to be_able_to(:outbound_pickups, Transfer)
-        expect(ability).to be_able_to(:manage, Person)
+        expect(ability).not_to be_able_to(:manage, Person)
       end
 
       it "has read-only event and calendar access" do
@@ -768,6 +922,71 @@ context "office user in the Events Team group" do
   end
 end
 
+context "office user in the Events Calendar Team group" do
+  let(:user) { build_stubbed(:user, id: 100, role: "office") }
+
+  before do
+    allow(user).to receive(:in_group?).and_return(false)
+    allow(user)
+      .to receive(:in_group?)
+      .with("events_calendar_team")
+      .and_return(true)
+  end
+
+  it "can access only the event calendar" do
+    expect(ability).to be_able_to(:calendar, Event)
+    expect(ability).not_to be_able_to(:index, Event)
+    expect(ability).not_to be_able_to(:show, Event)
+    expect(ability).not_to be_able_to(:create, Event)
+    expect(ability).not_to be_able_to(:update, Event)
+    expect(ability).not_to be_able_to(:destroy, Event)
+  end
+
+  it "does not receive unrelated operational access" do
+    expect(ability).not_to be_able_to(:manage, Person)
+    expect(ability).not_to be_able_to(:manage, Transfer)
+    expect(ability).not_to be_able_to(:manage, Club)
+    expect(ability).not_to be_able_to(:manage, Grant)
+  end
+end
+
+context "office user in the Educators Events Team group" do
+  let(:user) { build_stubbed(:user, id: 100, role: "office") }
+
+  before do
+    allow(user).to receive(:in_group?).and_return(false)
+    allow(user)
+      .to receive(:in_group?)
+      .with("educators_events_team")
+      .and_return(true)
+  end
+
+  it "can manage educator resources and use the heat map" do
+    expect(ability).to be_able_to(:manage, NetballEducator)
+    expect(ability).to be_able_to(:manage, FollowUp)
+    expect(ability).to be_able_to(:manage, Equipment)
+    expect(ability).to be_able_to(:heat_map, NetballEducator)
+    expect(ability).not_to be_able_to(:export, NetballEducator)
+  end
+
+  it "can manage events except deleting them" do
+    expect(ability).to be_able_to(:index, Event)
+    expect(ability).to be_able_to(:show, Event)
+    expect(ability).to be_able_to(:create, Event)
+    expect(ability).to be_able_to(:update, Event)
+    expect(ability).not_to be_able_to(:destroy, Event)
+    expect(ability).to be_able_to(:calendar, Event)
+  end
+
+  it "does not receive unrelated operational access" do
+    expect(ability).not_to be_able_to(:manage, Grant)
+    expect(ability).not_to be_able_to(:manage, Medium)
+    expect(ability).not_to be_able_to(:manage, Person)
+    expect(ability).not_to be_able_to(:manage, Transfer)
+    expect(ability).not_to be_able_to(:manage, Club)
+  end
+end
+
 context "office user in the Donated Items Team group" do
   let(:user) do
     build_stubbed(
@@ -800,6 +1019,248 @@ context "office user in the Donated Items Team group" do
     expect(ability).not_to be_able_to(:manage, Sponsor)
     expect(ability).not_to be_able_to(:manage, Event)
     expect(ability).not_to be_able_to(:manage, Person)
+  end
+end
+
+context "office user in the Grants Team group" do
+  let(:user) do
+    build_stubbed(
+      :user,
+      id: 100,
+      role: "office"
+    )
+  end
+
+  before do
+    allow(user).to receive(:in_group?).and_return(false)
+    allow(user).to receive(:in_group?).with("grants_team").and_return(true)
+  end
+
+  it "can manage grants" do
+    expect(ability).to be_able_to(:manage, Grant)
+  end
+
+  it "does not receive unrelated operational access" do
+    expect(ability).not_to be_able_to(:manage, Sponsor)
+    expect(ability).not_to be_able_to(:manage, Event)
+    expect(ability).not_to be_able_to(:manage, Medium)
+    expect(ability).not_to be_able_to(:manage, Transfer)
+    expect(ability).not_to be_able_to(:manage, Club)
+  end
+end
+
+context "office user in the Partners Team group" do
+  let(:user) { build_stubbed(:user, id: 100, role: "office") }
+
+  before do
+    allow(user).to receive(:in_group?).and_return(false)
+    allow(user)
+      .to receive(:in_group?)
+      .with("partners_team")
+      .and_return(true)
+  end
+
+  it "can manage partners" do
+    expect(ability).to be_able_to(:manage, Partner)
+  end
+
+  it "does not receive unrelated operational access" do
+    expect(ability).not_to be_able_to(:manage, Person)
+    expect(ability).not_to be_able_to(:manage, Transfer)
+    expect(ability).not_to be_able_to(:manage, Event)
+    expect(ability).not_to be_able_to(:manage, Sponsor)
+    expect(ability).not_to be_able_to(:manage, Grant)
+    expect(ability).not_to be_able_to(:manage, Club)
+  end
+end
+
+context "office user in the People Team group" do
+  let(:user) { build_stubbed(:user, id: 100, role: "office") }
+
+  before do
+    allow(user).to receive(:in_group?).and_return(false)
+    allow(user).to receive(:in_group?).with("people_team").and_return(true)
+  end
+
+  it "can manage people" do
+    expect(ability).to be_able_to(:manage, Person)
+  end
+
+  it "does not receive US Open or unrelated operational access" do
+    expect(ability).not_to be_able_to(:manage, Transfer)
+    expect(ability).not_to be_able_to(:menu_all, Transfer)
+    expect(ability).not_to be_able_to(:manage, Event)
+    expect(ability).not_to be_able_to(:manage, Club)
+    expect(ability).not_to be_able_to(:manage, Grant)
+  end
+end
+
+context "office user in the Membership Admin Team group" do
+  let(:user) { build_stubbed(:user, id: 100, role: "office") }
+
+  before do
+    allow(user).to receive(:in_group?).and_return(false)
+    allow(user)
+      .to receive(:in_group?)
+      .with("membership_admin_team")
+      .and_return(true)
+  end
+
+  it "can fully administer membership records and views" do
+    expect(ability).to be_able_to(:manage, Club)
+    expect(ability).to be_able_to(:manage, Member)
+    expect(ability).to be_able_to(:manage, IndividualMember)
+    expect(ability).to be_able_to(:manage, Payment)
+    expect(ability).to be_able_to(:index_admin, Club)
+    expect(ability).to be_able_to(:teams_list_index, Club)
+    expect(ability).to be_able_to(:read_all, IndividualMember)
+  end
+
+  it "does not receive unrelated operational access" do
+    expect(ability).not_to be_able_to(:manage, Person)
+    expect(ability).not_to be_able_to(:manage, Transfer)
+    expect(ability).not_to be_able_to(:manage, Event)
+    expect(ability).not_to be_able_to(:manage, Grant)
+  end
+end
+
+context "office user in the Membership View Team group" do
+  let(:user) { build_stubbed(:user, id: 100, role: "office") }
+
+  before do
+    allow(user).to receive(:in_group?).and_return(false)
+    allow(user)
+      .to receive(:in_group?)
+      .with("membership_view_team")
+      .and_return(true)
+  end
+
+  it "can view membership records and list pages" do
+    expect(ability).to be_able_to(:read, Club)
+    expect(ability).to be_able_to(:read, Member)
+    expect(ability).to be_able_to(:read, IndividualMember)
+    expect(ability).to be_able_to(:index_admin, Club)
+    expect(ability).to be_able_to(:teams_list_index, Club)
+    expect(ability).to be_able_to(:read_all, IndividualMember)
+  end
+
+  it "cannot change membership records" do
+    expect(ability).not_to be_able_to(:create, Club)
+    expect(ability).not_to be_able_to(:update, Club)
+    expect(ability).not_to be_able_to(:destroy, Club)
+    expect(ability).not_to be_able_to(:create, Member)
+    expect(ability).not_to be_able_to(:update, Member)
+    expect(ability).not_to be_able_to(:destroy, Member)
+    expect(ability).not_to be_able_to(:create, IndividualMember)
+    expect(ability).not_to be_able_to(:update, IndividualMember)
+    expect(ability).not_to be_able_to(:destroy, IndividualMember)
+  end
+
+  it "does not receive unrelated operational access" do
+    expect(ability).not_to be_able_to(:manage, Person)
+    expect(ability).not_to be_able_to(:manage, Transfer)
+    expect(ability).not_to be_able_to(:manage, Event)
+    expect(ability).not_to be_able_to(:manage, Grant)
+  end
+end
+
+context "office user in the Clubs Index View Team group" do
+  let(:user) { build_stubbed(:user, id: 100, role: "office") }
+
+  before do
+    allow(user).to receive(:in_group?).and_return(false)
+    allow(user)
+      .to receive(:in_group?)
+      .with("clubs_index_view_team")
+      .and_return(true)
+  end
+
+  it "can access only the restricted Clubs index" do
+    expect(ability).to be_able_to(:index_user, Club)
+    expect(ability).not_to be_able_to(:index, Club)
+    expect(ability).not_to be_able_to(:index_admin, Club)
+    expect(ability).not_to be_able_to(:teams_list_index, Club)
+    expect(ability).not_to be_able_to(:show, Club)
+    expect(ability).not_to be_able_to(:create, Club)
+    expect(ability).not_to be_able_to(:update, Club)
+    expect(ability).not_to be_able_to(:destroy, Club)
+  end
+
+  it "does not receive other membership or operational access" do
+    expect(ability).not_to be_able_to(:read, Member)
+    expect(ability).not_to be_able_to(:read, IndividualMember)
+    expect(ability).not_to be_able_to(:read, Payment)
+    expect(ability).not_to be_able_to(:manage, Person)
+    expect(ability).not_to be_able_to(:manage, Event)
+  end
+end
+
+context "office user in the Educators Export Team group" do
+  let(:user) { build_stubbed(:user, id: 100, role: "office") }
+
+  before do
+    allow(user).to receive(:in_group?).and_return(false)
+    allow(user)
+      .to receive(:in_group?)
+      .with("educators_export_team")
+      .and_return(true)
+  end
+
+  it "can export educators without managing them" do
+    expect(ability).to be_able_to(:export, NetballEducator)
+    expect(ability).not_to be_able_to(:manage, NetballEducator)
+  end
+
+  it "does not receive unrelated operational access" do
+    expect(ability).not_to be_able_to(:manage, Person)
+    expect(ability).not_to be_able_to(:manage, Transfer)
+    expect(ability).not_to be_able_to(:manage, Event)
+    expect(ability).not_to be_able_to(:manage, Club)
+  end
+end
+
+{
+  "vendors_team" => Vendor,
+  "venues_team" => Venue,
+  "tours_team" => Tour,
+  "programs_team" => Program,
+  "netball_academies_team" => NetballAcademy
+}.each do |group_key, resource_class|
+  context "office user in the #{group_key.humanize} group" do
+    let(:user) do
+      build_stubbed(
+        :user,
+        id: 100,
+        role: "office"
+      )
+    end
+
+    before do
+      allow(user).to receive(:in_group?).and_return(false)
+      allow(user).to receive(:in_group?).with(group_key).and_return(true)
+    end
+
+    it "can manage only its group resource" do
+      expect(ability).to be_able_to(:manage, resource_class)
+
+      unrelated_resources = [
+        Vendor,
+        Venue,
+        Tour,
+        Program,
+        NetballAcademy,
+        Grant,
+        Sponsor,
+        Event
+      ] - [resource_class]
+
+      unrelated_resources.each do |unrelated_resource|
+        expect(ability).not_to be_able_to(
+          :manage,
+          unrelated_resource
+        )
+      end
+    end
   end
 end
 

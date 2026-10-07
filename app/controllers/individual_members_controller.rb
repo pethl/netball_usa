@@ -3,7 +3,7 @@ class IndividualMembersController < ApplicationController
   load_and_authorize_resource
 
     def index
-  @individual_members = if is_admin? || %w[teams_grants teams_admin educators_events_medium].include?(current_user&.role)
+  @individual_members = if can?(:read_all, IndividualMember)
                           IndividualMember.all
                         else
                           IndividualMember.where(user_id: current_user.id)

@@ -1,0 +1,196 @@
+<% my_person   = my_person_for(current_user) %>
+
+<% if my_person.present? && can?(:update, my_person) %>
+  <li class="mt-2">
+    <%= link_to "My Profile",
+          edit_person_path(my_person),
+          class: "text-gray-100 hover:font-bold" %>
+  </li>
+<% elsif can?(:create, Person) %>
+  <li class="mt-2">
+    <%= link_to "Create My Profile",
+          new_person_path(person: { email: current_user.email }),
+          class: "text-gray-100 hover:font-bold" %>
+  </li>
+<% end %>
+
+<!-- Dynamic menu based on user permissions -->
+
+<% if can?(:read, DonatedItem) %>
+  <li class="mt-2">
+    <%= link_to "DONATED ITEMS",
+      donated_items_path,
+      class: "text-gray-100 hover:font-bold" %>
+  </li>
+<% end %>
+
+<% if can? :manage, Sponsor %>
+  <li class="mt-2">
+    <a href="/sponsors" class="text-gray-100 hover:font-bold">SPONSORS</a>
+  </li>
+  <% if can? :manage, Opportunity %>
+    <li class="mt-2 ml-2">
+      <a href="/opportunities" class="text-gray-100 hover:font-bold">- Opportunities</a>
+    </li>
+  <% end %>
+<% end %>
+
+<% if can? :manage, Grant %>
+  <li class="mt-2">
+    <a href="/grants/" class="text-gray-100 hover:font-bold">GRANTS</a>
+  </li>
+<% end %>
+
+<% if can? :manage, Person %>
+  <li class="mt-2">
+    <%= link_to "NA PEOPLE", people_path, class: "text-gray-100 hover:font-bold" %>
+  </li>
+<% end %>
+
+<% if (can?(:manage, Event) || can?(:read, Event)) &&
+  !university_group_member %>
+<li class="mt-2">
+  <a href="/events" class="text-gray-100 hover:font-bold">EVENTS</a>
+</li>
+<li class="mt-2 ml-2">
+  <a href="/events/calendar" class="text-gray-100 hover:font-bold">- Calendar</a>
+</li>
+  <% end %>
+
+  <% if can? :manage, Medium %>
+<li class="mt-2">
+  <a href="/media" class="text-gray-100 hover:font-bold">MEDIA</a>
+</li>
+<li class="mt-2 ml-2">
+  <%= link_to "- Published", published_media_path, class: "text-gray-100 hover:font-bold"%>
+</li>
+  <% end %>
+
+  <% if can?(:manage, Club) || can?(:read, Club) %>
+
+<li class="mt-2">
+  <a href="/clubs/index_admin" class="text-gray-100 hover:font-bold">MEMBERSHIP</a>
+</li>
+<li class="mt-2 ml-2">
+  <a href="/clubs/index_admin" class="text-gray-100 hover:font-bold">- All Clubs</a>
+</li>
+<li class="mt-2 ml-2">
+  <a href="/members" class="text-gray-100 hover:font-bold">- All Members</a>
+</li>
+<% if can? :manage, Club %>
+  <li class="mt-2 ml-2">
+    <a href="/clubs" class="text-gray-100 hover:font-bold">- Admin Managed Clubs</a>
+  </li>
+<% end %>
+<li class="mt-2 ml-2">
+  <a href="/individual_members/" class="text-gray-100 hover:font-bold">- Individual Members</a>
+</li>
+<li class="mt-2 ml-2">
+  <a href="/clubs/teams_list_index" class="text-gray-100 hover:font-bold">- Clubs by Region</a>
+</li>
+  <% end %>
+
+  <% if can? :manage, Payment %>
+<li class="mt-2 ml-2">
+  <a href="/payments/" class="text-gray-100 hover:font-bold">- Payments</a>
+</li>
+  <% end %>
+
+  <% if can? :manage, Tour %>
+<li class="mt-2">
+  <a href="/tours/" class="text-gray-100 hover:font-bold">TOURS</a>
+</li>
+  <% end %>
+
+  <% if can? :manage, Venue %>
+<li class="mt-2">
+  <a href="/venues" class="text-gray-100 hover:font-bold">VENUES</a>
+</li>
+  <% end %>
+
+  <% if can? :manage, Vendor %>
+<li class="mt-2">
+  <a href="/vendors/" class="text-gray-100 hover:font-bold">VENDORS</a>
+</li>
+  <% end %>
+
+  <% if can? :manage, Program %>
+<li class="mt-2">
+  <a href="/programs" class="text-gray-100 hover:font-bold">BAI PROGRAMS</a>
+</li>
+  <% end %>
+
+  <% if can?(:manage, NetballAcademy) %>
+<li class="mt-2">
+  <%= link_to "MY NETBALL ACADEMIES",
+        netball_academies_path,
+        class: "text-gray-100 hover:font-bold" %>
+</li>
+  <% end %>
+
+  <% if can? :manage, Partner %>
+<li class="mt-2">
+  <a href="/partners/" class="text-gray-100 hover:font-bold">PARTNERS</a>
+</li>
+  <% end %>
+
+  <% if can?(:menu_all, Transfer) && !us_open_group_member %>
+<li class="mt-2">
+  <a href="/transfers/" class="text-gray-100 hover:font-bold">US OPEN</a>
+</li>
+<li class="mt-2 ml-2">
+  <a href="/transfers/new" class="text-gray-100 hover:font-bold">- Add New Attendee</a>
+</li>
+<li class="mt-2 ml-2">
+  <a href="/transfers/" class="text-gray-100 hover:font-bold">- Event Attendees</a>
+</li>
+<li class="mt-2 ml-2">
+  <%= link_to "- Arrivals Transfers",  inbound_pickups_transfers_path,  class: "text-gray-100 hover:font-bold" %>
+</li>
+<li class="mt-2 ml-2">
+  <%= link_to "- Departures Transfers",  outbound_pickups_transfers_path,  class: "text-gray-100 hover:font-bold" %>
+</li>
+  <% else %>
+<% my_transfer = my_transfer_for(current_user) %>
+
+<% if my_transfer.present? && can?(:update, my_transfer) %>
+  <li class="mt-2">
+    <%= link_to "My US OPEN Details",
+          edit_transfer_path(my_transfer),
+          class: "text-gray-100 hover:font-bold" %>
+  </li>
+<% end %>
+  <% end %>
+
+<% unless current_user.admin? %>
+  <% if can?(:calendar, Event) || can?(:index_user, Club) %>
+
+<% if can?(:calendar, Event) &&
+      !can?(:manage, Event) &&
+      !can?(:read, Event) &&
+      !university_group_member %>
+<li class="mt-2">
+  <span class="text-gray-100 hover:font-bold">EVENTS</span>
+</li>
+
+<li class="mt-2 ml-2">
+  <%= link_to "- Calendar",
+        calendar_events_path,
+        class: "text-gray-100 hover:font-bold" %>
+</li>
+  <% end %>
+
+  <% if can?(:index_user, Club) && !can?(:read, Club) %>
+<li class="mt-2">
+  <span class="text-gray-100 hover:font-bold">MEMBERSHIP</span>
+</li>
+
+<li class="mt-2 ml-2">
+  <%= link_to "- Clubs",
+        index_user_path,
+        class: "text-gray-100 hover:font-bold" %>
+</li>
+  <% end %>
+
+<% end %>
+<% end %>

@@ -1,5 +1,5 @@
 
-<% if current_user.role == "na_people" %>
+<% if can?(:update, @transfer) && !can?(:manage, Transfer) %>
 
   <%= render "form_attendee", transfer: @transfer %>
   <% content_for(:page_title, "U.S. Open Netball Championships® Volunteer Information") %>

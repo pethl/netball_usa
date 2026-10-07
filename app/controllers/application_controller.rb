@@ -9,9 +9,9 @@ class ApplicationController < ActionController::Base
   helper_method :is_admin?
   helper_method :current_us_open_event
 
-  #CRITICAL USED TO ALLOW WHO CAN EXPORT EDUCATOR RECORDS - group 10 and admin (Takiya)
+  # Educator exports are controlled by CanCan so access survives role migration.
   def can_export_educators?
-    current_user.admin? || current_user.educators_events_medium?
+    can?(:export, NetballEducator)
   end
 
   helper_method :can_export_educators?

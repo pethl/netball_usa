@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_09_27_153856) do
+ActiveRecord::Schema[7.1].define(version: 2026_10_06_203000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -642,6 +642,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_09_27_153856) do
     t.string "country"
     t.date "dob"
     t.string "zip_code"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_people_on_user_id", unique: true
   end
 
   create_table "press_releases", force: :cascade do |t|
@@ -1067,6 +1069,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_09_27_153856) do
   add_foreign_key "payments", "individual_members"
   add_foreign_key "payments", "na_teams"
   add_foreign_key "payments", "users", column: "payment_recorded_by_id"
+  add_foreign_key "people", "users"
   add_foreign_key "press_releases", "media"
   add_foreign_key "programs", "people"
   add_foreign_key "reference_vendors", "references"

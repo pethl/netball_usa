@@ -98,6 +98,61 @@ RSpec.describe "Admin user account creation", type: :request do
     expect(response).to redirect_to(root_url(locale: :en))
   end
 
+  it "allows an administrator to link and unlink a Person profile" do
+    user = create(:user, email: "work-address@example.com")
+    person = create(
+      :person,
+      email: "personal-address@example.com",
+      status: "Active"
+    )
+    sign_in admin
+
+    get profile_user_path(user)
+    expect(response).to have_http_status(:ok)
+    expect(response.body).to include("work-address@example.com")
+    expect(response.body).to include("personal-address@example.com")
+
+    patch update_profile_user_path(user),
+          params: { user: { person_id: person.id } }
+
+    expect(response).to redirect_to(
+      profile_user_path(user, locale: :en)
+    )
+    expect(user.reload.person).to eq(person)
+
+    patch update_profile_user_path(user),
+          params: { user: { person_id: "" } }
+
+    expect(user.reload.person).to be_nil
+    expect(person.reload.user_id).to be_nil
+  end
+
+  it "does not allow a Person already linked to another user to be reassigned" do
+    first_user = create(:user)
+    second_user = create(:user)
+    person = create(
+      :person,
+      user: first_user,
+      status: "Active"
+    )
+    sign_in admin
+
+    patch update_profile_user_path(second_user),
+          params: { user: { person_id: person.id } }
+
+    expect(response).to have_http_status(:unprocessable_entity)
+    expect(person.reload.user).to eq(first_user)
+  end
+
+  it "prevents non-admin users from managing Person links" do
+    user = create(:user)
+    sign_in create(:user)
+
+    get profile_user_path(user)
+
+    expect(response).to redirect_to(root_url(locale: :en))
+  end
+
   def valid_attributes
     {
       first_name: "Alex",

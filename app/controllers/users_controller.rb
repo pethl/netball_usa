@@ -2,16 +2,17 @@ class UsersController < ApplicationController
   load_and_authorize_resource only: :index
 
   before_action :require_admin,
-                only: [:groups, :update_groups]
+                only: [:groups, :update_groups, :profile, :update_profile]
 
   before_action :set_user,
-                only: [:groups, :update_groups]
+                only: [:groups, :update_groups, :profile, :update_profile]
 
   def index
     authorize! :index, User
 
     users = User
       .accessible_by(current_ability)
+      .includes(:person)
       .order(
         account_active: :desc,
         last_name: :asc,
@@ -72,6 +73,33 @@ class UsersController < ApplicationController
     render :groups, status: :unprocessable_entity
   end
 
+  def profile
+    set_available_people
+  end
+
+  def update_profile
+    person_id = params.dig(:user, :person_id).presence
+
+    Person.transaction do
+      if person_id.present?
+        person = Person
+          .where(user_id: [nil, @user.id])
+          .find(person_id)
+
+        @user.person = person
+      elsif @user.person.present?
+        @user.person.update!(user: nil)
+      end
+    end
+
+    redirect_to profile_user_path(@user),
+                notice: "Linked Person profile was updated."
+  rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotFound => error
+    set_available_people
+    flash.now[:alert] = error.message
+    render :profile, status: :unprocessable_entity
+  end
+
   private
 
   def set_user
@@ -81,6 +109,12 @@ class UsersController < ApplicationController
   def submitted_group_ids
     Array(params.dig(:user, :user_group_ids))
       .reject(&:blank?)
+  end
+
+  def set_available_people
+    @available_people = Person
+      .where(user_id: [nil, @user.id])
+      .order(:first_name, :last_name)
   end
 
   def require_admin

@@ -58,7 +58,7 @@
         </div>
 
         <br>
-        <% if is_admin? ||  current_user.teams_grants?  %>
+        <% if can?(:index_admin, Club) %>
         <%= link_to "Add / Edit Members, Roles or Teams ", club_path(club), class: teal_button_class,
         data: { turbo_frame: "_top" } %>
            
@@ -83,7 +83,7 @@
       </div>  
 
      <br>
-     <% if is_admin? ||  current_user.teams_grants? %>
+     <% if can?(:index_admin, Club) %>
        <div class="my-2">
           Key Roles
         </div>
@@ -139,4 +139,3 @@
     </div>
 <% end %>
 </div>
-

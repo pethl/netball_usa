@@ -1,0 +1,70 @@
+<% content_for(:page_title, "Linked Person profile") %>
+
+<div class="mx-auto max-w-4xl px-4 py-8">
+  <div class="rounded-lg bg-white p-6 shadow">
+    <div class="mb-6 border-b border-gray-200 pb-4">
+      <h1 class="text-2xl font-bold text-gray-900">
+        Person profile for <%= @user.full_name %>
+      </h1>
+
+      <p class="mt-1 text-sm text-gray-600">
+        Login email: <%= @user.email %>
+      </p>
+
+      <p class="mt-3 text-sm text-gray-600">
+        Link this account to the Person record used for My Profile and
+        current U.S. Open self-service access. The two email addresses do
+        not need to match once the records are linked.
+      </p>
+    </div>
+
+    <% if @user.person.present? %>
+      <div class="mb-6 rounded-lg border border-green-200 bg-green-50 p-4">
+        <p class="text-sm font-semibold text-green-900">
+          Currently linked
+        </p>
+        <p class="mt-1 text-gray-800">
+          <%= @user.person.full_name %>
+          — <%= @user.person.email.presence || "No email" %>
+          — <%= @user.person.role %>
+          [ID: <%= @user.person.id %>]
+        </p>
+      </div>
+    <% end %>
+
+    <%= form_with url: update_profile_user_path(@user), method: :patch do %>
+      <div>
+        <%= label_tag "user_person_id",
+              "Linked Person record",
+              class: label_class %>
+
+        <%= select_tag "user[person_id]",
+              options_for_select(
+                @available_people.map do |person|
+                  [
+                    "#{person.full_name} — #{person.email.presence || 'No email'} — #{person.role} [ID: #{person.id}]",
+                    person.id
+                  ]
+                end,
+                @user.person&.id
+              ),
+              include_blank: "No linked Person profile",
+              class: form_input_class %>
+
+        <p class="mt-2 text-xs text-gray-500">
+          Person records already linked to another user are not shown.
+          Select the blank option to remove the current link.
+        </p>
+      </div>
+
+      <div class="mt-8 flex justify-end gap-3 border-t border-gray-200 pt-5">
+        <%= link_to "Back to users",
+              users_path,
+              class: clear_button_class %>
+
+        <%= submit_tag "Save Person link",
+              class: form_button_class %>
+      </div>
+    <% end %>
+  </div>
+</div>

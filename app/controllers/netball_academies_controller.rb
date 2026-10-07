@@ -1,5 +1,6 @@
 class NetballAcademiesController < ApplicationController
   before_action :set_netball_academy, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
 
   # GET /netball_academies
   def index

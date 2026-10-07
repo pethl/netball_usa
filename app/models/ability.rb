@@ -26,6 +26,42 @@ class Ability
 
     # But only separately authorised users can access the user list.
     cannot :index, User
+
+    # Prefer an explicit User-to-Person link. Email remains a transition
+    # fallback for users whose Person profile has not been linked yet.
+    normalized_email = user.email.to_s.strip.downcase
+    linked_person_id = user.person&.id
+    person_id = linked_person_id
+
+    if person_id.blank? && normalized_email.present?
+      person_id = Person
+        .where("LOWER(TRIM(email)) = ?", normalized_email)
+        .pick(:id)
+    end
+
+    if person_id.present?
+      can [:read, :update], Person, id: person_id
+    end
+
+    cannot :index, Person
+
+    # A signed-in user may view and edit their own existing Transfer for the
+    # current US Open event. This grants no attendee list, creation, deletion,
+    # historical-event access, or access to another person's Transfer.
+    current_us_open_event_id = Event
+      .where(event_type: "US Open")
+      .where("extract(year from date) = ?", Time.zone.now.year)
+      .order(date: :desc)
+      .pick(:id)
+
+    if linked_person_id.present? && current_us_open_event_id.present?
+      can [:read, :update],
+          Transfer,
+          person_id: linked_person_id,
+          event_id: current_us_open_event_id
+    end
+
+    cannot :index, Transfer
     
 
     # 🔒 Filings are admin-only by default - belt and braces
@@ -59,8 +95,6 @@ class Ability
       can :manage, Transfer
       can :menu_all, Transfer
 
-      can :manage, Person
-
       can :read, Event
       can :calendar, Event
     end
@@ -79,6 +113,72 @@ class Ability
       can :manage, Event
       cannot :destroy, Event
       can :calendar, Event
+    end
+
+    if user.in_group?("events_calendar_team")
+      can :calendar, Event
+    end
+
+    if user.in_group?("educators_events_team")
+      can :manage, NetballEducator
+      can :manage, FollowUp
+      can :manage, Equipment
+      can :heat_map, NetballEducator
+
+      can :manage, Event
+      cannot :destroy, Event
+      can :calendar, Event
+    end
+
+    if user.in_group?("grants_team")
+      can :manage, Grant
+    end
+
+    if user.in_group?("vendors_team")
+      can :manage, Vendor
+    end
+
+    if user.in_group?("venues_team")
+      can :manage, Venue
+    end
+
+    if user.in_group?("tours_team")
+      can :manage, Tour
+    end
+
+    if user.in_group?("programs_team")
+      can :manage, Program
+    end
+
+    if user.in_group?("partners_team")
+      can :manage, Partner
+    end
+
+    if user.in_group?("people_team")
+      can :manage, Person
+    end
+
+    if user.in_group?("membership_admin_team")
+      can :manage, Club
+      can :manage, Member
+      can :manage, IndividualMember
+      can :manage, Payment
+    end
+
+    if user.in_group?("membership_view_team")
+      can :read, Club
+      can :read, Member
+      can :read, IndividualMember
+      can [:index_admin, :teams_list_index], Club
+      can :read_all, IndividualMember
+    end
+
+    if user.in_group?("clubs_index_view_team")
+      can :index_user, Club
+    end
+
+    if user.in_group?("netball_academies_team")
+      can :manage, NetballAcademy
     end
 
     case user.role
@@ -204,6 +304,7 @@ class Ability
       can :read, Club
       can :read, Member
       can :read, IndividualMember
+      can :read_all, IndividualMember
 
       # ✅ Custom access to special view action
       can :teams_list_index, Club
@@ -300,5 +401,10 @@ when "na_people"
       cannot :manage, :all
       cannot :index, User
     end
+
+    # Export contains the personal details of more than 200 educators. Keep it
+    # outside broad educator management and require an explicit trusted group.
+    cannot :export, NetballEducator
+    can :export, NetballEducator if user.admin? || user.in_group?("educators_export_team")
   end
 end

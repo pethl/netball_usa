@@ -4,7 +4,7 @@ class UserGroupsController < ApplicationController
   def index
     @user_groups = UserGroup
       .active
-      .ordered
+      .order(:key)
       .includes(user_group_memberships: :user)
 
     @available_users = User

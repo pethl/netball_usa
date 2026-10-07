@@ -1,4 +1,4 @@
-<% if is_admin? || current_user.teams_grants? %>
+<% if can?(:index_admin, Club) %>
   <% content_for(:page_title, "Clubs Managed by NA Administrators") %>
 
   <%= turbo_frame_tag "first_turbo_frame" do %>

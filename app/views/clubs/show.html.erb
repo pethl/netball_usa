@@ -149,7 +149,7 @@
       Individual Members
     </div>
     
-    <% if is_admin? ||  current_user.teams_grants?  %>
+    <% if can?(:index_admin, Club) %>
     <div class="ml-2 my-2">
        <%= link_to "To add or remove Individual Membership records click here", individual_members_path, class: link_class %>
     </div>
