@@ -92,17 +92,10 @@
             </div>
           </div>
 
-          <% add_nights_url = us_open_additional_nights_url %>
-
-          <% if add_nights_url.present? && !add_nights_url.include?("TBD") %>
-            <div class="mb-6">
-              <%= link_to "» Click HERE to book any additional nights needed for your personal stay (not covered by the above nights requested).".html_safe,
-              add_nights_url,
-              target: "_blank",
-              rel: "noopener",
-              class: "block w-full px-4 py-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold rounded shadow-lg transition duration-200 text-center text-lg" %>
-            </div>
-          <% end %>
+          <div class="mb-6 rounded bg-yellow-400 px-4 py-4 text-center text-lg font-semibold text-black shadow-lg">
+            To book any additional nights needed for your personal stay (not covered by the above nights requested) Email
+            USOpen@NetballAmerica.com.
+          </div>
 
           <!-- Important Airport Section -->
           <div class="mb-6 p-4 bg-blue-100 text-gray-800 border border-blue-700 rounded-lg">

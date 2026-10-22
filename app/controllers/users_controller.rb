@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
     users = User
       .accessible_by(current_ability)
-      .includes(:person)
+      .includes(:person, :user_groups)
       .order(
         account_active: :desc,
         last_name: :asc,
