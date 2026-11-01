@@ -224,7 +224,7 @@ end
     def transfer_params
       params.require(:transfer).permit(:id, :person_id, :event_id, :consent, :role, :obtain_headshot, 
       :arrival_airport_transport_request, :departure_airport_transport_request, :arrival_phone, :departure_phone, 
-      :grouping_pickup_time, :grouping_departure_time, :departure_meetup_location, :hotel_confirmation_personal, :dietary_requirements_allergies,
+      :grouping_pickup_time, :grouping_departure_time, :departure_meetup_location, :hotel_confirmation_personal, :personal_stay_info, :dietary_requirements_allergies,
       :hotel_arrival, :hotel_departure, :check_in, :check_out, :room_type, :hotel_reservation, :share_volunteer, 
       :arrival_airline, :arrival_flight, :arrival_terminal, :arrival_time, 
       :departure_airline, :departure_flight, :departure_terminal, :departure_time, :transfer_departure_type,

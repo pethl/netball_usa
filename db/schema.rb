@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_10_06_203000) do
+ActiveRecord::Schema[7.1].define(version: 2026_11_01_120832) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -842,6 +842,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_10_06_203000) do
     t.string "dietary_requirements_allergies"
     t.string "departure_airport_transport_request"
     t.string "departure_phone"
+    t.text "personal_stay_info"
     t.index ["event_id"], name: "index_transfers_on_event_id"
     t.index ["person_id"], name: "index_transfers_on_person_id"
   end

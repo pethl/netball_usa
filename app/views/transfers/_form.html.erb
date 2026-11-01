@@ -246,40 +246,55 @@
       <!-- ===============================
            🏨 Hotel Confirmation Details
            =============================== -->
-      <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
-        <div class= "font-xl font-semibold">
-          FINAL HOTEL CONFIRM FOR YOUR NA COVERED ROOM
-        </div>
 
-        <div class="mb-4 mt-2">
-          <%= form.label :hotel_reservation, "Hotel Reservation #", class: label_class%>
-          <div class="mt-1">
-            <%= form.text_area :hotel_reservation, class: input_class  %>
+             <!-- Fourth column: two separate cards -->
+      <div class="space-y-4">
+
+        <!-- Company-covered booking -->
+        <div class="p-4 bg-white border border-gray-200 rounded-lg shadow">
+          <div class="font-semibold mb-4">
+            FINAL HOTEL CONFIRM FOR YOUR NA COVERED ROOM
+          </div>
+
+          <div class="mb-4">
+            <%= form.label :hotel_reservation, "Hotel Reservation #", class: label_class %>
+            <%= form.text_area :hotel_reservation, class: input_class %>
+          </div>
+
+          <div class="mb-4">
+            <%= form.label :hotel_name, class: label_class %>
+            <%= form.select :hotel_name,
+                            options_for_select(us_open_hotel_name, transfer.hotel_name),
+                            { prompt: true },
+                            class: input_class %>
+          </div>
+
+          <div class="mb-4">
+            <%= form.label :check_in, class: label_class %>
+            <%= form.date_field :check_in, class: input_class %>
+          </div>
+
+          <div>
+            <%= form.label :check_out, class: label_class %>
+            <%= form.date_field :check_out, class: input_class %>
           </div>
         </div>
 
-        <div class="mb-4">
-          <%= form.label :hotel_name, class: label_class%>
-          <div class="mt-1">
-            <%= form.select :hotel_name, options_for_select(us_open_hotel_name, :selected => transfer.hotel_name),{prompt: true}, class: input_class %>
-          </div>
+        <!-- Personal stay: permanent blue border -->
+        <div class="p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800">
+          <%= form.label :personal_stay_info,
+                         "Personal Stay Info",
+                         class: "block text-sm font-semibold text-blue-900 mb-2" %>
+
+          <%= form.text_area :personal_stay_info,
+                            rows: 6,
+                            placeholder: "Personal stay dates, booking references and notes",
+                            class: input_class %>
         </div>
 
-        <div class="mb-4">
-          <%= form.label :check_in, class: label_class%>
-          <div class="mt-1">
-            <%= form.date_field :check_in, class: input_class  %>
-          </div>
-        </div>
+      </div> <!-- End fourth column -->
+    </div> <!-- End pickup/hotel grid -->
 
-        <div class="mb-4">
-          <%= form.label :check_out, class: label_class%>
-          <div class="mt-1">
-            <%= form.date_field :check_out, class: input_class  %>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
       <!-- ===============================
@@ -321,6 +336,7 @@
       </div>
 
       <div class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800 ">
+        
 
         <div class= "font-xl font-semibold">
           DEPARTURE DETAILS

@@ -128,32 +128,54 @@
       <p class="text-sm text-gray-500">Personal Hotel Confirmation #</p>
       <p class="text-base font-medium text-gray-900 m-4"><%= @transfer.hotel_confirmation_personal %></p>
 
-      <div class="mb-4">
-        <%= link_to "» Click HERE to book your event hotel (personal stay, not covered by NA)",
-                  "https://www.marriott.com/event-reservations/reservation-link.mi?id=1732664035228&key=GRP&guestreslink2=true&app=resvlink",
-                  target: "_blank",
-                  rel: "noopener",
-                  class: "inline-block px-4 py-2 bg-gray-200 hover:bg-gray-400 text-black font-semibold rounded shadow-lg transition duration-200" %>
-      </div>
+      <div class="mb-4 rounded bg-yellow-400 px-4 py-2 font-semibold text-black shadow-lg">
+          To book any additional nights needed for your personal stay (not covered by the above nights requested) Email
+          USOpen@NetballAmerica.com.
+        </div>
     </div>
+
+
 
      
-      <div class="p-4 bg-white border border-gray-200 rounded-lg shadow">
-      <div class="text-lg font-semibold text-blue-900 mb-4">Hotel Booking Confirmation</div>
+      <!-- Company and personal stay cards in the same column -->
+<div class="space-y-4">
 
-      <p class="text-sm text-gray-500">Reservation #</p>
-      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.hotel_reservation %></p>
+  <div class="p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800">
+    <h3 class="text-base font-semibold text-blue-900 mb-4">
+      NA-Covered Room Confirmation
+    </h3>
 
-      <p class="text-sm text-gray-500">Hotel Name</p>
-      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.hotel_name %></p>
+    <p class="text-sm text-gray-500">Reservation #</p>
+    <p class="text-base font-medium text-gray-900 mb-4">
+      <%= @transfer.hotel_reservation %>
+    </p>
 
-      <p class="text-sm text-gray-500">Check-In</p>
-      <p class="text-base font-medium text-gray-900 mb-4"><%= @transfer.check_in %></p>
+    <p class="text-sm text-gray-500">Hotel Name</p>
+    <p class="text-base font-medium text-gray-900 mb-4">
+      <%= @transfer.hotel_name %>
+    </p>
 
-      <p class="text-sm text-gray-500">Check-Out</p>
-      <p class="text-base font-medium text-gray-900"><%= @transfer.check_out %></p>
-    </div>
+    <p class="text-sm text-gray-500">Check-In</p>
+    <p class="text-base font-medium text-gray-900 mb-4">
+      <%= @transfer.check_in&.to_date&.to_fs(:d_usa) %>
+    </p>
+
+    <p class="text-sm text-gray-500">Check-Out</p>
+    <p class="text-base font-medium text-gray-900">
+      <%= @transfer.check_out&.to_date&.to_fs(:d_usa) %>
+    </p>
   </div>
+
+  <div class="p-4 bg-white border border-gray-200 rounded-lg shadow hover:border-blue-800">
+    <h3 class="text-sm font-semibold text-blue-900 mb-2">
+      Personal Stay Info
+    </h3>
+
+    <div class="text-sm text-gray-900 whitespace-pre-wrap break-words"><%= @transfer.personal_stay_info.presence || "—" %></div>
+  </div>
+
+</div> <!-- End company/personal column -->
+</div>
 
   <!-- ===============================
        ✈️ Flight Info & Misc

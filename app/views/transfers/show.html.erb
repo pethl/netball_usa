@@ -25,7 +25,7 @@
 
 <% if user_signed_in? && current_user.role != "na_people" %>
   <div>
-    <%= link_to "Edit this record", edit_transfer_path(@transfer), class: link_class %> <br>
+    <span class="text-lg"><%= link_to "Edit this record", edit_transfer_path(@transfer), class: link_class %> </span><br>
     <%= link_to "Event Attendees", transfers_path, class: link_class %><br>
     <%= link_to "Arrivals Transfers", inbound_pickups_transfers_path, class: link_class %> |
     <%= link_to "Departure Transfers", outbound_pickups_transfers_path, class: link_class %>
