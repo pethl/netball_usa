@@ -10,10 +10,12 @@
   <% transfers_by_group = transfers.group_by { |t| t.pick_up_grouping.presence || "Ungrouped" } %>
 
   <% transfers_by_group.each do |group, grouped_transfers| %>
-    <div class="ml-4 mt-4 text-lg text-gray-700 font-semibold">
+   <div class="ml-4 mt-4 text-lg text-gray-700 font-semibold">
       Group: <%= group %> (<%= grouped_transfers.size %>)
-      <% if (gt = grouped_transfers.map(&:arrival_time).compact.min).present? %>
-        — <%= gt.strftime("%H:%M") %> (<%= gt.strftime("%I:%M %p") %>)
+      <% if (pickup_time = grouped_transfers.first&.grouping_pickup_time).present? %>
+        — Pickup Time: <%= pickup_time.strftime("%H:%M") %> (<%= pickup_time.strftime("%I:%M %p") %>)
+      <% else %>
+        — Pickup Time: TBC
       <% end %>
     </div>
 

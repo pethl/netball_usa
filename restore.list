@@ -1,0 +1,491 @@
+;
+; Archive created at 2026-11-01 10:38:20 GMT
+;     dbname: d2t36ef6ebunp7
+;     TOC Entries: 483
+;     Compression: -1
+;     Dump Version: 1.14-0
+;     Format: CUSTOM
+;     Integer: 4 bytes
+;     Offset: 8 bytes
+;     Dumped from database version: 15.18
+;     Dumped by pg_dump version: 15.19
+;
+;
+; Selected TOC Entries:
+;
+7; 2615 2200 SCHEMA - public uadnlggibe07p1
+5000; 0 0 COMMENT - SCHEMA "public" uadnlggibe07p1
+2; 3079 7047251 EXTENSION - pgcrypto 
+5002; 0 0 COMMENT - EXTENSION "pgcrypto" 
+220; 1259 7047289 TABLE public active_storage_attachments uadnlggibe07p1
+221; 1259 7047294 SEQUENCE public active_storage_attachments_id_seq uadnlggibe07p1
+5003; 0 0 SEQUENCE OWNED BY public active_storage_attachments_id_seq uadnlggibe07p1
+222; 1259 7047295 TABLE public active_storage_blobs uadnlggibe07p1
+223; 1259 7047300 SEQUENCE public active_storage_blobs_id_seq uadnlggibe07p1
+5004; 0 0 SEQUENCE OWNED BY public active_storage_blobs_id_seq uadnlggibe07p1
+224; 1259 7047301 TABLE public active_storage_variant_records uadnlggibe07p1
+225; 1259 7047306 SEQUENCE public active_storage_variant_records_id_seq uadnlggibe07p1
+5005; 0 0 SEQUENCE OWNED BY public active_storage_variant_records_id_seq uadnlggibe07p1
+226; 1259 7047307 TABLE public ar_internal_metadata uadnlggibe07p1
+227; 1259 7047312 TABLE public budgets uadnlggibe07p1
+228; 1259 7047317 SEQUENCE public budgets_id_seq uadnlggibe07p1
+5006; 0 0 SEQUENCE OWNED BY public budgets_id_seq uadnlggibe07p1
+229; 1259 7047318 TABLE public clubs uadnlggibe07p1
+230; 1259 7047323 SEQUENCE public clubs_id_seq uadnlggibe07p1
+5007; 0 0 SEQUENCE OWNED BY public clubs_id_seq uadnlggibe07p1
+231; 1259 7047324 TABLE public contacts uadnlggibe07p1
+232; 1259 7047329 SEQUENCE public contacts_id_seq uadnlggibe07p1
+5008; 0 0 SEQUENCE OWNED BY public contacts_id_seq uadnlggibe07p1
+312; 1259 36523681 TABLE public donated_item_requests uadnlggibe07p1
+311; 1259 36523680 SEQUENCE public donated_item_requests_id_seq uadnlggibe07p1
+5009; 0 0 SEQUENCE OWNED BY public donated_item_requests_id_seq uadnlggibe07p1
+310; 1259 36523672 TABLE public donated_items uadnlggibe07p1
+309; 1259 36523671 SEQUENCE public donated_items_id_seq uadnlggibe07p1
+5010; 0 0 SEQUENCE OWNED BY public donated_items_id_seq uadnlggibe07p1
+233; 1259 7047330 TABLE public equipment uadnlggibe07p1
+234; 1259 7047344 SEQUENCE public equipment_id_seq uadnlggibe07p1
+5011; 0 0 SEQUENCE OWNED BY public equipment_id_seq uadnlggibe07p1
+235; 1259 7047345 TABLE public event_assignments uadnlggibe07p1
+236; 1259 7047348 SEQUENCE public event_assignments_id_seq uadnlggibe07p1
+5012; 0 0 SEQUENCE OWNED BY public event_assignments_id_seq uadnlggibe07p1
+237; 1259 7047352 TABLE public event_participants uadnlggibe07p1
+238; 1259 7047355 SEQUENCE public event_participants_id_seq uadnlggibe07p1
+5013; 0 0 SEQUENCE OWNED BY public event_participants_id_seq uadnlggibe07p1
+239; 1259 7047356 TABLE public events uadnlggibe07p1
+240; 1259 7047362 SEQUENCE public events_id_seq uadnlggibe07p1
+5014; 0 0 SEQUENCE OWNED BY public events_id_seq uadnlggibe07p1
+308; 1259 25825640 TABLE public filing_occurrences uadnlggibe07p1
+307; 1259 25825639 SEQUENCE public filing_occurrences_id_seq uadnlggibe07p1
+5015; 0 0 SEQUENCE OWNED BY public filing_occurrences_id_seq uadnlggibe07p1
+306; 1259 25825623 TABLE public filings uadnlggibe07p1
+305; 1259 25825622 SEQUENCE public filings_id_seq uadnlggibe07p1
+5016; 0 0 SEQUENCE OWNED BY public filings_id_seq uadnlggibe07p1
+241; 1259 7047363 TABLE public follow_ups uadnlggibe07p1
+242; 1259 7047368 SEQUENCE public follow_ups_id_seq uadnlggibe07p1
+5017; 0 0 SEQUENCE OWNED BY public follow_ups_id_seq uadnlggibe07p1
+286; 1259 11276428 TABLE public frequent_flyer_numbers uadnlggibe07p1
+285; 1259 11276427 SEQUENCE public frequent_flyer_numbers_id_seq uadnlggibe07p1
+5018; 0 0 SEQUENCE OWNED BY public frequent_flyer_numbers_id_seq uadnlggibe07p1
+243; 1259 7047370 TABLE public grants uadnlggibe07p1
+244; 1259 7047376 SEQUENCE public grants_id_seq uadnlggibe07p1
+5019; 0 0 SEQUENCE OWNED BY public grants_id_seq uadnlggibe07p1
+245; 1259 7047378 TABLE public individual_members uadnlggibe07p1
+246; 1259 7047391 SEQUENCE public individual_members_id_seq uadnlggibe07p1
+5020; 0 0 SEQUENCE OWNED BY public individual_members_id_seq uadnlggibe07p1
+288; 1259 11284768 TABLE public media uadnlggibe07p1
+287; 1259 11284767 SEQUENCE public media_id_seq uadnlggibe07p1
+5021; 0 0 SEQUENCE OWNED BY public media_id_seq uadnlggibe07p1
+247; 1259 7047392 TABLE public member_key_roles uadnlggibe07p1
+248; 1259 7047397 SEQUENCE public member_key_roles_id_seq uadnlggibe07p1
+5022; 0 0 SEQUENCE OWNED BY public member_key_roles_id_seq uadnlggibe07p1
+249; 1259 7047398 TABLE public members uadnlggibe07p1
+250; 1259 7047403 SEQUENCE public members_id_seq uadnlggibe07p1
+5023; 0 0 SEQUENCE OWNED BY public members_id_seq uadnlggibe07p1
+251; 1259 7047404 TABLE public na_teams uadnlggibe07p1
+252; 1259 7047409 SEQUENCE public na_teams_id_seq uadnlggibe07p1
+5024; 0 0 SEQUENCE OWNED BY public na_teams_id_seq uadnlggibe07p1
+304; 1259 15973082 TABLE public netball_academies uadnlggibe07p1
+303; 1259 15973081 SEQUENCE public netball_academies_id_seq uadnlggibe07p1
+5025; 0 0 SEQUENCE OWNED BY public netball_academies_id_seq uadnlggibe07p1
+302; 1259 14555974 TABLE public netball_associations uadnlggibe07p1
+301; 1259 14555973 SEQUENCE public netball_associations_id_seq uadnlggibe07p1
+5026; 0 0 SEQUENCE OWNED BY public netball_associations_id_seq uadnlggibe07p1
+253; 1259 7047411 TABLE public netball_educators uadnlggibe07p1
+290; 1259 11404442 TABLE public notes uadnlggibe07p1
+289; 1259 11404441 SEQUENCE public notes_id_seq uadnlggibe07p1
+5027; 0 0 SEQUENCE OWNED BY public notes_id_seq uadnlggibe07p1
+296; 1259 12336035 TABLE public open_invites uadnlggibe07p1
+295; 1259 12336034 SEQUENCE public open_invites_id_seq uadnlggibe07p1
+5028; 0 0 SEQUENCE OWNED BY public open_invites_id_seq uadnlggibe07p1
+254; 1259 7047426 TABLE public opportunities uadnlggibe07p1
+255; 1259 7047431 SEQUENCE public opportunities_id_seq uadnlggibe07p1
+5029; 0 0 SEQUENCE OWNED BY public opportunities_id_seq uadnlggibe07p1
+256; 1259 7047432 TABLE public partners uadnlggibe07p1
+257; 1259 7047437 SEQUENCE public partners_id_seq uadnlggibe07p1
+5030; 0 0 SEQUENCE OWNED BY public partners_id_seq uadnlggibe07p1
+258; 1259 7047438 TABLE public payments uadnlggibe07p1
+259; 1259 7047445 SEQUENCE public payments_id_seq uadnlggibe07p1
+5031; 0 0 SEQUENCE OWNED BY public payments_id_seq uadnlggibe07p1
+260; 1259 7047446 TABLE public people uadnlggibe07p1
+261; 1259 7047451 SEQUENCE public people_id_seq uadnlggibe07p1
+5032; 0 0 SEQUENCE OWNED BY public people_id_seq uadnlggibe07p1
+298; 1259 13202109 TABLE public press_releases uadnlggibe07p1
+297; 1259 13202108 SEQUENCE public press_releases_id_seq uadnlggibe07p1
+5033; 0 0 SEQUENCE OWNED BY public press_releases_id_seq uadnlggibe07p1
+262; 1259 7047452 TABLE public programs uadnlggibe07p1
+263; 1259 7047458 SEQUENCE public programs_id_seq uadnlggibe07p1
+5034; 0 0 SEQUENCE OWNED BY public programs_id_seq uadnlggibe07p1
+294; 1259 12293666 TABLE public reference_vendors uadnlggibe07p1
+293; 1259 12293665 SEQUENCE public reference_vendors_id_seq uadnlggibe07p1
+5035; 0 0 SEQUENCE OWNED BY public reference_vendors_id_seq uadnlggibe07p1
+264; 1259 7047459 TABLE public references uadnlggibe07p1
+265; 1259 7047465 SEQUENCE public references_id_seq uadnlggibe07p1
+5036; 0 0 SEQUENCE OWNED BY public references_id_seq uadnlggibe07p1
+266; 1259 7047466 TABLE public regions uadnlggibe07p1
+267; 1259 7047471 SEQUENCE public regions_id_seq uadnlggibe07p1
+5037; 0 0 SEQUENCE OWNED BY public regions_id_seq uadnlggibe07p1
+268; 1259 7047472 TABLE public sample_words uadnlggibe07p1
+269; 1259 7047478 SEQUENCE public sample_words_id_seq uadnlggibe07p1
+5038; 0 0 SEQUENCE OWNED BY public sample_words_id_seq uadnlggibe07p1
+270; 1259 7047480 TABLE public schema_migrations uadnlggibe07p1
+271; 1259 7047485 TABLE public sponsors uadnlggibe07p1
+272; 1259 7047491 SEQUENCE public sponsors_id_seq uadnlggibe07p1
+5039; 0 0 SEQUENCE OWNED BY public sponsors_id_seq uadnlggibe07p1
+273; 1259 7047492 TABLE public teams uadnlggibe07p1
+274; 1259 7047497 SEQUENCE public teams_id_seq uadnlggibe07p1
+5040; 0 0 SEQUENCE OWNED BY public teams_id_seq uadnlggibe07p1
+275; 1259 7047499 TABLE public tours uadnlggibe07p1
+276; 1259 7047504 SEQUENCE public tours_id_seq uadnlggibe07p1
+5041; 0 0 SEQUENCE OWNED BY public tours_id_seq uadnlggibe07p1
+277; 1259 7047505 TABLE public transfers uadnlggibe07p1
+278; 1259 7047511 SEQUENCE public transfers_id_seq uadnlggibe07p1
+5042; 0 0 SEQUENCE OWNED BY public transfers_id_seq uadnlggibe07p1
+279; 1259 7047512 TABLE public umpires uadnlggibe07p1
+280; 1259 7047517 SEQUENCE public umpires_id_seq uadnlggibe07p1
+5043; 0 0 SEQUENCE OWNED BY public umpires_id_seq uadnlggibe07p1
+322; 1259 45499726 TABLE public university_athlete_profiles uadnlggibe07p1
+321; 1259 45499725 SEQUENCE public university_athlete_profiles_id_seq uadnlggibe07p1
+5044; 0 0 SEQUENCE OWNED BY public university_athlete_profiles_id_seq uadnlggibe07p1
+314; 1259 45499642 TABLE public university_objectives uadnlggibe07p1
+313; 1259 45499641 SEQUENCE public university_objectives_id_seq uadnlggibe07p1
+5045; 0 0 SEQUENCE OWNED BY public university_objectives_id_seq uadnlggibe07p1
+316; 1259 45499653 TABLE public university_tasks uadnlggibe07p1
+315; 1259 45499652 SEQUENCE public university_tasks_id_seq uadnlggibe07p1
+5046; 0 0 SEQUENCE OWNED BY public university_tasks_id_seq uadnlggibe07p1
+320; 1259 45499688 TABLE public user_group_memberships uadnlggibe07p1
+319; 1259 45499687 SEQUENCE public user_group_memberships_id_seq uadnlggibe07p1
+5047; 0 0 SEQUENCE OWNED BY public user_group_memberships_id_seq uadnlggibe07p1
+318; 1259 45499677 TABLE public user_groups uadnlggibe07p1
+317; 1259 45499676 SEQUENCE public user_groups_id_seq uadnlggibe07p1
+5048; 0 0 SEQUENCE OWNED BY public user_groups_id_seq uadnlggibe07p1
+281; 1259 7047519 TABLE public users uadnlggibe07p1
+282; 1259 7047533 SEQUENCE public users_id_seq uadnlggibe07p1
+5049; 0 0 SEQUENCE OWNED BY public users_id_seq uadnlggibe07p1
+292; 1259 12293657 TABLE public vendors uadnlggibe07p1
+291; 1259 12293656 SEQUENCE public vendors_id_seq uadnlggibe07p1
+5050; 0 0 SEQUENCE OWNED BY public vendors_id_seq uadnlggibe07p1
+283; 1259 7047534 TABLE public venues uadnlggibe07p1
+284; 1259 7047540 SEQUENCE public venues_id_seq uadnlggibe07p1
+5051; 0 0 SEQUENCE OWNED BY public venues_id_seq uadnlggibe07p1
+300; 1259 13528883 TABLE public versions uadnlggibe07p1
+299; 1259 13528882 SEQUENCE public versions_id_seq uadnlggibe07p1
+5052; 0 0 SEQUENCE OWNED BY public versions_id_seq uadnlggibe07p1
+4453; 2604 7047541 DEFAULT public active_storage_attachments id uadnlggibe07p1
+4454; 2604 7047542 DEFAULT public active_storage_blobs id uadnlggibe07p1
+4455; 2604 7047543 DEFAULT public active_storage_variant_records id uadnlggibe07p1
+4456; 2604 7047544 DEFAULT public budgets id uadnlggibe07p1
+4457; 2604 7047545 DEFAULT public clubs id uadnlggibe07p1
+4458; 2604 7047546 DEFAULT public contacts id uadnlggibe07p1
+4515; 2604 36523684 DEFAULT public donated_item_requests id uadnlggibe07p1
+4514; 2604 36523675 DEFAULT public donated_items id uadnlggibe07p1
+4459; 2604 7047547 DEFAULT public equipment id uadnlggibe07p1
+4460; 2604 7047548 DEFAULT public event_assignments id uadnlggibe07p1
+4461; 2604 7047549 DEFAULT public event_participants id uadnlggibe07p1
+4462; 2604 7047550 DEFAULT public events id uadnlggibe07p1
+4511; 2604 25825643 DEFAULT public filing_occurrences id uadnlggibe07p1
+4508; 2604 25825626 DEFAULT public filings id uadnlggibe07p1
+4464; 2604 7047551 DEFAULT public follow_ups id uadnlggibe07p1
+4498; 2604 11276431 DEFAULT public frequent_flyer_numbers id uadnlggibe07p1
+4465; 2604 7047552 DEFAULT public grants id uadnlggibe07p1
+4466; 2604 7047553 DEFAULT public individual_members id uadnlggibe07p1
+4499; 2604 11284771 DEFAULT public media id uadnlggibe07p1
+4467; 2604 7047554 DEFAULT public member_key_roles id uadnlggibe07p1
+4468; 2604 7047555 DEFAULT public members id uadnlggibe07p1
+4469; 2604 7047556 DEFAULT public na_teams id uadnlggibe07p1
+4507; 2604 15973085 DEFAULT public netball_academies id uadnlggibe07p1
+4506; 2604 14555977 DEFAULT public netball_associations id uadnlggibe07p1
+4500; 2604 11404445 DEFAULT public notes id uadnlggibe07p1
+4503; 2604 12336038 DEFAULT public open_invites id uadnlggibe07p1
+4471; 2604 7047558 DEFAULT public opportunities id uadnlggibe07p1
+4472; 2604 7047559 DEFAULT public partners id uadnlggibe07p1
+4474; 2604 7047560 DEFAULT public payments id uadnlggibe07p1
+4475; 2604 7047561 DEFAULT public people id uadnlggibe07p1
+4504; 2604 13202112 DEFAULT public press_releases id uadnlggibe07p1
+4477; 2604 7047562 DEFAULT public programs id uadnlggibe07p1
+4502; 2604 12293669 DEFAULT public reference_vendors id uadnlggibe07p1
+4478; 2604 7047563 DEFAULT public references id uadnlggibe07p1
+4479; 2604 7047564 DEFAULT public regions id uadnlggibe07p1
+4480; 2604 7047565 DEFAULT public sample_words id uadnlggibe07p1
+4481; 2604 7047566 DEFAULT public sponsors id uadnlggibe07p1
+4482; 2604 7047567 DEFAULT public teams id uadnlggibe07p1
+4483; 2604 7047569 DEFAULT public tours id uadnlggibe07p1
+4484; 2604 7047570 DEFAULT public transfers id uadnlggibe07p1
+4485; 2604 7047571 DEFAULT public umpires id uadnlggibe07p1
+4526; 2604 45499729 DEFAULT public university_athlete_profiles id uadnlggibe07p1
+4517; 2604 45499645 DEFAULT public university_objectives id uadnlggibe07p1
+4520; 2604 45499656 DEFAULT public university_tasks id uadnlggibe07p1
+4525; 2604 45499691 DEFAULT public user_group_memberships id uadnlggibe07p1
+4523; 2604 45499680 DEFAULT public user_groups id uadnlggibe07p1
+4486; 2604 7047572 DEFAULT public users id uadnlggibe07p1
+4501; 2604 12293660 DEFAULT public vendors id uadnlggibe07p1
+4497; 2604 7047573 DEFAULT public venues id uadnlggibe07p1
+4505; 2604 13528886 DEFAULT public versions id uadnlggibe07p1
+4890; 0 7047289 TABLE DATA public active_storage_attachments uadnlggibe07p1
+4892; 0 7047295 TABLE DATA public active_storage_blobs uadnlggibe07p1
+4894; 0 7047301 TABLE DATA public active_storage_variant_records uadnlggibe07p1
+4896; 0 7047307 TABLE DATA public ar_internal_metadata uadnlggibe07p1
+4897; 0 7047312 TABLE DATA public budgets uadnlggibe07p1
+4899; 0 7047318 TABLE DATA public clubs uadnlggibe07p1
+4901; 0 7047324 TABLE DATA public contacts uadnlggibe07p1
+4982; 0 36523681 TABLE DATA public donated_item_requests uadnlggibe07p1
+4980; 0 36523672 TABLE DATA public donated_items uadnlggibe07p1
+4903; 0 7047330 TABLE DATA public equipment uadnlggibe07p1
+4905; 0 7047345 TABLE DATA public event_assignments uadnlggibe07p1
+4907; 0 7047352 TABLE DATA public event_participants uadnlggibe07p1
+4909; 0 7047356 TABLE DATA public events uadnlggibe07p1
+4978; 0 25825640 TABLE DATA public filing_occurrences uadnlggibe07p1
+4976; 0 25825623 TABLE DATA public filings uadnlggibe07p1
+4911; 0 7047363 TABLE DATA public follow_ups uadnlggibe07p1
+4956; 0 11276428 TABLE DATA public frequent_flyer_numbers uadnlggibe07p1
+4913; 0 7047370 TABLE DATA public grants uadnlggibe07p1
+4915; 0 7047378 TABLE DATA public individual_members uadnlggibe07p1
+4958; 0 11284768 TABLE DATA public media uadnlggibe07p1
+4917; 0 7047392 TABLE DATA public member_key_roles uadnlggibe07p1
+4919; 0 7047398 TABLE DATA public members uadnlggibe07p1
+4921; 0 7047404 TABLE DATA public na_teams uadnlggibe07p1
+4974; 0 15973082 TABLE DATA public netball_academies uadnlggibe07p1
+4972; 0 14555974 TABLE DATA public netball_associations uadnlggibe07p1
+4923; 0 7047411 TABLE DATA public netball_educators uadnlggibe07p1
+4960; 0 11404442 TABLE DATA public notes uadnlggibe07p1
+4966; 0 12336035 TABLE DATA public open_invites uadnlggibe07p1
+4924; 0 7047426 TABLE DATA public opportunities uadnlggibe07p1
+4926; 0 7047432 TABLE DATA public partners uadnlggibe07p1
+4928; 0 7047438 TABLE DATA public payments uadnlggibe07p1
+4930; 0 7047446 TABLE DATA public people uadnlggibe07p1
+4968; 0 13202109 TABLE DATA public press_releases uadnlggibe07p1
+4932; 0 7047452 TABLE DATA public programs uadnlggibe07p1
+4964; 0 12293666 TABLE DATA public reference_vendors uadnlggibe07p1
+4934; 0 7047459 TABLE DATA public references uadnlggibe07p1
+4936; 0 7047466 TABLE DATA public regions uadnlggibe07p1
+4938; 0 7047472 TABLE DATA public sample_words uadnlggibe07p1
+4940; 0 7047480 TABLE DATA public schema_migrations uadnlggibe07p1
+4941; 0 7047485 TABLE DATA public sponsors uadnlggibe07p1
+4943; 0 7047492 TABLE DATA public teams uadnlggibe07p1
+4945; 0 7047499 TABLE DATA public tours uadnlggibe07p1
+4947; 0 7047505 TABLE DATA public transfers uadnlggibe07p1
+4949; 0 7047512 TABLE DATA public umpires uadnlggibe07p1
+4992; 0 45499726 TABLE DATA public university_athlete_profiles uadnlggibe07p1
+4984; 0 45499642 TABLE DATA public university_objectives uadnlggibe07p1
+4986; 0 45499653 TABLE DATA public university_tasks uadnlggibe07p1
+4990; 0 45499688 TABLE DATA public user_group_memberships uadnlggibe07p1
+4988; 0 45499677 TABLE DATA public user_groups uadnlggibe07p1
+4951; 0 7047519 TABLE DATA public users uadnlggibe07p1
+4962; 0 12293657 TABLE DATA public vendors uadnlggibe07p1
+4953; 0 7047534 TABLE DATA public venues uadnlggibe07p1
+4970; 0 13528883 TABLE DATA public versions uadnlggibe07p1
+5053; 0 0 SEQUENCE SET public active_storage_attachments_id_seq uadnlggibe07p1
+5054; 0 0 SEQUENCE SET public active_storage_blobs_id_seq uadnlggibe07p1
+5055; 0 0 SEQUENCE SET public active_storage_variant_records_id_seq uadnlggibe07p1
+5056; 0 0 SEQUENCE SET public budgets_id_seq uadnlggibe07p1
+5057; 0 0 SEQUENCE SET public clubs_id_seq uadnlggibe07p1
+5058; 0 0 SEQUENCE SET public contacts_id_seq uadnlggibe07p1
+5059; 0 0 SEQUENCE SET public donated_item_requests_id_seq uadnlggibe07p1
+5060; 0 0 SEQUENCE SET public donated_items_id_seq uadnlggibe07p1
+5061; 0 0 SEQUENCE SET public equipment_id_seq uadnlggibe07p1
+5062; 0 0 SEQUENCE SET public event_assignments_id_seq uadnlggibe07p1
+5063; 0 0 SEQUENCE SET public event_participants_id_seq uadnlggibe07p1
+5064; 0 0 SEQUENCE SET public events_id_seq uadnlggibe07p1
+5065; 0 0 SEQUENCE SET public filing_occurrences_id_seq uadnlggibe07p1
+5066; 0 0 SEQUENCE SET public filings_id_seq uadnlggibe07p1
+5067; 0 0 SEQUENCE SET public follow_ups_id_seq uadnlggibe07p1
+5068; 0 0 SEQUENCE SET public frequent_flyer_numbers_id_seq uadnlggibe07p1
+5069; 0 0 SEQUENCE SET public grants_id_seq uadnlggibe07p1
+5070; 0 0 SEQUENCE SET public individual_members_id_seq uadnlggibe07p1
+5071; 0 0 SEQUENCE SET public media_id_seq uadnlggibe07p1
+5072; 0 0 SEQUENCE SET public member_key_roles_id_seq uadnlggibe07p1
+5073; 0 0 SEQUENCE SET public members_id_seq uadnlggibe07p1
+5074; 0 0 SEQUENCE SET public na_teams_id_seq uadnlggibe07p1
+5075; 0 0 SEQUENCE SET public netball_academies_id_seq uadnlggibe07p1
+5076; 0 0 SEQUENCE SET public netball_associations_id_seq uadnlggibe07p1
+5077; 0 0 SEQUENCE SET public notes_id_seq uadnlggibe07p1
+5078; 0 0 SEQUENCE SET public open_invites_id_seq uadnlggibe07p1
+5079; 0 0 SEQUENCE SET public opportunities_id_seq uadnlggibe07p1
+5080; 0 0 SEQUENCE SET public partners_id_seq uadnlggibe07p1
+5081; 0 0 SEQUENCE SET public payments_id_seq uadnlggibe07p1
+5082; 0 0 SEQUENCE SET public people_id_seq uadnlggibe07p1
+5083; 0 0 SEQUENCE SET public press_releases_id_seq uadnlggibe07p1
+5084; 0 0 SEQUENCE SET public programs_id_seq uadnlggibe07p1
+5085; 0 0 SEQUENCE SET public reference_vendors_id_seq uadnlggibe07p1
+5086; 0 0 SEQUENCE SET public references_id_seq uadnlggibe07p1
+5087; 0 0 SEQUENCE SET public regions_id_seq uadnlggibe07p1
+5088; 0 0 SEQUENCE SET public sample_words_id_seq uadnlggibe07p1
+5089; 0 0 SEQUENCE SET public sponsors_id_seq uadnlggibe07p1
+5090; 0 0 SEQUENCE SET public teams_id_seq uadnlggibe07p1
+5091; 0 0 SEQUENCE SET public tours_id_seq uadnlggibe07p1
+5092; 0 0 SEQUENCE SET public transfers_id_seq uadnlggibe07p1
+5093; 0 0 SEQUENCE SET public umpires_id_seq uadnlggibe07p1
+5094; 0 0 SEQUENCE SET public university_athlete_profiles_id_seq uadnlggibe07p1
+5095; 0 0 SEQUENCE SET public university_objectives_id_seq uadnlggibe07p1
+5096; 0 0 SEQUENCE SET public university_tasks_id_seq uadnlggibe07p1
+5097; 0 0 SEQUENCE SET public user_group_memberships_id_seq uadnlggibe07p1
+5098; 0 0 SEQUENCE SET public user_groups_id_seq uadnlggibe07p1
+5099; 0 0 SEQUENCE SET public users_id_seq uadnlggibe07p1
+5100; 0 0 SEQUENCE SET public vendors_id_seq uadnlggibe07p1
+5101; 0 0 SEQUENCE SET public venues_id_seq uadnlggibe07p1
+5102; 0 0 SEQUENCE SET public versions_id_seq uadnlggibe07p1
+4528; 2606 7047910 CONSTRAINT public active_storage_attachments active_storage_attachments_pkey uadnlggibe07p1
+4532; 2606 7047913 CONSTRAINT public active_storage_blobs active_storage_blobs_pkey uadnlggibe07p1
+4535; 2606 7047906 CONSTRAINT public active_storage_variant_records active_storage_variant_records_pkey uadnlggibe07p1
+4538; 2606 7047767 CONSTRAINT public ar_internal_metadata ar_internal_metadata_pkey uadnlggibe07p1
+4540; 2606 7047769 CONSTRAINT public budgets budgets_pkey uadnlggibe07p1
+4542; 2606 7047771 CONSTRAINT public clubs clubs_pkey uadnlggibe07p1
+4545; 2606 7047775 CONSTRAINT public contacts contacts_pkey uadnlggibe07p1
+4669; 2606 36523689 CONSTRAINT public donated_item_requests donated_item_requests_pkey uadnlggibe07p1
+4665; 2606 36523679 CONSTRAINT public donated_items donated_items_pkey uadnlggibe07p1
+4549; 2606 7047787 CONSTRAINT public equipment equipment_pkey uadnlggibe07p1
+4552; 2606 7047920 CONSTRAINT public event_assignments event_assignments_pkey uadnlggibe07p1
+4556; 2606 7047903 CONSTRAINT public event_participants event_participants_pkey uadnlggibe07p1
+4562; 2606 7047859 CONSTRAINT public events events_pkey uadnlggibe07p1
+4661; 2606 25825647 CONSTRAINT public filing_occurrences filing_occurrences_pkey uadnlggibe07p1
+4658; 2606 25825632 CONSTRAINT public filings filings_pkey uadnlggibe07p1
+4564; 2606 7047866 CONSTRAINT public follow_ups follow_ups_pkey uadnlggibe07p1
+4629; 2606 11276435 CONSTRAINT public frequent_flyer_numbers frequent_flyer_numbers_pkey uadnlggibe07p1
+4566; 2606 7047868 CONSTRAINT public grants grants_pkey uadnlggibe07p1
+4568; 2606 7047870 CONSTRAINT public individual_members individual_members_pkey uadnlggibe07p1
+4632; 2606 11284775 CONSTRAINT public media media_pkey uadnlggibe07p1
+4572; 2606 7047874 CONSTRAINT public member_key_roles member_key_roles_pkey uadnlggibe07p1
+4575; 2606 7047677 CONSTRAINT public members members_pkey uadnlggibe07p1
+4579; 2606 7047878 CONSTRAINT public na_teams na_teams_pkey uadnlggibe07p1
+4656; 2606 15973089 CONSTRAINT public netball_academies netball_academies_pkey uadnlggibe07p1
+4653; 2606 14555981 CONSTRAINT public netball_associations netball_associations_pkey uadnlggibe07p1
+4581; 2606 7047611 CONSTRAINT public netball_educators netball_educators_pkey uadnlggibe07p1
+4635; 2606 11404449 CONSTRAINT public notes notes_pkey uadnlggibe07p1
+4644; 2606 12336042 CONSTRAINT public open_invites open_invites_pkey uadnlggibe07p1
+4585; 2606 7047736 CONSTRAINT public opportunities opportunities_pkey uadnlggibe07p1
+4588; 2606 7047880 CONSTRAINT public partners partners_pkey uadnlggibe07p1
+4593; 2606 7047885 CONSTRAINT public payments payments_pkey uadnlggibe07p1
+4596; 2606 7047739 CONSTRAINT public people people_pkey uadnlggibe07p1
+4647; 2606 13202116 CONSTRAINT public press_releases press_releases_pkey uadnlggibe07p1
+4599; 2606 7047916 CONSTRAINT public programs programs_pkey uadnlggibe07p1
+4641; 2606 12293671 CONSTRAINT public reference_vendors reference_vendors_pkey uadnlggibe07p1
+4601; 2606 7047747 CONSTRAINT public references references_pkey uadnlggibe07p1
+4603; 2606 7047887 CONSTRAINT public regions regions_pkey uadnlggibe07p1
+4605; 2606 7047897 CONSTRAINT public sample_words sample_words_pkey uadnlggibe07p1
+4607; 2606 7047889 CONSTRAINT public schema_migrations schema_migrations_pkey uadnlggibe07p1
+4609; 2606 7047744 CONSTRAINT public sponsors sponsors_pkey uadnlggibe07p1
+4612; 2606 7047893 CONSTRAINT public teams teams_pkey uadnlggibe07p1
+4614; 2606 7047922 CONSTRAINT public tours tours_pkey uadnlggibe07p1
+4618; 2606 7047755 CONSTRAINT public transfers transfers_pkey uadnlggibe07p1
+4620; 2606 7047899 CONSTRAINT public umpires umpires_pkey uadnlggibe07p1
+4692; 2606 45499733 CONSTRAINT public university_athlete_profiles university_athlete_profiles_pkey uadnlggibe07p1
+4674; 2606 45499651 CONSTRAINT public university_objectives university_objectives_pkey uadnlggibe07p1
+4681; 2606 45499662 CONSTRAINT public university_tasks university_tasks_pkey uadnlggibe07p1
+4689; 2606 45499693 CONSTRAINT public user_group_memberships user_group_memberships_pkey uadnlggibe07p1
+4684; 2606 45499685 CONSTRAINT public user_groups user_groups_pkey uadnlggibe07p1
+4625; 2606 7047765 CONSTRAINT public users users_pkey uadnlggibe07p1
+4637; 2606 12293664 CONSTRAINT public vendors vendors_pkey uadnlggibe07p1
+4627; 2606 7047895 CONSTRAINT public venues venues_pkey uadnlggibe07p1
+4650; 2606 13528890 CONSTRAINT public versions versions_pkey uadnlggibe07p1
+4529; 1259 7047908 INDEX public index_active_storage_attachments_on_blob_id uadnlggibe07p1
+4530; 1259 7047909 INDEX public index_active_storage_attachments_uniqueness uadnlggibe07p1
+4533; 1259 7047912 INDEX public index_active_storage_blobs_on_key uadnlggibe07p1
+4536; 1259 7047905 INDEX public index_active_storage_variant_records_uniqueness uadnlggibe07p1
+4543; 1259 14555988 INDEX public index_clubs_on_netball_association_id uadnlggibe07p1
+4546; 1259 7047774 INDEX public index_contacts_on_grant_id uadnlggibe07p1
+4547; 1259 7047773 INDEX public index_contacts_on_sponsor_id uadnlggibe07p1
+4670; 1259 36523707 INDEX public index_donated_item_requests_on_approved_by_id uadnlggibe07p1
+4671; 1259 36523705 INDEX public index_donated_item_requests_on_donated_item_id uadnlggibe07p1
+4672; 1259 36523706 INDEX public index_donated_item_requests_on_requested_by_id uadnlggibe07p1
+4666; 1259 36622105 INDEX public index_donated_items_on_club_id uadnlggibe07p1
+4667; 1259 36622111 INDEX public index_donated_items_on_program_id uadnlggibe07p1
+4550; 1259 26775939 INDEX public index_equipment_on_status uadnlggibe07p1
+4553; 1259 7047919 INDEX public index_event_assignments_on_event_id uadnlggibe07p1
+4554; 1259 7047918 INDEX public index_event_assignments_on_umpire_id uadnlggibe07p1
+4557; 1259 13483674 INDEX public index_event_participants_on_event_and_netball_educator uadnlggibe07p1
+4558; 1259 7047902 INDEX public index_event_participants_on_event_id uadnlggibe07p1
+4559; 1259 13483673 INDEX public index_event_participants_on_netball_educator_id uadnlggibe07p1
+4560; 1259 7047901 INDEX public index_event_participants_on_person_id uadnlggibe07p1
+4662; 1259 25825653 INDEX public index_filing_occurrences_on_filing_id uadnlggibe07p1
+4663; 1259 25825654 INDEX public index_filing_occurrences_on_filing_id_and_due_date uadnlggibe07p1
+4659; 1259 25825638 INDEX public index_filings_on_created_by_id uadnlggibe07p1
+4630; 1259 11276441 INDEX public index_frequent_flyer_numbers_on_person_id uadnlggibe07p1
+4569; 1259 7047872 INDEX public index_member_key_roles_on_member_id uadnlggibe07p1
+4570; 1259 7047873 INDEX public index_member_key_roles_on_na_teams_id uadnlggibe07p1
+4573; 1259 7047653 INDEX public index_members_on_na_team_id uadnlggibe07p1
+4576; 1259 7047877 INDEX public index_na_teams_on_member_id uadnlggibe07p1
+4577; 1259 7047876 INDEX public index_na_teams_on_member_key_role_id uadnlggibe07p1
+4654; 1259 15973095 INDEX public index_netball_academies_on_club_id uadnlggibe07p1
+4651; 1259 14555987 INDEX public index_netball_associations_on_user_id uadnlggibe07p1
+4633; 1259 11404455 INDEX public index_notes_on_club_id uadnlggibe07p1
+4642; 1259 12336048 INDEX public index_open_invites_on_person_id uadnlggibe07p1
+4582; 1259 7047711 INDEX public index_opportunities_on_sponsor_id uadnlggibe07p1
+4583; 1259 7047732 INDEX public index_opportunities_on_user_id uadnlggibe07p1
+4586; 1259 12500179 INDEX public index_partners_on_user_id uadnlggibe07p1
+4589; 1259 7047883 INDEX public index_payments_on_individual_member_id uadnlggibe07p1
+4590; 1259 7047882 INDEX public index_payments_on_na_team_id uadnlggibe07p1
+4591; 1259 7047884 INDEX public index_payments_on_payment_recorded_by_id uadnlggibe07p1
+4594; 1259 46075887 INDEX public index_people_on_user_id uadnlggibe07p1
+4645; 1259 13202122 INDEX public index_press_releases_on_medium_id uadnlggibe07p1
+4597; 1259 7047915 INDEX public index_programs_on_person_id uadnlggibe07p1
+4638; 1259 12293683 INDEX public index_reference_vendors_on_reference_id uadnlggibe07p1
+4639; 1259 12293682 INDEX public index_reference_vendors_on_vendor_id uadnlggibe07p1
+4610; 1259 7047892 INDEX public index_teams_on_user_id uadnlggibe07p1
+4615; 1259 7047750 INDEX public index_transfers_on_event_id uadnlggibe07p1
+4616; 1259 7047753 INDEX public index_transfers_on_person_id uadnlggibe07p1
+4690; 1259 45499739 INDEX public index_university_athlete_profiles_on_person_id uadnlggibe07p1
+4675; 1259 45499707 INDEX public index_university_tasks_on_assigned_user_id uadnlggibe07p1
+4676; 1259 45499713 INDEX public index_university_tasks_on_created_by_id uadnlggibe07p1
+4677; 1259 45499670 INDEX public index_university_tasks_on_partner_id uadnlggibe07p1
+4678; 1259 45499668 INDEX public index_university_tasks_on_university_objective_id uadnlggibe07p1
+4679; 1259 45499719 INDEX public index_university_tasks_on_updated_by_id uadnlggibe07p1
+4685; 1259 45499704 INDEX public index_user_group_memberships_on_user_group_id uadnlggibe07p1
+4686; 1259 45499705 INDEX public index_user_group_memberships_on_user_id uadnlggibe07p1
+4687; 1259 45499706 INDEX public index_user_group_memberships_uniquely uadnlggibe07p1
+4682; 1259 45499686 INDEX public index_user_groups_on_key uadnlggibe07p1
+4621; 1259 7047763 INDEX public index_users_on_approved uadnlggibe07p1
+4622; 1259 7047758 INDEX public index_users_on_email uadnlggibe07p1
+4623; 1259 7047761 INDEX public index_users_on_reset_password_token uadnlggibe07p1
+4648; 1259 13528891 INDEX public index_versions_on_item_type_and_item_id uadnlggibe07p1
+4714; 2606 7047923 FK CONSTRAINT public payments fk_rails_03adbbceec uadnlggibe07p1
+4705; 2606 7279915 FK CONSTRAINT public individual_members fk_rails_03ce5e44c4 uadnlggibe07p1
+4725; 2606 12293672 FK CONSTRAINT public reference_vendors fk_rails_041fb1b14f uadnlggibe07p1
+4724; 2606 11404450 FK CONSTRAINT public notes fk_rails_047502ad0d uadnlggibe07p1
+4730; 2606 15973090 FK CONSTRAINT public netball_academies fk_rails_0f7b9d62d1 uadnlggibe07p1
+4738; 2606 45499720 FK CONSTRAINT public university_tasks fk_rails_18d9b4b6c3 uadnlggibe07p1
+4713; 2606 12500180 FK CONSTRAINT public partners fk_rails_19700d5164 uadnlggibe07p1
+4726; 2606 12293677 FK CONSTRAINT public reference_vendors fk_rails_1ab5ee89f3 uadnlggibe07p1
+4697; 2606 7047928 FK CONSTRAINT public contacts fk_rails_1f822f02ba uadnlggibe07p1
+4701; 2606 7047933 FK CONSTRAINT public event_assignments fk_rails_25379529a4 uadnlggibe07p1
+4699; 2606 7047938 FK CONSTRAINT public equipment fk_rails_28e200e081 uadnlggibe07p1
+4715; 2606 7047943 FK CONSTRAINT public payments fk_rails_2bc53feb83 uadnlggibe07p1
+4711; 2606 7047948 FK CONSTRAINT public opportunities fk_rails_2f7c325f6c uadnlggibe07p1
+4739; 2606 45499714 FK CONSTRAINT public university_tasks fk_rails_300ba743a3 uadnlggibe07p1
+4709; 2606 7047953 FK CONSTRAINT public members fk_rails_34b6511a43 uadnlggibe07p1
+4743; 2606 45499699 FK CONSTRAINT public user_group_memberships fk_rails_42022c51df uadnlggibe07p1
+4720; 2606 7047958 FK CONSTRAINT public teams fk_rails_45096701b6 uadnlggibe07p1
+4698; 2606 7047963 FK CONSTRAINT public contacts fk_rails_4b8a83bc2e uadnlggibe07p1
+4703; 2606 7047968 FK CONSTRAINT public event_participants fk_rails_565ef9d942 uadnlggibe07p1
+4723; 2606 11276436 FK CONSTRAINT public frequent_flyer_numbers fk_rails_56684fe5e5 uadnlggibe07p1
+4702; 2606 7047973 FK CONSTRAINT public event_assignments fk_rails_599a512f24 uadnlggibe07p1
+4733; 2606 36622106 FK CONSTRAINT public donated_items fk_rails_5c7959072a uadnlggibe07p1
+4695; 2606 14555989 FK CONSTRAINT public clubs fk_rails_66cc6a183d uadnlggibe07p1
+4716; 2606 7047978 FK CONSTRAINT public payments fk_rails_6a69896d71 uadnlggibe07p1
+4729; 2606 14555982 FK CONSTRAINT public netball_associations fk_rails_6d4be3f5ae uadnlggibe07p1
+4735; 2606 36523695 FK CONSTRAINT public donated_item_requests fk_rails_6fafa0a06b uadnlggibe07p1
+4745; 2606 45499734 FK CONSTRAINT public university_athlete_profiles fk_rails_70f637101e uadnlggibe07p1
+4721; 2606 7047983 FK CONSTRAINT public transfers fk_rails_72a9f8ca42 uadnlggibe07p1
+4722; 2606 7047988 FK CONSTRAINT public transfers fk_rails_7448e6a080 uadnlggibe07p1
+4732; 2606 25825648 FK CONSTRAINT public filing_occurrences fk_rails_753ac21ed4 uadnlggibe07p1
+4712; 2606 7047993 FK CONSTRAINT public opportunities fk_rails_7a1e18e277 uadnlggibe07p1
+4707; 2606 7047998 FK CONSTRAINT public member_key_roles fk_rails_7bfc2747dc uadnlggibe07p1
+4740; 2606 45499671 FK CONSTRAINT public university_tasks fk_rails_80b72b4134 uadnlggibe07p1
+4704; 2606 7048003 FK CONSTRAINT public event_participants fk_rails_9409427466 uadnlggibe07p1
+4694; 2606 7048008 FK CONSTRAINT public active_storage_variant_records fk_rails_993965df05 uadnlggibe07p1
+4741; 2606 45499708 FK CONSTRAINT public university_tasks fk_rails_9f26b0c83c uadnlggibe07p1
+4719; 2606 7048013 FK CONSTRAINT public programs fk_rails_a09cbd1d6c uadnlggibe07p1
+4744; 2606 45499694 FK CONSTRAINT public user_group_memberships fk_rails_aece7151f8 uadnlggibe07p1
+4731; 2606 25825633 FK CONSTRAINT public filings fk_rails_b298589057 uadnlggibe07p1
+4718; 2606 46075888 FK CONSTRAINT public people fk_rails_b39dcee1e8 uadnlggibe07p1
+4700; 2606 7048018 FK CONSTRAINT public equipment fk_rails_b49f6f5648 uadnlggibe07p1
+4693; 2606 7048023 FK CONSTRAINT public active_storage_attachments fk_rails_c3b3935057 uadnlggibe07p1
+4708; 2606 7048028 FK CONSTRAINT public member_key_roles fk_rails_c661f7b15c uadnlggibe07p1
+4717; 2606 7048033 FK CONSTRAINT public payments fk_rails_ca355a5b1e uadnlggibe07p1
+4706; 2606 7048038 FK CONSTRAINT public individual_members fk_rails_cc75d217b9 uadnlggibe07p1
+4734; 2606 36622112 FK CONSTRAINT public donated_items fk_rails_cf6505c7ba uadnlggibe07p1
+4742; 2606 45499663 FK CONSTRAINT public university_tasks fk_rails_d2a54d419e uadnlggibe07p1
+4696; 2606 7048043 FK CONSTRAINT public clubs fk_rails_d3ef48169e uadnlggibe07p1
+4710; 2606 7048048 FK CONSTRAINT public members fk_rails_e330ef0ccc uadnlggibe07p1
+4736; 2606 36523690 FK CONSTRAINT public donated_item_requests fk_rails_e4ffc611e3 uadnlggibe07p1
+4728; 2606 13202117 FK CONSTRAINT public press_releases fk_rails_e825557945 uadnlggibe07p1
+4727; 2606 12336043 FK CONSTRAINT public open_invites fk_rails_e9b29db0a3 uadnlggibe07p1
+4737; 2606 36523700 FK CONSTRAINT public donated_item_requests fk_rails_eb67d735a3 uadnlggibe07p1
