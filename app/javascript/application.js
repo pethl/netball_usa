@@ -17,6 +17,7 @@ import PlotlyMapController from "./controllers/plotly_map_controller"
 import MobileMenuController from "./controllers/mobile_menu_controller"
 import PasswordController from "./controllers/password_controller"
 import TableTooltipController from "./controllers/table_tooltip_controller"
+import PassengerFilterController from "./controllers/passenger_filter_controller"
 
 
 const application = Application.start()
@@ -39,6 +40,7 @@ application.register("plotly-map", PlotlyMapController)
 application.register("mobile-menu", MobileMenuController)
 application.register("password", PasswordController)
 application.register("table-tooltip", TableTooltipController)
+application.register("passenger-filter", PassengerFilterController)
 
 
 // Make Stimulus available globally

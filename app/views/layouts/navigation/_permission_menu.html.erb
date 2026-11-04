@@ -150,6 +150,11 @@
 <li class="mt-2 ml-2">
   <%= link_to "- Departures Transfers",  outbound_pickups_transfers_path,  class: "text-gray-100 hover:font-bold" %>
 </li>
+<% if can?(:read, EventTransport) %>
+<li class="mt-2 ml-2">
+  <%= link_to "- Event Transport", event_transports_path, class: "text-gray-100 hover:font-bold" %>
+</li>
+<% end %>
   <% else %>
 <% my_transfer = my_transfer_for(current_user) %>
 

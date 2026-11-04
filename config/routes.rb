@@ -144,6 +144,9 @@ end
       get :external_edit
     end
   end
+
+  resources :event_transports
+  get "event_transports_pdf", to: "event_transports#pdf", as: :event_transports_pdf
   
   resources :references
   resources :grants

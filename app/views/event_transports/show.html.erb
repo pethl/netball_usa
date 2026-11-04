@@ -1,0 +1,7 @@
+<% content_for(:page_title, "Event Transport Journey") %>
+<div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+  <p class="text-lg font-semibold text-blue-900"><%= @event_transport.pickup_location %> to <%= @event_transport.destination %></p>
+  <p class="mt-2"><%= l(@event_transport.departure_at, format: :long) %></p>
+  <%= link_to "Edit", edit_event_transport_path(@event_transport), class: link_class %>
+  <%= link_to "Back", event_transports_path, class: "ml-3 #{link_class}" %>
+</div>

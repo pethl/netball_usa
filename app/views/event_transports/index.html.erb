@@ -1,0 +1,69 @@
+<% content_for(:page_title, "Event Transport") %>
+
+<div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+  <div>
+    <p class="font-semibold text-blue-900"><%= @transfer_event.name %></p>
+    <p class="text-sm text-gray-500">Court, hotel and venue journeys for registered officials and write-in volunteers.</p>
+  </div>
+  <div class="flex flex-wrap items-center gap-2">
+    <%= link_to "Event Transport PDF", event_transports_pdf_path(format: :pdf), class: clear_button_class, target: "_blank" %>
+    <%= link_to "Add journey", new_event_transport_path, class: form_button_class %>
+  </div>
+</div>
+
+<% if @event_transports_by_date.empty? %>
+  <div class="rounded-lg border border-dashed border-gray-300 p-10 text-center text-gray-500">
+    No Event Transport journeys have been scheduled yet.
+  </div>
+<% end %>
+
+<% @event_transports_by_date.each do |date, transports| %>
+  <section class="mb-8">
+    <h2 class="mb-3 border-b pb-2 text-xl font-semibold text-blue-800"><%= l(date, format: :long) %></h2>
+    <div class="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+      <table class="w-full table-auto text-left text-sm">
+        <thead class="bg-gray-100 text-xs font-semibold text-gray-700">
+          <tr>
+            <th class="px-3 py-2">Times</th>
+            <th class="px-3 py-2">Journey</th>
+            <th class="px-3 py-2">Driver</th>
+            <th class="px-3 py-2">People</th>
+            <th class="px-3 py-2">Notes / equipment</th>
+            <th class="px-3 py-2"><span class="sr-only">Actions</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% transports.each do |transport| %>
+            <tr class="border-t bg-white align-top hover:bg-gray-50">
+              <td class="whitespace-nowrap px-3 py-3">
+                <strong><%= transport.departure_at.strftime("%-l:%M %p") %></strong>
+                <% if transport.arrival_at.present? %>
+                  <div class="text-xs text-gray-500">Arrive <%= transport.arrival_at.strftime("%-l:%M %p") %></div>
+                <% end %>
+              </td>
+              <td class="px-3 py-3">
+                <div class="font-medium"><%= transport.pickup_location %></div>
+                <div class="text-gray-500">to <%= transport.destination %></div>
+              </td>
+              <td class="px-3 py-3"><%= transport.driver_name.presence || "—" %></td>
+              <td class="px-3 py-3">
+                <div class="mb-1 text-xs font-semibold text-gray-500"><%= pluralize(transport.event_transport_passengers.size, "person") %></div>
+                <% transport.event_transport_passengers.each do |passenger| %>
+                  <div><%= passenger.display_name %><% if passenger.display_phone.present? %> <span class="text-xs text-gray-500">· <%= passenger.display_phone %></span><% end %></div>
+                <% end %>
+              </td>
+              <td class="max-w-xs whitespace-pre-wrap px-3 py-3"><%= transport.notes.presence || "—" %></td>
+              <td class="whitespace-nowrap px-3 py-3 text-right">
+                <%= link_to "Edit", edit_event_transport_path(transport), class: link_class %>
+                <%= button_to "Delete", transport, method: :delete,
+                              class: "ml-3 inline text-red-600 hover:underline",
+                              form: { class: "inline" },
+                              data: { turbo_confirm: "Delete this journey?" } %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+<% end %>

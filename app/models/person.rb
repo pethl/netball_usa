@@ -10,6 +10,10 @@ class Person < ApplicationRecord
 
   has_many :event_participants, dependent: :destroy
   has_many :events, through: :event_participants
+  has_many :transfers
+
+  has_many :event_transport_passengers, dependent: :nullify
+  has_many :event_transports, through: :event_transport_passengers
 
   has_many :frequent_flyer_numbers, dependent: :destroy
   accepts_nested_attributes_for :frequent_flyer_numbers, allow_destroy: true

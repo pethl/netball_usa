@@ -7,6 +7,10 @@ class Event < ApplicationRecord
   has_many :event_assignments, dependent: :destroy
  # has_many :transfers, through: :event_assignments
   has_many :transfers
+  has_many :event_transports,
+           foreign_key: :transfer_event_id,
+           inverse_of: :transfer_event,
+           dependent: :restrict_with_error
   has_one :budget #, dependent: :destroy
   
   # for user assignment

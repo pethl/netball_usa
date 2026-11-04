@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_11_01_120832) do
+ActiveRecord::Schema[7.1].define(version: 2026_11_04_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -191,6 +191,31 @@ ActiveRecord::Schema[7.1].define(version: 2026_11_01_120832) do
     t.index ["event_id"], name: "index_event_participants_on_event_id"
     t.index ["netball_educator_id"], name: "index_event_participants_on_netball_educator_id"
     t.index ["person_id"], name: "index_event_participants_on_person_id"
+  end
+
+  create_table "event_transport_passengers", force: :cascade do |t|
+    t.bigint "event_transport_id", null: false
+    t.bigint "person_id"
+    t.string "write_in_name"
+    t.string "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_transport_id", "person_id"], name: "index_event_transport_passengers_on_transport_and_person", unique: true, where: "(person_id IS NOT NULL)"
+    t.index ["event_transport_id"], name: "index_event_transport_passengers_on_event_transport_id"
+    t.index ["person_id"], name: "index_event_transport_passengers_on_person_id"
+  end
+
+  create_table "event_transports", force: :cascade do |t|
+    t.bigint "transfer_event_id", null: false
+    t.datetime "departure_at", null: false
+    t.datetime "arrival_at"
+    t.string "pickup_location", null: false
+    t.string "destination", null: false
+    t.string "driver_name"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["transfer_event_id"], name: "index_event_transports_on_transfer_event_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -1050,6 +1075,9 @@ ActiveRecord::Schema[7.1].define(version: 2026_11_01_120832) do
   add_foreign_key "event_assignments", "umpires"
   add_foreign_key "event_participants", "events"
   add_foreign_key "event_participants", "people"
+  add_foreign_key "event_transport_passengers", "event_transports"
+  add_foreign_key "event_transport_passengers", "people"
+  add_foreign_key "event_transports", "events", column: "transfer_event_id"
   add_foreign_key "filing_occurrences", "filings", on_delete: :restrict
   add_foreign_key "filings", "users", column: "created_by_id"
   add_foreign_key "frequent_flyer_numbers", "people"

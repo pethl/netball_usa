@@ -1,0 +1,102 @@
+<%= form_with model: event_transport, class: "space-y-6" do |form| %>
+  <%= form_errors_for(event_transport) %>
+
+  <section class="rounded-lg border border-gray-200 border-t-4 border-t-blue-900 bg-white shadow-sm"
+           style="padding: 1.5rem;">
+    <h2 class="mb-4 text-lg font-semibold text-blue-900">Journey details</h2>
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div>
+        <%= form.label :departure_at, "Departure date and time", class: label_class %>
+        <%= form.datetime_local_field :departure_at, class: input_class, required: true %>
+      </div>
+      <div>
+        <%= form.label :arrival_at, "Expected arrival", class: label_class %>
+        <%= form.datetime_local_field :arrival_at, class: input_class %>
+      </div>
+      <div>
+        <%= form.label :driver_name, "Driver", class: label_class %>
+        <%= form.text_field :driver_name, class: input_class %>
+      </div>
+      <div>
+        <%= form.label :pickup_location, "Pick up from", class: label_class %>
+        <%= form.text_field :pickup_location, class: input_class, required: true %>
+      </div>
+      <div>
+        <%= form.label :destination, "Drop off at", class: label_class %>
+        <%= form.text_field :destination, class: input_class, required: true %>
+      </div>
+      <div>
+        <%= form.label :notes, "Notes / equipment requirements", class: label_class %>
+        <%= form.text_area :notes, rows: 3, class: input_class %>
+      </div>
+    </div>
+  </section>
+
+  <section class="rounded-lg border border-gray-200 border-t-4 border-t-blue-900 bg-white shadow-sm"
+           style="padding: 1.5rem;"
+           data-controller="passenger-filter">
+    <div class="mb-4 flex flex-wrap items-end justify-between gap-3">
+      <div>
+        <h2 class="text-lg font-semibold text-blue-900">Registered people</h2>
+        <p class="text-sm text-gray-500">Officials registered through the 2026 US Open transfer list.</p>
+      </div>
+      <input type="search"
+             placeholder="Filter names…"
+             class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm md:w-64"
+             data-passenger-filter-target="input"
+             data-action="input->passenger-filter#filter">
+    </div>
+
+    <% selected = event_transport.event_transport_passengers.select { |passenger| passenger.person_id.present? }.index_by(&:person_id) %>
+    <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
+      <% @registered_people.each do |person| %>
+        <% passenger = selected[person.id] %>
+        <label class="flex items-center gap-3 rounded-md border border-gray-200 p-3 transition-colors duration-150 hover:bg-blue-200"
+               data-passenger-filter-target="row"
+               data-passenger-name="<%= person.full_name.downcase %>">
+          <%= check_box_tag "registered_passengers[#{person.id}][selected]",
+                            "1",
+                            passenger.present?,
+                            class: "h-4 w-4 rounded border-gray-300 text-blue-900 focus:ring-blue-900" %>
+          <span class="min-w-0 flex-1 font-medium text-gray-800"><%= person.full_name %></span>
+          <%= telephone_field_tag "registered_passengers[#{person.id}][phone]",
+                                  passenger&.display_phone || person.phone,
+                                  class: "w-44 rounded-md border border-gray-300 px-2 py-1 text-sm",
+                                  placeholder: "Phone" %>
+        </label>
+      <% end %>
+    </div>
+  </section>
+
+  <section class="rounded-lg border border-gray-200 border-t-4 border-t-blue-900 bg-white shadow-sm"
+           style="padding: 1.5rem;">
+    <h2 class="text-lg font-semibold text-blue-900">Write-in people</h2>
+    <p class="mb-4 text-sm text-gray-500">For local volunteers or other people not on the registered list.</p>
+
+    <div class="grid grid-cols-1 gap-3 lg:grid-cols-2">
+      <%= form.fields_for :event_transport_passengers do |passenger_form| %>
+        <% next if passenger_form.object.person_id.present? %>
+        <div class="grid grid-cols-1 items-end gap-3 rounded-md border border-gray-200 bg-gray-50 p-3 sm:grid-cols-2">
+          <div>
+            <%= passenger_form.label :write_in_name, "Name", class: label_class %>
+            <%= passenger_form.text_field :write_in_name, class: input_class %>
+          </div>
+          <div>
+            <%= passenger_form.label :phone, class: label_class %>
+            <%= passenger_form.telephone_field :phone, class: input_class %>
+          </div>
+          <% if passenger_form.object.persisted? %>
+            <label class="flex items-center gap-2 text-sm text-red-700 sm:col-span-2">
+              <%= passenger_form.check_box :_destroy %> Remove
+            </label>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <div class="flex items-center gap-2">
+    <%= form.submit class: form_button_class %>
+    <%= link_to "Cancel", event_transports_path, class: clear_button_class %>
+  </div>
+<% end %>

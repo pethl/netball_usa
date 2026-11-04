@@ -13,6 +13,7 @@ class Ability
     :download_attendee_list_pdf,
     :download_flights_pdf,
     to: :read
+    alias_action :pdf, to: :read
     
     if user.nil?
       can :create, NetballEducator
@@ -94,6 +95,7 @@ class Ability
     if user.in_group?("us_open_team")
       can :manage, Transfer
       can :menu_all, Transfer
+      can :manage, EventTransport
 
       can :read, Event
       can :calendar, Event
@@ -257,6 +259,7 @@ class Ability
     # 7 : us_open (US Open and people)
     when "us_open"
       can :manage, Transfer
+      can :manage, EventTransport
       can :menu_all, Transfer
       can :inbound_pickups,  Transfer
       can :outbound_pickups, Transfer
@@ -379,6 +382,7 @@ when "na_people"
     # with additional Media access.
     when "us_open_media"
       can :manage, Transfer
+      can :manage, EventTransport
       can :menu_all, Transfer
       can :inbound_pickups,  Transfer
       can :outbound_pickups, Transfer
